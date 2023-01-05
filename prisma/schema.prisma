@@ -1,0 +1,153 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(uuid()) @db.Uuid
+  email String @unique @db.Text
+}
+
+model Employee {
+  id String @id @default(uuid()) @db.Uuid
+
+  managerId String? @db.Uuid
+  manager Employee? @relation("Manager", fields: [managerId], references: [id])
+  directReports Employee[] @relation("Manager")
+
+  employeeTypeId String @db.Uuid
+  employeeType EmployeeType @relation(fields: [employeeTypeId], references: [id])
+
+  hireReasonId String @db.Uuid
+  hireReason HireReason @relation(fields: [hireReasonId], references: [id])
+
+  hireDate DateTime
+  endEmploymentDate DateTime?
+
+  jobFamilyId String @db.Uuid
+  jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])
+
+  businessTitle String?
+
+  locationId String @db.Uuid
+  location Location @relation(fields: [locationId], references: [id])
+
+  // todo: this is a location
+  workspaceId String? @db.Uuid
+  workspace Workspace? @relation(fields: [workspaceId], references: [id])
+
+  positionTimeId String @db.Uuid
+  positionTime PositionTime @relation(fields: [positionTimeId], references: [id])
+
+  workShiftId String? @db.Uuid
+  workShift WorkShift? @relation(fields: [workShiftId], references: [id])
+
+  defaultWeeklyHours Int
+  scheduledWeeklyHours Int
+
+  // pay rate type - req (rel)
+  // additionalJobClassification - opt (rel)
+  // workerCompensationCode - opt (rel)
+
+}
+
+model EmployeeType {
+  id String @id @default(uuid()) @db.Uuid
+
+  name String @unique
+  nameSlug String @unique
+  description String?
+  isFixedTerm Boolean
+  isSeasonal Boolean
+  isTrainee Boolean
+  isInactive Boolean
+
+  employees Employee[]
+  countries EmployeeTypeCountry[] 
+}
+
+model EmployeeTypeCountry {
+  employeeTypeId String @db.Uuid
+  employeeType EmployeeType @relation(fields: [employeeTypeId], references: [id])
+
+  countryId String @db.Uuid
+  country Country @relation(fields: [countryId], references: [id])
+
+  @@id([employeeTypeId, countryId])
+}
+
+model Country {
+  id String @id @default(uuid()) @db.Uuid
+
+  name String 
+  type String
+  code String 
+
+  employeeTypes EmployeeTypeCountry[]
+}
+
+model HireReason {
+  id String @id @default(uuid()) @db.Uuid
+
+  slug String 
+  category String
+  isInactive Boolean
+  classificationName String
+  classificationSlug String
+  subcategorySlug String
+  reason String
+  isManagerReason Boolean
+
+  employees Employee[]
+}
+
+model JobFamily {
+  id String @id @default(uuid()) @db.Uuid
+
+  name String
+  slug String?
+  effectiveDate DateTime?
+  summary String?
+  isInactive Boolean
+
+  employees Employee[]
+}
+
+// WIP 
+model Location {
+  id String @id @default(uuid()) @db.Uuid
+
+  name String
+
+  employees Employee[]
+}
+
+// WIP
+model Workspace {
+  id String @id @default(uuid()) @db.Uuid
+
+  name String
+
+  employees Employee[]
+}
+
+// WIP
+model PositionTime {
+  id String @id @default(uuid()) @db.Uuid
+
+  employees Employee[]
+}
+
+// WIP
+model WorkShift {
+  id String @id @default(uuid()) @db.Uuid
+
+  employees Employee[]
+}

@@ -1,5 +1,19 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## ENV vars
+
+Copy `.env.example` to `.env` and update the variables.
+
+## Database setup
+
+Set your `DATABASE_URL` in `.env`.
+
+Migrate:
+
+```bash
+npx prisma migrate dev
+```
+
 ## Getting Started
 
 First, run the development server:
