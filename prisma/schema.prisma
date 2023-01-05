@@ -12,11 +12,16 @@ datasource db {
 
 model User {
   id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   email String @unique @db.Text
 }
 
 model Employee {
   id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   managerId String? @db.Uuid
   manager Employee? @relation("Manager", fields: [managerId], references: [id])
@@ -63,6 +68,8 @@ model Employee {
 
 model EmployeeType {
   id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   name String @unique
   nameSlug String @unique
@@ -77,6 +84,9 @@ model EmployeeType {
 }
 
 model EmployeeTypeCountry {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   employeeTypeId String @db.Uuid
   employeeType EmployeeType @relation(fields: [employeeTypeId], references: [id])
 
@@ -88,6 +98,8 @@ model EmployeeTypeCountry {
 
 model Country {
   id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   name String 
   type String
@@ -100,6 +112,8 @@ model Country {
 
 model HireReason {
   id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   slug String 
   category String
@@ -115,6 +129,8 @@ model HireReason {
 
 model JobFamily {
   id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   name String
   slug String?
@@ -128,6 +144,8 @@ model JobFamily {
 // WIP 
 model Location {
   id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   name String
   slug String
@@ -152,6 +170,8 @@ model Location {
 
 model PositionTime {
   id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   slug String
   name String
@@ -161,6 +181,8 @@ model PositionTime {
 
 model WorkShift {
   id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   slug String
   name String
@@ -176,6 +198,8 @@ model WorkShift {
 
 model PayRate {
   id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   name String @unique
   slug String @unique
@@ -188,6 +212,8 @@ model PayRate {
 // WIP
 model AdditionalJobClassification { 
   id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   employees Employee[]
 }
@@ -195,6 +221,8 @@ model AdditionalJobClassification {
 // WIP
 model WorkerCompensationCode { 
   id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   employees Employee[]
 }

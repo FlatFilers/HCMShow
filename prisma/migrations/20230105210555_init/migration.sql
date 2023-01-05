@@ -1,6 +1,8 @@
 -- CreateTable
 CREATE TABLE "User" (
     "id" UUID NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "email" TEXT NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
@@ -9,6 +11,8 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Employee" (
     "id" UUID NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "managerId" UUID,
     "employeeTypeId" UUID NOT NULL,
     "hireReasonId" UUID NOT NULL,
@@ -32,6 +36,8 @@ CREATE TABLE "Employee" (
 -- CreateTable
 CREATE TABLE "EmployeeType" (
     "id" UUID NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "name" TEXT NOT NULL,
     "nameSlug" TEXT NOT NULL,
     "description" TEXT,
@@ -45,6 +51,8 @@ CREATE TABLE "EmployeeType" (
 
 -- CreateTable
 CREATE TABLE "EmployeeTypeCountry" (
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "employeeTypeId" UUID NOT NULL,
     "countryId" UUID NOT NULL,
 
@@ -54,6 +62,8 @@ CREATE TABLE "EmployeeTypeCountry" (
 -- CreateTable
 CREATE TABLE "Country" (
     "id" UUID NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "name" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "code" TEXT NOT NULL,
@@ -64,6 +74,8 @@ CREATE TABLE "Country" (
 -- CreateTable
 CREATE TABLE "HireReason" (
     "id" UUID NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "slug" TEXT NOT NULL,
     "category" TEXT NOT NULL,
     "isInactive" BOOLEAN NOT NULL,
@@ -79,6 +91,8 @@ CREATE TABLE "HireReason" (
 -- CreateTable
 CREATE TABLE "JobFamily" (
     "id" UUID NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "name" TEXT NOT NULL,
     "slug" TEXT,
     "effectiveDate" TIMESTAMP(3),
@@ -91,6 +105,8 @@ CREATE TABLE "JobFamily" (
 -- CreateTable
 CREATE TABLE "Location" (
     "id" UUID NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "name" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "effectiveDate" TIMESTAMP(3) NOT NULL,
@@ -106,6 +122,8 @@ CREATE TABLE "Location" (
 -- CreateTable
 CREATE TABLE "PositionTime" (
     "id" UUID NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
 
@@ -115,6 +133,8 @@ CREATE TABLE "PositionTime" (
 -- CreateTable
 CREATE TABLE "WorkShift" (
     "id" UUID NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
@@ -127,6 +147,8 @@ CREATE TABLE "WorkShift" (
 -- CreateTable
 CREATE TABLE "PayRate" (
     "id" UUID NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
     "name" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "isInactive" BOOLEAN NOT NULL,
@@ -138,6 +160,8 @@ CREATE TABLE "PayRate" (
 -- CreateTable
 CREATE TABLE "AdditionalJobClassification" (
     "id" UUID NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "AdditionalJobClassification_pkey" PRIMARY KEY ("id")
 );
@@ -145,6 +169,8 @@ CREATE TABLE "AdditionalJobClassification" (
 -- CreateTable
 CREATE TABLE "WorkerCompensationCode" (
     "id" UUID NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "WorkerCompensationCode_pkey" PRIMARY KEY ("id")
 );
