@@ -22,6 +22,9 @@ CREATE TABLE "Employee" (
     "workShiftId" UUID,
     "defaultWeeklyHours" INTEGER NOT NULL,
     "scheduledWeeklyHours" INTEGER NOT NULL,
+    "payRateId" UUID NOT NULL,
+    "additionalJobClassificationId" UUID NOT NULL,
+    "workerCompensationCodeId" UUID NOT NULL,
 
     CONSTRAINT "Employee_pkey" PRIMARY KEY ("id")
 );
@@ -89,21 +92,22 @@ CREATE TABLE "JobFamily" (
 CREATE TABLE "Location" (
     "id" UUID NOT NULL,
     "name" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
+    "effectiveDate" TIMESTAMP(3) NOT NULL,
+    "isInactive" BOOLEAN NOT NULL,
+    "latitude" DOUBLE PRECISION,
+    "longitude" DOUBLE PRECISION,
+    "altitude" DOUBLE PRECISION,
+    "countryId" UUID,
 
     CONSTRAINT "Location_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Workspace" (
-    "id" UUID NOT NULL,
-    "name" TEXT NOT NULL,
-
-    CONSTRAINT "Workspace_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "PositionTime" (
     "id" UUID NOT NULL,
+    "slug" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
 
     CONSTRAINT "PositionTime_pkey" PRIMARY KEY ("id")
 );
@@ -111,8 +115,38 @@ CREATE TABLE "PositionTime" (
 -- CreateTable
 CREATE TABLE "WorkShift" (
     "id" UUID NOT NULL,
+    "slug" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT,
+    "countryId" UUID,
+    "isInactive" BOOLEAN NOT NULL,
 
     CONSTRAINT "WorkShift_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "PayRate" (
+    "id" UUID NOT NULL,
+    "name" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
+    "isInactive" BOOLEAN NOT NULL,
+    "frequency" TEXT NOT NULL,
+
+    CONSTRAINT "PayRate_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "AdditionalJobClassification" (
+    "id" UUID NOT NULL,
+
+    CONSTRAINT "AdditionalJobClassification_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "WorkerCompensationCode" (
+    "id" UUID NOT NULL,
+
+    CONSTRAINT "WorkerCompensationCode_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -123,6 +157,12 @@ CREATE UNIQUE INDEX "EmployeeType_name_key" ON "EmployeeType"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "EmployeeType_nameSlug_key" ON "EmployeeType"("nameSlug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "PayRate_name_key" ON "PayRate"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "PayRate_slug_key" ON "PayRate"("slug");
 
 -- AddForeignKey
 ALTER TABLE "Employee" ADD CONSTRAINT "Employee_managerId_fkey" FOREIGN KEY ("managerId") REFERENCES "Employee"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -140,7 +180,7 @@ ALTER TABLE "Employee" ADD CONSTRAINT "Employee_jobFamilyId_fkey" FOREIGN KEY ("
 ALTER TABLE "Employee" ADD CONSTRAINT "Employee_locationId_fkey" FOREIGN KEY ("locationId") REFERENCES "Location"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Employee" ADD CONSTRAINT "Employee_workspaceId_fkey" FOREIGN KEY ("workspaceId") REFERENCES "Workspace"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Employee" ADD CONSTRAINT "Employee_workspaceId_fkey" FOREIGN KEY ("workspaceId") REFERENCES "Location"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Employee" ADD CONSTRAINT "Employee_positionTimeId_fkey" FOREIGN KEY ("positionTimeId") REFERENCES "PositionTime"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -149,7 +189,22 @@ ALTER TABLE "Employee" ADD CONSTRAINT "Employee_positionTimeId_fkey" FOREIGN KEY
 ALTER TABLE "Employee" ADD CONSTRAINT "Employee_workShiftId_fkey" FOREIGN KEY ("workShiftId") REFERENCES "WorkShift"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Employee" ADD CONSTRAINT "Employee_payRateId_fkey" FOREIGN KEY ("payRateId") REFERENCES "PayRate"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Employee" ADD CONSTRAINT "Employee_additionalJobClassificationId_fkey" FOREIGN KEY ("additionalJobClassificationId") REFERENCES "AdditionalJobClassification"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Employee" ADD CONSTRAINT "Employee_workerCompensationCodeId_fkey" FOREIGN KEY ("workerCompensationCodeId") REFERENCES "WorkerCompensationCode"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "EmployeeTypeCountry" ADD CONSTRAINT "EmployeeTypeCountry_employeeTypeId_fkey" FOREIGN KEY ("employeeTypeId") REFERENCES "EmployeeType"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "EmployeeTypeCountry" ADD CONSTRAINT "EmployeeTypeCountry_countryId_fkey" FOREIGN KEY ("countryId") REFERENCES "Country"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Location" ADD CONSTRAINT "Location_countryId_fkey" FOREIGN KEY ("countryId") REFERENCES "Country"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "WorkShift" ADD CONSTRAINT "WorkShift_countryId_fkey" FOREIGN KEY ("countryId") REFERENCES "Country"("id") ON DELETE SET NULL ON UPDATE CASCADE;

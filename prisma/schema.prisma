@@ -37,11 +37,10 @@ model Employee {
   businessTitle String?
 
   locationId String @db.Uuid
-  location Location @relation(fields: [locationId], references: [id])
+  location Location @relation("Location", fields: [locationId], references: [id])
 
-  // todo: this is a location
   workspaceId String? @db.Uuid
-  workspace Workspace? @relation(fields: [workspaceId], references: [id])
+  workspace Location? @relation("Workspace", fields: [workspaceId], references: [id])
 
   positionTimeId String @db.Uuid
   positionTime PositionTime @relation(fields: [positionTimeId], references: [id])
@@ -52,10 +51,14 @@ model Employee {
   defaultWeeklyHours Int
   scheduledWeeklyHours Int
 
-  // pay rate type - req (rel)
-  // additionalJobClassification - opt (rel)
-  // workerCompensationCode - opt (rel)
+  payRateId String @db.Uuid
+  payRate PayRate @relation(fields: [payRateId], references: [id])
 
+  additionalJobClassificationId String @db.Uuid
+  additionalJobClassification AdditionalJobClassification @relation(fields: [additionalJobClassificationId], references: [id])
+
+  workerCompensationCodeId String @db.Uuid
+  workerCompensationCode WorkerCompensationCode @relation(fields: [workerCompensationCodeId], references: [id])
 }
 
 model EmployeeType {
@@ -91,6 +94,8 @@ model Country {
   code String 
 
   employeeTypes EmployeeTypeCountry[]
+  locations Location[]
+  workShifts WorkShift[]
 }
 
 model HireReason {
@@ -125,28 +130,70 @@ model Location {
   id String @id @default(uuid()) @db.Uuid
 
   name String
+  slug String
+  effectiveDate DateTime
+  // location usage id req rel
+  isInactive Boolean
+  latitude Float?
+  longitude Float?
+  altitude Float?
 
-  employees Employee[]
+  // time profile id
+  // locale id
+  // time zone id
+  // currency id
+
+  countryId String? @db.Uuid
+  country Country? @relation(fields: [countryId], references: [id])
+
+  locationEmployees Employee[] @relation("Location")
+  workspaceEmployees Employee[] @relation("Workspace")
 }
 
-// WIP
-model Workspace {
+model PositionTime {
   id String @id @default(uuid()) @db.Uuid
 
+  slug String
   name String
 
   employees Employee[]
 }
 
+model WorkShift {
+  id String @id @default(uuid()) @db.Uuid
+
+  slug String
+  name String
+  description String?
+
+  countryId String? @db.Uuid
+  country Country? @relation(fields: [countryId], references: [id])
+
+  isInactive Boolean
+
+  employees Employee[]
+}
+
+model PayRate {
+  id String @id @default(uuid()) @db.Uuid
+
+  name String @unique
+  slug String @unique
+  isInactive Boolean
+  frequency String
+
+  employees Employee[]
+}
+
 // WIP
-model PositionTime {
+model AdditionalJobClassification { 
   id String @id @default(uuid()) @db.Uuid
 
   employees Employee[]
 }
 
 // WIP
-model WorkShift {
+model WorkerCompensationCode { 
   id String @id @default(uuid()) @db.Uuid
 
   employees Employee[]
