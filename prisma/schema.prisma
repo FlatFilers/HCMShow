@@ -1,0 +1,228 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email String @unique @db.Text
+}
+
+model Employee {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  managerId String? @db.Uuid
+  manager Employee? @relation("Manager", fields: [managerId], references: [id])
+  directReports Employee[] @relation("Manager")
+
+  employeeTypeId String @db.Uuid
+  employeeType EmployeeType @relation(fields: [employeeTypeId], references: [id])
+
+  hireReasonId String @db.Uuid
+  hireReason HireReason @relation(fields: [hireReasonId], references: [id])
+
+  hireDate DateTime
+  endEmploymentDate DateTime?
+
+  jobFamilyId String @db.Uuid
+  jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])
+
+  businessTitle String?
+
+  locationId String @db.Uuid
+  location Location @relation("Location", fields: [locationId], references: [id])
+
+  workspaceId String? @db.Uuid
+  workspace Location? @relation("Workspace", fields: [workspaceId], references: [id])
+
+  positionTimeId String @db.Uuid
+  positionTime PositionTime @relation(fields: [positionTimeId], references: [id])
+
+  workShiftId String? @db.Uuid
+  workShift WorkShift? @relation(fields: [workShiftId], references: [id])
+
+  defaultWeeklyHours Int
+  scheduledWeeklyHours Int
+
+  payRateId String @db.Uuid
+  payRate PayRate @relation(fields: [payRateId], references: [id])
+
+  additionalJobClassificationId String @db.Uuid
+  additionalJobClassification AdditionalJobClassification @relation(fields: [additionalJobClassificationId], references: [id])
+
+  workerCompensationCodeId String @db.Uuid
+  workerCompensationCode WorkerCompensationCode @relation(fields: [workerCompensationCodeId], references: [id])
+}
+
+model EmployeeType {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String @unique
+  nameSlug String @unique
+  description String?
+  isFixedTerm Boolean
+  isSeasonal Boolean
+  isTrainee Boolean
+  isInactive Boolean
+
+  employees Employee[]
+  countries EmployeeTypeCountry[] 
+}
+
+model EmployeeTypeCountry {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  employeeTypeId String @db.Uuid
+  employeeType EmployeeType @relation(fields: [employeeTypeId], references: [id])
+
+  countryId String @db.Uuid
+  country Country @relation(fields: [countryId], references: [id])
+
+  @@id([employeeTypeId, countryId])
+}
+
+model Country {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String 
+  type String
+  code String 
+
+  employeeTypes EmployeeTypeCountry[]
+  locations Location[]
+  workShifts WorkShift[]
+}
+
+model HireReason {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  slug String 
+  category String
+  isInactive Boolean
+  classificationName String
+  classificationSlug String
+  subcategorySlug String
+  reason String
+  isManagerReason Boolean
+
+  employees Employee[]
+}
+
+model JobFamily {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+  slug String?
+  effectiveDate DateTime?
+  summary String?
+  isInactive Boolean
+
+  employees Employee[]
+}
+
+// WIP 
+model Location {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+  slug String
+  effectiveDate DateTime
+  // location usage id req rel
+  isInactive Boolean
+  latitude Float?
+  longitude Float?
+  altitude Float?
+
+  // time profile id
+  // locale id
+  // time zone id
+  // currency id
+
+  countryId String? @db.Uuid
+  country Country? @relation(fields: [countryId], references: [id])
+
+  locationEmployees Employee[] @relation("Location")
+  workspaceEmployees Employee[] @relation("Workspace")
+}
+
+model PositionTime {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  slug String
+  name String
+
+  employees Employee[]
+}
+
+model WorkShift {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  slug String
+  name String
+  description String?
+
+  countryId String? @db.Uuid
+  country Country? @relation(fields: [countryId], references: [id])
+
+  isInactive Boolean
+
+  employees Employee[]
+}
+
+model PayRate {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String @unique
+  slug String @unique
+  isInactive Boolean
+  frequency String
+
+  employees Employee[]
+}
+
+// WIP
+model AdditionalJobClassification { 
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  employees Employee[]
+}
+
+// WIP
+model WorkerCompensationCode { 
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  employees Employee[]
+}
