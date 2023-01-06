@@ -14,8 +14,6 @@ import {
   User,
 } from "@prisma/client";
 import { DateTime } from "luxon";
-import Email from "next-auth/providers/email";
-import { getMaxListeners } from "process";
 
 const prisma = new PrismaClient();
 
