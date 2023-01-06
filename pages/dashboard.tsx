@@ -3,17 +3,13 @@ import { unstable_getServerSession } from "next-auth/next";
 import { Session } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
 
-const Hosts: NextPage<{ session: Session }> = ({ session }) => {
+const Dashboard: NextPage<{ session: Session }> = ({ session }) => {
   return (
     <div>
-      {session && (
-        <div className="mx-auto">
-          Session!!!
-        </div>
-      )}
+      {session && <div className="mx-auto">Session!!!</div>}
       {!session && <div>Missing a session</div>}
     </div>
   );
 };
 
-export default Hosts;
+export default Dashboard;
