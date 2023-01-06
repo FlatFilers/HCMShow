@@ -1,8 +1,19 @@
 import { GetServerSideProps, NextPage } from "next";
-import { Employee, PrismaClient } from "@prisma/client";
+import { Employee, Prisma, PrismaClient } from "@prisma/client";
+
+const employeeWithRelations = Prisma.validator<Prisma.EmployeeArgs>()({
+  include: {
+    manager: true,
+    location: true,
+  },
+});
+
+type EmployeeWithRelations = Prisma.EmployeeGetPayload<
+  typeof employeeWithRelations
+>;
 
 interface Props {
-  employee: Employee;
+  employee: EmployeeWithRelations;
 }
 
 const Employees: NextPage<Props> = ({ employee }) => {
@@ -27,7 +38,7 @@ const Employees: NextPage<Props> = ({ employee }) => {
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Manager</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              {employee.managerId}
+              {employee.manager?.id}
             </dd>
           </div>
           <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
@@ -52,11 +63,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const employeeId: string = context.params?.id as string;
   const prisma = new PrismaClient();
 
-  const employee: Employee | null = await prisma.employee.findUnique({
-    where: {
-      id: employeeId,
-    },
-  });
+  const employee: EmployeeWithRelations | null =
+    await prisma.employee.findUnique({
+      where: {
+        id: employeeId,
+      },
+      include: {
+        manager: true,
+        location: true,
+      },
+    });
 
   if (!employee) {
     return {
