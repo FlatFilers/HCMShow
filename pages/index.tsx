@@ -18,20 +18,20 @@ const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 
 const Home: NextPageWithLayout = () => {
   return (
-    <div>
+    <div className="">
       <Head>
         <title>HCM Show</title>
         <meta name="description" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-row items-center justify-center min-h-screen">
+      <main className="flex flex-row items-center justify-center min-h-screen bg-white">
         <div>
-          <h1 className="mb-4">Log in to your account</h1>
+          <h1 className="mb-4 text-black">Log in to your account</h1>
           <div>
             <form onSubmit={handleSubmit}>
               <div className="mb-2">
-                <label className="mr-2">Email</label>
+                <label className="mr-2 text-black">Email</label>
                 <input
                   name="email"
                   type="email"
@@ -40,7 +40,7 @@ const Home: NextPageWithLayout = () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="mr-2">Password</label>
+                <label className="mr-2 text-black">Password</label>
                 <input
                   name="password"
                   type="password"
@@ -48,7 +48,7 @@ const Home: NextPageWithLayout = () => {
                   required
                 />
               </div>
-              <button className="px-6 py-1 mt-4 bg-white text-black rounded-lg">
+              <button className="px-6 py-1 mt-4 bg-white text-black rounded-lg border border-black">
                 Log in
               </button>
             </form>
