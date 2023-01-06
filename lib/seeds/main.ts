@@ -11,8 +11,11 @@ import {
   PayRate,
   AdditionalJobClassification,
   WorkerCompensationCode,
+  User,
 } from "@prisma/client";
 import { DateTime } from "luxon";
+import Email from "next-auth/providers/email";
+import { getMaxListeners } from "process";
 
 const prisma = new PrismaClient();
 
@@ -182,4 +185,11 @@ export const main = async () => {
       workerCompensationCodeId: workerCompensationCode.id,
     },
   });
+
+  const firstUser: User = await prisma.user.create({
+    data: {
+      email: "user@email.com",
+      password: "badpassword"
+    }
+  })
 };
