@@ -1,9 +1,20 @@
 import { GetServerSideProps, NextPage } from "next";
-import { Employee, PrismaClient } from "@prisma/client";
+import { Employee, Prisma, PrismaClient } from "@prisma/client";
 import Link from "next/link";
 
+const employeeWithRelations = Prisma.validator<Prisma.EmployeeArgs>()({
+  include: {
+    manager: true,
+    location: true,
+  },
+});
+
+type EmployeeWithRelations = Prisma.EmployeeGetPayload<
+  typeof employeeWithRelations
+>;
+
 interface Props {
-  employees: Employee[];
+  employees: EmployeeWithRelations[];
 }
 
 const Employees: NextPage<Props> = ({ employees }) => {
@@ -74,13 +85,15 @@ const Employees: NextPage<Props> = ({ employees }) => {
                         </Link>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {employee?.managerId}
+                        {employee.manager && (
+                          <div>{employee.manager?.id} - TODO Manager Name</div>
+                        )}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {employee.positionTitle}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {employee.locationId}
+                        {employee.location.name}
                       </td>
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                         <a
@@ -108,7 +121,12 @@ const Employees: NextPage<Props> = ({ employees }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const prisma = new PrismaClient();
 
-  const employees: Employee[] = await prisma.employee.findMany();
+  const employees: EmployeeWithRelations[] = await prisma.employee.findMany({
+    include: {
+      manager: true,
+      location: true,
+    },
+  });
 
   return {
     props: {
