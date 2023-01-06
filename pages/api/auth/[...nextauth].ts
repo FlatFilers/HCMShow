@@ -29,6 +29,7 @@ export const authOptions: NextAuthOptions = {
           where: {
             email: credentials!.email,
             password: credentials!.password,
+            // TODO: Add password scheme to hash password
           },
         });
         const result = res.json();
