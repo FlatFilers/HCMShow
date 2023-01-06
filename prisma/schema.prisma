@@ -39,6 +39,7 @@ model Employee {
   jobFamilyId String @db.Uuid
   jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])
 
+  positionTitle String
   businessTitle String?
 
   locationId String @db.Uuid
@@ -72,7 +73,7 @@ model EmployeeType {
   updatedAt DateTime @updatedAt
 
   name String @unique
-  nameSlug String @unique
+  slug String @unique
   description String?
   isFixedTerm Boolean
   isSeasonal Boolean
