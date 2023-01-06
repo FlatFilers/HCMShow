@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -25,18 +25,16 @@ export const authOptions: NextAuthOptions = {
         // Add logic here to look up the user from the credentials supplied
 
         const prisma = new PrismaClient();
-        const res = await prisma.user.findUnique({
+        const user: User | null = await prisma.user.findUnique({
           where: {
             email: credentials!.email,
-            password: credentials!.password,
+            // password: credentials!.password,
             // TODO: Add password scheme to hash password
           },
         });
-        const result = res.json();
 
-
-        if (res.ok && result) {
-          return result.response.user
+        if (user) {
+          return user;
         }
 
         return null;
@@ -44,6 +42,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   jwt: {
+    // TODO
     secret: "blah",
   },
 };
