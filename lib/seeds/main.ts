@@ -11,6 +11,7 @@ import {
   PayRate,
   AdditionalJobClassification,
   WorkerCompensationCode,
+  User,
 } from "@prisma/client";
 import { DateTime } from "luxon";
 
@@ -182,4 +183,11 @@ export const main = async () => {
       workerCompensationCodeId: workerCompensationCode.id,
     },
   });
+
+  const firstUser: User = await prisma.user.create({
+    data: {
+      email: "user@email.com",
+      password: "badpassword"
+    }
+  })
 };

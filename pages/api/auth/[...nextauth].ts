@@ -1,5 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { PrismaClient } from "@prisma/client";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -22,14 +23,23 @@ export const authOptions: NextAuthOptions = {
       // @ts-ignore This requires some await call that we are bypassing
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        const user = {
-          id: "1",
-          name: "J Smith",
-          email: "jsmith@example.com",
-          image: null,
-        };
 
-        return user;
+        const prisma = new PrismaClient();
+        const res = await prisma.user.findUnique({
+          where: {
+            email: credentials!.email,
+            password: credentials!.password,
+            // TODO: Add password scheme to hash password
+          },
+        });
+        const result = res.json();
+
+
+        if (res.ok && result) {
+          return result.response.user
+        }
+
+        return null;
       },
     }),
   ],
