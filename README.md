@@ -14,6 +14,15 @@ Migrate:
 npx prisma migrate dev
 ```
 
+## Seeding the database
+
+```bash
+ts-node -O '{"module": "commonjs"}' prisma/seed.ts
+
+# This reset the DB if you need to re-seed
+# npx prisma migrate reset
+```
+
 ## Getting Started
 
 First, run the development server:
