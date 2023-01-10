@@ -1,6 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient, User } from "@prisma/client";
+import * as bcrypt from 'bcrypt';
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -28,16 +29,12 @@ export const authOptions: NextAuthOptions = {
         const user: User | null = await prisma.user.findUnique({
           where: {
             email: credentials!.email,
-            // password: credentials!.password,
-            // TODO: Add password scheme to hash password
           },
         });
 
-        if (user) {
-          return user;
-        }
+        const pwIsValid = await bcrypt.compare( credentials!.password, user!.password );
 
-        return null;
+        user && pwIsValid ? user : null;
       },
     }),
   ],
