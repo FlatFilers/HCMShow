@@ -14,7 +14,6 @@ import {
   User,
 } from "@prisma/client";
 import { DateTime } from "luxon";
-import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
@@ -188,7 +187,7 @@ export const main = async () => {
   const firstUser: User = await prisma.user.create({
     data: {
       email: "user@email.com",
-      password: "badpassword",
-    },
-  });
+      password: "badpassword"
+    }
+  })
 };

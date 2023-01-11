@@ -17,8 +17,7 @@ export const authOptions: NextAuthOptions = {
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
         email: { label: "Email", type: "email" },
-        // password: credentials!.password,
-        // TODO: Add password scheme to hash password
+        password: { label: "Password", type: "password" },
       },
 
       // @ts-ignore This requires some await call that we are bypassing
@@ -29,6 +28,8 @@ export const authOptions: NextAuthOptions = {
         const user: User | null = await prisma.user.findUnique({
           where: {
             email: credentials!.email,
+            // password: credentials!.password,
+            // TODO: Add password scheme to hash password
           },
         });
 
