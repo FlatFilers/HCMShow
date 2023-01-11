@@ -45,6 +45,9 @@ export const authOptions: NextAuthOptions = {
     // TODO
     secret: "blah",
   },
+  pages: {
+    error: "/",
+  },
 };
 
 export default NextAuth(authOptions);
