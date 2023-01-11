@@ -188,7 +188,7 @@ export const main = async () => {
   const firstUser: User = await prisma.user.create({
     data: {
       email: "user@email.com",
-      password: await bcrypt.hash("badpassword", 16),
-    }
-  })
+      password: "badpassword",
+    },
+  });
 };

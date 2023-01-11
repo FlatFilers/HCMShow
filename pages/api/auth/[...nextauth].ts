@@ -1,7 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient, User } from "@prisma/client";
-import * as bcrypt from 'bcrypt';
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -18,7 +17,8 @@ export const authOptions: NextAuthOptions = {
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        // password: credentials!.password,
+        // TODO: Add password scheme to hash password
       },
 
       // @ts-ignore This requires some await call that we are bypassing
@@ -32,17 +32,11 @@ export const authOptions: NextAuthOptions = {
           },
         });
 
-        if (!user) {
-          throw new Error("Email address is not valid. Please try again.");
+        if (user) {
+          return user;
         }
 
-        const pwIsValid = await bcrypt.compare( credentials!.password, user!.password );
-
-        if (!pwIsValid) {
-          throw new Error('Password is invalid. Please try again.')
-        }
-
-        return user;
+        return null;
       },
     }),
   ],
@@ -51,8 +45,8 @@ export const authOptions: NextAuthOptions = {
     secret: "blah",
   },
   pages: {
-    error: '/', 
-  }
+    error: "/",
+  },
 };
 
 export default NextAuth(authOptions);
