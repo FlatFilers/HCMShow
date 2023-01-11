@@ -59,6 +59,34 @@ export const authOptions: NextAuthOptions = {
   pages: {
     error: "/",
   },
+  callbacks: {
+    async session({ session, user, token }: any) {
+      // console.log('SESSIONSESSIONSESSIONSESSIONSESSIONSESSION');
+      // console.log('user', user); 
+      // console.log('session', session);
+      // console.log('token', token);
+      
+      session.authenticationToken = token.authentication_token;
+      
+      // console.log('newsession', session);
+      return session;
+    },
+    async jwt({ token, user, account, profile, isNewUser }: any) {
+      // console.log("JWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWT");
+      // console.log('account', account);
+      // console.log('token', token);
+      // console.log('user', user);
+      // console.log('account', account);
+      // console.log('profile', profile);
+      // console.log('isNewUser', isNewUser);
+      if (user) {
+        token.authenticationToken = user.authentication_token;
+      }
+      
+      // console.log('newtoken', token);
+      return token;
+    }
+  },
 };
 
 export default NextAuth(authOptions);
