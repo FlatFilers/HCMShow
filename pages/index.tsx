@@ -3,6 +3,7 @@ import Head from "next/head";
 import { FormEvent, ReactElement } from "react";
 import { NextPageWithLayout } from "./_app";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
+import { useRouter } from "next/router";
 
 const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
   event.preventDefault();
@@ -17,7 +18,8 @@ const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
   signIn("credentials", { email, password, callbackUrl: "/dashboard" });
 };
 
-const Home: NextPageWithLayout = () => {
+const Home: NextPageWithLayout = () => {  
+  const { error } = useRouter().query;
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white h-screen">
       <div className="w-full max-w-md space-y-8">
@@ -40,6 +42,9 @@ const Home: NextPageWithLayout = () => {
             </a>
           </p>
         </div>
+        {error && 
+          <div className="text-red-600 mx-auto">{error}</div>
+        }
         <form className="mt-8 space-y-6" action="#" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md shadow-sm">
