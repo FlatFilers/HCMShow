@@ -32,13 +32,23 @@ export const authOptions: NextAuthOptions = {
           },
         });
 
-        const pwIsValid = await bcrypt.compare( credentials!.password, user!.password );
-
-        if (user && pwIsValid) {
-          return user;
+        if (!user) {
+          throw new Error("Email address is not valid. Please try again.");
         }
 
-        return null;
+        const pwIsValid = await bcrypt.compare(
+          credentials!.password,
+          user!.password
+        );
+
+        console.log(pwIsValid);
+        
+
+        if (!pwIsValid) {
+          throw new Error("Password is invalid. Please try again.");
+        }
+
+        return user;
       },
     }),
   ],
