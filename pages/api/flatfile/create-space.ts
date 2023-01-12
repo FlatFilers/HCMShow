@@ -22,8 +22,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  const basePath: string = "https://api.x.flatfile.com/v1";
   const configParams: ConfigurationParameters = {
-    basePath: "https://api.x.flatfile.com/v1",
+    basePath,
   };
   const config: Configuration = new Configuration(configParams);
   const client = new DefaultApi(config);
@@ -50,8 +51,9 @@ export default async function handler(
   const accessToken: string = accessTokenResponse.data.accessToken;
 
   // Pre-setup space config ID = us_sc_66CPdlvn
+  const spaceConfigId = "us_sc_66CPdlvn";
   const spaceConfig: SpaceConfig = {
-    spaceConfigId: "us_sc_66CPdlvn",
+    spaceConfigId: spaceConfigId,
     environmentId: process.env.FLATFILE_ENVIRONMENT_ID as string,
     name: "Onboarding",
   };
@@ -59,16 +61,93 @@ export default async function handler(
   const spaceRequestParameters: AddSpaceRequest = {
     spaceConfig,
   };
-  const options: RequestInit = {
-    headers: [
-      ["Authorization", `Bearer ${accessToken}`],
-      ["Content-Type", "application/json"],
-    ],
+  // TODO: Is there a way to use the SDK / OpenAPI wrapper to set these headers more elegantly?
+  // client.setHeaders/setToken() etc that will remember it moving forward
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    "Content-Type": "application/json",
   };
-  const spaceResponse = await client.addSpace(spaceRequestParameters, options);
+
+  const spacePayload = {
+    spaceConfigId: spaceConfigId,
+    environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
+  };
+
+  const spaceResponse = await fetch(`${basePath}/spaces`, {
+    method: "POST",
+    body: JSON.stringify(spacePayload),
+    headers: headers,
+  });
+  // const spaceResponse = await client.addSpace(spaceRequestParameters, options);
 
   console.log("spaceResponse", spaceResponse);
 
-  console.log("HERE");
-  res.status(200).json({ message: "John Doe" });
+  if (!spaceResponse.ok) {
+    res.status(500).json({ message: "Error creating space" });
+    return;
+  }
+
+  const spaceResult = await spaceResponse.json();
+
+  console.log("spaceResponse body", spaceResult);
+
+  const spaceId: string = spaceResult.data.id;
+
+  const payload = {
+    environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
+    email: `guest${Math.random()}@example.com`,
+    name: "Mr. Guest",
+    spaces: [
+      {
+        id: spaceId,
+        // TODO: What are these?
+        // lastAccessed: "2022-09-18T00:19:57.007Z",
+        invitationLink: "https://todo.todo",
+      },
+    ],
+  };
+
+  // TODO: Need guest methods on API wrapper to call
+  const addGuestToSpaceResponse: Response = await fetch(
+    `${basePath}/guests?spaceId=${spaceId}`,
+    {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: headers,
+    }
+  );
+
+  console.log("addGuestToSpaceResponse", addGuestToSpaceResponse);
+
+  if (!addGuestToSpaceResponse.ok) {
+    res.status(500).json({ message: "Error adding guest to space" });
+    return;
+  }
+
+  const addGuestResult = await addGuestToSpaceResponse.json();
+  console.log("addGuestResult", addGuestResult, addGuestResult.data.spaces);
+
+  // Query the space to get the guest URL
+  const getSpaceResponse: Response = await fetch(
+    `${basePath}/spaces/${spaceId}`,
+    {
+      method: "GET",
+      headers: headers,
+    }
+  );
+
+  console.log("getSpaceResponse", getSpaceResponse);
+
+  if (!getSpaceResponse.ok) {
+    res.status(500).json({ message: "Error retrieving space" });
+    return;
+  }
+
+  const getSpaceResult = await getSpaceResponse.json();
+  console.log("getSpaceResult", getSpaceResult);
+
+  const guestLink: string = getSpaceResult.data.guestLink;
+
+  // res.status(200).json({ message: "John Doe" });
+  res.redirect(guestLink);
 }
