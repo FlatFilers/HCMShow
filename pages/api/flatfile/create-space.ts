@@ -12,7 +12,7 @@ import {
   AddSpaceRequest,
   SpaceConfig,
 } from "@flatfile/api";
-import { env } from "process";
+import { PrismaClient, Space, User } from "@prisma/client";
 
 type Data = {
   message?: string;
@@ -50,8 +50,8 @@ export default async function handler(
 
   const accessToken: string = accessTokenResponse.data.accessToken;
 
-  // Pre-setup space config ID = us_sc_66CPdlvn
-  const spaceConfigId = "us_sc_66CPdlvn";
+  // Pre-setup space config ID
+  const spaceConfigId = "us_sc_PXZ1mklU";
   const spaceConfig: SpaceConfig = {
     spaceConfigId: spaceConfigId,
     environmentId: process.env.FLATFILE_ENVIRONMENT_ID as string,
@@ -145,6 +145,24 @@ export default async function handler(
 
   const getSpaceResult = await getSpaceResponse.json();
   console.log("getSpaceResult", getSpaceResult);
+
+  // const spaceId = getSpaceResult.data.id;
+
+  const prisma = new PrismaClient();
+
+  // TODO: use session to get this
+  const user: User = (await prisma.user.findUnique({
+    where: {
+      email: "user@email.com",
+    },
+  })) as User;
+
+  const space: Space = await prisma.space.create({
+    data: {
+      userId: user.id,
+      flatfileSpaceId: spaceId,
+    },
+  });
 
   const guestLink: string = getSpaceResult.data.guestLink;
 

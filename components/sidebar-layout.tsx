@@ -30,6 +30,12 @@ const SidebarLayout = ({ children }: Props) => {
       icon: UsersIcon,
       current: false,
     },
+    {
+      name: "Imports",
+      href: "/imports",
+      icon: InboxIcon,
+      current: false,
+    },
     // { name: "Projects", href: "#", icon: FolderIcon, current: false },
     // { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
     // { name: "Documents", href: "#", icon: InboxIcon, current: false },

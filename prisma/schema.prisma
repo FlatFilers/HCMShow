@@ -17,6 +17,8 @@ model User {
 
   email String @unique @db.Text
   password String 
+
+  spaces Space[]
 }
 
 model Employee {
@@ -227,4 +229,15 @@ model WorkerCompensationCode {
   updatedAt DateTime @updatedAt
 
   employees Employee[]
+}
+
+model Space {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  flatfileSpaceId String @unique
+
+  userId String @db.Uuid
+  user User @relation(fields: [userId], references: [id])
 }
