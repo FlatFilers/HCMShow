@@ -55,7 +55,7 @@ export const authOptions: NextAuthOptions = {
   ],
   jwt: {
     // TODO
-    secret: "boop",
+    secret: "blah",
   },
   pages: {
     error: "/",
@@ -69,8 +69,9 @@ export const authOptions: NextAuthOptions = {
       // console.log("account", account);
       // console.log("profile", profile);
       // console.log("isNewUser", isNewUser);
+      console.log("THETOKEN",token);
       const payload = {
-        email: token.email,
+        sub: token.sub,
       };
       const signOptions: any = {
         expiresIn: "30d",
@@ -80,6 +81,8 @@ export const authOptions: NextAuthOptions = {
 
       token.authenticationToken = access_token;
       
+
+      // console.log("newtoken", token);
       return token;
     },
     async session({ session, user, token }: any) {
@@ -95,6 +98,9 @@ export const authOptions: NextAuthOptions = {
       };
       session.authenticationToken = token.authenticationToken;
       session.token = token
+      console.log('jwt', session.jwt);
+      console.log("authtoken", session.authenticationToken);
+      console.log('token', session.token);
       
       return session;
     },
