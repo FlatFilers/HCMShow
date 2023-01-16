@@ -19,9 +19,23 @@ type Props = {
 
 const SidebarLayout = ({ children }: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // TODO: Set `current` here properly
   const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
     { name: "Employees", href: "/employees", icon: UsersIcon, current: false },
+    {
+      name: "Onboarding",
+      href: "/onboarding",
+      icon: UsersIcon,
+      current: false,
+    },
+    {
+      name: "Imports",
+      href: "/imports",
+      icon: InboxIcon,
+      current: false,
+    },
     // { name: "Projects", href: "#", icon: FolderIcon, current: false },
     // { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
     // { name: "Documents", href: "#", icon: InboxIcon, current: false },
