@@ -60,13 +60,6 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - name: 👀 Read app name
-        uses: SebRollen/toml-action@v1.0.0
-        id: app_name
-        with:
-          file: "fly.toml"
-          field: "app"
-
       - name: ⬆️ Push to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12 
         with:
