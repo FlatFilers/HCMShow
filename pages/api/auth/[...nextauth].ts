@@ -36,7 +36,6 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Email address is not valid. Please try again.");
         }
         
-
         const pwIsValid = await bcrypt.compare(
           credentials!.password,
           user!.password
