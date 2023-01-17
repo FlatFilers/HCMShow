@@ -128,6 +128,4 @@ Home.getLayout = function getLayout(page: ReactElement) {
   return page;
 };
 
-Home.skipAuth = true;
-
 export default Home;
