@@ -2,6 +2,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient, User } from "@prisma/client";
 import * as bcrypt from 'bcrypt';
+import jwt from "jsonwebtoken";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -68,11 +69,21 @@ export const authOptions: NextAuthOptions = {
       // console.log("account", account);
       // console.log("profile", profile);
       // console.log("isNewUser", isNewUser);
-      if (user) {
-        token.authenticationToken = user.authentication_token;
-      }
 
-      // console.log("newtoken", token);
+      const SignToken = () => {
+        const newToken = jwt.sign(
+          { id: token.email },
+          // TODO: Set secret to env variable
+          "blah",
+          { algorithm: "HS256", expiresIn: "1d" },
+        );
+        return newToken;
+      };
+
+      token.authenticationToken = SignToken();
+      token.alg = "HS256";
+
+      console.log("newtoken", token);
       return token;
     },
     async session({ session, user, token }: any) {
@@ -81,7 +92,7 @@ export const authOptions: NextAuthOptions = {
       // console.log("session", session);
       // console.log("token", token);
 
-      session.authenticationToken = token.authenticationToken;
+      session.jwt = token;
       return session;
     },
   },

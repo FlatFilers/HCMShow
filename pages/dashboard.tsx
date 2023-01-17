@@ -3,17 +3,9 @@ import { useSession } from "next-auth/react";
 
 const Dashboard: NextPage = () => {
   const { data: session } = useSession();
-  console.log("dashdashdashdashdashdash", session);
-  
-  const isSessionAuthenticated = session?.authenticationToken
-  
+   
   return (
     <div>
-      {console.log("session", session)})
-      {session && <div className="text-black">session</div>}
-      {isSessionAuthenticated && (
-        <div className="text-black">AuthenticationToken</div>
-      )}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
         <h1 className="text-2xl text-gray-900 mx-auto">
           <div className="font-semibold mt-6">
