@@ -43,6 +43,7 @@ export const authOptions: NextAuthOptions = {
 
         console.log(pwIsValid);
 
+        
         if (!pwIsValid) {
           throw new Error("Password is invalid. Please try again.");
         }
