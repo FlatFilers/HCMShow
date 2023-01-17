@@ -6,6 +6,8 @@ const Dashboard: NextPage = () => {
    
   return (
     <div>
+      {console.log('sessjwt', session)}
+      {session && <div className="text-black">session</div>}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
         <h1 className="text-2xl text-gray-900 mx-auto">
           <div className="font-semibold mt-6">

@@ -92,11 +92,9 @@ export const authOptions: NextAuthOptions = {
       // console.log("session", session);
       // console.log("token", token);
       // console.log('token',token);
-      session.jwt = {
+      session.user = {
         sub: token.sub,
         email: token.email,
-        iat: token.iat,
-        exp: token.exp,
       };
 
       return session;
