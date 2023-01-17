@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient, User } from "@prisma/client";
 import * as bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
+import { Secret } from "next-auth/jwt";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -54,8 +55,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   jwt: {
-    // TODO
-    secret: "blah",
+    secret: process.env.JWT_SECRET,
   },
   pages: {
     error: "/",
@@ -69,20 +69,21 @@ export const authOptions: NextAuthOptions = {
       // console.log("account", account);
       // console.log("profile", profile);
       // console.log("isNewUser", isNewUser);
-      console.log("THETOKEN",token);
+      // console.log("THETOKEN", token);
+
       const payload = {
         sub: token.sub,
       };
+      const jwtSecret = process.env.JWT_SECRET as Secret
       const signOptions: any = {
         expiresIn: "30d",
       };
       token.alg = "HS256";
-      const access_token = await jwt.sign(payload, "boop", signOptions);
+
+      const access_token = jwt.sign(payload, jwtSecret, signOptions);
 
       token.authenticationToken = access_token;
-      
 
-      // console.log("newtoken", token);
       return token;
     },
     async session({ session, user, token }: any) {
@@ -92,16 +93,12 @@ export const authOptions: NextAuthOptions = {
       // console.log("token", token);
       // console.log('token',token);
       session.jwt = {
+        sub: token.sub,
         email: token.email,
         iat: token.iat,
         exp: token.exp,
       };
-      session.authenticationToken = token.authenticationToken;
-      session.token = token
-      console.log('jwt', session.jwt);
-      console.log("authtoken", session.authenticationToken);
-      console.log('token', session.token);
-      
+
       return session;
     },
   },
