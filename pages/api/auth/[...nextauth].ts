@@ -2,8 +2,6 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient, User } from "@prisma/client";
 import * as bcrypt from 'bcrypt';
-import jwt from "jsonwebtoken";
-import { Secret } from "next-auth/jwt";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -41,10 +39,7 @@ export const authOptions: NextAuthOptions = {
         const pwIsValid = await bcrypt.compare(
           credentials!.password,
           user!.password
-        );
-
-        console.log(pwIsValid);
-        
+        );        
 
         if (!pwIsValid) {
           throw new Error("Password is invalid. Please try again.");
@@ -63,26 +58,11 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }: any) {
       // console.log("JWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWT");
-      // console.log("account", account);
       // console.log("token", token);
       // console.log("user", user);
       // console.log("account", account);
       // console.log("profile", profile);
       // console.log("isNewUser", isNewUser);
-      // console.log("THETOKEN", token);
-
-      const payload = {
-        sub: token.sub,
-      };
-      const jwtSecret = process.env.JWT_SECRET as Secret
-      const signOptions: any = {
-        expiresIn: "30d",
-      };
-      token.alg = "HS256";
-
-      const access_token = jwt.sign(payload, jwtSecret, signOptions);
-
-      token.authenticationToken = access_token;
 
       return token;
     },
@@ -92,6 +72,7 @@ export const authOptions: NextAuthOptions = {
       // console.log("session", session);
       // console.log("token", token);
       // console.log('token',token);
+
       session.user = {
         sub: token.sub,
         email: token.email,
