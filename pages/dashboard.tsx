@@ -1,7 +1,9 @@
 import { NextPage } from "next";
-import { Session } from "next-auth";
+import { useSession } from "next-auth/react";
 
-const Dashboard: NextPage<{ session: Session }> = ({ session }) => {
+const Dashboard: NextPage = () => {
+  const { data: session } = useSession();
+   
   return (
     <div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">

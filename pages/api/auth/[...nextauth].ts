@@ -53,11 +53,36 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   jwt: {
-    // TODO
-    secret: "blah",
+    secret: process.env.JWT_SECRET,
   },
   pages: {
     error: "/",
+  },
+  callbacks: {
+    async jwt({ token, user, account, profile, isNewUser }: any) {
+      // console.log("JWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWT");
+      // console.log("token", token);
+      // console.log("user", user);
+      // console.log("account", account);
+      // console.log("profile", profile);
+      // console.log("isNewUser", isNewUser);
+
+      return token;
+    },
+    async session({ session, user, token }: any) {
+      // console.log("SESSIONSESSIONSESSIONSESSIONSESSIONSESSION");
+      // console.log("user", user);
+      // console.log("session", session);
+      // console.log("token", token);
+      // console.log('token',token);
+
+      session.user = {
+        sub: token.sub,
+        email: token.email,
+      };
+
+      return session;
+    },
   },
 };
 
