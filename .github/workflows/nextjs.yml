@@ -65,7 +65,7 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "flatfile-demo-x"
-          heroku_email: "john.mosesman@flatfile.io" # TODO: This should be a diff email?
+          heroku_email: "infra+hcm@flatfile.io"
 
       # This ugly bit is necessary if you don't want your cache to grow forever
       # till it hits GitHub's limit of 5GB.
