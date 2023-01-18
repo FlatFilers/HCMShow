@@ -15,7 +15,7 @@ const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.currentTarget.elements.namedItem("password") as HTMLInputElement
   ).value;
 
-  signIn("credentials", { email, password, callbackUrl: "/dashboard" });
+  signIn("credentials", { email, password, callbackUrl: "/employees" });
 };
 
 const Home: NextPageWithLayout = () => {  
