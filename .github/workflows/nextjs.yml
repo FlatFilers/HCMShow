@@ -66,13 +66,3 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "flatfile-demo-x"
           heroku_email: "infra+hcm@flatfile.io"
-
-      # This ugly bit is necessary if you don't want your cache to grow forever
-      # till it hits GitHub's limit of 5GB.
-      # Temp fix
-      # https://github.com/docker/build-push-action/issues/252
-      # https://github.com/moby/buildkit/issues/1896
-      - name: 🚚 Move cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
