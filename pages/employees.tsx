@@ -1,5 +1,5 @@
 import { GetServerSideProps, NextPage } from "next";
-import { Employee, Prisma, PrismaClient } from "@prisma/client";
+import { Employee, Prisma, PrismaClient, User } from "@prisma/client";
 import Link from "next/link";
 
 const employeeWithRelations = Prisma.validator<Prisma.EmployeeArgs>()({
@@ -121,7 +121,8 @@ const Employees: NextPage<Props> = ({ employees }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const prisma = new PrismaClient();
 
-  const employees: EmployeeWithRelations[] = await prisma.employee.findMany({
+  // Test for CI
+  const employees: User[] = await prisma.employee.findMany({
     include: {
       manager: true,
       location: true,
