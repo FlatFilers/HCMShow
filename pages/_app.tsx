@@ -9,7 +9,6 @@ import SidebarLayout from "../components/sidebar-layout";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
-  skipAuth?: boolean;
 };
 
 interface AppPropsWithLayout extends AppProps {
