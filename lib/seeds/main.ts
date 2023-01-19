@@ -56,14 +56,48 @@ const upsertJobFamilies = async () => {
   });
 
   await Promise.all(promises);
-
-  console.log("CSV DATA", csvData);
 };
 
+const upsertCountries = async () => {
+  // [Name,Type,ID]
+  const parseCsv: Promise<Omit<Country, "id" | "createdAt" | "updatedAt">[]> =
+    new Promise((resolve, reject) => {
+      const data: Omit<Country, "id" | "createdAt" | "updatedAt">[] = [];
+
+      fs.createReadStream("./lib/seeds/data/seed_countries.csv")
+        .pipe(parse())
+        .on("error", reject)
+        .on("data", (row: any) => {
+          data.push({
+            name: row[0],
+            type: row[1],
+            code: row[2],
+          });
+        })
+        .on("end", () => {
+          resolve(data);
+        });
+    });
+
+  const csvData = await Promise.resolve(parseCsv);
+
+  const promises = csvData.map(async (data) => {
+    const country: Country = await prisma.country.upsert({
+      where: {
+        code: data.code,
+      },
+      create: data,
+      update: {},
+    });
+  });
+
+  await Promise.all(promises);
+};
 export const main = async () => {
   console.log("Seeding...");
 
   await upsertJobFamilies();
+  await upsertCountries();
 
   // const employeeTypeData = {
   //   name: "Regular",

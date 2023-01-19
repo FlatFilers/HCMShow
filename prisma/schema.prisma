@@ -107,7 +107,7 @@ model Country {
 
   name String 
   type String
-  code String 
+  code String @unique
 
   employeeTypes EmployeeTypeCountry[]
   locations Location[]

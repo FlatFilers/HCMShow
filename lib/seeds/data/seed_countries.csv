@@ -1,0 +1,736 @@
+Name,Type,ID
+United States of America,ISO_3166-1_Alpha-3_Code,USA
+United States of America,ISO_3166-1_Numeric-3_Code,840
+United States of America,ISO_3166-1_Alpha-2_Code,US
+Canada,ISO_3166-1_Alpha-3_Code,CAN
+Canada,ISO_3166-1_Numeric-3_Code,124
+Canada,ISO_3166-1_Alpha-2_Code,CA
+Algeria,ISO_3166-1_Alpha-3_Code,DZA
+Algeria,ISO_3166-1_Numeric-3_Code,12
+Algeria,ISO_3166-1_Alpha-2_Code,DZ
+Argentina,ISO_3166-1_Alpha-3_Code,ARG
+Argentina,ISO_3166-1_Numeric-3_Code,32
+Argentina,ISO_3166-1_Alpha-2_Code,AR
+Australia,ISO_3166-1_Alpha-3_Code,AUS
+Australia,ISO_3166-1_Numeric-3_Code,36
+Australia,ISO_3166-1_Alpha-2_Code,AU
+Austria,ISO_3166-1_Alpha-3_Code,AUT
+Austria,ISO_3166-1_Numeric-3_Code,40
+Austria,ISO_3166-1_Alpha-2_Code,AT
+South Africa,ISO_3166-1_Alpha-3_Code,ZAF
+South Africa,ISO_3166-1_Numeric-3_Code,710
+South Africa,ISO_3166-1_Alpha-2_Code,ZA
+Italy,ISO_3166-1_Alpha-3_Code,ITA
+Italy,ISO_3166-1_Numeric-3_Code,380
+Italy,ISO_3166-1_Alpha-2_Code,IT
+Japan,ISO_3166-1_Alpha-3_Code,JPN
+Japan,ISO_3166-1_Numeric-3_Code,392
+Japan,ISO_3166-1_Alpha-2_Code,JP
+"Korea, Republic of",ISO_3166-1_Alpha-3_Code,KOR
+"Korea, Republic of",ISO_3166-1_Numeric-3_Code,410
+"Korea, Republic of",ISO_3166-1_Alpha-2_Code,KR
+Lebanon,ISO_3166-1_Alpha-3_Code,LBN
+Lebanon,ISO_3166-1_Numeric-3_Code,422
+Lebanon,ISO_3166-1_Alpha-2_Code,LB
+Luxembourg,ISO_3166-1_Alpha-3_Code,LUX
+Luxembourg,ISO_3166-1_Numeric-3_Code,442
+Luxembourg,ISO_3166-1_Alpha-2_Code,LU
+Morocco,ISO_3166-1_Alpha-3_Code,MAR
+Morocco,ISO_3166-1_Numeric-3_Code,504
+Morocco,ISO_3166-1_Alpha-2_Code,MA
+Mexico,ISO_3166-1_Alpha-3_Code,MEX
+Mexico,ISO_3166-1_Numeric-3_Code,484
+Mexico,ISO_3166-1_Alpha-2_Code,MX
+Malaysia,ISO_3166-1_Alpha-3_Code,MYS
+Malaysia,ISO_3166-1_Numeric-3_Code,458
+Malaysia,ISO_3166-1_Alpha-2_Code,MY
+Netherlands,ISO_3166-1_Alpha-3_Code,NLD
+Netherlands,ISO_3166-1_Numeric-3_Code,528
+Netherlands,ISO_3166-1_Alpha-2_Code,NL
+New Zealand,ISO_3166-1_Alpha-3_Code,NZL
+New Zealand,ISO_3166-1_Numeric-3_Code,554
+New Zealand,ISO_3166-1_Alpha-2_Code,NZ
+Philippines,ISO_3166-1_Alpha-3_Code,PHL
+Philippines,ISO_3166-1_Numeric-3_Code,608
+Philippines,ISO_3166-1_Alpha-2_Code,PH
+Poland,ISO_3166-1_Alpha-3_Code,POL
+Poland,ISO_3166-1_Numeric-3_Code,616
+Poland,ISO_3166-1_Alpha-2_Code,PL
+Venezuela,ISO_3166-1_Alpha-3_Code,VEN
+Venezuela,ISO_3166-1_Numeric-3_Code,862
+Venezuela,ISO_3166-1_Alpha-2_Code,VE
+Taiwan,ISO_3166-1_Alpha-3_Code,TWN
+Taiwan,ISO_3166-1_Numeric-3_Code,158
+Taiwan,ISO_3166-1_Alpha-2_Code,TW
+Sweden,ISO_3166-1_Alpha-3_Code,SWE
+Sweden,ISO_3166-1_Numeric-3_Code,752
+Sweden,ISO_3166-1_Alpha-2_Code,SE
+Singapore,ISO_3166-1_Alpha-3_Code,SGP
+Singapore,ISO_3166-1_Numeric-3_Code,702
+Singapore,ISO_3166-1_Alpha-2_Code,SG
+Saudi Arabia,ISO_3166-1_Alpha-3_Code,SAU
+Saudi Arabia,ISO_3166-1_Numeric-3_Code,682
+Saudi Arabia,ISO_3166-1_Alpha-2_Code,SA
+Russian Federation,ISO_3166-1_Alpha-3_Code,RUS
+Russian Federation,ISO_3166-1_Numeric-3_Code,643
+Russian Federation,ISO_3166-1_Alpha-2_Code,RU
+Qatar,ISO_3166-1_Alpha-3_Code,QAT
+Qatar,ISO_3166-1_Numeric-3_Code,634
+Qatar,ISO_3166-1_Alpha-2_Code,QA
+Portugal,ISO_3166-1_Alpha-3_Code,PRT
+Portugal,ISO_3166-1_Numeric-3_Code,620
+Portugal,ISO_3166-1_Alpha-2_Code,PT
+"Korea, Democratic People's Republic of",ISO_3166-1_Alpha-3_Code,PRK
+"Korea, Democratic People's Republic of",ISO_3166-1_Numeric-3_Code,408
+"Korea, Democratic People's Republic of",ISO_3166-1_Alpha-2_Code,KP
+Israel,ISO_3166-1_Alpha-3_Code,ISR
+Israel,ISO_3166-1_Numeric-3_Code,376
+Israel,ISO_3166-1_Alpha-2_Code,IL
+Ireland,ISO_3166-1_Alpha-3_Code,IRL
+Ireland,ISO_3166-1_Numeric-3_Code,372
+Ireland,ISO_3166-1_Alpha-2_Code,IE
+India,ISO_3166-1_Alpha-3_Code,IND
+India,ISO_3166-1_Numeric-3_Code,356
+India,ISO_3166-1_Alpha-2_Code,IN
+Hungary,ISO_3166-1_Alpha-3_Code,HUN
+Hungary,ISO_3166-1_Numeric-3_Code,348
+Hungary,ISO_3166-1_Alpha-2_Code,HU
+Hong Kong,ISO_3166-1_Alpha-3_Code,HKG
+Hong Kong,ISO_3166-1_Numeric-3_Code,344
+Hong Kong,ISO_3166-1_Alpha-2_Code,HK
+Greece,ISO_3166-1_Alpha-3_Code,GRC
+Greece,ISO_3166-1_Numeric-3_Code,300
+Greece,ISO_3166-1_Alpha-2_Code,GR
+United Kingdom,ISO_3166-1_Alpha-3_Code,GBR
+United Kingdom,ISO_3166-1_Numeric-3_Code,826
+United Kingdom,ISO_3166-1_Alpha-2_Code,GB
+France,ISO_3166-1_Alpha-3_Code,FRA
+France,ISO_3166-1_Numeric-3_Code,250
+France,ISO_3166-1_Alpha-2_Code,FR
+Finland,ISO_3166-1_Alpha-3_Code,FIN
+Finland,ISO_3166-1_Numeric-3_Code,246
+Finland,ISO_3166-1_Alpha-2_Code,FI
+Spain,ISO_3166-1_Alpha-3_Code,ESP
+Spain,ISO_3166-1_Numeric-3_Code,724
+Spain,ISO_3166-1_Alpha-2_Code,ES
+Egypt,ISO_3166-1_Alpha-3_Code,EGY
+Egypt,ISO_3166-1_Numeric-3_Code,818
+Egypt,ISO_3166-1_Alpha-2_Code,EG
+Denmark,ISO_3166-1_Alpha-3_Code,DNK
+Denmark,ISO_3166-1_Numeric-3_Code,208
+Denmark,ISO_3166-1_Alpha-2_Code,DK
+Germany,ISO_3166-1_Alpha-3_Code,DEU
+Germany,ISO_3166-1_Numeric-3_Code,276
+Germany,ISO_3166-1_Alpha-2_Code,DE
+Costa Rica,ISO_3166-1_Alpha-3_Code,CRI
+Costa Rica,ISO_3166-1_Numeric-3_Code,188
+Costa Rica,ISO_3166-1_Alpha-2_Code,CR
+China,ISO_3166-1_Alpha-3_Code,CHN
+China,ISO_3166-1_Numeric-3_Code,156
+China,ISO_3166-1_Alpha-2_Code,CN
+Chile,ISO_3166-1_Alpha-3_Code,CHL
+Chile,ISO_3166-1_Numeric-3_Code,152
+Chile,ISO_3166-1_Alpha-2_Code,CL
+Switzerland,ISO_3166-1_Alpha-3_Code,CHE
+Switzerland,ISO_3166-1_Numeric-3_Code,756
+Switzerland,ISO_3166-1_Alpha-2_Code,CH
+Brazil,ISO_3166-1_Alpha-3_Code,BRA
+Brazil,ISO_3166-1_Numeric-3_Code,76
+Brazil,ISO_3166-1_Alpha-2_Code,BR
+Belgium,ISO_3166-1_Alpha-3_Code,BEL
+Belgium,ISO_3166-1_Numeric-3_Code,56
+Belgium,ISO_3166-1_Alpha-2_Code,BE
+United Arab Emirates,ISO_3166-1_Alpha-3_Code,ARE
+United Arab Emirates,ISO_3166-1_Numeric-3_Code,784
+United Arab Emirates,ISO_3166-1_Alpha-2_Code,AE
+Angola,ISO_3166-1_Alpha-3_Code,AGO
+Angola,ISO_3166-1_Numeric-3_Code,24
+Angola,ISO_3166-1_Alpha-2_Code,AO
+Belize,ISO_3166-1_Alpha-3_Code,BLZ
+Belize,ISO_3166-1_Numeric-3_Code,84
+Belize,ISO_3166-1_Alpha-2_Code,BZ
+Bermuda,ISO_3166-1_Alpha-3_Code,BMU
+Bermuda,ISO_3166-1_Numeric-3_Code,60
+Bermuda,ISO_3166-1_Alpha-2_Code,BM
+Colombia,ISO_3166-1_Alpha-3_Code,COL
+Colombia,ISO_3166-1_Numeric-3_Code,170
+Colombia,ISO_3166-1_Alpha-2_Code,CO
+Côte d'Ivoire,ISO_3166-1_Alpha-3_Code,CIV
+Côte d'Ivoire,ISO_3166-1_Numeric-3_Code,384
+Côte d'Ivoire,ISO_3166-1_Alpha-2_Code,CI
+Czechia,ISO_3166-1_Alpha-3_Code,CZE
+Czechia,ISO_3166-1_Numeric-3_Code,203
+Czechia,ISO_3166-1_Alpha-2_Code,CZ
+Ecuador,ISO_3166-1_Alpha-3_Code,ECU
+Ecuador,ISO_3166-1_Numeric-3_Code,218
+Ecuador,ISO_3166-1_Alpha-2_Code,EC
+Estonia,ISO_3166-1_Alpha-3_Code,EST
+Estonia,ISO_3166-1_Numeric-3_Code,233
+Estonia,ISO_3166-1_Alpha-2_Code,EE
+Indonesia,ISO_3166-1_Alpha-3_Code,IDN
+Indonesia,ISO_3166-1_Numeric-3_Code,360
+Indonesia,ISO_3166-1_Alpha-2_Code,ID
+Jamaica,ISO_3166-1_Alpha-3_Code,JAM
+Jamaica,ISO_3166-1_Numeric-3_Code,388
+Jamaica,ISO_3166-1_Alpha-2_Code,JM
+Latvia,ISO_3166-1_Alpha-3_Code,LVA
+Latvia,ISO_3166-1_Numeric-3_Code,428
+Latvia,ISO_3166-1_Alpha-2_Code,LV
+Liechtenstein,ISO_3166-1_Alpha-3_Code,LIE
+Liechtenstein,ISO_3166-1_Numeric-3_Code,438
+Liechtenstein,ISO_3166-1_Alpha-2_Code,LI
+Lithuania,ISO_3166-1_Alpha-3_Code,LTU
+Lithuania,ISO_3166-1_Numeric-3_Code,440
+Lithuania,ISO_3166-1_Alpha-2_Code,LT
+Malta,ISO_3166-1_Alpha-3_Code,MLT
+Malta,ISO_3166-1_Numeric-3_Code,470
+Malta,ISO_3166-1_Alpha-2_Code,MT
+Mozambique,ISO_3166-1_Alpha-3_Code,MOZ
+Mozambique,ISO_3166-1_Numeric-3_Code,508
+Mozambique,ISO_3166-1_Alpha-2_Code,MZ
+Norway,ISO_3166-1_Alpha-3_Code,NOR
+Norway,ISO_3166-1_Numeric-3_Code,578
+Norway,ISO_3166-1_Alpha-2_Code,NO
+Pakistan,ISO_3166-1_Alpha-3_Code,PAK
+Pakistan,ISO_3166-1_Numeric-3_Code,586
+Pakistan,ISO_3166-1_Alpha-2_Code,PK
+Puerto Rico,ISO_3166-1_Alpha-3_Code,PRI
+Puerto Rico,ISO_3166-1_Numeric-3_Code,630
+Puerto Rico,ISO_3166-1_Alpha-2_Code,PR
+Romania,ISO_3166-1_Alpha-3_Code,ROU
+Romania,ISO_3166-1_Numeric-3_Code,642
+Romania,ISO_3166-1_Alpha-2_Code,RO
+Slovakia,ISO_3166-1_Alpha-3_Code,SVK
+Slovakia,ISO_3166-1_Numeric-3_Code,703
+Slovakia,ISO_3166-1_Alpha-2_Code,SK
+Türkiye,ISO_3166-1_Alpha-3_Code,TUR
+Türkiye,ISO_3166-1_Numeric-3_Code,792
+Türkiye,ISO_3166-1_Alpha-2_Code,TR
+Dominican Republic,ISO_3166-1_Alpha-3_Code,DOM
+Dominican Republic,ISO_3166-1_Numeric-3_Code,214
+Dominican Republic,ISO_3166-1_Alpha-2_Code,DO
+El Salvador,ISO_3166-1_Alpha-3_Code,SLV
+El Salvador,ISO_3166-1_Numeric-3_Code,222
+El Salvador,ISO_3166-1_Alpha-2_Code,SV
+Guatemala,ISO_3166-1_Alpha-3_Code,GTM
+Guatemala,ISO_3166-1_Numeric-3_Code,320
+Guatemala,ISO_3166-1_Alpha-2_Code,GT
+Honduras,ISO_3166-1_Alpha-3_Code,HND
+Honduras,ISO_3166-1_Numeric-3_Code,340
+Honduras,ISO_3166-1_Alpha-2_Code,HN
+Nicaragua,ISO_3166-1_Alpha-3_Code,NIC
+Nicaragua,ISO_3166-1_Numeric-3_Code,558
+Nicaragua,ISO_3166-1_Alpha-2_Code,NI
+Panama,ISO_3166-1_Alpha-3_Code,PAN
+Panama,ISO_3166-1_Numeric-3_Code,591
+Panama,ISO_3166-1_Alpha-2_Code,PA
+Peru,ISO_3166-1_Alpha-3_Code,PER
+Peru,ISO_3166-1_Numeric-3_Code,604
+Peru,ISO_3166-1_Alpha-2_Code,PE
+Thailand,ISO_3166-1_Alpha-3_Code,THA
+Thailand,ISO_3166-1_Numeric-3_Code,764
+Thailand,ISO_3166-1_Alpha-2_Code,TH
+Ukraine,ISO_3166-1_Alpha-3_Code,UKR
+Ukraine,ISO_3166-1_Numeric-3_Code,804
+Ukraine,ISO_3166-1_Alpha-2_Code,UA
+Albania,ISO_3166-1_Alpha-3_Code,ALB
+Albania,ISO_3166-1_Numeric-3_Code,8
+Albania,ISO_3166-1_Alpha-2_Code,AL
+Bulgaria,ISO_3166-1_Alpha-3_Code,BGR
+Bulgaria,ISO_3166-1_Numeric-3_Code,100
+Bulgaria,ISO_3166-1_Alpha-2_Code,BG
+Croatia,ISO_3166-1_Alpha-3_Code,HRV
+Croatia,ISO_3166-1_Numeric-3_Code,191
+Croatia,ISO_3166-1_Alpha-2_Code,HR
+Jordan,ISO_3166-1_Alpha-3_Code,JOR
+Jordan,ISO_3166-1_Numeric-3_Code,400
+Jordan,ISO_3166-1_Alpha-2_Code,JO
+Kenya,ISO_3166-1_Alpha-3_Code,KEN
+Kenya,ISO_3166-1_Numeric-3_Code,404
+Kenya,ISO_3166-1_Alpha-2_Code,KE
+Kuwait,ISO_3166-1_Alpha-3_Code,KWT
+Kuwait,ISO_3166-1_Numeric-3_Code,414
+Kuwait,ISO_3166-1_Alpha-2_Code,KW
+Mauritius,ISO_3166-1_Alpha-3_Code,MUS
+Mauritius,ISO_3166-1_Numeric-3_Code,480
+Mauritius,ISO_3166-1_Alpha-2_Code,MU
+Nepal,ISO_3166-1_Alpha-3_Code,NPL
+Nepal,ISO_3166-1_Numeric-3_Code,524
+Nepal,ISO_3166-1_Alpha-2_Code,NP
+Serbia,ISO_3166-1_Alpha-3_Code,SRB
+Serbia,ISO_3166-1_Numeric-3_Code,688
+Serbia,ISO_3166-1_Alpha-2_Code,RS
+Syria,ISO_3166-1_Alpha-3_Code,SYR
+Syria,ISO_3166-1_Numeric-3_Code,760
+Syria,ISO_3166-1_Alpha-2_Code,SY
+Iceland,ISO_3166-1_Alpha-3_Code,ISL
+Iceland,ISO_3166-1_Numeric-3_Code,352
+Iceland,ISO_3166-1_Alpha-2_Code,IS
+Bahrain,ISO_3166-1_Alpha-3_Code,BHR
+Bahrain,ISO_3166-1_Numeric-3_Code,48
+Bahrain,ISO_3166-1_Alpha-2_Code,BH
+Uruguay,ISO_3166-1_Alpha-3_Code,URY
+Uruguay,ISO_3166-1_Numeric-3_Code,858
+Uruguay,ISO_3166-1_Alpha-2_Code,UY
+Armenia,ISO_3166-1_Alpha-3_Code,ARM
+Armenia,ISO_3166-1_Numeric-3_Code,51
+Armenia,ISO_3166-1_Alpha-2_Code,AM
+Afghanistan,ISO_3166-1_Alpha-3_Code,AFG
+Afghanistan,ISO_3166-1_Numeric-3_Code,4
+Afghanistan,ISO_3166-1_Alpha-2_Code,AF
+Azerbaijan,ISO_3166-1_Alpha-3_Code,AZE
+Azerbaijan,ISO_3166-1_Numeric-3_Code,31
+Azerbaijan,ISO_3166-1_Alpha-2_Code,AZ
+Bahamas,ISO_3166-1_Alpha-3_Code,BHS
+Bahamas,ISO_3166-1_Numeric-3_Code,44
+Bahamas,ISO_3166-1_Alpha-2_Code,BS
+Bangladesh,ISO_3166-1_Alpha-3_Code,BGD
+Bangladesh,ISO_3166-1_Numeric-3_Code,50
+Bangladesh,ISO_3166-1_Alpha-2_Code,BD
+Barbados,ISO_3166-1_Alpha-3_Code,BRB
+Barbados,ISO_3166-1_Numeric-3_Code,52
+Barbados,ISO_3166-1_Alpha-2_Code,BB
+Belarus,ISO_3166-1_Alpha-3_Code,BLR
+Belarus,ISO_3166-1_Numeric-3_Code,112
+Belarus,ISO_3166-1_Alpha-2_Code,BY
+Bolivia,ISO_3166-1_Alpha-3_Code,BOL
+Bolivia,ISO_3166-1_Numeric-3_Code,68
+Bolivia,ISO_3166-1_Alpha-2_Code,BO
+Botswana,ISO_3166-1_Alpha-3_Code,BWA
+Botswana,ISO_3166-1_Numeric-3_Code,72
+Botswana,ISO_3166-1_Alpha-2_Code,BW
+Burundi,ISO_3166-1_Alpha-3_Code,BDI
+Burundi,ISO_3166-1_Numeric-3_Code,108
+Burundi,ISO_3166-1_Alpha-2_Code,BI
+Cambodia,ISO_3166-1_Alpha-3_Code,KHM
+Cambodia,ISO_3166-1_Numeric-3_Code,116
+Cambodia,ISO_3166-1_Alpha-2_Code,KH
+Chad,ISO_3166-1_Alpha-3_Code,TCD
+Chad,ISO_3166-1_Numeric-3_Code,148
+Chad,ISO_3166-1_Alpha-2_Code,TD
+Congo,ISO_3166-1_Alpha-3_Code,COG
+Congo,ISO_3166-1_Numeric-3_Code,178
+Congo,ISO_3166-1_Alpha-2_Code,CG
+"Congo, Democratic Republic of the",ISO_3166-1_Alpha-3_Code,COD
+"Congo, Democratic Republic of the",ISO_3166-1_Numeric-3_Code,180
+"Congo, Democratic Republic of the",ISO_3166-1_Alpha-2_Code,CD
+Cyprus,ISO_3166-1_Alpha-3_Code,CYP
+Cyprus,ISO_3166-1_Numeric-3_Code,196
+Cyprus,ISO_3166-1_Alpha-2_Code,CY
+Ethiopia,ISO_3166-1_Alpha-3_Code,ETH
+Ethiopia,ISO_3166-1_Numeric-3_Code,231
+Ethiopia,ISO_3166-1_Alpha-2_Code,ET
+Georgia,ISO_3166-1_Alpha-3_Code,GEO
+Georgia,ISO_3166-1_Numeric-3_Code,268
+Georgia,ISO_3166-1_Alpha-2_Code,GE
+Ghana,ISO_3166-1_Alpha-3_Code,GHA
+Ghana,ISO_3166-1_Numeric-3_Code,288
+Ghana,ISO_3166-1_Alpha-2_Code,GH
+Guyana,ISO_3166-1_Alpha-3_Code,GUY
+Guyana,ISO_3166-1_Numeric-3_Code,328
+Guyana,ISO_3166-1_Alpha-2_Code,GY
+Haiti,ISO_3166-1_Alpha-3_Code,HTI
+Haiti,ISO_3166-1_Numeric-3_Code,332
+Haiti,ISO_3166-1_Alpha-2_Code,HT
+Iran,ISO_3166-1_Alpha-3_Code,IRN
+Iran,ISO_3166-1_Numeric-3_Code,364
+Iran,ISO_3166-1_Alpha-2_Code,IR
+Iraq,ISO_3166-1_Alpha-3_Code,IRQ
+Iraq,ISO_3166-1_Numeric-3_Code,368
+Iraq,ISO_3166-1_Alpha-2_Code,IQ
+Kyrgyzstan,ISO_3166-1_Alpha-3_Code,KGZ
+Kyrgyzstan,ISO_3166-1_Numeric-3_Code,417
+Kyrgyzstan,ISO_3166-1_Alpha-2_Code,KG
+Laos,ISO_3166-1_Alpha-3_Code,LAO
+Laos,ISO_3166-1_Numeric-3_Code,418
+Laos,ISO_3166-1_Alpha-2_Code,LA
+Libya,ISO_3166-1_Alpha-3_Code,LBY
+Libya,ISO_3166-1_Numeric-3_Code,434
+Libya,ISO_3166-1_Alpha-2_Code,LY
+North Macedonia,ISO_3166-1_Alpha-3_Code,MKD
+North Macedonia,ISO_3166-1_Numeric-3_Code,807
+North Macedonia,ISO_3166-1_Alpha-2_Code,MK
+Madagascar,ISO_3166-1_Alpha-3_Code,MDG
+Madagascar,ISO_3166-1_Numeric-3_Code,450
+Madagascar,ISO_3166-1_Alpha-2_Code,MG
+Malawi,ISO_3166-1_Alpha-3_Code,MWI
+Malawi,ISO_3166-1_Numeric-3_Code,454
+Malawi,ISO_3166-1_Alpha-2_Code,MW
+Mali,ISO_3166-1_Alpha-3_Code,MLI
+Mali,ISO_3166-1_Numeric-3_Code,466
+Mali,ISO_3166-1_Alpha-2_Code,ML
+Mauritania,ISO_3166-1_Alpha-3_Code,MRT
+Mauritania,ISO_3166-1_Numeric-3_Code,478
+Mauritania,ISO_3166-1_Alpha-2_Code,MR
+Moldova,ISO_3166-1_Alpha-3_Code,MDA
+Moldova,ISO_3166-1_Numeric-3_Code,498
+Moldova,ISO_3166-1_Alpha-2_Code,MD
+Mongolia,ISO_3166-1_Alpha-3_Code,MNG
+Mongolia,ISO_3166-1_Numeric-3_Code,496
+Mongolia,ISO_3166-1_Alpha-2_Code,MN
+Namibia,ISO_3166-1_Alpha-3_Code,NAM
+Namibia,ISO_3166-1_Numeric-3_Code,516
+Namibia,ISO_3166-1_Alpha-2_Code,NA
+Nigeria,ISO_3166-1_Alpha-3_Code,NGA
+Nigeria,ISO_3166-1_Numeric-3_Code,566
+Nigeria,ISO_3166-1_Alpha-2_Code,NG
+Papua New Guinea,ISO_3166-1_Alpha-3_Code,PNG
+Papua New Guinea,ISO_3166-1_Numeric-3_Code,598
+Papua New Guinea,ISO_3166-1_Alpha-2_Code,PG
+Paraguay,ISO_3166-1_Alpha-3_Code,PRY
+Paraguay,ISO_3166-1_Numeric-3_Code,600
+Paraguay,ISO_3166-1_Alpha-2_Code,PY
+Rwanda,ISO_3166-1_Alpha-3_Code,RWA
+Rwanda,ISO_3166-1_Numeric-3_Code,646
+Rwanda,ISO_3166-1_Alpha-2_Code,RW
+Senegal,ISO_3166-1_Alpha-3_Code,SEN
+Senegal,ISO_3166-1_Numeric-3_Code,686
+Senegal,ISO_3166-1_Alpha-2_Code,SN
+Slovenia,ISO_3166-1_Alpha-3_Code,SVN
+Slovenia,ISO_3166-1_Numeric-3_Code,705
+Slovenia,ISO_3166-1_Alpha-2_Code,SI
+Sri Lanka,ISO_3166-1_Alpha-3_Code,LKA
+Sri Lanka,ISO_3166-1_Numeric-3_Code,144
+Sri Lanka,ISO_3166-1_Alpha-2_Code,LK
+Sudan,ISO_3166-1_Alpha-3_Code,SDN
+Sudan,ISO_3166-1_Numeric-3_Code,729
+Sudan,ISO_3166-1_Alpha-2_Code,SD
+Tajikistan,ISO_3166-1_Alpha-3_Code,TJK
+Tajikistan,ISO_3166-1_Numeric-3_Code,762
+Tajikistan,ISO_3166-1_Alpha-2_Code,TJ
+Tanzania,ISO_3166-1_Alpha-3_Code,TZA
+Tanzania,ISO_3166-1_Numeric-3_Code,834
+Tanzania,ISO_3166-1_Alpha-2_Code,TZ
+Trinidad and Tobago,ISO_3166-1_Alpha-3_Code,TTO
+Trinidad and Tobago,ISO_3166-1_Numeric-3_Code,780
+Trinidad and Tobago,ISO_3166-1_Alpha-2_Code,TT
+Tunisia,ISO_3166-1_Alpha-3_Code,TUN
+Tunisia,ISO_3166-1_Numeric-3_Code,788
+Tunisia,ISO_3166-1_Alpha-2_Code,TN
+Turkmenistan,ISO_3166-1_Alpha-3_Code,TKM
+Turkmenistan,ISO_3166-1_Numeric-3_Code,795
+Turkmenistan,ISO_3166-1_Alpha-2_Code,TM
+Uganda,ISO_3166-1_Alpha-3_Code,UGA
+Uganda,ISO_3166-1_Numeric-3_Code,800
+Uganda,ISO_3166-1_Alpha-2_Code,UG
+Uzbekistan,ISO_3166-1_Alpha-3_Code,UZB
+Uzbekistan,ISO_3166-1_Numeric-3_Code,860
+Uzbekistan,ISO_3166-1_Alpha-2_Code,UZ
+Vietnam,ISO_3166-1_Alpha-3_Code,VNM
+Vietnam,ISO_3166-1_Numeric-3_Code,704
+Vietnam,ISO_3166-1_Alpha-2_Code,VN
+Zambia,ISO_3166-1_Alpha-3_Code,ZMB
+Zambia,ISO_3166-1_Numeric-3_Code,894
+Zambia,ISO_3166-1_Alpha-2_Code,ZM
+Zimbabwe,ISO_3166-1_Alpha-3_Code,ZWE
+Zimbabwe,ISO_3166-1_Numeric-3_Code,716
+Zimbabwe,ISO_3166-1_Alpha-2_Code,ZW
+Kazakhstan,ISO_3166-1_Alpha-3_Code,KAZ
+Kazakhstan,ISO_3166-1_Numeric-3_Code,398
+Kazakhstan,ISO_3166-1_Alpha-2_Code,KZ
+Greenland,ISO_3166-1_Alpha-3_Code,GRL
+Greenland,ISO_3166-1_Numeric-3_Code,304
+Greenland,ISO_3166-1_Alpha-2_Code,GL
+Brunei,ISO_3166-1_Alpha-3_Code,BRN
+Brunei,ISO_3166-1_Numeric-3_Code,96
+Brunei,ISO_3166-1_Alpha-2_Code,BN
+Niger,ISO_3166-1_Alpha-3_Code,NER
+Niger,ISO_3166-1_Numeric-3_Code,562
+Niger,ISO_3166-1_Alpha-2_Code,NE
+Cameroon,ISO_3166-1_Alpha-3_Code,CMR
+Cameroon,ISO_3166-1_Numeric-3_Code,120
+Cameroon,ISO_3166-1_Alpha-2_Code,CM
+Guinea,ISO_3166-1_Alpha-3_Code,GIN
+Guinea,ISO_3166-1_Numeric-3_Code,324
+Guinea,ISO_3166-1_Alpha-2_Code,GN
+Liberia,ISO_3166-1_Alpha-3_Code,LBR
+Liberia,ISO_3166-1_Numeric-3_Code,430
+Liberia,ISO_3166-1_Alpha-2_Code,LR
+Sierra Leone,ISO_3166-1_Alpha-3_Code,SLE
+Sierra Leone,ISO_3166-1_Numeric-3_Code,694
+Sierra Leone,ISO_3166-1_Alpha-2_Code,SL
+Bosnia and Herzegovina,ISO_3166-1_Alpha-3_Code,BIH
+Bosnia and Herzegovina,ISO_3166-1_Numeric-3_Code,70
+Bosnia and Herzegovina,ISO_3166-1_Alpha-2_Code,BA
+Montenegro,ISO_3166-1_Alpha-3_Code,MNE
+Montenegro,ISO_3166-1_Numeric-3_Code,499
+Montenegro,ISO_3166-1_Alpha-2_Code,ME
+Lesotho,ISO_3166-1_Alpha-3_Code,LSO
+Lesotho,ISO_3166-1_Numeric-3_Code,426
+Lesotho,ISO_3166-1_Alpha-2_Code,LS
+Oman,ISO_3166-1_Alpha-3_Code,OMN
+Oman,ISO_3166-1_Numeric-3_Code,512
+Oman,ISO_3166-1_Alpha-2_Code,OM
+Yemen,ISO_3166-1_Alpha-3_Code,YEM
+Yemen,ISO_3166-1_Numeric-3_Code,887
+Yemen,ISO_3166-1_Alpha-2_Code,YE
+Antigua and Barbuda,ISO_3166-1_Alpha-3_Code,ATG
+Antigua and Barbuda,ISO_3166-1_Numeric-3_Code,28
+Antigua and Barbuda,ISO_3166-1_Alpha-2_Code,AG
+Comoros,ISO_3166-1_Alpha-3_Code,COM
+Comoros,ISO_3166-1_Numeric-3_Code,174
+Comoros,ISO_3166-1_Alpha-2_Code,KM
+Dominica,ISO_3166-1_Alpha-3_Code,DMA
+Dominica,ISO_3166-1_Numeric-3_Code,212
+Dominica,ISO_3166-1_Alpha-2_Code,DM
+Fiji,ISO_3166-1_Alpha-3_Code,FJI
+Fiji,ISO_3166-1_Numeric-3_Code,242
+Fiji,ISO_3166-1_Alpha-2_Code,FJ
+Grenada,ISO_3166-1_Alpha-3_Code,GRD
+Grenada,ISO_3166-1_Numeric-3_Code,308
+Grenada,ISO_3166-1_Alpha-2_Code,GD
+Maldives,ISO_3166-1_Alpha-3_Code,MDV
+Maldives,ISO_3166-1_Numeric-3_Code,462
+Maldives,ISO_3166-1_Alpha-2_Code,MV
+Nauru,ISO_3166-1_Alpha-3_Code,NRU
+Nauru,ISO_3166-1_Numeric-3_Code,520
+Nauru,ISO_3166-1_Alpha-2_Code,NR
+Palau,ISO_3166-1_Alpha-3_Code,PLW
+Palau,ISO_3166-1_Numeric-3_Code,585
+Palau,ISO_3166-1_Alpha-2_Code,PW
+Saint Kitts and Nevis,ISO_3166-1_Alpha-3_Code,KNA
+Saint Kitts and Nevis,ISO_3166-1_Numeric-3_Code,659
+Saint Kitts and Nevis,ISO_3166-1_Alpha-2_Code,KN
+Saint Lucia,ISO_3166-1_Alpha-3_Code,LCA
+Saint Lucia,ISO_3166-1_Numeric-3_Code,662
+Saint Lucia,ISO_3166-1_Alpha-2_Code,LC
+Benin,ISO_3166-1_Alpha-3_Code,BEN
+Benin,ISO_3166-1_Numeric-3_Code,204
+Benin,ISO_3166-1_Alpha-2_Code,BJ
+Burkina Faso,ISO_3166-1_Alpha-3_Code,BFA
+Burkina Faso,ISO_3166-1_Numeric-3_Code,854
+Burkina Faso,ISO_3166-1_Alpha-2_Code,BF
+Central African Republic,ISO_3166-1_Alpha-3_Code,CAF
+Central African Republic,ISO_3166-1_Numeric-3_Code,140
+Central African Republic,ISO_3166-1_Alpha-2_Code,CF
+Djibouti,ISO_3166-1_Alpha-3_Code,DJI
+Djibouti,ISO_3166-1_Numeric-3_Code,262
+Djibouti,ISO_3166-1_Alpha-2_Code,DJ
+Eritrea,ISO_3166-1_Alpha-3_Code,ERI
+Eritrea,ISO_3166-1_Numeric-3_Code,232
+Eritrea,ISO_3166-1_Alpha-2_Code,ER
+Gabon,ISO_3166-1_Alpha-3_Code,GAB
+Gabon,ISO_3166-1_Numeric-3_Code,266
+Gabon,ISO_3166-1_Alpha-2_Code,GA
+Guinea-Bissau,ISO_3166-1_Alpha-3_Code,GNB
+Guinea-Bissau,ISO_3166-1_Numeric-3_Code,624
+Guinea-Bissau,ISO_3166-1_Alpha-2_Code,GW
+Somalia,ISO_3166-1_Alpha-3_Code,SOM
+Somalia,ISO_3166-1_Numeric-3_Code,706
+Somalia,ISO_3166-1_Alpha-2_Code,SO
+Eswatini,ISO_3166-1_Alpha-3_Code,SWZ
+Eswatini,ISO_3166-1_Numeric-3_Code,748
+Eswatini,ISO_3166-1_Alpha-2_Code,SZ
+Togo,ISO_3166-1_Alpha-3_Code,TGO
+Togo,ISO_3166-1_Numeric-3_Code,768
+Togo,ISO_3166-1_Alpha-2_Code,TG
+Andorra,ISO_3166-1_Alpha-3_Code,AND
+Andorra,ISO_3166-1_Numeric-3_Code,20
+Andorra,ISO_3166-1_Alpha-2_Code,AD
+Bhutan,ISO_3166-1_Alpha-3_Code,BTN
+Bhutan,ISO_3166-1_Numeric-3_Code,64
+Bhutan,ISO_3166-1_Alpha-2_Code,BT
+Cabo Verde,ISO_3166-1_Alpha-3_Code,CPV
+Cabo Verde,ISO_3166-1_Numeric-3_Code,132
+Cabo Verde,ISO_3166-1_Alpha-2_Code,CV
+Equatorial Guinea,ISO_3166-1_Alpha-3_Code,GNQ
+Equatorial Guinea,ISO_3166-1_Numeric-3_Code,226
+Equatorial Guinea,ISO_3166-1_Alpha-2_Code,GQ
+Gambia,ISO_3166-1_Alpha-3_Code,GMB
+Gambia,ISO_3166-1_Numeric-3_Code,270
+Gambia,ISO_3166-1_Alpha-2_Code,GM
+Kiribati,ISO_3166-1_Alpha-3_Code,KIR
+Kiribati,ISO_3166-1_Numeric-3_Code,296
+Kiribati,ISO_3166-1_Alpha-2_Code,KI
+Marshall Islands,ISO_3166-1_Alpha-3_Code,MHL
+Marshall Islands,ISO_3166-1_Numeric-3_Code,584
+Marshall Islands,ISO_3166-1_Alpha-2_Code,MH
+"Micronesia, Federated States of",ISO_3166-1_Alpha-3_Code,FSM
+"Micronesia, Federated States of",ISO_3166-1_Numeric-3_Code,583
+"Micronesia, Federated States of",ISO_3166-1_Alpha-2_Code,FM
+Monaco,ISO_3166-1_Alpha-3_Code,MCO
+Monaco,ISO_3166-1_Numeric-3_Code,492
+Monaco,ISO_3166-1_Alpha-2_Code,MC
+Myanmar,ISO_3166-1_Alpha-3_Code,MMR
+Myanmar,ISO_3166-1_Numeric-3_Code,104
+Myanmar,ISO_3166-1_Alpha-2_Code,MM
+Saint Vincent and the Grenadines,ISO_3166-1_Alpha-3_Code,VCT
+Saint Vincent and the Grenadines,ISO_3166-1_Numeric-3_Code,670
+Saint Vincent and the Grenadines,ISO_3166-1_Alpha-2_Code,VC
+Samoa,ISO_3166-1_Alpha-3_Code,WSM
+Samoa,ISO_3166-1_Numeric-3_Code,882
+Samoa,ISO_3166-1_Alpha-2_Code,WS
+San Marino,ISO_3166-1_Alpha-3_Code,SMR
+San Marino,ISO_3166-1_Numeric-3_Code,674
+San Marino,ISO_3166-1_Alpha-2_Code,SM
+Sao Tome and Principe,ISO_3166-1_Alpha-3_Code,STP
+Sao Tome and Principe,ISO_3166-1_Numeric-3_Code,678
+Sao Tome and Principe,ISO_3166-1_Alpha-2_Code,ST
+Seychelles,ISO_3166-1_Alpha-3_Code,SYC
+Seychelles,ISO_3166-1_Numeric-3_Code,690
+Seychelles,ISO_3166-1_Alpha-2_Code,SC
+Solomon Islands,ISO_3166-1_Alpha-3_Code,SLB
+Solomon Islands,ISO_3166-1_Numeric-3_Code,90
+Solomon Islands,ISO_3166-1_Alpha-2_Code,SB
+Suriname,ISO_3166-1_Alpha-3_Code,SUR
+Suriname,ISO_3166-1_Numeric-3_Code,740
+Suriname,ISO_3166-1_Alpha-2_Code,SR
+Timor-Leste,ISO_3166-1_Alpha-3_Code,TLS
+Timor-Leste,ISO_3166-1_Numeric-3_Code,626
+Timor-Leste,ISO_3166-1_Alpha-2_Code,TL
+Tonga,ISO_3166-1_Alpha-3_Code,TON
+Tonga,ISO_3166-1_Numeric-3_Code,776
+Tonga,ISO_3166-1_Alpha-2_Code,TO
+Tuvalu,ISO_3166-1_Alpha-3_Code,TUV
+Tuvalu,ISO_3166-1_Numeric-3_Code,798
+Tuvalu,ISO_3166-1_Alpha-2_Code,TV
+Vanuatu,ISO_3166-1_Alpha-3_Code,VUT
+Vanuatu,ISO_3166-1_Numeric-3_Code,548
+Vanuatu,ISO_3166-1_Alpha-2_Code,VU
+Macao,ISO_3166-1_Alpha-3_Code,MAC
+Macao,ISO_3166-1_Numeric-3_Code,446
+Macao,ISO_3166-1_Alpha-2_Code,MO
+Guernsey,ISO_3166-1_Alpha-3_Code,GGY
+Guernsey,ISO_3166-1_Numeric-3_Code,831
+Guernsey,ISO_3166-1_Alpha-2_Code,GG
+Cuba,ISO_3166-1_Alpha-3_Code,CUB
+Cuba,ISO_3166-1_Numeric-3_Code,192
+Cuba,ISO_3166-1_Alpha-2_Code,CU
+Anguilla,ISO_3166-1_Alpha-3_Code,AIA
+Anguilla,ISO_3166-1_Numeric-3_Code,660
+Anguilla,ISO_3166-1_Alpha-2_Code,AI
+Aruba,ISO_3166-1_Alpha-3_Code,ABW
+Aruba,ISO_3166-1_Numeric-3_Code,533
+Aruba,ISO_3166-1_Alpha-2_Code,AW
+British Virgin Islands,ISO_3166-1_Alpha-3_Code,VGB
+British Virgin Islands,ISO_3166-1_Numeric-3_Code,92
+British Virgin Islands,ISO_3166-1_Alpha-2_Code,VG
+Cayman Islands,ISO_3166-1_Alpha-3_Code,CYM
+Cayman Islands,ISO_3166-1_Numeric-3_Code,136
+Cayman Islands,ISO_3166-1_Alpha-2_Code,KY
+French Guiana,ISO_3166-1_Alpha-3_Code,GUF
+French Guiana,ISO_3166-1_Numeric-3_Code,254
+French Guiana,ISO_3166-1_Alpha-2_Code,GF
+Guam,ISO_3166-1_Alpha-3_Code,GUM
+Guam,ISO_3166-1_Numeric-3_Code,316
+Guam,ISO_3166-1_Alpha-2_Code,GU
+Jersey,ISO_3166-1_Alpha-3_Code,JEY
+Jersey,ISO_3166-1_Numeric-3_Code,832
+Jersey,ISO_3166-1_Alpha-2_Code,JE
+Curaçao,ISO_3166-1_Alpha-3_Code,CUW
+Curaçao,ISO_3166-1_Numeric-3_Code,531
+Curaçao,ISO_3166-1_Alpha-2_Code,CW
+Turks and Caicos Islands,ISO_3166-1_Alpha-3_Code,TCA
+Turks and Caicos Islands,ISO_3166-1_Numeric-3_Code,796
+Turks and Caicos Islands,ISO_3166-1_Alpha-2_Code,TC
+Western Sahara,ISO_3166-1_Alpha-3_Code,ESH
+Western Sahara,ISO_3166-1_Numeric-3_Code,732
+Western Sahara,ISO_3166-1_Alpha-2_Code,EH
+New Caledonia,ISO_3166-1_Alpha-3_Code,NCL
+New Caledonia,ISO_3166-1_Numeric-3_Code,540
+New Caledonia,ISO_3166-1_Alpha-2_Code,NC
+Reunion,ISO_3166-1_Alpha-3_Code,REU
+Reunion,ISO_3166-1_Numeric-3_Code,638
+Reunion,ISO_3166-1_Alpha-2_Code,RE
+Guadeloupe,ISO_3166-1_Alpha-3_Code,GLP
+Guadeloupe,ISO_3166-1_Numeric-3_Code,312
+Guadeloupe,ISO_3166-1_Alpha-2_Code,GP
+Martinique,ISO_3166-1_Alpha-3_Code,MTQ
+Martinique,ISO_3166-1_Numeric-3_Code,474
+Martinique,ISO_3166-1_Alpha-2_Code,MQ
+Palestine,ISO_3166-1_Alpha-3_Code,PSE
+Palestine,ISO_3166-1_Numeric-3_Code,275
+Palestine,ISO_3166-1_Alpha-2_Code,PS
+French Polynesia,ISO_3166-1_Alpha-3_Code,PYF
+French Polynesia,ISO_3166-1_Numeric-3_Code,258
+French Polynesia,ISO_3166-1_Alpha-2_Code,PF
+South Sudan,ISO_3166-1_Alpha-3_Code,SSD
+South Sudan,ISO_3166-1_Numeric-3_Code,728
+South Sudan,ISO_3166-1_Alpha-2_Code,SS
+Sint Maarten,ISO_3166-1_Alpha-3_Code,SXM
+Sint Maarten,ISO_3166-1_Numeric-3_Code,534
+Sint Maarten,ISO_3166-1_Alpha-2_Code,SX
+Isle of Man,ISO_3166-1_Alpha-3_Code,IMN
+Isle of Man,ISO_3166-1_Numeric-3_Code,833
+Isle of Man,ISO_3166-1_Alpha-2_Code,IM
+Kosovo,ISO_3166-1_Alpha-3_Code,XKX
+Kosovo,ISO_3166-1_Numeric-3_Code,999
+Kosovo,ISO_3166-1_Alpha-2_Code,XK
+Gibraltar,ISO_3166-1_Alpha-3_Code,GIB
+Gibraltar,ISO_3166-1_Numeric-3_Code,292
+Gibraltar,ISO_3166-1_Alpha-2_Code,GI
+Northern Mariana Islands,ISO_3166-1_Alpha-3_Code,MNP
+Northern Mariana Islands,ISO_3166-1_Numeric-3_Code,580
+Northern Mariana Islands,ISO_3166-1_Alpha-2_Code,MP
+U. S. Virgin Islands,ISO_3166-1_Alpha-3_Code,VIR
+U. S. Virgin Islands,ISO_3166-1_Numeric-3_Code,850
+U. S. Virgin Islands,ISO_3166-1_Alpha-2_Code,VI
+American Samoa,ISO_3166-1_Alpha-3_Code,ASM
+American Samoa,ISO_3166-1_Numeric-3_Code,16
+American Samoa,ISO_3166-1_Alpha-2_Code,AS
+Falkland Islands,ISO_3166-1_Alpha-3_Code,FLK
+Falkland Islands,ISO_3166-1_Numeric-3_Code,238
+Falkland Islands,ISO_3166-1_Alpha-2_Code,FK
+Holy See (Vatican City State),ISO_3166-1_Alpha-3_Code,VAT
+Holy See (Vatican City State),ISO_3166-1_Numeric-3_Code,336
+Holy See (Vatican City State),ISO_3166-1_Alpha-2_Code,VA
+British Indian Ocean Territory,ISO_3166-1_Alpha-3_Code,IOT
+British Indian Ocean Territory,ISO_3166-1_Numeric-3_Code,86
+British Indian Ocean Territory,ISO_3166-1_Alpha-2_Code,IO
+Faroe Islands,ISO_3166-1_Alpha-3_Code,FRO
+Faroe Islands,ISO_3166-1_Numeric-3_Code,234
+Faroe Islands,ISO_3166-1_Alpha-2_Code,FO
+United States Minor Outlying Islands,ISO_3166-1_Alpha-3_Code,UMI
+United States Minor Outlying Islands,ISO_3166-1_Numeric-3_Code,581
+United States Minor Outlying Islands,ISO_3166-1_Alpha-2_Code,UM
+Cook Islands,ISO_3166-1_Alpha-3_Code,COK
+Cook Islands,ISO_3166-1_Numeric-3_Code,184
+Cook Islands,ISO_3166-1_Alpha-2_Code,CK
+Montserrat,ISO_3166-1_Alpha-3_Code,MSR
+Montserrat,ISO_3166-1_Numeric-3_Code,500
+Montserrat,ISO_3166-1_Alpha-2_Code,MS
+Wallis and Futuna,ISO_3166-1_Alpha-3_Code,WLF
+Wallis and Futuna,ISO_3166-1_Numeric-3_Code,876
+Wallis and Futuna,ISO_3166-1_Alpha-2_Code,WF
+Svalbard and Jan Mayen,ISO_3166-1_Alpha-3_Code,SJM
+Svalbard and Jan Mayen,ISO_3166-1_Numeric-3_Code,744
+Svalbard and Jan Mayen,ISO_3166-1_Alpha-2_Code,SJ
+Pitcairn Islands,ISO_3166-1_Alpha-3_Code,PCN
+Pitcairn Islands,ISO_3166-1_Numeric-3_Code,612
+Pitcairn Islands,ISO_3166-1_Alpha-2_Code,PN
+"Bonaire, Sint Eustatius, and Saba",ISO_3166-1_Alpha-3_Code,BES
+"Bonaire, Sint Eustatius, and Saba",ISO_3166-1_Numeric-3_Code,535
+"Bonaire, Sint Eustatius, and Saba",ISO_3166-1_Alpha-2_Code,BQ
+Christmas Island,ISO_3166-1_Alpha-3_Code,CXR
+Christmas Island,ISO_3166-1_Numeric-3_Code,162
+Christmas Island,ISO_3166-1_Alpha-2_Code,CX
+Åland Islands,ISO_3166-1_Alpha-3_Code,ALA
+Åland Islands,ISO_3166-1_Numeric-3_Code,248
+Åland Islands,ISO_3166-1_Alpha-2_Code,AX
+Niue,ISO_3166-1_Alpha-3_Code,NIU
+Niue,ISO_3166-1_Numeric-3_Code,570
+Niue,ISO_3166-1_Alpha-2_Code,NU
+Cocos (Keeling) Islands,ISO_3166-1_Alpha-3_Code,CCK
+Cocos (Keeling) Islands,ISO_3166-1_Numeric-3_Code,166
+Cocos (Keeling) Islands,ISO_3166-1_Alpha-2_Code,CC
+Mayotte,ISO_3166-1_Alpha-3_Code,MYT
+Mayotte,ISO_3166-1_Numeric-3_Code,175
+Mayotte,ISO_3166-1_Alpha-2_Code,YT
+Saint Pierre and Miquelon,ISO_3166-1_Alpha-3_Code,SPM
+Saint Pierre and Miquelon,ISO_3166-1_Numeric-3_Code,666
+Saint Pierre and Miquelon,ISO_3166-1_Alpha-2_Code,PM
+Tokelau,ISO_3166-1_Alpha-3_Code,TKL
+Tokelau,ISO_3166-1_Numeric-3_Code,772
+Tokelau,ISO_3166-1_Alpha-2_Code,TK
+Norfolk Island,ISO_3166-1_Alpha-3_Code,NFK
+Norfolk Island,ISO_3166-1_Numeric-3_Code,574
+Norfolk Island,ISO_3166-1_Alpha-2_Code,NF
+Saint Barthelemy,ISO_3166-1_Alpha-3_Code,BLM
+Saint Barthelemy,ISO_3166-1_Numeric-3_Code,652
+Saint Barthelemy,ISO_3166-1_Alpha-2_Code,BL
+"Saint Helena, Ascension and Tristan da Cunha",ISO_3166-1_Alpha-3_Code,SHN
+"Saint Helena, Ascension and Tristan da Cunha",ISO_3166-1_Numeric-3_Code,654
+"Saint Helena, Ascension and Tristan da Cunha",ISO_3166-1_Alpha-2_Code,SH
+Saint Martin,ISO_3166-1_Alpha-3_Code,MAF
+Saint Martin,ISO_3166-1_Numeric-3_Code,663
+Saint Martin,ISO_3166-1_Alpha-2_Code,MF
