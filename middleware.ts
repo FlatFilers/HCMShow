@@ -1,22 +1,17 @@
-export { default } from "next-auth/middleware";
-// import { NextResponse } from "next/server";
-// import type { NextRequest } from "next/server";
+import withAuth from "next-auth/middleware";
 
-// export function middleware(request: NextRequest) {
-//   if (request.nextUrl.pathname === "/") {
-//     return NextResponse.redirect(new URL("/employees", request.url));
-//   }
-// }
+export default withAuth(
+  // `withAuth` augments your `Request` with the user's token.
+  function middleware(req) {
+    console.log("authhed",req.nextauth.token)
+  },
+  {
+    callbacks: {
+      authorized: ({ token }) => !!token,
+    },
+  }
+)
 
-// Able to set specific pages that the middleware will run on
 export const config = {
   matcher: ["/((?!auth/signin).*)"],
 };
-// export const config = {
-//   matcher: [
-//     "/dashboard",
-//     "/employees",
-//     "/employees/:path*",
-//     "/imports",
-//   ],
-// };
