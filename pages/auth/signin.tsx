@@ -1,7 +1,7 @@
 import { signIn } from "next-auth/react";
 import Head from "next/head";
 import { FormEvent, ReactElement } from "react";
-import { NextPageWithLayout } from "./_app";
+import { NextPageWithLayout } from "../_app";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
 
