@@ -137,7 +137,7 @@ model JobFamily {
   updatedAt DateTime @updatedAt
 
   name String
-  slug String?
+  slug String @unique
   effectiveDate DateTime?
   summary String?
   isInactive Boolean
