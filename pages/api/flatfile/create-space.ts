@@ -93,7 +93,7 @@ export default async function handler(
 
   const spaceId: string = spaceResult.data.id;
 
-  const payload = {
+  const payload = [{
     environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
     email: `guest${Math.random()}@example.com`,
     name: "Mr. Guest",
@@ -102,14 +102,14 @@ export default async function handler(
         id: spaceId,
         // TODO: What are these?
         // lastAccessed: "2022-09-18T00:19:57.007Z",
-        invitationLink: "https://todo.todo",
+        // invitationLink: "https://todo.todo",
       },
     ],
-  };
+  }];
 
   // TODO: Need guest methods on API wrapper to call
   const addGuestToSpaceResponse: Response = await fetch(
-    `${basePath}/guests?spaceId=${spaceId}`,
+    `${basePath}/guests`,
     {
       method: "POST",
       body: JSON.stringify(payload),
