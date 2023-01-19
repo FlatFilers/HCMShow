@@ -304,6 +304,7 @@ const upsertEmployees = async () => {
   const manager: Employee = await prisma.employee.create({
     data: {
       managerId: null,
+      name: faker.name.fullName(),
       employeeTypeId: employeeType.id,
       hireReasonId: hireReason.id,
       hireDate: DateTime.now().toJSDate(),
@@ -327,6 +328,7 @@ const upsertEmployees = async () => {
     await prisma.employee.create({
       data: {
         managerId: manager.id,
+        name: faker.name.fullName(),
         employeeTypeId: employeeType.id,
         hireReasonId: hireReason.id,
         hireDate: DateTime.now().toJSDate(),
