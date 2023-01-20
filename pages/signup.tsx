@@ -37,18 +37,9 @@ const Signup: NextPageWithLayout = () => {
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Sign up
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Or{" "}
-            <a
-              href="#"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              start your 14-day free trial
-            </a>
-          </p>
         </div>
         {error && <div className="text-red-600 mx-auto">{error}</div>}
-        <form className="mt-8 space-y-6" action="#" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-2" action="#" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
 
           <div className="-space-y-px rounded-md shadow-sm">
@@ -83,7 +74,7 @@ const Signup: NextPageWithLayout = () => {
           </div>
 
           <div className="flex items-center justify-between">
-            <div className="flex items-center">
+            <div className="hidden flex items-center">
               <input
                 id="remember-me"
                 name="remember-me"
@@ -96,15 +87,6 @@ const Signup: NextPageWithLayout = () => {
               >
                 Remember me
               </label>
-            </div>
-
-            <div className="text-sm">
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Forgot your password?
-              </a>
             </div>
           </div>
 
@@ -121,6 +103,15 @@ const Signup: NextPageWithLayout = () => {
               </span>
               Sign in
             </button>
+          </div>
+
+          <div className="text-sm">
+            <a
+              href="/"
+              className="font-medium text-indigo-600 hover:text-indigo-500 mt-4 text-right block"
+            >
+              Or Sign in
+            </a>
           </div>
         </form>
       </div>

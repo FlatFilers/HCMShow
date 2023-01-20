@@ -30,20 +30,11 @@ const Home: NextPageWithLayout = () => {
             alt="Your Company"
           />
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Sign in to your account
+            Sign in
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Or{" "}
-            <a
-              href="#"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              start your 14-day free trial
-            </a>
-          </p>
         </div>
         {error && <div className="text-red-600 mx-auto">{error}</div>}
-        <form className="mt-8 space-y-6" action="#" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-2" action="#" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
@@ -82,23 +73,14 @@ const Home: NextPageWithLayout = () => {
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                className="hidden h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               />
               <label
                 htmlFor="remember-me"
-                className="ml-2 block text-sm text-gray-900"
+                className="hidden ml-2 block text-sm text-gray-900 bg-white"
               >
                 Remember me
               </label>
-            </div>
-
-            <div className="text-sm">
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Forgot your password?
-              </a>
             </div>
           </div>
 
@@ -115,6 +97,15 @@ const Home: NextPageWithLayout = () => {
               </span>
               Sign in
             </button>
+          </div>
+
+          <div className="text-sm">
+            <a
+              href="/signup"
+              className="font-medium text-indigo-600 hover:text-indigo-500 mt-4 block text-right"
+            >
+              Or Signup
+            </a>
           </div>
         </form>
       </div>
