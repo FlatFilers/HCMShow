@@ -366,9 +366,28 @@ const upsertEmployees = async () => {
 };
 
 const upsertUser = async () => {
+  const email = "user@email.com";
+
+  const orgData = {
+    email,
+  };
+
+  const organization = await prisma.organization.upsert({
+    where: {
+      email,
+    },
+    create: orgData,
+    update: {},
+  });
+
   const data = {
-    email: "user@email.com",
+    email: email,
     password: await hashPassword("badpassword"),
+    organization: {
+      connect: {
+        id: organization.id,
+      },
+    },
   };
 
   const firstUser: User = await prisma.user.upsert({
@@ -376,6 +395,6 @@ const upsertUser = async () => {
       email: data.email,
     },
     create: data,
-    update: data,
+    update: {},
   });
 };
