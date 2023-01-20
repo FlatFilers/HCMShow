@@ -14,12 +14,27 @@ import {
   User,
 } from "@prisma/client";
 import { DateTime } from "luxon";
-import * as bcrypt from "bcrypt";
 import * as fs from "fs";
 import { parse } from "fast-csv";
 import { faker } from "@faker-js/faker";
+import { hashPassword } from "../user";
 
 const prisma = new PrismaClient();
+
+export const main = async () => {
+  console.log("Seeding...");
+
+  await upsertCountries();
+  await upsertLocations();
+
+  await upsertEmployeeTypes();
+  await upsertJobFamilies();
+
+  await upsertEmployeeTypes();
+  await upsertEmployees();
+
+  await upsertUser();
+};
 
 const upsertJobFamilies = async () => {
   // [ 'ID', 'Effective Date', 'Name', 'Summary', 'Inactive', '', '' ]
@@ -177,8 +192,6 @@ const upsertLocations = async () => {
       altitude: Math.random(),
       countryId: country.id,
     };
-
-    console.log("data", data);
 
     await prisma.location.upsert({
       where: {
@@ -350,26 +363,19 @@ const upsertEmployees = async () => {
   });
 
   await Promise.all(directReports);
-
-  console.log("DR's", directReports);
-
-  const firstUser: User = await prisma.user.create({
-    data: {
-      email: "user@email.com",
-      password: await bcrypt.hash("badpassword", 16),
-    },
-  });
 };
 
-export const main = async () => {
-  console.log("Seeding...");
+const upsertUser = async () => {
+  const data = {
+    email: "user@email.com",
+    password: await hashPassword("badpassword"),
+  };
 
-  await upsertCountries();
-  await upsertLocations();
-
-  await upsertEmployeeTypes();
-  await upsertJobFamilies();
-
-  await upsertEmployeeTypes();
-  await upsertEmployees();
+  const firstUser: User = await prisma.user.upsert({
+    where: {
+      email: data.email,
+    },
+    create: data,
+    update: data,
+  });
 };

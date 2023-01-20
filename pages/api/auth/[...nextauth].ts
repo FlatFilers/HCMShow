@@ -1,7 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaClient, User } from "@prisma/client";
-import * as bcrypt from 'bcrypt';
+import { createUser, findUser, isValidPassword } from "../../../lib/user";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -19,36 +18,33 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
+        isSignup: { label: "isSignup", type: "hidden" },
       },
 
       // @ts-ignore This requires some await call that we are bypassing
       async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-
-        const prisma = new PrismaClient();
-        const user: User | null = await prisma.user.findUnique({
-          where: {
-            email: credentials!.email,
-          },
-        });
-
-        if (!user) {
-          throw new Error("Email address is not valid. Please try again.");
+        if (!credentials) {
+          throw new Error("Enter an email and password");
         }
 
-        const pwIsValid = await bcrypt.compare(
-          credentials!.password,
-          user!.password
-        );
+        if (credentials?.isSignup === "true") {
+          console.log("signup flow");
 
-        console.log(pwIsValid);
-        
+          return await createUser(credentials.email, credentials.password);
+        } else {
+          console.log("login flow");
+          const user = await findUser(credentials.email);
 
-        if (!pwIsValid) {
-          throw new Error("Password is invalid. Please try again.");
+          if (!user) {
+            throw new Error("Email address is not valid. Please try again.");
+          }
+
+          if (!isValidPassword(user, credentials.password)) {
+            throw new Error("Password is invalid. Please try again.");
+          }
+
+          return user;
         }
-
-        return user;
       },
     }),
   ],
@@ -61,7 +57,6 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }: any) {
-      // console.log("JWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWTJWT");
       // console.log("token", token);
       // console.log("user", user);
       // console.log("account", account);
@@ -71,7 +66,6 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, user, token }: any) {
-      // console.log("SESSIONSESSIONSESSIONSESSIONSESSIONSESSION");
       // console.log("user", user);
       // console.log("session", session);
       // console.log("token", token);
