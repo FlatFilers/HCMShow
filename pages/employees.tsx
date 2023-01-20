@@ -81,12 +81,12 @@ const Employees: NextPage<Props> = ({ employees }) => {
                     <tr key={employee.id}>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                         <Link href={`/employees/${employee.id}`}>
-                          {employee.id} TODO Name
+                          {employee.name}
                         </Link>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {employee.manager && (
-                          <div>{employee.manager?.id} - TODO Manager Name</div>
+                          <div>{employee.manager?.name}</div>
                         )}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -101,9 +101,6 @@ const Employees: NextPage<Props> = ({ employees }) => {
                           className="text-indigo-600 hover:text-indigo-900"
                         >
                           Edit
-                          <span className="sr-only">
-                            , {employee.id} TODO Name
-                          </span>
                         </a>
                       </td>
                     </tr>

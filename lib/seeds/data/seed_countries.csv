@@ -1,0 +1,246 @@
+Name,Type,ID
+United States of America,ISO_3166-1_Alpha-3_Code,USA
+Canada,ISO_3166-1_Alpha-3_Code,CAN
+Algeria,ISO_3166-1_Alpha-3_Code,DZA
+Argentina,ISO_3166-1_Alpha-3_Code,ARG
+Australia,ISO_3166-1_Alpha-3_Code,AUS
+Austria,ISO_3166-1_Alpha-3_Code,AUT
+South Africa,ISO_3166-1_Alpha-3_Code,ZAF
+Italy,ISO_3166-1_Alpha-3_Code,ITA
+Japan,ISO_3166-1_Alpha-3_Code,JPN
+"Korea, Republic of",ISO_3166-1_Alpha-3_Code,KOR
+Lebanon,ISO_3166-1_Alpha-3_Code,LBN
+Luxembourg,ISO_3166-1_Alpha-3_Code,LUX
+Morocco,ISO_3166-1_Alpha-3_Code,MAR
+Mexico,ISO_3166-1_Alpha-3_Code,MEX
+Malaysia,ISO_3166-1_Alpha-3_Code,MYS
+Netherlands,ISO_3166-1_Alpha-3_Code,NLD
+New Zealand,ISO_3166-1_Alpha-3_Code,NZL
+Philippines,ISO_3166-1_Alpha-3_Code,PHL
+Poland,ISO_3166-1_Alpha-3_Code,POL
+Venezuela,ISO_3166-1_Alpha-3_Code,VEN
+Taiwan,ISO_3166-1_Alpha-3_Code,TWN
+Sweden,ISO_3166-1_Alpha-3_Code,SWE
+Singapore,ISO_3166-1_Alpha-3_Code,SGP
+Saudi Arabia,ISO_3166-1_Alpha-3_Code,SAU
+Russian Federation,ISO_3166-1_Alpha-3_Code,RUS
+Qatar,ISO_3166-1_Alpha-3_Code,QAT
+Portugal,ISO_3166-1_Alpha-3_Code,PRT
+"Korea, Democratic People's Republic of",ISO_3166-1_Alpha-3_Code,PRK
+Israel,ISO_3166-1_Alpha-3_Code,ISR
+Ireland,ISO_3166-1_Alpha-3_Code,IRL
+India,ISO_3166-1_Alpha-3_Code,IND
+Hungary,ISO_3166-1_Alpha-3_Code,HUN
+Hong Kong,ISO_3166-1_Alpha-3_Code,HKG
+Greece,ISO_3166-1_Alpha-3_Code,GRC
+United Kingdom,ISO_3166-1_Alpha-3_Code,GBR
+France,ISO_3166-1_Alpha-3_Code,FRA
+Finland,ISO_3166-1_Alpha-3_Code,FIN
+Spain,ISO_3166-1_Alpha-3_Code,ESP
+Egypt,ISO_3166-1_Alpha-3_Code,EGY
+Denmark,ISO_3166-1_Alpha-3_Code,DNK
+Germany,ISO_3166-1_Alpha-3_Code,DEU
+Costa Rica,ISO_3166-1_Alpha-3_Code,CRI
+China,ISO_3166-1_Alpha-3_Code,CHN
+Chile,ISO_3166-1_Alpha-3_Code,CHL
+Switzerland,ISO_3166-1_Alpha-3_Code,CHE
+Brazil,ISO_3166-1_Alpha-3_Code,BRA
+Belgium,ISO_3166-1_Alpha-3_Code,BEL
+United Arab Emirates,ISO_3166-1_Alpha-3_Code,ARE
+Angola,ISO_3166-1_Alpha-3_Code,AGO
+Belize,ISO_3166-1_Alpha-3_Code,BLZ
+Bermuda,ISO_3166-1_Alpha-3_Code,BMU
+Colombia,ISO_3166-1_Alpha-3_Code,COL
+Côte d'Ivoire,ISO_3166-1_Alpha-3_Code,CIV
+Czechia,ISO_3166-1_Alpha-3_Code,CZE
+Ecuador,ISO_3166-1_Alpha-3_Code,ECU
+Estonia,ISO_3166-1_Alpha-3_Code,EST
+Indonesia,ISO_3166-1_Alpha-3_Code,IDN
+Jamaica,ISO_3166-1_Alpha-3_Code,JAM
+Latvia,ISO_3166-1_Alpha-3_Code,LVA
+Liechtenstein,ISO_3166-1_Alpha-3_Code,LIE
+Lithuania,ISO_3166-1_Alpha-3_Code,LTU
+Malta,ISO_3166-1_Alpha-3_Code,MLT
+Mozambique,ISO_3166-1_Alpha-3_Code,MOZ
+Norway,ISO_3166-1_Alpha-3_Code,NOR
+Pakistan,ISO_3166-1_Alpha-3_Code,PAK
+Puerto Rico,ISO_3166-1_Alpha-3_Code,PRI
+Romania,ISO_3166-1_Alpha-3_Code,ROU
+Slovakia,ISO_3166-1_Alpha-3_Code,SVK
+Türkiye,ISO_3166-1_Alpha-3_Code,TUR
+Dominican Republic,ISO_3166-1_Alpha-3_Code,DOM
+El Salvador,ISO_3166-1_Alpha-3_Code,SLV
+Guatemala,ISO_3166-1_Alpha-3_Code,GTM
+Honduras,ISO_3166-1_Alpha-3_Code,HND
+Nicaragua,ISO_3166-1_Alpha-3_Code,NIC
+Panama,ISO_3166-1_Alpha-3_Code,PAN
+Peru,ISO_3166-1_Alpha-3_Code,PER
+Thailand,ISO_3166-1_Alpha-3_Code,THA
+Ukraine,ISO_3166-1_Alpha-3_Code,UKR
+Albania,ISO_3166-1_Alpha-3_Code,ALB
+Bulgaria,ISO_3166-1_Alpha-3_Code,BGR
+Croatia,ISO_3166-1_Alpha-3_Code,HRV
+Jordan,ISO_3166-1_Alpha-3_Code,JOR
+Kenya,ISO_3166-1_Alpha-3_Code,KEN
+Kuwait,ISO_3166-1_Alpha-3_Code,KWT
+Mauritius,ISO_3166-1_Alpha-3_Code,MUS
+Nepal,ISO_3166-1_Alpha-3_Code,NPL
+Serbia,ISO_3166-1_Alpha-3_Code,SRB
+Syria,ISO_3166-1_Alpha-3_Code,SYR
+Iceland,ISO_3166-1_Alpha-3_Code,ISL
+Bahrain,ISO_3166-1_Alpha-3_Code,BHR
+Uruguay,ISO_3166-1_Alpha-3_Code,URY
+Armenia,ISO_3166-1_Alpha-3_Code,ARM
+Afghanistan,ISO_3166-1_Alpha-3_Code,AFG
+Azerbaijan,ISO_3166-1_Alpha-3_Code,AZE
+Bahamas,ISO_3166-1_Alpha-3_Code,BHS
+Bangladesh,ISO_3166-1_Alpha-3_Code,BGD
+Barbados,ISO_3166-1_Alpha-3_Code,BRB
+Belarus,ISO_3166-1_Alpha-3_Code,BLR
+Bolivia,ISO_3166-1_Alpha-3_Code,BOL
+Botswana,ISO_3166-1_Alpha-3_Code,BWA
+Burundi,ISO_3166-1_Alpha-3_Code,BDI
+Cambodia,ISO_3166-1_Alpha-3_Code,KHM
+Chad,ISO_3166-1_Alpha-3_Code,TCD
+Congo,ISO_3166-1_Alpha-3_Code,COG
+"Congo, Democratic Republic of the",ISO_3166-1_Alpha-3_Code,COD
+Cyprus,ISO_3166-1_Alpha-3_Code,CYP
+Ethiopia,ISO_3166-1_Alpha-3_Code,ETH
+Georgia,ISO_3166-1_Alpha-3_Code,GEO
+Ghana,ISO_3166-1_Alpha-3_Code,GHA
+Guyana,ISO_3166-1_Alpha-3_Code,GUY
+Haiti,ISO_3166-1_Alpha-3_Code,HTI
+Iran,ISO_3166-1_Alpha-3_Code,IRN
+Iraq,ISO_3166-1_Alpha-3_Code,IRQ
+Kyrgyzstan,ISO_3166-1_Alpha-3_Code,KGZ
+Laos,ISO_3166-1_Alpha-3_Code,LAO
+Libya,ISO_3166-1_Alpha-3_Code,LBY
+North Macedonia,ISO_3166-1_Alpha-3_Code,MKD
+Madagascar,ISO_3166-1_Alpha-3_Code,MDG
+Malawi,ISO_3166-1_Alpha-3_Code,MWI
+Mali,ISO_3166-1_Alpha-3_Code,MLI
+Mauritania,ISO_3166-1_Alpha-3_Code,MRT
+Moldova,ISO_3166-1_Alpha-3_Code,MDA
+Mongolia,ISO_3166-1_Alpha-3_Code,MNG
+Namibia,ISO_3166-1_Alpha-3_Code,NAM
+Nigeria,ISO_3166-1_Alpha-3_Code,NGA
+Papua New Guinea,ISO_3166-1_Alpha-3_Code,PNG
+Paraguay,ISO_3166-1_Alpha-3_Code,PRY
+Rwanda,ISO_3166-1_Alpha-3_Code,RWA
+Senegal,ISO_3166-1_Alpha-3_Code,SEN
+Slovenia,ISO_3166-1_Alpha-3_Code,SVN
+Sri Lanka,ISO_3166-1_Alpha-3_Code,LKA
+Sudan,ISO_3166-1_Alpha-3_Code,SDN
+Tajikistan,ISO_3166-1_Alpha-3_Code,TJK
+Tanzania,ISO_3166-1_Alpha-3_Code,TZA
+Trinidad and Tobago,ISO_3166-1_Alpha-3_Code,TTO
+Tunisia,ISO_3166-1_Alpha-3_Code,TUN
+Turkmenistan,ISO_3166-1_Alpha-3_Code,TKM
+Uganda,ISO_3166-1_Alpha-3_Code,UGA
+Uzbekistan,ISO_3166-1_Alpha-3_Code,UZB
+Vietnam,ISO_3166-1_Alpha-3_Code,VNM
+Zambia,ISO_3166-1_Alpha-3_Code,ZMB
+Zimbabwe,ISO_3166-1_Alpha-3_Code,ZWE
+Kazakhstan,ISO_3166-1_Alpha-3_Code,KAZ
+Greenland,ISO_3166-1_Alpha-3_Code,GRL
+Brunei,ISO_3166-1_Alpha-3_Code,BRN
+Niger,ISO_3166-1_Alpha-3_Code,NER
+Cameroon,ISO_3166-1_Alpha-3_Code,CMR
+Guinea,ISO_3166-1_Alpha-3_Code,GIN
+Liberia,ISO_3166-1_Alpha-3_Code,LBR
+Sierra Leone,ISO_3166-1_Alpha-3_Code,SLE
+Bosnia and Herzegovina,ISO_3166-1_Alpha-3_Code,BIH
+Montenegro,ISO_3166-1_Alpha-3_Code,MNE
+Lesotho,ISO_3166-1_Alpha-3_Code,LSO
+Oman,ISO_3166-1_Alpha-3_Code,OMN
+Yemen,ISO_3166-1_Alpha-3_Code,YEM
+Antigua and Barbuda,ISO_3166-1_Alpha-3_Code,ATG
+Comoros,ISO_3166-1_Alpha-3_Code,COM
+Dominica,ISO_3166-1_Alpha-3_Code,DMA
+Fiji,ISO_3166-1_Alpha-3_Code,FJI
+Grenada,ISO_3166-1_Alpha-3_Code,GRD
+Maldives,ISO_3166-1_Alpha-3_Code,MDV
+Nauru,ISO_3166-1_Alpha-3_Code,NRU
+Palau,ISO_3166-1_Alpha-3_Code,PLW
+Saint Kitts and Nevis,ISO_3166-1_Alpha-3_Code,KNA
+Saint Lucia,ISO_3166-1_Alpha-3_Code,LCA
+Benin,ISO_3166-1_Alpha-3_Code,BEN
+Burkina Faso,ISO_3166-1_Alpha-3_Code,BFA
+Central African Republic,ISO_3166-1_Alpha-3_Code,CAF
+Djibouti,ISO_3166-1_Alpha-3_Code,DJI
+Eritrea,ISO_3166-1_Alpha-3_Code,ERI
+Gabon,ISO_3166-1_Alpha-3_Code,GAB
+Guinea-Bissau,ISO_3166-1_Alpha-3_Code,GNB
+Somalia,ISO_3166-1_Alpha-3_Code,SOM
+Eswatini,ISO_3166-1_Alpha-3_Code,SWZ
+Togo,ISO_3166-1_Alpha-3_Code,TGO
+Andorra,ISO_3166-1_Alpha-3_Code,AND
+Bhutan,ISO_3166-1_Alpha-3_Code,BTN
+Cabo Verde,ISO_3166-1_Alpha-3_Code,CPV
+Equatorial Guinea,ISO_3166-1_Alpha-3_Code,GNQ
+Gambia,ISO_3166-1_Alpha-3_Code,GMB
+Kiribati,ISO_3166-1_Alpha-3_Code,KIR
+Marshall Islands,ISO_3166-1_Alpha-3_Code,MHL
+"Micronesia, Federated States of",ISO_3166-1_Alpha-3_Code,FSM
+Monaco,ISO_3166-1_Alpha-3_Code,MCO
+Myanmar,ISO_3166-1_Alpha-3_Code,MMR
+Saint Vincent and the Grenadines,ISO_3166-1_Alpha-3_Code,VCT
+Samoa,ISO_3166-1_Alpha-3_Code,WSM
+San Marino,ISO_3166-1_Alpha-3_Code,SMR
+Sao Tome and Principe,ISO_3166-1_Alpha-3_Code,STP
+Seychelles,ISO_3166-1_Alpha-3_Code,SYC
+Solomon Islands,ISO_3166-1_Alpha-3_Code,SLB
+Suriname,ISO_3166-1_Alpha-3_Code,SUR
+Timor-Leste,ISO_3166-1_Alpha-3_Code,TLS
+Tonga,ISO_3166-1_Alpha-3_Code,TON
+Tuvalu,ISO_3166-1_Alpha-3_Code,TUV
+Vanuatu,ISO_3166-1_Alpha-3_Code,VUT
+Macao,ISO_3166-1_Alpha-3_Code,MAC
+Guernsey,ISO_3166-1_Alpha-3_Code,GGY
+Cuba,ISO_3166-1_Alpha-3_Code,CUB
+Anguilla,ISO_3166-1_Alpha-3_Code,AIA
+Aruba,ISO_3166-1_Alpha-3_Code,ABW
+British Virgin Islands,ISO_3166-1_Alpha-3_Code,VGB
+Cayman Islands,ISO_3166-1_Alpha-3_Code,CYM
+French Guiana,ISO_3166-1_Alpha-3_Code,GUF
+Guam,ISO_3166-1_Alpha-3_Code,GUM
+Jersey,ISO_3166-1_Alpha-3_Code,JEY
+Curaçao,ISO_3166-1_Alpha-3_Code,CUW
+Turks and Caicos Islands,ISO_3166-1_Alpha-3_Code,TCA
+Western Sahara,ISO_3166-1_Alpha-3_Code,ESH
+New Caledonia,ISO_3166-1_Alpha-3_Code,NCL
+Reunion,ISO_3166-1_Alpha-3_Code,REU
+Guadeloupe,ISO_3166-1_Alpha-3_Code,GLP
+Martinique,ISO_3166-1_Alpha-3_Code,MTQ
+Palestine,ISO_3166-1_Alpha-3_Code,PSE
+French Polynesia,ISO_3166-1_Alpha-3_Code,PYF
+South Sudan,ISO_3166-1_Alpha-3_Code,SSD
+Sint Maarten,ISO_3166-1_Alpha-3_Code,SXM
+Isle of Man,ISO_3166-1_Alpha-3_Code,IMN
+Kosovo,ISO_3166-1_Alpha-3_Code,XKX
+Gibraltar,ISO_3166-1_Alpha-3_Code,GIB
+Northern Mariana Islands,ISO_3166-1_Alpha-3_Code,MNP
+U. S. Virgin Islands,ISO_3166-1_Alpha-3_Code,VIR
+American Samoa,ISO_3166-1_Alpha-3_Code,ASM
+Falkland Islands,ISO_3166-1_Alpha-3_Code,FLK
+Holy See (Vatican City State),ISO_3166-1_Alpha-3_Code,VAT
+British Indian Ocean Territory,ISO_3166-1_Alpha-3_Code,IOT
+Faroe Islands,ISO_3166-1_Alpha-3_Code,FRO
+United States Minor Outlying Islands,ISO_3166-1_Alpha-3_Code,UMI
+Cook Islands,ISO_3166-1_Alpha-3_Code,COK
+Montserrat,ISO_3166-1_Alpha-3_Code,MSR
+Wallis and Futuna,ISO_3166-1_Alpha-3_Code,WLF
+Svalbard and Jan Mayen,ISO_3166-1_Alpha-3_Code,SJM
+Pitcairn Islands,ISO_3166-1_Alpha-3_Code,PCN
+"Bonaire, Sint Eustatius, and Saba",ISO_3166-1_Alpha-3_Code,BES
+Christmas Island,ISO_3166-1_Alpha-3_Code,CXR
+Åland Islands,ISO_3166-1_Alpha-3_Code,ALA
+Niue,ISO_3166-1_Alpha-3_Code,NIU
+Cocos (Keeling) Islands,ISO_3166-1_Alpha-3_Code,CCK
+Mayotte,ISO_3166-1_Alpha-3_Code,MYT
+Saint Pierre and Miquelon,ISO_3166-1_Alpha-3_Code,SPM
+Tokelau,ISO_3166-1_Alpha-3_Code,TKL
+Norfolk Island,ISO_3166-1_Alpha-3_Code,NFK
+Saint Barthelemy,ISO_3166-1_Alpha-3_Code,BLM
+"Saint Helena, Ascension and Tristan da Cunha",ISO_3166-1_Alpha-3_Code,SHN
+Saint Martin,ISO_3166-1_Alpha-3_Code,MAF
