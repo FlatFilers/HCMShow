@@ -20,6 +20,7 @@ interface Props {
   records: {
     id: string;
     values: {
+      endEmployementDate: Field;
       employeeId: Field;
       managerId: Field;
       employeeType: Field;
@@ -74,6 +75,12 @@ const Imports: NextPage<Props> = ({ records }) => {
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
+                      End Date
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
                       Status
                     </th>
                     <th
@@ -86,10 +93,10 @@ const Imports: NextPage<Props> = ({ records }) => {
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {records.map(({ id, values }) => {
-                    const isAnyRecordValid = Object.values(values).some(
-                      (value) => value.valid === true
+                    const isAnyRecordinvalid = Object.values(values).some(
+                      (value) => value.valid === false
                     );
-                    console.log("isAnyRecordValid", isAnyRecordValid);
+                    console.log("isAnyRecordinvalid", isAnyRecordinvalid);
 
                     return (
                       <tr key={id}>
@@ -107,10 +114,17 @@ const Imports: NextPage<Props> = ({ records }) => {
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {values.hireDate.value}
                         </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          {values.endEmployementDate.value}
+                        </td>
                         <td
-                          className={`whitespace-nowrap px-3 py-4 text-sm text-gray-500 ${isAnyRecordValid ? "text-green-500" : "text-red-500"}`}
+                          className={`whitespace-nowrap px-3 py-4 text-sm text-gray-500 ${
+                            isAnyRecordinvalid
+                              ? "text-red-500"
+                              : "text-green-500"
+                          }`}
                         >
-                          {isAnyRecordValid ? "Valid" : "invalid"}
+                          {isAnyRecordinvalid ? "Error" : "Valid"}
                         </td>
                       </tr>
                     );
