@@ -41,9 +41,11 @@ interface Props {
   }[];
 }
 
+type FilterTypes = "All" | "Valid" | "Error";
+
 const Imports: NextPage<Props> = ({records}) => {
 
-  const [filterSelected, setFilterSelected] = useState("All");
+  const [filterSelected, setFilterSelected] = useState<FilterTypes>("All");
 
   let isAnyRecordInvalid = (values: object) => (
     Object.values(values).some((value: Field) => value.valid === false)
@@ -91,7 +93,7 @@ const Imports: NextPage<Props> = ({records}) => {
           <select
             className="rounded-md border border-gray-300 shadow-sm px-3 py-2 text-sm font-medium text-gray-900 bg-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mr-20"
             value={filterSelected}
-            onChange={(e) => setFilterSelected(e.target.value)}
+            onChange={(e) => setFilterSelected(e.target.value as FilterTypes)}
           >
             <option className="relative top-10" value="All">
               All
