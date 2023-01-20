@@ -32,15 +32,7 @@ const Home: NextPageWithLayout = () => {
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Sign in to your account
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Or{" "}
-            <a
-              href="#"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              start your 14-day free trial
-            </a>
-          </p>
+          <p className="mt-2 text-center text-sm text-gray-600"></p>
         </div>
         {error && <div className="text-red-600 mx-auto">{error}</div>}
         <form className="mt-8 space-y-6" action="#" onSubmit={handleSubmit}>
@@ -92,14 +84,7 @@ const Home: NextPageWithLayout = () => {
               </label>
             </div>
 
-            <div className="text-sm">
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Forgot your password?
-              </a>
-            </div>
+            <div className="text-sm"></div>
           </div>
 
           <div>
@@ -117,6 +102,12 @@ const Home: NextPageWithLayout = () => {
             </button>
           </div>
         </form>
+        <a className="text-gray-900 flex flex-row pt-6" href="/signup">
+          <div className="mr-2">
+            Click here to
+          </div>
+          <div className="text-blue-600">Sign Up</div>
+        </a>
       </div>
     </div>
   );

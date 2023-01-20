@@ -8,6 +8,7 @@ import {
   FolderIcon,
   HomeIcon,
   InboxIcon,
+  RocketLaunchIcon,
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -28,7 +29,7 @@ const SidebarLayout = ({ children }: Props) => {
     {
       name: "Onboarding",
       href: "/onboarding",
-      icon: UsersIcon,
+      icon: RocketLaunchIcon,
       current: false,
     },
     {
