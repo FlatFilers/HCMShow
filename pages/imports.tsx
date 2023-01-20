@@ -45,23 +45,23 @@ const Imports: NextPage<Props> = ({records}) => {
 
   const [filterSelected, setFilterSelected] = useState("All");
 
-  const isAnyRecordInvalid = (values: object) => (
+  let isAnyRecordInvalid = (values: object) => (
     Object.values(values).some((value: Field) => value.valid === false)
-  )
+  )    
 
-  let getAllInvalidRecords = (records: Records[]) =>
-    records.filter((record: Records) => isAnyRecordInvalid(record.values));
+  let getRecordsBasedOnStatus = (records: Records[], filterSelected: string) => {
+    if (filterSelected === "Valid") {
 
-  let getAllValidRecords = (records: Records[]) =>
-    records.filter((record: Records) =>
-      Object.values(record.values).every((value: Field) => value.valid === true)
-    );
-
-  let getAllBasedOnStatus = (records: Records[], status: boolean) => {
-    if (status === true) {
-      return getAllValidRecords(records);
+      return records.filter((record: Records) =>
+        Object.values(record.values).every(
+          (value: Field) => value.valid === true
+        )
+      );
     } else {
-      return getAllInvalidRecords(records);
+
+      return records.filter((record: Records) =>
+        isAnyRecordInvalid(record.values)
+      );
     }
   };
   
@@ -69,7 +69,7 @@ const Imports: NextPage<Props> = ({records}) => {
     if (filterSelected === "All") {
       return records;
     } else {
-      return getAllBasedOnStatus(records, filterSelected === "Valid" ? true : false);
+      return getRecordsBasedOnStatus(records, filterSelected);
     }
   }
 
