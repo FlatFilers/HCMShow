@@ -31,9 +31,17 @@ export const main = async () => {
   await upsertJobFamilies();
 
   await upsertEmployeeTypes();
-  await upsertEmployees();
+  await createOtherData();
 
-  await upsertUser();
+  const user = await upsertUser();
+
+  await seedNewAccount(user);
+};
+
+export const seedNewAccount = async (user: User) => {
+  // TODO: Eventually as we migrate the models we'll need to tie more
+  // into the specific organization
+  await upsertEmployees(user.organizationId);
 };
 
 const upsertJobFamilies = async () => {
@@ -205,7 +213,9 @@ const upsertLocations = async () => {
   await Promise.all(promises);
 };
 
-const upsertEmployees = async () => {
+// TODO: Eventually this needs to be scoped to the organization.
+// Some of this may stay static.
+const createOtherData = async () => {
   // // TODO: need to define unique constraints here to do upsert
   // const hireReasonData = {
   //   slug: "Additional_Headcount_Request_Headcount_Request",
@@ -277,13 +287,18 @@ const upsertEmployees = async () => {
   //   },
   // });
 
-  const payRate: PayRate = await prisma.payRate.create({
-    data: {
-      name: "Hourly",
+  const payRateData = {
+    name: "Hourly",
+    slug: "Hourly",
+    isInactive: false,
+    frequency: "Hourly",
+  };
+  const payRate: PayRate = await prisma.payRate.upsert({
+    where: {
       slug: "Hourly",
-      isInactive: false,
-      frequency: "Hourly",
     },
+    create: payRateData,
+    update: {},
   });
 
   const additionalJobClassification: AdditionalJobClassification =
@@ -313,10 +328,48 @@ const upsertEmployees = async () => {
   if (!location) {
     throw "Error upsertEmployees(): no location record";
   }
+};
+
+const upsertEmployees = async (organizationId: string) => {
+  const employeeType = await prisma.employeeType.findFirst();
+  if (!employeeType) {
+    throw "Error upsertEmployees(): no employeeType record";
+  }
+  const jobFamily = await prisma.jobFamily.findFirst();
+  if (!jobFamily) {
+    throw "Error upsertEmployees(): no jobFamily record";
+  }
+  const hireReason = await prisma.hireReason.findFirst();
+  if (!hireReason) {
+    throw "Error upsertEmployees(): no hireReason record";
+  }
+  const positionTime = await prisma.positionTime.findFirst();
+  if (!positionTime) {
+    throw "Error upsertEmployees(): no positionTime record";
+  }
+  const payRate = await prisma.payRate.findFirst();
+  if (!payRate) {
+    throw "Error upsertEmployees(): no payRate record";
+  }
+  const additionalJobClassification =
+    await prisma.additionalJobClassification.findFirst();
+  if (!additionalJobClassification) {
+    throw "Error upsertEmployees(): no additionalJobClassification record";
+  }
+  const workerCompensationCode =
+    await prisma.workerCompensationCode.findFirst();
+  if (!workerCompensationCode) {
+    throw "Error upsertEmployees(): no workerCompensationCode record";
+  }
+  const location = await prisma.location.findFirst();
+  if (!location) {
+    throw "Error upsertEmployees(): no location record";
+  }
 
   const manager: Employee = await prisma.employee.create({
     data: {
       managerId: null,
+      organizationId: organizationId,
       name: faker.name.fullName(),
       employeeTypeId: employeeType.id,
       hireReasonId: hireReason.id,
@@ -341,6 +394,7 @@ const upsertEmployees = async () => {
     await prisma.employee.create({
       data: {
         managerId: manager.id,
+        organizationId: organizationId,
         name: faker.name.fullName(),
         employeeTypeId: employeeType.id,
         hireReasonId: hireReason.id,
@@ -390,11 +444,13 @@ const upsertUser = async () => {
     },
   };
 
-  const firstUser: User = await prisma.user.upsert({
+  const user: User = await prisma.user.upsert({
     where: {
       email: data.email,
     },
     create: data,
     update: {},
   });
+
+  return user;
 };

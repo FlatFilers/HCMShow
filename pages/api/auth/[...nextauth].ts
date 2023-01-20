@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { createUser, findUser, isValidPassword } from "../../../lib/user";
+import { findUser, isValidPassword, setupNewAccount } from "../../../lib/user";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -30,7 +30,14 @@ export const authOptions: NextAuthOptions = {
         if (credentials?.isSignup === "true") {
           console.log("signup flow");
 
-          return await createUser(credentials.email, credentials.password);
+          const user = await setupNewAccount(
+            credentials.email,
+            credentials.password
+          );
+
+          console.log("setup account");
+
+          return user;
         } else {
           console.log("login flow");
           const user = await findUser(credentials.email);
@@ -63,6 +70,10 @@ export const authOptions: NextAuthOptions = {
       // console.log("profile", profile);
       // console.log("isNewUser", isNewUser);
 
+      if (user) {
+        token.organizationId = user.organizationId;
+      }
+
       return token;
     },
     async session({ session, user, token }: any) {
@@ -72,7 +83,8 @@ export const authOptions: NextAuthOptions = {
       // console.log('token',token);
 
       session.user = {
-        sub: token.sub,
+        id: token.sub,
+        organizationId: token.organizationId,
         email: token.email,
       };
 
