@@ -111,7 +111,6 @@ const Employees: NextPage<Props> = ({ employees }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const token = await getToken({
     req: context.req,
-    secret: process.env.NEXTAUTH_SECRET,
   });
   // console.log("gSSP token", token);
 

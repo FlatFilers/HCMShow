@@ -10,7 +10,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  await main();
+  // TODO: Hack to run seeds on Heroku
+  // await main();
 
   res.status(200).json({ name: "John Doe" });
 }

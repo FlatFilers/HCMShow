@@ -13,6 +13,8 @@ import {
   SpaceConfig,
 } from "@flatfile/api";
 import { PrismaClient, Space, User } from "@prisma/client";
+import { getToken } from "next-auth/jwt";
+import { userAgent } from "next/server";
 
 type Data = {
   message?: string;
@@ -22,6 +24,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  const token = await getToken({
+    req: req,
+  });
+  // console.log("gSSP token", token);
+
+  if (!token) {
+    console.log("No session");
+    return {
+      notFound: true,
+    };
+  }
+
   const basePath: string = "https://api.x.flatfile.com/v1";
   const configParams: ConfigurationParameters = {
     basePath,
@@ -51,7 +65,12 @@ export default async function handler(
   const accessToken: string = accessTokenResponse.data.accessToken;
 
   // Pre-setup space config ID
-  const spaceConfigId = "us_sc_PXZ1mklU";
+  const spaceConfigId = process.env.ONBOARDING_SPACE_CONFIG_ID;
+
+  if (!spaceConfigId) {
+    throw "Missing ENV var: ONBOARDING_SPACE_CONFIG_ID";
+  }
+
   const spaceConfig: SpaceConfig = {
     spaceConfigId: spaceConfigId,
     environmentId: process.env.FLATFILE_ENVIRONMENT_ID as string,
@@ -93,31 +112,43 @@ export default async function handler(
 
   const spaceId: string = spaceResult.data.id;
 
-  const payload = [{
-    environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
-    email: `guest${Math.random()}@example.com`,
-    name: "Mr. Guest",
-    spaces: [
-      {
-        id: spaceId,
-        // TODO: What are these?
-        // lastAccessed: "2022-09-18T00:19:57.007Z",
-        // invitationLink: "https://todo.todo",
-      },
-    ],
-  }];
+  const prisma = new PrismaClient();
+  const user = await prisma.user.findUnique({
+    where: {
+      id: token.sub,
+    },
+  });
+
+  if (!user) {
+    console.error("No user found");
+    throw "No user found";
+  }
+
+  const payload = [
+    {
+      environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
+      email: user.email,
+      name: "Mr. Guest",
+      spaces: [
+        {
+          id: spaceId,
+        },
+      ],
+    },
+  ];
 
   // TODO: Need guest methods on API wrapper to call
-  const addGuestToSpaceResponse: Response = await fetch(
-    `${basePath}/guests`,
-    {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: headers,
-    }
-  );
+  const addGuestToSpaceResponse: Response = await fetch(`${basePath}/guests`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: headers,
+  });
 
   console.log("addGuestToSpaceResponse", addGuestToSpaceResponse);
+  // console.log(
+  //   "addGuestToSpaceResponse body",
+  //   await addGuestToSpaceResponse.json()
+  // );
 
   if (!addGuestToSpaceResponse.ok) {
     res.status(500).json({ message: "Error adding guest to space" });
@@ -146,17 +177,6 @@ export default async function handler(
   const getSpaceResult = await getSpaceResponse.json();
   console.log("getSpaceResult", getSpaceResult);
 
-  // const spaceId = getSpaceResult.data.id;
-
-  const prisma = new PrismaClient();
-
-  // TODO: use session to get this
-  const user: User = (await prisma.user.findUnique({
-    where: {
-      email: "user@email.com",
-    },
-  })) as User;
-
   const space: Space = await prisma.space.create({
     data: {
       userId: user.id,
@@ -166,6 +186,5 @@ export default async function handler(
 
   const guestLink: string = getSpaceResult.data.guestLink;
 
-  // res.status(200).json({ message: "John Doe" });
   res.redirect(guestLink);
 }
