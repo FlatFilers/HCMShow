@@ -17,7 +17,7 @@ interface Field {
   message: [];
 }
 
-interface records {
+interface Records {
   id: string;
   values: {
     endEmployementDate: Field;
@@ -27,17 +27,6 @@ interface records {
     hireDate: Field;
   };
 }[]
-
-interface record {
-  id: string;
-  values: {
-    endEmployementDate: Field;
-    employeeId: Field;
-    managerId: Field;
-    employeeType: Field;
-    hireDate: Field;
-  };
-}
 
 interface Props {
   records: {
@@ -60,20 +49,15 @@ const Imports: NextPage<Props> = ({records}) => {
     Object.values(values).some((value: Field) => value.valid === false)
   )
 
-  let getAllInvalidRecords = (records: records[]) => (
-    records.filter((record: record) =>
-      isAnyRecordInvalid(record.values)
-    )
-  )
+  let getAllInvalidRecords = (records: Records[]) =>
+    records.filter((record: Records) => isAnyRecordInvalid(record.values));
 
-  let getAllValidRecords = (records: records[]) => (
-    records.filter((record: record) => Object.values(record.values).every(
-        (value: Field) => value.valid === true
-      )
-    )
-  )
+  let getAllValidRecords = (records: Records[]) =>
+    records.filter((record: Records) =>
+      Object.values(record.values).every((value: Field) => value.valid === true)
+    );
 
-  let getAllBasedOnStatus = (records: records[], status: boolean) => {
+  let getAllBasedOnStatus = (records: Records[], status: boolean) => {
     if (status === true) {
       return getAllValidRecords(records);
     } else {
