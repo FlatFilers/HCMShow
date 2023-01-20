@@ -12,6 +12,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { signOut } from "next-auth/react";
 
 type Props = {
   children: React.ReactNode;
@@ -41,10 +42,9 @@ const SidebarLayout = ({ children }: Props) => {
     // { name: "Documents", href: "#", icon: InboxIcon, current: false },
     // { name: "Reports", href: "#", icon: ChartBarIcon, current: false },
   ];
-  const userNavigation = [
-    { name: "Your Profile", href: "#" },
-    { name: "Settings", href: "#" },
-    { name: "Sign out", href: "#" },
+  const userNavigation: { name: string; href: string }[] = [
+    // { name: "Your Profile", href: "#" },
+    // { name: "Settings", href: "#" },
   ];
 
   function classNames(...classes: string[]) {
@@ -271,6 +271,21 @@ const SidebarLayout = ({ children }: Props) => {
                         )}
                       </Menu.Item>
                     ))}
+
+                    <Menu.Item>
+                      {({ active }) => (
+                        <a
+                          href="#"
+                          onClick={() => signOut()}
+                          className={classNames(
+                            active ? "bg-gray-100" : "",
+                            "block px-4 py-2 text-sm text-gray-700"
+                          )}
+                        >
+                          Sign out
+                        </a>
+                      )}
+                    </Menu.Item>
                   </Menu.Items>
                 </Transition>
               </Menu>
