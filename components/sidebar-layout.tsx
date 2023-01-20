@@ -23,12 +23,12 @@ const SidebarLayout = ({ children }: Props) => {
 
   // TODO: Set `current` here properly
   const navigation = [
-    { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
+    // { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
     { name: "Employees", href: "/employees", icon: UsersIcon, current: false },
     {
       name: "Onboarding",
       href: "/onboarding",
-      icon: UsersIcon,
+      icon: FolderIcon,
       current: false,
     },
     {
