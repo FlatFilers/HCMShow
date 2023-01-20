@@ -8,6 +8,7 @@ import {
 } from "@flatfile/api";
 import { PrismaClient, Space, prisma } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
+import { useState } from "react";
 // import client from "@flatfile/api";
 
 interface Field {
@@ -16,10 +17,22 @@ interface Field {
   message: [];
 }
 
+interface Records {
+  id: string;
+  values: {
+    endEmployementDate: Field;
+    employeeId: Field;
+    managerId: Field;
+    employeeType: Field;
+    hireDate: Field;
+  };
+}[]
+
 interface Props {
   records: {
     id: string;
     values: {
+      endEmployementDate: Field;
       employeeId: Field;
       managerId: Field;
       employeeType: Field;
@@ -28,7 +41,40 @@ interface Props {
   }[];
 }
 
-const Imports: NextPage<Props> = ({ records }) => {
+type FilterTypes = "All" | "Valid" | "Error";
+
+const Imports: NextPage<Props> = ({records}) => {
+
+  const [filterSelected, setFilterSelected] = useState<FilterTypes>("All");
+
+  let isAnyRecordInvalid = (values: object) => (
+    Object.values(values).some((value: Field) => value.valid === false)
+  )    
+
+  let getRecordsBasedOnStatus = (records: Records[], filterSelected: string) => {
+    if (filterSelected === "Valid") {
+
+      return records.filter((record: Records) =>
+        Object.values(record.values).every(
+          (value: Field) => value.valid === true
+        )
+      );
+    } else {
+
+      return records.filter((record: Records) =>
+        isAnyRecordInvalid(record.values)
+      );
+    }
+  };
+  
+  let filteredRecords = () => {
+    if (filterSelected === "All") {
+      return records;
+    } else {
+      return getRecordsBasedOnStatus(records, filterSelected);
+    }
+  }
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
@@ -37,6 +83,24 @@ const Imports: NextPage<Props> = ({ records }) => {
           <p className="mt-2 text-sm text-gray-700">
             Your import history from Flatfile will show here.
           </p>
+        </div>
+      </div>
+      <div className="text-gray-800 pt-10 w-full flex flex-row">
+        <div className="ml-auto self-end flex flex-row align-middle">
+          <div className="align-middle my-auto mr-4 text-sm font-semibold text-gray-900">
+            Filter Status:{" "}
+          </div>
+          <select
+            className="rounded-md border border-gray-300 shadow-sm px-3 py-2 text-sm font-medium text-gray-900 bg-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mr-20"
+            value={filterSelected}
+            onChange={(e) => setFilterSelected(e.target.value as FilterTypes)}
+          >
+            <option className="relative top-10" value="All">
+              All
+            </option>
+            <option value="Valid">Valid</option>
+            <option value="Error">Error</option>
+          </select>
         </div>
       </div>
       <div className="mt-8 flex flex-col">
@@ -72,6 +136,18 @@ const Imports: NextPage<Props> = ({ records }) => {
                     </th>
                     <th
                       scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      End Date
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Status
+                    </th>
+                    <th
+                      scope="col"
                       className="relative py-3.5 pl-3 pr-4 sm:pr-6"
                     >
                       <span className="sr-only">Edit</span>
@@ -79,7 +155,8 @@ const Imports: NextPage<Props> = ({ records }) => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {records.map(({ id, values }) => {
+                  {filteredRecords().map(({ id, values }) => {
+
                     return (
                       <tr key={id}>
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
@@ -95,6 +172,20 @@ const Imports: NextPage<Props> = ({ records }) => {
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {values.hireDate.value}
+                        </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                          {values.endEmployementDate.value}
+                        </td>
+                        <td
+                          className={`whitespace-nowrap px-3 py-4 text-sm text-gray-500 ${
+                            isAnyRecordInvalid(values)
+                              ? "text-red-500"
+                              : "text-green-500"
+                          }`}
+                        >
+                          {isAnyRecordInvalid(values)
+                            ? "Error"
+                            : "Valid"}
                         </td>
                       </tr>
                     );
@@ -155,6 +246,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   })) as Space;
 
+  console.log("space", space);
+  
+
   const { workbookId, sheetId } = await getWorkbookIdAndSheetId(
     space.flatfileSpaceId,
     headers
@@ -188,6 +282,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log("records man", records[0].values.managerId);
   console.log("records type", records[0].values.employeeType);
   console.log("records hiredate", records[0].values.hireDate);
+  console.log("records end emp date", records[0].values.endEmployementDate);
 
   return {
     props: {
