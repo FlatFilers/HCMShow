@@ -72,6 +72,12 @@ const Imports: NextPage<Props> = ({ records }) => {
                     </th>
                     <th
                       scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Status
+                    </th>
+                    <th
+                      scope="col"
                       className="relative py-3.5 pl-3 pr-4 sm:pr-6"
                     >
                       <span className="sr-only">Edit</span>
@@ -80,6 +86,11 @@ const Imports: NextPage<Props> = ({ records }) => {
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {records.map(({ id, values }) => {
+                    const isAnyRecordValid = Object.values(values).some(
+                      (value) => value.valid === true
+                    );
+                    console.log("isAnyRecordValid", isAnyRecordValid);
+
                     return (
                       <tr key={id}>
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
@@ -95,6 +106,11 @@ const Imports: NextPage<Props> = ({ records }) => {
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {values.hireDate.value}
+                        </td>
+                        <td
+                          className={`whitespace-nowrap px-3 py-4 text-sm text-gray-500 ${isAnyRecordValid ? "text-green-500" : "text-red-500"}`}
+                        >
+                          {isAnyRecordValid ? "Valid" : "invalid"}
                         </td>
                       </tr>
                     );
@@ -155,6 +171,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   })) as Space;
 
+  console.log("space", space);
+  
+
   const { workbookId, sheetId } = await getWorkbookIdAndSheetId(
     space.flatfileSpaceId,
     headers
@@ -188,6 +207,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log("records man", records[0].values.managerId);
   console.log("records type", records[0].values.employeeType);
   console.log("records hiredate", records[0].values.hireDate);
+  console.log("records end emp date", records[0].values.endEmployementDate);
 
   return {
     props: {
