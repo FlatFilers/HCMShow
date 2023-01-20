@@ -14,7 +14,8 @@ export default withAuth(
         if (
           req.nextUrl.pathname === "/" ||
           req.nextUrl.pathname === "/signup" ||
-          req.nextUrl.pathname.includes("api/auth")
+          req.nextUrl.pathname.includes("api/auth") ||
+          req.nextUrl.pathname.includes("api/seeds") // TODO: temp
         ) {
           return true;
         }
