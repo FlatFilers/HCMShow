@@ -8,12 +8,35 @@ import {
 } from "@flatfile/api";
 import { PrismaClient, Space, prisma } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
+import { useState } from "react";
 // import client from "@flatfile/api";
 
 interface Field {
   value: string | null;
   valid: boolean;
   message: [];
+}
+
+interface records {
+  id: string;
+  values: {
+    endEmployementDate: Field;
+    employeeId: Field;
+    managerId: Field;
+    employeeType: Field;
+    hireDate: Field;
+  };
+}[]
+
+interface record {
+  id: string;
+  values: {
+    endEmployementDate: Field;
+    employeeId: Field;
+    managerId: Field;
+    employeeType: Field;
+    hireDate: Field;
+  };
 }
 
 interface Props {
@@ -29,7 +52,43 @@ interface Props {
   }[];
 }
 
-const Imports: NextPage<Props> = ({ records }) => {
+const Imports: NextPage<Props> = ({records}) => {
+
+  const [filterSelected, setFilterSelected] = useState("All");
+
+  const isAnyRecordInvalid = (values: object) => (
+    Object.values(values).some((value: Field) => value.valid === false)
+  )
+
+  let getAllInvalidRecords = (records: records[]) => (
+    records.filter((record: record) =>
+      isAnyRecordInvalid(record.values)
+    )
+  )
+
+  let getAllValidRecords = (records: records[]) => (
+    records.filter((record: record) => Object.values(record.values).every(
+        (value: Field) => value.valid === true
+      )
+    )
+  )
+
+  let getAllBasedOnStatus = (records: records[], status: boolean) => {
+    if (status === true) {
+      return getAllValidRecords(records);
+    } else {
+      return getAllInvalidRecords(records);
+    }
+  };
+  
+  let filteredRecords = () => {
+    if (filterSelected === "All") {
+      return records;
+    } else {
+      return getAllBasedOnStatus(records, filterSelected === "Valid" ? true : false);
+    }
+  }
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
@@ -38,6 +97,24 @@ const Imports: NextPage<Props> = ({ records }) => {
           <p className="mt-2 text-sm text-gray-700">
             Your import history from Flatfile will show here.
           </p>
+        </div>
+      </div>
+      <div className="text-gray-800 pt-10 w-full flex flex-row">
+        <div className="ml-auto self-end flex flex-row align-middle">
+          <div className="align-middle my-auto mr-4 text-sm font-semibold text-gray-900">
+            Filter Status:{" "}
+          </div>
+          <select
+            className="rounded-md border border-gray-300 shadow-sm px-3 py-2 text-sm font-medium text-gray-900 bg-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm mr-20"
+            value={filterSelected}
+            onChange={(e) => setFilterSelected(e.target.value)}
+          >
+            <option className="relative top-10" value="All">
+              All
+            </option>
+            <option value="Valid">Valid</option>
+            <option value="Error">Error</option>
+          </select>
         </div>
       </div>
       <div className="mt-8 flex flex-col">
@@ -92,11 +169,7 @@ const Imports: NextPage<Props> = ({ records }) => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {records.map(({ id, values }) => {
-                    const isAnyRecordinvalid = Object.values(values).some(
-                      (value) => value.valid === false
-                    );
-                    console.log("isAnyRecordinvalid", isAnyRecordinvalid);
+                  {filteredRecords().map(({ id, values }) => {
 
                     return (
                       <tr key={id}>
@@ -119,12 +192,14 @@ const Imports: NextPage<Props> = ({ records }) => {
                         </td>
                         <td
                           className={`whitespace-nowrap px-3 py-4 text-sm text-gray-500 ${
-                            isAnyRecordinvalid
+                            isAnyRecordInvalid(values)
                               ? "text-red-500"
                               : "text-green-500"
                           }`}
                         >
-                          {isAnyRecordinvalid ? "Error" : "Valid"}
+                          {isAnyRecordInvalid(values)
+                            ? "Error"
+                            : "Valid"}
                         </td>
                       </tr>
                     );
