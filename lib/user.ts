@@ -12,10 +12,21 @@ export const findUser = async (email: string) => {
 };
 
 export const createUser = async (email: string, plaintextPassword: string) => {
+  const organization = await prisma.organization.create({
+    data: {
+      email: email,
+    },
+  });
+
   return await prisma.user.create({
     data: {
       email: email,
       password: await hashPassword(plaintextPassword),
+      organization: {
+        connect: {
+          id: organization.id,
+        },
+      },
     },
   });
 };
