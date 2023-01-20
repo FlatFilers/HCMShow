@@ -1,6 +1,6 @@
 import withAuth from "next-auth/middleware";
 import { NextResponse } from "next/server";
-import type { NextRequest } from 'next/server'
+import type { NextRequest } from "next/server";
 
 // The authorized callback, when returning true, will hit the middleware. Returning false will redirect to the signin page.
 
@@ -10,11 +10,12 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized: ({ req,token }) => {
-        if (req.nextUrl.pathname === "/" ||
-            req.nextUrl.pathname.includes("api/auth")
+      authorized: ({ req, token }) => {
+        if (
+          req.nextUrl.pathname === "/" ||
+          req.nextUrl.pathname === "/signup" ||
+          req.nextUrl.pathname.includes("api/auth")
         ) {
-
           return true;
         }
 
@@ -23,4 +24,3 @@ export default withAuth(
     },
   }
 );
-
