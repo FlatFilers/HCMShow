@@ -42,6 +42,8 @@ model Employee {
 
   name String
 
+  flatfileRecordId String?
+
   organizationId String @db.Uuid
   organization Organization @relation(fields: [organizationId], references: [id])
 

@@ -1,8 +1,9 @@
 import { PrismaClient, Space, prisma } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import { useState } from "react";
-import getAccessToken from "../lib/flatfile";
+import { getAccessToken, getRecords } from "../lib/flatfile";
 import React from "react";
+import { getToken } from "next-auth/jwt";
 // import client from "@flatfile/api";
 
 interface Field {
@@ -198,50 +199,21 @@ const Imports: NextPage<Props> = ({ records }) => {
 const basePath: string = "https://api.x.flatfile.com/v1";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const accessToken = await getAccessToken();
+  const token = await getToken({
+    req: context.req,
+  });
+  // console.log("gSSP token", token);
 
-  // fetch the records
-  const headers = {
-    Authorization: `Bearer ${accessToken}`,
-    "Content-Type": "application/json",
-  };
-
-  const prisma = new PrismaClient();
-  const space: Space = (await prisma.space.findFirst({
-    orderBy: {
-      createdAt: "desc",
-    },
-  })) as Space;
-
-  console.log("space", space);
-
-  const { workbookId, sheetId } = await getWorkbookIdAndSheetId(
-    space.flatfileSpaceId,
-    headers
-  );
-
-  const recordsResponse = await fetch(
-    `${basePath}/workbooks/${workbookId}/sheets/${sheetId}/records`,
-    {
-      method: "GET",
-      headers: headers,
-    }
-  );
-
-  console.log("recordsResponse", recordsResponse);
-
-  if (!recordsResponse.ok) {
-    console.log("Error getting space");
+  if (!token?.sub) {
+    console.log("No session");
     return {
-      props: {},
+      notFound: true,
     };
   }
 
-  const recordsResult = await recordsResponse.json();
+  const accessToken = await getAccessToken();
 
-  console.log("recordsResult", recordsResult);
-
-  const records = recordsResult.data.records;
+  const records = await getRecords(token.sub, accessToken);
 
   console.log("records", records);
   console.log("records emp", records[0].values.employeeId);

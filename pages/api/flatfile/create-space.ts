@@ -9,7 +9,7 @@ import {
 import { PrismaClient, Space, User } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { userAgent } from "next/server";
-import getAccessToken from "../../../lib/flatfile";
+import { getAccessToken } from "../../../lib/flatfile";
 
 type Data = {
   message?: string;
