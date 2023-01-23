@@ -33,14 +33,7 @@ export default async function handler(
 
   const basePath: string = "https://api.x.flatfile.com/v1";
 
-  const accessTokenResponse = await getAccessToken();
-
-  if (!accessTokenResponse.data?.accessToken) {
-    res.status(500).json({ message: "Error fetching access token" });
-    return;
-  }
-
-  const accessToken: string = accessTokenResponse.data.accessToken;
+  const accessToken = await getAccessToken();
 
   // Pre-setup space config ID
   const spaceConfigId = process.env.ONBOARDING_SPACE_CONFIG_ID;

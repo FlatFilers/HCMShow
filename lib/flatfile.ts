@@ -8,9 +8,8 @@ import {
 } from "@flatfile/api";
 
 export default async function getAccessToken() {
-
   const basePath: string = "https://api.x.flatfile.com/v1";
-  
+
   const configParams: ConfigurationParameters = {
     basePath,
   };
@@ -31,5 +30,9 @@ export default async function getAccessToken() {
 
   console.log("response", accessTokenResponse);
 
-  return accessTokenResponse;
+  if (!accessTokenResponse.data?.accessToken) {
+    throw new Error("Error fetching access token");
+  }
+
+  return accessTokenResponse.data.accessToken;
 }

@@ -67,10 +67,15 @@ const Imports: NextPage<Props> = ({ records }) => {
             </p>
           </div>
 
-          <div className="flex flex-col align-end">
-            <button className="w-32 bg-indigo-600 hover:bg-indigo-700 group relative flex justify-center rounded-md border border-transparent py-2 px-2 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mb-2">
-              Sync Records
-            </button>
+          <div className="flex flex-col items-end">
+            <form action="/api/sync-records" method="post">
+              <button
+                type="submit"
+                className="w-32 bg-indigo-600 hover:bg-indigo-700 group relative flex justify-center rounded-md border border-transparent py-2 px-2 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mb-2"
+              >
+                Sync Records
+              </button>
+            </form>
 
             <p className="text-xs text-gray-400">
               Last sync 1/23/23 12:45:04PM
@@ -193,16 +198,7 @@ const Imports: NextPage<Props> = ({ records }) => {
 const basePath: string = "https://api.x.flatfile.com/v1";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const accessTokenResponse = await getAccessToken();
-
-  if (!accessTokenResponse.data?.accessToken) {
-    console.log("Error getting access token");
-    return {
-      props: {},
-    };
-  }
-
-  const accessToken: string = accessTokenResponse.data.accessToken;
+  const accessToken = await getAccessToken();
 
   // fetch the records
   const headers = {
