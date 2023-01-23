@@ -9,7 +9,7 @@ import {
 import { PrismaClient, Space, User } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { userAgent } from "next/server";
-import getAccessToken from "../../../lib/get_access_token";
+import getAccessToken from "../../../lib/flatfile";
 
 type Data = {
   message?: string;
@@ -33,7 +33,7 @@ export default async function handler(
 
   const basePath: string = "https://api.x.flatfile.com/v1";
 
-  const accessTokenResponse = await getAccessToken(basePath);
+  const accessTokenResponse = await getAccessToken();
 
   if (!accessTokenResponse.data?.accessToken) {
     res.status(500).json({ message: "Error fetching access token" });

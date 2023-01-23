@@ -7,7 +7,9 @@ import {
   AccessTokenResponse,
 } from "@flatfile/api";
 
-export default async function getAccessToken(basePath: string) {
+export default async function getAccessToken() {
+
+  const basePath: string = "https://api.x.flatfile.com/v1";
   
   const configParams: ConfigurationParameters = {
     basePath,

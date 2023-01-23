@@ -1,7 +1,7 @@
 import { PrismaClient, Space, prisma } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import { useState } from "react";
-import getAccessToken from "../lib/get_access_token";
+import getAccessToken from "../lib/flatfile";
 import React from "react";
 // import client from "@flatfile/api";
 
@@ -197,7 +197,7 @@ const Imports: NextPage<Props> = ({records}) => {
 const basePath: string = "https://api.x.flatfile.com/v1";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const accessTokenResponse = await getAccessToken(basePath);
+  const accessTokenResponse = await getAccessToken();
 
   if (!accessTokenResponse.data?.accessToken) {
     console.log("Error getting access token");
