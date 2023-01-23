@@ -35,8 +35,6 @@ export const authOptions: NextAuthOptions = {
             credentials.password
           );
 
-          console.log("setup account");
-
           return user;
         } else {
           console.log("login flow");
@@ -46,7 +44,12 @@ export const authOptions: NextAuthOptions = {
             throw new Error("Email address is not valid. Please try again.");
           }
 
-          if (!isValidPassword(user, credentials.password)) {
+          const validPassword = await isValidPassword(
+            user,
+            credentials.password
+          );
+
+          if (!validPassword) {
             throw new Error("Password is invalid. Please try again.");
           }
 
