@@ -1,20 +1,15 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import {
-  DefaultApi,
-  Configuration,
-  ConfigurationParameters,
   AddSpaceConfigRequest,
   AuthenticateRequest,
-  GetAccessTokenOperationRequest,
-  GetAccessTokenRequest,
-  AccessTokenResponse,
   AddSpaceRequest,
   SpaceConfig,
 } from "@flatfile/api";
 import { PrismaClient, Space, User } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { userAgent } from "next/server";
+import getAccessToken from "../../../lib/flatfile";
 
 type Data = {
   message?: string;
@@ -37,25 +32,8 @@ export default async function handler(
   }
 
   const basePath: string = "https://api.x.flatfile.com/v1";
-  const configParams: ConfigurationParameters = {
-    basePath,
-  };
-  const config: Configuration = new Configuration(configParams);
-  const client = new DefaultApi(config);
 
-  const getAccessTokenRequest: GetAccessTokenRequest = {
-    clientId: process.env.FLATFILE_CLIENT_ID,
-    secret: process.env.FLATFILE_CLIENT_SECRET,
-  };
-
-  const getAccessTokenOperationRequest: GetAccessTokenOperationRequest = {
-    getAccessTokenRequest,
-  };
-  const accessTokenResponse: AccessTokenResponse = await client.getAccessToken(
-    getAccessTokenOperationRequest
-  );
-
-  console.log("response", accessTokenResponse);
+  const accessTokenResponse = await getAccessToken();
 
   if (!accessTokenResponse.data?.accessToken) {
     res.status(500).json({ message: "Error fetching access token" });
