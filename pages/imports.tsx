@@ -1,14 +1,8 @@
-import {
-  AccessTokenResponse,
-  Configuration,
-  ConfigurationParameters,
-  DefaultApi,
-  GetAccessTokenOperationRequest,
-  GetAccessTokenRequest,
-} from "@flatfile/api";
 import { PrismaClient, Space, prisma } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import { useState } from "react";
+import getAccessToken from "../lib/get_access_token";
+import React from "react";
 // import client from "@flatfile/api";
 
 interface Field {
@@ -203,26 +197,7 @@ const Imports: NextPage<Props> = ({records}) => {
 const basePath: string = "https://api.x.flatfile.com/v1";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // TODO: Very duplicated, clean up later
-  const configParams: ConfigurationParameters = {
-    basePath,
-  };
-  const config: Configuration = new Configuration(configParams);
-  const client = new DefaultApi(config);
-
-  const getAccessTokenRequest: GetAccessTokenRequest = {
-    clientId: process.env.FLATFILE_CLIENT_ID,
-    secret: process.env.FLATFILE_CLIENT_SECRET,
-  };
-
-  const getAccessTokenOperationRequest: GetAccessTokenOperationRequest = {
-    getAccessTokenRequest,
-  };
-  const accessTokenResponse: AccessTokenResponse = await client.getAccessToken(
-    getAccessTokenOperationRequest
-  );
-
-  console.log("response", accessTokenResponse);
+  const accessTokenResponse = await getAccessToken(basePath);
 
   if (!accessTokenResponse.data?.accessToken) {
     console.log("Error getting access token");
