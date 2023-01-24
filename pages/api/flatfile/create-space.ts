@@ -105,7 +105,7 @@ export default async function handler(
   const payload = [
     {
       environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
-      email: `${Math.ceil(Math.random() * 10000000000000)}${user.email}`,
+      email: user.email,
       name: "Mr. Guest",
       spaces: [
         {
@@ -115,29 +115,33 @@ export default async function handler(
     },
   ];
 
-  console.log('payloademail', payload[0].email);
-  
-
   // TODO: Need guest methods on API wrapper to call
-  const addGuestToSpaceResponse: Response = await fetch(`${basePath}/guests`, {
-    method: "POST",
-    body: JSON.stringify(payload),
-    headers: headers,
-  });
+  try {
+    const addGuestToSpaceResponse: Response = await fetch(`${basePath}/guests`, {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: headers,
+    });
+    
+    // console.log("addGuestToSpaceResponse", addGuestToSpaceResponse);
+    
+    // if (!addGuestToSpaceResponse.ok) {
+    //   res.status(500).json({ message: "Error adding guest to space" });
+    //   return;
+    // }
 
-  console.log("addGuestToSpaceResponse", addGuestToSpaceResponse);
-  // console.log(
-  //   "addGuestToSpaceResponse body",
-  //   await addGuestToSpaceResponse.json()
-  // );
+    // const addGuestResult = await addGuestToSpaceResponse.json();
+    // console.log("addGuestResult", addGuestResult, addGuestResult.data.spaces);
 
-  if (!addGuestToSpaceResponse.ok) {
-    res.status(500).json({ message: "Error adding guest to space" });
-    return;
+    // console.log(
+    //   "addGuestToSpaceResponse body",
+    //   await addGuestToSpaceResponse.json()
+    // );
+
+  } catch (error) {
+
+    console.log('catch error')
   }
-
-  const addGuestResult = await addGuestToSpaceResponse.json();
-  console.log("addGuestResult", addGuestResult, addGuestResult.data.spaces);
 
   // Query the space to get the guest URL
   const getSpaceResponse: Response = await fetch(
