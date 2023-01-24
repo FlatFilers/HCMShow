@@ -122,7 +122,7 @@ export default async function handler(
     headers: headers,
   });
   
-  // console.log("addGuestToSpaceResponse", addGuestToSpaceResponse);
+  console.log("addGuestToSpaceResponse", addGuestToSpaceResponse);
   
   // TODO: Add guest API is breaking on email unique constraint
   // Removed message and added logging for now
