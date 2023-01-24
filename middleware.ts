@@ -6,7 +6,12 @@ import type { NextRequest } from "next/server";
 
 export default withAuth(
   function middleware(req) {
-    // return console.log("authhed", req.nextauth.token);
+    // console.log("requestNextAuthToken", req.nextauth.token);
+    if (req.nextauth.token && (req.nextUrl.pathname === "/" || req.nextUrl.pathname === "/signup")) {
+      console.log('middleware redirecting');
+      
+      return NextResponse.redirect(new URL('/employees', req.url)) 
+    }
   },
   {
     callbacks: {
