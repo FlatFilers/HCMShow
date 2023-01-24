@@ -116,35 +116,29 @@ export default async function handler(
   ];
 
   // TODO: Need guest methods on API wrapper to call
-  try {
-    const addGuestToSpaceResponse: Response = await fetch(`${basePath}/guests`, {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: headers,
-    });
-    
-    // TODO: Add guest API is breaking on email unique constraint
-    // console.log("addGuestToSpaceResponse", addGuestToSpaceResponse);
-    
-    // if (!addGuestToSpaceResponse.ok) {
-    //   res.status(500).json({ message: "Error adding guest to space" });
-    //   return;
-    // }
-
-    // const addGuestResult = await addGuestToSpaceResponse.json();
-    // console.log("addGuestResult", addGuestResult, addGuestResult.data.spaces);
-
-    // console.log(
-    //   "addGuestToSpaceResponse body",
-    //   await addGuestToSpaceResponse.json()
-    // );
-
-    console.log('try error')
-
-  } catch (error) {
-
-    console.log('catch error here')
+  const addGuestToSpaceResponse: Response = await fetch(`${basePath}/guests`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: headers,
+  });
+  
+  // console.log("addGuestToSpaceResponse", addGuestToSpaceResponse);
+  
+  // TODO: Add guest API is breaking on email unique constraint
+  // Removed message and added logging for now
+  if (!addGuestToSpaceResponse.ok) {
+    // res.status(500).json({ message: "Error adding guest to space" });
+    // return;
+    console.log('Error adding guest to space');
   }
+
+  const addGuestResult = await addGuestToSpaceResponse.json();
+  console.log("addGuestResult", addGuestResult, addGuestResult.data?.spaces);
+
+  // console.log(
+  //   "addGuestToSpaceResponse body",
+  //   await addGuestToSpaceResponse.json()
+  // );
 
   // Query the space to get the guest URL
   const getSpaceResponse: Response = await fetch(
