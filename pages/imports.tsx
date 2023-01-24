@@ -200,13 +200,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const records = await getRecords(token.sub, accessToken);
 
-  // console.log("records", records);
-  // console.log("records emp", records[0].values.employeeId);
-  // console.log("records man", records[0].values.managerId);
-  // console.log("records type", records[0].values.employeeType);
-  // console.log("records hiredate", records[0].values.hireDate);
-  // console.log("records end emp date", records[0].values.endEmployementDate);
-
   return {
     props: {
       records,

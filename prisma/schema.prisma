@@ -257,7 +257,7 @@ model Space {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  flatfileSpaceId String @unique
+  flatfileData Json @db.JsonB
 
   userId String @db.Uuid
   user User @relation(fields: [userId], references: [id])
