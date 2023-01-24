@@ -64,8 +64,5 @@ export default async function handler(
   // console.log("space", space);
   // console.log("space data", space.flatfileData);
 
-  const guestLink = (space.flatfileData as unknown as FlatfileSpaceData)
-    .guestLink;
-
-  res.redirect(guestLink);
+  res.redirect("/onboarding");
 }
