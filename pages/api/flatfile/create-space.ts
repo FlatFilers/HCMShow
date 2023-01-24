@@ -105,7 +105,7 @@ export default async function handler(
   const payload = [
     {
       environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
-      email: user.email,
+      email: `${Math.ceil(Math.random() * 10000000000000)}${user.email}`,
       name: "Mr. Guest",
       spaces: [
         {
@@ -114,6 +114,9 @@ export default async function handler(
       ],
     },
   ];
+
+  console.log('payloademail', payload[0].email);
+  
 
   // TODO: Need guest methods on API wrapper to call
   const addGuestToSpaceResponse: Response = await fetch(`${basePath}/guests`, {
