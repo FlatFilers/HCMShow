@@ -13,6 +13,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { signOut } from "next-auth/react";
+import { useRouter } from 'next/router'
 
 type Props = {
   children: React.ReactNode;
@@ -20,22 +21,22 @@ type Props = {
 
 const SidebarLayout = ({ children }: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const router = useRouter()
 
-  // TODO: Set `current` here properly
   const navigation = [
     // { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
-    { name: "Employees", href: "/employees", icon: UsersIcon, current: false },
+    { name: "Employees", href: "/employees", icon: UsersIcon, current: router.pathname === '/employees' },
     {
       name: "Onboarding",
       href: "/onboarding",
       icon: FolderIcon,
-      current: false,
+      current: router.pathname === '/onboarding',
     },
     {
       name: "Imports",
       href: "/imports",
       icon: InboxIcon,
-      current: false,
+      current: router.pathname === '/imports',
     },
     // { name: "Projects", href: "#", icon: FolderIcon, current: false },
     // { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
@@ -120,7 +121,7 @@ const SidebarLayout = ({ children }: Props) => {
                         href={item.href}
                         className={classNames(
                           item.current
-                            ? "bg-gray-100 text-gray-900"
+                            ? "bg-slate-200 text-gray-900"
                             : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
                           "group flex items-center px-2 py-2 text-base font-medium rounded-md"
                         )}
@@ -128,7 +129,7 @@ const SidebarLayout = ({ children }: Props) => {
                         <item.icon
                           className={classNames(
                             item.current
-                              ? "text-gray-500"
+                              ? "text-gray-800"
                               : "text-gray-400 group-hover:text-gray-500",
                             "mr-4 flex-shrink-0 h-6 w-6"
                           )}
@@ -167,7 +168,7 @@ const SidebarLayout = ({ children }: Props) => {
                   href={item.href}
                   className={classNames(
                     item.current
-                      ? "bg-gray-100 text-gray-900"
+                      ? "bg-slate-200 text-gray-900"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
                     "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                   )}
@@ -175,7 +176,7 @@ const SidebarLayout = ({ children }: Props) => {
                   <item.icon
                     className={classNames(
                       item.current
-                        ? "text-gray-500"
+                        ? "text-gray-800"
                         : "text-gray-400 group-hover:text-gray-500",
                       "mr-3 flex-shrink-0 h-6 w-6"
                     )}
