@@ -40,7 +40,9 @@ model Employee {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  employeeId String @unique
   name String
+  flatfileRecordId String?
 
   organizationId String @db.Uuid
   organization Organization @relation(fields: [organizationId], references: [id])

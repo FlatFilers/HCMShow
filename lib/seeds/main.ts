@@ -18,6 +18,8 @@ import * as fs from "fs";
 import { parse } from "fast-csv";
 import { faker } from "@faker-js/faker";
 import { hashPassword } from "../user";
+import crypto from "crypto";
+import { upsertEmployee } from "../employee";
 
 const prisma = new PrismaClient();
 
@@ -331,88 +333,16 @@ const createOtherData = async () => {
 };
 
 const upsertEmployees = async (organizationId: string) => {
-  const employeeType = await prisma.employeeType.findFirst();
-  if (!employeeType) {
-    throw "Error upsertEmployees(): no employeeType record";
-  }
-  const jobFamily = await prisma.jobFamily.findFirst();
-  if (!jobFamily) {
-    throw "Error upsertEmployees(): no jobFamily record";
-  }
-  const hireReason = await prisma.hireReason.findFirst();
-  if (!hireReason) {
-    throw "Error upsertEmployees(): no hireReason record";
-  }
-  const positionTime = await prisma.positionTime.findFirst();
-  if (!positionTime) {
-    throw "Error upsertEmployees(): no positionTime record";
-  }
-  const payRate = await prisma.payRate.findFirst();
-  if (!payRate) {
-    throw "Error upsertEmployees(): no payRate record";
-  }
-  const additionalJobClassification =
-    await prisma.additionalJobClassification.findFirst();
-  if (!additionalJobClassification) {
-    throw "Error upsertEmployees(): no additionalJobClassification record";
-  }
-  const workerCompensationCode =
-    await prisma.workerCompensationCode.findFirst();
-  if (!workerCompensationCode) {
-    throw "Error upsertEmployees(): no workerCompensationCode record";
-  }
-  const location = await prisma.location.findFirst();
-  if (!location) {
-    throw "Error upsertEmployees(): no location record";
-  }
-
-  const manager: Employee = await prisma.employee.create({
-    data: {
-      managerId: null,
-      organizationId: organizationId,
-      name: faker.name.fullName(),
-      employeeTypeId: employeeType.id,
-      hireReasonId: hireReason.id,
-      hireDate: DateTime.now().toJSDate(),
-      endEmploymentDate: null,
-      jobFamilyId: jobFamily.id,
-      positionTitle: "Sales Director",
-      businessTitle: "Sales Director",
-      locationId: location.id,
-      // workspaceId: workspace.id,
-      positionTimeId: positionTime.id,
-      // workShiftId: workShift.id,
-      defaultWeeklyHours: 40,
-      scheduledWeeklyHours: 40,
-      payRateId: payRate.id,
-      additionalJobClassificationId: additionalJobClassification.id,
-      workerCompensationCodeId: workerCompensationCode.id,
-    },
+  const manager: Employee = await upsertEmployee({
+    organizationId,
+    employeeId: crypto.randomBytes(16).toString("hex"),
   });
 
   const directReports = Array.from({ length: 10 }).map(async () => {
-    await prisma.employee.create({
-      data: {
-        managerId: manager.id,
-        organizationId: organizationId,
-        name: faker.name.fullName(),
-        employeeTypeId: employeeType.id,
-        hireReasonId: hireReason.id,
-        hireDate: DateTime.now().toJSDate(),
-        endEmploymentDate: null,
-        jobFamilyId: jobFamily.id,
-        positionTitle: "Sales Rep",
-        businessTitle: "Sales Rep",
-        locationId: location.id,
-        // workspaceId: workspace.id,
-        positionTimeId: positionTime.id,
-        // workShiftId: workShift.id,
-        defaultWeeklyHours: 40,
-        scheduledWeeklyHours: 40,
-        payRateId: payRate.id,
-        additionalJobClassificationId: additionalJobClassification.id,
-        workerCompensationCodeId: workerCompensationCode.id,
-      },
+    await upsertEmployee({
+      organizationId,
+      employeeId: crypto.randomBytes(16).toString("hex"),
+      managerId: manager.id,
     });
   });
 

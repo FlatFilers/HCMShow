@@ -198,44 +198,10 @@ const SidebarLayout = ({ children }: Props) => {
             <span className="sr-only">Open sidebar</span>
             <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
           </button>
-          <div className="flex flex-1 justify-between px-4 border border-t-2">
-            <div className="flex flex-1 bg-white">
-              <form
-                className="flex w-full md:ml-0 bg-white"
-                action="#"
-                method="GET"
-              >
-                <label htmlFor="search-field" className="sr-only">
-                  Search
-                </label>
-                <div className="relative w-full text-gray-600 bg-white">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center bg-white">
-                    <MagnifyingGlassIcon
-                      className="h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <input
-                    id="search-field"
-                    className="block h-full w-full border-transparent py-2 pl-8 pr-3 bg-white placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm"
-                    placeholder="Search"
-                    type="search"
-                    name="search"
-                  />
-                </div>
-              </form>
-            </div>
+          <div className="flex flex-1 justify-end px-4 border border-t-2">
             <div className="ml-4 flex items-center md:ml-6">
-              <button
-                type="button"
-                className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                <span className="sr-only">View notifications</span>
-                <BellIcon className="h-6 w-6" aria-hidden="true" />
-              </button>
-
               {/* Profile dropdown */}
-              <Menu as="div" className="relative ml-3">
+              <Menu as="div" className="relative">
                 <div>
                   <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                     <span className="sr-only">Open user menu</span>
