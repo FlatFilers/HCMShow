@@ -1,27 +1,16 @@
 import { PrismaClient, Space, prisma } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import { useState } from "react";
-import { getAccessToken, getRecords } from "../lib/flatfile";
+import {
+  Field,
+  getAccessToken,
+  getRecords,
+  validRecords,
+} from "../lib/flatfile";
 import React from "react";
 import { getToken } from "next-auth/jwt";
+import { Record } from "../lib/flatfile";
 // import client from "@flatfile/api";
-
-interface Field {
-  value: string | null;
-  valid: boolean;
-  message: [];
-}
-
-interface Record {
-  id: string;
-  values: {
-    endEmployementDate: Field;
-    employeeId: Field;
-    managerId: Field;
-    employeeType: Field;
-    hireDate: Field;
-  };
-}
 
 interface Props {
   records: Record[];
@@ -37,11 +26,7 @@ const Imports: NextPage<Props> = ({ records }) => {
 
   let getRecordsBasedOnStatus = (records: Record[], filterSelected: string) => {
     if (filterSelected === "Valid") {
-      return records.filter((record: Record) =>
-        Object.values(record.values).every(
-          (value: Field) => value.valid === true
-        )
-      );
+      return validRecords(records);
     } else {
       return records.filter((record: Record) =>
         isAnyRecordInvalid(record.values)
@@ -69,7 +54,7 @@ const Imports: NextPage<Props> = ({ records }) => {
           </div>
 
           <div className="flex flex-col items-end">
-            <form action="/api/sync-records" method="post">
+            <form action="/api/flatfile/sync-records" method="post">
               <button
                 type="submit"
                 className="w-32 bg-indigo-600 hover:bg-indigo-700 group relative flex justify-center rounded-md border border-transparent py-2 px-2 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mb-2"
@@ -202,7 +187,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const token = await getToken({
     req: context.req,
   });
-  // console.log("gSSP token", token);
+  console.log("gSSP token", token);
 
   if (!token?.sub) {
     console.log("No session");
@@ -215,12 +200,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const records = await getRecords(token.sub, accessToken);
 
-  console.log("records", records);
-  console.log("records emp", records[0].values.employeeId);
-  console.log("records man", records[0].values.managerId);
-  console.log("records type", records[0].values.employeeType);
-  console.log("records hiredate", records[0].values.hireDate);
-  console.log("records end emp date", records[0].values.endEmployementDate);
+  // console.log("records", records);
+  // console.log("records emp", records[0].values.employeeId);
+  // console.log("records man", records[0].values.managerId);
+  // console.log("records type", records[0].values.employeeType);
+  // console.log("records hiredate", records[0].values.hireDate);
+  // console.log("records end emp date", records[0].values.endEmployementDate);
 
   return {
     props: {

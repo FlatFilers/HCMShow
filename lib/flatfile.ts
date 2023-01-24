@@ -8,6 +8,23 @@ import {
 } from "@flatfile/api";
 import { PrismaClient } from "@prisma/client";
 
+export interface Field {
+  value: string | null;
+  valid: boolean;
+  message: [];
+}
+
+export interface Record {
+  id: string;
+  values: {
+    endEmployementDate: Field;
+    employeeId: Field;
+    managerId: Field;
+    employeeType: Field;
+    hireDate: Field;
+  };
+}
+
 const BASE_PATH = "https://api.x.flatfile.com/v1";
 
 export async function getAccessToken() {
@@ -29,7 +46,7 @@ export async function getAccessToken() {
     getAccessTokenOperationRequest
   );
 
-  console.log("response", accessTokenResponse);
+  // console.log("response", accessTokenResponse);
 
   if (!accessTokenResponse.data?.accessToken) {
     throw new Error("Error fetching access token");
@@ -38,7 +55,10 @@ export async function getAccessToken() {
   return accessTokenResponse.data.accessToken;
 }
 
-export const getRecords = async (userId: string, accessToken: string) => {
+export const getRecords = async (
+  userId: string,
+  accessToken: string
+): Promise<Record[]> => {
   const prisma = new PrismaClient();
 
   const space = await prisma.space.findFirst({
@@ -74,7 +94,7 @@ export const getRecords = async (userId: string, accessToken: string) => {
     }
   );
 
-  console.log("recordsResponse", recordsResponse);
+  // console.log("recordsResponse", recordsResponse);
 
   if (!recordsResponse.ok) {
     throw new Error(
@@ -84,7 +104,7 @@ export const getRecords = async (userId: string, accessToken: string) => {
 
   const recordsResult = await recordsResponse.json();
 
-  console.log("recordsResult", recordsResult);
+  // console.log("recordsResult", recordsResult);
 
   return recordsResult.data.records;
 };
@@ -101,16 +121,20 @@ const getWorkbookIdAndSheetId = async (
     }
   );
 
-  console.log("getWorkbooks response", response);
+  // console.log("getWorkbooks response", response);
 
   const result = await response.json();
 
   // TODO: Assuming just 1 of each. Maybe ok for this demo case?
-  console.log("workbooks", result["data"].length);
-  console.log("sheet", result["data"][0]["sheets"].length);
+  // console.log("workbooks", result["data"].length);
+  // console.log("sheet", result["data"][0]["sheets"].length);
 
   return {
     workbookId: result["data"][0]["id"],
     sheetId: result["data"][0]["sheets"][0]["id"],
   };
+};
+
+export const validRecords = (records: Record[]) => {
+  return records.filter((r) => Object.values(r.values).every((f) => f.valid));
 };
