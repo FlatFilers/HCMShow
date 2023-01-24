@@ -1,6 +1,7 @@
 import { PrismaClient, Space } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import { getToken } from "next-auth/jwt";
+import { FlatfileSpaceData } from "../lib/flatfile";
 
 interface Props {
   space?: Space;
@@ -45,7 +46,10 @@ const Onboarding: NextPage<Props> = ({ space }) => {
           <p className="mb-4">Visit your space below to upload records. 👇</p>
 
           <a
-            href="#"
+            target="_blank"
+            href={
+              (space.flatfileData as unknown as FlatfileSpaceData).guestLink
+            }
             className="mb-8 inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
           >
             Visit Space
