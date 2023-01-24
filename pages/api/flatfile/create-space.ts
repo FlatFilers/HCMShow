@@ -139,9 +139,11 @@ export default async function handler(
     //   await addGuestToSpaceResponse.json()
     // );
 
+    console.log('try error')
+
   } catch (error) {
 
-    console.log('catch error')
+    console.log('catch error here')
   }
 
   // Query the space to get the guest URL
