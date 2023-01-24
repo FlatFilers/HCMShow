@@ -5,8 +5,11 @@ import {
   GetAccessTokenOperationRequest,
   GetAccessTokenRequest,
   AccessTokenResponse,
+  SpaceConfig,
+  AddSpaceRequest,
 } from "@flatfile/api";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Space, User } from "@prisma/client";
+import { DateTime } from "luxon";
 
 export interface Field {
   value: string | null;
@@ -23,6 +26,26 @@ export interface Record {
     employeeType: Field;
     hireDate: Field;
   };
+}
+
+export interface FlatfileSpaceData {
+  id: string;
+  workbooksCount: number;
+  filesCount: number;
+  createdByUserId: string;
+  createdByUserName: string;
+  guestLink: string;
+  spaceConfigId: string;
+  environmentId: string;
+  primaryWorkbookId: string;
+  name: string;
+  displayOrder: number;
+  sidebarConfigs: [
+    {
+      type: string;
+      workbookId: string;
+    }
+  ];
 }
 
 const BASE_PATH = "https://api.x.flatfile.com/v1";
@@ -82,7 +105,7 @@ export const getRecords = async (
   };
 
   const { workbookId, sheetId } = await getWorkbookIdAndSheetId(
-    space.flatfileSpaceId,
+    (space.flatfileData as unknown as FlatfileSpaceData).id,
     headers
   );
 
@@ -98,7 +121,9 @@ export const getRecords = async (
 
   if (!recordsResponse.ok) {
     throw new Error(
-      `Error getting records for spaceId: ${space.id}, flatfileSpaceId: ${space.flatfileSpaceId}, flatfile workbookId: ${workbookId}, flatfile sheetId: ${sheetId}`
+      `Error getting records for spaceId: ${space.id}, flatfileSpaceId: ${
+        (space.flatfileData as unknown as FlatfileSpaceData).id
+      }, flatfile workbookId: ${workbookId}, flatfile sheetId: ${sheetId}`
     );
   }
 
@@ -133,6 +158,134 @@ const getWorkbookIdAndSheetId = async (
     workbookId: result["data"][0]["id"],
     sheetId: result["data"][0]["sheets"][0]["id"],
   };
+};
+
+export const createSpace = async (accessToken: string) => {
+  // Pre-setup space config ID
+  const spaceConfigId = process.env.ONBOARDING_SPACE_CONFIG_ID;
+
+  if (!spaceConfigId) {
+    throw "Missing ENV var: ONBOARDING_SPACE_CONFIG_ID";
+  }
+
+  const spaceConfig: SpaceConfig = {
+    spaceConfigId: spaceConfigId,
+    environmentId: process.env.FLATFILE_ENVIRONMENT_ID as string,
+    name: "Onboarding",
+  };
+
+  const spaceRequestParameters: AddSpaceRequest = {
+    spaceConfig,
+  };
+  // TODO: Is there a way to use the SDK / OpenAPI wrapper to set these headers more elegantly?
+  // client.setHeaders/setToken() etc that will remember it moving forward
+  const spacePayload = {
+    spaceConfigId: spaceConfigId,
+    environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
+  };
+
+  const spaceResponse = await fetch(`${BASE_PATH}/spaces`, {
+    method: "POST",
+    body: JSON.stringify(spacePayload),
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  });
+  // const spaceResponse = await client.addSpace(spaceRequestParameters, options);
+
+  console.log("spaceResponse", spaceResponse);
+
+  if (!spaceResponse.ok) {
+    throw new Error("Error creating space");
+  }
+
+  const spaceResult = await spaceResponse.json();
+
+  console.log("spaceResult body", spaceResult);
+
+  // const spaceId: string = spaceResult.data.id;
+
+  return spaceResult.data as FlatfileSpaceData;
+};
+
+export const getSpace = async (
+  flatfileSpaceId: string,
+  accessToken: string
+) => {
+  // Query the space to get the guest URL
+  const getSpaceResponse: Response = await fetch(
+    `${BASE_PATH}/spaces/${flatfileSpaceId}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  // console.log("getSpaceResponse", getSpaceResponse);
+
+  if (!getSpaceResponse.ok) {
+    throw new Error("Error retrieving space");
+  }
+
+  const getSpaceResult = await getSpaceResponse.json();
+  // console.log("getSpaceResult", getSpaceResult);
+
+  return getSpaceResult.data as FlatfileSpaceData;
+};
+
+export const addGuestToSpace = async (
+  user: User,
+  flatfileSpaceData: FlatfileSpaceData,
+  accessToken: string
+) => {
+  // TODO: Hack until we can add existing guests to a space
+  // Adds a +timestamp in the email so this is always unique
+  const userEmailPieces = user.email.split("@");
+  const email = `${userEmailPieces[0]}+${DateTime.now().toMillis()}@${
+    userEmailPieces[1]
+  }`;
+
+  const payload = [
+    {
+      environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
+      email: email,
+      name: "Guest",
+      spaces: [
+        {
+          id: flatfileSpaceData.id,
+        },
+      ],
+    },
+  ];
+
+  // TODO: Need guest methods on API wrapper to call
+  const addGuestToSpaceResponse: Response = await fetch(`${BASE_PATH}/guests`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  // console.log("addGuestToSpaceResponse", addGuestToSpaceResponse);
+  // console.log(
+  //   "addGuestToSpaceResponse body",
+  //   await addGuestToSpaceResponse.json()
+  // );
+
+  if (!addGuestToSpaceResponse.ok) {
+    throw new Error("Error adding guest to space");
+  }
+
+  const addGuestResult = await addGuestToSpaceResponse.json();
+  // console.log("addGuestResult", addGuestResult, addGuestResult.data.spaces);
+
+  return addGuestResult.data;
 };
 
 export const validRecords = (records: Record[]) => {
