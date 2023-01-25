@@ -97,7 +97,7 @@ export const getRecords = async (
     throw new Error(`No space for user ${userId}`);
   }
 
-  console.log("space", space);
+  // console.log("space", space);
 
   const headers = {
     Authorization: `Bearer ${accessToken}`,

@@ -1,17 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { AddSpaceRequest, SpaceConfig } from "@flatfile/api";
-import { PrismaClient, Space, User, prisma } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import {
   getAccessToken,
   getRecords,
   validRecords,
-  Record,
 } from "../../../lib/flatfile";
-import crypto from "crypto";
-import { faker } from "@faker-js/faker";
-import { DateTime } from "luxon";
 import { upsertEmployee } from "../../../lib/employee";
 
 type Data = {
@@ -62,7 +57,7 @@ export default async function handler(
 
   console.log("newrecs", newEmployeeRecords);
 
-  newEmployeeRecords.map(async (r) => {
+  const upserts = newEmployeeRecords.map(async (r) => {
     let data: {
       organizationId: string;
       employeeId: string;
@@ -95,6 +90,8 @@ export default async function handler(
 
     await upsertEmployee(data);
   });
+
+  await Promise.all(upserts);
 
   res.redirect("/imports");
 }
