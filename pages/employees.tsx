@@ -63,9 +63,9 @@ const Employees: NextPage<Props> = ({ employees }) => {
                     </th>
                     <th
                       scope="col"
-                      className="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      <span className="sr-only">Edit</span>
+                      Origin
                     </th>
                   </tr>
                 </thead>
@@ -88,13 +88,13 @@ const Employees: NextPage<Props> = ({ employees }) => {
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {employee.location.name}
                       </td>
-                      <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                        <a
-                          href="#"
-                          className="hidden text-indigo-600 hover:text-indigo-900"
-                        >
-                          Edit
-                        </a>
+                      <td
+                        className={`relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6
+                           ${
+                             employee.flatfileRecordId ? "text-green-500" : ""
+                           }`}
+                      >
+                        {employee.flatfileRecordId && <div>Flatfile</div>}
                       </td>
                     </tr>
                   ))}

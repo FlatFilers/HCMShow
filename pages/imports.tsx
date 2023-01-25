@@ -98,19 +98,19 @@ const Imports: NextPage<Props> = ({ records }) => {
                       scope="col"
                       className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                     >
-                      Name
+                      Employee ID
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Manager
+                      Manager ID
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      Title
+                      Employment Type
                     </th>
                     <th
                       scope="col"
@@ -122,19 +122,13 @@ const Imports: NextPage<Props> = ({ records }) => {
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
-                      End Date
+                      Hire Date
                     </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Status
-                    </th>
-                    <th
-                      scope="col"
-                      className="relative py-3.5 pl-3 pr-4 sm:pr-6"
-                    >
-                      <span className="sr-only">Edit</span>
                     </th>
                   </tr>
                 </thead>
@@ -153,11 +147,9 @@ const Imports: NextPage<Props> = ({ records }) => {
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {values.employeeType.value}
                         </td>
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"></td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {values.hireDate.value}
-                        </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {values.endEmployementDate.value}
                         </td>
                         <td
                           className={`whitespace-nowrap px-3 py-4 text-sm text-gray-500 ${
@@ -181,13 +173,11 @@ const Imports: NextPage<Props> = ({ records }) => {
   );
 };
 
-const basePath: string = "https://api.x.flatfile.com/v1";
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const token = await getToken({
     req: context.req,
   });
-  console.log("gSSP token", token);
+  // console.log("gSSP token", token);
 
   if (!token?.sub) {
     console.log("No session");
@@ -204,32 +194,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       records,
     },
-  };
-};
-
-const getWorkbookIdAndSheetId = async (
-  flatfileSpaceId: string,
-  headers: any
-): Promise<{ workbookId: string; sheetId: string }> => {
-  const response = await fetch(
-    `${basePath}/workbooks?spaceId=${flatfileSpaceId}`,
-    {
-      method: "GET",
-      headers,
-    }
-  );
-
-  console.log("getWorkbooks response", response);
-
-  const result = await response.json();
-
-  // TODO: Assuming just 1 of each. Maybe ok for this demo case?
-  console.log("workbooks", result["data"].length);
-  console.log("sheet", result["data"][0]["sheets"].length);
-
-  return {
-    workbookId: result["data"][0]["id"],
-    sheetId: result["data"][0]["sheets"][0]["id"],
   };
 };
 
