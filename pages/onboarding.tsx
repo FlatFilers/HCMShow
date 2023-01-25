@@ -9,12 +9,15 @@ interface Props {
 
 const Onboarding: NextPage<Props> = ({ space }) => {
   return (
-    <div className="text-gray-900">
+    <div className="text-gray-800">
       {!space && (
         <div>
           <p className="text-2xl mb-8">Onboarding Setup</p>
 
-          <p className="mb-2">First, download the sample data. 👇</p>
+          <p className="text-xl">1. Download Sample Data</p>
+          <p className="mb-4">
+            Click the button below to download the sample dataset.
+          </p>
 
           <a
             className="hover:text-white mb-12 inline-flex items-center justify-center rounded-md border text-indigo-600 border-indigo-600 px-4 py-2 text-sm font-medium shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
@@ -24,8 +27,9 @@ const Onboarding: NextPage<Props> = ({ space }) => {
             Download sample data
           </a>
 
-          <p className="mb-2">
-            Next, create your Space to begin your onboarding in Flatfile. 👇
+          <p className="text-xl">2. Create Space</p>
+          <p className="mb-4">
+            Next, click the button below to create your Space in Flatfile.
           </p>
 
           <form action="/api/flatfile/create-space">
@@ -41,30 +45,57 @@ const Onboarding: NextPage<Props> = ({ space }) => {
 
       {space && (
         <div>
-          <p className="text-2xl mb-8">Onboarding</p>
+          <div className="mb-12">
+            <p className="text-2xl mb-8">Onboarding</p>
 
-          <p className="mb-4">Visit your space below to upload records. 👇</p>
+            <p className="text-xl">1. Visit Space</p>
+            <p className="mb-4">
+              Click the button below to visit your space and upload records into
+              Flatfile.
+            </p>
 
-          <a
-            target="_blank"
-            href={
-              (space.flatfileData as unknown as FlatfileSpaceData).guestLink
-            }
-            className="mb-8 inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
-          >
-            Visit Space
-          </a>
-
-          <p className="text-sm block text-gray-600">
-            To download the sample data again{" "}
             <a
-              className="underline text-indigo-600"
-              download={"sample-employees.csv"}
-              href={"/sample-data/sample-employees.csv"}
+              target="_blank"
+              href={
+                (space.flatfileData as unknown as FlatfileSpaceData).guestLink
+              }
+              className="mb-2 inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
             >
-              click here.
+              Visit Space
             </a>
-          </p>
+
+            <p className="text-xs block text-gray-600">
+              To download the sample data again{" "}
+              <a
+                className="underline text-indigo-600"
+                download={"sample-employees.csv"}
+                href={"/sample-data/sample-employees.csv"}
+              >
+                click here.
+              </a>
+            </p>
+          </div>
+
+          <div>
+            <p className="text-xl">2. Sync Records</p>
+            <p className="mb-4">
+              After uploading records in Flatfile, click the button below to
+              sync those records with HCM.show.
+            </p>
+
+            <form action="/api/flatfile/sync-records" method="post">
+              <button
+                type="submit"
+                className="hover:text-white mb-2 inline-flex items-center justify-center rounded-md border text-indigo-600 border-indigo-600 px-4 py-2 text-sm font-medium shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+              >
+                Sync Records
+              </button>
+            </form>
+
+            <p className="text-xs block text-gray-600 italic">
+              Last sync 1/23/23 12:45:04PM
+            </p>
+          </div>
         </div>
       )}
     </div>
