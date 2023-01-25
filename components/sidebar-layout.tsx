@@ -32,12 +32,6 @@ const SidebarLayout = ({ children }: Props) => {
       icon: FolderIcon,
       current: router.pathname === '/onboarding',
     },
-    {
-      name: "Imports",
-      href: "/imports",
-      icon: InboxIcon,
-      current: router.pathname === '/imports',
-    },
     // { name: "Projects", href: "#", icon: FolderIcon, current: false },
     // { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
     // { name: "Documents", href: "#", icon: InboxIcon, current: false },
@@ -114,7 +108,8 @@ const SidebarLayout = ({ children }: Props) => {
                   />
                 </div>
                 <div className="mt-5 h-0 flex-1 overflow-y-auto">
-                  <nav className="space-y-1 px-2">
+                <nav className="flex flex-col px-2 h-full justify-between">
+                  <div>
                     {navigation.map((item) => (
                       <a
                         key={item.name}
@@ -123,7 +118,7 @@ const SidebarLayout = ({ children }: Props) => {
                           item.current
                             ? "bg-slate-200 text-gray-900"
                             : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                          "group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                          "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                         )}
                       >
                         <item.icon
@@ -131,14 +126,95 @@ const SidebarLayout = ({ children }: Props) => {
                             item.current
                               ? "text-gray-800"
                               : "text-gray-400 group-hover:text-gray-500",
-                            "mr-4 flex-shrink-0 h-6 w-6"
+                            "mr-3 flex-shrink-0 h-6 w-6"
                           )}
                           aria-hidden="true"
                         />
                         {item.name}
                       </a>
                     ))}
-                  </nav>
+                  </div>
+                  <div className="flex flex-col">
+                    <a
+                        key="Imports"
+                        href="/imports"
+                        className={classNames(
+                          router.pathname === '/imports'
+                            ? "bg-slate-200 text-gray-900"
+                            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                          "group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-1"
+                        )}
+                      >
+                        <InboxIcon
+                          className={classNames(
+                            router.pathname === '/imports'
+                              ? "text-gray-800"
+                              : "text-gray-400 group-hover:text-gray-500",
+                            "mr-4 flex-shrink-0 h-6 w-6"
+                          )}
+                          aria-hidden="true"
+                        />
+                        Imports
+                      </a>
+                    {/* Profile dropdown */}
+                    <div className="flex flex-row w-full border-t-2 border-gray-200">
+                      <Menu as="div" className="relative ml-auto group flex items-center px-2 pt-4 text-base font-medium rounded-md">
+                        <div>
+                          <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            <span className="sr-only">Open user menu</span>
+                            <img
+                              className="h-8 w-8 rounded-full"
+                              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                              alt=""
+                            />
+                          </Menu.Button>
+                        </div>
+                        <Transition
+                          as={Fragment}
+                          enter="transition ease-out duration-100"
+                          enterFrom="transform opacity-0 scale-95"
+                          enterTo="transform opacity-100 scale-100"
+                          leave="transition ease-in duration-75"
+                          leaveFrom="transform opacity-100 scale-100"
+                          leaveTo="transform opacity-0 scale-95"
+                        >
+                          <Menu.Items className="absolute right-0 bottom-10 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            {userNavigation.map((item) => (
+                              <Menu.Item key={item.name}>
+                                {({ active }) => (
+                                  <a
+                                    href={item.href}
+                                    className={classNames(
+                                      active ? "bg-gray-100" : "",
+                                      "block px-4 py-2 text-sm text-gray-700"
+                                    )}
+                                  >
+                                    {item.name}
+                                  </a>
+                                )}
+                              </Menu.Item>
+                            ))}
+
+                            <Menu.Item>
+                              {({ active }) => (
+                                <a
+                                  href="#"
+                                  onClick={() => signOut()}
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm text-gray-700"
+                                  )}
+                                >
+                                  Sign out
+                                </a>
+                              )}
+                            </Menu.Item>
+                          </Menu.Items>
+                        </Transition>
+                      </Menu>
+                    </div>
+                  </div>
+                </nav>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
@@ -161,30 +237,112 @@ const SidebarLayout = ({ children }: Props) => {
             />
           </div>
           <div className="mt-5 flex flex-grow flex-col">
-            <nav className="flex-1 space-y-1 px-2 pb-4">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-slate-200 text-gray-900"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                    "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                  )}
-                >
-                  <item.icon
+            <nav className="flex flex-col px-2 pb-4 h-full justify-between">
+              <div>
+                {navigation.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
                     className={classNames(
                       item.current
-                        ? "text-gray-800"
-                        : "text-gray-400 group-hover:text-gray-500",
-                      "mr-3 flex-shrink-0 h-6 w-6"
+                        ? "bg-slate-200 text-gray-900"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                     )}
-                    aria-hidden="true"
-                  />
-                  {item.name}
-                </a>
-              ))}
+                  >
+                    <item.icon
+                      className={classNames(
+                        item.current
+                          ? "text-gray-800"
+                          : "text-gray-400 group-hover:text-gray-500",
+                        "mr-3 flex-shrink-0 h-6 w-6"
+                      )}
+                      aria-hidden="true"
+                    />
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+              <div className="flex flex-col">
+                <a
+                    key="Imports"
+                    href="/imports"
+                    className={classNames(
+                      router.pathname === '/imports'
+                        ? "bg-slate-200 text-gray-900"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-1"
+                    )}
+                  >
+                    <InboxIcon
+                      className={classNames(
+                        router.pathname === '/imports'
+                          ? "text-gray-800"
+                          : "text-gray-400 group-hover:text-gray-500",
+                        "mr-4 flex-shrink-0 h-6 w-6"
+                      )}
+                      aria-hidden="true"
+                    />
+                    Imports
+                  </a>
+                {/* Profile dropdown */}
+                <div className="flex flex-row w-full border-t-2 border-gray-200">
+                  <Menu as="div" className="relative ml-auto group flex items-center px-2 pt-4 text-base font-medium rounded-md">
+                    <div>
+                      <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        <span className="sr-only">Open user menu</span>
+                        <img
+                          className="h-8 w-8 rounded-full"
+                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          alt=""
+                        />
+                      </Menu.Button>
+                    </div>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 bottom-10 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        {userNavigation.map((item) => (
+                          <Menu.Item key={item.name}>
+                            {({ active }) => (
+                              <a
+                                href={item.href}
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                {item.name}
+                              </a>
+                            )}
+                          </Menu.Item>
+                        ))}
+
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href="#"
+                              onClick={() => signOut()}
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Sign out
+                            </a>
+                          )}
+                        </Menu.Item>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
+                </div>
+              </div>
             </nav>
           </div>
         </div>
@@ -199,65 +357,6 @@ const SidebarLayout = ({ children }: Props) => {
             <span className="sr-only">Open sidebar</span>
             <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
           </button>
-          <div className="flex flex-1 justify-end px-4 border border-t-2">
-            <div className="ml-4 flex items-center md:ml-6">
-              {/* Profile dropdown */}
-              <Menu as="div" className="relative">
-                <div>
-                  <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                    <span className="sr-only">Open user menu</span>
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
-                    />
-                  </Menu.Button>
-                </div>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    {userNavigation.map((item) => (
-                      <Menu.Item key={item.name}>
-                        {({ active }) => (
-                          <a
-                            href={item.href}
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            {item.name}
-                          </a>
-                        )}
-                      </Menu.Item>
-                    ))}
-
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a
-                          href="#"
-                          onClick={() => signOut()}
-                          className={classNames(
-                            active ? "bg-gray-100" : "",
-                            "block px-4 py-2 text-sm text-gray-700"
-                          )}
-                        >
-                          Sign out
-                        </a>
-                      )}
-                    </Menu.Item>
-                  </Menu.Items>
-                </Transition>
-              </Menu>
-            </div>
-          </div>
         </div>
 
         <main className="flex-1 py-6">{children}</main>
