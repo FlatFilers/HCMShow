@@ -2,17 +2,12 @@ import { Fragment, ReactElement, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   Bars3BottomLeftIcon,
-  BellIcon,
-  CalendarIcon,
-  ChartBarIcon,
   FolderIcon,
-  HomeIcon,
   InboxIcon,
   UsersIcon,
   XMarkIcon,
   ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/outline";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 
@@ -162,10 +157,8 @@ const SidebarLayout = ({ children }: Props) => {
                         />
                         Imports
                       </a>
-                      {/* Profile dropdown */}
                       <div className="flex flex-row w-full border-t-2 border-gray-200 pt-1">
                         <a
-                          key="Imports"
                           href="#"
                           onClick={() => signOut()}
                           className={classNames(
@@ -255,10 +248,8 @@ const SidebarLayout = ({ children }: Props) => {
                   />
                   Imports
                 </a>
-                {/* Profile dropdown */}
                 <div className="flex flex-row w-full border-t-2 border-gray-200 pt-1">
                   <a
-                    key="Imports"
                     href="#"
                     onClick={() => signOut()}
                     className={classNames(

@@ -8,6 +8,7 @@ import {
   validRecords,
 } from "../../../lib/flatfile";
 import { upsertEmployee } from "../../../lib/employee";
+import { ActionType, createAction } from "../../../lib/action";
 
 type Data = {
   message?: string;
@@ -30,6 +31,7 @@ export default async function handler(
 
   const records = await getRecords(token.sub, accessToken);
 
+  // TODO: Do a flash alert and return if there's no records in FF yet
   console.log("Get records", records);
 
   const prisma = new PrismaClient();
@@ -88,10 +90,22 @@ export default async function handler(
       data = { ...data, managerId: manager.id };
     }
 
-    await upsertEmployee(data);
+    const result = await upsertEmployee(data);
+    console.log("result", result);
+
+    return result;
   });
 
-  await Promise.all(upserts);
+  console.log("upserst", upserts);
+  const results = await Promise.all(upserts);
+  console.log("results", results);
 
-  res.redirect("/imports");
+  // await createAction({
+  //   userId: token.sub,
+  //   organizationId: token.organizationId,
+  //   type: ActionType.SyncRecords,
+  //   description: `Synced ${records.length} records. Created ${} new Employee records.`,
+  // });
+
+  res.redirect("/employees");
 }
