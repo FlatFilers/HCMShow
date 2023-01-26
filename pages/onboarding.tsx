@@ -1,13 +1,15 @@
-import { PrismaClient, Space } from "@prisma/client";
+import { Action, PrismaClient, Space } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
 import { getToken } from "next-auth/jwt";
 import { FlatfileSpaceData } from "../lib/flatfile";
+import { DateTime } from "luxon";
 
 interface Props {
   space?: Space;
+  lastSyncAction?: Action;
 }
 
-const Onboarding: NextPage<Props> = ({ space }) => {
+const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
   return (
     <div className="text-gray-800">
       {!space && (
@@ -92,9 +94,14 @@ const Onboarding: NextPage<Props> = ({ space }) => {
               </button>
             </form>
 
-            <p className="text-xs block text-gray-600 italic">
-              Last sync 1/23/23 12:45:04PM
-            </p>
+            {lastSyncAction && (
+              <p className="text-xs block text-gray-600 italic">
+                Last sync{" "}
+                {DateTime.fromJSDate(lastSyncAction.createdAt).toFormat(
+                  "MM/dd/yy hh:mm:ss a"
+                )}
+              </p>
+            )}
           </div>
         </div>
       )}
@@ -132,8 +139,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
+  const lastSyncAction = await prisma.action.findFirst({
+    where: {
+      organizationId: token.organizationId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
   return {
-    props: { space },
+    props: { space, lastSyncAction },
   };
 };
 

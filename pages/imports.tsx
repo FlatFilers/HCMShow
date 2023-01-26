@@ -3,6 +3,7 @@ import React from "react";
 import { getToken } from "next-auth/jwt";
 import { ActionType, getActions } from "../lib/action";
 import { Action, User } from "@prisma/client";
+import { DateTime } from "luxon";
 
 const mapActionTypeToLabel = (type: string) => {
   const mappings = {
@@ -75,7 +76,9 @@ const Imports: NextPage<Props> = ({ actions }) => {
                             {a.user.email}
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {a.createdAt.toDateString()}
+                            {DateTime.fromJSDate(a.createdAt).toFormat(
+                              "MM/dd/yy hh:mm:ss a"
+                            )}
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                             {a.description}

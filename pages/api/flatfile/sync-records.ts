@@ -60,52 +60,53 @@ export default async function handler(
   console.log("newrecs", newEmployeeRecords);
 
   const upserts = newEmployeeRecords.map(async (r) => {
-    let data: {
-      organizationId: string;
-      employeeId: string;
-      managerId?: string;
-      flatfileRecordId?: string;
-    } = {
-      organizationId: token.organizationId,
-      employeeId: r.values.employeeId.value as string,
-      flatfileRecordId: r.id,
-    };
+    try {
+      let data: {
+        organizationId: string;
+        employeeId: string;
+        managerId?: string;
+        flatfileRecordId?: string;
+      } = {
+        organizationId: token.organizationId,
+        employeeId: r.values.employeeId.value as string,
+        flatfileRecordId: r.id,
+      };
 
-    if (r.values.managerId.value && r.values.managerId.value.length > 0) {
-      // Does the manager record already exist?
-      let manager = await prisma.employee.findUnique({
-        where: {
-          employeeId: r.values.managerId.value,
-        },
-      });
-
-      if (!manager) {
-        manager = await upsertEmployee({
-          ...data,
-          employeeId: r.values.managerId.value,
-          managerId: undefined,
+      if (r.values.managerId.value && r.values.managerId.value.length > 0) {
+        // Does the manager record already exist?
+        let manager = await prisma.employee.findUnique({
+          where: {
+            employeeId: r.values.managerId.value,
+          },
         });
+
+        if (!manager) {
+          manager = await upsertEmployee({
+            ...data,
+            employeeId: r.values.managerId.value,
+            managerId: undefined,
+          });
+        }
+
+        data = { ...data, managerId: manager.id };
       }
 
-      data = { ...data, managerId: manager.id };
+      await upsertEmployee(data);
+    } catch (error) {
+      console.error(
+        `Error: syncing record for user ${token.sub}, record ${r.id}`
+      );
     }
-
-    const result = await upsertEmployee(data);
-    console.log("result", result);
-
-    return result;
   });
 
-  console.log("upserst", upserts);
-  const results = await Promise.all(upserts);
-  console.log("results", results);
+  await Promise.all(upserts);
 
-  // await createAction({
-  //   userId: token.sub,
-  //   organizationId: token.organizationId,
-  //   type: ActionType.SyncRecords,
-  //   description: `Synced ${records.length} records. Created ${} new Employee records.`,
-  // });
+  await createAction({
+    userId: token.sub,
+    organizationId: token.organizationId,
+    type: ActionType.SyncRecords,
+    description: `Found ${records.length} records. Synced ${newEmployeeRecords.length} new Employee records.`,
+  });
 
   res.redirect("/employees");
 }
