@@ -50,7 +50,7 @@ const SidebarLayout = ({ children }: Props) => {
 
   return (
     <div className="h-screen w-screen bg-white">
-      <Toaster position="bottom-left"/>
+      <Toaster />
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
