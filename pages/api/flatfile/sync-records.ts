@@ -108,5 +108,5 @@ export default async function handler(
     description: `Found ${records.length} records. Synced ${newEmployeeRecords.length} new Employee records.`,
   });
 
-  res.redirect("/employees");
+  res.redirect("/employees?message=Synced records")
 }

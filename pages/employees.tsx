@@ -2,6 +2,9 @@ import { GetServerSideProps, NextPage } from "next";
 import { Prisma, PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { getToken } from "next-auth/jwt";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 const employeeWithRelations = Prisma.validator<Prisma.EmployeeArgs>()({
   include: {
@@ -18,7 +21,18 @@ interface Props {
   employees: EmployeeWithRelations[];
 }
 
+
+
 const Employees: NextPage<Props> = ({ employees }) => {
+  const router = useRouter();
+
+useEffect(() => {
+  if (router.query.message === 'Synced records') {   
+    window.history.replaceState(null, '', '/employees')
+    toast.success('Synced records', {id: "synced"})
+  }
+}, []);
+  
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">

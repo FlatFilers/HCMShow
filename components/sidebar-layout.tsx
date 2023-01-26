@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
+import { Toaster } from "react-hot-toast"
 
 type Props = {
   children: React.ReactNode;
@@ -49,6 +50,7 @@ const SidebarLayout = ({ children }: Props) => {
 
   return (
     <div className="h-screen w-screen bg-white">
+      <Toaster position="bottom-left"/>
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
