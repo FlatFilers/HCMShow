@@ -1,5 +1,5 @@
 import { GetServerSideProps, NextPage } from "next";
-import { Employee, Prisma, PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { getToken } from "next-auth/jwt";
 
