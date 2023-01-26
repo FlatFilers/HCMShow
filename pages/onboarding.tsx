@@ -139,7 +139,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const lastSyncAction = await prisma.action.findFirst({
+  const lastSyncAction = await prisma.action?.findFirst({
     where: {
       organizationId: token.organizationId,
     },
