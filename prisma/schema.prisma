@@ -96,7 +96,9 @@ model Employee {
   workerCompensationCodeId String @db.Uuid
   workerCompensationCode WorkerCompensationCode @relation(fields: [workerCompensationCodeId], references: [id])
   
-  addresses Address[]
+  addresses AddressEmployee[]
+  phoneNumbers PhoneNumberEmployee[]
+  emailAddresses EmailAddressEmployee[]
 
   // App fields
   directReports Employee[] @relation("Manager")
@@ -353,7 +355,19 @@ model Address {
   useFor CommunicationUsageBehaviorType? @relation(fields: [useForId], references: [id])
   municipalityLocal String?
 
-  employees Employee[]
+  employees AddressEmployee[]
+}
+
+model AddressEmployee {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  addressId String @db.Uuid
+  address Address @relation(fields: [addressId], references: [id])
+  employeeId String @db.Uuid
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@id([addressId, employeeId])
 }
 
 model AddressLineType {
@@ -379,6 +393,7 @@ model CommunicationUsageType {
 
   addresses Address[]
   phoneNumbers PhoneNumber[]
+  emailAddresses EmailAddress[]
 }
 
 model CommunicationUsageBehaviorType {
@@ -391,6 +406,7 @@ model CommunicationUsageBehaviorType {
 
   addresses Address[]
   phoneNumbers PhoneNumber[]
+  emailAddresses EmailAddress[]
 }
 
 model PhoneNumber {
@@ -403,15 +419,28 @@ model PhoneNumber {
   internationalPhoneCode String?
   phoneNumber String?
   phoneExtension String?
-//
-  isPublic Boolean
-  isPrimary Boolean
   phoneDeviceTypeId String? @db.Uuid
   phoneDeviceType PhoneDeviceType? @relation(fields: [phoneDeviceTypeId], references: [id])
+  isPublic Boolean
+  isPrimary Boolean
   typeId String? @db.Uuid
   type CommunicationUsageType? @relation(fields: [typeId], references: [id])
   useForId String? @db.Uuid
   useFor CommunicationUsageBehaviorType? @relation(fields: [useForId], references: [id])
+
+  employees PhoneNumberEmployee[]
+}
+
+model PhoneNumberEmployee {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  phoneNumberId String @db.Uuid
+  phoneNumber PhoneNumber @relation(fields: [phoneNumberId], references: [id])
+  employeeId String @db.Uuid
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@id([phoneNumberId, employeeId])
 }
 
 model PhoneDeviceType {
@@ -427,4 +456,33 @@ model PhoneDeviceType {
   isInactive Boolean
 
   phoneNumbers PhoneNumber[]
+}
+
+model EmailAddress {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  emailAddress String?
+  emailComment String?
+  isPublic Boolean
+  isPrimary Boolean
+  typeId String? @db.Uuid
+  type CommunicationUsageType? @relation(fields: [typeId], references: [id])
+  useForId String? @db.Uuid
+  useFor CommunicationUsageBehaviorType? @relation(fields: [useForId], references: [id])
+
+  employees EmailAddressEmployee[]
+}
+
+model EmailAddressEmployee {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  emailAddressId String @db.Uuid
+  emailAddress EmailAddress @relation(fields: [emailAddressId], references: [id])
+  employeeId String @db.Uuid
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@id([emailAddressId, employeeId])
 }
