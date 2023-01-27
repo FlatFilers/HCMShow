@@ -34,16 +34,17 @@ const Signup: NextPageWithLayout = () => {
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white h-screen">
       <div className="w-full max-w-md space-y-8">
-        <div>
+        <div className="flex my-auto justify-evenly">
           <img
-            className="mx-auto h-12 w-auto"
+            className="h-12 w-auto"
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Sign up for HCM.show
+          <h2 className="mx-auto my-auto text-center text-3xl font-bold tracking-tight text-gray-900">
+            HCM.show
           </h2>
         </div>
+        <div className="text-center text-2xl font-bold tracking-tight text-gray-900">Sign up below</div>
 
         <form className="mt-8 space-y-2" action="#" onSubmit={handleSubmit}>
           {error && (
