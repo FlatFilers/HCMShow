@@ -5,6 +5,8 @@ import { getToken } from "next-auth/jwt";
 import { FlatfileSpaceData } from "../lib/flatfile";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 interface Props {
   space?: Space;
@@ -15,9 +17,18 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>("Create Space");
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    setIsSubmitting(true)
-    setButtonText("Creating space...")
+    setIsSubmitting(true);
+    setButtonText("Creating space...");
   };
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.query.message === "Created space") {
+      window.history.replaceState(null, "", "/onboarding");
+      toast.success("Created space", { id: "created" });
+    }
+  }, []);
 
   return (
     <div className="text-gray-800">
@@ -45,10 +56,11 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
 
           <form action="/api/flatfile/create-space" onSubmit={handleSubmit}>
             <button
-              className={`${isSubmitting
+              className={`${
+                isSubmitting
                   ? "bg-indigo-400"
                   : "bg-indigo-600 hover:bg-indigo-700 "
-                } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto}`}
+              } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto}`}
               type="submit"
             >
               {buttonText}
@@ -99,7 +111,7 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
 
             <form action="/api/flatfile/sync-records" method="post">
               <button
-                onClick={() => toast.loading('Syncing...')}
+                onClick={() => toast.loading("Syncing...")}
                 type="submit"
                 className="hover:text-white mb-2 inline-flex items-center justify-center rounded-md border text-indigo-600 border-indigo-600 px-4 py-2 text-sm font-medium shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
               >
