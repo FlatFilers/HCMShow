@@ -7,6 +7,9 @@ export enum ActionType {
 export const getActions = async (organizationId: string) => {
   const prisma = new PrismaClient();
   return await prisma.action.findMany({
+    where: {
+      organizationId,
+    },
     orderBy: {
       createdAt: "desc",
     },
