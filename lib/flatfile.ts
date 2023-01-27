@@ -109,6 +109,8 @@ export const getRecords = async (
     headers
   );
 
+  // console.log("w, s", workbookId, sheetId);
+
   const recordsResponse = await fetch(
     `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records`,
     {
@@ -150,13 +152,16 @@ const getWorkbookIdAndSheetId = async (
 
   const result = await response.json();
 
-  // TODO: Assuming just 1 of each. Maybe ok for this demo case?
-  // console.log("workbooks", result["data"].length);
-  // console.log("sheet", result["data"][0]["sheets"].length);
+  // TODO: Assuming just 1 workbook for this demo (but multiple sheets).
+  // console.log("sheets", result["data"][0]["sheets"]);
+
+  const sheetId = result["data"][0]["sheets"].find(
+    (s: { id: string; name: string; config: any }) => s.name === "Employees"
+  ).id;
 
   return {
     workbookId: result["data"][0]["id"],
-    sheetId: result["data"][0]["sheets"][0]["id"],
+    sheetId: sheetId,
   };
 };
 
