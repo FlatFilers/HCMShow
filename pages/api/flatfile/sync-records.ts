@@ -34,7 +34,8 @@ export default async function handler(
   console.log("Get records", records);
 
   if (records.length === 0) {
-    return res.redirect("/employees?message=No Records Found")
+    res.redirect("/employees?message=No Records Found");
+    return;
   }
 
   const prisma = new PrismaClient();
@@ -111,5 +112,5 @@ export default async function handler(
     description: `Found ${records.length} records. Synced ${newEmployeeRecords.length} new Employee records.`,
   });
 
-  res.redirect("/employees?message=Synced records")
+  res.redirect("/employees?message=Synced records");
 }
