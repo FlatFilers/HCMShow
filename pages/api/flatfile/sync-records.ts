@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
+import { Employee, PrismaClient } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import {
   getAccessToken,
@@ -32,7 +32,7 @@ export default async function handler(
   const records = await getRecords(token.sub, accessToken);
 
   // TODO: Do a flash alert and return if there's no records in FF yet
-  console.log("Get records", records);
+  // console.log("Get records", records);
 
   const prisma = new PrismaClient();
   const employees = await prisma.employee.findMany({
@@ -44,69 +44,95 @@ export default async function handler(
     },
   });
 
-  console.log("employees", employees);
+  // console.log("employees", employees);
 
   const employeeIds = employees.map((e) => e.employeeId);
 
   // console.log("employeeIds", employeeIds);
-
   // console.log("rec", records[0].values);
   // console.log("valid recs", validRecords(records));
 
-  const newEmployeeRecords = validRecords(records).filter((r) => {
-    return !employeeIds.includes(r.id) && r.values.employeeId.value;
-  });
+  // console.log("records", records);
+  const vRecords = await validRecords(records);
+  console.log("vrecords", vRecords);
+  // const newEmployeeRecords = vRecords.filter((r) => {
+  //   return !employeeIds.includes(r.id) && r.values.employeeId.value;
+  // });
+  // .map((r) => {
+  //   console.log("r", r);
+  //   console.log("val", convertToCamelCase(r.values));
+  //   return { id: r.id, values: convertToCamelCase(r.values) };
+  // });
 
-  console.log("newrecs", newEmployeeRecords);
+  // console.log("new emp", newEmployeeRecords);
 
-  const upserts = newEmployeeRecords.map(async (r) => {
-    try {
-      let data: {
-        organizationId: string;
-        employeeId: string;
-        managerId?: string;
-        flatfileRecordId?: string;
-      } = {
-        organizationId: token.organizationId,
-        employeeId: r.values.employeeId.value as string,
-        flatfileRecordId: r.id,
-      };
+  // console.log("newrecs", newEmployeeRecords);
 
-      if (r.values.managerId.value && r.values.managerId.value.length > 0) {
-        // Does the manager record already exist?
-        let manager = await prisma.employee.findUnique({
-          where: {
-            employeeId: r.values.managerId.value,
-          },
-        });
+  // const upserts = newEmployeeRecords.map(async (r) => {
+  //   try {
+  //     const values = convertToCamelCase(r.values);
 
-        if (!manager) {
-          manager = await upsertEmployee({
-            ...data,
-            employeeId: r.values.managerId.value,
-            managerId: undefined,
-          });
-        }
+  //     let data: {
+  //       organizationId: string;
+  //       employeeId: string;
+  //       managerId?: string;
+  //       flatfileRecordId?: string;
+  //     } = {
+  //       organizationId: token.organizationId,
+  //       employeeId: r.values.employeeId.value as string,
+  //       flatfileRecordId: r.id,
+  //     };
 
-        data = { ...data, managerId: manager.id };
-      }
+  //     if (r.values.managerId.value && r.values.managerId.value.length > 0) {
+  //       // Does the manager record already exist?
+  //       let manager = await prisma.employee.findUnique({
+  //         where: {
+  //           employeeId: r.values.managerId.value,
+  //         },
+  //       });
 
-      await upsertEmployee(data);
-    } catch (error) {
-      console.error(
-        `Error: syncing record for user ${token.sub}, record ${r.id}`
-      );
-    }
-  });
+  //       if (!manager) {
+  //         manager = await upsertEmployee({
+  //           ...data,
+  //           employeeId: r.values.managerId.value,
+  //           managerId: undefined,
+  //         });
+  //       }
 
-  await Promise.all(upserts);
+  //       data = { ...data, managerId: manager.id };
+  //     }
 
-  await createAction({
-    userId: token.sub,
-    organizationId: token.organizationId,
-    type: ActionType.SyncRecords,
-    description: `Found ${records.length} records. Synced ${newEmployeeRecords.length} new Employee records.`,
-  });
+  //     await upsertEmployee(data);
+  //   } catch (error) {
+  //     console.error(
+  //       `Error: syncing record for user ${token.sub}, record ${r.id}`
+  //     );
+  //   }
+  // });
 
-  res.redirect("/employees?message=Synced records")
+  // await Promise.all(upserts);
+
+  // await createAction({
+  //   userId: token.sub,
+  //   organizationId: token.organizationId,
+  //   type: ActionType.SyncRecords,
+  //   description: `Found ${records.length} records. Synced ${newEmployeeRecords.length} new Employee records.`,
+  // });
+
+  // res.redirect("/employees?message=Synced records");
+  res.redirect("/onboarding?message=Synced records");
 }
+
+const convertToCamelCase = (obj: { [key: string]: any }) => {
+  const newObj: { [key: string]: any } = {};
+
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const newKey = key.replace(/_([a-z])/g, (match) =>
+        match[1].toUpperCase()
+      );
+      newObj[newKey] = obj[key];
+    }
+  }
+  return newObj;
+};
