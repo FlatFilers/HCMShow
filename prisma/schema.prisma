@@ -56,55 +56,58 @@ model Employee {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // FF fields
   employeeId String @unique
+  managerId String? @db.Uuid
+  manager Employee? @relation("Manager", fields: [managerId], references: [id])
+  countryId String? @db.Uuid
+  country Country? @relation(fields: [countryId], references: [id])
+  titleId String? @db.Uuid
+  title Title? @relation("Title", fields: [titleId], references: [id])
+  firstName String 
+  middleName String
+  lastName String
+  socialSuffixId String? @db.Uuid
+  socialSuffix Title? @relation("SocialSuffix", fields: [socialSuffixId], references: [id])
+  employeeTypeId String @db.Uuid
+  employeeType EmployeeType @relation(fields: [employeeTypeId], references: [id])
+  hireReasonId String @db.Uuid
+  hireReason HireReason @relation(fields: [hireReasonId], references: [id])
+  hireDate DateTime
+  endEmploymentDate DateTime?
+  jobFamilyId String @db.Uuid
+  jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])
+  positionTitle String
+  businessTitle String?
+  locationId String @db.Uuid
+  location Location @relation("Location", fields: [locationId], references: [id])
+  workspaceId String? @db.Uuid
+  workspace Location? @relation("Workspace", fields: [workspaceId], references: [id])
+  positionTimeId String @db.Uuid
+  positionTime PositionTime @relation(fields: [positionTimeId], references: [id])
+  workShiftId String? @db.Uuid
+  workShift WorkShift? @relation(fields: [workShiftId], references: [id])
+  defaultWeeklyHours Int
+  scheduledWeeklyHours Int
+  payRateId String @db.Uuid
+  payRate PayRate @relation(fields: [payRateId], references: [id])
+  additionalJobClassificationId String @db.Uuid
+  additionalJobClassification AdditionalJobClassification @relation(fields: [additionalJobClassificationId], references: [id])
+  workerCompensationCodeId String @db.Uuid
+  workerCompensationCode WorkerCompensationCode @relation(fields: [workerCompensationCodeId], references: [id])
+  
+  addresses AddressEmployee[]
+  phoneNumbers PhoneNumberEmployee[]
+  emailAddresses EmailAddressEmployee[]
+
+  // App fields
+  directReports Employee[] @relation("Manager")
+  // todo: remove name
   name String
   flatfileRecordId String?
-
   organizationId String @db.Uuid
   organization Organization @relation(fields: [organizationId], references: [id])
 
-  managerId String? @db.Uuid
-  manager Employee? @relation("Manager", fields: [managerId], references: [id])
-  directReports Employee[] @relation("Manager")
-
-  employeeTypeId String @db.Uuid
-  employeeType EmployeeType @relation(fields: [employeeTypeId], references: [id])
-
-  hireReasonId String @db.Uuid
-  hireReason HireReason @relation(fields: [hireReasonId], references: [id])
-
-  hireDate DateTime
-  endEmploymentDate DateTime?
-
-  jobFamilyId String @db.Uuid
-  jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])
-
-  positionTitle String
-  businessTitle String?
-
-  locationId String @db.Uuid
-  location Location @relation("Location", fields: [locationId], references: [id])
-
-  workspaceId String? @db.Uuid
-  workspace Location? @relation("Workspace", fields: [workspaceId], references: [id])
-
-  positionTimeId String @db.Uuid
-  positionTime PositionTime @relation(fields: [positionTimeId], references: [id])
-
-  workShiftId String? @db.Uuid
-  workShift WorkShift? @relation(fields: [workShiftId], references: [id])
-
-  defaultWeeklyHours Int
-  scheduledWeeklyHours Int
-
-  payRateId String @db.Uuid
-  payRate PayRate @relation(fields: [payRateId], references: [id])
-
-  additionalJobClassificationId String @db.Uuid
-  additionalJobClassification AdditionalJobClassification @relation(fields: [additionalJobClassificationId], references: [id])
-
-  workerCompensationCodeId String @db.Uuid
-  workerCompensationCode WorkerCompensationCode @relation(fields: [workerCompensationCodeId], references: [id])
 }
 
 model EmployeeType {
@@ -146,9 +149,25 @@ model Country {
   type String
   code String @unique
 
+  employees Employee[]
   employeeTypes EmployeeTypeCountry[]
   locations Location[]
   workShifts WorkShift[]
+  titles Title[]
+  addresses Address[]
+  phoneNumbers PhoneNumber[]
+}
+
+model CountryRegion {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String 
+  type String
+  code String @unique
+
+  addresses Address[]
 }
 
 model HireReason {
@@ -277,4 +296,193 @@ model Space {
 
   userId String @db.Uuid
   user User @relation(fields: [userId], references: [id])
+}
+
+model Title {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  countryId String? @db.Uuid
+  country Country? @relation(fields: [countryId], references: [id])
+  slug String @unique
+  titleTypeId String? @db.Uuid
+  titleType TitleType? @relation(fields: [titleTypeId], references: [id])
+  value String
+
+  employeesWithTitles Employee[] @relation("Title")
+  employeesWithSuffixes Employee[] @relation("SocialSuffix")
+}
+
+model TitleType {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+  slug String @unique
+
+  titles Title[]
+}
+
+model Address {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // FF fields
+  effectiveDate DateTime?
+  countryId String? @db.Uuid
+  country Country? @relation(fields: [countryId], references: [id])
+  addressLineTypeId String? @db.Uuid
+  addressLineType AddressLineType? @relation("AddressLine", fields: [addressLineTypeId], references: [id])
+  addressLineData String?
+  municipality String?
+  submunicipalityTypeId String? @db.Uuid
+  submunicipality AddressLineType? @relation("Submunicipality", fields: [submunicipalityTypeId], references: [id])
+  submunicipalityData String?
+  countryRegionId String? @db.Uuid
+  countryRegion CountryRegion? @relation(fields: [countryRegionId], references: [id])
+  subregionTypeId String? @db.Uuid
+  subregion AddressLineType? @relation("Subregion", fields: [subregionTypeId], references: [id])
+  subregionData String?
+  postalCode String?
+  isPublic Boolean
+  isPrimary Boolean
+  typeId String? @db.Uuid
+  type CommunicationUsageType? @relation(fields: [typeId], references: [id])
+  useForId String? @db.Uuid
+  useFor CommunicationUsageBehaviorType? @relation(fields: [useForId], references: [id])
+  municipalityLocal String?
+
+  employees AddressEmployee[]
+}
+
+model AddressEmployee {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  addressId String @db.Uuid
+  address Address @relation(fields: [addressId], references: [id])
+  employeeId String @db.Uuid
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@id([addressId, employeeId])
+}
+
+model AddressLineType {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  slug String @unique
+  name String
+
+  addressLines Address[] @relation("AddressLine")
+  submunicipalities Address[] @relation("Submunicipality")
+  subregions Address[] @relation("Subregion")
+}
+
+model CommunicationUsageType {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  name String
+  slug String @unique
+
+  addresses Address[]
+  phoneNumbers PhoneNumber[]
+  emailAddresses EmailAddress[]
+}
+
+model CommunicationUsageBehaviorType {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  name String
+  slug String @unique
+
+  addresses Address[]
+  phoneNumbers PhoneNumber[]
+  emailAddresses EmailAddress[]
+}
+
+model PhoneNumber {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  countryId String? @db.Uuid
+  country Country? @relation(fields: [countryId], references: [id])
+  internationalPhoneCode String?
+  phoneNumber String?
+  phoneExtension String?
+  phoneDeviceTypeId String? @db.Uuid
+  phoneDeviceType PhoneDeviceType? @relation(fields: [phoneDeviceTypeId], references: [id])
+  isPublic Boolean
+  isPrimary Boolean
+  typeId String? @db.Uuid
+  type CommunicationUsageType? @relation(fields: [typeId], references: [id])
+  useForId String? @db.Uuid
+  useFor CommunicationUsageBehaviorType? @relation(fields: [useForId], references: [id])
+
+  employees PhoneNumberEmployee[]
+}
+
+model PhoneNumberEmployee {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  phoneNumberId String @db.Uuid
+  phoneNumber PhoneNumber @relation(fields: [phoneNumberId], references: [id])
+  employeeId String @db.Uuid
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@id([phoneNumberId, employeeId])
+}
+
+model PhoneDeviceType {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  slug String
+  type String
+  mapsToCode String?
+  isDefaultPhoneDeviceType Boolean
+  shouldHideForRecruiting Boolean
+  isInactive Boolean
+
+  phoneNumbers PhoneNumber[]
+}
+
+model EmailAddress {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  emailAddress String?
+  emailComment String?
+  isPublic Boolean
+  isPrimary Boolean
+  typeId String? @db.Uuid
+  type CommunicationUsageType? @relation(fields: [typeId], references: [id])
+  useForId String? @db.Uuid
+  useFor CommunicationUsageBehaviorType? @relation(fields: [useForId], references: [id])
+
+  employees EmailAddressEmployee[]
+}
+
+model EmailAddressEmployee {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  emailAddressId String @db.Uuid
+  emailAddress EmailAddress @relation(fields: [emailAddressId], references: [id])
+  employeeId String @db.Uuid
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@id([emailAddressId, employeeId])
 }
