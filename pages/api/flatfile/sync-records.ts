@@ -34,7 +34,7 @@ export default async function handler(
   console.log("Get records", records);
 
   if (records.length === 0) {
-    res.redirect("/employees?message=No Records Found")
+    return res.redirect("/employees?message=No Records Found")
   }
 
   const prisma = new PrismaClient();
