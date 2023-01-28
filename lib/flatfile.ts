@@ -294,17 +294,3 @@ export const addGuestToSpace = async (
 
   return addGuestResult.data;
 };
-
-const convertToCamelCase = (obj: { [key: string]: any }) => {
-  const newObj: { [key: string]: any } = {};
-
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      const newKey = key.replace(/_([a-z])/g, (match) =>
-        match[1].toUpperCase()
-      );
-      newObj[newKey] = obj[key];
-    }
-  }
-  return newObj;
-};
