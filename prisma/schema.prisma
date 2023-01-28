@@ -88,8 +88,7 @@ model Employee {
   workShiftId String? @db.Uuid
   workShift WorkShift? @relation(fields: [workShiftId], references: [id])
   defaultWeeklyHours Int
-  // TODO: scheduledWeeklyHours not needed anymore?
-  scheduledWeeklyHours Int?
+  scheduledWeeklyHours Int
   payRateId String @db.Uuid
   payRate PayRate @relation(fields: [payRateId], references: [id])
   additionalJobClassificationId String @db.Uuid
