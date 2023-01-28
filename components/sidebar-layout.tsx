@@ -10,7 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
-import { Toaster } from "react-hot-toast"
+import { Toaster } from "react-hot-toast";
 
 type Props = {
   children: React.ReactNode;
@@ -274,7 +274,7 @@ const SidebarLayout = ({ children }: Props) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-1 flex-col md:pl-72 pt-4">
+      <div className="flex flex-1 flex-col md:pl-72 pt-4 bg-white">
         <button
           type="button"
           className="md:hidden border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 mt-4"

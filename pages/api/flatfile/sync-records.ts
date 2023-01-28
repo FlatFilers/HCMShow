@@ -9,6 +9,7 @@ import {
   validRecords,
 } from "../../../lib/employee";
 import { ActionType, createAction } from "../../../lib/action";
+import { inspect } from "util";
 
 type Data = {
   message?: string;
@@ -32,96 +33,79 @@ export default async function handler(
   const records = await getRecords(token.sub, accessToken);
 
   const mappedRecords = await mapRecordFieldsForEmployee(records);
+  // console.log("mappedRecords", mappedRecords);
 
-  console.log("mappedRecords", mappedRecords);
-
-  // TODO: Do a flash alert and return if there's no records in FF yet
-  // console.log("Get records", records);
-
-  // throw "hi";
   const valids = await validRecords(mappedRecords);
+  // console.log("valids", valids.length);
 
-  console.log("valids", valids.length);
+  const prisma = new PrismaClient();
+  const employees = await prisma.employee.findMany({
+    where: {
+      organizationId: token.organizationId,
+    },
+    select: {
+      employeeId: true,
+    },
+  });
+  console.log("employees", employees);
+  const employeeIds = employees.map((e) => e.employeeId);
+  console.log("employeeIds", employeeIds);
 
-  // const prisma = new PrismaClient();
-  // const employees = await prisma.employee.findMany({
-  //   where: {
-  //     organizationId: token.organizationId,
-  //   },
-  //   select: {
-  //     employeeId: true,
-  //   },
-  // });
+  const newEmployeeRecords = valids.filter((r) => {
+    return !employeeIds.includes(r.id) && r.values.employeeId.value;
+  });
+  console.log("new emp", newEmployeeRecords.length);
 
-  // console.log("employees", employees);
+  const upserts = newEmployeeRecords.map(async (r) => {
+    try {
+      const values = convertToCamelCase(r.values);
 
-  // const employeeIds = employees.map((e) => e.employeeId);
+      let data: {
+        organizationId: string;
+        employeeId: string;
+        managerId?: string;
+        flatfileRecordId?: string;
+      } = {
+        organizationId: token.organizationId,
+        employeeId: r.values.employeeId.value as string,
+        flatfileRecordId: r.id,
+      };
 
-  // const vRecords = await validRecords(records);
-  // console.log("vrecords", vRecords);
-  // const newEmployeeRecords = vRecords.filter((r) => {
-  //   return !employeeIds.includes(r.id) && r.values.employeeId.value;
-  // });
-  // .map((r) => {
-  //   console.log("r", r);
-  //   console.log("val", convertToCamelCase(r.values));
-  //   return { id: r.id, values: convertToCamelCase(r.values) };
-  // });
+      if (r.values.managerId.value && r.values.managerId.value.length > 0) {
+        // Does the manager record already exist?
+        let manager = await prisma.employee.findUnique({
+          where: {
+            employeeId: r.values.managerId.value,
+          },
+        });
 
-  // console.log("new emp", newEmployeeRecords);
+        if (!manager) {
+          manager = await upsertEmployee({
+            ...data,
+            employeeId: r.values.managerId.value,
+            managerId: undefined,
+          });
+        }
 
-  // console.log("newrecs", newEmployeeRecords);
+        data = { ...data, managerId: manager.id };
+      }
 
-  // const upserts = newEmployeeRecords.map(async (r) => {
-  //   try {
-  //     const values = convertToCamelCase(r.values);
+      await upsertEmployee(data);
+    } catch (error) {
+      console.error(
+        `Error: syncing record for user ${token.sub}, record ${r.id}`
+      );
+    }
+  });
 
-  //     let data: {
-  //       organizationId: string;
-  //       employeeId: string;
-  //       managerId?: string;
-  //       flatfileRecordId?: string;
-  //     } = {
-  //       organizationId: token.organizationId,
-  //       employeeId: r.values.employeeId.value as string,
-  //       flatfileRecordId: r.id,
-  //     };
+  await Promise.all(upserts);
 
-  //     if (r.values.managerId.value && r.values.managerId.value.length > 0) {
-  //       // Does the manager record already exist?
-  //       let manager = await prisma.employee.findUnique({
-  //         where: {
-  //           employeeId: r.values.managerId.value,
-  //         },
-  //       });
-
-  //       if (!manager) {
-  //         manager = await upsertEmployee({
-  //           ...data,
-  //           employeeId: r.values.managerId.value,
-  //           managerId: undefined,
-  //         });
-  //       }
-
-  //       data = { ...data, managerId: manager.id };
-  //     }
-
-  //     await upsertEmployee(data);
-  //   } catch (error) {
-  //     console.error(
-  //       `Error: syncing record for user ${token.sub}, record ${r.id}`
-  //     );
-  //   }
-  // });
-
-  // await Promise.all(upserts);
-
-  // await createAction({
-  //   userId: token.sub,
-  //   organizationId: token.organizationId,
-  //   type: ActionType.SyncRecords,
-  //   description: `Found ${records.length} records. Synced ${newEmployeeRecords.length} new Employee records.`,
-  // });
+  await createAction({
+    userId: token.sub,
+    organizationId: token.organizationId,
+    type: ActionType.SyncRecords,
+    description: `Found ${records.length} records. Synced ${newEmployeeRecords.length} new Employee records.`,
+  });
 
   // res.redirect("/employees?message=Synced records");
   res.redirect("/onboarding?message=Synced records");
