@@ -104,7 +104,7 @@ export default async function handler(
     userId: token.sub,
     organizationId: token.organizationId,
     type: ActionType.SyncRecords,
-    description: `Found ${records.length} records. Synced ${newEmployeeRecords.length} new Employee records.`,
+    description: `Found ${records.length} records. Synced ${newEmployeeRecords.length} Employee records.`,
   });
 
   res.redirect("/employees?message=Synced records");
