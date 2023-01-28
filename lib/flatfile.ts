@@ -201,7 +201,7 @@ export const createSpace = async (accessToken: string) => {
   });
   // const spaceResponse = await client.addSpace(spaceRequestParameters, options);
 
-  console.log("spaceResponse", spaceResponse);
+  // console.log("spaceResponse", spaceResponse);
 
   if (!spaceResponse.ok) {
     throw new Error("Error creating space");
@@ -209,7 +209,7 @@ export const createSpace = async (accessToken: string) => {
 
   const spaceResult = await spaceResponse.json();
 
-  console.log("spaceResult body", spaceResult);
+  // console.log("spaceResult body", spaceResult);
 
   // const spaceId: string = spaceResult.data.id;
 

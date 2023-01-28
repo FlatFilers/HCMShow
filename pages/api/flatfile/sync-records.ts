@@ -47,14 +47,14 @@ export default async function handler(
       employeeId: true,
     },
   });
-  console.log("employees", employees);
+  // console.log("employees", employees);
   const employeeIds = employees.map((e) => e.employeeId);
-  console.log("employeeIds", employeeIds);
+  // console.log("employeeIds", employeeIds);
 
   const newEmployeeRecords = valids.filter((r) => {
     return !employeeIds.includes(r.id) && r.values.employeeId.value;
   });
-  console.log("new emp", newEmployeeRecords.length);
+  // console.log("new emp", newEmployeeRecords.length);
 
   const upserts = newEmployeeRecords.map(async (r) => {
     try {
@@ -107,8 +107,7 @@ export default async function handler(
     description: `Found ${records.length} records. Synced ${newEmployeeRecords.length} new Employee records.`,
   });
 
-  // res.redirect("/employees?message=Synced records");
-  res.redirect("/onboarding?message=Synced records");
+  res.redirect("/employees?message=Synced records");
 }
 
 const convertToCamelCase = (obj: { [key: string]: any }) => {

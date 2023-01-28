@@ -173,8 +173,6 @@ export const mapRecordFieldsForEmployee = async (records: Record[]) => {
       mapping.hasOwnProperty(key)
     );
 
-    console.log("keys to take", requiredKeys);
-
     const mappedValues = requiredKeys.reduce(
       (acc, key) => ({
         ...acc,
@@ -182,7 +180,6 @@ export const mapRecordFieldsForEmployee = async (records: Record[]) => {
       }),
       {}
     );
-    console.log("mappedValues", inspect(mappedValues, { depth: null }));
 
     const camelCaseValues = convertToCamelCase(r.values);
 
