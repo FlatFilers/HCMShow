@@ -106,12 +106,14 @@ export default async function handler(
 
   await Promise.all(upserts);
 
+  const message = `Found ${records.length} records. Synced ${newEmployeeRecords.length} Employee records.`;
+
   await createAction({
     userId: token.sub,
     organizationId: token.organizationId,
     type: ActionType.SyncRecords,
-    description: `Found ${records.length} records. Synced ${newEmployeeRecords.length} Employee records.`,
+    description: message,
   });
 
-  res.redirect("/employees?message=Synced records");
+  res.redirect(`/employees?flash=success&message=${message}`);
 }

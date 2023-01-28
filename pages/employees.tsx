@@ -21,21 +21,22 @@ interface Props {
   employees: EmployeeWithRelations[];
 }
 
-
-
 const Employees: NextPage<Props> = ({ employees }) => {
   const router = useRouter();
 
-useEffect(() => {
-  if (router.query.message === 'Synced records') {   
-    window.history.replaceState(null, '', '/employees')
-    toast.success('Synced records', {id: "synced"})
-  } else if (router.query.message === 'No Records Found') {   
-    window.history.replaceState(null, '', '/employees')
-    toast.error('No Records Found', {id: "no-records"})
-  }
-}, []);
-  
+  useEffect(() => {
+    if (router.query.flash === "success") {
+      window.history.replaceState(null, "", "/employees");
+      toast.success(router.query.message as string, {
+        id: router.query.message as string,
+        duration: 4000,
+      });
+    } else if (router.query.message === "No Records Found") {
+      window.history.replaceState(null, "", "/employees");
+      toast.error("No Records Found", { id: "no-records" });
+    }
+  }, []);
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
