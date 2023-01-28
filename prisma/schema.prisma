@@ -65,7 +65,7 @@ model Employee {
   titleId String? @db.Uuid
   title Title? @relation("Title", fields: [titleId], references: [id])
   firstName String 
-  middleName String
+  middleName String?
   lastName String
   socialSuffixId String? @db.Uuid
   socialSuffix Title? @relation("SocialSuffix", fields: [socialSuffixId], references: [id])

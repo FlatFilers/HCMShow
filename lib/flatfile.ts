@@ -295,48 +295,6 @@ export const addGuestToSpace = async (
   return addGuestResult.data;
 };
 
-export const validRecords = async (records: Record[]) => {
-  const prisma = new PrismaClient();
-  const result: { column_name: string }[] = await prisma.$queryRaw`
-    SELECT column_name
-    FROM information_schema.columns
-    WHERE table_name = 'Employee'
-      AND is_nullable = 'NO'
-      AND column_name NOT ILIKE '%id'
-      AND column_name NOT IN ('createdAt', 'updatedAt')
-`;
-
-  // console.log("Result", result);
-  const requiredFields = result.map((r) => r.column_name);
-  console.log("requiredFields", requiredFields);
-
-  // const requiredKeys = Object.keys(r.values).filter((key) =>
-  //   requiredFields.includes(key)
-  // );
-  // console.log("Required keys", requiredKeys);
-
-  return [records[0]].filter((r) => {
-    const values = convertToCamelCase(r.values);
-    values.firstName = values["nameTitle"];
-    values.firstName = values["nameFirstName"];
-    values.middleName = values["nameMiddleName"];
-    values.lastName = values["nameLastName"];
-
-    delete values["nameTitle"];
-    delete values["nameFirstName"];
-    delete values["nameMiddleName"];
-    delete values["nameLastName"];
-
-    console.log("x", values);
-
-    requiredFields.every((f) => {
-      console.log("x", f);
-      console.log("x", (values as { [key: string]: any })[f]);
-      return (values as { [key: string]: any })[f].valid === true;
-    });
-  });
-};
-
 const convertToCamelCase = (obj: { [key: string]: any }) => {
   const newObj: { [key: string]: any } = {};
 

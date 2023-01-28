@@ -2,12 +2,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Employee, PrismaClient } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
+import { getAccessToken, getRecords } from "../../../lib/flatfile";
 import {
-  getAccessToken,
-  getRecords,
+  mapRecordFieldsForEmployee,
+  upsertEmployee,
   validRecords,
-} from "../../../lib/flatfile";
-import { upsertEmployee } from "../../../lib/employee";
+} from "../../../lib/employee";
 import { ActionType, createAction } from "../../../lib/action";
 
 type Data = {
@@ -31,30 +31,34 @@ export default async function handler(
 
   const records = await getRecords(token.sub, accessToken);
 
+  const mappedRecords = await mapRecordFieldsForEmployee(records);
+
+  console.log("mappedRecords", mappedRecords);
+
   // TODO: Do a flash alert and return if there's no records in FF yet
   // console.log("Get records", records);
 
-  const prisma = new PrismaClient();
-  const employees = await prisma.employee.findMany({
-    where: {
-      organizationId: token.organizationId,
-    },
-    select: {
-      employeeId: true,
-    },
-  });
+  // throw "hi";
+  const valids = await validRecords(mappedRecords);
+
+  console.log("valids", valids.length);
+
+  // const prisma = new PrismaClient();
+  // const employees = await prisma.employee.findMany({
+  //   where: {
+  //     organizationId: token.organizationId,
+  //   },
+  //   select: {
+  //     employeeId: true,
+  //   },
+  // });
 
   // console.log("employees", employees);
 
-  const employeeIds = employees.map((e) => e.employeeId);
+  // const employeeIds = employees.map((e) => e.employeeId);
 
-  // console.log("employeeIds", employeeIds);
-  // console.log("rec", records[0].values);
-  // console.log("valid recs", validRecords(records));
-
-  // console.log("records", records);
-  const vRecords = await validRecords(records);
-  console.log("vrecords", vRecords);
+  // const vRecords = await validRecords(records);
+  // console.log("vrecords", vRecords);
   // const newEmployeeRecords = vRecords.filter((r) => {
   //   return !employeeIds.includes(r.id) && r.values.employeeId.value;
   // });
