@@ -10,6 +10,7 @@ import {
 } from "../../../lib/employee";
 import { ActionType, createAction } from "../../../lib/action";
 import { inspect } from "util";
+import { convertToCamelCase } from "../../../lib/utils";
 
 type Data = {
   message?: string;
@@ -114,17 +115,3 @@ export default async function handler(
 
   res.redirect("/employees?message=Synced records");
 }
-
-const convertToCamelCase = (obj: { [key: string]: any }) => {
-  const newObj: { [key: string]: any } = {};
-
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      const newKey = key.replace(/_([a-z])/g, (match) =>
-        match[1].toUpperCase()
-      );
-      newObj[newKey] = obj[key];
-    }
-  }
-  return newObj;
-};

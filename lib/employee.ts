@@ -6,6 +6,7 @@ import { DateTime } from "luxon";
 import { Field, Record } from "./flatfile";
 import { inspect } from "util";
 import { prismaClient } from "./prisma-client";
+import { convertKeyToCamelCase, convertToCamelCase } from "./utils";
 
 // TODO: Temp solution until we get more of the fields in the config
 export const upsertEmployee = async ({
@@ -188,24 +189,6 @@ export const mapRecordFieldsForEmployee = async (records: Record[]) => {
       values: mappedValues,
     } as Record;
   });
-};
-
-const convertToCamelCase = (obj: { [key: string]: any }) => {
-  const newObj: { [key: string]: any } = {};
-
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      const newKey = key.replace(/_([a-z])/g, (match) =>
-        match[1].toUpperCase()
-      );
-      newObj[newKey] = obj[key];
-    }
-  }
-  return newObj;
-};
-
-const convertKeyToCamelCase = (key: string) => {
-  return key.replace(/_([a-z])/g, (match) => match[1].toUpperCase());
 };
 
 export const validRecords = async (records: Record[]) => {
