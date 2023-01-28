@@ -8,8 +8,9 @@ import {
   SpaceConfig,
   AddSpaceRequest,
 } from "@flatfile/api";
-import { PrismaClient, Space, User } from "@prisma/client";
+import { PrismaClient, Space, User, prisma } from "@prisma/client";
 import { DateTime } from "luxon";
+import { inspect } from "util";
 
 export interface Field {
   value: string | null;
@@ -20,11 +21,12 @@ export interface Field {
 export interface Record {
   id: string;
   values: {
-    endEmployementDate: Field;
-    employeeId: Field;
-    managerId: Field;
-    employeeType: Field;
-    hireDate: Field;
+    [key: string]: Field;
+    // endEmployementDate: Field;
+    // employeeId: Field;
+    // managerId: Field;
+    // employeeType: Field;
+    // hireDate: Field;
   };
 }
 
@@ -109,6 +111,8 @@ export const getRecords = async (
     headers
   );
 
+  // console.log("w, s", workbookId, sheetId);
+
   const recordsResponse = await fetch(
     `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records`,
     {
@@ -150,13 +154,16 @@ const getWorkbookIdAndSheetId = async (
 
   const result = await response.json();
 
-  // TODO: Assuming just 1 of each. Maybe ok for this demo case?
-  // console.log("workbooks", result["data"].length);
-  // console.log("sheet", result["data"][0]["sheets"].length);
+  // TODO: Assuming just 1 workbook for this demo (but multiple sheets).
+  // console.log("sheets", result["data"][0]["sheets"]);
+
+  const sheetId = result["data"][0]["sheets"].find(
+    (s: { id: string; name: string; config: any }) => s.name === "Employees"
+  ).id;
 
   return {
     workbookId: result["data"][0]["id"],
-    sheetId: result["data"][0]["sheets"][0]["id"],
+    sheetId: sheetId,
   };
 };
 
@@ -194,7 +201,7 @@ export const createSpace = async (accessToken: string) => {
   });
   // const spaceResponse = await client.addSpace(spaceRequestParameters, options);
 
-  console.log("spaceResponse", spaceResponse);
+  // console.log("spaceResponse", spaceResponse);
 
   if (!spaceResponse.ok) {
     throw new Error("Error creating space");
@@ -202,7 +209,7 @@ export const createSpace = async (accessToken: string) => {
 
   const spaceResult = await spaceResponse.json();
 
-  console.log("spaceResult body", spaceResult);
+  // console.log("spaceResult body", spaceResult);
 
   // const spaceId: string = spaceResult.data.id;
 
@@ -286,8 +293,4 @@ export const addGuestToSpace = async (
   // console.log("addGuestResult", addGuestResult, addGuestResult.data.spaces);
 
   return addGuestResult.data;
-};
-
-export const validRecords = (records: Record[]) => {
-  return records.filter((r) => Object.values(r.values).every((f) => f.valid));
 };

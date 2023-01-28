@@ -1,14 +1,16 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
+import { Employee, PrismaClient } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
+import { getAccessToken, getRecords } from "../../../lib/flatfile";
 import {
-  getAccessToken,
-  getRecords,
+  mapRecordFieldsForEmployee,
+  upsertEmployee,
   validRecords,
-} from "../../../lib/flatfile";
-import { upsertEmployee } from "../../../lib/employee";
+} from "../../../lib/employee";
 import { ActionType, createAction } from "../../../lib/action";
+import { inspect } from "util";
+import { convertToCamelCase } from "../../../lib/utils";
 
 type Data = {
   message?: string;
@@ -31,12 +33,16 @@ export default async function handler(
 
   const records = await getRecords(token.sub, accessToken);
 
-  console.log("Get records", records);
-
   if (records.length === 0) {
     res.redirect("/employees?message=No Records Found");
     return;
   }
+
+  const mappedRecords = await mapRecordFieldsForEmployee(records);
+  // console.log("mappedRecords", mappedRecords);
+
+  const valids = await validRecords(mappedRecords);
+  // console.log("valids", valids.length);
 
   const prisma = new PrismaClient();
   const employees = await prisma.employee.findMany({
@@ -47,24 +53,19 @@ export default async function handler(
       employeeId: true,
     },
   });
-
-  console.log("employees", employees);
-
+  // console.log("employees", employees);
   const employeeIds = employees.map((e) => e.employeeId);
-
   // console.log("employeeIds", employeeIds);
 
-  // console.log("rec", records[0].values);
-  // console.log("valid recs", validRecords(records));
-
-  const newEmployeeRecords = validRecords(records).filter((r) => {
+  const newEmployeeRecords = valids.filter((r) => {
     return !employeeIds.includes(r.id) && r.values.employeeId.value;
   });
-
-  console.log("newrecs", newEmployeeRecords);
+  // console.log("new emp", newEmployeeRecords.length);
 
   const upserts = newEmployeeRecords.map(async (r) => {
     try {
+      const values = convertToCamelCase(r.values);
+
       let data: {
         organizationId: string;
         employeeId: string;
@@ -105,12 +106,14 @@ export default async function handler(
 
   await Promise.all(upserts);
 
+  const message = `Found ${records.length} records. Synced ${newEmployeeRecords.length} Employee records.`;
+
   await createAction({
     userId: token.sub,
     organizationId: token.organizationId,
     type: ActionType.SyncRecords,
-    description: `Found ${records.length} records. Synced ${newEmployeeRecords.length} new Employee records.`,
+    description: message,
   });
 
-  res.redirect("/employees?message=Synced records");
+  res.redirect(`/employees?flash=success&message=${message}`);
 }
