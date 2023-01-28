@@ -30,6 +30,9 @@ useEffect(() => {
   if (router.query.message === 'Synced records') {   
     window.history.replaceState(null, '', '/employees')
     toast.success('Synced records', {id: "synced"})
+  } else if (router.query.message === 'No Records Found') {   
+    window.history.replaceState(null, '', '/employees')
+    toast.error('No Records Found', {id: "no-records"})
   }
 }, []);
   

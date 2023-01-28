@@ -58,5 +58,5 @@ export default async function handler(
   // console.log("space", space);
   // console.log("space data", space.flatfileData);
 
-  res.redirect("/onboarding");
+  res.redirect("/onboarding?message=Created space");
 }

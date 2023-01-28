@@ -32,6 +32,11 @@ export default async function handler(
 
   const records = await getRecords(token.sub, accessToken);
 
+  if (records.length === 0) {
+    res.redirect("/employees?message=No Records Found");
+    return;
+  }
+
   const mappedRecords = await mapRecordFieldsForEmployee(records);
   // console.log("mappedRecords", mappedRecords);
 
