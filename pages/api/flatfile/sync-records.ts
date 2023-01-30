@@ -1,13 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Employee, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { getAccessToken, getRecords } from "../../../lib/flatfile";
-import {
-  mapRecordFieldsForEmployee,
-  upsertEmployee,
-  validRecords,
-} from "../../../lib/employee";
+import { upsertEmployee, validRecords } from "../../../lib/employee";
 import { ActionType, createAction } from "../../../lib/action";
 import { inspect } from "util";
 import { convertToCamelCase } from "../../../lib/utils";
@@ -34,14 +30,14 @@ export default async function handler(
   const records = await getRecords(token.sub, accessToken);
 
   if (records.length === 0) {
-    res.redirect("/employees?message=No Records Found");
+    res.redirect("/onboarding?message=No Records Found");
     return;
   }
 
-  const mappedRecords = await mapRecordFieldsForEmployee(records);
-  // console.log("mappedRecords", mappedRecords);
+  console.log("record[0]", inspect(records[0], { depth: null }));
 
-  const valids = await validRecords(mappedRecords);
+  const valids = await validRecords(records);
+
   // console.log("valids", valids.length);
 
   const prisma = new PrismaClient();
@@ -115,5 +111,5 @@ export default async function handler(
     description: message,
   });
 
-  res.redirect(`/employees?flash=success&message=${message}`);
+  res.redirect(`/onboarding?flash=success&message=${message}`);
 }

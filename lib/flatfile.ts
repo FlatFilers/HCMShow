@@ -114,6 +114,8 @@ export const getRecords = async (
   // console.log("w, s", workbookId, sheetId);
 
   const recordsResponse = await fetch(
+    // TODO: eventually use valid filter here
+    // `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records?filter=valid`,
     `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records`,
     {
       method: "GET",

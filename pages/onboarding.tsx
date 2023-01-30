@@ -26,7 +26,16 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (router.query.message === "Created space") {
+    if (router.query.flash === "success") {
+      window.history.replaceState(null, "", "/onboarding");
+      toast.success(router.query.message as string, {
+        id: router.query.message as string,
+        duration: 4000,
+      });
+    } else if (router.query.message === "No Records Found") {
+      window.history.replaceState(null, "", "/onboarding");
+      toast.error("No Records Found", { id: "no-records" });
+    } else if (router.query.message === "Created space") {
       window.history.replaceState(null, "", "/onboarding");
       toast.success("Created space", { id: "created" });
     }
