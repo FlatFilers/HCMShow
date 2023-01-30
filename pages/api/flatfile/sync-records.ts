@@ -34,14 +34,14 @@ export default async function handler(
   const records = await getRecords(token.sub, accessToken);
 
   if (records.length === 0) {
-    res.redirect("/employees?message=No Records Found");
+    res.redirect("/onboarding?message=No Records Found");
     return;
   }
 
-  const mappedRecords = await mapRecordFieldsForEmployee(records);
-  // console.log("mappedRecords", mappedRecords);
+  console.log("record[0]", inspect(records[0], { depth: null }));
 
-  const valids = await validRecords(mappedRecords);
+  const valids = await validRecords(records);
+
   // console.log("valids", valids.length);
 
   const prisma = new PrismaClient();
@@ -115,5 +115,5 @@ export default async function handler(
     description: message,
   });
 
-  res.redirect(`/employees?flash=success&message=${message}`);
+  res.redirect(`/onboarding?flash=success&message=${message}`);
 }
