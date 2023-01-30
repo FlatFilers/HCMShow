@@ -1,13 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Employee, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { getAccessToken, getRecords } from "../../../lib/flatfile";
-import {
-  mapRecordFieldsForEmployee,
-  upsertEmployee,
-  validRecords,
-} from "../../../lib/employee";
+import { upsertEmployee, validRecords } from "../../../lib/employee";
 import { ActionType, createAction } from "../../../lib/action";
 import { inspect } from "util";
 import { convertToCamelCase } from "../../../lib/utils";
