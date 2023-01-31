@@ -121,11 +121,14 @@ const upsertCountries = async () => {
 };
 
 const upsertEmployeeTypes = async () => {
-  // Employee Type Name,ID,Employee Type Description,Fixed Term Employee Type,Seasonal,Trainee,Inactive
-  const parseCsv: Promise<
-    Omit<EmployeeType, "id" | "createdAt" | "updatedAt">[]
-  > = new Promise((resolve, reject) => {
-    const data: Omit<EmployeeType, "id" | "createdAt" | "updatedAt">[] = [];
+  type CsvType = Omit<
+    EmployeeType & { countryCodes: string[] },
+    "id" | "createdAt" | "updatedAt"
+  >;
+
+  // Employee Type Name,ID,Employee Type Description,Fixed Term Employee Type,Seasonal,Trainee,Inactive,Restricted to Countries
+  const parseCsv: Promise<CsvType[]> = new Promise((resolve, reject) => {
+    const data: CsvType[] = [];
 
     fs.createReadStream("./lib/seeds/data/seed_employee_types.csv")
       .pipe(parse())
@@ -139,6 +142,7 @@ const upsertEmployeeTypes = async () => {
           isSeasonal: row[4] === "y",
           isTrainee: row[5] === "y",
           isInactive: row[6] === "y",
+          countryCodes: row[7].split(","),
         });
       })
       .on("end", () => {
@@ -148,15 +152,24 @@ const upsertEmployeeTypes = async () => {
 
   const csvData = await Promise.resolve(parseCsv);
 
-  const country = await prisma.country.findUnique({
-    where: { code: "USA" },
-  });
+  const dataWithCountries = await Promise.all(
+    csvData.map(async (data) => {
+      const countryIds = (
+        await prisma.country.findMany({
+          where: { code: { in: data.countryCodes } },
+        })
+      ).map((c) => {
+        return { id: c.id };
+      });
 
-  if (!country) {
-    throw "Error in upsertLocations: no USA country record found, did you seed countries?";
-  }
+      return {
+        ...data,
+        countryIds,
+      };
+    })
+  );
 
-  const promises = csvData.map(async (data) => {
+  const promises = dataWithCountries.map(async (data) => {
     const employeeType: EmployeeType = await prisma.employeeType.upsert({
       where: {
         slug: data.slug,
@@ -164,13 +177,14 @@ const upsertEmployeeTypes = async () => {
       create: {
         ...data,
         countries: {
-          create: {
-            country: {
-              connect: {
-                id: country.id,
-              },
-            },
-          },
+          connect: data.countryIds,
+          // create: {
+          //   country: {
+          //     connect: {
+          //       id: country.id,
+          //     },
+          //   },
+          // },
         },
       },
       update: {},
