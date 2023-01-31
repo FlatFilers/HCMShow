@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 const Signup: NextPageWithLayout = () => {
   const { error } = useRouter().query;
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [buttonText, setButtonText] = useState<string>("Sign up");
+  const [buttonText, setButtonText] = useState<string>("Create My Account");
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,18 +34,20 @@ const Signup: NextPageWithLayout = () => {
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white h-screen">
       <div className="w-full max-w-md space-y-8">
-        <div>
+        <div className="mb-8">
           <img
             className="mx-auto h-12 w-auto"
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Sign up for HCM.show
+          <h2 className="mt-6 mb-1 text-center text-3xl font-bold tracking-tight text-gray-900">
+            HCM.show
           </h2>
+          <p className="text-gray-500 text-center text-sm">
+            Create a new account below.
+          </p>
         </div>
-
-        <form className="mt-8 space-y-2" action="#" onSubmit={handleSubmit}>
+        <form className="mt-4 space-y-2" action="#" onSubmit={handleSubmit}>
           {error && (
             <div
               className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative text-sm"
