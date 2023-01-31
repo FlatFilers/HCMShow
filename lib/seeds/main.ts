@@ -91,7 +91,7 @@ const upsertCountries = async () => {
       const data: Omit<Country, "id" | "createdAt" | "updatedAt">[] = [];
 
       fs.createReadStream("./lib/seeds/data/seed_countries.csv")
-        .pipe(parse())
+        .pipe(parse({ skipRows: 1 }))
         .on("error", reject)
         .on("data", (row: any) => {
           data.push({
@@ -131,9 +131,10 @@ const upsertEmployeeTypes = async () => {
     const data: CsvType[] = [];
 
     fs.createReadStream("./lib/seeds/data/seed_employee_types.csv")
-      .pipe(parse())
+      .pipe(parse({ skipRows: 1 }))
       .on("error", reject)
       .on("data", (row: any) => {
+        console.log("row", row);
         data.push({
           name: row[0],
           slug: row[1],
@@ -142,7 +143,9 @@ const upsertEmployeeTypes = async () => {
           isSeasonal: row[4] === "y",
           isTrainee: row[5] === "y",
           isInactive: row[6] === "y",
-          countryCodes: row[7].split(","),
+          countryCodes: row[7]
+            ?.split(",")
+            ?.filter((c: string) => c.trim() !== ""),
         });
       })
       .on("end", () => {
@@ -152,46 +155,56 @@ const upsertEmployeeTypes = async () => {
 
   const csvData = await Promise.resolve(parseCsv);
 
-  const dataWithCountries = await Promise.all(
-    csvData.map(async (data) => {
-      const countryIds = (
-        await prisma.country.findMany({
-          where: { code: { in: data.countryCodes } },
-        })
-      ).map((c) => {
-        return { id: c.id };
-      });
+  console.log("csvData", csvData);
 
-      return {
-        ...data,
-        countryIds,
-      };
-    })
-  );
+  // Tried to make the upsert/connect query all in one, but wasn't able to figure it out.
+  const employeeTypesUpserts = csvData.map(async (data) => {
+    const { countryCodes, ...employeeTypeData } = data;
 
-  const promises = dataWithCountries.map(async (data) => {
-    const employeeType: EmployeeType = await prisma.employeeType.upsert({
+    return await prisma.employeeType.upsert({
       where: {
         slug: data.slug,
       },
-      create: {
-        ...data,
-        countries: {
-          connect: data.countryIds,
-          // create: {
-          //   country: {
-          //     connect: {
-          //       id: country.id,
-          //     },
-          //   },
-          // },
-        },
-      },
+      create: employeeTypeData,
       update: {},
     });
   });
 
-  await Promise.all(promises);
+  const employeeTypes = await Promise.all(employeeTypesUpserts);
+
+  const updates = employeeTypes.map(async (e) => {
+    const countryCodes =
+      csvData.find((row) => e.slug === row.slug)?.countryCodes || [];
+
+    const countryUpdates = countryCodes.map(async (code) => {
+      const country = (await prisma.country.findUnique({
+        where: { code },
+      })) as Country;
+
+      await prisma.employeeType.update({
+        where: { id: e.id },
+        data: {
+          countries: {
+            connectOrCreate: {
+              where: {
+                employeeTypeId_countryId: {
+                  employeeTypeId: e.id,
+                  countryId: country.id,
+                },
+              },
+              create: {
+                countryId: country.id,
+              },
+            },
+          },
+        },
+      });
+    });
+
+    await Promise.all(countryUpdates);
+  });
+
+  await Promise.all(updates);
 };
 
 const upsertLocations = async () => {
