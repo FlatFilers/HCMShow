@@ -208,38 +208,95 @@ const upsertEmployeeTypes = async () => {
 };
 
 const upsertLocations = async () => {
-  const country = await prisma.country.findUnique({
-    where: { code: "USA" },
+  type CsvType = Omit<
+    Location & { countryCode: string },
+    "id" | "createdAt" | "updatedAt" | "countryId"
+  >;
+
+  const parseCsv: Promise<CsvType[]> = new Promise((resolve, reject) => {
+    const data: CsvType[] = [];
+
+    fs.createReadStream("./lib/seeds/data/seed_locations.csv")
+      .pipe(parse({ skipRows: 1 }))
+      .on("error", reject)
+      .on("data", (row: any) => {
+        console.log(
+          "row",
+          row,
+          DateTime.fromFormat(row[1], "yyyy-MM-dd").toJSDate()
+        );
+        data.push({
+          slug: row[0],
+          effectiveDate: DateTime.fromFormat(row[1], "yyyy-MM-dd").toJSDate(),
+          name: row[2],
+          isInactive: row[5] !== "n",
+          latitude: Number.parseFloat(row[6]),
+          longitude: Number.parseFloat(row[7]),
+          altitude: Number.parseFloat(row[8]),
+          countryCode: row[20],
+        });
+      })
+      .on("end", () => {
+        resolve(data);
+      });
   });
 
-  if (!country) {
-    throw "Error in upsertLocations: no USA country record found, did you seed countries?";
-  }
+  const csvData = await Promise.resolve(parseCsv);
 
-  const promises = [...Array(10)].map(async () => {
-    let city = faker.address.city();
+  const dataWithCountries = await Promise.all(
+    csvData.map(async (data) => {
+      const { countryCode, ...rest } = data;
 
-    const data: Omit<Location, "id" | "createdAt" | "updatedAt"> = {
-      name: city,
-      slug: city.toLowerCase().replaceAll(" ", "_"),
-      effectiveDate: DateTime.now().toJSDate(),
-      isInactive: false,
-      latitude: Math.random(),
-      longitude: Math.random(),
-      altitude: Math.random(),
-      countryId: country.id,
-    };
+      let mappedData: Omit<CsvType, "countryCode"> & { country?: any } = {
+        ...rest,
+      };
 
-    await prisma.location.upsert({
-      where: {
-        slug: data.slug,
-      },
-      create: data,
-      update: {},
-    });
-  });
+      if (!data.countryCode) {
+        return mappedData;
+      }
 
-  await Promise.all(promises);
+      const country = await prisma.country.findUnique({
+        where: {
+          code: data.countryCode,
+        },
+      });
+
+      if (!country) {
+        return mappedData;
+      }
+
+      console.log("country", country);
+
+      mappedData = {
+        ...mappedData,
+        country: {
+          connect: {
+            id: country.id,
+          },
+        },
+      };
+
+      return {
+        ...mappedData,
+      };
+    })
+  );
+
+  const promises = await Promise.all(
+    dataWithCountries.map(async (data) => {
+      try {
+        await prisma.location.upsert({
+          where: {
+            slug: data.slug,
+          },
+          create: data,
+          update: {},
+        });
+      } catch (error) {
+        // console.error("Error upserting location", data.slug, error);
+      }
+    })
+  );
 };
 
 // TODO: Eventually this needs to be scoped to the organization.
