@@ -41,9 +41,17 @@ export const main = async () => {
 };
 
 export const seedNewAccount = async (user: User) => {
-  // TODO: Eventually as we migrate the models we'll need to tie more
-  // into the specific organization
-  await upsertEmployees(user.organizationId);
+  const existingEmployees = await prisma.employee.findMany({
+    where: {
+      organizationId: user.organizationId,
+    },
+  });
+
+  if (existingEmployees.length === 0) {
+    // TODO: Eventually as we migrate the models we'll need to tie more
+    // into the specific organization
+    await upsertEmployees(user.organizationId);
+  }
 };
 
 const upsertJobFamilies = async () => {
@@ -134,7 +142,6 @@ const upsertEmployeeTypes = async () => {
       .pipe(parse({ skipRows: 1 }))
       .on("error", reject)
       .on("data", (row: any) => {
-        console.log("row", row);
         data.push({
           name: row[0],
           slug: row[1],
@@ -154,8 +161,6 @@ const upsertEmployeeTypes = async () => {
   });
 
   const csvData = await Promise.resolve(parseCsv);
-
-  console.log("csvData", csvData);
 
   // Tried to make the upsert/connect query all in one, but wasn't able to figure it out.
   const employeeTypesUpserts = csvData.map(async (data) => {
@@ -220,11 +225,6 @@ const upsertLocations = async () => {
       .pipe(parse({ skipRows: 1 }))
       .on("error", reject)
       .on("data", (row: any) => {
-        console.log(
-          "row",
-          row,
-          DateTime.fromFormat(row[1], "yyyy-MM-dd").toJSDate()
-        );
         data.push({
           slug: row[0],
           effectiveDate: DateTime.fromFormat(row[1], "yyyy-MM-dd").toJSDate(),
@@ -264,8 +264,6 @@ const upsertLocations = async () => {
       if (!country) {
         return mappedData;
       }
-
-      console.log("country", country);
 
       mappedData = {
         ...mappedData,
