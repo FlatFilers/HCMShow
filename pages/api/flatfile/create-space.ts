@@ -7,7 +7,7 @@ import {
   createSpace,
   getAccessToken,
   getSpace,
-  inviteGuestsToSpace,
+  inviteGuestToSpace,
 } from "../../../lib/flatfile";
 
 export default async function handler(
@@ -48,7 +48,7 @@ export default async function handler(
     accessToken
   );
 
-  const inviteGuestsToSpaceResponse = await inviteGuestsToSpace(addGuestToSpaceResponse[0].id, flatfileSpaceData.id, accessToken);
+  const inviteGuestsToSpaceResponse = await inviteGuestToSpace(addGuestToSpaceResponse[0].id, flatfileSpaceData.id, accessToken);
 
   // console.log('inviteGuestsToSpaceResponse', inviteGuestsToSpaceResponse.success);
 
