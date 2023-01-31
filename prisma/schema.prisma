@@ -180,7 +180,7 @@ model HireReason {
   isInactive Boolean
   classificationName String
   classificationSlug String
-  subcategorySlug String
+  subcategorySlug String @unique
   reason String
   isManagerReason Boolean
 

@@ -1,29 +1,23 @@
-import { User } from "@prisma/client";
-import * as bcrypt from "bcrypt";
-import { seedNewAccount } from "./seeds/main";
+import { EmployeeType } from "@prisma/client";
 import { faker } from "@faker-js/faker";
 import { DateTime } from "luxon";
-import { Field, Record } from "./flatfile";
-import { inspect } from "util";
+import { Record } from "./flatfile";
 import { prismaClient } from "./prisma-client";
-import { convertKeyToCamelCase, convertToCamelCase } from "./utils";
 
 // TODO: Temp solution until we get more of the fields in the config
 export const upsertEmployee = async ({
   organizationId,
   employeeId,
+  employeeTypeId,
   managerId,
   flatfileRecordId,
 }: {
   organizationId: string;
   employeeId: string;
+  employeeTypeId: string;
   managerId?: string;
   flatfileRecordId?: string;
 }) => {
-  const employeeType = await prismaClient.employeeType.findFirst();
-  if (!employeeType) {
-    throw "Error upsertEmployees(): no employeeType record";
-  }
   const jobFamily = await prismaClient.jobFamily.findFirst();
   if (!jobFamily) {
     throw "Error upsertEmployees(): no jobFamily record";
@@ -67,7 +61,7 @@ export const upsertEmployee = async ({
       middleName: faker.name.middleName(),
       lastName: faker.name.lastName(),
       name: faker.name.fullName(),
-      employeeTypeId: employeeType.id,
+      employeeTypeId,
       hireReasonId: hireReason.id,
       hireDate: DateTime.now().toJSDate(),
       endEmploymentDate: null,

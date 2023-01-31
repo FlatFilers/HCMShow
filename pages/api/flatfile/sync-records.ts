@@ -1,12 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
+import { EmployeeType, PrismaClient } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { getAccessToken, getRecords } from "../../../lib/flatfile";
 import { upsertEmployee, validRecords } from "../../../lib/employee";
 import { ActionType, createAction } from "../../../lib/action";
 import { inspect } from "util";
-import { convertToCamelCase } from "../../../lib/utils";
 
 type Data = {
   message?: string;
@@ -34,7 +33,7 @@ export default async function handler(
     return;
   }
 
-  console.log("record[0]", inspect(records[0], { depth: null }));
+  // console.log("record[0]", inspect(records[0], { depth: null }));
 
   const valids = await validRecords(records);
 
@@ -58,18 +57,17 @@ export default async function handler(
   });
   // console.log("new emp", newEmployeeRecords.length);
 
+  // TODO
+  const employeeType = (await prisma.employeeType.findFirst()) as EmployeeType;
+
   const upserts = newEmployeeRecords.map(async (r) => {
     try {
-      const values = convertToCamelCase(r.values);
+      const values = r.values;
 
-      let data: {
-        organizationId: string;
-        employeeId: string;
-        managerId?: string;
-        flatfileRecordId?: string;
-      } = {
+      let data: Parameters<typeof upsertEmployee>[0] = {
         organizationId: token.organizationId,
         employeeId: r.values.employeeId.value as string,
+        employeeTypeId: employeeType.id,
         flatfileRecordId: r.id,
       };
 
@@ -85,6 +83,7 @@ export default async function handler(
           manager = await upsertEmployee({
             ...data,
             employeeId: r.values.managerId.value,
+            employeeTypeId: employeeType.id,
             managerId: undefined,
           });
         }
