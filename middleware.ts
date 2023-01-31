@@ -20,6 +20,7 @@ export default withAuth(
           req.nextUrl.pathname === "/" ||
           req.nextUrl.pathname === "/signup" ||
           req.nextUrl.pathname.includes("api/auth") ||
+          req.nextUrl.pathname.includes("api/health_check") ||
           req.nextUrl.pathname.includes("api/seeds") // TODO: temp
         ) {
           return true;
