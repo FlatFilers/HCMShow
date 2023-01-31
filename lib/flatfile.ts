@@ -296,3 +296,35 @@ export const addGuestToSpace = async (
 
   return addGuestResult.data;
 };
+
+export const inviteGuestsToSpace = async (
+  userId: string,
+  spaceId: string,
+  accessToken: string
+) => {
+
+  const payload = [
+    {
+      guestId: userId,
+      spaceId: spaceId,
+      message: "string"
+    }
+  ]
+
+  const inviteGuestsToSpaceResponse: Response = await fetch(`${BASE_PATH}/invitations`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!inviteGuestsToSpaceResponse.ok) {
+    throw new Error("Error adding guest to space");
+  }
+
+  const inviteGuestResult = await inviteGuestsToSpaceResponse.json();
+
+  return inviteGuestResult.data;
+};
