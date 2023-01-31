@@ -7,6 +7,7 @@ import {
   createSpace,
   getAccessToken,
   getSpace,
+  inviteGuestToSpace,
 } from "../../../lib/flatfile";
 
 export default async function handler(
@@ -40,12 +41,16 @@ export default async function handler(
 
   const flatfileSpaceData = await createSpace(accessToken);
 
-  await addGuestToSpace(user, flatfileSpaceData, accessToken);
+  const addGuestToSpaceResponse = await addGuestToSpace(user, flatfileSpaceData, accessToken);
 
   const flatfileSpaceDataRefetch = await getSpace(
     flatfileSpaceData.id,
     accessToken
   );
+
+  const inviteGuestsToSpaceResponse = await inviteGuestToSpace(addGuestToSpaceResponse[0].id, flatfileSpaceData.id, accessToken);
+
+  // console.log('inviteGuestsToSpaceResponse', inviteGuestsToSpaceResponse.success);
 
   const space: Space = await prisma.space.create({
     data: {

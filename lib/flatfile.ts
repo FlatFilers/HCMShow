@@ -296,3 +296,35 @@ export const addGuestToSpace = async (
 
   return addGuestResult.data;
 };
+
+export const inviteGuestToSpace = async (
+  userId: string,
+  spaceId: string,
+  accessToken: string
+) => {
+
+  const payload = [
+    {
+      guestId: userId,
+      spaceId: spaceId,
+      message: "Accept the invite below to enter the space. From there, you will be able to upload your files."
+    }
+  ]
+
+  const inviteGuestToSpaceResponse: Response = await fetch(`${BASE_PATH}/invitations`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!inviteGuestToSpaceResponse.ok) {
+    throw new Error("Error sending invite to guest");
+  }
+
+  const inviteGuestResult = await inviteGuestToSpaceResponse.json();
+
+  return inviteGuestResult.data;
+};
