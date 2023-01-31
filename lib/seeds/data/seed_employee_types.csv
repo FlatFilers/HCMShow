@@ -1,8 +1,8 @@
-Employee Type Name,ID,Employee Type Description,Fixed Term Employee Type,Seasonal,Trainee,Inactive
-Regular,Regular,"A person who works a regular schedule, year round.",n,n,n,n
-Temporary,Temporary_Fixed_Term,A situation where the employee is expected to leave the employer within a certain period of time.,y,n,n,n
-Fixed Term Contract,Fixed_Term_Contract_Fixed_Term,A person with a contract.,y,n,n,n
-Seasonal,Seasonal_Fixed_Term_Seasonal,"Seasonal employment is the kind of occupation that can be performed only during certain periods of the year, and does not include such occupations that may be carried on throughout the entire year.",y,y,n,n
-Intern,Intern_Fixed_Term_Trainee,"A person who works, sometimes without pay, to gain professional work experience.",y,n,y,n
-Casual,Casual,A person hired to work occasional and irregular hours on an as-needed basis or to provide supplemental help during periods of unusual circumstances.,n,n,n,n
+Employee Type Name,ID,Employee Type Description,Fixed Term Employee Type,Seasonal,Trainee,Inactive,Restricted to Countries
+Regular,Regular,"A person who works a regular schedule, year round.",n,n,n,n,
+Temporary,Temporary_Fixed_Term,A situation where the employee is expected to leave the employer within a certain period of time.,y,n,n,n,
+Fixed Term Contract,Fixed_Term_Contract_Fixed_Term,A person with a contract.,y,n,n,n,
+Seasonal,Seasonal_Fixed_Term_Seasonal,"Seasonal employment is the kind of occupation that can be performed only during certain periods of the year, and does not include such occupations that may be carried on throughout the entire year.",y,y,n,n,
+Intern,Intern_Fixed_Term_Trainee,"A person who works, sometimes without pay, to gain professional work experience.",y,n,y,n,
+Casual,Casual,A person hired to work occasional and irregular hours on an as-needed basis or to provide supplemental help during periods of unusual circumstances.,n,n,n,n,"DE,CH,FR"
 Apprentice,Apprentice_Fixed_Term,A person hired with an apprenticeship contract.,y,n,n,n
