@@ -16,7 +16,6 @@ import {
 import { DateTime } from "luxon";
 import * as fs from "fs";
 import { parse } from "fast-csv";
-import { faker } from "@faker-js/faker";
 import { hashPassword } from "../user";
 import crypto from "crypto";
 import { upsertEmployee } from "../employee";
@@ -422,18 +421,20 @@ const upsertEmployees = async (organizationId: string) => {
   const employeeTypeId = (
     (await prismaClient.employeeType.findFirst()) as EmployeeType
   ).id;
+  const locationId = ((await prismaClient.location.findFirst()) as Location).id;
 
-  const manager: Employee = await upsertEmployee({
+  const data = {
     organizationId,
     employeeId: crypto.randomBytes(16).toString("hex"),
+    locationId,
     employeeTypeId,
-  });
+  };
+  const manager: Employee = await upsertEmployee(data);
 
   const directReports = Array.from({ length: 10 }).map(async () => {
     await upsertEmployee({
-      organizationId,
+      ...data,
       employeeId: crypto.randomBytes(16).toString("hex"),
-      employeeTypeId,
       managerId: manager.id,
     });
   });

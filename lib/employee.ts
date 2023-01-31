@@ -9,12 +9,14 @@ export const upsertEmployee = async ({
   organizationId,
   employeeId,
   employeeTypeId,
+  locationId,
   managerId,
   flatfileRecordId,
 }: {
   organizationId: string;
   employeeId: string;
   employeeTypeId: string;
+  locationId: string;
   managerId?: string;
   flatfileRecordId?: string;
 }) => {
@@ -44,10 +46,6 @@ export const upsertEmployee = async ({
   if (!workerCompensationCode) {
     throw "Error upsertEmployees(): no workerCompensationCode record";
   }
-  const location = await prismaClient.location.findFirst();
-  if (!location) {
-    throw "Error upsertEmployees(): no location record";
-  }
 
   return await prismaClient.employee.upsert({
     where: {
@@ -68,7 +66,7 @@ export const upsertEmployee = async ({
       jobFamilyId: jobFamily.id,
       positionTitle: "Sales Rep",
       businessTitle: "Sales Rep",
-      locationId: location.id,
+      locationId,
       // workspaceId: workspace.id,
       positionTimeId: positionTime.id,
       // workShiftId: workShift.id,
