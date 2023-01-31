@@ -357,11 +357,25 @@ const createOtherData = async () => {
   //   },
   // });
 
-  const positionTime: PositionTime = await prismaClient.positionTime.create({
-    data: {
+  const positionTime: PositionTime = await prismaClient.positionTime.upsert({
+    where: {
+      slug: "Part_time",
+    },
+    create: {
       slug: "Part_time",
       name: "Part time",
     },
+    update: {},
+  });
+  await prismaClient.positionTime.upsert({
+    where: {
+      slug: "Full_time",
+    },
+    create: {
+      slug: "Full_time",
+      name: "Full time",
+    },
+    update: {},
   });
 
   // const workShift: WorkShift = await prismaClient.workShift.create({
@@ -422,12 +436,19 @@ const upsertEmployees = async (organizationId: string) => {
     (await prismaClient.employeeType.findFirst()) as EmployeeType
   ).id;
   const locationId = ((await prismaClient.location.findFirst()) as Location).id;
+  const jobFamilyId = ((await prismaClient.jobFamily.findFirst()) as JobFamily)
+    .id;
+  const positionTimeId = (
+    (await prismaClient.positionTime.findFirst()) as PositionTime
+  ).id;
 
   const data = {
     organizationId,
     employeeId: crypto.randomBytes(16).toString("hex"),
     locationId,
     employeeTypeId,
+    jobFamilyId,
+    positionTimeId,
   };
   const manager: Employee = await upsertEmployee(data);
 

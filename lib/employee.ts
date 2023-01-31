@@ -11,6 +11,8 @@ export const upsertEmployee = async ({
   employeeTypeId,
   locationId,
   managerId,
+  jobFamilyId,
+  positionTimeId,
   flatfileRecordId,
 }: {
   organizationId: string;
@@ -18,12 +20,10 @@ export const upsertEmployee = async ({
   employeeTypeId: string;
   locationId: string;
   managerId?: string;
+  jobFamilyId: string;
+  positionTimeId: string;
   flatfileRecordId?: string;
 }) => {
-  const jobFamily = await prismaClient.jobFamily.findFirst();
-  if (!jobFamily) {
-    throw "Error upsertEmployees(): no jobFamily record";
-  }
   const hireReason = await prismaClient.hireReason.findFirst();
   if (!hireReason) {
     throw "Error upsertEmployees(): no hireReason record";
@@ -63,12 +63,12 @@ export const upsertEmployee = async ({
       hireReasonId: hireReason.id,
       hireDate: DateTime.now().toJSDate(),
       endEmploymentDate: null,
-      jobFamilyId: jobFamily.id,
+      jobFamilyId,
       positionTitle: "Sales Rep",
       businessTitle: "Sales Rep",
       locationId,
       // workspaceId: workspace.id,
-      positionTimeId: positionTime.id,
+      positionTimeId,
       // workShiftId: workShift.id,
       defaultWeeklyHours: 40,
       scheduledWeeklyHours: 40,

@@ -1,6 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { EmployeeType, Location, PrismaClient } from "@prisma/client";
+import {
+  EmployeeType,
+  JobFamily,
+  Location,
+  PositionTime,
+  PrismaClient,
+} from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { getAccessToken, getRecords } from "../../../lib/flatfile";
 import { upsertEmployee, validRecords } from "../../../lib/employee";
@@ -58,8 +64,14 @@ export default async function handler(
   // console.log("new emp", newEmployeeRecords.length);
 
   // TODO - hacking this in to get seeds working then do this
-  const employeeType = (await prisma.employeeType.findFirst()) as EmployeeType;
-  const location = (await prisma.location.findFirst()) as Location;
+  const employeeTypeId = (
+    (await prisma.employeeType.findFirst()) as EmployeeType
+  ).id;
+  const locationId = ((await prisma.location.findFirst()) as Location).id;
+  const jobFamilyId = ((await prisma.jobFamily.findFirst()) as JobFamily).id;
+  const positionTimeId = (
+    (await prisma.positionTime.findFirst()) as PositionTime
+  ).id;
 
   const upserts = newEmployeeRecords.map(async (r) => {
     try {
@@ -68,8 +80,10 @@ export default async function handler(
       let data: Parameters<typeof upsertEmployee>[0] = {
         organizationId: token.organizationId,
         employeeId: r.values.employeeId.value as string,
-        locationId: location.id,
-        employeeTypeId: employeeType.id,
+        locationId,
+        employeeTypeId,
+        jobFamilyId,
+        positionTimeId,
         flatfileRecordId: r.id,
       };
 
@@ -85,7 +99,6 @@ export default async function handler(
           manager = await upsertEmployee({
             ...data,
             employeeId: r.values.managerId.value,
-            employeeTypeId: employeeType.id,
             managerId: undefined,
           });
         }
