@@ -1,13 +1,16 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import {
+  AdditionalJobClassification,
   EmployeeType,
   HireReason,
   JobFamily,
   Location,
+  PayRate,
   PositionTime,
   PrismaClient,
   Title,
+  WorkerCompensationCode,
 } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { getAccessToken, getRecords } from "../../../lib/flatfile";
@@ -70,12 +73,6 @@ export default async function handler(
   const employeeTypeId = (
     (await prismaClient.employeeType.findFirst()) as EmployeeType
   ).id;
-  const locationId = ((await prismaClient.location.findFirst()) as Location).id;
-  const jobFamilyId = ((await prismaClient.jobFamily.findFirst()) as JobFamily)
-    .id;
-  const positionTimeId = (
-    (await prismaClient.positionTime.findFirst()) as PositionTime
-  ).id;
   const titleId = ((await prismaClient.title.findFirst()) as Title).id;
   const socialSuffixId = ((await prismaClient.title.findFirst()) as Title).id;
   const hireReasonId = (
@@ -83,6 +80,28 @@ export default async function handler(
   ).id;
   const hireDate = DateTime.now().toJSDate();
   const endEmploymentDate = null;
+  const positionTitle = "Sales Rep";
+  const businessTitle = "Sales Rep";
+  const jobFamilyId = ((await prismaClient.jobFamily.findFirst()) as JobFamily)
+    .id;
+  const locationId = ((await prismaClient.location.findFirst()) as Location).id;
+  const workspaceId = (
+    (await prismaClient.location.findFirst({
+      orderBy: { name: "desc" },
+    })) as Location
+  ).id;
+  const positionTimeId = (
+    (await prismaClient.positionTime.findFirst()) as PositionTime
+  ).id;
+  const defaultWeeklyHours = 40;
+  const scheduledWeeklyHours = 40;
+  const payRateId = ((await prismaClient.payRate.findFirst()) as PayRate).id;
+  const additionalJobClassificationId = (
+    (await prismaClient.additionalJobClassification.findFirst()) as AdditionalJobClassification
+  ).id;
+  const workerCompensationCodeId = (
+    (await prismaClient.workerCompensationCode.findFirst()) as WorkerCompensationCode
+  ).id;
 
   const upserts = newEmployeeRecords.map(async (r) => {
     try {
@@ -96,10 +115,18 @@ export default async function handler(
         hireReasonId,
         hireDate,
         endEmploymentDate,
+        positionTitle,
+        businessTitle,
         locationId,
+        workspaceId,
         employeeTypeId,
         jobFamilyId,
         positionTimeId,
+        defaultWeeklyHours,
+        scheduledWeeklyHours,
+        payRateId,
+        additionalJobClassificationId,
+        workerCompensationCodeId,
         flatfileRecordId: r.id,
       };
 

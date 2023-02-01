@@ -13,10 +13,18 @@ export const upsertEmployee = async ({
   hireReasonId,
   hireDate,
   endEmploymentDate,
+  positionTitle,
+  businessTitle,
   locationId,
+  workspaceId,
   managerId,
   jobFamilyId,
   positionTimeId,
+  defaultWeeklyHours,
+  scheduledWeeklyHours,
+  payRateId,
+  additionalJobClassificationId,
+  workerCompensationCodeId,
   flatfileRecordId,
 }: {
   organizationId: string;
@@ -27,31 +35,20 @@ export const upsertEmployee = async ({
   hireReasonId: string;
   hireDate: Date;
   endEmploymentDate: Date | null;
+  positionTitle: string;
+  businessTitle: string;
   locationId: string;
+  workspaceId: string;
   managerId?: string;
   jobFamilyId: string;
   positionTimeId: string;
+  defaultWeeklyHours: number;
+  scheduledWeeklyHours: number;
+  payRateId: string;
+  additionalJobClassificationId: string;
+  workerCompensationCodeId: string;
   flatfileRecordId?: string;
 }) => {
-  const positionTime = await prismaClient.positionTime.findFirst();
-  if (!positionTime) {
-    throw "Error upsertEmployees(): no positionTime record";
-  }
-  const payRate = await prismaClient.payRate.findFirst();
-  if (!payRate) {
-    throw "Error upsertEmployees(): no payRate record";
-  }
-  const additionalJobClassification =
-    await prismaClient.additionalJobClassification.findFirst();
-  if (!additionalJobClassification) {
-    throw "Error upsertEmployees(): no additionalJobClassification record";
-  }
-  const workerCompensationCode =
-    await prismaClient.workerCompensationCode.findFirst();
-  if (!workerCompensationCode) {
-    throw "Error upsertEmployees(): no workerCompensationCode record";
-  }
-
   return await prismaClient.employee.upsert({
     where: {
       employeeId,
@@ -71,17 +68,17 @@ export const upsertEmployee = async ({
       hireDate,
       endEmploymentDate,
       jobFamilyId,
-      positionTitle: "Sales Rep",
-      businessTitle: "Sales Rep",
+      positionTitle,
+      businessTitle,
       locationId,
-      // workspaceId: workspace.id,
+      workspaceId,
       positionTimeId,
       // workShiftId: workShift.id,
-      defaultWeeklyHours: 40,
-      scheduledWeeklyHours: 40,
-      payRateId: payRate.id,
-      additionalJobClassificationId: additionalJobClassification.id,
-      workerCompensationCodeId: workerCompensationCode.id,
+      defaultWeeklyHours,
+      scheduledWeeklyHours,
+      payRateId,
+      additionalJobClassificationId,
+      workerCompensationCodeId,
       flatfileRecordId,
     },
     update: {},
