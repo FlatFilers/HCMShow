@@ -1,6 +1,5 @@
 import { EmployeeType } from "@prisma/client";
 import { faker } from "@faker-js/faker";
-import { DateTime } from "luxon";
 import { Record } from "./flatfile";
 import { prismaClient } from "./prisma-client";
 
@@ -9,6 +8,11 @@ export const upsertEmployee = async ({
   organizationId,
   employeeId,
   employeeTypeId,
+  titleId,
+  socialSuffixId,
+  hireReasonId,
+  hireDate,
+  endEmploymentDate,
   locationId,
   managerId,
   jobFamilyId,
@@ -18,16 +22,17 @@ export const upsertEmployee = async ({
   organizationId: string;
   employeeId: string;
   employeeTypeId: string;
+  titleId: string;
+  socialSuffixId: string;
+  hireReasonId: string;
+  hireDate: Date;
+  endEmploymentDate: Date | null;
   locationId: string;
   managerId?: string;
   jobFamilyId: string;
   positionTimeId: string;
   flatfileRecordId?: string;
 }) => {
-  const hireReason = await prismaClient.hireReason.findFirst();
-  if (!hireReason) {
-    throw "Error upsertEmployees(): no hireReason record";
-  }
   const positionTime = await prismaClient.positionTime.findFirst();
   if (!positionTime) {
     throw "Error upsertEmployees(): no positionTime record";
@@ -55,14 +60,16 @@ export const upsertEmployee = async ({
       employeeId: employeeId,
       managerId: managerId,
       organizationId: organizationId,
+      titleId,
+      socialSuffixId,
+      hireReasonId,
       firstName: faker.name.firstName(),
       middleName: faker.name.middleName(),
       lastName: faker.name.lastName(),
       name: faker.name.fullName(),
       employeeTypeId,
-      hireReasonId: hireReason.id,
-      hireDate: DateTime.now().toJSDate(),
-      endEmploymentDate: null,
+      hireDate,
+      endEmploymentDate,
       jobFamilyId,
       positionTitle: "Sales Rep",
       businessTitle: "Sales Rep",

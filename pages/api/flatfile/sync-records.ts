@@ -2,16 +2,20 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import {
   EmployeeType,
+  HireReason,
   JobFamily,
   Location,
   PositionTime,
   PrismaClient,
+  Title,
 } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { getAccessToken, getRecords } from "../../../lib/flatfile";
 import { upsertEmployee, validRecords } from "../../../lib/employee";
 import { ActionType, createAction } from "../../../lib/action";
 import { inspect } from "util";
+import { prismaClient } from "../../../lib/prisma-client";
+import { DateTime } from "luxon";
 
 type Data = {
   message?: string;
@@ -45,8 +49,7 @@ export default async function handler(
 
   // console.log("valids", valids.length);
 
-  const prisma = new PrismaClient();
-  const employees = await prisma.employee.findMany({
+  const employees = await prismaClient.employee.findMany({
     where: {
       organizationId: token.organizationId,
     },
@@ -65,13 +68,21 @@ export default async function handler(
 
   // TODO - hacking this in to get seeds working then do this
   const employeeTypeId = (
-    (await prisma.employeeType.findFirst()) as EmployeeType
+    (await prismaClient.employeeType.findFirst()) as EmployeeType
   ).id;
-  const locationId = ((await prisma.location.findFirst()) as Location).id;
-  const jobFamilyId = ((await prisma.jobFamily.findFirst()) as JobFamily).id;
+  const locationId = ((await prismaClient.location.findFirst()) as Location).id;
+  const jobFamilyId = ((await prismaClient.jobFamily.findFirst()) as JobFamily)
+    .id;
   const positionTimeId = (
-    (await prisma.positionTime.findFirst()) as PositionTime
+    (await prismaClient.positionTime.findFirst()) as PositionTime
   ).id;
+  const titleId = ((await prismaClient.title.findFirst()) as Title).id;
+  const socialSuffixId = ((await prismaClient.title.findFirst()) as Title).id;
+  const hireReasonId = (
+    (await prismaClient.hireReason.findFirst()) as HireReason
+  ).id;
+  const hireDate = DateTime.now().toJSDate();
+  const endEmploymentDate = null;
 
   const upserts = newEmployeeRecords.map(async (r) => {
     try {
@@ -80,6 +91,11 @@ export default async function handler(
       let data: Parameters<typeof upsertEmployee>[0] = {
         organizationId: token.organizationId,
         employeeId: r.values.employeeId.value as string,
+        titleId,
+        socialSuffixId,
+        hireReasonId,
+        hireDate,
+        endEmploymentDate,
         locationId,
         employeeTypeId,
         jobFamilyId,
@@ -89,7 +105,7 @@ export default async function handler(
 
       if (r.values.managerId.value && r.values.managerId.value.length > 0) {
         // Does the manager record already exist?
-        let manager = await prisma.employee.findUnique({
+        let manager = await prismaClient.employee.findUnique({
           where: {
             employeeId: r.values.managerId.value,
           },

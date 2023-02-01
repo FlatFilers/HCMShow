@@ -32,6 +32,7 @@ export const main = async () => {
   await upsertHireReasons();
   await upsertTitleTypes();
   await upsertTitles();
+  await upsertPositionTimes();
 
   await createOtherData();
 
@@ -452,6 +453,30 @@ const upsertHireReasons = async () => {
   );
 };
 
+const upsertPositionTimes = async () => {
+  await prismaClient.positionTime.upsert({
+    where: {
+      slug: "Part_time",
+    },
+    create: {
+      slug: "Part_time",
+      name: "Part time",
+    },
+    update: {},
+  });
+
+  await prismaClient.positionTime.upsert({
+    where: {
+      slug: "Full_time",
+    },
+    create: {
+      slug: "Full_time",
+      name: "Full time",
+    },
+    update: {},
+  });
+};
+
 // TODO: Eventually this needs to be scoped to the organization.
 // Some of this may stay static.
 const createOtherData = async () => {
@@ -474,27 +499,6 @@ const createOtherData = async () => {
   //     countryId: country.id,
   //   },
   // });
-
-  const positionTime: PositionTime = await prismaClient.positionTime.upsert({
-    where: {
-      slug: "Part_time",
-    },
-    create: {
-      slug: "Part_time",
-      name: "Part time",
-    },
-    update: {},
-  });
-  await prismaClient.positionTime.upsert({
-    where: {
-      slug: "Full_time",
-    },
-    create: {
-      slug: "Full_time",
-      name: "Full time",
-    },
-    update: {},
-  });
 
   // const workShift: WorkShift = await prismaClient.workShift.create({
   //   data: {
@@ -559,10 +563,22 @@ const upsertEmployees = async (organizationId: string) => {
   const positionTimeId = (
     (await prismaClient.positionTime.findFirst()) as PositionTime
   ).id;
+  const titleId = ((await prismaClient.title.findFirst()) as Title).id;
+  const socialSuffixId = ((await prismaClient.title.findFirst()) as Title).id;
+  const hireReasonId = (
+    (await prismaClient.hireReason.findFirst()) as HireReason
+  ).id;
+  const hireDate = DateTime.now().toJSDate();
+  const endEmploymentDate = null;
 
   const data = {
     organizationId,
     employeeId: crypto.randomBytes(16).toString("hex"),
+    titleId,
+    socialSuffixId,
+    hireReasonId,
+    hireDate,
+    endEmploymentDate,
     locationId,
     employeeTypeId,
     jobFamilyId,
