@@ -8,7 +8,5 @@ export default async function handler(
   
   const countries = await prismaClient.country.findMany();  
 
-  const listCountries = countries.map(country => country.name)
-
-  res.send({listCountries})
+  res.send({countries})
 }
