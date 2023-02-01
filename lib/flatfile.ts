@@ -157,10 +157,10 @@ const getWorkbookIdAndSheetId = async (
   const result = await response.json();
 
   // TODO: Assuming just 1 workbook for this demo (but multiple sheets).
-  // console.log("sheets", result["data"][0]["sheets"]);
+  console.log("sheets", result["data"][0]["sheets"]);
 
   const sheetId = result["data"][0]["sheets"].find(
-    (s: { id: string; name: string; config: any }) => s.name === "Employees"
+    (s: { id: string; name: string; config: any }) => s.name === "MySheet"
   ).id;
 
   return {
