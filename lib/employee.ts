@@ -1,33 +1,29 @@
-import { User } from "@prisma/client";
-import * as bcrypt from "bcrypt";
-import { seedNewAccount } from "./seeds/main";
+import { EmployeeType } from "@prisma/client";
 import { faker } from "@faker-js/faker";
 import { DateTime } from "luxon";
-import { Field, Record } from "./flatfile";
-import { inspect } from "util";
+import { Record } from "./flatfile";
 import { prismaClient } from "./prisma-client";
-import { convertKeyToCamelCase, convertToCamelCase } from "./utils";
 
 // TODO: Temp solution until we get more of the fields in the config
 export const upsertEmployee = async ({
   organizationId,
   employeeId,
+  employeeTypeId,
+  locationId,
   managerId,
+  jobFamilyId,
+  positionTimeId,
   flatfileRecordId,
 }: {
   organizationId: string;
   employeeId: string;
+  employeeTypeId: string;
+  locationId: string;
   managerId?: string;
+  jobFamilyId: string;
+  positionTimeId: string;
   flatfileRecordId?: string;
 }) => {
-  const employeeType = await prismaClient.employeeType.findFirst();
-  if (!employeeType) {
-    throw "Error upsertEmployees(): no employeeType record";
-  }
-  const jobFamily = await prismaClient.jobFamily.findFirst();
-  if (!jobFamily) {
-    throw "Error upsertEmployees(): no jobFamily record";
-  }
   const hireReason = await prismaClient.hireReason.findFirst();
   if (!hireReason) {
     throw "Error upsertEmployees(): no hireReason record";
@@ -50,10 +46,6 @@ export const upsertEmployee = async ({
   if (!workerCompensationCode) {
     throw "Error upsertEmployees(): no workerCompensationCode record";
   }
-  const location = await prismaClient.location.findFirst();
-  if (!location) {
-    throw "Error upsertEmployees(): no location record";
-  }
 
   return await prismaClient.employee.upsert({
     where: {
@@ -67,16 +59,16 @@ export const upsertEmployee = async ({
       middleName: faker.name.middleName(),
       lastName: faker.name.lastName(),
       name: faker.name.fullName(),
-      employeeTypeId: employeeType.id,
+      employeeTypeId,
       hireReasonId: hireReason.id,
       hireDate: DateTime.now().toJSDate(),
       endEmploymentDate: null,
-      jobFamilyId: jobFamily.id,
+      jobFamilyId,
       positionTitle: "Sales Rep",
       businessTitle: "Sales Rep",
-      locationId: location.id,
+      locationId,
       // workspaceId: workspace.id,
-      positionTimeId: positionTime.id,
+      positionTimeId,
       // workShiftId: workShift.id,
       defaultWeeklyHours: 40,
       scheduledWeeklyHours: 40,

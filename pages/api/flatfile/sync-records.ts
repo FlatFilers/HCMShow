@@ -1,12 +1,17 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
+import {
+  EmployeeType,
+  JobFamily,
+  Location,
+  PositionTime,
+  PrismaClient,
+} from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { getAccessToken, getRecords } from "../../../lib/flatfile";
 import { upsertEmployee, validRecords } from "../../../lib/employee";
 import { ActionType, createAction } from "../../../lib/action";
 import { inspect } from "util";
-import { convertToCamelCase } from "../../../lib/utils";
 
 type Data = {
   message?: string;
@@ -58,18 +63,27 @@ export default async function handler(
   });
   // console.log("new emp", newEmployeeRecords.length);
 
+  // TODO - hacking this in to get seeds working then do this
+  const employeeTypeId = (
+    (await prisma.employeeType.findFirst()) as EmployeeType
+  ).id;
+  const locationId = ((await prisma.location.findFirst()) as Location).id;
+  const jobFamilyId = ((await prisma.jobFamily.findFirst()) as JobFamily).id;
+  const positionTimeId = (
+    (await prisma.positionTime.findFirst()) as PositionTime
+  ).id;
+
   const upserts = newEmployeeRecords.map(async (r) => {
     try {
-      const values = convertToCamelCase(r.values);
+      const values = r.values;
 
-      let data: {
-        organizationId: string;
-        employeeId: string;
-        managerId?: string;
-        flatfileRecordId?: string;
-      } = {
+      let data: Parameters<typeof upsertEmployee>[0] = {
         organizationId: token.organizationId,
         employeeId: r.values.employeeId.value as string,
+        locationId,
+        employeeTypeId,
+        jobFamilyId,
+        positionTimeId,
         flatfileRecordId: r.id,
       };
 

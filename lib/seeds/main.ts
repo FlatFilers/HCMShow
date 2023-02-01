@@ -1,5 +1,5 @@
+import { prismaClient } from "../prisma-client";
 import {
-  PrismaClient,
   Employee,
   EmployeeType,
   HireReason,
@@ -16,23 +16,19 @@ import {
 import { DateTime } from "luxon";
 import * as fs from "fs";
 import { parse } from "fast-csv";
-import { faker } from "@faker-js/faker";
 import { hashPassword } from "../user";
 import crypto from "crypto";
 import { upsertEmployee } from "../employee";
-
-const prisma = new PrismaClient();
 
 export const main = async () => {
   console.log("Seeding...");
 
   await upsertCountries();
   await upsertLocations();
-
   await upsertEmployeeTypes();
   await upsertJobFamilies();
+  await upsertHireReasons();
 
-  await upsertEmployeeTypes();
   await createOtherData();
 
   const user = await upsertUser();
@@ -41,7 +37,7 @@ export const main = async () => {
 };
 
 export const seedNewAccount = async (user: User) => {
-  const existingEmployees = await prisma.employee.findMany({
+  const existingEmployees = await prismaClient.employee.findMany({
     where: {
       organizationId: user.organizationId,
     },
@@ -69,7 +65,7 @@ const upsertJobFamilies = async () => {
             effectiveDate: DateTime.fromFormat(row[1], "yyyy-MM-dd").toJSDate(),
             name: row[2],
             summary: row[3],
-            isInactive: row[4] !== "n",
+            isInactive: row[4] !== "y",
           });
         })
         .on("end", () => {
@@ -80,7 +76,7 @@ const upsertJobFamilies = async () => {
   const csvData = await Promise.resolve(parseCsv);
 
   const promises = csvData.map(async (data) => {
-    const jobFamily: JobFamily = await prisma.jobFamily.upsert({
+    const jobFamily: JobFamily = await prismaClient.jobFamily.upsert({
       where: {
         slug: data.slug,
       },
@@ -116,7 +112,7 @@ const upsertCountries = async () => {
   const csvData = await Promise.resolve(parseCsv);
 
   const promises = csvData.map(async (data) => {
-    const country: Country = await prisma.country.upsert({
+    const country: Country = await prismaClient.country.upsert({
       where: {
         code: data.code,
       },
@@ -166,7 +162,7 @@ const upsertEmployeeTypes = async () => {
   const employeeTypesUpserts = csvData.map(async (data) => {
     const { countryCodes, ...employeeTypeData } = data;
 
-    return await prisma.employeeType.upsert({
+    return await prismaClient.employeeType.upsert({
       where: {
         slug: data.slug,
       },
@@ -182,11 +178,11 @@ const upsertEmployeeTypes = async () => {
       csvData.find((row) => e.slug === row.slug)?.countryCodes || [];
 
     const countryUpdates = countryCodes.map(async (code) => {
-      const country = (await prisma.country.findUnique({
+      const country = (await prismaClient.country.findUnique({
         where: { code },
       })) as Country;
 
-      await prisma.employeeType.update({
+      await prismaClient.employeeType.update({
         where: { id: e.id },
         data: {
           countries: {
@@ -229,7 +225,7 @@ const upsertLocations = async () => {
           slug: row[0],
           effectiveDate: DateTime.fromFormat(row[1], "yyyy-MM-dd").toJSDate(),
           name: row[2],
-          isInactive: row[5] !== "n",
+          isInactive: row[5] !== "y",
           latitude: Number.parseFloat(row[6]),
           longitude: Number.parseFloat(row[7]),
           altitude: Number.parseFloat(row[8]),
@@ -255,7 +251,7 @@ const upsertLocations = async () => {
         return mappedData;
       }
 
-      const country = await prisma.country.findUnique({
+      const country = await prismaClient.country.findUnique({
         where: {
           code: data.countryCode,
         },
@@ -283,7 +279,7 @@ const upsertLocations = async () => {
   const promises = await Promise.all(
     dataWithCountries.map(async (data) => {
       try {
-        await prisma.location.upsert({
+        await prismaClient.location.upsert({
           where: {
             slug: data.slug,
           },
@@ -297,44 +293,51 @@ const upsertLocations = async () => {
   );
 };
 
+const upsertHireReasons = async () => {
+  type CsvType = Omit<HireReason, "id" | "createdAt" | "updatedAt">;
+
+  const parseCsv: Promise<CsvType[]> = new Promise((resolve, reject) => {
+    const data: CsvType[] = [];
+
+    fs.createReadStream("./lib/seeds/data/seed_hire_reasons.csv")
+      .pipe(parse({ headers: true }))
+      .on("error", reject)
+      .on("data", (row: any) => {
+        data.push({
+          slug: row["ID"],
+          category: row["Reason Category"],
+          isInactive: row["Inactive"] === "y",
+          classificationName: row["Event Classification Name"],
+          classificationSlug: row["Event Classification ID"],
+          subcategorySlug: row["General Event Subcategory ID"],
+          reason: row["Reason"],
+          isManagerReason: row["Manager Reason"] === "y",
+        });
+      })
+      .on("end", () => {
+        resolve(data);
+      });
+  });
+
+  const csvData = await Promise.resolve(parseCsv);
+
+  await Promise.all(
+    csvData.map(async (data) => {
+      await prismaClient.hireReason.upsert({
+        where: {
+          subcategorySlug: data.subcategorySlug,
+        },
+        create: data,
+        update: {},
+      });
+    })
+  );
+};
+
 // TODO: Eventually this needs to be scoped to the organization.
 // Some of this may stay static.
 const createOtherData = async () => {
-  // // TODO: need to define unique constraints here to do upsert
-  // const hireReasonData = {
-  //   slug: "Additional_Headcount_Request_Headcount_Request",
-  //   category: "Headcount Request",
-  //   isInactive: false,
-  //   classificationName: "Additional Headcount Request",
-  //   classificationSlug: "ADDITIONAL_HEADCOUNT_REQUEST",
-  //   subcategorySlug:
-  //     "Additional_Headcount_Request_Headcount_Request_New_Project",
-  //   reason: "New Project",
-  //   isManagerReason: true,
-  // };
-  // const hireReason = await prisma.hireReason.upsert({
-  //   where: {
-  //     slug: hireReasonData.slug,
-  //   },
-  //   create: hireReasonData,
-  //   update: {},
-  // });
-
-  const hireReason = await prisma.hireReason.create({
-    data: {
-      slug: "Additional_Headcount_Request_Headcount_Request",
-      category: "Headcount Request",
-      isInactive: false,
-      classificationName: "Additional Headcount Request",
-      classificationSlug: "ADDITIONAL_HEADCOUNT_REQUEST",
-      subcategorySlug:
-        "Additional_Headcount_Request_Headcount_Request_New_Project",
-      reason: "New Project",
-      isManagerReason: true,
-    },
-  });
-
-  // const workspace: Location = await prisma.location.create({
+  // const workspace: Location = await prismaClient.location.create({
   //   data: {
   //     name: "Front desk",
   //     slug: "Front desk",
@@ -354,14 +357,28 @@ const createOtherData = async () => {
   //   },
   // });
 
-  const positionTime: PositionTime = await prisma.positionTime.create({
-    data: {
+  const positionTime: PositionTime = await prismaClient.positionTime.upsert({
+    where: {
+      slug: "Part_time",
+    },
+    create: {
       slug: "Part_time",
       name: "Part time",
     },
+    update: {},
+  });
+  await prismaClient.positionTime.upsert({
+    where: {
+      slug: "Full_time",
+    },
+    create: {
+      slug: "Full_time",
+      name: "Full time",
+    },
+    update: {},
   });
 
-  // const workShift: WorkShift = await prisma.workShift.create({
+  // const workShift: WorkShift = await prismaClient.workShift.create({
   //   data: {
   //     slug: "Day_United_States_of_America",
   //     name: "Day",
@@ -377,7 +394,7 @@ const createOtherData = async () => {
     isInactive: false,
     frequency: "Hourly",
   };
-  const payRate: PayRate = await prisma.payRate.upsert({
+  const payRate: PayRate = await prismaClient.payRate.upsert({
     where: {
       slug: "Hourly",
     },
@@ -386,28 +403,28 @@ const createOtherData = async () => {
   });
 
   const additionalJobClassification: AdditionalJobClassification =
-    await prisma.additionalJobClassification.create({
+    await prismaClient.additionalJobClassification.create({
       data: {},
     });
 
   const workerCompensationCode: WorkerCompensationCode =
-    await prisma.workerCompensationCode.create({
+    await prismaClient.workerCompensationCode.create({
       data: {},
     });
 
-  const employeeType = await prisma.employeeType.findFirst();
+  const employeeType = await prismaClient.employeeType.findFirst();
 
   if (!employeeType) {
     throw "Error upsertEmployees(): no employeeType record";
   }
 
-  const jobFamily = await prisma.jobFamily.findFirst();
+  const jobFamily = await prismaClient.jobFamily.findFirst();
 
   if (!jobFamily) {
     throw "Error upsertEmployees(): no jobFamily record";
   }
 
-  const location = await prisma.location.findFirst();
+  const location = await prismaClient.location.findFirst();
 
   if (!location) {
     throw "Error upsertEmployees(): no location record";
@@ -415,14 +432,29 @@ const createOtherData = async () => {
 };
 
 const upsertEmployees = async (organizationId: string) => {
-  const manager: Employee = await upsertEmployee({
+  const employeeTypeId = (
+    (await prismaClient.employeeType.findFirst()) as EmployeeType
+  ).id;
+  const locationId = ((await prismaClient.location.findFirst()) as Location).id;
+  const jobFamilyId = ((await prismaClient.jobFamily.findFirst()) as JobFamily)
+    .id;
+  const positionTimeId = (
+    (await prismaClient.positionTime.findFirst()) as PositionTime
+  ).id;
+
+  const data = {
     organizationId,
     employeeId: crypto.randomBytes(16).toString("hex"),
-  });
+    locationId,
+    employeeTypeId,
+    jobFamilyId,
+    positionTimeId,
+  };
+  const manager: Employee = await upsertEmployee(data);
 
   const directReports = Array.from({ length: 10 }).map(async () => {
     await upsertEmployee({
-      organizationId,
+      ...data,
       employeeId: crypto.randomBytes(16).toString("hex"),
       managerId: manager.id,
     });
@@ -438,7 +470,7 @@ const upsertUser = async () => {
     email,
   };
 
-  const organization = await prisma.organization.upsert({
+  const organization = await prismaClient.organization.upsert({
     where: {
       email,
     },
@@ -456,7 +488,7 @@ const upsertUser = async () => {
     },
   };
 
-  const user: User = await prisma.user.upsert({
+  const user: User = await prismaClient.user.upsert({
     where: {
       email: data.email,
     },

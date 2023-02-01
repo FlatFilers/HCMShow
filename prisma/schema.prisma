@@ -180,7 +180,7 @@ model HireReason {
   isInactive Boolean
   classificationName String
   classificationSlug String
-  subcategorySlug String
+  subcategorySlug String @unique
   reason String
   isManagerReason Boolean
 
@@ -233,7 +233,7 @@ model PositionTime {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  slug String
+  slug String @unique
   name String
 
   employees Employee[]
