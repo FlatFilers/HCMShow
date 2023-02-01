@@ -109,7 +109,7 @@ const upsertTitleTypes = async () => {
 
   await Promise.all(
     Object.keys(data).map(async (key) => {
-      await prisma.titleType.upsert({
+      await prismaClient.titleType.upsert({
         where: {
           slug: data[key],
         },
@@ -161,13 +161,13 @@ const upsertTitles = async () => {
         ...rest,
       };
 
-      const country = (await prisma.country.findUnique({
+      const country = (await prismaClient.country.findUnique({
         where: {
           code: data.countryCode,
         },
       })) as Country;
 
-      const titleType = (await prisma.titleType.findUnique({
+      const titleType = (await prismaClient.titleType.findUnique({
         where: {
           slug: data.titleTypeSlug,
         },
@@ -195,7 +195,7 @@ const upsertTitles = async () => {
 
   await Promise.all(
     dataWithCountries.map(async (data) => {
-      await prisma.title.upsert({
+      await prismaClient.title.upsert({
         where: {
           slug: data.slug,
         },
