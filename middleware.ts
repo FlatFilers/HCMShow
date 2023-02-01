@@ -23,7 +23,7 @@ export default withAuth(
           req.nextUrl.pathname === "/signup" ||
           req.nextUrl.pathname === "api/health_check" ||
           req.nextUrl.pathname.includes("api/auth") ||
-          req.nextUrl.pathname.includes("api/countries") ||
+          req.nextUrl.pathname.includes("api/v1") ||
           req.nextUrl.pathname.includes("api/health_check")
         ) {
           return true;
