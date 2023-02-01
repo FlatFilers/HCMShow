@@ -12,6 +12,8 @@ import {
   AdditionalJobClassification,
   WorkerCompensationCode,
   User,
+  Title,
+  TitleType,
 } from "@prisma/client";
 import { DateTime } from "luxon";
 import * as fs from "fs";
@@ -28,6 +30,8 @@ export const main = async () => {
   await upsertEmployeeTypes();
   await upsertJobFamilies();
   await upsertHireReasons();
+  await upsertTitleTypes();
+  await upsertTitles();
 
   await createOtherData();
 
@@ -86,6 +90,120 @@ const upsertJobFamilies = async () => {
   });
 
   await Promise.all(promises);
+};
+
+const upsertTitleTypes = async () => {
+  const data: {
+    [key: string]: string;
+  } = {
+    Title: "TITLE",
+    Social: "SOCIAL",
+    Royal: "ROYAL",
+    Religious: "RELIGIOUS",
+    Professional: "PROFESSIONAL",
+    Honorary: "HONORARY",
+    Hereditary: "HEREDITARY",
+    Academic: "ACADEMIC",
+    Salutation: "SALUTATION",
+  };
+
+  await Promise.all(
+    Object.keys(data).map(async (key) => {
+      await prisma.titleType.upsert({
+        where: {
+          slug: data[key],
+        },
+        create: {
+          name: key,
+          slug: data[key],
+        },
+        update: {},
+      });
+    })
+  );
+};
+
+const upsertTitles = async () => {
+  type CsvType = Omit<
+    Title,
+    "id" | "createdAt" | "updatedAt" | "titleTypeId" | "countryId"
+  > & { countryCode: string; titleTypeSlug: string };
+
+  const parseCsv: Promise<CsvType[]> = new Promise((resolve, reject) => {
+    const data: CsvType[] = [];
+
+    fs.createReadStream("./lib/seeds/data/seed_titles.csv")
+      .pipe(parse({ skipRows: 1 }))
+      .on("error", reject)
+      .on("data", (row: any) => {
+        data.push({
+          countryCode: row[0],
+          titleTypeSlug: row[1],
+          value: row[2],
+          slug: row[3],
+        });
+      })
+      .on("end", () => {
+        resolve(data);
+      });
+  });
+
+  const csvData = await Promise.resolve(parseCsv);
+
+  const dataWithCountries = await Promise.all(
+    csvData.map(async (data) => {
+      const { countryCode, titleTypeSlug, ...rest } = data;
+
+      let mappedData: Omit<CsvType, "countryCode" | "titleTypeSlug"> & {
+        country?: any;
+        titleType?: any;
+      } = {
+        ...rest,
+      };
+
+      const country = (await prisma.country.findUnique({
+        where: {
+          code: data.countryCode,
+        },
+      })) as Country;
+
+      const titleType = (await prisma.titleType.findUnique({
+        where: {
+          slug: data.titleTypeSlug,
+        },
+      })) as TitleType;
+
+      mappedData = {
+        ...mappedData,
+        country: {
+          connect: {
+            id: country.id,
+          },
+        },
+        titleType: {
+          connect: {
+            id: titleType.id,
+          },
+        },
+      };
+
+      return {
+        ...mappedData,
+      };
+    })
+  );
+
+  await Promise.all(
+    dataWithCountries.map(async (data) => {
+      await prisma.title.upsert({
+        where: {
+          slug: data.slug,
+        },
+        create: data,
+        update: {},
+      });
+    })
+  );
 };
 
 const upsertCountries = async () => {
