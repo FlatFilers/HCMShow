@@ -22,8 +22,6 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);
     space ? setButtonText("Syncing records...") : setButtonText("Creating space...");
-    
-    
   };
 
   const router = useRouter();
