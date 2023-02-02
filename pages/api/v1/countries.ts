@@ -10,10 +10,9 @@ export default async function handler(
 
   const listCountries = countries.map(country => {
     return {
-      id: country.id,
-      createdAt: country.createdAt,
-      updatedAt: country.updatedAt,
-      name: country.name
+      name: country.name,
+      type: country.type,
+      code: country.code,
     }
   })
 
