@@ -69,6 +69,7 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
           <form action="/api/flatfile/create-space" onSubmit={handleSubmit}>
             <button
               onClick={() => toast.loading("Creating Space...")}
+              disabled={isSubmitting}
               className={`${
                 isSubmitting
                   ? "bg-indigo-400 hover:cursor-not-allowed"
@@ -125,6 +126,7 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
             <form action="/api/flatfile/sync-records" method="post" onSubmit={handleSubmit}>
               <button
                 onClick={() => toast.loading("Syncing...")}
+                disabled={isSubmitting}
                 type="submit"
                 className={`${
                   isSubmitting
