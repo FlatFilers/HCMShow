@@ -264,7 +264,8 @@ model PayRate {
   name String @unique
   slug String @unique
   isInactive Boolean
-  frequency String
+  // TODO: should be an association
+  frequency String?
 
   employees Employee[]
 }
