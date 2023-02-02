@@ -49,7 +49,7 @@ export const main = async () => {
 
 const upsertAddresses = async () => {
   await Promise.all(
-    Array.from({ length: 10 }).map(async (element) => {
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(async (element) => {
       const addressId = `todo-fake-id-${element}`;
 
       await prismaClient.address.upsert({
