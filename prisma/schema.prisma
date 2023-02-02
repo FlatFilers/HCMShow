@@ -156,6 +156,8 @@ model Country {
   titles Title[]
   addresses Address[]
   phoneNumbers PhoneNumber[]
+  additionalJobClassifications AdditionalJobClassification[]
+  workerCompensationCodes WorkerCompensationCode[]
 }
 
 model CountryRegion {
@@ -270,11 +272,17 @@ model PayRate {
   employees Employee[]
 }
 
-// WIP
 model AdditionalJobClassification { 
   id String @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  countryId String? @db.Uuid
+  country Country? @relation(fields: [countryId], references: [id])
+  slug String @unique
+  jobClassificationId String
+  description String
+  isInactive Boolean
 
   employees Employee[]
 }
