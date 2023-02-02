@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import {
+  addDocumentToSpace,
   addGuestToSpace,
   createSpace,
   getAccessToken,
@@ -40,6 +41,7 @@ export default async function handler(
   const accessToken = await getAccessToken();
 
   const flatfileSpaceData = await createSpace(accessToken);
+  const spaceId = flatfileSpaceData.id;
 
   const addGuestToSpaceResponse = await addGuestToSpace(user, flatfileSpaceData, accessToken);
 
@@ -48,7 +50,7 @@ export default async function handler(
     accessToken
   );
 
-  const inviteGuestsToSpaceResponse = await inviteGuestToSpace(addGuestToSpaceResponse[0].id, flatfileSpaceData.id, accessToken);
+  const inviteGuestsToSpaceResponse = await inviteGuestToSpace(addGuestToSpaceResponse[0].id, spaceId, accessToken);
 
   // console.log('inviteGuestsToSpaceResponse', inviteGuestsToSpaceResponse.success);
 
@@ -62,6 +64,10 @@ export default async function handler(
 
   // console.log("space", space);
   // console.log("space data", space.flatfileData);
+
+  const addDocumentToSpaceResponse = await addDocumentToSpace("Document title", "Document body", spaceId, accessToken);
+
+  // console.log("addDocumentToSpaceResponse", addDocumentToSpaceResponse);
 
   res.redirect("/onboarding?message=Created space");
 }

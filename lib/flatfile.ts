@@ -322,3 +322,40 @@ export const inviteGuestToSpace = async (
 
   return inviteGuestResult.data;
 };
+
+export const addDocumentToSpace = async (
+  title: string,
+  body: string,
+  spaceId: string,
+  accessToken: string,
+) => {
+
+  const payload =
+    {
+      title: title,
+      body: body,
+    }
+
+  const addDocumentToSpaceResponse: Response = await fetch(`${BASE_PATH}/spaces/${spaceId}/documents`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  // console.log("addDocumentToSpaceResponse", addDocumentToSpaceResponse);
+  // console.log(
+  //   "addDocumentToSpaceResponse body",
+  //   await addDocumentToSpaceResponse.json()
+  // );
+
+  if (!addDocumentToSpaceResponse.ok) {
+    throw new Error("Error adding document to space");
+  }
+
+  const addDocumentResult = await addDocumentToSpaceResponse.json();
+
+  return addDocumentResult.data;
+};
