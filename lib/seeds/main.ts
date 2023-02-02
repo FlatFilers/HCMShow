@@ -14,6 +14,8 @@ import {
   User,
   Title,
   TitleType,
+  prisma,
+  Address,
 } from "@prisma/client";
 import { DateTime } from "luxon";
 import * as fs from "fs";
@@ -36,12 +38,38 @@ export const main = async () => {
   await upsertPositionTimes();
   await upsertPayRates();
   await upsertAdditionalJobClassifications();
+  await upsertAddresses();
 
   await createOtherData();
 
   const user = await upsertUser();
 
   await seedNewAccount(user);
+};
+
+const upsertAddresses = async () => {
+  await Promise.all(
+    Array.from({ length: 10 }).map(async (element) => {
+      const addressId = `todo-fake-id-${element}`;
+
+      await prismaClient.address.upsert({
+        where: {
+          addressId,
+        },
+        create: {
+          addressId,
+          addressLineData: faker.address.streetAddress(),
+          city: faker.address.city(),
+          state: faker.address.state(),
+          countryId: ((await prismaClient.country.findFirst()) as Country).id,
+          isPublic: true,
+          isPrimary: true,
+          postalCode: "94105",
+        },
+        update: {},
+      });
+    })
+  );
 };
 
 export const seedNewAccount = async (user: User) => {
@@ -660,6 +688,9 @@ const upsertEmployees = async (organizationId: string) => {
   const workerCompensationCodeId = (
     (await prismaClient.workerCompensationCode.findFirst()) as WorkerCompensationCode
   ).id;
+  const addresses = await prismaClient.address.findMany({
+    take: 2,
+  });
 
   const data = {
     organizationId,
@@ -684,6 +715,7 @@ const upsertEmployees = async (organizationId: string) => {
     payRateId,
     additionalJobClassificationId,
     workerCompensationCodeId,
+    addresses,
   };
   const manager: Employee = await upsertEmployee(data);
 

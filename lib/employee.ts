@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { Record } from "./flatfile";
 import { prismaClient } from "./prisma-client";
+import { Address, prisma } from "@prisma/client";
 
 // TODO: Temp solution until we get more of the fields in the config
 export const upsertEmployee = async ({
@@ -27,6 +28,7 @@ export const upsertEmployee = async ({
   payRateId,
   additionalJobClassificationId,
   workerCompensationCodeId,
+  addresses,
   flatfileRecordId,
 }: {
   organizationId: string;
@@ -52,9 +54,10 @@ export const upsertEmployee = async ({
   payRateId: string;
   additionalJobClassificationId: string;
   workerCompensationCodeId: string;
+  addresses: Address[];
   flatfileRecordId?: string;
 }) => {
-  return await prismaClient.employee.upsert({
+  const employee = await prismaClient.employee.upsert({
     where: {
       employeeId,
     },
@@ -89,6 +92,31 @@ export const upsertEmployee = async ({
     },
     update: {},
   });
+
+  await prismaClient.employee.update({
+    where: {
+      employeeId,
+    },
+    data: {
+      addresses: {
+        connectOrCreate: addresses.map((a) => {
+          return {
+            where: {
+              addressId_employeeId: {
+                addressId: a.id,
+                employeeId: employee.employeeId,
+              },
+            },
+            create: {
+              addressId: a.id,
+            },
+          };
+        }),
+      },
+    },
+  });
+
+  return employee;
 };
 
 export const validRecords = async (records: Record[]) => {

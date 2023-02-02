@@ -157,7 +157,6 @@ model Country {
   addresses Address[]
   phoneNumbers PhoneNumber[]
   additionalJobClassifications AdditionalJobClassification[]
-  workerCompensationCodes WorkerCompensationCode[]
 }
 
 model CountryRegion {
@@ -339,8 +338,10 @@ model Address {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // FF fields
+  addressId String @unique
   effectiveDate DateTime?
+  city String
+  state String
   countryId String? @db.Uuid
   country Country? @relation(fields: [countryId], references: [id])
   addressLineTypeId String? @db.Uuid

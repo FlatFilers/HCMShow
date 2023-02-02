@@ -102,6 +102,9 @@ export default async function handler(
   const workerCompensationCodeId = (
     (await prismaClient.workerCompensationCode.findFirst()) as WorkerCompensationCode
   ).id;
+  const addresses = await prismaClient.address.findMany({
+    take: 2,
+  });
 
   const upserts = newEmployeeRecords.map(async (r) => {
     try {
@@ -113,6 +116,9 @@ export default async function handler(
         titleId,
         socialSuffixId,
         hireReasonId,
+        firstName: "todo",
+        middleName: "todo",
+        lastName: "todo",
         hireDate,
         endEmploymentDate,
         positionTitle,
@@ -127,6 +133,7 @@ export default async function handler(
         payRateId,
         additionalJobClassificationId,
         workerCompensationCodeId,
+        addresses,
         flatfileRecordId: r.id,
       };
 
