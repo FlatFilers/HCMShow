@@ -1,7 +1,7 @@
-import { EmployeeType } from "@prisma/client";
 import { faker } from "@faker-js/faker";
 import { Record } from "./flatfile";
 import { prismaClient } from "./prisma-client";
+import { Address, prisma } from "@prisma/client";
 
 // TODO: Temp solution until we get more of the fields in the config
 export const upsertEmployee = async ({
@@ -11,6 +11,9 @@ export const upsertEmployee = async ({
   titleId,
   socialSuffixId,
   hireReasonId,
+  firstName,
+  middleName,
+  lastName,
   hireDate,
   endEmploymentDate,
   positionTitle,
@@ -25,6 +28,7 @@ export const upsertEmployee = async ({
   payRateId,
   additionalJobClassificationId,
   workerCompensationCodeId,
+  addresses,
   flatfileRecordId,
 }: {
   organizationId: string;
@@ -33,6 +37,9 @@ export const upsertEmployee = async ({
   titleId: string;
   socialSuffixId: string;
   hireReasonId: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
   hireDate: Date;
   endEmploymentDate: Date | null;
   positionTitle: string;
@@ -47,9 +54,10 @@ export const upsertEmployee = async ({
   payRateId: string;
   additionalJobClassificationId: string;
   workerCompensationCodeId: string;
+  addresses: Address[];
   flatfileRecordId?: string;
 }) => {
-  return await prismaClient.employee.upsert({
+  const employee = await prismaClient.employee.upsert({
     where: {
       employeeId,
     },
@@ -60,9 +68,10 @@ export const upsertEmployee = async ({
       titleId,
       socialSuffixId,
       hireReasonId,
-      firstName: faker.name.firstName(),
-      middleName: faker.name.middleName(),
-      lastName: faker.name.lastName(),
+      firstName,
+      middleName,
+      lastName,
+      // TODO: remove
       name: faker.name.fullName(),
       employeeTypeId,
       hireDate,
@@ -83,6 +92,31 @@ export const upsertEmployee = async ({
     },
     update: {},
   });
+
+  await prismaClient.employee.update({
+    where: {
+      employeeId,
+    },
+    data: {
+      addresses: {
+        connectOrCreate: addresses.map((a) => {
+          return {
+            where: {
+              addressId_employeeId: {
+                addressId: a.id,
+                employeeId: employee.employeeId,
+              },
+            },
+            create: {
+              addressId: a.id,
+            },
+          };
+        }),
+      },
+    },
+  });
+
+  return employee;
 };
 
 export const validRecords = async (records: Record[]) => {

@@ -14,6 +14,8 @@ import {
   User,
   Title,
   TitleType,
+  prisma,
+  Address,
 } from "@prisma/client";
 import { DateTime } from "luxon";
 import * as fs from "fs";
@@ -21,6 +23,7 @@ import { parse } from "fast-csv";
 import { hashPassword } from "../user";
 import crypto from "crypto";
 import { upsertEmployee } from "../employee";
+import { faker } from "@faker-js/faker";
 
 export const main = async () => {
   console.log("Seeding...");
@@ -34,12 +37,39 @@ export const main = async () => {
   await upsertTitles();
   await upsertPositionTimes();
   await upsertPayRates();
+  await upsertAdditionalJobClassifications();
+  await upsertAddresses();
 
   await createOtherData();
 
   const user = await upsertUser();
 
   await seedNewAccount(user);
+};
+
+const upsertAddresses = async () => {
+  await Promise.all(
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(async (element) => {
+      const addressId = `todo-fake-id-${element}`;
+
+      await prismaClient.address.upsert({
+        where: {
+          addressId,
+        },
+        create: {
+          addressId,
+          addressLineData: faker.address.streetAddress(),
+          city: faker.address.city(),
+          state: faker.address.state(),
+          countryId: ((await prismaClient.country.findFirst()) as Country).id,
+          isPublic: true,
+          isPrimary: true,
+          postalCode: "94105",
+        },
+        update: {},
+      });
+    })
+  );
 };
 
 export const seedNewAccount = async (user: User) => {
@@ -513,80 +543,116 @@ const upsertPayRates = async () => {
   );
 };
 
+const upsertAdditionalJobClassifications = async () => {
+  const data = [
+    [
+      "US",
+      "1_1_Executive_Senior_Level_Officials_and_Managers_United_States_EEO_1_United_States_of_America",
+      "1.1 Executive/Senior Level Officials and ",
+      "Managers",
+      "n",
+    ],
+    [
+      "US",
+      "1_2_First_Mid_Level_Officials_and_Managers_United_States_EEO_1_United_States_of_America",
+      "1.2 First/Mid-Level Officials and ",
+      "Managers",
+      "n",
+    ],
+    [
+      "US",
+      "2_Professionals_United_States_EEO_1_United_States_of_America",
+      "2 ",
+      "Professionals",
+      "n",
+    ],
+    [
+      "US",
+      "3_Techincians_United_States_EEO_1_United_States_of_America",
+      "3 ",
+      "Techincians",
+      "n",
+    ],
+    [
+      "US",
+      "4_Sales_Workers_United_States_EEO_1_United_States_of_America",
+      "4 Sales ",
+      "Workers",
+      "n",
+    ],
+    [
+      "US",
+      "5_Administrative_Support_Workers_United_States_EEO_1_United_States_of_America",
+      "5 Administrative Support ",
+      "Workers",
+      "n",
+    ],
+    [
+      "US",
+      "6_Craft_Workers_United_States_EEO_1_United_States_of_America",
+      "6 Craft ",
+      "Workers",
+      "n",
+    ],
+    [
+      "US",
+      "7_Operatives_United_States_EEO_1_United_States_of_America",
+      "7 ",
+      "Operatives",
+      "n",
+    ],
+    [
+      "US",
+      "8_Laborers_and_Helpers_United_States_EEO_1_United_States_of_America",
+      "8 Laborers and ",
+      "Helpers",
+      "n",
+    ],
+    [
+      "US",
+      "9_Service_Workers_United_States_EEO_1_United_States_of_America",
+      "9 Service ",
+      "Workers",
+      "n",
+    ],
+  ];
+
+  await Promise.all(
+    data.map(async (d) => {
+      const country = (await prismaClient.country.findUnique({
+        where: {
+          code: d[0],
+        },
+      })) as Country;
+
+      await prismaClient.additionalJobClassification.upsert({
+        where: {
+          slug: d[1],
+        },
+        create: {
+          slug: d[1],
+          jobClassificationId: d[2],
+          description: d[3],
+          isInactive: d[4] === "y",
+          country: {
+            connect: {
+              id: country.id,
+            },
+          },
+        },
+        update: {},
+      });
+    })
+  );
+};
+
 // TODO: Eventually this needs to be scoped to the organization.
 // Some of this may stay static.
 const createOtherData = async () => {
-  // const workspace: Location = await prismaClient.location.create({
-  //   data: {
-  //     name: "Front desk",
-  //     slug: "Front desk",
-  //     effectiveDate: DateTime.now().toJSDate(),
-  //     // location usage id req rel
-  //     isInactive: false,
-  //     latitude: 123.12,
-  //     longitude: 65.4,
-  //     altitude: 8456.22,
-
-  //     // time profile id
-  //     // locale id
-  //     // time zone id
-  //     // currency id
-
-  //     countryId: country.id,
-  //   },
-  // });
-
-  // const workShift: WorkShift = await prismaClient.workShift.create({
-  //   data: {
-  //     slug: "Day_United_States_of_America",
-  //     name: "Day",
-  //     description: "Day	US",
-  //     countryId: country.id,
-  //     isInactive: false,
-  //   },
-  // });
-
-  // const payRateData = {
-  //   name: "Hourly",
-  //   slug: "Hourly",
-  //   isInactive: false,
-  //   frequency: "Hourly",
-  // };
-  // const payRate: PayRate = await prismaClient.payRate.upsert({
-  //   where: {
-  //     slug: "Hourly",
-  //   },
-  //   create: payRateData,
-  //   update: {},
-  // });
-
-  const additionalJobClassification: AdditionalJobClassification =
-    await prismaClient.additionalJobClassification.create({
-      data: {},
-    });
-
   const workerCompensationCode: WorkerCompensationCode =
     await prismaClient.workerCompensationCode.create({
       data: {},
     });
-
-  const employeeType = await prismaClient.employeeType.findFirst();
-
-  if (!employeeType) {
-    throw "Error upsertEmployees(): no employeeType record";
-  }
-
-  const jobFamily = await prismaClient.jobFamily.findFirst();
-
-  if (!jobFamily) {
-    throw "Error upsertEmployees(): no jobFamily record";
-  }
-
-  const location = await prismaClient.location.findFirst();
-
-  if (!location) {
-    throw "Error upsertEmployees(): no location record";
-  }
 };
 
 const upsertEmployees = async (organizationId: string) => {
@@ -622,6 +688,9 @@ const upsertEmployees = async (organizationId: string) => {
   const workerCompensationCodeId = (
     (await prismaClient.workerCompensationCode.findFirst()) as WorkerCompensationCode
   ).id;
+  const addresses = await prismaClient.address.findMany({
+    take: 2,
+  });
 
   const data = {
     organizationId,
@@ -629,6 +698,9 @@ const upsertEmployees = async (organizationId: string) => {
     titleId,
     socialSuffixId,
     hireReasonId,
+    firstName: faker.name.firstName(),
+    middleName: faker.name.middleName(),
+    lastName: faker.name.lastName(),
     hireDate,
     endEmploymentDate,
     positionTitle,
@@ -643,6 +715,7 @@ const upsertEmployees = async (organizationId: string) => {
     payRateId,
     additionalJobClassificationId,
     workerCompensationCodeId,
+    addresses,
   };
   const manager: Employee = await upsertEmployee(data);
 
