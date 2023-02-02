@@ -11,7 +11,7 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   // TODO: Hack to run seeds on Heroku
-  // await main();
+  await main();
 
   res.status(200).json({ name: "John Doe" });
 }
