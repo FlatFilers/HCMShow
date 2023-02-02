@@ -251,17 +251,11 @@ export const addGuestToSpace = async (
   flatfileSpaceData: FlatfileSpaceData,
   accessToken: string
 ) => {
-  // TODO: Hack until we can add existing guests to a space
-  // Adds a +timestamp in the email so this is always unique
-  const userEmailPieces = user.email.split("@");
-  const email = `${userEmailPieces[0]}+${DateTime.now().toMillis()}@${
-    userEmailPieces[1]
-  }`;
 
   const payload = [
     {
       environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
-      email: email,
+      email: user.email,
       name: "Guest",
       spaces: [
         {
