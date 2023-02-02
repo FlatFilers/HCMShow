@@ -17,10 +17,13 @@ const sampleDataFileName = "/sample-data/sample-hcm-employees.csv";
 
 const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [buttonText, setButtonText] = useState<string>("Create Space");
+  let defaultText = space ? "Sync Records" : "Create Space";
+  const [buttonText, setButtonText] = useState<string>(defaultText);
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);
-    setButtonText("Creating space...");
+    space ? setButtonText("Syncing records...") : setButtonText("Creating space...");
+    
+    
   };
 
   const router = useRouter();
@@ -67,11 +70,12 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
 
           <form action="/api/flatfile/create-space" onSubmit={handleSubmit}>
             <button
+              onClick={() => toast.loading("Creating Space...")}
               className={`${
                 isSubmitting
-                  ? "bg-indigo-400"
+                  ? "bg-indigo-400 hover:cursor-not-allowed"
                   : "bg-indigo-600 hover:bg-indigo-700 "
-              } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto}`}
+              } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto}`}
               type="submit"
             >
               {buttonText}
@@ -120,13 +124,17 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
               sync those records with HCM.show.
             </p>
 
-            <form action="/api/flatfile/sync-records" method="post">
+            <form action="/api/flatfile/sync-records" method="post" onSubmit={handleSubmit}>
               <button
                 onClick={() => toast.loading("Syncing...")}
                 type="submit"
-                className="hover:text-white mb-2 inline-flex items-center justify-center rounded-md border text-indigo-600 border-indigo-600 px-4 py-2 text-sm font-medium shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+                className={`${
+                  isSubmitting
+                    ? "bg-indigo-400 hover:cursor-not-allowed"
+                    : "bg-indigo-600 hover:bg-indigo-700 "
+                } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto}`}
               >
-                Sync Records
+                {buttonText}
               </button>
             </form>
 
