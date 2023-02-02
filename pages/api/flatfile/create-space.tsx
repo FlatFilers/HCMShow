@@ -64,9 +64,11 @@ export default async function handler(
 
   // console.log("space", space);
   // console.log("space data", space.flatfileData);
+
+  const basePathUrl = `${process.env.BASEPATH_URL}/onboarding`
   
   const initialDocumentBody =
-    '<div> \
+    `<div> \
       <h1>Welcome to your first Space!</h1> \
       <div class="mt-6"> \
         Now upload the sample dataset you downloaded from HCM.show by clicking "Files" in the left sidebar. \
@@ -76,12 +78,12 @@ export default async function handler(
       </div> \
       <div class="mt-4"> \
           Once the records are imported into Flatfile, you can return to HCM.show by clicking \
-        <a href="https://localhost:3000/onboarding" class="text-indigo-600"> \
+        <a href="${basePathUrl}" class="text-indigo-600"> \
           here \
         </a> \
           to sync them into the HCM show app.\
       </div> \
-    </div>'
+    </div>`
 
   const addDocumentToSpaceResponse = await addDocumentToSpace("Welcome", initialDocumentBody, spaceId, accessToken);
 
