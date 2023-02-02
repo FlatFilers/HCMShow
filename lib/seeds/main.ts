@@ -21,6 +21,7 @@ import { parse } from "fast-csv";
 import { hashPassword } from "../user";
 import crypto from "crypto";
 import { upsertEmployee } from "../employee";
+import { faker } from "@faker-js/faker";
 
 export const main = async () => {
   console.log("Seeding...");
@@ -666,6 +667,9 @@ const upsertEmployees = async (organizationId: string) => {
     titleId,
     socialSuffixId,
     hireReasonId,
+    firstName: faker.name.firstName(),
+    middleName: faker.name.middleName(),
+    lastName: faker.name.lastName(),
     hireDate,
     endEmploymentDate,
     positionTitle,

@@ -1,4 +1,3 @@
-import { EmployeeType } from "@prisma/client";
 import { faker } from "@faker-js/faker";
 import { Record } from "./flatfile";
 import { prismaClient } from "./prisma-client";
@@ -11,6 +10,9 @@ export const upsertEmployee = async ({
   titleId,
   socialSuffixId,
   hireReasonId,
+  firstName,
+  middleName,
+  lastName,
   hireDate,
   endEmploymentDate,
   positionTitle,
@@ -33,6 +35,9 @@ export const upsertEmployee = async ({
   titleId: string;
   socialSuffixId: string;
   hireReasonId: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
   hireDate: Date;
   endEmploymentDate: Date | null;
   positionTitle: string;
@@ -60,9 +65,10 @@ export const upsertEmployee = async ({
       titleId,
       socialSuffixId,
       hireReasonId,
-      firstName: faker.name.firstName(),
-      middleName: faker.name.middleName(),
-      lastName: faker.name.lastName(),
+      firstName,
+      middleName,
+      lastName,
+      // TODO: remove
       name: faker.name.fullName(),
       employeeTypeId,
       hireDate,
