@@ -281,7 +281,8 @@ export const addGuestToSpace = async (
   // );
 
   if (!addGuestToSpaceResponse.ok) {
-    throw new Error("Error adding guest to space");
+    // throw new Error("Error adding guest to space");
+    return await addGuestToSpaceResponse.json();
   }
 
   const addGuestResult = await addGuestToSpaceResponse.json();
