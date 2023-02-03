@@ -32,6 +32,9 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
       toast.success(router.query.message as string, {
         id: router.query.message as string,
         duration: 4000,
+        style: {
+          minWidth: '450px',
+        }
       });
     } else if (router.query.message === "No Records Found") {
       window.history.replaceState(null, "", "/onboarding");
@@ -139,7 +142,7 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
             </form>
 
             {lastSyncAction && (
-              <p className="text-xs block text-gray-600 italic">
+              <p className="text-xs block text-gray-600 italic mt-2">
                 Last sync{" "}
                 {DateTime.fromJSDate(lastSyncAction.createdAt).toFormat(
                   "MM/dd/yy hh:mm:ss a"
