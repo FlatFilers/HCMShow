@@ -251,7 +251,6 @@ export const addGuestToSpace = async (
   flatfileSpaceData: FlatfileSpaceData,
   accessToken: string
 ) => {
-
   const payload = [
     {
       environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
@@ -296,23 +295,26 @@ export const inviteGuestToSpace = async (
   spaceId: string,
   accessToken: string
 ) => {
-
   const payload = [
     {
       guestId: userId,
       spaceId: spaceId,
-      message: "Accept the invite below to enter the space. From there, you will be able to upload your files."
-    }
-  ]
-
-  const inviteGuestToSpaceResponse: Response = await fetch(`${BASE_PATH}/invitations`, {
-    method: "POST",
-    body: JSON.stringify(payload),
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
+      message:
+        "Accept the invite below to enter the space. From there, you will be able to upload your files.",
     },
-  });
+  ];
+
+  const inviteGuestToSpaceResponse: Response = await fetch(
+    `${BASE_PATH}/invitations`,
+    {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   if (!inviteGuestToSpaceResponse.ok) {
     throw new Error("Error sending invite to guest");
@@ -321,4 +323,42 @@ export const inviteGuestToSpace = async (
   const inviteGuestResult = await inviteGuestToSpaceResponse.json();
 
   return inviteGuestResult.data;
+};
+
+export const addDocumentToSpace = async (
+  title: string,
+  body: string,
+  spaceId: string,
+  accessToken: string
+) => {
+  const payload = {
+    title: title,
+    body: body,
+  };
+
+  const addDocumentToSpaceResponse: Response = await fetch(
+    `${BASE_PATH}/spaces/${spaceId}/documents`,
+    {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  // console.log("addDocumentToSpaceResponse", addDocumentToSpaceResponse);
+  // console.log(
+  //   "addDocumentToSpaceResponse body",
+  //   await addDocumentToSpaceResponse.json()
+  // );
+
+  if (!addDocumentToSpaceResponse.ok) {
+    throw new Error("Error adding document to space");
+  }
+
+  const addDocumentResult = await addDocumentToSpaceResponse.json();
+
+  return addDocumentResult.data;
 };

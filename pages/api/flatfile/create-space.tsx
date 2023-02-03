@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import {
+  addDocumentToSpace,
   addGuestToSpace,
   createSpace,
   getAccessToken,
@@ -40,6 +41,7 @@ export default async function handler(
   const accessToken = await getAccessToken();
 
   const flatfileSpaceData = await createSpace(accessToken);
+  const spaceId = flatfileSpaceData.id;
 
   const addGuestToSpaceResponse = await addGuestToSpace(user, flatfileSpaceData, accessToken);
 
@@ -48,7 +50,7 @@ export default async function handler(
     accessToken
   );
 
-  const inviteGuestsToSpaceResponse = await inviteGuestToSpace(addGuestToSpaceResponse[0].id, flatfileSpaceData.id, accessToken);
+  const inviteGuestsToSpaceResponse = await inviteGuestToSpace(addGuestToSpaceResponse[0].id, spaceId, accessToken);
 
   // console.log('inviteGuestsToSpaceResponse', inviteGuestsToSpaceResponse.success);
 
@@ -62,6 +64,30 @@ export default async function handler(
 
   // console.log("space", space);
   // console.log("space data", space.flatfileData);
+
+  const basePathUrl = `${process.env.BASEPATH_URL}/onboarding`
+  
+  const initialDocumentBody =
+    `<div> \
+      <h1>Welcome to your first Space!</h1> \
+      <div class="mt-6"> \
+        Now upload the sample dataset you downloaded from HCM.show by clicking "Files" in the left sidebar. \
+      </div> \
+      <div class="mt-4"> \
+        After uploading you can view the records within Flatfile by clicking the workbook name in the sidebar.\
+      </div> \
+      <div class="mt-4"> \
+          Once the records are imported into Flatfile, you can return to HCM.show by clicking \
+        <a href="${basePathUrl}" class="text-indigo-600"> \
+          here \
+        </a> \
+          to sync them into the HCM show app.\
+      </div> \
+    </div>`
+
+  const addDocumentToSpaceResponse = await addDocumentToSpace("Welcome", initialDocumentBody, spaceId, accessToken);
+
+  // console.log("addDocumentToSpaceResponse", addDocumentToSpaceResponse);
 
   res.redirect("/onboarding?message=Created space");
 }
