@@ -52,23 +52,6 @@ export default async function handler(
 
   // console.log("valids", valids.length);
 
-  const employees = await prismaClient.employee.findMany({
-    where: {
-      organizationId: token.organizationId,
-    },
-    select: {
-      employeeId: true,
-    },
-  });
-  // console.log("employees", employees);
-  const employeeIds = employees.map((e) => e.employeeId);
-  // console.log("employeeIds", employeeIds);
-
-  const newEmployeeRecords = valids.filter((r) => {
-    return !employeeIds.includes(r.id) && r.values.employeeId.value;
-  });
-  // console.log("new emp", newEmployeeRecords.length);
-
   // TODO - hacking this in to get seeds working then do this
   const employeeTypeId = (
     (await prismaClient.employeeType.findFirst()) as EmployeeType
@@ -106,7 +89,7 @@ export default async function handler(
     take: 2,
   });
 
-  const upserts = newEmployeeRecords.map(async (r) => {
+  const upserts = valids.map(async (r) => {
     try {
       const values = r.values;
 
@@ -166,7 +149,7 @@ export default async function handler(
 
   await Promise.all(upserts);
 
-  const message = `Found ${records.length} records. Synced ${newEmployeeRecords.length} Employee records.`;
+  const message = `Found ${records.length} records. Synced ${valids.length} Employee records.`;
 
   await createAction({
     userId: token.sub,
