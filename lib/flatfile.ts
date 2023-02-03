@@ -251,7 +251,6 @@ export const addGuestToSpace = async (
   flatfileSpaceData: FlatfileSpaceData,
   accessToken: string
 ) => {
-
   const payload = [
     {
       environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
@@ -296,23 +295,26 @@ export const inviteGuestToSpace = async (
   spaceId: string,
   accessToken: string
 ) => {
-
   const payload = [
     {
       guestId: userId,
       spaceId: spaceId,
-      message: "Accept the invite below to enter the space. From there, you will be able to upload your files."
-    }
-  ]
-
-  const inviteGuestToSpaceResponse: Response = await fetch(`${BASE_PATH}/invitations`, {
-    method: "POST",
-    body: JSON.stringify(payload),
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
+      message:
+        "Accept the invite below to enter the space. From there, you will be able to upload your files.",
     },
-  });
+  ];
+
+  const inviteGuestToSpaceResponse: Response = await fetch(
+    `${BASE_PATH}/invitations`,
+    {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   if (!inviteGuestToSpaceResponse.ok) {
     throw new Error("Error sending invite to guest");
@@ -327,23 +329,24 @@ export const addDocumentToSpace = async (
   title: string,
   body: string,
   spaceId: string,
-  accessToken: string,
+  accessToken: string
 ) => {
+  const payload = {
+    title: title,
+    body: body,
+  };
 
-  const payload =
+  const addDocumentToSpaceResponse: Response = await fetch(
+    `${BASE_PATH}/spaces/${spaceId}/documents`,
     {
-      title: title,
-      body: body,
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
     }
-
-  const addDocumentToSpaceResponse: Response = await fetch(`${BASE_PATH}/spaces/${spaceId}/documents`, {
-    method: "POST",
-    body: JSON.stringify(payload),
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    },
-  });
+  );
 
   // console.log("addDocumentToSpaceResponse", addDocumentToSpaceResponse);
   // console.log(
