@@ -46,44 +46,15 @@ export default async function handler(
     return;
   }
 
-  console.log("record[0]", inspect(records[0], { depth: null }));
-
   const valids = await validRecords(records);
 
   // console.log("valids", valids.length);
 
   // TODO - hacking this in to get seeds working then do this
-  const employeeTypeId = (
-    (await prismaClient.employeeType.findFirst()) as EmployeeType
-  ).id;
-  const titleId = ((await prismaClient.title.findFirst()) as Title).id;
-  const socialSuffixId = ((await prismaClient.title.findFirst()) as Title).id;
-  const hireReasonId = (
-    (await prismaClient.hireReason.findFirst()) as HireReason
-  ).id;
-  const hireDate = DateTime.now().toJSDate();
-  const endEmploymentDate = null;
-  const positionTitle = "Sales Rep";
-  const businessTitle = "Sales Rep";
-  const jobFamilyId = ((await prismaClient.jobFamily.findFirst()) as JobFamily)
-    .id;
-  const locationId = ((await prismaClient.location.findFirst()) as Location).id;
-  const workspaceId = (
-    (await prismaClient.location.findFirst({
-      orderBy: { name: "desc" },
-    })) as Location
-  ).id;
-  const positionTimeId = (
-    (await prismaClient.positionTime.findFirst()) as PositionTime
-  ).id;
-  const defaultWeeklyHours = 40;
-  const scheduledWeeklyHours = 40;
-  const payRateId = ((await prismaClient.payRate.findFirst()) as PayRate).id;
-  const additionalJobClassificationId = (
-    (await prismaClient.additionalJobClassification.findFirst()) as AdditionalJobClassification
-  ).id;
   const workerCompensationCodeId = (
-    (await prismaClient.workerCompensationCode.findFirst()) as WorkerCompensationCode
+    (await prismaClient.workerCompensationCode.findFirst(
+      {}
+    )) as WorkerCompensationCode
   ).id;
   const addresses = await prismaClient.address.findMany({
     take: 2,
@@ -92,6 +63,62 @@ export default async function handler(
   const upserts = valids.map(async (r) => {
     try {
       const values = r.values;
+      const employeeTypeId = (
+        (await prismaClient.employeeType.findUnique({
+          where: { slug: values.employeeType.value as string },
+        })) as EmployeeType
+      ).id;
+      const titleId = (
+        (await prismaClient.title.findUnique({
+          where: {
+            slug: values.title.value as string,
+          },
+        })) as Title
+      ).id;
+      const socialSuffixId = (
+        (await prismaClient.title.findUnique({
+          where: {
+            slug: values.socialSuffix.value as string,
+          },
+        })) as Title
+      ).id;
+      const hireReasonId = (
+        (await prismaClient.hireReason.findUnique({
+          where: {
+            subcategorySlug: r.values.hireReason.value as string,
+          },
+        })) as HireReason
+      ).id;
+      const jobFamilyId = (
+        (await prismaClient.jobFamily.findUnique({
+          where: { slug: r.values.jobCode.value as string },
+        })) as JobFamily
+      ).id;
+      const locationId = (
+        (await prismaClient.location.findUnique({
+          where: { slug: r.values.location.value as string },
+        })) as Location
+      ).id;
+      const workspaceId = (
+        (await prismaClient.location.findUnique({
+          where: { slug: r.values.location.value as string },
+        })) as Location
+      ).id;
+      const positionTimeId = (
+        (await prismaClient.positionTime.findUnique({
+          where: { slug: r.values.positionTime.value as string },
+        })) as PositionTime
+      ).id;
+      const payRateId = (
+        (await prismaClient.payRate.findUnique({
+          where: { slug: r.values.payRate.value as string },
+        })) as PayRate
+      ).id;
+      const additionalJobClassificationId = (
+        (await prismaClient.additionalJobClassification.findUnique({
+          where: { slug: r.values.additionalJobClassification.value as string },
+        })) as AdditionalJobClassification
+      ).id;
 
       let data: Parameters<typeof upsertEmployee>[0] = {
         organizationId: token.organizationId,
@@ -99,20 +126,28 @@ export default async function handler(
         titleId,
         socialSuffixId,
         hireReasonId,
-        firstName: "todo",
-        middleName: "todo",
-        lastName: "todo",
-        hireDate,
-        endEmploymentDate,
-        positionTitle,
-        businessTitle,
+        firstName: r.values.firstName.value as string,
+        middleName: r.values.middleName.value as string,
+        lastName: r.values.lastName.value as string,
+        hireDate: DateTime.fromFormat(
+          r.values.hireDate.value as string,
+          "L/d/yyyy"
+        ).toJSDate(),
+        endEmploymentDate: r.values.hireDate.value
+          ? DateTime.fromFormat(
+              r.values.hireDate.value as string,
+              "L/d/yyyy"
+            ).toJSDate()
+          : null,
+        positionTitle: r.values.positionTitle.value as string,
+        businessTitle: r.values.businessTitle.value as string,
+        jobFamilyId,
         locationId,
         workspaceId,
         employeeTypeId,
-        jobFamilyId,
         positionTimeId,
-        defaultWeeklyHours,
-        scheduledWeeklyHours,
+        defaultWeeklyHours: r.values.defaultWeeklyHours.value as number,
+        scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
         payRateId,
         additionalJobClassificationId,
         workerCompensationCodeId,
@@ -120,18 +155,23 @@ export default async function handler(
         flatfileRecordId: r.id,
       };
 
-      if (r.values.managerId.value && r.values.managerId.value.length > 0) {
+      console.log("data", data);
+
+      if (
+        r.values.managerId.value &&
+        (r.values.managerId.value as string).length > 0
+      ) {
         // Does the manager record already exist?
         let manager = await prismaClient.employee.findUnique({
           where: {
-            employeeId: r.values.managerId.value,
+            employeeId: r.values.managerId.value as string,
           },
         });
 
         if (!manager) {
           manager = await upsertEmployee({
             ...data,
-            employeeId: r.values.managerId.value,
+            employeeId: r.values.managerId.value as string,
             managerId: undefined,
           });
         }
@@ -141,9 +181,9 @@ export default async function handler(
 
       await upsertEmployee(data);
     } catch (error) {
-      console.error(
-        `Error: syncing record for user ${token.sub}, record ${r.id}`
-      );
+      // console.error(
+      //   `Error: syncing record for user ${token.sub}, record ${r.id}`
+      // );
     }
   });
 
