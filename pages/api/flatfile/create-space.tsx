@@ -85,21 +85,21 @@ export default async function handler(
   const basePathUrl = `${process.env.BASEPATH_URL}/onboarding`;
 
   const initialDocumentBody = `<div> \
-      <h1>Welcome to your first Space!</h1> \
-      <div class="mt-6"> \
-        Now upload the sample dataset you downloaded from HCM.show by clicking "Files" in the left sidebar. \
-      </div> \
-      <div class="mt-4"> \
-        After uploading you can view the records within Flatfile by clicking the workbook name in the sidebar.\
-      </div> \
-      <div class="mt-4"> \
-          Once the records are imported into Flatfile, you can return to HCM.show by clicking \
-        <a href="${basePathUrl}" class="text-indigo-600"> \
-          here \
-        </a> \
-          to sync them into the HCM show app.\
-      </div> \
-    </div>`;
+                                <h1>Welcome to your first Space!</h1> \
+                                <div class="mt-6"> \
+                                  Now upload the sample dataset you downloaded from HCM.show by clicking "Files" in the left sidebar. \
+                                </div> \
+                                <div class="mt-4"> \
+                                  After uploading you can view the records within Flatfile by clicking the workbook name in the sidebar.\
+                                </div> \
+                                <div class="mt-4"> \
+                                    Once the records are imported into Flatfile, you can return to HCM.show by clicking \
+                                  <a href="${basePathUrl}" class="text-indigo-600"> \
+                                    here \
+                                  </a> \
+                                    to sync them into the HCM show app.\
+                                </div> \
+                              </div>`;
 
   const addDocumentToSpaceResponse = await addDocumentToSpace(
     "Welcome",
