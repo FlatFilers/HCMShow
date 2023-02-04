@@ -487,10 +487,10 @@ const upsertHireReasons = async () => {
 const upsertPositionTimes = async () => {
   await prismaClient.positionTime.upsert({
     where: {
-      slug: "Part_time",
+      slug: "PT",
     },
     create: {
-      slug: "Part_time",
+      slug: "PT",
       name: "Part time",
     },
     update: {},
@@ -498,10 +498,10 @@ const upsertPositionTimes = async () => {
 
   await prismaClient.positionTime.upsert({
     where: {
-      slug: "Full_time",
+      slug: "FT",
     },
     create: {
-      slug: "Full_time",
+      slug: "FT",
       name: "Full time",
     },
     update: {},

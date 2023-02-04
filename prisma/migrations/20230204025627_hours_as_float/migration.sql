@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Employee" ALTER COLUMN "defaultWeeklyHours" SET DATA TYPE DOUBLE PRECISION,
+ALTER COLUMN "scheduledWeeklyHours" SET DATA TYPE DOUBLE PRECISION;

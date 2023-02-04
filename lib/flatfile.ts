@@ -13,7 +13,7 @@ import { DateTime } from "luxon";
 import { inspect } from "util";
 
 export interface Field {
-  value: string | null;
+  value: string | number | null;
   valid: boolean;
   message: [];
 }
