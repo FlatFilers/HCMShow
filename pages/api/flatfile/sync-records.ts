@@ -100,7 +100,7 @@ export default async function handler(
         ).id;
       }
 
-      // TODO: Missing locations in base data?
+      // TODO: Missing locations in base data
       let locationId;
       try {
         locationId = (
@@ -114,7 +114,8 @@ export default async function handler(
           r.values.location.value
         );
 
-        throw error;
+        locationId = ((await prismaClient.location.findFirst({})) as Location)
+          .id;
       }
 
       const positionTimeId = (
