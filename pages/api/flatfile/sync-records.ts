@@ -48,6 +48,10 @@ export default async function handler(
 
   const valids = await validRecords(records);
 
+  const validsManagersFirst = valids.sort((a, b) => {
+    return a.values.managerId.value ? 1 : -1;
+  });
+
   // console.log("valids", valids.length);
 
   // TODO - hacking this in to get seeds working then do this
@@ -60,7 +64,7 @@ export default async function handler(
     take: 2,
   });
 
-  const upserts = valids.map(async (r) => {
+  const upserts = validsManagersFirst.map(async (r) => {
     try {
       const values = r.values;
       const employeeTypeId = (
@@ -68,63 +72,70 @@ export default async function handler(
           where: { slug: values.employeeType.value as string },
         })) as EmployeeType
       ).id;
-      const titleId = (
-        (await prismaClient.title.findUnique({
-          where: {
-            slug: values.title.value as string,
-          },
-        })) as Title
-      ).id;
-      const socialSuffixId = (
-        (await prismaClient.title.findUnique({
-          where: {
-            slug: values.socialSuffix.value as string,
-          },
-        })) as Title
-      ).id;
+
+      // TODO: Needs SDK validation to map to ID
+      // const hireReasonId = (
+      //   (await prismaClient.hireReason.findUnique({
+      //     where: {
+      //       subcategorySlug: r.values.hireReason.value as string,
+      //     },
+      //   })) as HireReason
+      // ).id;
       const hireReasonId = (
-        (await prismaClient.hireReason.findUnique({
-          where: {
-            subcategorySlug: r.values.hireReason.value as string,
-          },
-        })) as HireReason
+        (await prismaClient.hireReason.findFirst()) as HireReason
       ).id;
-      const jobFamilyId = (
-        (await prismaClient.jobFamily.findUnique({
-          where: { slug: r.values.jobCode.value as string },
-        })) as JobFamily
-      ).id;
-      const locationId = (
-        (await prismaClient.location.findUnique({
-          where: { slug: r.values.location.value as string },
-        })) as Location
-      ).id;
-      const workspaceId = (
-        (await prismaClient.location.findUnique({
-          where: { slug: r.values.location.value as string },
-        })) as Location
-      ).id;
+
+      let jobFamilyId: string;
+
+      // TODO: Remove once all the job families are in the DB
+      try {
+        jobFamilyId = (
+          (await prismaClient.jobFamily.findUnique({
+            where: { slug: r.values.jobCode.value as string },
+          })) as JobFamily
+        ).id;
+      } catch (error) {
+        jobFamilyId = (
+          (await prismaClient.jobFamily.findFirst({})) as JobFamily
+        ).id;
+      }
+
+      // TODO: Missing locations in base data?
+      let locationId;
+      try {
+        locationId = (
+          (await prismaClient.location.findUnique({
+            where: { slug: r.values.location.value as string },
+          })) as Location
+        ).id;
+      } catch (error) {
+        console.error(
+          "Error - location slug not found:",
+          r.values.location.value
+        );
+      }
+
       const positionTimeId = (
         (await prismaClient.positionTime.findUnique({
-          where: { slug: r.values.positionTime.value as string },
+          where: { slug: r.values.positionTimeType.value as string },
         })) as PositionTime
       ).id;
-      const payRateId = (
-        (await prismaClient.payRate.findUnique({
-          where: { slug: r.values.payRate.value as string },
-        })) as PayRate
-      ).id;
-      const additionalJobClassificationId = (
-        (await prismaClient.additionalJobClassification.findUnique({
-          where: { slug: r.values.additionalJobClassification.value as string },
-        })) as AdditionalJobClassification
-      ).id;
+
+      // TODO: map fields in SDK
+      let payRateId;
+      try {
+        payRateId = (
+          (await prismaClient.payRate.findUnique({
+            where: { slug: r.values.payRate.value as string },
+          })) as PayRate
+        ).id;
+      } catch (error) {
+        payRateId = ((await prismaClient.payRate.findFirst()) as PayRate).id;
+      }
 
       let data: Parameters<typeof upsertEmployee>[0] = {
         organizationId: token.organizationId,
         employeeId: r.values.employeeId.value as string,
-        titleId,
-        socialSuffixId,
         hireReasonId,
         firstName: r.values.firstName.value as string,
         middleName: r.values.middleName.value as string,
@@ -141,21 +152,71 @@ export default async function handler(
           : null,
         positionTitle: r.values.positionTitle.value as string,
         businessTitle: r.values.businessTitle.value as string,
-        jobFamilyId,
         locationId,
-        workspaceId,
+        jobFamilyId,
         employeeTypeId,
         positionTimeId,
         defaultWeeklyHours: r.values.defaultWeeklyHours.value as number,
         scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
         payRateId,
-        additionalJobClassificationId,
         workerCompensationCodeId,
         addresses,
         flatfileRecordId: r.id,
       };
 
-      console.log("data", data);
+      if (values.title.value) {
+        const titleId = (
+          (await prismaClient.title.findUnique({
+            where: {
+              slug: values.title.value as string,
+            },
+          })) as Title
+        ).id;
+
+        data = { ...data, titleId };
+      }
+
+      if (values.socialSuffix.value) {
+        const socialSuffixId = (
+          (await prismaClient.title.findUnique({
+            where: {
+              slug: values.socialSuffix.value as string,
+            },
+          })) as Title
+        ).id;
+
+        data = { ...data, socialSuffixId };
+      }
+
+      if (r.values.additionalJobClassification.value) {
+        const additionalJobClassificationId = (
+          (await prismaClient.additionalJobClassification.findUnique({
+            where: {
+              slug: r.values.additionalJobClassification.value as string,
+            },
+          })) as AdditionalJobClassification
+        ).id;
+
+        data = { ...data, additionalJobClassificationId };
+      }
+
+      if (r.values.workspace.value) {
+        // TODO: Missing locations in base data?
+        try {
+          const workspaceId = (
+            (await prismaClient.location.findUnique({
+              where: { slug: r.values.workspace.value as string },
+            })) as Location
+          ).id;
+
+          data = { ...data, workspaceId };
+        } catch (error) {
+          console.error(
+            "Error - workspace (location) slug not found:",
+            r.values.workspace.value
+          );
+        }
+      }
 
       if (
         r.values.managerId.value &&
@@ -168,19 +229,15 @@ export default async function handler(
           },
         });
 
-        if (!manager) {
-          manager = await upsertEmployee({
-            ...data,
-            employeeId: r.values.managerId.value as string,
-            managerId: undefined,
-          });
+        // TODO: What if we sync the manager after the employee? Sort first?
+        if (manager) {
+          data = { ...data, managerId: manager.id };
         }
-
-        data = { ...data, managerId: manager.id };
       }
 
       await upsertEmployee(data);
     } catch (error) {
+      // throw error;
       // console.error(
       //   `Error: syncing record for user ${token.sub}, record ${r.id}`
       // );

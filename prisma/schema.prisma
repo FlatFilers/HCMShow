@@ -56,10 +56,11 @@ model Employee {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // FF fields
-  employeeId String @unique
   managerId String? @db.Uuid
   manager Employee? @relation("Manager", fields: [managerId], references: [id])
+
+  // FF fields
+  employeeId String @unique
   countryId String? @db.Uuid
   country Country? @relation(fields: [countryId], references: [id])
   titleId String? @db.Uuid
@@ -87,12 +88,12 @@ model Employee {
   positionTime PositionTime @relation(fields: [positionTimeId], references: [id])
   workShiftId String? @db.Uuid
   workShift WorkShift? @relation(fields: [workShiftId], references: [id])
-  defaultWeeklyHours Int
-  scheduledWeeklyHours Int
+  defaultWeeklyHours Float
+  scheduledWeeklyHours Float
   payRateId String @db.Uuid
   payRate PayRate @relation(fields: [payRateId], references: [id])
-  additionalJobClassificationId String @db.Uuid
-  additionalJobClassification AdditionalJobClassification @relation(fields: [additionalJobClassificationId], references: [id])
+  additionalJobClassificationId String? @db.Uuid
+  additionalJobClassification AdditionalJobClassification? @relation(fields: [additionalJobClassificationId], references: [id])
   workerCompensationCodeId String @db.Uuid
   workerCompensationCode WorkerCompensationCode @relation(fields: [workerCompensationCodeId], references: [id])
   

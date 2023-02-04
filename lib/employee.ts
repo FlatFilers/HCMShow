@@ -34,8 +34,8 @@ export const upsertEmployee = async ({
   organizationId: string;
   employeeId: string;
   employeeTypeId: string;
-  titleId: string;
-  socialSuffixId: string;
+  titleId?: string;
+  socialSuffixId?: string;
   hireReasonId: string;
   firstName: string;
   middleName: string;
@@ -45,14 +45,14 @@ export const upsertEmployee = async ({
   positionTitle: string;
   businessTitle: string;
   locationId: string;
-  workspaceId: string;
+  workspaceId?: string;
   managerId?: string;
   jobFamilyId: string;
   positionTimeId: string;
   defaultWeeklyHours: number;
   scheduledWeeklyHours: number;
   payRateId: string;
-  additionalJobClassificationId: string;
+  additionalJobClassificationId?: string;
   workerCompensationCodeId: string;
   addresses: Address[];
   flatfileRecordId?: string;
@@ -104,7 +104,7 @@ export const upsertEmployee = async ({
             where: {
               addressId_employeeId: {
                 addressId: a.id,
-                employeeId: employee.employeeId,
+                employeeId: employee.id,
               },
             },
             create: {
