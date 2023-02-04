@@ -48,11 +48,11 @@ export default async function handler(
 
   const valids = await validRecords(records);
 
+  console.log("Valid records to sync", valids.length);
+
   const validsManagersFirst = valids.sort((a, b) => {
     return a.values.managerId.value ? 1 : -1;
   });
-
-  // console.log("valids", valids.length);
 
   // TODO - hacking this in to get seeds working then do this
   const workerCompensationCodeId = (
