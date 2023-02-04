@@ -240,9 +240,10 @@ export default async function handler(
       await upsertEmployee(data);
     } catch (error) {
       // throw error;
-      // console.error(
-      //   `Error: syncing record for user ${token.sub}, record ${r.id}`
-      // );
+      console.error(
+        `Error: syncing record for user ${token.sub}, record ${r.id}`,
+        error
+      );
     }
   });
 
