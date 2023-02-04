@@ -27,7 +27,7 @@ const Signup: NextPageWithLayout = () => {
       email,
       password,
       isSignup: true,
-      callbackUrl: "/employees",
+      callbackUrl: "/onboarding",
     });
   };
 
