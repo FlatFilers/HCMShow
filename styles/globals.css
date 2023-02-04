@@ -109,13 +109,3 @@ a {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer components {
-  .bg-primary {
-    background-color: #0875e1;
-  }
-
-  .text-primary {
-    color: #0875e1;
-  }
-}

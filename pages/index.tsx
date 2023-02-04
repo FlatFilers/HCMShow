@@ -109,8 +109,8 @@ const Home: NextPageWithLayout = () => {
               disabled={isSubmitting}
               className={`${
                 isSubmitting
-                  ? "bg-indigo-400"
-                  : "bg-primary hover:bg-indigo-700 "
+                  ? "bg-indigo-400 hover:cursor-not-allowed"
+                  : "bg-primary hover:grayscale-[30%]"
               } group relative flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2`}
             >
               {buttonText}
@@ -120,7 +120,7 @@ const Home: NextPageWithLayout = () => {
           <div className="text-sm">
             <a
               href="/signup"
-              className="font-medium text-primary hover:text-indigo-500 mt-4 block text-right"
+              className="font-medium text-primary hover:grayscale-[30%] mt-4 block text-right"
             >
               Or Signup
             </a>
