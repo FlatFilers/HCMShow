@@ -113,6 +113,8 @@ export default async function handler(
           "Error - location slug not found:",
           r.values.location.value
         );
+
+        throw error;
       }
 
       const positionTimeId = (
