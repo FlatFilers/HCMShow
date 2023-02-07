@@ -42,7 +42,7 @@ export default async function handler(
   const records = await getRecords(token.sub, accessToken);
 
   if (records.length === 0) {
-    res.redirect("/onboarding?message=No Records Found");
+    res.redirect("/onboarding?flash=error&message=No Records Found");
     return;
   }
 

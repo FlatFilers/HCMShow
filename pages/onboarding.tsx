@@ -21,7 +21,9 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
   const [buttonText, setButtonText] = useState<string>(defaultText);
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);
-    space ? setButtonText("Syncing records...") : setButtonText("Creating space...");
+    space
+      ? setButtonText("Syncing records...")
+      : setButtonText("Creating space...");
   };
 
   const router = useRouter();
@@ -33,12 +35,12 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
         id: router.query.message as string,
         duration: 4000,
         style: {
-          minWidth: '450px',
-        }
+          minWidth: "450px",
+        },
       });
-    } else if (router.query.message === "No Records Found") {
+    } else if (router.query.flash === "error") {
       window.history.replaceState(null, "", "/onboarding");
-      toast.error("No Records Found", { id: "no-records" });
+      toast.error(router.query.message as string, { id: "error" });
     } else if (router.query.message === "Created space") {
       window.history.replaceState(null, "", "/onboarding");
       toast.success("Created space", { id: "created" });
@@ -126,7 +128,11 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
               sync those records with HCM.show.
             </p>
 
-            <form action="/api/flatfile/sync-records" method="post" onSubmit={handleSubmit}>
+            <form
+              action="/api/flatfile/sync-records"
+              method="post"
+              onSubmit={handleSubmit}
+            >
               <button
                 onClick={() => toast.loading("Syncing...")}
                 disabled={isSubmitting}

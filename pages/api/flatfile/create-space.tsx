@@ -43,14 +43,29 @@ export default async function handler(
   const flatfileSpaceData = await createSpace(accessToken);
   const spaceId = flatfileSpaceData.id;
 
-  const addGuestToSpaceResponse = await addGuestToSpace(user, flatfileSpaceData, accessToken);
+  const addGuestToSpaceResponse = await addGuestToSpace(
+    user,
+    flatfileSpaceData,
+    accessToken
+  );
+
+  if (
+    addGuestToSpaceResponse.errors &&
+    addGuestToSpaceResponse.errors[0].message
+  ) {
+    res.redirect("/onboarding?flash=error&message=Error setting up Space");
+  }
 
   const flatfileSpaceDataRefetch = await getSpace(
     flatfileSpaceData.id,
     accessToken
   );
 
-  const inviteGuestsToSpaceResponse = await inviteGuestToSpace(addGuestToSpaceResponse[0].id, spaceId, accessToken);
+  const inviteGuestsToSpaceResponse = await inviteGuestToSpace(
+    addGuestToSpaceResponse[0].id,
+    spaceId,
+    accessToken
+  );
 
   // console.log('inviteGuestsToSpaceResponse', inviteGuestsToSpaceResponse.success);
 
@@ -65,27 +80,31 @@ export default async function handler(
   // console.log("space", space);
   // console.log("space data", space.flatfileData);
 
-  const basePathUrl = `${process.env.BASEPATH_URL}/onboarding`
-  
-  const initialDocumentBody =
-    `<div> \
-      <h1>Welcome to your first Space!</h1> \
-      <div class="mt-6"> \
-        Now upload the sample dataset you downloaded from HCM.show by clicking "Files" in the left sidebar. \
-      </div> \
-      <div class="mt-4"> \
-        After uploading you can view the records within Flatfile by clicking the workbook name in the sidebar.\
-      </div> \
-      <div class="mt-4"> \
-          Once the records are imported into Flatfile, you can return to HCM.show by clicking \
-        <a href="${basePathUrl}" class="text-indigo-600"> \
-          here \
-        </a> \
-          to sync them into the HCM show app.\
-      </div> \
-    </div>`
+  const basePathUrl = `${process.env.BASEPATH_URL}/onboarding`;
 
-  const addDocumentToSpaceResponse = await addDocumentToSpace("Welcome", initialDocumentBody, spaceId, accessToken);
+  const initialDocumentBody = `<div> \
+                                <h1>Welcome to your first Space!</h1> \
+                                <div class="mt-6"> \
+                                  Now upload the sample dataset you downloaded from HCM.show by clicking "Files" in the left sidebar. \
+                                </div> \
+                                <div class="mt-4"> \
+                                  After uploading you can view the records within Flatfile by clicking the workbook name in the sidebar.\
+                                </div> \
+                                <div class="mt-4"> \
+                                    Once the records are imported into Flatfile, you can return to HCM.show by clicking \
+                                  <a href="${basePathUrl}" class="text-indigo-600"> \
+                                    here \
+                                  </a> \
+                                    to sync them into the HCM show app.\
+                                </div> \
+                              </div>`;
+
+  const addDocumentToSpaceResponse = await addDocumentToSpace(
+    "Welcome",
+    initialDocumentBody,
+    spaceId,
+    accessToken
+  );
 
   // console.log("addDocumentToSpaceResponse", addDocumentToSpaceResponse);
 
