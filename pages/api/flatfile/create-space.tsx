@@ -53,9 +53,7 @@ export default async function handler(
     addGuestToSpaceResponse.errors &&
     addGuestToSpaceResponse.errors[0].message
   ) {
-    res.redirect(
-      `/onboarding?flash=error&message=${addGuestToSpaceResponse.errors[0].message}`
-    );
+    res.redirect("/onboarding?flash=error&message=Error setting up Space");
   }
 
   const flatfileSpaceDataRefetch = await getSpace(
