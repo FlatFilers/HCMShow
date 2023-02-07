@@ -90,7 +90,7 @@ const upsertJobFamilies = async () => {
       const data: Omit<JobFamily, "id" | "createdAt" | "updatedAt">[] = [];
 
       fs.createReadStream("./lib/seeds/data/seed_job_families.csv")
-        .pipe(parse())
+        .pipe(parse({ skipRows: 1 }))
         .on("error", reject)
         .on("data", (row: any) => {
           data.push({

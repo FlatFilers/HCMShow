@@ -7,6 +7,7 @@ import {
   UsersIcon,
   XMarkIcon,
   ArrowLeftOnRectangleIcon,
+  BriefcaseIcon,
 } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -33,6 +34,12 @@ const SidebarLayout = ({ children }: Props) => {
       href: "/onboarding",
       icon: FolderIcon,
       current: router.pathname === "/onboarding",
+    },
+    {
+      name: "Jobs",
+      href: "/jobs",
+      icon: BriefcaseIcon,
+      current: router.pathname === "/jobs",
     },
     // { name: "Projects", href: "#", icon: FolderIcon, current: false },
     // { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
