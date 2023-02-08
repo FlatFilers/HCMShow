@@ -5,14 +5,20 @@ import { NextResponse } from "next/server";
 
 export default withAuth(
   function middleware(req) {
-    // console.log("requestNextAuthToken", req.nextauth.token);
+    console.log("requestNextAuthToken", req.nextauth.token);
     if (
       req.nextauth.token &&
       (req.nextUrl.pathname === "/" || req.nextUrl.pathname === "/signup")
     ) {
       console.log("middleware redirecting");
 
+      // TODO: Make employees
       return NextResponse.redirect(new URL("/employees", req.url));
+    } else if (
+      !req.nextauth?.token?.hasOnboarded &&
+      req.nextUrl.pathname !== "/onboarding"
+    ) {
+      return NextResponse.redirect(new URL("/onboarding", req.url));
     }
   },
   {
