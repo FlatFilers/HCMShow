@@ -59,7 +59,7 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
           </p>
 
           <a
-            className="hover:text-white mb-12 inline-flex items-center justify-center rounded-md border text-primary border-primary px-4 py-2 text-sm font-medium shadow-sm hover:grayscale-[30%] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+            className="hover:text-white mb-12 inline-flex items-center justify-center rounded-md border text-primary border-primary px-4 py-2 text-sm font-medium shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
             download={sampleDataFileName}
             href={sampleDataFileName}
           >
@@ -78,7 +78,7 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
               className={`${
                 isSubmitting
                   ? "bg-indigo-400 hover:cursor-not-allowed"
-                  : "bg-primary hover:grayscale-[30%]"
+                  : "bg-primary hover:bg-primary-dark"
               } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto}`}
               type="submit"
             >
@@ -104,7 +104,7 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
               href={
                 (space.flatfileData as unknown as FlatfileSpaceData).guestLink
               }
-              className="mb-2 inline-flex items-center justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:grayscale-[30%] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+              className="mb-2 inline-flex items-center justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
             >
               Visit Space
             </a>
@@ -112,7 +112,7 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
             <p className="text-xs block text-gray-600">
               To download the sample data again{" "}
               <a
-                className="underline text-primary"
+                className="underline text-primary hover:text-primary-dark"
                 download={sampleDataFileName}
                 href={sampleDataFileName}
               >
@@ -140,7 +140,7 @@ const Onboarding: NextPage<Props> = ({ space, lastSyncAction }) => {
                 className={`${
                   isSubmitting
                     ? "bg-indigo-400 hover:cursor-not-allowed"
-                    : "bg-primary hover:grayscale-[30%]"
+                    : "bg-primary hover:bg-primary-dark"
                 } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto}`}
               >
                 {buttonText}

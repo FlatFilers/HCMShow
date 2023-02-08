@@ -45,7 +45,7 @@ const Signup: NextPageWithLayout = () => {
             priority
           />
           <p className="mt-4 text-gray-500 text-center text-md">
-            Create a new account below.
+            Create your account
           </p>
         </div>
         <form className="mt-4 space-y-2" action="#" onSubmit={handleSubmit}>

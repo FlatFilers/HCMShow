@@ -41,7 +41,7 @@ const Home: NextPageWithLayout = () => {
             priority
           />
           <h2 className="mt-4 text-center text-2xl tracking-tight text-gray-900">
-            Sign in to your account below
+            Sign in to HCM.show
           </h2>
         </div>
 
