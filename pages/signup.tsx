@@ -115,7 +115,7 @@ const Signup: NextPageWithLayout = () => {
               className={`${
                 isSubmitting
                   ? "bg-indigo-400 hover:cursor-not-allowed"
-                  : "bg-primary hover:grayscale-[30%]"
+                  : "bg-primary hover:bg-primary-dark"
               } group relative flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2`}
             >
               {buttonText}
@@ -125,7 +125,7 @@ const Signup: NextPageWithLayout = () => {
           <div className="text-sm">
             <a
               href="/"
-              className="font-medium text-primary hover:grayscale-[30%] mt-4 text-right block"
+              className="font-medium text-primary hover:text-primary-dark mt-4 text-right block"
             >
               Or Sign in
             </a>
