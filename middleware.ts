@@ -14,11 +14,6 @@ export default withAuth(
 
       // TODO: Make employees
       return NextResponse.redirect(new URL("/employees", req.url));
-    } else if (
-      !req.nextauth?.token?.hasOnboarded &&
-      req.nextUrl.pathname !== "/onboarding"
-    ) {
-      return NextResponse.redirect(new URL("/onboarding", req.url));
     }
   },
   {
