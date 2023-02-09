@@ -15,6 +15,8 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Toaster } from "react-hot-toast";
 import MobileSidebar from "./mobile-sidebar";
+import Image from "next/image";
+import logo from "../public/hcm_show_logo_gray.png";
 
 type Props = {
   children: React.ReactNode;
@@ -92,10 +94,12 @@ const SidebarLayout = ({ children }: Props) => {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 pt-5">
           <div className="flex flex-shrink-0 items-center px-4">
-            <img
-              className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            <Image
+              className="mx-auto"
+              src={logo}
               alt="Your Company"
+              width={120}
+              height={120}
             />
           </div>
           <div className="mt-5 flex flex-grow flex-col">

@@ -4,6 +4,8 @@ import { FormEvent, ReactElement, useState } from "react";
 import { NextPageWithLayout } from "./_app";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
+import Image from 'next/image'
+import logo from '../public/hcm_show_logo.png'
 
 const Home: NextPageWithLayout = () => {
   const { error } = useRouter().query;
@@ -31,13 +33,15 @@ const Home: NextPageWithLayout = () => {
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white h-screen">
       <div className="w-full max-w-md space-y-8">
         <div>
-          <img
-            className="mx-auto h-12 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+          <Image
+            className="mx-auto"
+            src={logo}
             alt="Your Company"
+            width={200}
+            height={200}
           />
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Sign in to HCM.show
+          <h2 className="mt-4 text-center text-2xl tracking-tight text-gray-900">
+            Sign in to your account below
           </h2>
         </div>
 
@@ -106,7 +110,7 @@ const Home: NextPageWithLayout = () => {
               className={`${
                 isSubmitting
                   ? "bg-indigo-400"
-                  : "bg-indigo-600 hover:bg-indigo-700 "
+                  : "bg-[#0875E1] hover:bg-indigo-700 "
               } group relative flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2`}
             >
               {buttonText}
