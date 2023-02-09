@@ -95,14 +95,14 @@ const SidebarLayout = ({ children }: Props) => {
           <div className="flex flex-shrink-0 items-center px-4">
             <Image
               className="mx-auto"
-              src="/../public/hcm_show_clear.png"
+              src={"/hcm_logo.png"}
               alt="Your Company"
-              width={120}
-              height={120}
+              width={130}
+              height={130}
               priority
             />
           </div>
-          <div className="mt-5 flex flex-grow flex-col">
+          <div className="mt-4 flex flex-grow flex-col">
             <nav className="flex flex-col px-2 pb-4 h-full justify-between">
               <div>
                 {itemsNavigation.map((item) => (

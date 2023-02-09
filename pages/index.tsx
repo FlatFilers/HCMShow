@@ -33,11 +33,11 @@ const Home: NextPageWithLayout = () => {
       <div className="w-full max-w-md space-y-8">
         <div className="relative flex flex-col items-center w-full">
           <Image
-            className="mx-auto object-cover h-18 w-40"
-            src={"/../public/hcm_show_clear.png"}
+            className="mx-auto"
+            src={"/hcm_logo.png"}
             alt="Your Company"
-            width={120}
-            height={120}
+            width={180}
+            height={180}
             priority
           />
           <h2 className="mt-4 text-center text-2xl tracking-tight text-gray-900">
