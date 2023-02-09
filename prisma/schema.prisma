@@ -226,8 +226,8 @@ model JobFamily {
 }
 
 model JobsOnJobFamilies {
-  assignedAt DateTime @default(now())
-  assignedBy String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])
   jobFamilyId String @db.Uuid
