@@ -17,15 +17,17 @@ interface Props {
   actions: (Action & { user: User })[];
 }
 
-const Imports: NextPage<Props> = ({ actions }) => {
+const ActivityLog: NextPage<Props> = ({ actions }) => {
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="w-full flex flex-row justify-between items-center mb-8">
           <div className="sm:flex-auto">
-            <h1 className="text-xl font-semibold text-gray-900">Imports</h1>
+            <h1 className="text-xl font-semibold text-gray-900">
+              Activity Log
+            </h1>
             <p className="mt-2 text-sm text-gray-700">
-              Your action history from Flatfile will show here.
+              Your activity history from Flatfile will show here.
             </p>
           </div>
         </div>
@@ -125,4 +127,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default Imports;
+export default ActivityLog;

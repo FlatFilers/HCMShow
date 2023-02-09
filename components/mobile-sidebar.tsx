@@ -2,6 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import {
   ArrowLeftOnRectangleIcon,
   InboxIcon,
+  ListBulletIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
@@ -93,8 +94,12 @@ const MobileSidebar = ({
                 />
               </div>
               <div className="mt-5 h-0 flex-1 overflow-y-auto">
-                <nav className="flex flex-col px-2 h-full justify-between">
+                <nav className="flex flex-col px-2 h-full justify-between mt-4">
                   <div>
+                    <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2">
+                      Resources
+                    </p>
+
                     {itemsNavigation.map((item) => (
                       <a
                         key={item.name}
@@ -118,9 +123,8 @@ const MobileSidebar = ({
                         {item.name}
                       </a>
                     ))}
-                  </div>
-                  <div className="flex flex-col">
-                    <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2">
+
+                    <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2 mt-6">
                       Workflows
                     </p>
 
@@ -147,28 +151,30 @@ const MobileSidebar = ({
                         {item.name}
                       </a>
                     ))}
+                  </div>
+                  <div className="flex flex-col">
                     <a
-                      key="Imports"
-                      href="/imports"
+                      key="Activity Log"
+                      href="/activity-log"
                       className={classNames(
-                        pathname === "/imports"
+                        pathname === "/activity-log"
                           ? "bg-slate-200 text-gray-900"
                           : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
                         "group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-1"
                       )}
                     >
-                      <InboxIcon
+                      <ListBulletIcon
                         className={classNames(
-                          pathname === "/imports"
+                          pathname === "/activity-log"
                             ? "text-gray-800"
                             : "text-gray-400 group-hover:text-gray-500",
-                          "mr-4 flex-shrink-0 h-6 w-6"
+                          "mr-3 flex-shrink-0 h-6 w-6"
                         )}
                         aria-hidden="true"
                       />
-                      Imports
+                      Activity Log
                     </a>
-                    <div className="flex flex-row w-full border-t-2 border-gray-200 pt-1">
+                    <div className="flex flex-row w-full border-t-2 border-gray-200 pt-2 mt-2">
                       <a
                         href="#"
                         onClick={() => signOut()}
@@ -180,7 +186,7 @@ const MobileSidebar = ({
                         <ArrowLeftOnRectangleIcon
                           className={classNames(
                             "text-gray-400 group-hover:text-gray-500",
-                            "mr-4 flex-shrink-0 h-6 w-6"
+                            "mr-3 flex-shrink-0 h-6 w-6"
                           )}
                           aria-hidden="true"
                         />
