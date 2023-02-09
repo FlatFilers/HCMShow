@@ -38,7 +38,7 @@ const Signup: NextPageWithLayout = () => {
         <div className="relative flex flex-col items-center w-full">
           <Image
             className="mx-auto"
-            src={"/hcm_logo.png"}
+            src={"/images/hcm_logo.png"}
             alt="Your Company"
             width={180}
             height={180}

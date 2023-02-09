@@ -94,11 +94,11 @@ const SidebarLayout = ({ children }: Props) => {
         <div className="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 pt-5">
           <div className="flex flex-shrink-0 items-center px-4">
             <Image
-              className="mx-auto"
-              src={"/hcm_logo.png"}
+              className=""
+              src={"/images/hcm_logo_LR.png"}
               alt="Your Company"
-              width={130}
-              height={130}
+              width={160}
+              height={160}
               priority
             />
           </div>
