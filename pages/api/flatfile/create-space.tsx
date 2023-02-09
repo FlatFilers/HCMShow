@@ -108,5 +108,5 @@ export default async function handler(
 
   // console.log("addDocumentToSpaceResponse", addDocumentToSpaceResponse);
 
-  res.redirect("/onboarding?message=Created space");
+  res.redirect("/onboarding?message=Setup Flatfile!");
 }

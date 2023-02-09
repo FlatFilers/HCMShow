@@ -9,6 +9,10 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { NextPageWithLayout } from "./_app";
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
+import {
+  ArrowPathIcon,
+  ArrowTopRightOnSquareIcon,
+} from "@heroicons/react/24/outline";
 
 interface Props {
   space?: Space;
@@ -192,7 +196,87 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
         </>
       )}
 
-      {space && <div>hi</div>}
+      {space && (
+        <div>
+          <p className="text-2xl mb-8">Your workspace is configured. 🎉 </p>
+
+          <div className="flex flex-row justify-between">
+            <div>
+              <p className="font-semibold mb-2">Upload Records in Flatfile</p>
+              <p className="text-gray-600 mb-2 max-w-lg">
+                Check your inbox for a magic sign-in link to your space, or
+                click the button below.
+              </p>
+              <p className="text-gray-600 mb-6 max-w-lg">
+                Once inside the space, upload the sample data you downloaded
+                previously and return back to HCM.show to sync the records into
+                the app.
+              </p>
+
+              <a
+                target="_blank"
+                href={
+                  (space.flatfileData as unknown as FlatfileSpaceData).guestLink
+                }
+                className="inline-flex flex-row items-center justify-between mb-8 rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                Visit Workspace
+                <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
+              </a>
+
+              <p className="text-xs block text-gray-600">
+                To download the sample data again{" "}
+                <a
+                  className="underline text-indigo-600"
+                  download={sampleDataFileName}
+                  href={sampleDataFileName}
+                >
+                  click here.
+                </a>
+              </p>
+            </div>
+
+            <div className="border-r border-gray-300 mx-16"></div>
+
+            <div>
+              <p className="font-semibold mb-2">Sync Records to HCM.show</p>
+              <p className="text-gray-600 mb-6 max-w-lg">
+                After uploading records in Flatfile, click the button below to
+                sync the records into HCM.show.
+              </p>
+
+              <form
+                action="/api/flatfile/sync-records"
+                method="post"
+                onSubmit={handleSubmit}
+              >
+                <button
+                  onClick={() => toast.loading("Syncing...")}
+                  disabled={isSubmitting}
+                  type="submit"
+                  className={`${
+                    isSubmitting
+                      ? "bg-indigo-400 hover:cursor-not-allowed"
+                      : "bg-indigo-600 hover:bg-indigo-700 "
+                  } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto}`}
+                >
+                  {buttonText}
+                  <ArrowPathIcon className="w-4 h-4 ml-1" />
+                </button>
+              </form>
+
+              {lastSyncAction && (
+                <p className="text-xs block text-gray-600 italic mt-2">
+                  Last sync{" "}
+                  {DateTime.fromJSDate(lastSyncAction.createdAt).toFormat(
+                    "MM/dd/yy hh:mm:ss a"
+                  )}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
