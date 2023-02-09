@@ -97,8 +97,8 @@ const SidebarLayout = ({ children }: Props) => {
               className="mx-auto"
               src="../public/hcm_show_clear.png"
               alt="Your Company"
-              // width={120}
-              // height={120}
+              width={120}
+              height={120}
             />
           </div>
           <div className="mt-5 flex flex-grow flex-col">

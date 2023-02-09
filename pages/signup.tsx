@@ -40,8 +40,8 @@ const Signup: NextPageWithLayout = () => {
             className="mx-auto"
             src="../public/hcm_show_clear.png"
             alt="Your Company"
-            // width={200}
-            // height={200}
+            width={200}
+            height={200}
           />
           <p className="mt-4 text-gray-500 text-center text-sm">
             Create a new account below.

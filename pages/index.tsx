@@ -36,8 +36,8 @@ const Home: NextPageWithLayout = () => {
             className="mx-auto"
             src="../public/hcm_show_clear.png"
             alt="Your Company"
-            // width={200}
-            // height={200}
+            width={200}
+            height={200}
           />
           <h2 className="mt-4 text-center text-2xl tracking-tight text-gray-900">
             Sign in to your account below
