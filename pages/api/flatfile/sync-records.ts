@@ -42,7 +42,7 @@ export default async function handler(
   const records = await getRecords(token.sub, accessToken);
 
   if (records.length === 0) {
-    res.redirect("/onboarding?flash=error&message=No Records Found");
+    res.redirect("/workbook-upload?flash=error&message=No Records Found");
     return;
   }
 
@@ -259,5 +259,5 @@ export default async function handler(
     description: message,
   });
 
-  res.redirect(`/onboarding?flash=success&message=${message}`);
+  res.redirect(`/workbook-upload?flash=success&message=${message}`);
 }

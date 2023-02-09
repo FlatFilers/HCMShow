@@ -28,7 +28,7 @@ const Signup: NextPageWithLayout = () => {
       email,
       password,
       isSignup: true,
-      callbackUrl: "/onboarding",
+      callbackUrl: "/workbook-upload",
     });
   };
 

@@ -120,7 +120,7 @@ const MobileSidebar = ({
                     ))}
                   </div>
                   <div className="flex flex-col">
-                    <p className="text-xs uppercase font-semibold text-gray-600 mb-1 pl-2">
+                    <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2">
                       Workflows
                     </p>
 

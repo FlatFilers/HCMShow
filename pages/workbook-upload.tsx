@@ -36,7 +36,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
 
   useEffect(() => {
     if (router.query.flash === "success") {
-      window.history.replaceState(null, "", "/onboarding");
+      window.history.replaceState(null, "", "/workbook-upload");
       toast.success(router.query.message as string, {
         id: router.query.message as string,
         duration: 4000,
@@ -45,10 +45,10 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
         },
       });
     } else if (router.query.flash === "error") {
-      window.history.replaceState(null, "", "/onboarding");
+      window.history.replaceState(null, "", "/workbook-upload");
       toast.error(router.query.message as string, { id: "error" });
     } else if (router.query.message === "Created space") {
-      window.history.replaceState(null, "", "/onboarding");
+      window.history.replaceState(null, "", "/workbook-upload");
       toast.success("Created space", { id: "created" });
     }
   }, []);
