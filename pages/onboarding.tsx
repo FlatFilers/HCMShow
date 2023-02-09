@@ -85,7 +85,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
               </p>
               <div className="mt-4 flex">
                 <a
-                  className="hover:text-white mb-12 inline-flex items-center justify-center rounded-md border text-indigo-600 border-indigo-600 px-4 py-2 text-sm font-medium shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+                  className="hover:text-white mb-12 inline-flex items-center justify-center rounded-md border text-primary border-primary px-4 py-2 text-sm font-medium shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
                   download={sampleDataFileName}
                   href={sampleDataFileName}
                   onClick={() => {
@@ -121,9 +121,9 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
                   disabled={isSubmitting}
                   className={`${
                     isSubmitting
-                      ? "bg-indigo-400 hover:cursor-not-allowed"
-                      : "bg-indigo-600 hover:bg-indigo-700 "
-                  } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto}`}
+                      ? "bg-primary-dark hover:cursor-not-allowed"
+                      : "bg-primary hover:bg-primary-dark "
+                  } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto}`}
                   type="submit"
                 >
                   {buttonText}
@@ -133,7 +133,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
               <p className="text-xs block text-gray-600">
                 To download the sample data again{" "}
                 <a
-                  className="underline text-indigo-600"
+                  className="underline text-primary"
                   download={sampleDataFileName}
                   href={sampleDataFileName}
                 >
@@ -152,7 +152,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
                       <span className="flex items-start">
                         <span className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
                           <CheckCircleIcon
-                            className="h-full w-full text-indigo-600"
+                            className="h-full w-full text-primary"
                             aria-hidden="true"
                           />
                         </span>
@@ -167,10 +167,10 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
                         className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center"
                         aria-hidden="true"
                       >
-                        <span className="absolute h-4 w-4 rounded-full bg-indigo-200" />
-                        <span className="relative block h-2 w-2 rounded-full bg-indigo-600" />
+                        <span className="absolute h-4 w-4 rounded-full bg-blue-200" />
+                        <span className="relative block h-2 w-2 rounded-full bg-primary" />
                       </span>
-                      <span className="ml-3 text-sm font-medium text-indigo-600">
+                      <span className="ml-3 text-sm font-medium text-primary">
                         {step.name}
                       </span>
                     </a>
@@ -218,7 +218,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
                 href={
                   (space.flatfileData as unknown as FlatfileSpaceData).guestLink
                 }
-                className="inline-flex flex-row items-center justify-between mb-8 rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="inline-flex flex-row items-center justify-between mb-8 rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
               >
                 Visit Workspace
                 <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
@@ -227,7 +227,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
               <p className="text-xs block text-gray-600">
                 To download the sample data again{" "}
                 <a
-                  className="underline text-indigo-600"
+                  className="underline text-primary"
                   download={sampleDataFileName}
                   href={sampleDataFileName}
                 >
@@ -256,9 +256,9 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
                   type="submit"
                   className={`${
                     isSubmitting
-                      ? "bg-indigo-400 hover:cursor-not-allowed"
-                      : "bg-indigo-600 hover:bg-indigo-700 "
-                  } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto}`}
+                      ? "bg-primary-dark hover:cursor-not-allowed"
+                      : "bg-primary hover:bg-primary-dark "
+                  } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto}`}
                 >
                   {buttonText}
                   <ArrowPathIcon className="w-4 h-4 ml-1" />

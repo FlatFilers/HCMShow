@@ -6,6 +6,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Fragment } from "react";
 import { NavigationItem } from "./sidebar-layout";
+import Image from "next/image";
 
 type Props = {
   pathname: string;
@@ -82,10 +83,13 @@ const MobileSidebar = ({
                 </div>
               </Transition.Child>
               <div className="flex flex-shrink-0 items-center px-4">
-                <img
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                <Image
+                  className=""
+                  src={"/images/hcm_logo_LR.png"}
                   alt="Your Company"
+                  width={160}
+                  height={160}
+                  priority
                 />
               </div>
               <div className="mt-5 h-0 flex-1 overflow-y-auto">
