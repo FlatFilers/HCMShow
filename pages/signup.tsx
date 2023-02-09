@@ -71,7 +71,7 @@ const Signup: NextPageWithLayout = () => {
                 type="email"
                 autoComplete="email"
                 required
-                className="bg-white relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className="bg-white relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
                 placeholder="Email address"
               />
             </div>
@@ -85,7 +85,7 @@ const Signup: NextPageWithLayout = () => {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="bg-white relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className="bg-white relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
                 placeholder="Password"
               />
             </div>
@@ -97,7 +97,7 @@ const Signup: NextPageWithLayout = () => {
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-indigo-500"
+                className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
               />
               <label
                 htmlFor="remember-me"
@@ -114,9 +114,9 @@ const Signup: NextPageWithLayout = () => {
               disabled={isSubmitting}
               className={`${
                 isSubmitting
-                  ? "bg-indigo-400 hover:cursor-not-allowed"
+                  ? "bg-primary-dark hover:cursor-not-allowed"
                   : "bg-primary hover:bg-primary-dark"
-              } group relative flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2`}
+              } group relative flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
             >
               {buttonText}
             </button>
