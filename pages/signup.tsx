@@ -5,7 +5,7 @@ import { NextPageWithLayout } from "./_app";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import logo from "public/hcm_show_clear.png";
+import logo from "../public/hcm_show_clear.png";
 
 const Signup: NextPageWithLayout = () => {
   const { error } = useRouter().query;
@@ -41,8 +41,8 @@ const Signup: NextPageWithLayout = () => {
             className="mx-auto"
             src={logo}
             alt="Your Company"
-            width={200}
-            height={200}
+            // width={200}
+            // height={200}
           />
           <p className="mt-4 text-gray-500 text-center text-sm">
             Create a new account below.
