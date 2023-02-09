@@ -20,6 +20,7 @@ export default withAuth(
       authorized: ({ req, token }) => {
         if (
           req.nextUrl.pathname === "/" ||
+          req.nextUrl.pathname === "/hcm_logo.png" ||
           req.nextUrl.pathname === "/signup" ||
           req.nextUrl.pathname === "/api/health_check" ||
           req.nextUrl.pathname === "/api/seeds" ||

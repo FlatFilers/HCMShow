@@ -5,7 +5,6 @@ import { NextPageWithLayout } from "./_app";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import logo from "../public/hcm_logo.png";
 
 const Signup: NextPageWithLayout = () => {
   const { error } = useRouter().query;
@@ -38,9 +37,11 @@ const Signup: NextPageWithLayout = () => {
       <div className="w-full max-w-md space-y-8">
         <div className="relative flex flex-col items-center w-full">
           <Image
-            className="mx-auto h-20 w-48"
-            src={logo}
+            className="mx-auto"
+            src={"/hcm_logo.png"}
             alt="Your Company"
+            width={180}
+            height={180}
             priority
           />
           <p className="mt-4 text-gray-500 text-center text-md">
