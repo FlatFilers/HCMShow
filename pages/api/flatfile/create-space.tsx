@@ -53,7 +53,7 @@ export default async function handler(
     addGuestToSpaceResponse.errors &&
     addGuestToSpaceResponse.errors[0].message
   ) {
-    res.redirect("/onboarding?flash=error&message=Error setting up Space");
+    res.redirect("/workbook-upload?flash=error&message=Error setting up Flatfile");
   }
 
   const flatfileSpaceDataRefetch = await getSpace(
@@ -80,7 +80,7 @@ export default async function handler(
   // console.log("space", space);
   // console.log("space data", space.flatfileData);
 
-  const basePathUrl = `${process.env.BASEPATH_URL}/onboarding`;
+  const basePathUrl = `${process.env.BASEPATH_URL}/workbook-upload`;
 
   const initialDocumentBody = `<div> \
                                 <h1>Welcome to your first Space!</h1> \
@@ -92,7 +92,7 @@ export default async function handler(
                                 </div> \
                                 <div class="mt-4"> \
                                     Once the records are imported into Flatfile, you can return to HCM.show by clicking \
-                                  <a href="${basePathUrl}" class="text-indigo-600"> \
+                                  <a href="${basePathUrl}" style="text-decoration: underline;"> \
                                     here \
                                   </a> \
                                     to sync them into the HCM show app.\
@@ -108,5 +108,5 @@ export default async function handler(
 
   // console.log("addDocumentToSpaceResponse", addDocumentToSpaceResponse);
 
-  res.redirect("/onboarding?message=Created space");
+  res.redirect("/workbook-upload?message=Setup Flatfile!");
 }

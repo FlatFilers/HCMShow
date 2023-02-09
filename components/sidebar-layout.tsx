@@ -48,10 +48,10 @@ const SidebarLayout = ({ children }: Props) => {
   ];
   const workflowsNavigation = [
     {
-      name: "Onboarding",
-      href: "/onboarding",
+      name: "Workbook Upload",
+      href: "/workbook-upload",
       icon: FolderIcon,
-      current: router.pathname === "/onboarding",
+      current: router.pathname === "/workbook-upload",
     },
     {
       name: "File Feed",
@@ -60,7 +60,7 @@ const SidebarLayout = ({ children }: Props) => {
       current: router.pathname === "/file-feed",
     },
     {
-      name: "Embedded",
+      name: "Embedded Portal",
       href: "/embedded",
       icon: WindowIcon,
       current: router.pathname === "/embedded",
@@ -130,7 +130,7 @@ const SidebarLayout = ({ children }: Props) => {
                 ))}
               </div>
               <div className="flex flex-col">
-                <p className="text-xs uppercase font-semibold text-gray-600 mb-1 pl-2">
+                <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2">
                   Workflows
                 </p>
 
