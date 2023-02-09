@@ -97,7 +97,7 @@ const Signup: NextPageWithLayout = () => {
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-indigo-500"
               />
               <label
                 htmlFor="remember-me"
@@ -115,7 +115,7 @@ const Signup: NextPageWithLayout = () => {
               className={`${
                 isSubmitting
                   ? "bg-indigo-400"
-                  : "bg-[#0875E1] hover:bg-indigo-700 "
+                  : "bg-primary hover:bg-indigo-700 "
               } group relative flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2`}
             >
               {buttonText}
@@ -125,7 +125,7 @@ const Signup: NextPageWithLayout = () => {
           <div className="text-sm">
             <a
               href="/"
-              className="font-medium text-indigo-600 hover:text-indigo-500 mt-4 text-right block"
+              className="font-medium text-primary hover:text-indigo-500 mt-4 text-right block"
             >
               Or Sign in
             </a>

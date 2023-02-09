@@ -92,7 +92,7 @@ const Home: NextPageWithLayout = () => {
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="hidden h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                className="hidden h-4 w-4 rounded border-gray-300 text-primary focus:ring-indigo-500"
               />
               <label
                 htmlFor="remember-me"
@@ -120,7 +120,7 @@ const Home: NextPageWithLayout = () => {
           <div className="text-sm">
             <a
               href="/signup"
-              className="font-medium text-indigo-600 hover:text-indigo-500 mt-4 block text-right"
+              className="font-medium text-primary hover:text-indigo-500 mt-4 block text-right"
             >
               Or Signup
             </a>

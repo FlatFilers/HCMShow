@@ -114,4 +114,8 @@ a {
   .bg-primary {
     background-color: #0875e1;
   }
+
+  .text-primary {
+    color: #0875e1;
+  }
 }
