@@ -35,13 +35,14 @@ const Signup: NextPageWithLayout = () => {
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white h-screen">
       <div className="w-full max-w-md space-y-8">
-        <div className="mb-8">
+        <div className="mb-8 relative flex flex-col items-center w-full">
           <Image
-            className="mx-auto"
-            src="../public/hcm_show_clear.png"
+            className="mx-auto object-cover h-18 w-40"
+            src="/../public/hcm_show_clear.png"
             alt="Your Company"
-            width={200}
-            height={200}
+            width={120}
+            height={120}
+            priority
           />
           <p className="mt-4 text-gray-500 text-center text-sm">
             Create a new account below.

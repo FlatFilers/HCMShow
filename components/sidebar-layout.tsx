@@ -95,10 +95,11 @@ const SidebarLayout = ({ children }: Props) => {
           <div className="flex flex-shrink-0 items-center px-4">
             <Image
               className="mx-auto"
-              src="../public/hcm_show_clear.png"
+              src="/../public/hcm_show_clear.png"
               alt="Your Company"
               width={120}
               height={120}
+              priority
             />
           </div>
           <div className="mt-5 flex flex-grow flex-col">
