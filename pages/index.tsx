@@ -4,8 +4,8 @@ import { FormEvent, ReactElement, useState } from "react";
 import { NextPageWithLayout } from "./_app";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
-import Image from 'next/image'
-import logo from '../public/hcm_show_logo.png'
+import Image from "next/image";
+import logo from "../public/hcm_show_clear.png";
 
 const Home: NextPageWithLayout = () => {
   const { error } = useRouter().query;
@@ -110,7 +110,7 @@ const Home: NextPageWithLayout = () => {
               className={`${
                 isSubmitting
                   ? "bg-indigo-400"
-                  : "bg-[#0875E1] hover:bg-indigo-700 "
+                  : "bg-primary hover:bg-indigo-700 "
               } group relative flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2`}
             >
               {buttonText}
