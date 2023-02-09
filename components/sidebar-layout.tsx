@@ -15,6 +15,7 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Toaster } from "react-hot-toast";
 import MobileSidebar from "./mobile-sidebar";
+import Image from "next/image";
 
 type Props = {
   children: React.ReactNode;
@@ -92,13 +93,16 @@ const SidebarLayout = ({ children }: Props) => {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 pt-5">
           <div className="flex flex-shrink-0 items-center px-4">
-            <img
-              className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            <Image
+              className=""
+              src={"/images/hcm_logo_LR.png"}
               alt="Your Company"
+              width={160}
+              height={160}
+              priority
             />
           </div>
-          <div className="mt-5 flex flex-grow flex-col">
+          <div className="mt-6 flex flex-grow flex-col">
             <nav className="flex flex-col px-2 pb-4 h-full justify-between">
               <div>
                 {itemsNavigation.map((item) => (
@@ -202,7 +206,7 @@ const SidebarLayout = ({ children }: Props) => {
       <div className="flex flex-1 flex-col md:pl-72 pt-4 bg-white">
         <button
           type="button"
-          className="md:hidden border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 mt-4"
+          className="md:hidden border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary mt-4"
           onClick={() => setSidebarOpen(true)}
         >
           <span className="sr-only">Open sidebar</span>
