@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import { Toaster } from "react-hot-toast";
 import MobileSidebar from "./mobile-sidebar";
 import Image from "next/image";
+import logo from "../public/hcm_logo.png";
 
 type Props = {
   children: React.ReactNode;
@@ -94,11 +95,9 @@ const SidebarLayout = ({ children }: Props) => {
         <div className="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 pt-5">
           <div className="flex flex-shrink-0 items-center px-4">
             <Image
-              className="mx-auto"
-              src={"/hcm_logo.png"}
+              className="mx-auto h-14 w-36"
+              src={logo}
               alt="Your Company"
-              width={130}
-              height={130}
               priority
             />
           </div>
