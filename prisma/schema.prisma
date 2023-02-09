@@ -78,7 +78,8 @@ model Employee {
   endEmploymentDate DateTime?
   jobFamilyId String @db.Uuid
   jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])
-  positionTitle String
+  job Job @relation(fields: [positionTitle], references: [id])
+  positionTitle String @db.Uuid
   businessTitle String?
   locationId String @db.Uuid
   location Location @relation("Location", fields: [locationId], references: [id])
@@ -96,7 +97,7 @@ model Employee {
   additionalJobClassification AdditionalJobClassification? @relation(fields: [additionalJobClassificationId], references: [id])
   workerCompensationCodeId String @db.Uuid
   workerCompensationCode WorkerCompensationCode @relation(fields: [workerCompensationCodeId], references: [id])
-  
+
   addresses AddressEmployee[]
   phoneNumbers PhoneNumberEmployee[]
   emailAddresses EmailAddressEmployee[]
@@ -108,7 +109,6 @@ model Employee {
   flatfileRecordId String?
   organizationId String @db.Uuid
   organization Organization @relation(fields: [organizationId], references: [id])
-
 }
 
 model EmployeeType {
@@ -189,6 +189,27 @@ model HireReason {
   employees Employee[]
 }
 
+model Job {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+  slug String @unique
+  effectiveDate DateTime
+  isInactive Boolean?
+  includeJobCodeInName Boolean?
+  title String?
+  summary String?
+  description String?
+  additionalDescription String?
+  workShift String?
+  isJobPublic Boolean?
+
+  employees Employee[]
+  jobFamilies JobsOnJobFamilies[] 
+}
+
 model JobFamily {
   id String @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now())
@@ -201,6 +222,20 @@ model JobFamily {
   isInactive Boolean
 
   employees Employee[]
+  jobs JobsOnJobFamilies[]
+}
+
+model JobsOnJobFamilies {
+  assignedAt DateTime @default(now())
+  assignedBy String
+
+  jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])
+  jobFamilyId String @db.Uuid
+
+  job Job @relation(fields: [jobId], references: [id])
+  jobId String @db.Uuid
+
+  @@id([jobFamilyId, jobId])
 }
 
 // WIP 
