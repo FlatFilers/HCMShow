@@ -5,18 +5,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log("validate hirereasons");
-  console.log("req.body", req.body);
-  const hireReasonStrings = JSON.parse(req.body) as string[];
-
-  console.log("hireReasonStrings", hireReasonStrings);
+  const body = JSON.parse(req.body) as string[];
+  const hireReasonStrings = Array.from(new Set(body));
 
   const hireReasons = await prismaClient.hireReason.findMany();
 
   const result = hireReasonStrings.map((s) => {
-    const d = "Hire Employee > New Hire > New Position";
-
-    const [classificationName, category, reason] = d.split(" > ");
+    const [classificationName, category, reason] = s.split(" > ");
 
     return {
       originalString: s,
