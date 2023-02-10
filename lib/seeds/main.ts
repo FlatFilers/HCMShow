@@ -370,7 +370,7 @@ const upsertLocations = async () => {
       .on("data", (row: any) => {
         data.push({
           slug: row[0],
-          effectiveDate: DateTime.fromFormat(row[1], "yyyy-MM-dd").toJSDate(),
+          effectiveDate: DateTime.fromFormat(row[1], "M/d/yyyy").toJSDate(),
           name: row[2],
           isInactive: row[5] !== "y",
           latitude: Number.parseFloat(row[6]),
@@ -434,7 +434,7 @@ const upsertLocations = async () => {
           update: {},
         });
       } catch (error) {
-        // console.error("Error upserting location", data.slug, error);
+        console.error("Error upserting location", data.slug, error);
       }
     })
   );
