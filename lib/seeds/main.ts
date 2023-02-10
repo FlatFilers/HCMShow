@@ -142,7 +142,7 @@ const upsertJobs = async () => {
             name: row[1],
             jobCode: row[2],
             effectiveDate: DateTime.fromFormat(row[3], "yyyy-MM-dd").toJSDate(),
-            isInactive: row[4] !== "y",
+            isInactive: row[4] !== "Yes",
             includeJobCodeInName: row[5],
             title: row[6],
             summary: row[7],

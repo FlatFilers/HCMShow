@@ -78,8 +78,8 @@ model Employee {
   endEmploymentDate DateTime?
   jobFamilyId String @db.Uuid
   jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])
-  job Job @relation(fields: [employeeJobCode], references: [jobCode])
-  employeeJobCode String
+  job Job @relation(fields: [JobCode], references: [id])
+  JobCode String
   positionTitle String
   businessTitle String?
   locationId String @db.Uuid
