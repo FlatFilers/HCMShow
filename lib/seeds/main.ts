@@ -3,6 +3,7 @@ import {
   Employee,
   EmployeeType,
   HireReason,
+  Job,
   JobFamily,
   Location,
   Country,
@@ -28,6 +29,7 @@ export const main = async () => {
   await upsertCountries();
   await upsertLocations();
   await upsertEmployeeTypes();
+  await upsertJobs();
   await upsertJobFamilies();
   await upsertHireReasons();
   await upsertTitleTypes();
@@ -85,20 +87,70 @@ export const seedNewAccount = async (user: User) => {
 
 const upsertJobFamilies = async () => {
   // [ 'ID', 'Effective Date', 'Name', 'Summary', 'Inactive', '', '' ]
-  const parseCsv: Promise<Omit<JobFamily, "id" | "createdAt" | "updatedAt">[]> =
-    new Promise((resolve, reject) => {
-      const data: Omit<JobFamily, "id" | "createdAt" | "updatedAt">[] = [];
+  const parseCsv: Promise<
+    Omit<JobFamily, "id" | "createdAt" | "updatedAt" | "job" | "jobId">[]
+  > = new Promise((resolve, reject) => {
+    const data: Omit<
+      JobFamily,
+      "id" | "createdAt" | "updatedAt" | "job" | "jobId"
+    >[] = [];
 
-      fs.createReadStream("./lib/seeds/data/seed_job_families.csv")
+    fs.createReadStream("./lib/seeds/data/seed_job_families.csv")
+      .pipe(parse({ skipRows: 1 }))
+      .on("error", reject)
+      .on("data", (row: any) => {
+        data.push({
+          slug: row[0],
+          effectiveDate: DateTime.fromFormat(row[1], "yyyy-MM-dd").toJSDate(),
+          name: row[2],
+          summary: row[3],
+          isInactive: row[4] !== "y",
+        });
+      })
+      .on("end", () => {
+        resolve(data);
+      });
+  });
+
+  const csvData = await Promise.resolve(parseCsv);
+
+  const promises = csvData.map(async (data) => {
+    const jobFamily: JobFamily = await prismaClient.jobFamily.upsert({
+      where: {
+        slug: data.slug,
+      },
+      create: data,
+      update: {},
+    });
+  });
+
+  await Promise.all(promises);
+};
+
+const upsertJobs = async () => {
+  // [ 'ID', 'Profile Name', 'Job Code', 'Effective Date', 'Inactive', 'Include Job Code In Name', 'Title', 'Summary', 'Description', 'Additional Description', 'Work Shift Required', 'Is Job Public', 'Job Family']
+  const parseCsv: Promise<Omit<Job, "id" | "createdAt" | "updatedAt">[]> =
+    new Promise((resolve, reject) => {
+      const data: Omit<Job, "id" | "createdAt" | "updatedAt">[] = [];
+
+      fs.createReadStream("./lib/seeds/data/seed_job.csv")
         .pipe(parse({ skipRows: 1 }))
         .on("error", reject)
         .on("data", (row: any) => {
           data.push({
             slug: row[0],
-            effectiveDate: DateTime.fromFormat(row[1], "yyyy-MM-dd").toJSDate(),
-            name: row[2],
-            summary: row[3],
+            name: row[1],
+            jobCode: row[2],
+            effectiveDate: DateTime.fromFormat(row[3], "yyyy-MM-dd").toJSDate(),
             isInactive: row[4] !== "y",
+            includeJobCodeInName: row[5],
+            title: row[6],
+            summary: row[7],
+            description: row[8],
+            additionalDescription: row[9],
+            workShift: row[10],
+            jobPublic: row[11],
+            jobFamily: row[12],
           });
         })
         .on("end", () => {
@@ -109,7 +161,7 @@ const upsertJobFamilies = async () => {
   const csvData = await Promise.resolve(parseCsv);
 
   const promises = csvData.map(async (data) => {
-    const jobFamily: JobFamily = await prismaClient.jobFamily.upsert({
+    const job: Job = await prismaClient.job.upsert({
       where: {
         slug: data.slug,
       },
@@ -665,6 +717,7 @@ const upsertEmployees = async (organizationId: string) => {
   const endEmploymentDate = null;
   const positionTitle = "Sales Rep";
   const businessTitle = "Sales Rep";
+  const jobCode = ((await prismaClient.job.findFirst()) as Job).jobCode;
   const jobFamilyId = ((await prismaClient.jobFamily.findFirst()) as JobFamily)
     .id;
   const locationId = ((await prismaClient.location.findFirst()) as Location).id;
@@ -705,6 +758,7 @@ const upsertEmployees = async (organizationId: string) => {
     locationId,
     workspaceId,
     employeeTypeId,
+    jobCode,
     jobFamilyId,
     positionTimeId,
     defaultWeeklyHours,
