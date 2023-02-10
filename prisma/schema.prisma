@@ -98,7 +98,6 @@ model Employee {
   additionalJobClassification AdditionalJobClassification? @relation(fields: [additionalJobClassificationId], references: [id])
   workerCompensationCodeId String @db.Uuid
   workerCompensationCode WorkerCompensationCode @relation(fields: [workerCompensationCodeId], references: [id])
-
   addresses AddressEmployee[]
   phoneNumbers PhoneNumberEmployee[]
   emailAddresses EmailAddressEmployee[]
@@ -198,15 +197,15 @@ model Job {
   name String
   slug String @unique
   jobCode String @unique
-  effectiveDate DateTime
+  effectiveDate DateTime?
   isInactive Boolean?
   includeJobCodeInName Boolean?
   title String?
   summary String?
   description String?
   additionalDescription String?
-  workShift String?
-  isJobPublic Boolean?
+  workShift Boolean?
+  jobPublic Boolean?
   jobFamily JobFamily?
 
   employees Employee[]
