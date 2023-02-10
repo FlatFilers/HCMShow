@@ -204,13 +204,16 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
             <div>
               <p className="font-semibold mb-2">Upload Records in Flatfile</p>
               <p className="text-gray-600 mb-2 max-w-lg">
-                Check your inbox for a magic sign-in link to your space, or
-                click the button below.
+                Click the button below to go to your space and receive a sign-in
+                link in your inbox.
+              </p>
+              <p className="text-gray-600 mb-2 max-w-lg">
+                Once inside the space, upload the sample data you downloaded
+                previously.
               </p>
               <p className="text-gray-600 mb-6 max-w-lg">
-                Once inside the space, upload the sample data you downloaded
-                previously and return back to HCM.show to sync the records into
-                the app.
+                After uploading, return back here to HCM.show to sync the
+                records into the app.
               </p>
 
               <a

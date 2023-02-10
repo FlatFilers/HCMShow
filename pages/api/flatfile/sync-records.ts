@@ -42,7 +42,7 @@ export default async function handler(
   const records = await getRecords(token.sub, accessToken);
 
   if (records.length === 0) {
-    res.redirect("/workbook-upload?flash=error&message=No Records Found");
+    res.redirect("/workbook-upload?flash=error&message=No Records Found. Did you upload the sample data in Flatfile?");
     return;
   }
 
