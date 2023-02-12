@@ -1,2 +1,2 @@
-Reference ID,	Name,	Job Code,	Effective Date,	Inactive,	Include Job Code in Name,	Private Title, Summary,	Description,	Additional Description,	Work Shift Required, Is Job Public,	Job Family,,
-Chief_Executive_Officer,Chief Executive Officer,,1/1/2000,,,,summary,description,,,Yes,Executive Management
+Reference ID,	Name,	Job Code,	Effective Date,	Inactive,	Include Job Code in Name,	Private Title, Summary,	Description,	Additional Description,	Work Shift Required, Is Job Public,	Job Family ID,,
+Chief_Executive_Officer,Chief Executive Officer,Chief_Executive_Officer,1900-01-01,,,,summary,description,,,Yes,Executive_Management,,

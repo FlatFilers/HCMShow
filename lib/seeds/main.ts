@@ -87,30 +87,26 @@ export const seedNewAccount = async (user: User) => {
 
 const upsertJobFamilies = async () => {
   // [ 'ID', 'Effective Date', 'Name', 'Summary', 'Inactive', '', '' ]
-  const parseCsv: Promise<
-    Omit<JobFamily, "id" | "createdAt" | "updatedAt" | "job" | "jobId">[]
-  > = new Promise((resolve, reject) => {
-    const data: Omit<
-      JobFamily,
-      "id" | "createdAt" | "updatedAt" | "job" | "jobId"
-    >[] = [];
+  const parseCsv: Promise<Omit<JobFamily, "id" | "createdAt" | "updatedAt">[]> =
+    new Promise((resolve, reject) => {
+      const data: Omit<JobFamily, "id" | "createdAt" | "updatedAt">[] = [];
 
-    fs.createReadStream("./lib/seeds/data/seed_job_families.csv")
-      .pipe(parse({ skipRows: 1 }))
-      .on("error", reject)
-      .on("data", (row: any) => {
-        data.push({
-          slug: row[0],
-          effectiveDate: DateTime.fromFormat(row[1], "yyyy-MM-dd").toJSDate(),
-          name: row[2],
-          summary: row[3],
-          isInactive: row[4] !== "y",
+      fs.createReadStream("./lib/seeds/data/seed_job_families.csv")
+        .pipe(parse({ skipRows: 1 }))
+        .on("error", reject)
+        .on("data", (row: any) => {
+          data.push({
+            slug: row[0],
+            effectiveDate: DateTime.fromFormat(row[1], "yyyy-MM-dd").toJSDate(),
+            name: row[2],
+            summary: row[3],
+            isInactive: row[4] !== "y",
+          });
+        })
+        .on("end", () => {
+          resolve(data);
         });
-      })
-      .on("end", () => {
-        resolve(data);
-      });
-  });
+    });
 
   const csvData = await Promise.resolve(parseCsv);
 
@@ -143,14 +139,14 @@ const upsertJobs = async () => {
             jobCode: row[2],
             effectiveDate: DateTime.fromFormat(row[3], "yyyy-MM-dd").toJSDate(),
             isInactive: row[4] !== "Yes",
-            includeJobCodeInName: row[5],
+            includeJobCodeInName: row[5] === "" ? null : row[5] === "Yes",
             title: row[6],
             summary: row[7],
             description: row[8],
             additionalDescription: row[9],
-            workShift: row[10],
-            jobPublic: row[11],
-            jobFamily: row[12],
+            workShift: row[10] === "" ? null : row[10] === "Yes",
+            jobPublic: row[11] !== "No",
+            jobFamilyId: row[12],
           });
         })
         .on("end", () => {
@@ -717,7 +713,6 @@ const upsertEmployees = async (organizationId: string) => {
   const endEmploymentDate = null;
   const positionTitle = "Sales Rep";
   const businessTitle = "Sales Rep";
-  const jobCode = ((await prismaClient.job.findFirst()) as Job).jobCode;
   const jobFamilyId = ((await prismaClient.jobFamily.findFirst()) as JobFamily)
     .id;
   const locationId = ((await prismaClient.location.findFirst()) as Location).id;
@@ -758,7 +753,6 @@ const upsertEmployees = async (organizationId: string) => {
     locationId,
     workspaceId,
     employeeTypeId,
-    jobCode,
     jobFamilyId,
     positionTimeId,
     defaultWeeklyHours,

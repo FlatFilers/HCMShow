@@ -78,8 +78,7 @@ model Employee {
   endEmploymentDate DateTime?
   jobFamilyId String @db.Uuid
   jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])
-  job Job @relation(fields: [JobCode], references: [id])
-  JobCode String
+  jobs EmployeesJobs[]
   positionTitle String
   businessTitle String?
   locationId String @db.Uuid
@@ -143,6 +142,19 @@ model EmployeeTypeCountry {
   @@id([employeeTypeId, countryId])
 }
 
+model EmployeesJobs {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  employeeId String @db.Uuid
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  jobId String @db.Uuid
+  job Job @relation(fields: [jobId], references: [id])
+
+  @@id([employeeId, jobId])
+}
+
 model Country {
   id String @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now())
@@ -191,6 +203,22 @@ model HireReason {
   employees Employee[]
 }
 
+
+model JobFamily {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+  slug String @unique
+  effectiveDate DateTime?
+  summary String?
+  isInactive Boolean
+
+  jobs Job[]
+  employees Employee[]
+}
+
 model Job {
   id String @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now())
@@ -208,39 +236,11 @@ model Job {
   additionalDescription String?
   workShift Boolean?
   jobPublic Boolean?
-  jobFamily JobFamily?
 
-  employees Employee[]
+  jobFamilyId String @db.Uuid
+  jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])
+  employees EmployeesJobs[]
 }
-
-model JobFamily {
-  id String @id @default(uuid()) @db.Uuid
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  name String
-  slug String @unique
-  effectiveDate DateTime?
-  summary String?
-  isInactive Boolean
-  job Job @relation(fields: [jobId], references: [id])
-  jobId String @db.Uuid @unique
-
-  employees Employee[]
-}
-
-// model JobsJobFamilies {
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-
-//   jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])
-//   jobFamilyId String @db.Uuid
-
-//   job Job @relation(fields: [jobId], references: [id])
-//   jobId String @db.Uuid
-
-//   @@id([jobFamilyId, jobId])
-// }
 
 // WIP 
 model Location {
