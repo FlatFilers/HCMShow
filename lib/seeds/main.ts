@@ -29,8 +29,8 @@ export const main = async () => {
   await upsertCountries();
   await upsertLocations();
   await upsertEmployeeTypes();
-  await upsertJobs();
   await upsertJobFamilies();
+  await upsertJobs();
   await upsertHireReasons();
   await upsertTitleTypes();
   await upsertTitles();
@@ -125,6 +125,8 @@ const upsertJobFamilies = async () => {
 
 const upsertJobs = async () => {
   // [ 'ID', 'Profile Name', 'Job Code', 'Effective Date', 'Inactive', 'Include Job Code In Name', 'Title', 'Summary', 'Description', 'Additional Description', 'Work Shift Required', 'Is Job Public', 'Job Family']
+  const jobFamilyId = ((await prismaClient.jobFamily.findFirst()) as JobFamily)
+    .id;
   const parseCsv: Promise<Omit<Job, "id" | "createdAt" | "updatedAt">[]> =
     new Promise((resolve, reject) => {
       const data: Omit<Job, "id" | "createdAt" | "updatedAt">[] = [];
@@ -146,7 +148,7 @@ const upsertJobs = async () => {
             additionalDescription: row[9],
             workShift: row[10] === "" ? null : row[10] === "Yes",
             jobPublic: row[11] !== "No",
-            jobFamilyId: row[12],
+            jobFamilyId,
           });
         })
         .on("end", () => {
