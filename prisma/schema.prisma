@@ -226,16 +226,15 @@ model Job {
 
   name String
   slug String @unique
-  jobCode String @unique
-  effectiveDate DateTime?
-  isInactive Boolean?
+  effectiveDate DateTime
+  isInactive Boolean
   includeJobCodeInName Boolean?
   title String?
-  summary String?
-  description String?
+  summary String
+  description String
   additionalDescription String?
   workShift Boolean?
-  jobPublic Boolean?
+  jobPublic Boolean
 
   jobFamilyId String @db.Uuid
   jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])

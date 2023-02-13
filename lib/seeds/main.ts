@@ -131,23 +131,22 @@ const upsertJobs = async () => {
     new Promise((resolve, reject) => {
       const data: Omit<Job, "id" | "createdAt" | "updatedAt">[] = [];
 
-      fs.createReadStream("./lib/seeds/data/seed_job.csv")
+      fs.createReadStream("./lib/seeds/data/seed_jobs.csv")
         .pipe(parse({ skipRows: 1 }))
         .on("error", reject)
         .on("data", (row: any) => {
           data.push({
             slug: row[0],
             name: row[1],
-            jobCode: row[2],
-            effectiveDate: DateTime.fromFormat(row[3], "yyyy-MM-dd").toJSDate(),
-            isInactive: row[4] !== "Yes",
-            includeJobCodeInName: row[5] === "" ? null : row[5] === "Yes",
-            title: row[6],
-            summary: row[7],
-            description: row[8],
-            additionalDescription: row[9],
-            workShift: row[10] === "" ? null : row[10] === "Yes",
-            jobPublic: row[11] !== "No",
+            effectiveDate: DateTime.fromFormat(row[2], "M/d/yyyy").toJSDate(),
+            isInactive: row[3] !== "y",
+            includeJobCodeInName: row[4] === "" ? null : row[4] === "y",
+            title: row[5],
+            summary: row[6],
+            description: row[7],
+            additionalDescription: row[8],
+            workShift: row[9] === "" ? null : row[9] === "y",
+            jobPublic: row[10] === "y",
             jobFamilyId,
           });
         })
