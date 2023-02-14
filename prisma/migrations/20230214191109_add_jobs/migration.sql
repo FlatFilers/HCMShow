@@ -24,7 +24,7 @@ CREATE TABLE "Job" (
     "additionalDescription" TEXT,
     "workShift" BOOLEAN,
     "jobPublic" BOOLEAN NOT NULL,
-    "jobFamilyId" UUID NOT NULL,
+    "jobFamilyId" UUID,
 
     CONSTRAINT "Job_pkey" PRIMARY KEY ("id")
 );
@@ -39,4 +39,4 @@ ALTER TABLE "EmployeesJobs" ADD CONSTRAINT "EmployeesJobs_employeeId_fkey" FOREI
 ALTER TABLE "EmployeesJobs" ADD CONSTRAINT "EmployeesJobs_jobId_fkey" FOREIGN KEY ("jobId") REFERENCES "Job"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Job" ADD CONSTRAINT "Job_jobFamilyId_fkey" FOREIGN KEY ("jobFamilyId") REFERENCES "JobFamily"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Job" ADD CONSTRAINT "Job_jobFamilyId_fkey" FOREIGN KEY ("jobFamilyId") REFERENCES "JobFamily"("id") ON DELETE SET NULL ON UPDATE CASCADE;

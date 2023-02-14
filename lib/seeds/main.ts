@@ -167,20 +167,22 @@ const upsertJobs = async () => {
         ...rest,
       };
 
-      const jobFamily = (await prismaClient.jobFamily.findUnique({
-        where: {
-          slug: data.jobFamilyId,
-        },
-      })) as JobFamily;
-
-      mappedData = {
-        ...mappedData,
-        jobFamily: {
-          connect: {
-            id: jobFamily.id,
+      if (data.jobFamilyId && !data.jobFamilyId.includes("N/A")) {
+        const jobFamily = (await prismaClient.jobFamily.findUnique({
+          where: {
+            slug: data.jobFamilyId,
           },
-        },
-      };
+        })) as JobFamily;
+
+        mappedData = {
+          ...mappedData,
+          jobFamily: {
+            connect: {
+              id: jobFamily.id,
+            },
+          },
+        };
+      }
 
       return {
         ...mappedData,

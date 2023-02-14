@@ -236,7 +236,7 @@ model Job {
   workShift Boolean?
   jobPublic Boolean
 
-  jobFamilyId String @db.Uuid
+  jobFamilyId String? @db.Uuid
   jobFamily JobFamily? @relation(fields: [jobFamilyId], references: [id])
   employees EmployeesJobs[]
 }

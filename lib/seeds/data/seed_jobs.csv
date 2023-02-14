@@ -1,2 +1,1319 @@
-Reference ID,	Name,	Job Code,	Effective Date,	Inactive,	Include Job Code in Name,	Private Title, Summary,	Description, Additional Description, Work Shift Required, Is Job Public, Job Family ID,,
-Chief_Executive_Officer,Chief Executive Officer,1/1/2000,n,,,summary,description,,,y,Executive_Management,,
+Reference ID,Job Profile Name,Created Effective Date,Inactive,Include Job Code in Name,Private Title,Job Profile Summary,Job Description,Additional Job Description,Work Shift Required,Is Job Public,Job Families on Job Profile
+Chief_Executive_Officer,Chief Executive Officer,1/1/2000,n,,,"We're a modern company and so is our CEO with a mantra is to make things happen, turn ideas into action while embracing mobile and social technologies tweeting and friending your way into the hearts and minds of our stakeholders. You know how to turn on a dime to take a company in new directions before the market and technology commands it, to create a business culture that's expansive and promotes employee and customer engagement while setting a future vision and strategy mapped not only to organizational objectives but to community and global social purposes as well. You are a modern CEO with a modern vision.","Has overall responsibility for creating, planning, implementing and integrating the strategic direction of an organization.
+Ensures the organization's leadership maintains constant awareness of both the external and internal competitive landscape, opportunities for expansion, customers, markets, new industry developments and standards, and so forth.",,,Yes,Executive_Management,,
+Chief_Information_Officer,Chief Information Officer,1/1/2000,n,,,"In six years there could be more than 50 billion connected devices in the world.  Our CIO is a business driver, internal coach and consultant who speaks the language of the C-Suite and can lead the digital enterprise staying in front of trends and ahead of competition by being agile, customer-focused, visible, and innovative.",".  Sets objectives and strategies for the IT department
+.  Selects and implements suitable technology to streamline all internal operations and help optimize their strategic benefits
+.  Designs and customizes technological systems and platforms to improve customer experience
+.  Plans the implementation of new systems and provide guidance to IT professionals and other staff within the organization
+.  Approves purchases of technological equipment and software and establishes partnerships with IT providers
+.  Oversees the technological infrastructure (networks and computer systems) in the organization to ensure optimal performance
+.  Analyzes the costs, values and risks of information technology to advise management and suggest actions",,,Yes,Executive_Management,, 
+Chief_Financial_Officer,Chief Financial Officer,1/1/2000,n,,,"A strategic adviser, disciplined operator, right-hand executive and trusted business partner to the CEO, you're no ordinary bean counter.  You have a comprehensive vision of the company able to execute the CEO's vision by challenging and optimizing processes and operations for profit purposes while pushing the envelope with innovative technology solutions that support and propel the business forward. You understand the importance of culture, brand, strategic needs,  and performance trends and work actively with the management team to develop, justify and implement strategies to improve them.","Reports to the Board of Directors  
+Makes high-level decisions about policy and strategy
+Keeps the Board of Directors informed about policy issues
+Provides executive leadership across an organization
+Evaluates the success of the organization  
+Develops and implementing operational policies  
+Acts as the primary spokesperson for the organization  
+Develops the organization’s culture and vision",,,Yes,Executive_Management,,
+Chief_Operating_Officer,Chief Operating Officer,1/1/2000,n,,,The COO is a corporate officer responsible for managing the day-to-day activities of the corporation.,,,,Yes,Executive_Management,,
+General_Counsel,General Counsel,1/1/2000,n,,,"Advises the CEO, Chairman and Board on all legal matters impacting the organization and its entities.   Prepares, reviews and negotiates all contracts and legal documents.  Provides legal guidance to the compliance function and seeks to ensure that the organization conducts its business according to applicable federal and state laws and regulations.  Represents the Company before all legal forums including governmental and regulatory agencies, courts and arbitration bodies.",,,,Yes,FA_Management,,
+Chief_Human_Resources_Officer,Chief Human Resources Officer,1/1/2000,n,,,"Oversees all aspects of HR management, practices and operations to meet the needs of a growing and evolving organization by developing and executing people programs, service delivery strategies, enhanced organizational decision-making and talent strategies to secure growth on a global scale while acting as the curator/guardian responsible for preserving core culture.","·  Key human resources adviser to executive leadership, with responsibility for developing and implementing overall people strategy, initiatives and programs to support business outcomes.
+·  Drives cultural transformation while building employee engagement.
+·  Leads the development and implementation of progressive compensation and benefits programs to provide motivation, incentives, recognition, and rewards for effective performance.
+ ·  Develops talent planning models to identify gaps with respect to competency, knowledge and talent, and oversees the development of specific programs for filling these gaps.",,,Yes,Executive_Management,,
+Director_Employee_Benefits,"Director, Employee Benefits",1/1/2000,n,,,"The Director of Compensation & Benefits is both strategic and tactical, ensuring the ongoing implementation of existing programs while strategizing and introducing broad-based initiatives designed to attract and retain superior talent.",,,,Yes,HR_Management,,
+Director_Payroll_Operations,"Director, Payroll Operations",1/1/2000,n,,,"Responsible for payroll preparation & processing, tax reporting & compliance, overall administration & maintenance of payroll systems. Responsible for all payroll related activities for acquisitions or divestitures.","General Responsibilities:
+This role leads a highly professional organization that manages multiple payrolls across the globe with varying pay delivery frequencies. Total payroll scope is approx 4,000 employees across c40 countries.
+Responsibility includes payroll delivery, vendor management, operational effectiveness initiatives, development of service level metrics and management of end-to-end controls for payroll processes while also developing an organization-wide culture of continuous improvement
+Accountability for audit support, compliance support, service delivery excellence, governance with key business partners, ensuring successful implementation of all acquisitions and new country development, driving process improvement and automation as well as staff development
+Provide consistently accurate, efficient, scalable, and cost-effective payroll services that exceed industry standard performance benchmarks while providing business value to our stakeholders at the corporate, regional and local levels
+Analyze complex pay transactions, identify issues that exist and work with various internal operational teams to identify root cause of payroll system issues, assess risk and implement mitigation plans to minimize or eliminate future occurrence
+Support the design, implementation and operational delivery of a standardized global payroll solution with highest level of integration with Workday Global HR system. This global payroll solution includes: Global Payroll, Global Time Reporting and Global Absence Management functions
+Design, develop, and implement payroll business processes, polices and work rules; and create and maintain payroll process repository
+Foster an environment in which customer needs and requirements are anticipated and expectations are exceeded. Analyze actual data for trends, drivers and performance results against industry benchmarks to drive SLA compliance/quality improvement
+Diagnose complex payroll and reimbursement problems and make recommendations to improve efficiency and effectiveness
+Facilitate development of payroll project plans and schedules relating to ongoing enterprise-wide and internal enhancement projects
+Select and manage vendor relationships to deliver timely, accurate and compliant payroll
+Design and implement proper segregation of duties, Sarbanes-Oxley controls, and internal self-audits. Ensure compliance with all corporate policies and procedures. Partner with Internal Audit team to provide compliance reporting and SOX narratives that support the Corporate/Global process controls while ensuring no high risk audit comments. Manage the various audits, such as employment tax audits and internal/external audits. Drive vendor governance routines and ensure our vendors are meeting or exceeding contractual SLA's
+Develop/maintain payroll disaster recovery methodology
+Ensure payroll transactions are properly classified and in compliance with general accounting principles, and audit requirements
+Recruit and manage staff engaged in the processing of payroll, time and attendance, relevant deductions, and overall compliance; create an environment that is conducive to full performance; and ensure continuous training, and high morale
+Collaborate with Benefits, Compensation, and HR communities in the support of HR Business initiatives
+Foster a high rate of associate engagement within the team to develop high performing employees: Build a positive work environment that encourages teamwork. Retain and develop employees through training, career development, and timely reward and recognition. Regularly provide coaching and mentoring sessions that promote employee performance and development, creating a motivational and rewarding environment which promotes continuous learning & growth
+Create routines and collaborative partnerships to document and share best practices broadly. Understand business partners' needs and effectively propose recommendations. Collaborate with other Global HR leaders and the HR Shared Services on joint initiatives to ensure a coordinated effort between the functional areas and proper documentation on roles and responsibilities is agreed and understood.
+
+Qualifications:
+Minimum 10+ years relevant experience managing a payroll operations team preferably in a medium to large, corporate environment with multi-country/jurisdictional payroll
+Knowledge of employment regulations in the respective countries including compliance with country guidelines, or the ability to learn quickly
+Knowledge of accounting, with a focus on compensation accounting
+Experience in designing, implementing and reviewing internal controls aimed at reducing operational risk
+Strong verbal and written communication skills and the ability to work collaboratively across teams and vendors
+Strong client service mentality; able to develop strong working relationships with team, internal partners and vendors to deliver high quality service
+Ability to successfully handle numerous priorities in a dynamic environment",,,Yes,HR_Management,,
+Director_Recruiting_Services,"Director, Recruiting Services",1/1/2000,n,,,Overall responsibility for creating & executing holistic recruitment strategy that maximizes quality of new hires & speed they are hired. Responsible for managing recruitment team & for devising & implementing strategies for minimizing recruitment costs.,"Job Duties:
+• Develops & implements annual & long-term recruitment strategies, which include strategies for high volumes in many ""hard-to-recruit"" positions in healthcare.
+• Collaborates w/ key stakeholders to create action plans, set direction & establish goals.
+• Develops & implements improvement plans related to recruitment systems, policies & processes, & department/individual performance.
+• Communicates w/ senior leaders regarding recruitment strategies, short/long term objectives, & alignment w/ organizational goals & initiatives.
+• Develops & oversees service level agreements leading to the delivery of high quality, cost-effective recruitment, hiring, internal transfer, on-boarding, workforce planning, pipeline development, & career planning services.
+• Helps develop, analyzes, & reports on success against workforce & recruitment/hiring metrics.
+• Provides managerial oversight for the NCAL workforce planning function that develops robust talent pipelines for clinical & non-clinical hard-to-fill positions (e.g., Nursing, Allied Health, & Pharmacy).
+• Also, responsible for ensuring that the Region's career redeployment function is able to deliver transitional services as needed for potentially impacted job roles.
+• Provides continuous consultation & active partnership w/ key leaders of our medical facilities, business units, & national Human Resources to: develop & drive plans to execute the business strategy & our not-for-profit mission to provide superior quality & service at a competitive price &  - introduce & lead process improvements, build the systems & infrastructure to ensure the highest levels of client service, & develop a strong team.
+• Develop talent pipelines across a broad range of clinical & non-clinical roles to meet future business demands.
+• Develops & manages recruiting budget; maintains cost effectiveness & efficiency for delivery of all recruiting services (e.g., recruitment payroll, external vendors); tracks & analyzes expenses against the operational budget w/ linkage to the workforce recruiting plan.
+• Leads over 200 local area staff located across NCAL, including a transfer processing & job posting center w/ volumes of several hundred thousand transactions per year.
+• Collaborates w/ HR Business Partners & local recruiting directors to evaluate the effectiveness of recruitment services, including establishment of performance metrics & measurement of client satisfaction.
+• Establishes & tracks performance metrics for staff; manages recruitment workload levels & assignments.
+• Negotiates process & policy changes in collaboration w/ Operations, Labor, & Regional, Local & National HR Partners; ensures compliance w/ labor agreements & promotion of Labor Management Partnership objectives.
+• Facilitates the transition of appropriate recruitment aspects to the National Shared Services Function.
+• Ensures that the diversity of our workforce matches the diversity of the communities that we serve as well as compliance w/ government regulations, & legal & professional standards related to employment & EEO/AAP.
+• Ensures consistency & effectiveness of recruitment processes & practices across the region.
+• Directs or perform other tasks & special projects as required or assigned by HR Leadership or key clients.
+
+Basic Qualifications:
+Experience
+• Minimum ten (10) years of recruiting or relevant experience in recruitment, sourcing and interacting with all levels.
+• Minimum five (5) years of experience in complex union environments and in healthcare delivery and/or large, complex organization.
+Education
+• Bachelor's degree in in business, human resources, social science or related field OR four (4) years of experience in a directly related field.
+• High School Diploma or General Education Development (GED) required.
+Licenses, Certifications, Registrations
+• N/A.
+ 
+ 
+Preferred Qualifications:
+• Five (5) + years of experience managing geographically dispersed teams preferred.
+• Ten (10) + years professional experience in the healthcare field preferred.
+• Experience leading in turnaround and/or transitional situations preferred.
+• Experience managing the business of corporate recruiting, including budgeting, management, metrics reporting, and recruiting technology preferred.
+• Master's degree in business, human resources, social science or related field preferred.",,,Yes,HR_Management,,
+Director_Workforce_Planning,"Director, Workforce Planning",1/1/2000,n,,,"Responsible to provide leadership in the assessment of organizational needs and the development, implementation and evaluation of programs that facilitate the recruitment and retention of staff to support the organization's mission and goals.",,,,Yes,HR_Management,,
+Senior_Benefits_Analyst,Senior Benefits Analyst,1/1/2000,n,,,"Coordinates with the medical, dental, FSA, LTC, LTD, STD carriers and other insurance carriers (both domestic and international) to ensure the proper insurance program information is maintained in their records as well as employee and partner data; handles inquiries, requests and researches insurance-related issues. Responsible for analyzing and assisting in the administration of employee benefit plans, evaluating and comparing existing benefits.",,,,Yes,HR_Benefits,,
+Senior_Payroll_Specialist,Senior Payroll Specialist,1/1/2000,n,,,"Responsible for payroll administration including processing and reconciling semi-monthly payroll from time sheets, preparing and auditing payroll-related reports to include vacation and sick time accruals, benefit accruals and 401(k) contributions and satisfying government requirements for payroll taxes.",,,,Yes,HR_Payroll,,
+Senior_Recruiter,Senior Recruiter,1/1/2000,n,,,"Responsible for partnering with hiring managers and HR teammates to seek out, assess, attract and hire the best talent - both internally and externally - for both exempt and non-exempt positions.  Concentration will be on more complex/higher level recruitment efforts.","Responsibilities: 
+Responsible for driving all aspects of the recruiting process by building strong relationships with human resource leaders, hiring managers, and senior leadership. The Recruiter is responsible to develop strategies for job specific hiring needs within tight time frames. Manages all requisition related activities with a strong focus on quality of hire and time to fill. 
+Sources, screens and interviews candidates from both internal and external sources
+Develops applicant flow for key positions. Develops and implements sources for applicants using internet sourcing, employee referral programs, job fairs, trade fairs, associations, etc.
+Utilizes advertisements in appropriate media and trade journals and social networking sites to attract candidates for all positions as needed.
+Participate in and attend job fairs, networking events as a means to obtain a strong pipeline of candidates and to effectively meet hiring needs and business initiatives.
+Consults with Talent Acquisition Manager and HRBP on current and future staffing needs for key or high-level professional positions to identify job requirements, potential applicants, and interview guides proactively.
+
+Qualifications: 
+Minimum 5 years recruiting experience
+Proven success partnering with hiring managers to implement long term staffing and hiring strategies
+Strong analytical, organizational and assessment skills, proven abilities in staffing
+Excellent interviewing skills for establishing rapport with candidate and gathering information for hiring decisions
+Maintain high level of confidentiality regarding employee information",,,Yes,HR_Recruiting,,
+Senior_Workforce_Analyst,Senior Workforce Analyst,1/1/2000,n,,,"Works with other Human Resources teams to design effective processes, taking into consideration the needs of departments, the organization's commitment to diversity, equal employment opportunity, and in accordance with applicable labor laws.  Participate in long range strategic workforce planning for the organization.",,,,Yes,HR_Workforce_Planning,,
+Staff_Benefits_Analyst,Staff Benefits Analyst,1/1/2000,n,,,"Act as primary corporate office contact as well as liaison to all other offices regarding all facets of Employee Benefit Programs including design and analysis, while providing excellent customer service, expertise, and interpretation of company benefit plans.",,,,Yes,HR_Benefits,,
+Director_HR_Operations,"Director, HR Operations",1/1/2000,n,,,"Responsible to develop, oversee, and manage systems and transactional processes for our employees.","This is a high impact role and will work closely with the human resources business managers and functional business leaders. The Director of HR Services will provide direction for the design, development, administration and management of all systems that balance industry best practices in alignment with the organization's growth and culture.
+
+Duties and Responsibilities:
+Provide strategy and oversight of the administration of compensation, benefits, HRIS system (Workday), and core HR activities across the employee life cycle
+Responsible for the delivery and support of all of the following:
+Global Benefit Programs
+Compensation
+HRIS (Workday is system of record)
+HR analytics/metrics/turnover reporting
+Immigration
+Shared Services
+HR Policy/Procedures/Handbook
+
+Oversee the members and activities of the HR Operations team.
+Fully leverage and maintain our newly implemented HRIS system, Workday.
+Serve as the leader and keeper of HR policy, process and systems that support these.
+Ensure the capture and maintenance of complete and accurate employee related data. Provide reports and insights to leadership team in order to enable better talent decision making.
+Coordinate HR interactions cross-functionally with other teams as necessary, including Payroll/Finance, IT as well as other parts of the HR Team globally.
+Work with other members of the HR team (including HRBPs, TA and Engagement) to support HR programs, including performance management and compensation reviews.
+Support organizational change-management and other special projects.
+Ensure that all HR policies and programs are compliant with the regulatory requirements in each jurisdiction.
+
+Position Requirements:
+Minimum 10 years of broad based and progressive experience in HR Operations, ideally in a fast paced, growing tech company.
+4-7 years in an HR leadership role.
+5+ years’ experience with HRIS platforms (Workday strongly preferred)
+Outstanding execution and project management skills.
+Strategic mindset but willingness to be hands on and bring a strong sense of what operational excellence looks and feels like. 
+Strong attention to detail, highly analytical with the ability to evaluate complex data and make recommendations.
+Strong customer service skills and collaborative approach to work and problem solving.
+Ability to meet deadlines and adapt to changing conditions and generate effective and pragmatic solutions to new situations and problems as they are presented.
+Ability to inspire confidence in senior leadership and other managers through timely delivery of information and plans, working independently of senior leadership, but consulting when appropriate.
+Familiarity with best practices for people processes and experience in coaching managers through these processes and leading these practices, when necessary.
+Desire to continually improve processes and exceed employee expectations.
+Strong business acumen, attention to detail and strong sense of logic
+Demonstrated ability to multitask, probe, analyze and present solution driven results
+Advanced Excel and Word
+Experience working with a sophisticated HRIS required, experience with Workday is a plus
+Bachelor’s degree required",,,Yes,HR_Management,,
+Staff_Recruiter,Staff Recruiter,1/1/2000,n,,,"Responsible for recruitment for staff and senior level, domestic and international positions while driving the successful deployment of recruitment programs across the organization.  Development of creative and innovative sourcing solutions to identify and attract passive candidates.",,,,Yes,HR_Recruiting,,
+Staff_Payroll_Specialist,Staff Payroll Specialist,1/1/2000,n,,,"Responsibile for input, review, and processing of payroll for organization's employees.  Set-up new hires for payroll processing.   Process final paychecks.  Must be familiar with overtime law.  Must be able to process manual checks and calculate deductions (e.g, fica, medicare, etc.) as needed.",,,,Yes,HR_Payroll,,
+Staff_Workforce_Analyst,Staff Workforce Analyst,1/1/2000,n,,,"Works with other Human Resources teams to design effective processes, taking into consideration the needs of departments, the organization's commitment to diversity, equal employment opportunity, and in accordance with applicable labor laws.  Supports manangement as appropriate in activities related to workforce planning.",,,,Yes,HR_Workforce_Planning,,
+Senior_HR_Representative,Senior HR Representative,1/1/2000,n,,,"Responsible for development of HR policies and programs and facilitation of training programs (New Hire Orientation, Non-Harassment Training, Performance Management, Supervisor/Manager Orientation/Training).   Provide project support to both senior management of Human Resources organization.",,,,Yes,HR_Service_Center,,
+Staff_HR_Representative,Staff HR Representative,1/1/2000,n,,,"Provides Corporate Human Resources & Payroll Department administrative support from the field office locations.  Responsible for maintaining employee information in HCM system and personnel files, coordinating the new hire process (new hire orientation).  Respond to general HR inquiries and provides interpretation when necessary.",,,,Yes,HR_Service_Center,,
+Associate_General_Counsel,Associate General Counsel,1/1/2000,n,,,"The Associate General Counsel is responsible for all of the legal affairs of the company, including commercial contract matters, intellectual property management, corporate governance and securities matters (including SEC, Sarbanes-Oxley and NASDAQ listed company legal compliance and disclosure matters), and litigation.","PRIMARY RESPONSIBILITIES:
+Commercial/Contracts: Provide legal advice and counseling on a variety of legal issues, including contractual and transaction matters such as procurement and vendor agreements, sales and marketing, and regulatory and compliance matters. Depending on experience, this position will support the Marketing, Sales, Operations and/or R&D teams.
+Operations: Provide legal advice to manufacturing plant and distribution center management. Review and negotiate contracts with vendors and service providers.
+
+ REQUIRED SKILLS:
+Member of the Bar
+Possess excellent communication skills, both verbal and written
+Strong client service orientation and sense of urgency
+Team player and positive attitude
+Ability to deal effectively with personnel in and outside the Company",,,Yes,Legal_Management,,
+Corporate_Counsel,Corporate Counsel,1/1/2000,n,,,"Provides legal services to the organization under the direction of the General Counsel, and other senior lawyers in the department on a wide variety of topics, including:intellectual property protection; licensing;  export control; antitrust; government contracting; employment law issues; and governance.",,,,Yes,Legal_Corporate,,
+Senior_Counsel,Senior Counsel,1/1/2000,n,,,"Provide counsel to sales force on promotional, regulatory, and compliance issues; commercial contract negotiation, including license agreements; consulting and review on advertising and promotional materials; and consulting on HR/employment issues.",,,,,Legal_Corporate,,
+Corporate_Paralegal,Corporate Paralegal,1/1/2000,n,,,"Prepares, reviews and negotiates proposed contracts, formal agreements and other legal instruments. Supports legal and contracts function by performing a variety of work relating to the organization's entities and products. Identifies, manages and communicates risks and opportunities around specific contracts.",,,,Yes,Legal_Corporate,,
+Staff_Financial_Analyst,Staff Financial Analyst,1/1/2000,n,,,"Numbers tell great stories. If you're driven with a high degree of common sense, analytical prowess and great problem solving skills that's a nice start. You'll be a miner; for data that is, by developing business metrics to uncover customer insights, strategies and growth opportunities. You know customers and high volume tasks and if overdrive is your speed, show us what you've got.","Responsible for performing analyses and reports for department management under direct supervision. 
+Creates weekly, monthly sales reports 
+Collects, analyzes, evaluates, and reports data with focus on increased sales
+Assists in publisher revenue forecast
+Assists in preparation of monthly financials & financial close package",,,Yes,FA_Financial_Analysis,,
+Director_Accounting,"Director, Accounting",1/1/2000,n,,,"Responsible for the accounting operations, compliance with accounting and tax policies, and reporting requirements related to revenue-generating legal entities.  Participate in Corporate Accounting strategic planning and business review processes.",,,,Yes,FA_Management,,
+Director_Tax,"Director, Tax",1/1/2000,n,,,"Responsible to oversee all aspects of US and International tax compliance and tax accounting issues throughout the organization.  While supporting senior management, will be accountable for developing and implementing strategic plans in relations to tax that will compliment the organizatin's core business strategy and mission.",,,,Yes,FA_Management,,
+Director_Financial_Planning_and_Analysis,"Director, Financial Planning & Analysis",1/1/2000,n,,,"Responsible for the development of the annual operating plan, financial forecasting, customer contract analysis and customer negotiations support, sales and gross profit analysis and reporting, variance and financial statement analysis and reporting, ad-hoc analyses, and sales and marketing business decision support.","The Director of Financial Planning & Analysis supports the executive team and operating partners with value added analytics.  The position reports to the Vice President, Financial Planning & Analysis and is a key member of the corporate finance team.  We have an outstanding culture and work environment and this highly visible role allows the incumbent to partner with the executive team on improving the overall business.
+
+RESPONSIBILITIES
+Lead the creation of the annual operating plan and periodic forecasts for the consolidated Company
+Develop and maintain customer, product, and SKU profitability models with involvement from associated functions
+Lead the development of tools and processes to continually improve the analytical capabilities and measurement processes across the Company with the goal of creating an environment where the majority of time is spent in analysis and recommendations as opposed to data gathering
+Complete complex analyses, provide sensitivity analysis and data, and make sound recommendations
+Lead the creation of and publication of key performance indicators and dashboard/metrics reporting; identify opportunities for improvement with functional leaders
+Provide regular analysis of overall profitability (Sales, COGS, operating expenses), focusing not only on the ‘what’s’ but also the ‘whys’ to ensure root causes are understood
+Help identify, structure and drive implementation of various operational improvement initiatives by working with cross functional teams in a program management office function
+Assist with annual strategic planning activity for the Company
+Analyze business opportunities and research company, customer, competitor, and industry trends
+Work with peers in financial function to track, analyze, and report financial performance (P&L / balance sheet)
+Analyze working capital trends and identify areas for improvement
+Ability to seek out, implement and/or improve internal or external best practices
+
+REQUIREMENTS
+EDUCATION
+Bachelor's degree in a business-related major required (Accounting or Finance preferred)
+MBA preferred
+CPA or CMA a plus
+   
+EXPERIENCE
+Ten (10) to fifteen (15) years experience in a Manufacturing / Consumer Goods related environment with strong analytical and financial modeling skills with exposure to best-in-class practices
+Strong FP&A analytic skills; able to clearly link financial results to operational performance drivers, generate alternatives, and drive positive change
+Prior dairy related experience, or consumer packaged goods experience, is a plus 
+   
+TECHNICAL SKILLS
+Very advanced financial modeling and technical skills (Excel) and deep grounding in contemporary financial analysis techniques
+Financial systems experience preferred (OLAP cube software such as TM1)
+
+ADDITIONAL SKILLS
+Ability to switch gears quickly and work cross-functionally and collaboratively with sales, manufacturing, and distribution
+Good team player with strong communication and interpersonal skills; incumbent must be sought after as a subject-matter expert who can be relied upon to provide valuable insight and recommendations
+Ability to complete duties with limited direct supervision and meet deadlines in a fast-paced, changing environment
+Leadership skills and the ability to present at a high level",,,Yes,FA_Management,,
+Director_SEC_Reporting,"Director, SEC Reporting",1/1/2000,n,,,"Responsible to ensure compliance with all SEC filings; including 10-K, 10-Q, and Sarbanes Oxley compliance under the supervision of the CFO.  Work closely with the Legal Department, external auditors, FP/A, Accounting, and Executive Management to ensure complete, accurate, and timely filings.",,,,Yes,FA_Management,,
+Senior_Financial_Analyst,Senior Financial Analyst,1/1/2000,n,,,"Assists in the preparation, analysis and distribution of financial statement packages. Ensures financial statements are generated in a timely and accurate manner. Responsibilities include internal audit function, audit research, and other projects as assigned by senior management. Maintains a positive and supportive working relationship with both internal and external customers to guide them in daily accounting related activities and helps ensure their overall success. Performs duties in accordance with company’s established Core Values and Mission Statement.",,,,Yes,FA_Financial_Analysis,,
+Chief_Risk_Management_Officer,Chief Risk Management Officer,1/1/2000,n,,,"The CRMO executive is in charge of assessing and planning for potential risks in the various segments of a given business model, such as computer security, compliance, and lawsuits, to minimize the firm's liability and related management costs",,,,Yes,Executive_Management,,
+Controller,Controller,1/1/2000,n,,,"Works with the CFO in preparing monthly financial reports,   evaluates the accuracy and reliability of accounting data, effectiveness of existing accounting procedures and controls, and makes recommendations for improvement.   Develop, recommend and implement accounting practices to promote consistency, applications of best practices, task automation and efficiencies.",".  Guides financial decisions by establishing, monitoring, and enforcing policies and procedures.
+·  Protects assets by establishing, monitoring, and enforcing internal controls.
+·  Monitors and confirms financial condition by conducting audits; providing information to external auditors.
+·  Maximizes return, and limits risk, on cash by minimizing bank balances; making investments.
+·  Prepares budgets by establishing schedules; collecting, analyzing, and consolidating financial data; recommending plans.
+·  Achieves budget objectives by scheduling expenditures; analyzing variances; initiating corrective actions.",,,Yes,FA_Management,,
+Senior_Network_Engineer,Senior Network Engineer,1/1/2000,n,,,"Responsible for designing, implementation, and provide 3rd level support for WAN LAN environment, which consists of routers and switches. This includes designing and evaluating network requirements for new product releases and supporting complex operational tasks and initiatives.",,,,Yes,IT_Systems,,
+System_Administrator,System Administrator,1/1/2000,n,,,"Responsible for system operations, and managing the full cycle of systems installation, maintenance, and troubleshooting procedures.  Determine and recommend hardware and software requirements.",,,,Yes,IT_Systems,,
+Senior_IT_Analyst,Senior IT Analyst,1/1/2000,n,,,"Responsible for troubleshooting and resolving IT related issues, supporting both corporate and field-based teams in a technically diverse workforce.  Support end users using desktops and laptops installed with various operating system, as well as supporting field sales users with mobile devices.",,,,Yes,IT_HelpDesk,,
+Tax_Accountant,Tax Accountant,1/1/2000,n,,,"Responsible for organization's entities tax return preparation, working trial balance and general ledger account analysis, tax planning and tax research.  Work involves consolidated returns as well as multi-state tax return issues.",,,,Yes,FA_Accounting,,
+Tax_Specialist,Tax Specialist,1/1/2000,n,,,"Responsible to evaluate and find solutions for complex tax issues for the organization's entities leveraging technical skills in interpretation and application of relevant tax laws. Regularly contribute to the development of new or improved tax processes, concepts, techniques, and standards. Serve as consultant to business managers on all major tax matters pertaining to the tax department's policies, plans, and objectives.",,,,Yes,FA_Accounting,,
+Manager_Accounts_Payable,"Manager, Accounts Payable",1/1/2000,n,,,"Responsible for overseeing all aspects of accounts payable, reconciling vendor accounts, reconciling accounts payable to the general ledger, resolving and inquiries or issues and preparing reports for management. Provide leadership in a team environment working closely with all AP Analysts.",,,,Yes,FA_Management,,
+Manager_Accounts_Receivable,"Manager, Accounts Receivable",1/1/2000,n,,,Responsible for managing a full range of accounts receivable functions including billing clients for services provided during the month across multiple divisions and resolving customer issues leading to timely collection of receivables.,,,,Yes,FA_Management,,
+Accounting_Specialist_AP,Accounting Specialist - AP,1/1/2000,n,,,"As an accounting team member you will provide efficient, timely and accurate financial and administrative services to our vendors and suppliers using a modern system to input data, generate reports, conduct research projects, and respond to inquiries as well as assisting with any vendor resolution disputes.","·  Reconciles AP entries processed by validating balances to system reports ·  Answers AP requests/inquiries from vendors, buyer and employees  
+·  Charges expenses to accounts and cost centers by analyzing invoice/expense reports; recording entries
+·  Pays vendors, resolves purchase orders, contracts, invoices, and payment discrepancies
+·  Maintains accounting ledgers by verifying and posting account transactions",,,Yes,FA_Accounting,,
+Accounting_Specialist_AR,Accounting Specialist - AR,1/1/2000,n,,,"In our department everybody counts. You love to dig into issues, have excellent analytical skills, are detail-oriented, results-focused and know what it takes to sustain good customer relationships.  You will be responsible for managing customer accounts and all aspects of the accounts receivable portfolio/life cycle to maximize and improve cash flow efficiencies.","·  Posts customer payments by recording cash, checks, and credit card transactions
+·  Posts revenues by verifying and entering transactions from bank, online, and orbital deposits
+·  Collects revenue by reminding delinquent accounts; notifying customers of insufficient payments and reconciling monthly customer statements
+·  Reviews and collects customer payments over 90 days outstanding
+·  Responsible for monthly reconciliation of aged receivables to the general ledger
+·  Monitor KPI focusing on DSO in an effort to measure and reduce overall DSO",,,Yes,FA_Accounting,,
+Senior_Accountant,Senior Accountant,1/1/2000,n,,,"Lead role responsible for performing the monthly general ledger close and assisting more junior staff with completing their assignments.  Review other's work for accuracy, prepare month-end financial reports, analyze and reconcile general ledger accounts, identify and explain deviations from budget./",,,,Yes,FA_Accounting,,
+Director_Information_Technology,"Director, Information Technology",1/1/2000,n,,,Responsible for all aspects of IT operations and service delivery (voice and data & distributed systems) and directly managing the applications as well as indirectly working with all other IT areas (Infrastructure).,"Duties: 
+Design, develop, implement and operate organizational enterprise information systems, software applications, and related infrastructure.
+Implement, support and maintain all internal employee productivity infrastructure including servers, desktops, phones and networks.
+Keep current with trends and issues in the IT industry, including current technologies and prices.
+Advise, counsel and educate on their competitive or financial impact.
+Oversee the software development of mission-critical applications and technology to support the company’s goals and provide direction and leadership to one or more development teams.
+Leading technology planning. Driving the implementation of best practices throughout the IT organization, while governing control and ensuring objectives are achieved.
+Development of organization-wide systems standards (hardware, software, network systems) policies and procedures.
+Manage, develop and train a team of high performing software and hardware engineers.
+Manage multiple, concurrent software development projects and endure high quality and timely releases.
+Ensure metrics are in place to monitor and measure software development projects, ongoing support and maintenance activities.
+Perform resource allocation, project prioritization, lead, direct and oversee Program and Project Management processes and resources.
+Expert level understanding multi-tier web applications development and architecture including responsible design and mobile
+Experience with Program and Project Management
+Expert level of understanding of computing infrastructure components including cloud platforms.
+Assists IT support staff in their daily functions as required.
+
+Required: 
+Bachelor’s degree required in Computer Science.
+5 - 10 years of progressive information systems management experience.
+Experience managing programmers using HTML, XML, XFORMS, XSLT, SOLR, Hibernate, Tomcat and JavaScript required.
+Excellent written/oral interpersonal skills.
+Excellent organizational/analytical skills, time and project management skills
+Knowledgeable of HIPAA Privacy Rules
+Willingness to be on-call",,,Yes,IT_Management,,
+Manager_IT_HelpDesk,"Manager, IT HelpDesk",1/1/2000,n,,,"Responsible for the delivery of 24x7 production support for the organization’s global applications including web sites, reporting applications, the enterprise applications and data-related processing.  Own the communication process between IT and the business for all support-related activities, and ensure that all issues are tracked, prioritized and actioned in accordance with agreed upon SLAs.",,,,Yes,IT_Management,,
+Manager_Workstation_Support,"Manager, Workstation Support",1/1/2000,n,,,"As a member of the Services leadership team, you will lead and manage the delivery of high-quality desktop support services to the organization as well as execute operational and tactical plans for laptop, desktop and mobile deployments satisfying customer and business needs for the enterprise. Provide leadership, direction, and supervision and day-to-day operational and technical support to members of the desktop team.",".  Plan, design, lead, and coordinate desktop support related activities and provide administrative direction and leadership for daily operational undertakings.
+.  Develop the enterprise desktop roadmap.
+.  Oversee scheduling, prioritization, and timely completion of service requests and incident tickets.
+.  Develop Service and Business Level Agreements to set expectations and provide expert guidance and consultation to members of the team on available solutions to automate work, including systems deployment, software distribution, and security management.",,,Yes,IT_Management,,
+Senior_Workstation_Engineer,Senior Workstation Engineer,1/1/2000,n,,,"Responsible for workstation builds for new hires, and support inquiries and requests for assistance from users and investigate, identify, troubleshoot, resolve problems and provide advice to users of PC hardware/software.",,,,Yes,IT_Support,,
+IT_HelpDesk_Specialist,IT HelpDesk Specialist,1/1/2000,n,,,"Responsible for providing exceptional customer service and support to the organization's user community by answering, evaluating and prioritizing incoming telephone, voice mail, e-mail and in-person requests for assistance from users experiencing problems or requesting assistance with hardware, software, networking and other computer-related technologies.",,,,Yes,IT_HelpDesk,,
+Manager_IT_Operations,"Manager, IT Operations",1/1/2000,n,,,"Responsible for internal and external data network, including connections to the internet, secure connections via VPNs, and internal communication. Ensures security and high availability of network resources, as well as day to day maintenance and monitoring",,,,Yes,IT_Management,,
+Vice_President_Sales,"Vice President, Sales",1/1/2000,n,,,"The Vice President of Sales is an executive level position that is responsible for the overall coordination, functional management and leadership of all sales activities of the business for all geographic region(s). The Vice President of Sales develops, manages, and guides sales activities for the organization.","RESPONSIBILITIES/DUTIES
+Direct and coordinate company sales and marketing functions. Develop and coordinate sales selling cycle and methodology. Analyze and evaluate the effectiveness of sales, methods, costs, and results. Develop and manage sales and marketing budgets, and oversee the development and management of internal operating budgets.  Directly manage major and critical developing client accounts, and coordinate the management of all other accounts. Participate in the development of new project proposals. Establish and implement short- and long-range goals, objectives, policies, and operating procedures.
+
+EDUCATION
+Completion of a Bachelor's Degree in Marketing and ten years of experience in a senior-level sales and/or marketing position.
+
+KNOWLEDGE/SKILLS
+Experience in strategic planning and execution. Knowledge of contracting, negotiating, and change management. Knowledge of structuring sales quota goals and revenue expectations. Work requires professional written and verbal communication and interpersonal skills. Ability to motivate teams to produce quality materials within tight timeframes and simultaneously manage several projects. Ability to participate in and facilitate group meetings.",,,Yes,Sales_Management,,
+Vice_President_Marketing,"Vice President, Marketing",1/1/2000,n,,,"Responsible for the strategic development and tactical execution for all marketing activities.  The V.P. of Marketing will lead all brand management, maintain brand integrity, and develop effective marketing communications for the successful introduction of new products.  Working closely with the marketing team and the sales team, the V.P. of Marketing will drive initiatives, objectives, processes and policies in an effort to deliver strong sales within established channels and to assist with new sales into new channels.",,,,Yes,MK_Marketing_Management,,
+Director_Marketing_Communications,"Director, Marketing Communications",1/1/2000,n,,,"Contribute to the creation of a marketing communications strategy, including assessing specific market opportunities, tracking competitive activities and measuring success.  Lead all public relations initiatives for the Company, including selection and management of a PR firm, speaking engagements, awards and bi-line activities.  Create an overall market awareness strategy to build consideration directly with senior management of Marketing and C-level executives.","Essential Functions
+Build, develop, and lead global team of Marketing Communications professionals responsible for development and execution of lead generation, direct eCommerce promotions, search marketing, social media, advertising, tradeshows, PR and other marketing communication activities.  
+Develops and aligns communication strategy and brand positioning with corporate strategies to ensure an effective, impactful and consistent communication to the marketplace.
+Continually strives to develop a center of excellence in marketing communications, with strong focus on direct marketing and lead generation.
+Manages the marketing communications budget.
+Manages outside marketing vendors in developing consistent communications strategies  Monitors the success of communication strategies based on metrics and makes necessary adjustments to maximize the efficiency and effectiveness of marketing initiatives.
+Oversees the development of tradeshow strategies and schedules, and related promotional activities.  
+Utilizes strong knowledge base to guide appropriate communication strategies, working closely with market research group, vertical marketing team and product management business units.
+Qualifications
+ 
+Education, Background and Skill Requirements
+B.A. or B.S. degree required.  MBA or degree in marketing is preferable or equivalent combination of education and work experience.
+Strong management skills with experience developing direct reports
+7+ years of experience in both business-to-business and business-to-consumer markets is desired.  Strong preference for business-to-consumer and direct marketing experience
+Strong PC skills. Experience with Word, Excel, Access, Project, PowerPoint, and Acrobat
+Market segmentation, research and strategic skills
+Demonstrated ability to effectively manage a large budget
+PC in an open-office environment
+Up to 30% travel required",,,Yes,MK_Marketing_Management,,
+Director_Marketing_Services,"Director, Marketing Services",1/1/2000,n,,,"Responsible for the development of go-to-market strategy and plans for Company's products & solutions.  This includes heavy interaction with the various business units, marketing, sales and corporate communications teams within the Company, and in particular, the Company's channel partner teams to align our strategies and fiscal year plans.","Responsbile to develop a marketing strategy involving a diverse set of activities including market research, development of collateral and sales tools, sales and partner training and support, and other outbound marketing activities with heavy emphasis on support of global channel marketing programs and campaigns.
+
+Job Duties:
+Contributes to marketing effectiveness by identifying short-term and long-range issues that must be addressed; providing information and commentary pertinent to deliberations; recommending options and courses of action; implementing directives.
+Obtains market share by developing marketing plans and programs for each product; directing promotional support.
+Maintains relations with customers by organizing and developing specific customer- relations programs; determining company presence at conventions, annual meetings, trade associations, and seminars.
+Provides short- and long-term market forecasts and reports by directing market research collection, analysis, and interpretation of market data.
+Influences present and future products by determining and evaluating current and future market trends.
+Develops new uses for existing products by analyzing statistics regarding market development; acquiring and analyzing data; consulting with internal and external sources.
+Maintains research database by identifying and assembling marketing information.
+Provides marketing information by answering questions and requests.
+Achieves financial objectives by preparing an annual budget; scheduling expenditures; analyzing variances; initiating corrective actions.
+Completes marketing department operational requirements by scheduling and assigning employees; following up on work results.
+Maintains marketing staff by recruiting, selecting, orienting, and training employees.
+Maintains marketing staff job results by counseling and disciplining employees; planning, monitoring, and appraising job results.
+Develops marketing staff by providing information, educational opportunities, and experiential growth opportunities.
+Maintains professional and technical knowledge by attending educational workshops; reviewing professional publications; establishing personal networks; participating in professional societies.
+Contributes to team effort by accomplishing related results as needed.
+
+Skills and Qualifications:
+Client Relationships, Coaching, Managing Processes, Self-Motivated, Marketing Plan, Subordinate Involvement, Customer Focus, Marketing Research, Statistical Analysis, Developing Budgets, Financial Planning and Strategy",,,Yes,MK_Marketing_Management,,
+Senior_Manager_Marketing_Communications,"Senior Manager, Marketing Communications",1/1/2000,n,,,"Responsible for implementing integrated marketing communication plans for the Company's strategic programs.  This includes targeted lead generation programs which include email, direct mail, sales collateral, and website development and some print and online advertising.",,,,Yes,MK_Marketing_Management,,
+Office_Manager,Office Manager,1/1/2000,n,,,"Responsible for planning, directing and coordinating office support services, including purchasing and facilities management.  Additional responsibilities include: hiring and managing office support staff, managing internal communications, assisting with travel arrangements, and miscellaneous projects.","Responsibilities:
+Responsibilities in this role include, but are not limited to:
+- Serving as the main point of contact for all things related to the EverFi-Walnut Creek office.
+- Welcoming and greeting visitors, answering their questions or directing them as needed
+- Answering the office phone line and responding or directing as needed
+- Maintaining security to office to ensure appropriate access
+- Ordering office supplies and maintaining a clean office area
+- Managing office equipment, kitchen and general supplies
+- Processing outgoing shipments and handling incoming mail and packages
+- Coordinating events and schedules as needed
+- Supporting new hire on-boarding to ensure a smooth transition
+- Coordinating travel and accommodations as needed for guests and visitors
+ 
+Requirements:
+- High energy and positive, can-do attitude
+- Previous office management experience.
+- Excellent communication skills, both written and verbal.
+- Strong interpersonal skills: Upbeat, friendly and professional.
+- Excellent time management skills and organizational skills.
+- Proficiency in Microsoft Office programs and office-related IT tools.
+- Willingness to learn new things even though you never done them before.
+- Familiarity with the ins and outs of a startup environment.
+- Desire to assist others and take on additional responsibilities
+Desired Skills and Experience
+Microsoft Office Communication Event Planning Organization Office Administration Project Management Teamwork Administrative Assistance Executive Administrative Assistance Administration Inventory Management",,,Yes,FA_Administration,,
+Receptionist,Receptionist,1/1/2000,n,,,"As the face of our company, you will provide excellent customer service receiving incoming calls and routing those calls to the appropriate staff; greeting visitors; and general office duties including data entry, typing correspondence and spreadsheets, filing, mail; and other administrative duties as assigned.","·  Develop and maintain strong organizational and business knowledge of Process Stream to provide guidance and fulfill responsibilities of the role. 
+·  Must be extremely organized, and able to multi-task efficiently.
+·  Must be highly motivated and have a willingness to learn.
+·  Greet guests; notify hosts and direct guests to conference rooms or other offices. 
+·  Answer phone and direct callers appropriately. 
+·  Conference Rooms: review schedule on public calendar; confirm meetings and resolve conflicts when needed.",,,Yes,FA_Administration,,
+Executive_Assistant,Executive Assistant,1/1/2000,n,,,"Responsible for confidential administrative duties for executive management.  Proactively manage executives' calendar to accommodate shifting priorities and meetings.   Must be available for demanding work volume and occasional travel; be prepared to work under pressure and meet deadlines.  Responsibilities may also include Board Member coordination (assisting and supporting BOD meetings, communications, approvals, teleconferences).",,,,Yes,FA_Administration,,
+Regional_Sales_Manager,Regional Sales Manager,1/1/2000,n,,,"Responsible to own the complete sales process from lead to close. The sales process generally involves calling on C-level business and administration managers and selling the “concept” of the Company's solutions and qualifying the opportunity.  For qualified opportunities, the RSM will schedule any evaluations / demonstrations at the customer site, which the RSM will coordinate with the sales support team.","Minimum three years direct selling experience in selling business solutions 
+Proven experience closing complex sales 
+Experience with Cloud and Managed Service offerings are a plus 
+Strong interpersonal skills required to effectively communicate with clients and vendors 
+Superior prospecting and lead management skills 
+New business development skills and the ability to grow our footprint with existing customers is essential 
+Excellent written, verbal, and presentation skills to confidently and professionally present to “C” level executives 
+Knowledge of local marketplace 
+
+This Position Entails:
+
+Selling responsibilities: 
+
+
+Syntax Enterprise Cloud and related offerings
+JD Edwards Services: New implementations, Upgrades, Managed services
+Oracle ERP Cloud Services
+JD Edwards Applications
+Related Third Party applications and services
+Role has both hunter and farmer characteristics
+
+
+Local travel, on a regular basis throughout the Northeast US.  
+
+
+The Successful Candidate must be:
+ 
+U.S. Citizens and those authorized to work in the U.S.; we are unable to sponsor at this time. 
+Professional and articulate 
+Interpersonally adept, can interface well with Management, Consulting and related Sales Teams 
+Technically proficient 
+A relationship builder, a problem solver, dynamic, a difference maker",,,Yes,Sales_Direct_Sales,,
+Inside_Sales_Representative,Inside Sales Representative,1/1/2000,n,,,"This is your first step into sales with ready, qualified leads for you to work, develop and close.  Bring your enthusiasm and passion for building strong customer relationships while articulating our vision and value. Excellent training and coaching is provided to ensure your success in achieving revenue targets that grow and scale.",Responsible for generating and cultivating new business along with managing all aspects of strategic marketing and lead generation.  On a daily basis you will procure or create targeted lists fitting our client profile and contact individuals on these lists in a number of ways ultimately with the goals of identifying warm or hot leads to be passed along to the sales team.,,,Yes,Sales_Inside_Sales,,
+Sales_Solution_Consultant,Sales Solution Consultant,1/1/2000,n,,,"Responsible to identify our clients' business challenges, to collaboratively shape solutions that drive their strategic initiatives, and to keep them educated and informed in the ways that the Company's current and future products can enhance their business.  Responsible for managing relationships clients in a specific geography when teamed together with a Regional Sales Manager.  Need to be a focused, proactive self-starter, and able to multi-task in a fast-paced environment.   In addition, act as an advisor and consultant, as well as a client advocate within the Company.",,,,Yes,Sales_Sales_Support,,
+Director_Inside_Sales,"Director, Inside Sales",1/1/2000,n,,,"Responsible to directly supervise all Inside Sales and Sales Support personnel while developing the department budget and controlling monthly expenses within budget plan.  Establish and nuture an environment focused on team member's relationship development with customers, building excellent rapport, knowledge of the customers' business and providing exceptional customer support combined with monitoring and achieving department performance measurements.","Duties and Responsibilities: 
+* Develop and manage an Enterprise-Class Inside Sales organization by organizing and measuring data-defined goals and activities that contribute to the lead generation and pipeline build for the salesforce – This is FAST and SCALABLE processes of capturing data, creating compelling marketing campaigns to drive demand, and ensuring sales execution.
+* Respond to inbound inquiries based on marketing campaigns including: web promotions and leads, e-mail, Webinars, seminars
+* Mentor and develop an inside sales team which includes recruiting, hiring and training new Reps on Product Portfolio, Industry, Customers, Competitors, Systems(salesforce.com, Workday, etc) and sales process
+* Maintain responsibility for detailed partner pipelines and accurate forecasting of assigned accounts and well-being for all of the regions including the Americas, EMEA and APAC
+* Assist all regional sales managers (RSM’s) and partners with the following: a) Lead qualification & dissemination b) closing new business for high volume, low average selling price products, c) Up-selling new products, d) developing outbound scripts, e) reviewing leads passed, f) participating in Solutions Marketing programs.
+* Oversee the daily outbound calls to prospects. Maintain or exceed set minimum number of team calls weekly.
+* Help team perform opportunity identification, account qualification, and needs analysis at all prospect levels
+* Maintain required activity metrics, via phone calls, appointments, demos and proposals
+* Conducting weekly forecast meetings. Coach direct reports regarding strategies to meet key goals, achieve measures, and drive closure
+* Devise plans to generate new and innovative sources of revenue for the company and present these to Executive Management.
+Required Skills/Experience: 
+* 5-7+ years of leading a technology-based worldwide Inside sales department
+* 3+ years technology sales management experience with 10+ direct reports
+* Results driven and able to achieve/exceed annual sales quotas
+* Successful track record of identifying, qualifying, negotiating, closing and account management
+* Ability to hire and train new inside sales representatives
+* Strong business planning, analytical and communication skills, data-driven mindset, and  good attention to detail
+* Enthusiastic, driven and confident; ability to clearly and persuasively articulate the company's mission, product and business opportunity with contagious conviction.
+* Knowledge of business organizational structures and buying influences
+* Must be able to learn new software quickly
+* Bachelor’s Degree Required",,,Yes,Sales_Management,,
+Director_Field_Sales,"Director, Field Sales",1/1/2000,n,,,"Works with the VP of Sales to set the sales strategic direction for outside sales in conjunction with forecasts and marketing efforts. Manage the day to day administrative operations of the outside regional management team, manage recruitment, hiring, personnel management, forecasting, training, sales strategies, tracking results, sales processes, compensation plan development and measuring performance. Improve sales and management performance through analyzing daily, weekly and monthly sales data. Work along side sales operations, customer service, and sales systems to ensure the teams are headed in the same general direction.",,,,Yes,Sales_Management,,
+Sales_Compensation_Analyst,Sales Compensation Analyst,1/1/2000,n,,,"Act as primary business lead for Sales Compensation in all geographies worldwide.  Develop, revise and distribute sales plan and business rules documents to sales compensation plan participants, including producing performance calculations examples.  Work with cross-functional teams including Field Sales, Finance, and HR to ensure data integrity and alignment with business objectives, performance and strategy.  Partner with Human Resources on the development of annual recommendations for OTEs by role.  Analyze market data to validate competitive pay practices.",,,,Yes,Sales_Operations,,
+Sales_Contracts_Manager,Sales Contracts Manager,1/1/2000,n,,,Responsible to review and analyze proposed contract terms and provide feedback on issues of concern and recommend alternatives.  Draft/negotiate standard and non-standard agreements business terms in consultation (where necessary) with legal counsel and business contacts.  Provide support to sales organization on issues related to contracts.  Serve as liaison between the Company and our customers for pricing and contractual matters.,,,,Yes,Sales_Operations,,
+Director_Sales_Operations,"Director, Sales Operations",1/1/2000,n,,,"Responsible for Sales divisional strategy, internal initiatives delivering complex process changes, organization growth and changes, and near term tactical improvement projects to affect the performance of sales and operations.  Leads project teams working with business stakeholders to define the business problem and desired outcome.  Strategically plan expansion into new markets outside North America, including market assessment to evaluate country and business line attractiveness and best entry strategy.  Lead project coordination between the new country's management team and headquarter's (Finance, Legal, Operations and Risk Management) for new business approval, pre-launch and launch phases.","Responsibilities
+Responsible for developing the blueprint for operational success, transparency and revenue growth and executing on the day-to-day tactical operations to get us there. 
+ 
+Pipeline & Forecasting
+Implement comprehensive pipeline and forecast reporting, processes and tools across all business lines. 
+Assist sales leadership to accurately forecast business. Manage forecast calls and associated requirements.
+Establish stage benchmarks and expectations and assist CRO in managing sales organization against those to ensure pipeline is accurate and always moving towards close.
+Establish and enforce cross-vertical pipeline management expectations; responsible for the ongoing communication with sales leaders for clean and accurate pipeline data.
+ 
+Reporting & Analytics
+Provide business critical sales and revenue insights using analytics, ensure cross functional alignment of sales and company goals and execution.
+Deliver accurate and relevant dashboard reporting:  Create, improve and maintain key dashboards for executive management team.  This may include weekly, monthly and quarterly reports, among others.  
+Maintain close coordination with Sr. Director of Operations for Customer Success on renewals and key upsell opportunities.
+ 
+Operational Efficiency
+Spearhead cross-vertical and cross-functional sales and customer success operations team coordination, including lead generation team, Salesforce admin and individual vertical sales operations to ensure comprehensive planning and coordination.
+Evaluate effectiveness of sales tools across the organization (and in the industry) and make recommendations to senior leadership on investments needed.
+Develop strategies to optimize Salesforce and other enterprise sales tools across all business units.
+Refine knowledge management strategies and toolsets that continuously increase sales effectiveness and product knowledge across all sales teams, including sales decks, contracts, pricing, among others.
+Provide key insights into ongoing professional development needs across the sales organization.
+Help to facilitate and resolve day-to-day sales operations challenges related to Salesforce.
+ 
+Sales to Customer Success 
+Ensure processes for transitions between sales to account management across verticals and “to the field” are optimized, documented and clearly communicated.
+ 
+Strategy, Planning & Special Projects
+Work with sales leadership as well as cross functional leaders (HR, Finance, Marketing, etc.) on the annual business planning process.
+Collaborate with CRO and vertical Presidents to refine KPIs and interpret results into actionable recommendations.
+Work closely with CRO to manage sales incentives including commissions and bonuses.  Ensure Salesforce data related to deal teams is accurate for Finance team.
+“Quarterback” the planning, execution and actionable follow-up of major sales initiatives, including “surge trips.”  
+ 
+Education and Experience
+Minimum 5-7 years of related experience
+Bachelors Degree; MBA a plus
+Proven track record in sales operations and many success stories of improving the efficiency and effectiveness of business processes essential to Salesforce productivity. 
+Solid understanding of SasS industry metrics and benchmarks; familiarity with Predictable Revenue, The Sales Acceleration Formula & Challenger Sale
+Demonstrate outstanding interpersonal, verbal, and written communication skills
+The ability to influence and foster collaborative relationships with cross functional departments - sales, marketing, product engineering, legal and finance
+Able to work with all levels of individuals all the way up to C-Level
+A demonstrated ability to translate data and metrics into predictable business insights
+Experience in broad array of key focus areas of sales operations: forecasting, reporting and analytics, operational planning and sales tools planning, designing and executing compensation plans
+Experience in Salesforce, the Salesforce ecosystem and other sales related software tools is important
+Exceptional project management skills
+Detail oriented
+High level of reliability and follow-through skills; immediate responsiveness to all internal inquiries, ability to multitask under tight deadlines.",,,Yes,Sales_Management,,
+Internal_Auditor,Internal Auditor,1/1/2000,n,,,"Responsible to identify and assess risk to evaluate and improve the underlying processes and internal controls.  Individuals in this job profile plan and execute complete audit assignments.  Requires objective, accurate and factual formal and informal audit reports summarizing the results of the audit work performed, determining effect and properly assessing and communicating risk for management, executive management and the audit committee.",,,,Yes,FA_Risk_Management,,
+Senior_Risk_Analyst,Senior Risk Analyst,1/1/2000,n,,,Responsible for managing and responding to SOX (Sarbanes Oxley) inquiries from the Information Risk Management Group in conjunction with our outside auditors. The purpose would be so that testing and validation of various controls could be performed. There would be a requirement to work with various internal IT groups both during audits and proactively outside of formal audit periods to ensure that regulatory requirements are being met without exceptions.,,,,Yes,FA_Risk_Management,,
+Product_Strategy,Product Strategy,1/1/2000,n,,Product Strategist,"Product Strategy is responsible for research, analysis and operational support for the 
+development of the Company’s Business Strategy, Strategic Partnerships, and Acquisitions.  
+The role is highly visible and requires regular interaction with the Company’s senior 
+management and key functional leads.  Requires a strong knowledge of strategic planning 
+process, broad analytical and research experience, and excellent presentation and communication skills.","KEY RESPONSIBILITIES: 
+Develop our business plans, including forecasts, identifying key indicators, progress tracking, and course correcting.
+Driving product strategy and roadmap, both for on-premises and cloud deployment models.
+Work with all departments to proactively identify “whole product/solution” gaps, define market requirements, and drive eco system partnerships.
+Work closely with product marketing to develop and implement a company-wide go-to-market plan.
+Evangelizing/messaging/marketing the solution portfolio to the field and the customers.
+This position requires travel (~20%). 
+5-10 years of experience (minimum) in product management
+Excellent written and oral communications skills as well as polished presentation style.
+Self-managing, with sound judgment to prioritize/balance customer, field requests and business goals.
+Demonstrable experience in hands-on networking, including all aspects of IP communications.
+Technically sound and knowledgeable about networking technologies – L2/L3 wired network protocols, TCP/IP communications, Wireless LAN and 802.11 standards.
+Relevant technical degree or equivalent experience is a must. Additional business degree is preferred.",,,Yes,RD_Product_Strategy,,
+Product_Management,Product Management,1/1/2000,n,,Product Manager,"Product Management ensures that the Company has the best worldwide product offerings 
+by analyzing, positioning, packaging, promoting, and tailoring our solutions across a variety 
+of countries and markets where the Company does business. The Product Management team 
+is responsible for the product throughout the execution cycle, and works closely with the 
+engineering group to continuously improve systems, processes and production.","Role & Responsibilities 
+The manager will lead a small team of product managers who: 
+● Develop the internal business case and customer value proposition for enhancements to the ELA offers, based on an understanding of the market conditions, customer decision drivers, and competitive dynamics 
+● Define the commercial terms, including any unique licensing terms and business/governance rules 
+● Define the go-to-market requirements for the various functional organizations that are needed to deliver offer enhancements 
+● Identify any channel management considerations and unique sales compensation considerations 
+● Develop positioning and messaging of the offers and collaborate with the marketing organization on the marketing plan for the offers 
+● To the extent necessary, identify product development requirements with the product managers of the component products to ensure they support and/or enforce the value proposition and competitive advantages of the offers 
+● Forecast the bookings and revenue attributed to the offer 
+● Establish relationships with account teams for purposes of driving requirements, facilitating deals, and maintaining the pipeline 
+● Establish self as a trusted collaborator by having an open and engaging collaboration style. Exhibit an ability to participate in virtual team efforts, partner across organizational boundaries and influence other stakeholders 
+Minimum Qualifications 
+● Eight or more years of experience in the enterprise software market as a product manager, account manager, product sales specialist, business development manager, or equivalent, preferably combined with an MBA 
+● Previous supervisory experience 
+Desired Skills 
+● Experience managing a transition to a successor product during a high-growth phase of the market 
+● Business acumen to make decisions that balance growth vs. risk and long-term business health 
+● Demonstrated ability to lead a team to achieve economies of scale 
+● Leadership of others to solve diverse issues requiring a deep understanding of business trends and customer buying behaviors 
+● Excellent listening, verbal and written communications as well as influencing skills 
+● Ability to thrive in a very dynamic, loosely structured, entrepreneurial environment",,,Yes,RD_Product_Management,,
+Product_Development,Product Development,1/1/2000,n,,Product Developer,"Product Development is responsible for the design, development and testing of the 
+Company’s products and their related components.  The team has accountability to make 
+sure its products meet defined function specifications and performance benchmarks 
+and other agreed criteria.   Establish technical requirements, objectives, timing, while 
+monitoring conformance to acceptable standards and specifications.","RESPONSIBILITIES: 
+Support and build strong, mutually effective key relationships (with peers, across the business and with suppliers) grounded in clear objectives, accountabilities, and respect
+Accurate and timely reporting of all metrics and timeline processes (such as sample status) with key internal and external supply chain partners with clear accountabilities, deliverables, and measures
+Understand and Adhere to all compliance standards, relating to all product quality, product safety, and TOE requirements
+Support the team in achieving Aesthetic and Cost targets for product category brand segment through the execution of products from concept to manufacturing ready meeting all “Go To Market” milestones
+Support execution of all Go To Market calendar development activities
+Assist in coordinating and submitting complete product development packages (costing packages)
+Assist in entering data and maintenance of seasonal costing templates, including seasonal rollups
+Ensure integrity of data in systems/pre-production logs is complete and accurate before sampling/bulk contracts are issued
+Support and track execution of protos, PPS, FOP activities and monitor timely receipt to meet production deadlines
+Support population of Seasonal trigger documents and planning tools
+Track seasonal samples; receipt and organization
+Assist in managing pre-production submits; timely tracking and receipt, ensure that logs are accurate and approvals are complete before bulk contracts are issued
+Track deliverables and monitor production deadlines
+Maintain data entry into various systems and ensure the integrity of the information
+
+QUALIFICATIONS:
+Bachelor’s degree, however a combination of college education and related work experience may be used as a substitute
+1-3 years garment production and/or product development experience preferred
+Minimum 1 year of experience working in a position that required the manipulation of large amounts of data using various spreadsheet applications
+Strong knowledge and proficiency with MS Office applications including Excel, Outlook, Word
+Must be highly organized, analytical, detail oriented and results driven
+Ability to be flexible in a multiple-task environment with a sense of urgency to meet development and manufacturing deadlines
+Flexibility with regards to job responsibilities
+Effective interpersonal and organizational skills; ability to build strong relationships and communicate with cross-functional and global teams
+Demonstrated ability to learn new computer programs quickly
+Excellent discretion, judgment, tact and diplomacy",,,Yes,RD_Product_Development,,
+Vice_President_Research_and_Development,"Vice President, Research & Development",1/1/2000,n,,,"Responsible for innovative technical leadership and vision to all aspects of R&D including new product development and improvements & cost optimization for existing products.  Additionally identify, explore and implement strategic growth and optimization initiatives, both domestically and internationally.","RESPONSIBILITIES/DUTIES
+Provide leadership and develop objectives for the Research and Development (R&D) department. Obtain funding for existing and future R&D projects. Develop and direct the design and development of new products and the improvement of existing products. Work with members of the senior management team to further department and company goals.
+
+EDUCATION
+At least a bachelor's degree in a scientific, business, or engineering discipline,.",,,Yes,#N/A,,
+Director_Research_and_Development,"Director, Research & Development",1/1/2000,n,,,"Responsible for both the regular and timely release of innovative, high quality products that satisfy market requirements, and the effective integration and coordination with other departments within Research & Development, and the rest of the Company (i.e., Sales, Marketing, Business Planning, Operations, etc.).","Responsible for complete ownership of research and development projects involving materials, new products, and process and equipment opportunities leading to increased revenue and/or cost reductions within the Sabert Group.
+ESSENTIAL DUTIES AND RESPONSIBILITIES
+• Key project management responsibilities include:
+- Identify and manage project risks
+- Develop and manage budgets for multiple projects
+- Manage and report timelines and key milestones of individual projects to all key stakeholders
+- Co-ordinate and monitor all internal and external activities; prioritize activities to make best use of resources and ensure commitments to “customers” are delivered
+- Work closely with the New Product Development, Manufacturing and Engineering team to ensure projects meet business needs
+• Ensure all projects consistently follow Center for Innovation’s methodology for project management, tracking, etc.
+• Work with Finance, as appropriate, to estimate financial impact for projects and initiatives
+• Coordinate and oversee preparation of any Capital Authorization Requests and related return on investment
+• Perform “post mortem” evaluations of all projects
+• Work in accordance with all company policies and procedures regarding employment, safety, quality, product safety and legality, security, and regulatory compliance as applicable
+PROVIDE LEADERSHIP AND TECHNICAL EXPERTISE
+• Lead teams in multi-unit complex projects or assignments
+• Able to manage teams or work independently to solve problems and create new opportunities
+• Communicates with colleagues of different departments to lead new projects and/or provide advice
+• Provides technical support and assistance throughout the Sabert Group
+• Expert knowledge of plastic materials and processes and has the ability to communicate and educate this knowledge to others
+
+QUALIFICATIONS
+• Requires a Bachelor’s degree in an Engineering or science discipline; MBA a plus
+• Certified Project Manager (CPM) a plus
+• 10+ years of experience in project management 
+• Prior experience working on technology initiatives",,,Yes,RD_Management,,
+Executive_VP_Sales_and_Marketing,"Executive VP, Sales & Marketing",1/1/2000,n,,,"Responsible for driving all revenue generation for the company, both personally and through field sales teams.  Grow the Company's overall market share and establish a strong renewal-based core business.  Oversee sales development of both domestic and international markets, and focus on key vertical industries, as appropriate.  Hire, train, manage and motivate sales team at all experience levels to deliver top sales performance.  Establish sales processes to maximize sales team efficiency and effectiveness while increasing client satisfaction and company profitability.",,,,Yes,Executive_Management,,
+Sales_Proposal_Specialist,Sales Proposal Specialist,1/1/2000,n,,,"A first point of contact for new customers, and a key contributor, you will coordinate and support company sales objectives with the production of proposals, presentations, executive summaries, corporate overviews and solutions of our best practices. Provide outstanding customer service and support in an internal client service organization.",,,,Yes,Sales_Operations,,
+Vice_President_Global_Support,"Vice President, Global Support",1/1/2000,n,,,"Responsible for a support environment where customer satisfaction is paramount. The quality of the services offered is the most important factor to build a long-term, profitable relationship with our Customers.   The Vice President , Global Support will have to demonstrate proven performance of achieving continuous after-sales growth and customer life cycle management. Position is customer facing and as such the incumbent must demonstrate clear and positive presence, command confidence in large customer settings, and communicate clearly and effectively. Internally, the incumbent must be capable of driving internal processes to ensure both satisfaction and business growth at key accounts.",,,,Yes,OPS_Management,,
+Director_Global_Support,"Director, Global Support",1/1/2000,n,,,"Responsible for developing, implementing and maintaining processes, procedures and communication channels in a customer focused manner in order to serve our customers.","The Director of Global Customer Support is a leader for all global Customer Support functions. This position leads a team of Support and Escalation Engineers, ensuring resolution of customer issues, team and accurate reporting on assigned metrics. This position is responsible for defining and executing the strategy to provide support to our customers across the globe in a cost effective and scalable manner. Strong communication skills with the ability to engage customers at various levels, and manage executive escalations are required.
+Manage global support team and daily support team activities
+Ensure support service level agreements are met.
+Ensure the support team provides an exceptional customer service experience and ensure consistent quality technical support and customer service experience.
+Create and continuously refine process flow documentation that outlines the steps to efficiently resolve customer issues.
+Interface with customers, sales force, and various inside contacts to ensure that goals are met and customers receive the best service possible. To this end, develop key measurements of customer satisfaction. Serve as point of escalation for customer issues.
+Responsible for employee lifecycle management, including resource acquisition
+Meet with development or product management as necessary to ensure escalated tickets (bugs) are worked according to priority.
+Monitor individual performance of direct reports against quarterly goals and objectives.
+Provide daily, weekly and monthly reporting on support activities, ROI, and success.
+Work with members of technical support, technical services, and sales engineers to diagnose and resolve complex issues for end users.
+Travel to customer sites to meet with end users and stakeholders as needed.
+
+Required Skills and Experience:
+Bachelor’s Degree in Information Technology, Business Administration, or related field required.
+10 or more years of technical customer support experience required.
+Previous management experience required. 
+Basic networking knowledge required.
+Experience managing and prioritizing individual workload for optimal efficiency required.
+Ability to learn abstract technical concepts required.
+
+Preferred Skills and Experience:
+Previous networking help desk experience preferred.
+Experience with applications running on a client-server model preferred.",,,Yes,CS_Management,,
+Manager_Information_Analysis,"Manager, Information Analysis",1/1/2000,n,,,"Develop and establish best practices throughout the data acquisition, transformation and delivery lifecycle. This manager will supervise the daily activities of data analysts and oversee data quality for data process and reporting projects. Identify areas for data quality improvement and lead resolution of data quality problems through the appropriate choice of error detection and correction, process control and improvement, or process design strategies.",,,,Yes,IT_Management,,
+Senior_Data_Analyst,Senior Data Analyst,1/1/2000,n,,,Analytical dexterity and excellent communications skills are critical in this role where you'll roll up your sleeves and dig deep into analyzing a wide range of business problems using facts and data from multiple repositories to determine root causes to derive conclusions and deliver recommendations to management.,".  Works with large data sets, including statistical analysis, data visualization, data mining, and data cleansing/transformation on an ongoing basis.
+.  Reviews data to determine how to increase productivity/profits, while increasing efficiency of application and class data performance.
+.  Reviews customer and store data feeds to analyzes patterns. 
+. Analyzes customer trends that impact business performance and recommend ways to improve outcomes.",,,Yes,IT_Services,,
+Vice_President_Real_Estate_and_Facilities,"Vice President, Real Estate & Facilities",1/1/2000,n,,,"Create and execute the Real Estate and Facilities strategy for the Company, including day-to-day management of six major domestic sites and various minor international sites. This individual will manage the acquisition, maintenance and repair of the property portfolio for new locations and handle property management of existing locations.","RESPONSIBILITIES
+Ensure compliance with internal, local, and federal guidelines and safety standards. Create and direct plans to maintain and enhance physical facilities. Manage construction projects, including interactions with government officials. Lead Facilities Management team, coordinate, and direct all activities. Control and predict financial costs, negotiating contracts to stay within budget.
+
+EDUCATION
+Bachelor's degree in business or a related field and prior experience as a facilities manager is highly beneficial. Industry certifications are also helpful.
+
+KNOWLEDGE & SKILLS
+Actively participate in business meetings to suggest ideas to save company resources and provide recommendations to solves problems in the workplace. Responsible for providing expert-level technical skills to help management complete tasks. Oversee cleaning, repair, and customer service staff to surpass client expectations and increase company revenue.",,,Yes,OPS_Management,,
+Manager_Workstation_Operations,"Manager, Workstation Operations",1/1/2000,n,,,"Responsible for setting up, coordinating, and monitoring the operation of computer equipment.  May involve verifying data and performing clerical tasks in the data processing function.  Examines, revises, approves and dispatches input and output materials according to established specifications. Using established programs and procedures, manipulates controls in accordance with standard procedures, runs diagnostic tests to detect machine malfunctions, and other related peripheral equipment.",,,,Yes,IT_Management,,
+Vice_President_Program_Management,"Vice President, Program Management",1/1/2000,n,,,"Responsible for directing Program Managers and their responsibilities for managing employees on multiple complex projects and programs with broad scope, high risk, high impact, and/or long implementation time frames. Achieves business objectives by managing an effective team responsible for the project management and development of new and current procedures, process and programs across all channels and departments supporting strategic and tactical projects.","RESPONSIBILITIES/DUTIES
+Track and analyze issues, risks, and costs, and then proactively address and mitigate. Manage process from development through production to customer relations, and create stable, effective methodologies. Create, measure, and communicate program plans, milestones, and metrics, including budgets. Enforce policies around documentation and standardization of programs and products.
+
+EDUCATION
+Bachelor's degree in a field that is relevant to the company's work. Eight years of program management experience. Excellent interpersonal, communication, and presentation skills.
+
+KNOWLEDGE/SKILLS
+Ensure that all programs are developed and carried out in line with company standards. Manage development schedule and remain within budget. Provide annual staffing and budget plans and quarterly updates to company's senior management team.",,,Yes,OPS_Management,,
+Program_Manager,Program Manager,1/1/2000,n,,,"Responsible for the design, development, and implementation of complete projects/programs. Develops cross-functional project resource plans, forecast and budget, and project-specific strategies and specifications to reach goals.  Ensures the project remains within budget throughout the project life cycle.  Understands and manages decision-making processes and cost/time/quality impacts to project.  Establishes project success criteria and determine the degree to which the project achieved project objectives.  Manages scope, issues, constraints, risks, assumptions and change control process throughout the project life cycle.","RESPONSIBILITIES
+Understand nature of program & project management needs to drive execution & delivery
+Manage scope and milestones to ensure goals are met
+Develop appropriately structured and detailed program & project plans
+Identify and track interdependencies to ensure timely and successful delivery
+Secure estimates & resource commitments across various dependency teams
+Optimize resource and capacity planning to support program goals and outcomes
+Identify risks and develop risk mitigation techniques
+Identify, track, prioritize and drive resolution of issues and work to address systemic issues
+Ensure escalations are done in a timely manner to the right individuals
+Identify and track major milestones for the program and/or project
+Monitor and measure progress to ensure that the program & project meet objectives
+Communicate timely and accurate status to appropriate levels and stakeholders
+Oversee program & project performance and reporting across geographic locations
+Manage business & technology stakeholders
+Provide delivery leadership
+ 
+Professional Qualities
+Strong bias to action
+Strong leadership skills; self-motivated and a self-starter with a can do attitude
+Team player, energetic personality, quality minded, focused, committed, able to work independently in a fast paced, changing environment
+Strong team management skills, able to instill passion, loyalty, and commitment among team members at all levels of the organization
+High degree of professional confidence and credibility with effective presence, strong written and verbal communication skills, able to communicate technical concepts and plans at all levels
+Strong negotiation skills in all mediums and throughout all levels of the organization
+ 
+Requirements
+10-12 years of technical program management experience in the software industry (e-commerce, mobile commerce is preferred)
+3+ years program managing software product development in an Agile Scrum environment. Successful candidate will have a strong understanding of the Agile methodology and can demonstrate a successful track record of delivering large, complex technology products across multiple scrum teams and organizational units that meet business outcomes and performance metrics
+Proven ability to develop effective cross-organization relationships, collaborating and communicating across different stakeholders
+Strong technical acumen, able to ensure that technical solutions, strategies, practices, and governance deliver business and customer value
+Deep knowledge of program & project management process, tools and templates",,,Yes,OPS_Program_Management,,
+Buyer,Buyer,1/1/2000,n,,,"Serve as the main liaison to the purchasing and accounting department.  Day-to-day responsibilities will include processing purchase order transactions, and check standards, review quotes, validate contract pricing, send equipment requests bulk order to bid as applicable, negotiate contract terms and conditions, expedite orders, and insure applicable documentation.",,,,,FA_Purchasing,,
+Manager_Purchasing,"Manager, Purchasing",1/1/2000,n,,,"Responsible to supervise, train, mentor and manage the workflow of multiple Buyers in the Purchasing department.  Additional responsibilities include: Effectively and cost efficiently sourcing a variety of items from the company's base of vendors, identify new vendors as appropriate and managing working relationships with vendors. The Purchasing Manager will also utilize both experience and initiative to streamline purchasing processes and utilize the functionality of business applications.",,,,Yes,FA_Purchasing,,
+Director_Field_Marketing,"Director, Field Marketing",1/1/2000,n,,,"Responsible for developing and executing regional and country-specific marketing programs supporting the firm's global regions.  The role is primarily focused on partnering with Product Marketing Services and Sales teams to develop and execute marketing strategies grounded in lead development, demand generation and sales readiness. The position will also be responsible for packaging and syndicating programs for use in other global regions and coordinating global Field Marketing best practices.",,,,Yes,MK_Marketing_Management,,
+Senior_Manager_Field_Marketing,"Senior Manager, Field Marketing",1/1/2000,n,,,Responsible to partner with the field sales teams to drive license pipeline (3X pipeline) and to help the field sales teams move top deals through the sales cycle to closure. This marketing leader will achieve the pipeline goals through a combination of executing national and global marketing campaigns as well as planning and executing account-specific marketing programs for top enterprise accounts. This position reports to the Director of Field Marketing.,,,,Yes,MK_Field_Marketing,,
+Web_Content_Manager,Web Content Manager,1/1/2000,n,,,"Responsible developing the voice for all aspects of the organization’s online presence. In addition to writing, editing, and proofreading site content, this person will also work closely with the creative team to maintain site standards with regard to new development.","RESPONSIBILITIES/DUTIES
+Manages all web content and projects related to the website. Writes, edits, and proofreads new content. Ensures that all documents meet established content standards and works with developers to assess any technical challenges in displaying the content. 
+
+EDUCATION
+Requires a bachelor's degree in a related area and at least 7 years of experience in the field or in a related area. 
+
+KNOWLEDGE/SKILLS
+Familiar with a variety of the field's concepts, practices, and procedures. Relies on extensive experience and judgment to plan and accomplish goals. Performs a variety of tasks. Leads and directs the work of others. A wide degree of creativity and latitude is expected. Typically reports to top management.",,,Yes,MK_Marketing_Services,,
+Marketing_Coordinator,Marketing Coordinator,1/1/2000,n,,,"Bring your creativity to this job where you'll work with product and creative business teams to expand our customer engagement using data, partnerships, and tailored content. You will be responsible for designing and executing on a plan to maximize engagement of our fans on the web, social media, mobile, and our newsletter.",".  Develop digital media strategy.  
+·  Measure and report performance of all digital campaigns against goals.
+.  Responsible for coordinating and implementing all marketing communication activities that assist in various marketing support and sales support functions.  
+.  Develop, maintain and update marketing collateral, including resumes, project sheets, project lists, capability statements and brochures. 
+.  Assist with corporate trade shows, event planning, various promotions and strategy",,,Yes,MK_Marketing_Services,,
+Senior_Customer_Services_Representative,Senior Customer Services Representative,1/1/2000,n,,Senior Customer Services Representative,"Twitter, Chat, Facebook, LinkedIn ….. Digital customer engagement is transforming customer service, and elevating the expectations of our online and cross-channel customers. This position requires sharp social media skills to exceed expectations with rich, personalized experiences the moment they engage with our brand from anywhere for anything. Bring your mad, tech-savvy skills and know-how to provide that instant gratification while moving and adapting your skill set to a customer’s preferred channel for a seamless and tweetable rock star experience.","Responsible as the primary customer interface for online/social media inquiries.
+Ensures quality customer service for internal and external customers
+Responds to incoming customer service requests
+Applies appropriate communication techniques to all situations
+Identifies and assesses customer's needs quickly and accurately
+Solves problems systematically with sound business judgement",,,Yes,CS_Customer_Service,,
+Shipping_and_Receiving_Associate,Shipping & Receiving Associate,1/1/2000,n,,,"Responsible for performing tasks involved in the shipping, storing, and distributing of products.","Primary duties include pulling and filling orders.  Additional responsibilities include preparing, documenting, and maintaining records of items shipped.  Also required to posts weights and shipping charges and prepares goods for final shipment.  Must follow safety procedures and practices, maintain a clean, orderly work environment and communicate problems to a Supervisor or Manager.",,,Yes,FA_Administration,,
+Facilities_Administrator,Facilities Administrator,1/1/2000,n,,,"Think of yourself in this position as the conductor of an orchestra where you will oversee all the different aspects of building management to ensure all the components come together harmoniously. Day-to-day tasks will vary from operations and maintenance to project planning and management, with the main duty being an effective and smooth-running facility.","Responsible for day-to-day management and oversight of corporate facilities and operations in assigned location.  Excellent organizational and interpersonal skills and a proven ability to work with all levels of an organization are required. Additional responsibilities include vendor relationships (HVAC, electrical, landscaping, cafeteria, food services) and coordination of internal moves and appropriate updates to floor plans.",,,Yes,FA_Administration,,
+Customer_Service_Representative,Customer Service Representative,1/1/2000,n,,,"Dazzle our customers with flawless execution ... in how we answer the phone, fill an order, deliver on time, process the invoice and  meet every imaginable need for excellence in customer service.  Guide customers in best practices and online tools. Provide trouble-shooting and problem escalation.","Our customer service team members are critical to the success of the organization. They provide a personable, knowledgeable, and caring experience when customers contact us. We are looking for people who are warm, articulate, and positive to add to our already awesome team.
+
+Job duties:
+Responsible for receiving, responding to and resolving customer telephone-inquires in a high-volume call center.
+Maintain departmental quality and productivity standards.
+Where appropriate, cross-reference a variety other products and services available for customers to consider.
+Engage in outbound calls to current customers to survey satisfaction with current products.
+Perform other work-related duties, as assigned - including (but not limited to) customer e-mail and correspondence.
+
+Qualifications:
+High school diploma, general education degree or equivalent
+Knowledge of customer service principles and practices
+Knowledge of relevant computer applications
+Ability to type
+Numeric, oral and written language applications
+
+Key Competencies
+Interpersonal skills
+Communication skills - verbal and written
+Listening skills
+Problem analysis and problem-solving
+Attention to detail and accuracy
+Data collection and ordering
+Customer service orientation
+Adaptability, initiative and stress tolerance",,,Yes,CS_Customer_Service,,
+Director_Facilities_Operations,"Director, Facilities Operations",1/1/2000,n,,"Director, Facilities Operations","Responsible for overall management of  Office Managers, who coordinate available resources for all business office needs worldwide.  As Director, Office Management, provide critical leadership and support to a global team of associates.   Perform regular audits of business office operations.  Among other duties: Maintain open lines of communication with all members of the management team and conduct or assist with special projects as requested by the Vice President, Facilities or Chief Operating Officer.",,,,Yes,FC_Management,,
+Senior_Office_Manager,Senior Office Manager,1/1/2000,n,,Senior Office Manager,"Responsible for planning, directing and coordinating office support services, including purchasing and facilities management.  Additional responsibilities include: hiring and managing office support staff, managing internal communications, assisting with travel arrangements, and miscellaneous projects.",,,,Yes,FA_Administration,,
+Consultant,Consultant,1/1/2000,n,,,"Our Consultants work within an engagement team and are responsible for identifying business requirements, requirements management, functional design, prototyping, process design (including scenario design, flow mapping), testing, training, defining support procedures and supporting implementations.",,,,Yes,SV_Consulting_Services,,
+Travel_Coordinator,Travel Coordinator,1/1/2000,n,,Travel Coordinator,"Responsible for coordinating the company's travel needs; duties may include scheduling hotel and flight accommodations, and procuring necessary documentation such as passports, visas, or other clearances. Ensures that travel needs are met within the constraints of the company travel budget.","RESPONSIBILITIES
+Responsible for coordinating the company's travel needs. Schedules hotel and flight accommodations and procures necessary documentation such as passports, visas, or other clearances. Ensures that travel needs are met within the constraints of the company travel budget. 
+
+EDUCATION/WORK EXPERIENCE
+Requires a high school diploma or its equivalent with 0-2 years of experience in the field or in a related area. 
+
+SPECIFIC KNOWLEDGE/SKILLS
+Has knowledge of commonly-used concepts, practices, and procedures within a particular field. Relies on instructions and pre-established guidelines to perform the functions of the job. Works under immediate supervision. Primary job functions do not typically require exercising independent judgment. Typically reports to a supervisor or manager.",,,Yes,FA_Administration,,
+Project_Manager,Project Manager,1/1/2000,n,,,"The Senior Project Manager is accountable for the successful delivery of projects on time and within budget, while exceeding client expectations.   This job will act as the main point of contact between our company and our clients, setting expectations and facilitating clear and open lines of communication.
+
+This job provides leadership that encourages team enthusiasm & innovation, and strategic direction to project teams.   This role handles the day to day project operations and communications.","RESPONSIBILITIES:
+
+Oversee and take responsibility for the successful completion and timeliness of projects
+
+Manage stakeholders working with distributed clients (local and remote) and teams (onsite, remote and offshore)
+
+Create and maintain project plans inclusive of communication matrix, responsibility matrix, schedule and budget
+
+Set and manage deadlines with clients and internal team (assign responsibilities, monitor progress of projects, weekly client status reports and calls)
+
+Lead business and functional requirements definition and prioritization of requirements
+
+Map business requirements to features and functionality in partnership
+
+Manage client expectations and maintain communication throughout the course of the project
+
+Assist Executive Leadership in establishing project estimates and milestones which you will lead
+
+Assist Executive Leadership in continuous improvement activities and operational analytic reporting
+
+Prepare reports for client and management regarding the status of projects and address issues/concerns when appropriate
+
+Support pre-sales activities which could include participating in sales calls and proposal development (statements of work)
+
+ 
+REQUIRED SKILLS & EXPERIENCE
+
+5-10 years of experience managing complex projects in a consulting/professional services environment
+
+Previous experience managing multiple projects at one time (including but not limited to: implementations, upgrades, new installations)
+
+Strong time management experience as you’ll have multiple priorities to focus on in a week that often change based on client demands
+
+The ability to be self-directed and work in an ambiguous and dynamic environment
+
+Demonstration of good judgement; ability to know when to listen vs. ask questions
+
+Innate service mentality and care for the client experience
+
+Demonstrated ability to proactively mitigate risk
+
+Strong work ethic and the ability to work autonomously
+
+Strong business and technical acumen
+
+Exceptional written and verbal communication
+
+Ability to interact with executive-level clients
+
+Bachelor’s degree, MBA or other advanced degree
+
+Reliable transportation is required as this person will be meeting with clients in the Bay Area about 30% of the week
+
+Must be able to perform the basic functions of the job which include the ability to sit for long periods of time
+
+Candidate must have the unrestricted right to work in the US without requiring sponsorship",,,Yes,SV_Consulting_Services,,
+Director_Consulting_Services,"Director, Consulting Services",1/1/2000,n,,,"Responsible for identifying, developing, and securing project work for corporate clients wishing to engage in successful business strategies that also significantly advance the organizations' interests. The Director of Consulting Services will also provide ongoing engagement management, strong team leadership, and successful project delivery.",,,,Yes,SV_Consulting_Management,,
+Vice_President_Consulting_Services,"Vice President, Consulting Services",1/1/2000,n,,,"Responsible for building and leading the firm's consulting business in the major global markets.  Consulting Services collaborates with clients in defining measurable improvements and successfully implementing change in operations. The range of consulting services covers operating strategy, organization and process design, resourcing strategy, capability development and deployment and performance management.",,,,Yes,SV_Consulting_Management,,
+Senior_Consultant,Senior Consultant,1/1/2000,n,,,"Responsible for identifying business requirements, functional design, prototyping, process design (including scenario design, flow mapping), testing, training, defining support procedures and supporting implementations.  Ability to provide leadership and guidance to engagement team.",,,,Yes,SV_Consulting_Services,,
+Associate_Consultant,Associate Consultant,1/1/2000,n,,,Do you enjoy working with clients? Join our Academy program - intensive training designed to teach smart young professionals to become world-class consultants. Work and learn from experienced Consultants and team members while contributing to developing solutions for customer's business issues.,"Job Duties
+Provide clients with powerful facts and analyses that outline solutions and drive change.
+Work as a member of case teams in roles that vary according to the team’s objectives.
+Take responsibility for identifying information sources, gathering and interpreting data, and presenting findings to case team members.
+Interview clients' customers, competitors, suppliers and employers; this work then becomes the basis of the case team's strategic recommendation.",,,Yes,SV_Consulting_Services,,
+Tax_Analyst,Tax Analyst,1/1/2000,n,,Tax Analyst,Ensures that the organization's employees comply with fiscal directives when performing their tasks. Works under the direction of a payroll tax manager to periodically evaluate staff's salary information and ensure it is accurate. Partners with corporate treasury and accounting department employees to ensure that employment tax amounts are transferred to revenue agencies on time.,,,,Yes,HR_Payroll,,
+Customer_Service_Operations_Support,Customer Service Operations Support,1/1/2000,n,,,Responsible supporting customer service representatives with their day-to-day business and technical needs.  Maintain departmental quality and productivity standards.,,,,,CS_Customer_Service,,
+Organization_Development_Specialist,Organization Development Specialist,1/1/2000,n,,,"Responsible for the development, planning, delivery and evaluation of training and development activities for leadership. Defines competencies by role and/or function and ensures the integration of this information into all relevant HR processes.
+Partners with leadership to accelerate strategy implementation. Oversees and administers targeted development programs for high potential leaders within the organization. Defining and marketing career paths within the organization to assist team members / leaders with owning and managing their own career
+Assisting in the selection and implementation of an automated performance management and talent management system for the organization
+Administering the performance appraisal process for the organization to improve organizational performance","Responsibilities
+The OD Specialist will be responsible for designing, facilitating, and evaluating corporate-wide initiatives including: leadership and management development programs and projects. Partner with HR, business leaders to align OD initiatives with corporate goals, and support organizational development and design interventions that improve performance, processes, and structures. Conduct gap analyses and assist business leaders with the establishment of success measures and accountabilities to achieve superior business results. Facilitate trainings for internal customer groups, update and maintain current OD initiatives and programs, and aid in the development of strategic plans to address deficiencies and meet business needs. Support delivery of OD services to our business partners that align with the OD Strategy, including employee engagement, leadership development, survey design and analysis, new hire orientation, and 360 degree feedback. Perform all duties in accordance with the company’s policies and procedures, all US state and federal laws and regulations, wherein the company operates.
+Conduct needs assessment, diagnose, develop, implement and evaluate interventions that connect the people-side of business with corporate goals.
+Identify data collection tools, data sources, benchmarks, and performance targets.
+Design and implement organizational effectiveness interventions.
+Design and facilitate leadership development programs that offer Associates opportunities for growth and advancement.
+Assess team dynamics and develop team-building interventions and workshops.
+Develop content for soft skills training and leadership development programs.
+Recommend training and development systems.
+Assess training needs through surveys, interviews with associates, focus groups, or consultation with managers, instructors, subject matter experts, or customer representatives.
+Present information using a variety of instructional techniques or formats, such as role playing, simulations, team exercises, group discussions, videos, or lectures.
+Perform survey assessments, design and analysis of results.
+Shared responsibility for coordination and facilitation of employee onboarding (New Hire Orientation).
+Schedule classes based on availability of classrooms, equipment, and instructors.
+Coordinate onsite and offsite classroom and video conference training, including scheduling, participant registration, confirmation, and logistics/catering.
+Prepare requests for proposal for training. May assist with evaluating bids, products and vendors, and make recommendations for selection. Evaluate and monitor quality of vendor or contract services.
+Make use of new technology, such as distance learning or video conferencing to facilitate discussion between associates on an individual or group basis.
+Attend meetings and seminars to obtain information useful to train staff and to inform management of training programs and goals.
+Maintain records and write reports to monitor and evaluate training activities and program effectiveness.
+Participate as needed in Learning Management System (LMS), including registrations, generating course rosters, managing withdrawals and waitlists, creating reports, and sending evaluations.
+Perform other duties as assigned.
+Master’s degree in Industrial/Organizational Psychology, Organizational Development, or equivalent combination of education/experience required.
+Three (3) to (5) years’ experience in the field of organizational development and training.",,,Yes,HR_Workforce_Planning,,
+Administrative_Assistant,Administrative Assistant,1/1/2000,n,,,"You are unsung hero of a business organization and the glue that holds the office together with excellent office skills and knowledge.  You wear many hats, set the bar for multi-tasking and attention to details. You can keep up with minute details, whatever they are,  organize files and handle incoming and outgoing communication and mail. You know how to focus and prioritize your workflow; so much to do but yet you can do it all.",".  Greet visitors and answer the front office phone
+.  Provide administrative support to executives
+.  Answer telephones, take and relay messages, arrange conference calls, and personally respond to routine matters
+.  Monitor kitchen and office supplies and help to submit work order requests to property management as needed.
+.  Assist with on-site meeting arrangements ensuring conference rooms are prepared and maintained.",,,Yes,FA_Administration,,
+Business_Analyst,Business Analyst,1/1/2000,n,,,"A Business Analyst's responsibility is to help drive projects and bring value through operations. To do this, they identify, distinguish and analyze multiple components of a problem and then make conclusions using high-level quantitative skills.","Primary Responsibilities:
+The Business Analyst manages back-office, e-commerce and web based technical projects, and 3rd party applications. This includes: Creating and maintaining project plans with tasks, estimates, dates, dependencies and responsible parties.   Monitoring and taking necessary actions to ensure that deadlines are met. Leading regularly scheduled project meetings with technical and business unit staff and stakeholders to communicate updates and work through issues and needs. Organizing and managing upper-management review meetings of projects to provide updates and identify goals and strategic direction.
+The Business Analyst supports organization business units in the development of project plans and documentation such as business case, project charter, schedule, change control procedure, Use Cases,  RACI model,  Decision Matrices, Risk Analysis,  Documentation sites (Confluence/SP) , process flows and transition plan. Project manage the installation of upgrades and service packs in collaboration with Technology Division staff, client business units, vendors, and other Business Analysts.
+The Business Analyst works directly with the client and Technology Division community to identify, define and investigate processes and/or technical changes that facilitate the support of the organization’s business through the effective use of information technology. Writes detailed descriptions of client needs, program functions, and steps required to develop, implement, or modify back-office, e-commerce and web based systems or processes. Works closely with technical resources to ensure that technical solutions are sound and adhere to strategic direction.",,,Yes,FA_Financial_Analysis,,
+Senior_Site_Engineer_I,Senior Site Engineer I,1/1/2000,n,,,"Represent company to oversee assigned Site project activities and ensure project execution is carried out in a safe manner.  Report to Project Management Team on contractor’s performances and project issues. Generate reports as required.  Work actively with the contractor’s project management teams to understand project objectives and priorities and to meet project objectives with regard to safety, cost control and schedule.",,,,Yes,OPS_Production,,
+Senior_Site_Engineer_II,Senior Site Engineer II,1/1/2000,n,,,"Represent company to oversee assigned Site project activities and ensure project execution is carried out in a safe manner.  Report to Project Management Team on contractor’s performances and project issues. Generate reports as required.  Work actively with the contractor’s project management teams to understand project objectives and priorities and to meet project objectives with regard to safety, cost control and schedule.",,,,Yes,OPS_Production,,
+Site_Engineer_I,Site Engineer I,1/1/2000,n,,,"Represent company to oversee assigned Site project activities and ensure project execution is carried out in a safe manner.  Report to Project Management Team on contractor’s performances and project issues. Generate reports as required.  Work actively with the contractor’s project management teams to understand project objectives and priorities and to meet project objectives with regard to safety, cost control and schedule.",,,,Yes,OPS_Production,,
+Site_Engineer_II,Site Engineer II,1/1/2000,n,,,"Represent company to oversee assigned Site project activities and ensure project execution is carried out in a safe manner.  Report to Project Management Team on contractor’s performances and project issues. Generate reports as required.  Work actively with the contractor’s project management teams to understand project objectives and priorities and to meet project objectives with regard to safety, cost control and schedule.",,,,Yes,OPS_Production,,
+Payroll_Coordinator,Payroll Coordinator,1/1/2000,n,,,The Payroll Coordinator is the first point of contact for all employee payroll inquiries.  The payroll coordinator responds to payroll inquiries in a timely manner.  It is necessary to research and resolve discrepancies regarding employee pay and paid/unpaid time off as well as file payroll documents and complete benefit audits.,"KEY RESPONSIBILITIES:
+* Assist with processing of Salary/Hourly/EX-Pat/ and Canadian payrolls and all supporting transactions.
+* Assist with verification and processing of payroll data and data entry
+* Provide support and assist with queries for all payroll related audits 
+* Liaison with payroll processing vendor and approve invoicing as required
+* Coordinate tax fillings with payroll vendor and related jurisdictions 
+* Review and administer involuntary deductions 
+* Prepare funding requisitions for pay runs
+* Special projects
+ 
+SKILLS AND EXPERIENCE:
+* 1-3 years of experience in payroll 
+* Familiarity with etime, ADP or PeopleSoft payroll systems, strongly preferred
+* Self-starter with ability to work independently 
+* Proficient in Microsoft Suite 
+ 
+EDUCATION AND TRAINING:
+HS Graduate or GED, some college preferred.",,,Yes,HR_Payroll,,
+Curriculum_Developer,Curriculum Developer,1/1/2000,n,,Curriculum Developer,,,,,,HR_Training,,
+Training_Director,Training Director,1/1/2000,n,,Training Director,,,,,,HR_Training,,
+Instructor,Instructor,1/1/2000,n,,Instructor,,,,,,HR_Training,,
+Senior_Instructor,Senior Instructor,1/1/2000,n,,Senior Instructor,,,,,,HR_Training,,
+Course_Developer,Course Developer,1/1/2000,n,,Course Developer,,,,,,HR_Training,,
+Manager_Global_Support,"Manager, Global Support",1/1/2000,n,,"Manager, Global Support","Manage a team that is driving the evolution of customer care excellence and reshaping the future of global customer support.  You know how to motivate a team, elevate service team benchmarks, work collaboratively, build strategy and expand touch points that will add value to our customers, strengthen relationships and drive loyalty.","In this role, you will be responsible for managing the people, process, and technological elements of customer support.  Specific requirements for each of these three areas include:
+
+People Management
+Recruit, train, coach, and evaluate Support Engineers with published standards and expectations.
+Define individual and team goals that align with business objectives and ensure that individuals understand how they can contribute.
+Review the performance of direct reports, monitor MBOs, and conduct periodic and annual reviews. 
+Process Management
+Develop and implement support plan to meet SLA for the various customer segments and product lines
+Create and monitor a flexible training program for both new hires and the continuous improvement of existing staff
+Lead and maintain daily hands-on oversight of the support activities
+Manage and refine support workflow (case handling, etc.) and define efficiencies using CRM and other process tools
+Manage customer escalations, customer complaints or inquiries with support case handling.
+Develop and optimize feedback mechanisms for tactical and strategic liaison with peers in other departments (Account Management, Product Management, Product Engineering, etc.) to resolve - issues and communicate product improvements and feedback.
+Own process of publishing articles/relevant content to our knowledge base
+Technology Management
+Designs, develops, and implements tools and systems to support and improve the efficiency of the technical support function, including workflow and incident management
+Defines, maintains, and implements systems and applications needed to perform excellent technical support function
+Develops and implements standard operating procedures and practices to enhance and measure the effectiveness and performance of the Technical Support function
+Develops, maintains, and implements reporting systems to provide necessary feedback to appropriate stakeholders
+
+Requirements
+Bachelors/Masters degree in engineering, computer science or related field
+5+ years in a support organization with at least 3 in a managerial capacity
+Demonstrated capacity for leading a geographically distributed team
+Demonstrated cross-functional leadership to meet client needs
+Experience developing and executing implementation strategy across SaaS platforms",,,Yes,CS_Management,,
+Regional_Finance_Manager,Regional Finance Manager,1/1/2000,n,,,"Provides strategic and technical financial leadership to a portfolio of country programs in order to ensure the effective development of countries’ financial strategies and the implementation of sound internal controls, budgeting, financial management and financial reporting  This role will also be responsible, where appropriate, for processing of financial transactions.","ESSENTIAL FUNCTIONS:
+
+1.     Plans, directs, and implements activities to ensure timely and accurate accounting and financial information to company leadership as well as customer. This includes, but is not limited to:  period and quarterly financial statements (internal and external), annual budget, forecasting, cash flow, and variance analysis.
+
+2.     Manage the month-end closing process including review and submission of journal entries, budget to actual variances, and balance sheet reconciliations.
+
+3.     Present financial information with insightful and actionable analysis to company leadership as well as customers.
+
+4.     Lead, coordinate, and track cost savings measures
+
+5.     Review and approve all center expense reports
+
+6.     Coordinate and assist with all external audits
+
+7.     Monitor, analyze, and report on department expenses, working with departments to meet daily operational requirements, evaluate effectiveness of controls, minimize expenses, and improve processes.
+
+8.     Coordinates the development of the division annual business plan, working with department heads to compile information required for effective decision making
+
+9.     Prepares financial reports, annual budget, and various feasibility studies and other special projects to ensure senior management has the information required for effective decision-making.
+
+10. Manages regional accounting support at local DC’s
+
+11. Track and review under/over achievements to pricing protocols (Product mix, fuel); play key role in updating annual pricing protocols.
+
+12. Performs other related and assigned duties as necessary.
+
+MINIMUM QUALIFICATIONS:  Education and experience equivalent to:
+
+Education/Certification:
+Bachelor’s degree in accounting or business administration from an accredited college or university. CPA and/or MBA preferred
+
+Experience:
+7 to 10 years of relevant experience in accounting and/or finance.
+
+Knowledge, Skills and Abilities
+
+Knowledge of (B/basic; J/journey; E/expert):
+Generally accepted accounting principles (GAAP) (J)
+Inventory Control system (J)
+Budgetary concepts and techniques (J)
+Financial analysis and reporting (J)
+Distribution concepts and techniques (J)
+Management concepts and techniques (J)
+Data management concepts and techniques (J)
+JD Edwards Enterprise System (J)
+Microsoft Office Suite: Word, PowerPoint (J); Excel (E)
+
+Skill and ability to:
+Manage and motivate employees in a team-based environment
+Analyze and resolve complex problems
+Communicate and coordinate effectively with employees verbally and in writing
+Communicate and coordinate effectively with internal and external customers verbally and in writing
+Prepare a variety of technical documents and reports
+Work effectively in a general business environment, with a focus on high levels of quality and customer service
+Present financial data to leadership
+Act in accordance with GSF’s Values and Creed
+
+LEADERSHIP/MANAGEMENT RESPONSIBILITY
+
+Manage up to 10 employees.
+
+PERFORMANCE CATEGORIES
+Productivity/quality standards: distribution objectives
+Productivity/quality standards: delivery efficiency and timeliness
+Variable expense control
+Approved profit margin
+Division assets
+Regulatory agency compliance
+Budget
+Cost containment
+Employee development
+Teamwork within the department and across departments
+Project/assignment standards
+Customer satisfaction",,,Yes,FA_Financial_Analysis,,
+Systems_Analyst,Systems Analyst,1/1/2000,n,,,Uses IT tools to help enterprises of all sizes achieve their goals. Designs and develops new computer systems by choosing and configuring hardware and software. Devises ways to apply existing systems' resources to additional tasks.,,,,Yes,IT_Systems,,
+Integration_Engineer,Integration Engineer,1/1/2000,n,,,"Develops and implements solutions coordinating applications across the enterprise or its units/departments. Evaluates existing components or systems to determine integration requirements and to ensure final solutions meet organizational needs. Reuses components when possible and assists management in buy/build decisions. Familiar with the standard concepts, practices, and procedures. Relies on experience and judgment to plan and accomplish goals. Performs a variety of tasks. May lead or direct the work of others.",,,,Yes,IT_Services,,
+Associate_Product_Development,Associate Product Development,1/1/2000,n,,Associate Product Developer,"The Associate Product Development works closely with design to ensure all details of development line are executed accurately, including preparing, updating, and distributing reports on fabric, samples, trim development.","Key Responsibilities:
+• Category Analysis Includes identifying driving factors behind trends recommending opportunities for assortment gains, and analyzing base business to discover and resolve issues early on.
+• Supporting Product Management in managing all aspects related to achieving its performance goals. Includes business reviews, making new item presentations, managing timelines for new product development and leading any other day-to-day priorities.
+• Category & Product Optimization - Taking part in all relevant category reviews and providing analysis to support Own Brands (pricing, assortment, schematics, promotion, etc.)
+• Working cross functionally with Product Development, Regulatory, Sourcing, Packaging Design, Finance",,,Yes,RD_Product_Development,,
+Server,Server,1/1/2000,n,,,,,,,,FA_Employee_Services,,
+Maintenance_Technician,Maintenance Technician,1/1/2000,n,,,Maintain the day-to-day operations and to assume responsibility for maintaining the physical assets of the property under the direction of the Property/Operations Manager,,,,Yes,#N/A,,
+Customer_Service_Associate,Customer Service Associate,1/1/2000,n,,,"Dazzle our customers with flawless execution ... in how we answer the phone, fill an order, deliver on time, process the invoice and  meet every imaginable need for excellence in customer service.  Guide customers in best practices and online tools. Provide trouble-shooting and problem escalation.","Our customer service team members are critical to the success of the organization. They provide a personable, knowledgeable, and caring experience when customers contact us. We are looking for people who are warm, articulate, and positive to add to our already awesome team. You will maintain customer relationships by responding to inquiries and documenting actions. This is an entry level job that builds the necessary skills to deliver outstanding customer service. Shadows Customer Service Representatives and receives training in customer service.
+
+Job duties:
+Responsible for receiving, responding to and resolving customer telephone-inquires in a high-volume call center.Maintain departmental quality and productivity standards.Where appropriate, cross-reference a variety other products and services available for customers to consider.Engage in outbound calls to current customers to survey satisfaction with current products.Perform other work-related duties, as assigned - including (but not limited to) customer e-mail and correspondence.",,,,CS_Customer_Service,,
+Data_Analyst,Data Analyst,1/1/2000,n,,,"Solve a puzzle, paint a picture is exactly what you'll do in this role by collecting, researching and analyzing data that will be translated into every day language to understand a pattern or dilemma that will in turn become the basis to help the company make better business decisions.","·  Interpret qualitative and quantitative data to ‘tell the story’ or understand patterns
+·  Provide analysis, and forecasting to support organizational improvements
+·  Collect and organize data for easy use by internal and external teams
+·  Complete standard reports, dashboards, and ad-hoc analysis
+·  Facilitate discovery of business needs and reporting analysis support 
+·  Gather requirements, develop and implement new reporting and analysis
+·  Scope, structure, manage and execute analytical projects under some supervision",,,Yes,IT_Services,,
+Property_Administrator,Property Administrator,1/1/2000,n,,Property Administrator,"Responsible for day-to-day administration  of corporate facilities and operations in assigned location.  Excellent organizational and interpersonal skills and a proven ability to work with all levels of an organization are required.  Additional responsibilities include vendor relationships (HVAC, electrical, landscaping, cafeteria/food services) and coordination of internal moves and appropriate updates to the floor plan.",".  Responsible for all customer service and tenant relations and first point of contact for tenant requests
+.  Coordinates all service calls and follow-up.
+.  Management of building, services and all visitors to the building.
+.  Responsible for leases, insurance certificates, vendor service agreements,  A/R and A/P, monitoring vendors’ activities, and security systems and controls.     
+.  Regularly assist in the inspection of assets to ensure the property is maintained at an optimum level, and safeguard the security and protection of all tenants and visitors.",,,Yes,FA_Administration,,
+Supervisor_Employee_Services,"Supervisor, Employee Services",1/1/2000,n,,"Supervisor, Employee Services",Designs and administers Human Resources policies and procedures pertaining to Employee Relations and services.  Responsible for coordinating and directing the Employee Relations programs and functions.   Maintains good communication and positive relationships with employees to promote employee satisfaction.,".  Provides advice and guidance to all levels of management regarding employee relations activities and employee services based on established guidelines and sound administrative practices.
+.  Investigates disciplinary actions, employee and applicant appeals and grievances.  According to circumstances, provides guidance and recommendations for problem resolution. 
+.  Provides specialized training in employee relations area.
+.  Represents organization in employment matters such as EEOC inquiries, agency audits and unemployment appeal hearing",,,Yes,FA_Employee_Services,,
+HR_Manager,HR Manager,1/1/2000,n,,HR Manager,"As a strategic partner, the HR Manager (HRM) aligns business objectives with employees and management in designated business units. The HRM serves as a consultant to management on Human Resource related issues. Successful HRM will act as employee champion and change agent. HRM assesses and anticipates HR-related needs, communicating needs proactively with our HR department and business management. The HRM seeks to develop integrated solutions and formulates partnerships across the HR function to deliver value added service to management and employees that reflect the business objectives of the organization. The HRM may include international Human Resource responsibilities. The HRM maintains an effective level of business literacy about the business units financial position, its mid range plans, its culture and its competition.","The HR Manager is an exciting new position for a seasoned Human Resources leader with experience supporting multi-national locations and clients. The opportunity exists for innovative HR practices, interesting and complex project work, and partnership with an exceptional team of senior business leaders.
+
+RESPONSIBILITIES/ DUTIES:
+Conduct weekly meetings with respective business units.
+Consult with line management providing HR guidance when appropriate.
+Analyze trends and metrics in partnership with HR group to develop solutions, programs and policies.
+Manage and resolve complex employee relations issues. Conducts effective, thorough and objective investigations.
+Maintain in-depth knowledge of legal requirements related to day-to-day management of employees, reducing legal risks and ensuring regulatory compliance. Partner with legal department as needed/required.
+Provides day to day performance management guidance to line management (coaching, counseling, career development, disciplinary actions).
+Works closely with management and employees to improve work relationships, build morale, increase productivity and retention.
+Provides HR Policy guidance and interpretation.
+Develop contract terms for new hires, promotions, transfers.
+May assist int'l employees with expatriate assignments and related HR matters.
+Provide guidance and input on business unit restructures, workforce planning, succession planning.
+Identify training needs for business units and individual executive coaching needs.
+Participate in evaluation and monitoring of success of training programs. Follow-up to ensure training objectives are met.
+
+SPECIFIC KNOWLEDGE and SKILLS:
+Excellent consulting skills.
+Excellent client management and business literacy skills.
+Strong conflict management skills.
+Strong interpersonal and negotiation skills.
+Excellent verbal and written communication skills.
+Develop strong trusting relationships in order to gain support and achieve results.
+Effectively envision, develop, and implement new strategies to address competitive, complex business issues.
+Manage multiple business units in multiple locations.
+Manage multiple conflicting priorities.
+Work in environment with international objectives.
+Ability to understand issues domestically and internationally and communicate effectively with clients.
+Be flexible and available to interact with employees at all levels.
+Be self directed and motivated.
+Take initiative to identify and anticipate client needs and make recommendations for implementation.",,,Yes,HR_Management,,
+Clerk,Clerk,1/1/2000,n,,Distribution Center Clerk,,,,,,FA_Logistics,,
+Dock_Worker,Dock Worker,1/1/2000,n,,Dock Loading Lead,,,,,,FA_Logistics,,
+Delivery_Operations_Assistant,Delivery Operations Assistant,1/1/2000,n,,Delivery Operations Assistant,,,,,,FA_Logistics,,
+Dispatcher,Dispatcher,1/1/2000,n,,Dispatcher Shipping & Receiving,,,,,,FA_Logistics,,
+Resource_Manager,Resource Manager,1/1/2000,n,,Resource Manager,"The primary responsibility of the resource manager is to manage resourcing for all assigned projects. The Resource Manage works directly with Recruitment and HR to facilitate appropriate staffing across the company based on the understanding of project requirements.
+
+The Resource Manager must also ensure that project resourcing is managed in order to assure timely delivery and must communicate to appropriate project managers resourcing issues that may impact scheduled deadlines.
+
+It is also required that this position enforce process by utilizing and requesting all departments use proper procedures when requesting resources.",,,,Yes,SV_Consulting_Services,,
+Practice_Manager,Practice Manager,1/1/2000,n,,Practice Manager,"The Practice Manager is accountable for managing and selling the set of client engagements necessary to achieve the annual financial targets for practice. The Practice Manager provides executive level oversight on all projects insuring client satisfaction, appropriate executive level communication – both internal and external, escalation and resolution of engagement issues and appropriately directing and coaching project resources.
+
+The Practice Manager is accountable for ensuring that the utilization goals for all team members are achieved and resource hiring and staffing are managed to achieve practice satisfaction and growth.
+
+This position is actively involved in the development of new business, successfully building executive level relationships at key accounts and actively ensuring the successful delivery.","The Practice Manager is accountable for managing and selling the set of client engagements necessary to achieve the annual financial targets for practice. The Practice Manager provides executive level oversight on all projects insuring client satisfaction, appropriate executive level communication – both internal and external, escalation and resolution of engagement issues and appropriately directing and coaching project resources.
+The Practice Manager is accountable for ensuring that the utilization goals for all team members are achieved and resource hiring and staffing are managed to achieve practice satisfaction and growth.
+This position is actively involved in the development of new business, successfully building executive level relationships at key accounts and actively ensuring the successful delivery.",,,Yes,SV_Consulting_Management,,
+Consultant_Manager,Consultant Manager,1/1/2000,n,,Consultant Manager,"The Consultant Manager will be responsible for managing a team of Consultants in addition to providing customer support on some of our most strategic projects. This position will be responsible for assisting to build the Engagement Manager practice by hiring, mentoring, and managing a team of Engagement Managers. The Sr Manager – Engagement Management will also work with the Workday Resource Management Team, Consulting Managers, and Business Development teams to determine appropriate staffing plans, assemble project teams and resolve resource challenges to successfully deliver Workday projects.",,,,Yes,SV_Consulting_Management,,
+Collection_Manager,Collection Manager,1/1/2000,n,,"Manager, Collections","Responsible for  engaging, managing and working to directly  improve the activities of the
+credit department for the organization.",,,,Yes,FA_Management,,
+Collection_Specialist,Collection Specialist,1/1/2000,n,,Collection Specialist,Responsibilities include collection calls and/or correspondence in a fast paced goal oriented collections department.,,,,Yes,FA_Accounting,,
+Director_Technical_Operations,"Director, Technical Operations",1/1/2000,n,,"Director, Technical Operations","The Director of Technical Operations is charged with providing the leadership and tactical oversight necessary to support the execution of best practices for the supporting functions within the group. Those functions include, but are not limited to, center of excellence, operation service center, site development, implementation, transitions, and any additional professional services rendered. This will be done thru the working within a cross functional matrix to develop, set, and implement standards.","The Director of Technical Operations is charged with providing the leadership and tactical oversight necessary to support the execution of best practices for the supporting functions within the group. Those functions include, but are not limited to, center of excellence, operation service center, site development, implementation, transitions, and any additional professional services rendered. This will be done thru the working within a cross functional matrix to develop, set, and implement standards. The role requires keen planning skills along with the ability to lead through influence and to be a proactive partner with a strong customer-service orientation. This leader should be able to solve problems at a tactical and functional level, have excellent oral and written communication skills, a solid work ethic and unquestioned integrity.
+
+Success Metrics:
+Create, evolve, and implement a basis of standards that insures up-time standards are met.
+Continuously improve the customer transition experience
+Work with our cross functional support partners to develop best in class standards, implementation, assessments analysis, and innovations.
+
+Responsibilities:
+Leading the Tech Operations teams that own management of critical, complex operational platform and managing problems, driving measurable Operational Excellence improvements across the entire organization.
+Implementation and tracking of support effectiveness programs
+Continuous improvement for monitoring, automation and tools development to improve availability and transparency
+Leading the Tech Operations teams that own management of critical, complex operational platform and managing problems, driving measurable Operational Excellence improvements across the entire organization.
+
+Required Experience and Qualifications:
+Bachelor's Degree in Computer Science or related field, plus a minimum of 7 years of Technical Operations experience
+At least three (3) years experience in Leadership role
+Three (3) years of experience in managing Platform monitoring, Production Availability management and Incident Management process
+Strong experience and detailed technical knowledge in system, database and network engineering",,,Yes,CS_Management,,
+Senior_Call_Center_Operator,Senior Call Center Operator,1/1/2000,n,,,You are the first line of customer experience responsible for handling incoming calls from customers.  You have the intimate knowledge of our products and services; have great communication and sales skills of-selling and cross-selling new products.,"The primarily responsibility of the Senior Call Center Operator is telephone and internet-based support for customer-initiated activities, includes order processing and tracking, technical and billing problems.
+The Senior Call Center Operator answers telephone call inquiries and promotes an organization's products and services through the provision of quality customer service.
+KEY RESPONSIBILITIES:
+* Provide excellence in customer care; research and resolve telephone and written inquiries.
+* Answer a variety of questions regarding the firm's products and services.
+* Assist in achieving regional and divisional goals in quality through individual and collaborative efforts.
+* Handles escalated and unresolved calls from less experienced representatives. Provides input into hiring decisions and performance appraisals.
+* Supervises the activities of customer service representatives in accomplishing customer care goals.
+REQUIRED EXPERIENCE AND QUALIFICATIONS:
+* Ability to work in both a structured and unstructured and fast paced environment with rigorous performance metrics.
+* Must have the ability to multi-task, prioritize and organize work
+* Ability to work under pressure and move between types of jobs without workflow
+disruption or errors.
+* Ability to prioritize own work, as well as others, to meet deadlines and demands of
+highly seasonal work.
+* Ability to effectively deal with the public on complex or technical issues.",,,Yes,CS_Call_Center,,
+Chief_Data_Officer,Chief Data Officer,1/1/2014,n,,Chief Data Officer,"The Chief Data Officer is a blend of experience as a data strategist, adviser, and steward.  The owner of all things data related, you are the data conscience of the organization enforcing transparency and utilization of data as a corporate asset that will spur our data-driven culture forward and lead us into an efficient information-centric organization.","The Chief Data Officer job requires people, technical and business decision skills at its foundation.  Our organization has a clear a vision of data-driven decision-making. The Chief Data Officer is the role primarily responsible for operationalizing that vision. In essence, managing data as an asset means improving links between silo-ed databases and data stores; making information/data easier to find on-line, making it easier for analysts and decision makers to quickly access and transform data into the new formats and knowledge. It means lowering the cost of consuming and using data because we keep having more data to manage.  Responsibilities include:
+• Decrease the cost of managing data and increasing the value of the data we have.
+• Improve how our organization collects, uses, and manages data.
+• Lead company efforts to track data collections, data purchases, databases, physical data models, and linkages between datasets.
+• Improve data quality and how we measure data quality.
+• Ensure data is available, reliable, consistent, accessible, secure, and timely to support the mission and activities of the company.
+• Align and standardizing data models.
+• Head up company wide data-working groups.
+• Work with the business as it creates data, understand its value in the context of business processes, and determine how it can best be managed and used.",,,Yes,Executive_Management,,
+Call_Center_Operator,Call Center Operator,1/1/2000,n,,,"You're a smooth operator ..... on the phone with great phone skills because that’s where most of the work is done. Responsible for incoming customer calls to provide general information, transferring calls and taking messages and providing a pleasant and professional experience. Software-saavy, you adapt easily to working between multiple computer screens and possess great customer skills to thrive in this position.","The primary responsibility of the Call Center Operator is to serve customers by determining requirements,  answering inquiries,  resolving problems, fulfilling requests and maintaining the database.
+Key Responsibilities:
+• Determines requirements by working with customers.
+• Answers inquiries by clarifying desired information; researching, locating, and providing information.
+• Resolves problems by clarifying issues; researching and exploring answers and alternative solutions; implementing solutions; escalating unresolved problems.
+• Fulfills requests by clarifying desired information; completing transactions; forwarding requests.
+• Sells additional services by recognizing opportunities to up-sell accounts; explaining new features.
+• Maintains call center database by entering information.
+• Keeps equipment operational by following established procedures; reporting malfunctions.
+• Updates job knowledge by participating in educational opportunities.
+• Enhances organization reputation by accepting ownership for accomplishing new and different requests; exploring opportunities to add value to job accomplishments.
+Experience and Qualifications:
+• proficient in relevant computer applications
+• required language proficiency
+• knowledge of customer service principles and practices
+• knowledge of call center telephony and technology
+• some experience in a call center or customer service environment
+• good data entry and typing skills
+• knowledge of administration and clerical processes",,,Yes,CS_Call_Center,,
+Associate_Call_Center_Operator,Associate Call Center Operator,1/1/2000,n,,,Maintains customer relationships by responding to inquiries and documenting actions. This is an entry level job that builds the necessary skills to deliver outstanding customer service. Shadows Call Center Operator  and receives training in customer service.,"Job Duties:
+• Prepares for customer inquiries by studying products, services, and customer service processes.
+• Responds to customer inquiries by understanding inquiry; reviewing previous inquiries and responses; gathering and researching information; assembling and forwarding information; verifying customer's understanding of information and answer.
+• Records customer inquiries by documenting inquiry and response in customers' accounts.
+•  Improves quality service by recommending improved processes; identifying new product and service applications.
+•  Updates job knowledge by participating in educational opportunities.
+•  Accomplishes customer service and organization mission by completing related results as needed.",,,Yes,CS_Call_Center,,
+Call_Center_Manager,Call Center Manager,1/1/2000,n,,,"Manage a team that provides excellence in customer care; research and resolve telephone and written inquiries. Answer a variety of questions regarding the firm's products and services. Lead the team in achieving regional and divisional goals in quality through individual and collaborative efforts. Ability to work in both a structured and unstructured and fast paced environment with rigorous performance metrics. Must have the ability to multi-task, prioritize and organize work and inspire others.","Primary Responsibilities:
+• Manage the operation of the call center.
+• Work with Product and Cross-site peers to successfully implement new Clients, Customers, and Products.
+• Gather and analyze call center data to recognize trends and opportunities, communicate concerns/trends with Sr. Leadership as appropriate.
+• Provide reporting on multiple issues/ performance metrics to Sr. Leadership as required.
+• Create and Implement continuous process improvements.
+• Maintain all Process and Procedure documents, keep documents updated with all changes. Accountable for all formal P&P document reviews.
+• Serve as organization's SME on the portal support process.
+• Meeting bi-weekly with each direct report to provide update on current job performance and individual development.
+• Manage the MAP process for all employees within established time frames.  Recommend salary/ bonus actions based on job performance.
+• Ensure that all team members have current, relevant Individual Goal Documents.
+• Develop reward and recognition activities. Share actions/plans with colleagues so they can adapt for their businesses.
+• Respond to Escalated calls as the final level escalation.
+Qualifications/Requi​rements:​
+• Minimum Education of a HS Diploma or GED required. A Bachelor's Degree is preferred.
+• 3+ years call center leadership experience. Strong Understanding of all aspects of Call Center Operations.
+• 2+ years experience working with direct reports pertaining to HR functions, performance management, hiring and staff development.
+• 1+ year experience leading and managing both onsite and remote direct reports.
+• 1+ year experience in suggesting and implementing process improvements.
+• 6+ months experience in organizing, researching and presenting business related topics and materials to all levels of the organization. Must have strong presentation skills
+• Strong Analytical Skills and ability to use data to provide solutions for complex problems
+• Up to 25% travel required
+• Working Hours 5:00am - 8:00pm Monday - Friday",,,Yes,CS_Management
+Intern,Intern,1/1/2000,n,,Intern,"Fast paced and fun opportunity for students and less experienced workers to learn while delivering on a key project as assigned.  Eligible for academic credit at most schools, where applicable.","Company is looking for a qualified intern to join our marketing/advertising team. Our marketing department produces quality work for major companies, and seeks an intern who can participate in various stages of print and online marketing campaigns.
+This intern should be prepared to work in a fast-paced team environment, and will finish the internship having gained broad experience in various aspects of marketing.
+
+Responsibilities
+Assist in the creation of signage, circulars, mock ups, e-mail campaigns, on line promotion, etc.
+Assist in the distribution or delivery of marketing materials
+Assist with fulfillment of marketing offers
+Assist with execution of trade shows
+Assist with the preparation and delivery of training materials
+Perform analysis of marketing and sales data
+Seek and analyze competitor marketing and sales materials both on and offline
+Prepare presentations
+Open and sort mail
+Enter contact information into contact management systems
+Provide support to social media efforts
+Maintain tracking report of public relations activity
+
+Requirements
+Company is looking for an undergraduate student who is majoring in Sales, Marketing or Advertising. This person should have excellent verbal and written communication skills, with extensive knowledge of Web and social media. PowerPoint, Word and Excel experience is a bonus, and will be considered when choosing the best applicant for this internship position.
+
+Majors
+Marketing, Sales, Advertising, Computer Science, Mathematics, Language",,,Yes,#N/A,,
+Marketing_Specialist,Marketing Specialist,1/1/2000,n,,Marketing Specialist,Our goal is to simplify the experience of our customer's journey. As a 'content specialist' you will be responsible for collecting and organizing growing support trends for insight reporting as well as creating compelling online content for customer support and education. You will work closely with product and services teams to enhance our brand and values.,"Responsibilities:
+Create compelling online support content to help customer resolve issues and maximize their online experience.
+Work closely with the Content and Social Support teams to define and deliver overall help content strategy.
+Ensure self-serve content and account access is consistent, intuitive, and reflective of our brand.
+Manage self-serve content for all product and feature launches",,,Yes,MK_Marketing_Services,,
+Training_Specialist,Training Specialist,1/1/2015,n,,Training Specialist,"Customer service education never stops and with strong customer support experience and exceptional communication skills you will provide on-boarding training and remedial training for our Customer Service Support Team.  You will aid in the development and maintenance of training plans and offerings while providing education, observation, coaching and motivation that ensures achievement of individual, team, and department objectives","Facilitate product training to enhance Customer Service onboarding and continued professional development with multiple training channels
+Creates process, systems, skill, role-specific, and/or special project training content for internal initiatives
+Train new employees and cross-train existing employees on processes, systems, policies and workflows  
+Works closely with management, subject matter experts, and vendor representatives to identify and execute learning initiatives",,,Yes,CS_Customer_Service,,
+Chief_Technology_Officer,Chief Technology Officer,1/1/2015,n,,Chief Technology Officer (CTO),"The Chief Technology Officer (CTO) is responsible for overseeing all technical aspects of the company. The CTO works with Executive Management to grow the company through the use of technological resources. Using an active and practical approach, the CTO will direct all employees in IT and IO departments to attain the company’s strategic goals established in the company’s strategic plan.","Responsibilities:
+Establish the company’s technical vision and leads all aspects of the company’s technological development.
+Directs the company’s strategic direction, development and future growth.
+Works in a consultative fashion with other department heads, such as marketing, production and operations as an advisor of technologies that may improve their efficiency and effectiveness.
+Provide leadership to department heads in a fashion that supports the company’s culture, mission and values.
+Conducts research and case studies on leading edge technologies and makes determinations on the probability of implementation.
+Acts as a good steward of company's resources and ensures control of IT and IO departmental budgets.
+
+Qualifications: 
+BS in related field and at least 15 years experience in the Information Technology arena, at least 10 years management and strategic experience in this field or MBA/MS in related filed with 10 years experience, 7 of which must be managerial and strategic.",,,Yes,Executive_Management,,
+Chief_Marketing_Officer,Chief Marketing Officer,1/1/2015,n,,Chief Marketing Officer (CMO),"Chief Marketing Officer (CMO) is responsible for overseeing the planning, development and execution of marketing and advertising initiatives. Reporting directly to the Chief Executive Officer, the CMO's primary responsibility is to generate revenue by increasing sales through successful marketing for the entire organization, using market research, pricing, product marketing, marketing communications, advertising and public relations.","Responsibilities:
+Facilitate growth, sales, and marketing strategies at an organization.
+Increase revenue generation.
+Reduce costs.
+Perform risk mitigation.
+Prepare overall marketing strategy.
+Develop programs with quantifiable objectives to measure results.
+Implement and manage marketing budget.
+Leverage data and analytics to drive insights.
+Modify or redirect business intelligence strategy.
+Oversee and direct the efforts of the marketing team.
+Develop segmentation, competitive analysis/market intelligence, prospecting, lead generation, product and market development, pricing, promotions, communications and budgets, sales force effectiveness, strategic planning, services units and revenue retention and growth.
+Oversee the development of new products.
+Create product roadmap.
+Develop and measure key metrics around the business including user acquisition, conversion rates, engagement rates, satisfaction and renewal rates.
+ 
+Qualifications:
+Superb analytical skills
+Demonstrated ability to lead and inspire a team
+Outstanding communication and interpersonal skills
+Flexibility
+Passionate customer advocacy
+Thorough knowledge of marketing principles, brand, product and service management
+Deep understanding of changing market dynamics
+Entrepreneurial spirit",,,Yes,Executive_Management,,
+Chief_of_Staff,Chief of Staff,1/1/2016,n,,Chief of Staff,"Job Profile Summary
+The Chief of Staff to the CEO (“the COS”) is a critically important role, enabling the CEO to work most
+effectively with internal and external stakeholders and fulfill commitments to partners, funders, and the Board of Directors. This is not an administrative role; it is highly strategic and facilitative one that requires a combination of focus and flexibility, as well as a willingness to play an active, behind-the-scenes role. As the CEO’s ‘trusted counsel’, the role requires a highly resourceful individual with strong emotional intelligence, self-motivation, and strong analytical skills.","Responsibilities: 
+Preparing the CEO for meetings and speaking appearances, including providing background notes and handling logistics in conjunction with the CEO’s Executive Assistant;
+Writing correspondence and coordinating with the Director of Communications on the development of op eds, blogs, and other publications;
+Managing contact lists to ensure ongoing follow up;
+Support the CEO in maintaining relationships with key partners, customers, investors, board members, and policy makers as designated by the CEO to ensure continuity in communications and to surface and pursue opportunities for collaboration;
+Coordinating strategic planning efforts and special projects across the executive team;
+Conducting research about organizations, speaking engagements, and policy issues;
+Developing engaging, visually-appealing presentations;
+Building financial models and undertaking other data-intensive model building activities to assist the CEO in planning and product performance analyses; and
+Representing the company at high-level policy events and working sessions.
+Qualifications:
+Bachelor’s degree and extensive experience and demonstrated track record in the tech, education, or public policy sectors and/or in strategic planning and analysis (MBA, JD, MPP or equivalent preferred);
+Experience in business development / strategic relationship building;
+Clear and concise writing;
+Excellent presentation design / management skills as well as strong command of Excel;
+Thorough and enterprising research skills;
+Highly organized with excellent follow through and ability to get past obstacles in order to get things done; and
+Ability to travel with or on behalf of the CEO as needed to client meetings, conferences, and to track development projects across a global organization with seven offices on four continents.",,,Yes,Executive_Management,,
+General_Manager,General Manager,1/1/2015,n,,,"Provides the  for planning and directing the operations of an organization to ensure and enhance performance, productivity and profitability.","Responsibilities / Duties:
+apply strategic planning to determine company, department or unit objectives
+plan and implement procedures and systems to maximize operating efficiency
+coordinate financial and budget activities for maximum operational efficiency
+review performance data (financial, sales and activity reports) to monitor and measure productivity, goal progress and activity levels
+responsible for the achievement of department/division/unit productivity and quality goals
+
+Education and Work Experience:
+proficient in relevant software applications
+qualification in project management or equivalent
+proven experience in strategic planning 
+knowledge of human resource management principles and procedures
+
+Specific Knowledge & Skills: 
+resource and information management
+planning and organizing
+problem analysis and problem solving
+delegating tasks and responsibility
+communication skills",,,Yes,Sales_Operations,,
+Assistant_Controller,Assistant Controller,1/1/2016,n,,,"Works with the Controller in preparing monthly financial reports, evaluates the accuracy and reliability of accounting data, effectiveness of existing accounting procedures and controls, and makes recommendations for improvement.","RESPONSIBILITIES:
+Guides financial decisions by establishing, monitoring, and enforcing policies and procedures.
+Protects assets by establishing, monitoring, and enforcing internal controls.
+Monitors and confirms financial condition by conducting audits; providing information to external auditors.
+Maximizes return, and limits risk, on cash by minimizing bank balances; making investments.
+Prepares budgets by establishing schedules; collecting, analyzing, and consolidating financial data; recommending plans.
+Achieves budget objectives by scheduling expenditures; analyzing variances; initiating corrective actions.",,,Yes,FA_Management,,
+Vice_President_Human_Resources,"Vice President, Human Resources",1/1/2016,n,,,"Job Profile Summary
+Supports various aspects of HR management, practices and operations to meet the needs of a growing and evolving organization by assisting in the development and execution of people programs, service delivery strategies, enhanced organizational decision-making and talent strategies to secure growth on a global scale.","RESPONSIBILITIES:
+Responsibility for developing and implementing people strategy, initiatives and programs to support business outcomes.
+Drives cultural transformation while building employee engagement.
+Assists in the development and implementation of progressive compensation and benefits programs to provide motivation, incentives, recognition, and rewards for effective performance.
+Develops talent planning models to identify gaps with respect to competency, knowledge and talent, and oversees the development of specific programs for filling these gaps.",,,Yes,HR_Management,,
+EMEA_Assistant_Controller,EMEA Assistant Controller,2/1/2017,n,,,"Works with the Controller in preparing monthly financial reports, evaluates the accuracy and reliability of accounting data, effectiveness of existing accounting procedures and controls, and makes recommendations for improvement.","RESPONSIBILITIES:
+Guides financial decisions by establishing, monitoring, and enforcing policies and procedures.
+Protects assets by establishing, monitoring, and enforcing internal controls.
+Monitors and confirms financial condition by conducting audits; providing information to external auditors.
+Maximizes return, and limits risk, on cash by minimizing bank balances; making investments.
+Prepares budgets by establishing schedules; collecting, analyzing, and consolidating financial data; recommending plans.
+Achieves budget objectives by scheduling expenditures; analyzing variances; initiating corrective actions.",,,Yes,FA_Management,,
+EMEA_Controller,EMEA Controller,1/1/2000,n,,,"Works with the Controller in preparing monthly financial reports, evaluates the accuracy and reliability of accounting data, effectiveness of existing accounting procedures and controls, and makes recommendations for improvement.","RESPONSIBILITIES:
+Guides financial decisions by establishing, monitoring, and enforcing policies and procedures.
+Protects assets by establishing, monitoring, and enforcing internal controls.
+Monitors and confirms financial condition by conducting audits; providing information to external auditors.
+Maximizes return, and limits risk, on cash by minimizing bank balances; making investments.
+Prepares budgets by establishing schedules; collecting, analyzing, and consolidating financial data; recommending plans.
+Achieves budget objectives by scheduling expenditures; analyzing variances; initiating corrective actions.",,,Yes,FA_Management,,
+Administrative_Coordinator,Administrative Coordinator,1/1/2000,n,,,"Provides office services by implementing administrative systems, procedures, and policies; monitoring administrative projects; maintaining suggestion program","Administrative Coordinator Job Duties:
+Maintains administrative workflow by studying methods; implementing cost reductions; developing reporting procedures.
+Creates and revises systems and procedures by analyzing operating practices; studying utilization of micro-computer and software technologies; evaluating personnel and technological requirements; implementing changes.
+Develops administrative staff by providing information, educational opportunities, and coaching.
+Resolves administrative problems by analyzing information; identifying and communication solutions.",,,,FA_Administration,,
+Vice_President_Support_Operations,"Vice President, Support Operations",1/1/2015,n,,,"Responsible for a number of prestigious accounts that require exceptional client relations, attention to detail, team development and strong business acumen. Manage applications development, release and customer support teams in addition to supporting business applications.","RESPONSIBILITIES:
+Manage and lead the central operations of the business supporting the regional, and global functions of the Meetings & Events business
+Global responsibility and accountability for operational excellence, including process excellence, productivity, efficiency
+Implement new global processes to standardize operations
+Work with regional Meetings & Events leadership to implement changes, and improve the efficiency of the business
+Responsible for operational productivity, client and decision maker satisfaction on a regional basis
+Operate in a team-oriented environment with a strong sense of responsibility toward team members and engagement objectives",,,Yes,OPS_Management,,
+Data_Scientist,Data Scientist,1/1/2015,n,,Data Scientist,"You excel at analyzing large, complex datasets through statistics to discover patterns and insights that are translated into analytical solutions and dashboards to help make data-informed decisions with measurable outcomes to the organization and customer experiences.","DESCRIPTION:
+Search and identify valuable data sets matching data analytics 
+Apply transformations to structured / unstructured data prior to analysis 
+Performing exploratory data analysis 
+Analyze large amounts of information to discover trends and patterns
+Apply techniques for selecting representative data set features 
+Build predictive models and machine-learning
+
+REQUIREMENTS:
+Proven experience as Data Scientist OR Data Analyst
+Experience in data mining
+Knowledge of R, SQL, Python with familiarity of Scala, Java or C++
+Strong mathematical and statistical skills",,,Yes,IT_Services,,
+Senior_Data_Scientist,Senior Data Scientist,1/1/2015,n,,Senior Data Scientist,"You thrive on exploration and working with lots of data to find answers to big questions.  You will be responsible for solving complex problems, developing and communicating transformative strategies and decisions that shape and steer strategic and operational decisions across the company.","RESPONSIBILITIES:
+• Identify analyze and recommend the most critical growth factors
+• Design and execute in-depth analysis to shape our future road map 
+• Develop, implement, communicate and evaluate success metrics 
+• Collaborate with organizational stakeholders to synthesize results, qualitative research and quantitative research into actionable next steps
+• Lead the development and adoption of predictive models to aid decision making
+• Responsible for evangelizing data into educational conversations and insightful conversations on a daily basis",,,Yes,IT_Services,,
+Facilities_Manager,Facilities Manager,1/1/2016,n,,,"Manage the shipping and receiving functions as well as maintain the buildings and grounds of assigned locations, directing staff and overseeing the upkeep of equipment and supplies. Ensure the buildings and grounds are maintained, which entails daily and weekly cleaning schedules as well as determining and scheduling repairs, renovation projects, waste reduction improvements and safety inspections.","Responsible for the management of a work facility, including security, maintenance, shipping and receiving, and other services. Ensuring that the needs of the business, employees, and/or visitors are met.
+
+Job Duties:
+Hire, train, and continually motivate the Shipping and Receiving teams
+Manage the overall services provided within the facility
+Use best business practices to manage and reduce operation costs
+Create a budget for various facility needs and expenses
+Compare costs for various services and goods before choosing the best options for the facility
+Manage the maintenance of assigned buildings
+Track building upkeep as well as anticipated long- and short-term improvements and maintenance
+Ensure the security of the building by researching and implementing various security measures, such as surveillance cameras or security staff members
+Respond to emergency situations or other urgent issues involving the facility
+
+Facilities Manager Skills and Qualifications:
+
+At least a bachelor's degree in business management, facilities management, or a related field; problem-solving and analytical skills; time-management skills; maintenance experience; familiarity with building upkeep, structural issues, and grounds maintenance; budgeting skills; interpersonal and communication skills; multi-tasking skills; organizational and planning skills; leadership skills; ability to guide and motivate employees; good physical condition; flexible scheduling.",,,Yes,FC_Management,,
+Apprentice_Office_Management,Apprentice Office Management,1/1/2000,n,,,Responsible for various office task as well as the communication with internal and external stakeholders,"Handling of various office tasks as well as general office management
+Communication with internal and external stakeholders
+Organization of internal and external events",,,,FA_Administration,,
+Learning_Program_Manager,Learning Program Manager,1/1/2000,n,,,"Responsible for developing internal training programs, and manages continuous improvement initiatives. Develops cross-functional project resource plans and project-specific strategies and specifications to reach goals. Ensures the project remains within budget throughout the project life cycle. Understands and manages decision-making processes and cost/time/quality impacts to project.","RESPONSIBILITIES
+Understand nature of program & project management needs to drive execution & delivery
+Manage scope and milestones to ensure goals are met
+Develop appropriately structured and detailed program & project plans
+Identify and track interdependencies to ensure timely and successful delivery
+Secure estimates & resource commitments across various dependency teams
+Optimize resource and capacity planning to support program goals and outcomes
+ 
+Professional Qualities
+Strong bias to action
+Strong leadership skills; self-motivated and a self-starter with a can do attitude
+Team player, energetic personality, quality minded, focused, committed, able to work independently in a fast paced, changing environment
+Strong team management skills, able to instill passion, loyalty, and commitment among team members at all levels of the organization
+High degree of professional confidence and credibility with effective presence, strong written and verbal communication skills, able to communicate technical concepts and plans at all levels
+Strong negotiation skills in all mediums and throughout all levels of the organization
+ 
+Requirements
+Proven ability to develop effective cross-organization relationships, collaborating and communicating across different stakeholders
+Strong technical acumen, able to ensure that technical solutions, strategies, practices, and governance deliver business and customer value
+Deep knowledge of program & project management process, tools and templates",,,,HR_Training,,
+23100,Chief Diversity Officer,1/1/2019,n,,,"The Chief Diversity Officer is responsible for the following:
+- Creating a strategy for recruitment of diverse and underrepresented candidates. 
+- Developing, managing, and supporting data-based diversity and inclusion strategies
+- Spearheading or supporting negotiations with foreign business counterparts
+- Identifying new programs or initiatives that can bolster diversity within the organization
+- Overseeing employee complaints related to discrimination and harassment
+- Raising funds for operating and strategic initiatives
+- Supporting strategic collaboration between departments and executive and leadership teams
+- Addressing employee demonstrations and responding to staff needs
+- Developing or supporting change and culture management initiatives
+- Addressing issues facing specific demographic populations","The Chief Diversity Officer is responsible for the following:- Creating a strategy for recruitment of diverse and underrepresented candidates. - Developing, managing, and supporting data-based diversity and inclusion strategies- Spearheading or supporting negotiations with foreign business counterparts- Identifying new programs or initiatives that can bolster diversity within the organization- Overseeing employee complaints related to discrimination and harassment- Raising funds for operating and strategic initiatives- Supporting strategic collaboration between departments and executive and leadership teams- Addressing employee demonstrations and responding to staff needs- Developing or supporting change and culture management initiatives- Addressing issues facing specific demographic populations",,,,Executive_Management,,
