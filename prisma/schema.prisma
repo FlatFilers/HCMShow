@@ -78,6 +78,7 @@ model Employee {
   endEmploymentDate DateTime?
   jobFamilyId String @db.Uuid
   jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])
+  jobs EmployeesJobs[]
   positionTitle String
   businessTitle String?
   locationId String @db.Uuid
@@ -141,6 +142,19 @@ model EmployeeTypeCountry {
   @@id([employeeTypeId, countryId])
 }
 
+model EmployeesJobs {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  employeeId String @db.Uuid
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  jobId String @db.Uuid
+  job Job @relation(fields: [jobId], references: [id])
+
+  @@id([employeeId, jobId])
+}
+
 model Country {
   id String @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now())
@@ -189,6 +203,7 @@ model HireReason {
   employees Employee[]
 }
 
+
 model JobFamily {
   id String @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now())
@@ -200,7 +215,30 @@ model JobFamily {
   summary String?
   isInactive Boolean
 
+  jobs Job[]
   employees Employee[]
+}
+
+model Job {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+  slug String @unique
+  effectiveDate DateTime
+  isInactive Boolean
+  includeJobCodeInName Boolean?
+  title String?
+  summary String
+  description String
+  additionalDescription String?
+  workShift Boolean?
+  jobPublic Boolean
+
+  jobFamilyId String? @db.Uuid
+  jobFamily JobFamily? @relation(fields: [jobFamilyId], references: [id])
+  employees EmployeesJobs[]
 }
 
 // WIP 
