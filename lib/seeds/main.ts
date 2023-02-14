@@ -125,49 +125,80 @@ const upsertJobFamilies = async () => {
 
 const upsertJobs = async () => {
   // [ 'ID', 'Profile Name', 'Job Code', 'Effective Date', 'Inactive', 'Include Job Code In Name', 'Title', 'Summary', 'Description', 'Additional Description', 'Work Shift Required', 'Is Job Public', 'Job Family']
-  const jobFamilyId = ((await prismaClient.jobFamily.findFirst()) as JobFamily)
-    .id;
-  const parseCsv: Promise<Omit<Job, "id" | "createdAt" | "updatedAt">[]> =
-    new Promise((resolve, reject) => {
-      const data: Omit<Job, "id" | "createdAt" | "updatedAt">[] = [];
+  // const jobFamilyId = ((await prismaClient.jobFamily.findFirst()) as JobFamily)
+  //   .id;
+  type CsvJobType = Omit<Job, "id" | "createdAt" | "updatedAt">;
+  const parseCsv: Promise<CsvJobType[]> = new Promise((resolve, reject) => {
+    const data: CsvJobType[] = [];
 
-      fs.createReadStream("./lib/seeds/data/seed_jobs.csv")
-        .pipe(parse({ skipRows: 1 }))
-        .on("error", reject)
-        .on("data", (row: any) => {
-          data.push({
-            slug: row[0],
-            name: row[1],
-            effectiveDate: DateTime.fromFormat(row[2], "M/d/yyyy").toJSDate(),
-            isInactive: row[3] !== "y",
-            includeJobCodeInName: row[4] === "" ? null : row[4] === "y",
-            title: row[5],
-            summary: row[6],
-            description: row[7],
-            additionalDescription: row[8],
-            workShift: row[9] === "" ? null : row[9] === "y",
-            jobPublic: row[10] === "y",
-            jobFamilyId,
-          });
-        })
-        .on("end", () => {
-          resolve(data);
+    fs.createReadStream("./lib/seeds/data/seed_jobs.csv")
+      .pipe(parse({ skipRows: 1 }))
+      .on("error", reject)
+      .on("data", (row: any) => {
+        data.push({
+          slug: row[0],
+          name: row[1],
+          effectiveDate: DateTime.fromFormat(row[2], "M/d/yyyy").toJSDate(),
+          isInactive: row[3] !== "y",
+          includeJobCodeInName: row[4] === "" ? null : row[4] === "y",
+          title: row[5],
+          summary: row[6],
+          description: row[7],
+          additionalDescription: row[8],
+          workShift: row[9] === "" ? null : row[9] === "y",
+          jobPublic: row[10] === "y",
+          jobFamilyId: row[11],
         });
-    });
+      })
+      .on("end", () => {
+        resolve(data);
+      });
+  });
 
   const csvData = await Promise.resolve(parseCsv);
 
-  const promises = csvData.map(async (data) => {
-    const job: Job = await prismaClient.job.upsert({
-      where: {
-        slug: data.slug,
-      },
-      create: data,
-      update: {},
-    });
-  });
+  const dataWithJobFamilyId = await Promise.all(
+    csvData.map(async (data) => {
+      const { jobFamilyId, ...rest } = data;
 
-  await Promise.all(promises);
+      let mappedData: Omit<CsvJobType, "jobFamilyId"> & {
+        jobFamily?: any;
+      } = {
+        ...rest,
+      };
+
+      const jobFamily = (await prismaClient.jobFamily.findUnique({
+        where: {
+          slug: data.jobFamilyId,
+        },
+      })) as JobFamily;
+
+      mappedData = {
+        ...mappedData,
+        jobFamily: {
+          connect: {
+            id: jobFamily.id,
+          },
+        },
+      };
+
+      return {
+        ...mappedData,
+      };
+    })
+  );
+
+  await Promise.all(
+    dataWithJobFamilyId.map(async (data) => {
+      await prismaClient.job.upsert({
+        where: {
+          slug: data.slug,
+        },
+        create: data,
+        update: {},
+      });
+    })
+  );
 };
 
 const upsertTitleTypes = async () => {
