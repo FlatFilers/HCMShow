@@ -1,19 +1,5 @@
 import { GetServerSideProps, NextPage } from "next";
-import { Prisma, PrismaClient } from "@prisma/client";
-
-type Job = {
-  id: string;
-  name: string;
-  effectiveDate: Date | null;
-  isInactive: boolean | null;
-  includeJobCodeInName: boolean | null;
-  title: string | null;
-  summary: string | null;
-  description: string | null;
-  additionalDescription: string | null;
-  workShift: boolean | null;
-  jobPublic: boolean;
-};
+import { Job, Prisma, PrismaClient } from "@prisma/client";
 
 interface Props {
   job: Job;
@@ -21,9 +7,9 @@ interface Props {
 
 const Jobs: NextPage<Props> = ({ job }) => {
   return (
-    <div className="h-screen w-fit mr-8">
-      <div className="max-h-[93%] overflow-auto bg-white shadow sm:rounded-lg">
-        <div className="px-4 py-5 sm:px-6 sticky inset-0 bg-white border-b border-gray-200">
+    <div className="h-screen overflow-auto">
+      <div className="w-fit mr-8 mb-16 bg-white shadow sm:rounded-lg border border-gray-200">
+        <div className="px-4 py-5 sm:px-6 bg-white border-b border-gray-200 rounded-lg">
           <h3 className="text-lg font-medium leading-6 text-gray-900">
             Job Information
           </h3>

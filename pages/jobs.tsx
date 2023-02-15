@@ -1,21 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Job, Prisma, PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { getToken } from "next-auth/jwt";
-
-type Job = {
-  id: string;
-  name: string;
-  effectiveDate: Date | null;
-  isInactive: boolean | null;
-  includeJobCodeInName: boolean | null;
-  title: string | null;
-  summary: string | null;
-  description: string | null;
-  additionalDescription: string | null;
-  workShift: boolean | null;
-  jobPublic: boolean;
-};
 
 interface Props {
   jobs: Job[];
