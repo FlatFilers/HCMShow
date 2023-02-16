@@ -77,7 +77,7 @@ const SidebarLayout = ({ children }: Props) => {
   }
 
   return (
-    <div className="h-screen w-screen bg-white overflow-hidden">
+    <div className="h-screen w-screen bg-white">
       <Toaster />
 
       <MobileSidebar

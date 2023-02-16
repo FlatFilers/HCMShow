@@ -25,8 +25,7 @@ export default function MyApp(props: AppPropsWithLayout) {
 
   return getLayout(
     <SessionProvider session={session}>
-        <Component {...pageProps} />
+      <Component {...pageProps} />
     </SessionProvider>
   );
-
 }
