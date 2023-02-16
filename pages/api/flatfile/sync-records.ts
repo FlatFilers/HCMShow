@@ -4,7 +4,6 @@ import {
   AdditionalJobClassification,
   EmployeeType,
   HireReason,
-  JobFamily,
   Location,
   PayRate,
   PositionTime,
@@ -42,7 +41,9 @@ export default async function handler(
   const records = await getRecords(token.sub, accessToken);
 
   if (records.length === 0) {
-    res.redirect("/workbook-upload?flash=error&message=No Records Found. Did you upload the sample data in Flatfile?");
+    res.redirect(
+      "/workbook-upload?flash=error&message=No Records Found. Did you upload the sample data in Flatfile?"
+    );
     return;
   }
 
@@ -84,21 +85,6 @@ export default async function handler(
       const hireReasonId = (
         (await prismaClient.hireReason.findFirst()) as HireReason
       ).id;
-
-      let jobFamilyId: string;
-
-      // TODO: Remove once all the job families are in the DB
-      try {
-        jobFamilyId = (
-          (await prismaClient.jobFamily.findUnique({
-            where: { slug: r.values.jobCode.value as string },
-          })) as JobFamily
-        ).id;
-      } catch (error) {
-        jobFamilyId = (
-          (await prismaClient.jobFamily.findFirst({})) as JobFamily
-        ).id;
-      }
 
       // TODO: Missing locations in base data
       let locationId;
@@ -156,7 +142,6 @@ export default async function handler(
         positionTitle: r.values.positionTitle.value as string,
         businessTitle: r.values.businessTitle.value as string,
         locationId,
-        jobFamilyId,
         employeeTypeId,
         positionTimeId,
         defaultWeeklyHours: r.values.defaultWeeklyHours.value as number,
