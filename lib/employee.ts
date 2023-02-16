@@ -21,7 +21,6 @@ export const upsertEmployee = async ({
   locationId,
   workspaceId,
   managerId,
-  jobFamilyId,
   positionTimeId,
   defaultWeeklyHours,
   scheduledWeeklyHours,
@@ -47,7 +46,6 @@ export const upsertEmployee = async ({
   locationId: string;
   workspaceId?: string;
   managerId?: string;
-  jobFamilyId: string;
   positionTimeId: string;
   defaultWeeklyHours: number;
   scheduledWeeklyHours: number;
@@ -76,7 +74,6 @@ export const upsertEmployee = async ({
       employeeTypeId,
       hireDate,
       endEmploymentDate,
-      jobFamilyId,
       positionTitle,
       businessTitle,
       locationId,
