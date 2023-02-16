@@ -20,7 +20,7 @@ const Jobs: NextPage<Props> = ({ jobs }) => {
           </p>
         </div>
       </div>
-      <div className="my-8 w-10/12 h-5/6 overflow-auto">
+      <div className="my-8 w-10/12 h-5/6">
         <div className="border border-gray-100 rounded-l-lg">
           <table className="h-full w-full">
             <thead className="bg-gray-50 sticky inset-0 w-full h-20">
@@ -72,7 +72,7 @@ const Jobs: NextPage<Props> = ({ jobs }) => {
             <tbody className="divide-y divide-gray-200 bg-white w-full">
               {jobs.map((job) => (
                 <tr key={job.id}>
-                  <td className="text-blue-600 underline whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">
+                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">
                     <Link href={`/jobs/${job.id}`}>{job.name}</Link>
                   </td>
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
