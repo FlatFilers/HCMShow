@@ -756,8 +756,6 @@ const upsertEmployees = async (organizationId: string) => {
   const endEmploymentDate = null;
   const positionTitle = "Sales Rep";
   const businessTitle = "Sales Rep";
-  const jobFamilyId = ((await prismaClient.jobFamily.findFirst()) as JobFamily)
-    .id;
   const locationId = ((await prismaClient.location.findFirst()) as Location).id;
   const workspaceId = (
     (await prismaClient.location.findFirst({
@@ -796,7 +794,6 @@ const upsertEmployees = async (organizationId: string) => {
     locationId,
     workspaceId,
     employeeTypeId,
-    jobFamilyId,
     positionTimeId,
     defaultWeeklyHours,
     scheduledWeeklyHours,

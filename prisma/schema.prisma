@@ -76,8 +76,6 @@ model Employee {
   hireReason HireReason @relation(fields: [hireReasonId], references: [id])
   hireDate DateTime
   endEmploymentDate DateTime?
-  jobFamilyId String @db.Uuid
-  jobFamily JobFamily @relation(fields: [jobFamilyId], references: [id])
   jobs EmployeesJobs[]
   positionTitle String
   businessTitle String?
@@ -216,7 +214,6 @@ model JobFamily {
   isInactive Boolean
 
   jobs Job[]
-  employees Employee[]
 }
 
 model Job {
