@@ -2,6 +2,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { Job, Prisma, PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { getToken } from "next-auth/jwt";
+import { DateTime } from "luxon";
 
 interface Props {
   jobs: Job[];
@@ -34,7 +35,7 @@ const Jobs: NextPage<Props> = ({ jobs }) => {
                   scope="col"
                   className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                 >
-                  Start Date
+                  Effective Date
                 </th>
                 <th
                   scope="col"
@@ -75,7 +76,13 @@ const Jobs: NextPage<Props> = ({ jobs }) => {
                     <Link href={`/jobs/${job.id}`}>{job.name}</Link>
                   </td>
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {<div>{job.effectiveDate?.toLocaleString()}</div>}
+                    {
+                      <div>
+                        {DateTime.fromJSDate(job.effectiveDate).toFormat(
+                          "MM/dd/yyyy"
+                        )}
+                      </div>
+                    }
                   </td>
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     {job.summary ? job.summary?.slice(0, 40) + "..." : ""}
