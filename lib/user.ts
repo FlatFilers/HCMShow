@@ -50,8 +50,6 @@ export const setupNewAccount = async (
 ) => {
   const user = await createUser(email, plaintextPassword);
 
-  await seedNewAccount(user);
-
   return user;
 };
 

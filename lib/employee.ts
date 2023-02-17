@@ -37,7 +37,7 @@ export const upsertEmployee = async ({
   socialSuffixId?: string;
   hireReasonId: string;
   firstName: string;
-  middleName: string;
+  middleName?: string;
   lastName: string;
   hireDate: Date;
   endEmploymentDate: Date | null;
