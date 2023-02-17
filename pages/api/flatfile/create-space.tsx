@@ -85,13 +85,27 @@ export default async function handler(
 
   const basePathUrl = `${process.env.BASEPATH_URL}/workbook-upload`;
   const initialDocumentBody = `<div> 
-                                <h1>Let's import your data.</h1> 
-                                <ol style="padding-left: 16px;">
-                                  <li style="margin-bottom: 8px;">First, start by clicking "Files" in the left-hand sidebar and uploading the sample data you downloaded previously.</li>
-                                  <li style="margin-bottom: 8px;">After uploading the sample data, you can view the resulting records by clicking on the sheet name in the left-hand sidebar.</li>
-                                  <li style="margin-bottom: 8px;">When you're ready, <a href="${basePathUrl}" style="text-decoration: underline;">click here to return to HCM.show</a> to sync these records back into HCM.show.</li>
-                                </ol>
-                              </div>`;
+  <h1 style="margin-bottom: 0px;">Welcome! Let's import your data.</h1>
+  <p style="margin-top: 0px; margin-bottom: 12px;">Follow the steps below in order. Note: you can always return to this page by clicking "Welcome" in the left-hand sidebar.</p>
+  <h2 style="margin-bottom: 0px;">1. Visit Files</h2>
+  <p style="margin-top: 0px; margin-bottom: 8px;">Click "Files" in the left-hand sidebar. This is where you can upload files you want to import into Flatfile.</p>
+  <h2 style="margin-bottom: 0px;">2. Upload the sample data</h2>
+  <p style="margin-top: 0px; margin-bottom: 8px;">On the Files page, click "Add files" or drag-and-drop the sample data you downloaded previously onto the page.</p>
+  <p style="margin-top: 0px; margin-bottom: 8px;">After the file uploads, click "Import" and follow the steps to completion to import the workbook.</p>
+  <h2 style="margin-bottom: 0px;">3. Return to HCM.show</h2>
+  <p style="margin-top: 0px; margin-bottom: 12px;">After uploading and importing the sample data, click the button below to return to HCM.show and click "Sync Records" to sync the data back into HCM.show.</p>
+  <a 
+    class="return-button"
+    style="
+      padding: 8px 12px;
+      border-radius: 4px;
+      border: 1px solid #4c48ef;
+      text-decoration: none;
+      background-color: white;
+      color: #4c48ef;
+      display: inline-block;"
+    href="${basePathUrl}">Return to HCM.show</a>
+</div>`;
 
   const addDocumentToSpaceResponse = await addDocumentToSpace(
     "Welcome",
