@@ -96,7 +96,9 @@ export default async function handler(
         ).id;
       } catch (error) {
         console.error(
-          "Error - location slug not found:",
+          "Error - record ID:",
+          r.id,
+          ", location slug not found:",
           r.values.location.value
         );
 
@@ -115,10 +117,17 @@ export default async function handler(
       try {
         payRateId = (
           (await prismaClient.payRate.findUnique({
-            where: { slug: r.values.payRate.value as string },
+            where: { slug: r.values.payRateType.value as string },
           })) as PayRate
         ).id;
       } catch (error) {
+        console.error(
+          "Error - record ID:",
+          r.id,
+          ", pay rate not found:",
+          r.values.payRateType.value
+        );
+
         payRateId = ((await prismaClient.payRate.findFirst()) as PayRate).id;
       }
 
@@ -127,7 +136,6 @@ export default async function handler(
         employeeId: r.values.employeeId.value as string,
         hireReasonId,
         firstName: r.values.firstName.value as string,
-        middleName: r.values.middleName.value as string,
         lastName: r.values.lastName.value as string,
         hireDate: DateTime.fromFormat(
           r.values.hireDate.value as string,
@@ -151,6 +159,10 @@ export default async function handler(
         addresses,
         flatfileRecordId: r.id,
       };
+
+      if (values.middleName.value) {
+        data = { ...data, middleName: values.middleName.value as string };
+      }
 
       if (values.title.value) {
         const titleId = (
@@ -177,15 +189,22 @@ export default async function handler(
       }
 
       if (r.values.additionalJobClassification.value) {
-        const additionalJobClassificationId = (
-          (await prismaClient.additionalJobClassification.findUnique({
-            where: {
-              slug: r.values.additionalJobClassification.value as string,
-            },
-          })) as AdditionalJobClassification
-        ).id;
+        try {
+          const additionalJobClassificationId = (
+            (await prismaClient.additionalJobClassification.findUnique({
+              where: {
+                slug: r.values.additionalJobClassification.value as string,
+              },
+            })) as AdditionalJobClassification
+          ).id;
 
-        data = { ...data, additionalJobClassificationId };
+          data = { ...data, additionalJobClassificationId };
+        } catch (error) {
+          console.error(
+            "Error - additionalJobClassification slug not found:",
+            r.values.additionalJobClassification.value
+          );
+        }
       }
 
       if (r.values.workspace.value) {
@@ -210,16 +229,22 @@ export default async function handler(
         r.values.managerId.value &&
         (r.values.managerId.value as string).length > 0
       ) {
-        // Does the manager record already exist?
-        let manager = await prismaClient.employee.findUnique({
-          where: {
-            employeeId: r.values.managerId.value as string,
-          },
-        });
+        try {
+          // Does the manager record already exist?
+          let manager = await prismaClient.employee.findUnique({
+            where: {
+              employeeId: r.values.managerId.value as string,
+            },
+          });
 
-        // TODO: What if we sync the manager after the employee? Sort first?
-        if (manager) {
-          data = { ...data, managerId: manager.id };
+          if (manager) {
+            data = { ...data, managerId: manager.id };
+          }
+        } catch (error) {
+          console.error(
+            "Error - managerId not found:",
+            r.values.managerId.value
+          );
         }
       }
 
