@@ -60,7 +60,7 @@ model Employee {
   manager Employee? @relation("Manager", fields: [managerId], references: [id])
 
   // FF fields
-  employeeId String @unique
+  employeeId String 
   countryId String? @db.Uuid
   country Country? @relation(fields: [countryId], references: [id])
   titleId String? @db.Uuid
@@ -108,6 +108,7 @@ model Employee {
   organizationId String @db.Uuid
   organization Organization @relation(fields: [organizationId], references: [id])
 
+  @@unique([organizationId, employeeId])
 }
 
 model EmployeeType {
