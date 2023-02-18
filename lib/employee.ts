@@ -57,7 +57,10 @@ export const upsertEmployee = async ({
 }) => {
   const employee = await prismaClient.employee.upsert({
     where: {
-      employeeId,
+      organizationId_employeeId: {
+        organizationId,
+        employeeId,
+      },
     },
     create: {
       employeeId: employeeId,
@@ -92,7 +95,10 @@ export const upsertEmployee = async ({
 
   await prismaClient.employee.update({
     where: {
-      employeeId,
+      organizationId_employeeId: {
+        organizationId,
+        employeeId,
+      },
     },
     data: {
       addresses: {
