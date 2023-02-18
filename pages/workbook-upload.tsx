@@ -71,6 +71,17 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
 
   const [steps, setSteps] = useState<Step[]>(initialSteps);
 
+  const storageKey = "has-downloaded-sample-data";
+
+  useEffect(() => {
+    if (!space && localStorage.getItem(storageKey) === "true") {
+      setSteps([
+        { ...steps[0], status: "complete" },
+        { ...steps[1], status: "current" },
+      ]);
+    }
+  }, []);
+
   return (
     <div className="ml-12 flex flex-row justify-between max-w-5xl mt-16">
       {!space && (
@@ -89,6 +100,8 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
                   download={sampleDataFileName}
                   href={sampleDataFileName}
                   onClick={() => {
+                    localStorage.setItem(storageKey, "true");
+
                     // set steps but change the status of the current step
                     setSteps([
                       { ...steps[0], status: "complete" },
