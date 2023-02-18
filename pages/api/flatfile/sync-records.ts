@@ -233,7 +233,10 @@ export default async function handler(
           // Does the manager record already exist?
           let manager = await prismaClient.employee.findUnique({
             where: {
-              employeeId: r.values.managerId.value as string,
+              organizationId_employeeId: {
+                organizationId: token.organizationId,
+                employeeId: r.values.managerId.value as string,
+              },
             },
           });
 
