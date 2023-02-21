@@ -13,7 +13,7 @@ import {
 } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { getAccessToken, getRecords } from "../../../lib/flatfile";
-import { upsertEmployee, validRecords } from "../../../lib/employee";
+import { upsertEmployee, validEmployeeRecords } from "../../../lib/employee";
 import { ActionType, createAction } from "../../../lib/action";
 import { inspect } from "util";
 import { prismaClient } from "../../../lib/prisma-client";
@@ -53,11 +53,12 @@ export default async function handler(
     return;
   }
 
-  const valids = await validRecords(records);
+  const validEmployees = await validEmployeeRecords(records);
 
-  console.log("Valid records to sync", valids.length);
+  console.log("Valid records to sync", validEmployees.length);
 
-  const validsManagersFirst = valids.sort((a, b) => {
+  // TODO: Refactor employee logic to its lib file
+  const validsManagersFirst = validEmployees.sort((a, b) => {
     return a.values.managerId.value ? 1 : -1;
   });
 
@@ -71,7 +72,7 @@ export default async function handler(
     take: 2,
   });
 
-  const upserts = validsManagersFirst.map(async (r) => {
+  const upsertEmployees = validsManagersFirst.map(async (r) => {
     try {
       const values = r.values;
       const employeeTypeId = (
@@ -267,18 +268,15 @@ export default async function handler(
     }
   });
 
-  await Promise.all(upserts);
+  await Promise.all(upsertEmployees);
 
-  const validjobs = await validJobRecords(records);
+  const validJobs = await validJobRecords(records);
 
-  console.log("Valid job records to sync", validjobs.length);
+  console.log("Valid job records to sync", validJobs.length);
 
-  const upsertJobs = await upsertJobRecords(validjobs, token);
+  const upsertJobs = await upsertJobRecords(validJobs, token);
 
-  // const message = `Found ${records.length} records. Synced ${
-  //   validEmployees.length + validjobs.length
-  // } records.`;
-  const message = `Found ${records.length} records. Synced ${validjobs.length} records.`;
+  const message = `Found ${records.length} total records. Synced ${validEmployees.length} Employee records.  Synced ${validJobs.length} Job records.`;
 
   await createAction({
     userId: token.sub,

@@ -120,9 +120,17 @@ export const getRecords = async (
 
   // console.log("w, s", workbookId, sheetIds);
 
-  const records = await mergeRecords(space, workbookId, sheetIds, headers);
+  let [employeeSheetId, jobSheetId] = sheetIds;
 
-  return records.flat();
+  const employeeRecords = await mergeRecords(
+    space,
+    workbookId,
+    employeeSheetId,
+    headers
+  );
+  const jobRecords = await mergeRecords(space, workbookId, jobSheetId, headers);
+
+  return [employeeRecords, jobRecords].flat();
 };
 
 const getWorkbookIdAndSheetIds = async (
@@ -160,33 +168,29 @@ const getWorkbookIdAndSheetIds = async (
 const mergeRecords = async (
   space: Space,
   workbookId: string,
-  sheetIds: string[],
+  sheetId: string,
   headers: Headers
 ): Promise<Record[]> => {
-  const recordsResponse = sheetIds.map(async (sheetId: string) => {
-    const response = await fetch(
-      `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records`,
-      {
-        method: "GET",
-        headers: headers,
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(
-        `Error getting records for spaceId: ${space.id}, flatfileSpaceId: ${
-          (space.flatfileData as unknown as FlatfileSpaceData).id
-        }, flatfile workbookId: ${workbookId}`
-      );
+  const response = await fetch(
+    `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records`,
+    {
+      method: "GET",
+      headers: headers,
     }
+  );
 
-    const recordsResult = await response.json();
-    // console.log("rr", recordsResult.data.records);
+  if (!response.ok) {
+    throw new Error(
+      `Error getting records for spaceId: ${space.id}, flatfileSpaceId: ${
+        (space.flatfileData as unknown as FlatfileSpaceData).id
+      }, flatfile workbookId: ${workbookId}`
+    );
+  }
 
-    return recordsResult.data.records;
-  });
+  const recordsResult = await response.json();
+  // console.log("rr", recordsResult.data.records);
 
-  return await Promise.all(recordsResponse);
+  return await Promise.all(recordsResult.data.records);
 };
 
 export const createSpace = async (accessToken: string) => {

@@ -122,7 +122,7 @@ export const upsertEmployee = async ({
   return employee;
 };
 
-export const validRecords = async (records: Record[]) => {
+export const validEmployeeRecords = async (records: Record[]) => {
   // Find required fields
   const result: { column_name: string }[] = await prismaClient.$queryRaw`
     SELECT column_name 
