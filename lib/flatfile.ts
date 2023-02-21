@@ -118,7 +118,7 @@ export const getRecords = async (
     headers
   );
 
-  console.log("w, s", workbookId, sheetIds);
+  // console.log("w, s", workbookId, sheetIds);
 
   const records = await mergeRecords(space, workbookId, sheetIds, headers);
 
@@ -142,9 +142,7 @@ const getWorkbookIdAndSheetIds = async (
   const result = await response.json();
 
   // TODO: Assuming just 1 workbook for this demo (but multiple sheets).
-  // console.log("wb", result["data"][0]["id"]);
   // console.log("sheets", result["data"][0]["sheets"]);
-  console.log("datas", result["data"][0]["sheets"]);
 
   let sheetIds = ["Employees", "Jobs"].map(
     (sheetName) =>
