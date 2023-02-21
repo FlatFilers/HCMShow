@@ -51,6 +51,11 @@ export interface FlatfileSpaceData {
   ];
 }
 
+type Headers = {
+  Authorization: string;
+  "Content-Type": string;
+};
+
 const BASE_PATH = "https://api.x.flatfile.com/v1";
 
 export async function getAccessToken() {
@@ -115,17 +120,19 @@ export const getRecords = async (
 
   console.log("w, s", workbookId, sheetIds);
 
-  const mergeRecords = getMergeRecords(space, headers, workbookId, sheetIds);
+  const records = await mergeRecords(space, workbookId, sheetIds, headers);
 
-  console.log("mergeRecords", mergeRecords);
+  await Promise.all(records);
+  // console.log("recordsResponse", recordsResponse);
+  console.log("records123", records);
 
-  return mergeRecords;
+  return records;
 };
 
 const getWorkbookIdAndSheetIds = async (
   flatfileSpaceId: string,
   headers: any
-): Promise<{ workbookId: string; sheetIds: any }> => {
+): Promise<{ workbookId: string; sheetIds: string[] }> => {
   const response = await fetch(
     `${BASE_PATH}/workbooks?spaceId=${flatfileSpaceId}`,
     {
@@ -139,6 +146,7 @@ const getWorkbookIdAndSheetIds = async (
   const result = await response.json();
 
   // TODO: Assuming just 1 workbook for this demo (but multiple sheets).
+  // console.log("wb", result["data"][0]["id"]);
   // console.log("sheets", result["data"][0]["sheets"]);
 
   let sheetIds = ["Employees", "Jobs"].map(
@@ -154,14 +162,13 @@ const getWorkbookIdAndSheetIds = async (
   };
 };
 
-const getMergeRecords = (
+const mergeRecords = async (
   space: Space,
-  headers: Headers,
   workbookId: string,
-  sheetIds: string[]
+  sheetIds: string[],
+  headers: Headers
 ) => {
-  let records: Record[] = [];
-  sheetIds.forEach(async (sheetId: any) => {
+  const recordsResponse = sheetIds.map(async (sheetId: string) => {
     const response = await fetch(
       `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records`,
       {
@@ -169,6 +176,7 @@ const getMergeRecords = (
         headers: headers,
       }
     );
+    await Promise.all([response]);
 
     if (!response.ok) {
       throw new Error(
@@ -179,12 +187,14 @@ const getMergeRecords = (
     }
 
     const recordsResult = await response.json();
-    console.log("rr", recordsResult.data.records);
+    // console.log("rr", recordsResult.data.records);
 
-    await recordsResult.data.records.forEach((record: Record) => {
-      records.push(record);
-    });
+    return recordsResult.data.records;
   });
+  await Promise.all([recordsResponse]);
+
+  console.log("recordsResponse", recordsResponse);
+  return recordsResponse;
 };
 
 export const createSpace = async (accessToken: string) => {
