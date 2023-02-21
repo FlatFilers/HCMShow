@@ -20,7 +20,6 @@ export interface Field {
 }
 
 export interface Record {
-  push(returnArr: Record[]): unknown;
   id: string;
   values: {
     [key: string]: Field;
@@ -184,7 +183,7 @@ const mergeRecords = async (
     }
 
     const recordsResult = await response.json();
-    console.log("rr", recordsResult.data.records);
+    // console.log("rr", recordsResult.data.records);
 
     return recordsResult.data.records;
   });
