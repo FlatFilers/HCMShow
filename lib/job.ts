@@ -100,20 +100,6 @@ export const validJobRecords = async (records: Record[]) => {
 };
 
 export const upsertJobRecords = async (validJobs: Record[], token: JWT) => {
-  // const validsManagersFirst = validJobs.sort((a, b) => {
-  //   return a.values.managerId.value ? 1 : -1;
-  // });
-
-  // // TODO - hacking this in to get seeds working then do this
-  // const workerCompensationCodeId = (
-  //   (await prismaClient.workerCompensationCode.findFirst(
-  //     {}
-  //   )) as WorkerCompensationCode
-  // ).id;
-  // const addresses = await prismaClient.address.findMany({
-  //   take: 2,
-  // });
-
   const upserts = validJobs.map(async (r) => {
     try {
       let jobFamilyId;
