@@ -123,10 +123,7 @@ export const getRecords = async (
 
   const records = await mergeRecords(space, workbookId, sheetIds, headers);
 
-  // console.log("recordsResponse", recordsResponse);
-  console.log("records123", records);
-
-  return records.flatten();
+  return records.flat();
 };
 
 const getWorkbookIdAndSheetIds = async (
@@ -168,7 +165,7 @@ const mergeRecords = async (
   workbookId: string,
   sheetIds: string[],
   headers: Headers
-) => {
+): Promise<Record[]> => {
   const recordsResponse = sheetIds.map(async (sheetId: string) => {
     const response = await fetch(
       `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records`,
@@ -177,10 +174,6 @@ const mergeRecords = async (
         headers: headers,
       }
     );
-    // console.log("space", space);
-    // console.log("workbookId", workbookId);
-    // console.log("sheetIds", sheetIds);
-    // console.log("response", response);
 
     if (!response.ok) {
       throw new Error(
