@@ -19,6 +19,7 @@ import { inspect } from "util";
 import { prismaClient } from "../../../lib/prisma-client";
 import { DateTime } from "luxon";
 import { SpaceType } from "../../../lib/space";
+import { upsertJobRecords, validJobRecords } from "../../../lib/job";
 
 type Data = {
   message?: string;
@@ -268,7 +269,16 @@ export default async function handler(
 
   await Promise.all(upserts);
 
-  const message = `Found ${records.length} records. Synced ${valids.length} Employee records.`;
+  const validjobs = await validJobRecords(records);
+
+  console.log("Valid job records to sync", validjobs.length);
+
+  const upsertJobs = await upsertJobRecords(validjobs, token);
+
+  // const message = `Found ${records.length} records. Synced ${
+  //   validEmployees.length + validjobs.length
+  // } records.`;
+  const message = `Found ${records.length} records. Synced ${validjobs.length} records.`;
 
   await createAction({
     userId: token.sub,

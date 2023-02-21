@@ -108,44 +108,24 @@ export const getRecords = async (
     "Content-Type": "application/json",
   };
 
-  const { workbookId, sheetId } = await getWorkbookIdAndSheetId(
+  const { workbookId, sheetIds } = await getWorkbookIdAndSheetIds(
     (space.flatfileData as unknown as FlatfileSpaceData).id,
     headers
   );
 
-  // console.log("w, s", workbookId, sheetId);
+  console.log("w, s", workbookId, sheetIds);
 
-  const recordsResponse = await fetch(
-    // TODO: eventually use valid filter here
-    // `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records?filter=valid`,
-    `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records`,
-    {
-      method: "GET",
-      headers: headers,
-    }
-  );
+  const mergeRecords = getMergeRecords(space, headers, workbookId, sheetIds);
 
-  // console.log("recordsResponse", recordsResponse);
+  console.log("mergeRecords", mergeRecords);
 
-  if (!recordsResponse.ok) {
-    throw new Error(
-      `Error getting records for spaceId: ${space.id}, flatfileSpaceId: ${
-        (space.flatfileData as unknown as FlatfileSpaceData).id
-      }, flatfile workbookId: ${workbookId}, flatfile sheetId: ${sheetId}`
-    );
-  }
-
-  const recordsResult = await recordsResponse.json();
-
-  // console.log("recordsResult", recordsResult);
-
-  return recordsResult.data.records;
+  return mergeRecords;
 };
 
-const getWorkbookIdAndSheetId = async (
+const getWorkbookIdAndSheetIds = async (
   flatfileSpaceId: string,
   headers: any
-): Promise<{ workbookId: string; sheetId: string }> => {
+): Promise<{ workbookId: string; sheetIds: any }> => {
   const response = await fetch(
     `${BASE_PATH}/workbooks?spaceId=${flatfileSpaceId}`,
     {
@@ -161,14 +141,50 @@ const getWorkbookIdAndSheetId = async (
   // TODO: Assuming just 1 workbook for this demo (but multiple sheets).
   // console.log("sheets", result["data"][0]["sheets"]);
 
-  const sheetId = result["data"][0]["sheets"].find(
-    (s: { id: string; name: string; config: any }) => s.name === "Employees"
-  ).id;
+  let sheetIds = ["Employees", "Jobs"].map(
+    (sheetName) =>
+      result["data"][0]["sheets"].find(
+        (s: { id: string; name: string; config: any }) => s.name === sheetName
+      ).id
+  );
 
   return {
     workbookId: result["data"][0]["id"],
-    sheetId: sheetId,
+    sheetIds: sheetIds,
   };
+};
+
+const getMergeRecords = (
+  space: Space,
+  headers: Headers,
+  workbookId: string,
+  sheetIds: string[]
+) => {
+  let records: Record[] = [];
+  sheetIds.forEach(async (sheetId: any) => {
+    const response = await fetch(
+      `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records`,
+      {
+        method: "GET",
+        headers: headers,
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Error getting records for spaceId: ${space.id}, flatfileSpaceId: ${
+          (space.flatfileData as unknown as FlatfileSpaceData).id
+        }, flatfile workbookId: ${workbookId}`
+      );
+    }
+
+    const recordsResult = await response.json();
+    console.log("rr", recordsResult.data.records);
+
+    await recordsResult.data.records.forEach((record: Record) => {
+      records.push(record);
+    });
+  });
 };
 
 export const createSpace = async (accessToken: string) => {
