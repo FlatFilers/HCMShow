@@ -20,6 +20,7 @@ export interface Field {
 }
 
 export interface Record {
+  push(returnArr: Record[]): unknown;
   id: string;
   values: {
     [key: string]: Field;
@@ -122,11 +123,10 @@ export const getRecords = async (
 
   const records = await mergeRecords(space, workbookId, sheetIds, headers);
 
-  await Promise.all(records);
   // console.log("recordsResponse", recordsResponse);
   console.log("records123", records);
 
-  return records;
+  return records.flatten();
 };
 
 const getWorkbookIdAndSheetIds = async (
@@ -148,6 +148,7 @@ const getWorkbookIdAndSheetIds = async (
   // TODO: Assuming just 1 workbook for this demo (but multiple sheets).
   // console.log("wb", result["data"][0]["id"]);
   // console.log("sheets", result["data"][0]["sheets"]);
+  console.log("datas", result["data"][0]["sheets"]);
 
   let sheetIds = ["Employees", "Jobs"].map(
     (sheetName) =>
@@ -176,7 +177,10 @@ const mergeRecords = async (
         headers: headers,
       }
     );
-    await Promise.all([response]);
+    // console.log("space", space);
+    // console.log("workbookId", workbookId);
+    // console.log("sheetIds", sheetIds);
+    // console.log("response", response);
 
     if (!response.ok) {
       throw new Error(
@@ -187,14 +191,12 @@ const mergeRecords = async (
     }
 
     const recordsResult = await response.json();
-    // console.log("rr", recordsResult.data.records);
+    console.log("rr", recordsResult.data.records);
 
     return recordsResult.data.records;
   });
-  await Promise.all([recordsResponse]);
 
-  console.log("recordsResponse", recordsResponse);
-  return recordsResponse;
+  return await Promise.all(recordsResponse);
 };
 
 export const createSpace = async (accessToken: string) => {
