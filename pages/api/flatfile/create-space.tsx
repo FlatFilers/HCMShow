@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
+import { useRouter } from "next/router";
 import {
   addDocumentToSpace,
   addGuestToSpace,
@@ -15,6 +16,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const router = useRouter();
   const token = await getToken({
     req: req,
   });
@@ -77,6 +79,7 @@ export default async function handler(
       userId: user.id,
       flatfileData:
         flatfileSpaceDataRefetch as unknown as Prisma.InputJsonValue,
+      type: router.query.spaceType as string,
     },
   });
 

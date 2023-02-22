@@ -125,7 +125,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
                 invite you to it. 👇
               </p>
               <form
-                action="/api/flatfile/create-space"
+                action="/api/flatfile/create-space?spaceType=workbookUpload"
                 onSubmit={handleSubmit}
                 className="mb-8"
               >
