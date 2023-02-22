@@ -44,6 +44,7 @@ model Action {
 
   type String
   description String
+  metadata Json @db.JsonB @default("{}")
 
   userId String @db.Uuid
   user User @relation(fields: [userId], references: [id])

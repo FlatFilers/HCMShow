@@ -118,5 +118,5 @@ export default async function handler(
 
   // console.log("addDocumentToSpaceResponse", addDocumentToSpaceResponse);
 
-  res.redirect("/workbook-upload?message=Setup Flatfile!");
+  res.redirect("/workbook-upload?flash=success&message=Setup Flatfile!");
 }
