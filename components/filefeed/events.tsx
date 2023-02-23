@@ -2,6 +2,8 @@ import { Action } from "@prisma/client";
 import { useState, FormEvent } from "react";
 import toast from "react-hot-toast";
 
+import { Event } from "./event";
+
 type Props = {
   actions: Action[];
 };
@@ -75,25 +77,8 @@ export const Events = ({ actions }: Props) => {
 
               return (
                 <tr key={i}>
-                  <td className="flex flex-row items-center loading-text whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                    {state === "initial" && (
-                      <>
-                        <div className="blob pulse-blob bg-primary"></div>
-                        <span className="">Syncing...</span>
-                      </>
-                    )}
-                    {state === "complete" && (
-                      <>
-                        <div className="blob bg-green-800"></div>
-                        <span className="">Synced</span>
-                      </>
-                    )}
-                    {state === "error" && (
-                      <>
-                        <div className="blob bg-red-800"></div>
-                        <span className="">Error</span>
-                      </>
-                    )}
+                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                    <Event action={a} />
                   </td>
                 </tr>
               );
