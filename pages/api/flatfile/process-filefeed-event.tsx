@@ -9,7 +9,7 @@ import {
   getAccessToken,
   getSpace,
 } from "../../../lib/flatfile";
-import { ActionState, ActionType, createAction } from "../../../lib/action";
+import { ActionType, createAction } from "../../../lib/action";
 
 export default async function handler(
   req: NextApiRequest,
@@ -28,25 +28,22 @@ export default async function handler(
   }
 
   const prisma = new PrismaClient();
-  const user = await prisma.user.findUnique({
+
+  // find and update action from the req body
+  const action = await prisma.action.update({
     where: {
-      id: token.sub,
+      userId: token.sub,
+      id: req.body.actionId,
+    },
+    data: {
+      metadata: {
+        state: "complete",
+        description: "Synced X Records",
+      },
     },
   });
 
-  if (!user) {
-    throw new Error("No user found");
-  }
+  console.log("action", action);
 
-  await createAction({
-    userId: token.sub,
-    organizationId: token.organizationId,
-    type: ActionType.FileFeedEvent,
-    description: "",
-    metadata: {
-      state: ActionState.Initial,
-    },
-  });
-
-  res.redirect(`/file-feed?flash=success&message=New file event found`);
+  res.send({ data: action });
 }

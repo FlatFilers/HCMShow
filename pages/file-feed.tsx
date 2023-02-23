@@ -48,7 +48,7 @@ const FileFeed: NextPage<Props> = ({ space, actions }) => {
   }, []);
 
   return (
-    <div className="ml-12 flex flex-row justify-between max-w-5xl mt-16">
+    <div className="ml-12 flex flex-row justify-between max-w-7xl mt-16">
       {!space && <SetupSpace />}
 
       {space && <Events actions={actions} />}

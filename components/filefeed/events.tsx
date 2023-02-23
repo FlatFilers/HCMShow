@@ -3,6 +3,7 @@ import { useState, FormEvent } from "react";
 import toast from "react-hot-toast";
 
 import { Event } from "./event";
+import { ActionState } from "../../lib/action";
 
 type Props = {
   actions: Action[];
@@ -17,15 +18,8 @@ export const Events = ({ actions }: Props) => {
     setButtonText("Simulating...");
   };
 
-  type Sync = {
-    state: "initial" | "complete" | "error";
-    action?: Action;
-  };
-
-  const [syncs, setSyncs] = useState<Sync[]>([]);
-
   return (
-    <div>
+    <div className="w-full">
       <p className="text-2xl mb-2">Ready and listening for files. 🎉 </p>
 
       <p className="text-gray-600 mb-4 max-w-lg">
@@ -53,39 +47,45 @@ export const Events = ({ actions }: Props) => {
 
       <div className="border-1 border border-gray-100 my-6"></div>
 
-      <div>
-        <table className="min-w-full divide-y divide-gray-300">
-          <thead className="bg-gray-50">
-            <tr>
-              <th
-                scope="col"
-                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-              >
-                Status
-              </th>
-              <th
-                scope="col"
-                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-              >
-                Result
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {actions.map((a, i) => {
-              const state = (a.metadata as { state: string }).state;
+      <table className="min-w-full divide-y divide-gray-300">
+        <thead className="bg-gray-50">
+          <tr>
+            <th
+              scope="col"
+              className="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900"
+            >
+              Status
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3.5 text-left text-sm font-semibold text-gray-900"
+            >
+              Result
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3.5 text-left text-sm font-semibold text-gray-900"
+            >
+              When
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {actions.map((a, i) => {
+            const metadata = a.metadata as {
+              state: string;
+              description: string;
+            };
+            const state = metadata.state;
 
-              return (
-                <tr key={i}>
-                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                    <Event action={a} />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+            return (
+              <tr key={i}>
+                <Event action={a} />
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };

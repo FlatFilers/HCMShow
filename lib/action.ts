@@ -5,6 +5,12 @@ export enum ActionType {
   FileFeedEvent = "file-feed-event",
 }
 
+export enum ActionState {
+  Initial = "initial",
+  Complete = "complete",
+  Error = "error",
+}
+
 export const getActions = async (organizationId: string) => {
   const prisma = new PrismaClient();
   return await prisma.action.findMany({
