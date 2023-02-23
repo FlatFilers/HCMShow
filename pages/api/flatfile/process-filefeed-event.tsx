@@ -1,15 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Prisma, PrismaClient, Space } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
-import {
-  addDocumentToSpace,
-  addGuestToSpace,
-  createSpace,
-  getAccessToken,
-  getSpace,
-} from "../../../lib/flatfile";
-import { ActionType, createAction } from "../../../lib/action";
 
 export default async function handler(
   req: NextApiRequest,
@@ -42,8 +34,6 @@ export default async function handler(
       },
     },
   });
-
-  console.log("action", action);
 
   res.send({ data: action });
 }

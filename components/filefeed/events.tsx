@@ -3,7 +3,6 @@ import { useState, FormEvent } from "react";
 import toast from "react-hot-toast";
 
 import { Event } from "./event";
-import { ActionState } from "../../lib/action";
 
 type Props = {
   actions: Action[];
@@ -52,19 +51,19 @@ export const Events = ({ actions }: Props) => {
           <tr>
             <th
               scope="col"
-              className="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900"
+              className="w-20 py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900"
             >
               Status
             </th>
             <th
               scope="col"
-              className="px-6 py-3.5 text-left text-sm font-semibold text-gray-900"
+              className="w-48 px-6 py-3.5 text-left text-sm font-semibold text-gray-900"
             >
               Result
             </th>
             <th
               scope="col"
-              className="px-6 py-3.5 text-left text-sm font-semibold text-gray-900"
+              className="w-48 px-6 py-3.5 text-left text-sm font-semibold text-gray-900"
             >
               When
             </th>

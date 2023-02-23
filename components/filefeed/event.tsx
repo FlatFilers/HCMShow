@@ -31,10 +31,12 @@ const updateAction = async (action: Action): Promise<Action> => {
     };
   }
 
-  const updatedAction = (await res.json()).data as Action;
-  console.log("updatedAction", updatedAction);
+  const data = (await res.json()).data;
 
-  return updatedAction;
+  return {
+    ...data,
+    createdAt: DateTime.fromISO(data.createdAt).toJSDate(),
+  };
 };
 
 export const Event = ({ action }: Props) => {
@@ -50,9 +52,7 @@ export const Event = ({ action }: Props) => {
     // after 3 seconds, set state to complete
     if (metadata.state === ActionState.Initial) {
       setTimeout(() => {
-        console.log("Syncing action");
         updateAction(action).then((a) => {
-          console.log("resulting action", a);
           setCurrentAction(a);
         });
       }, 5000);
