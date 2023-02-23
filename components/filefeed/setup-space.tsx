@@ -28,7 +28,7 @@ export const SetupSpace = () => {
   ];
 
   return (
-    <>
+    <div className="flex flex-row justify-between max-w-5xl">
       <div>
         <h2 className="text-2xl font-semibold mb-2">
           Let's get ready to listen for file feed uploads.
@@ -106,6 +106,6 @@ export const SetupSpace = () => {
           ))}
         </ol>
       </nav>
-    </>
+    </div>
   );
 };

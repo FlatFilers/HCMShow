@@ -18,7 +18,7 @@ export const Events = ({ actions }: Props) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="max-w-5xl">
       <p className="text-2xl mb-2">Ready and listening for files. 🎉 </p>
 
       <p className="text-gray-600 mb-4 max-w-lg">

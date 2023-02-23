@@ -34,9 +34,6 @@ const FileFeed: NextPage<Props> = ({ space, actions }) => {
       toast.success(router.query.message as string, {
         id: router.query.message as string,
         duration: 4000,
-        style: {
-          minWidth: "450px",
-        },
       });
     } else if (router.query.flash === "error") {
       window.history.replaceState(null, "", "/file-feed");
@@ -48,7 +45,7 @@ const FileFeed: NextPage<Props> = ({ space, actions }) => {
   }, []);
 
   return (
-    <div className="ml-12 flex flex-row justify-between max-w-7xl mt-16">
+    <div className="ml-12 mt-16">
       {!space && <SetupSpace />}
 
       {space && <Events actions={actions} />}

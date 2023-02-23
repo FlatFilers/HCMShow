@@ -19,8 +19,6 @@ const updateAction = async (action: Action): Promise<Action> => {
     },
   });
 
-  console.log("updateAction res", res);
-
   if (!res.ok) {
     return {
       ...action,
