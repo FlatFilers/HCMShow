@@ -23,6 +23,7 @@ const jobSheetMapping = {
 };
 
 export const upsertJob = async ({
+  organizationId,
   slug,
   name,
   effectiveDate,
@@ -36,6 +37,7 @@ export const upsertJob = async ({
   jobPublic,
   jobFamilyId,
 }: {
+  organizationId: string;
   slug: string;
   name: string;
   effectiveDate: Date;
@@ -54,6 +56,7 @@ export const upsertJob = async ({
       slug,
     },
     create: {
+      organizationId,
       slug,
       name,
       effectiveDate,
@@ -131,6 +134,7 @@ export const upsertJobRecords = async (validJobs: Record[], token: JWT) => {
       ).id;
 
       let data: Parameters<typeof upsertJob>[0] = {
+        organizationId: token.organizationId,
         slug: r.values.jobCode.value as string,
         name: r.values.jobName.value as string,
         effectiveDate: new Date(r.values.effectiveDate.value as string),

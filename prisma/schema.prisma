@@ -21,6 +21,7 @@ model Organization {
   users User[]
   employees Employee[]
   actions Action[]
+  jobs Job[]
 }
 
 model User {
@@ -238,6 +239,8 @@ model Job {
 
   jobFamilyId String? @db.Uuid
   jobFamily JobFamily? @relation(fields: [jobFamilyId], references: [id])
+  organizationId String @db.Uuid
+  organization Organization @relation(fields: [organizationId], references: [id])
   employees EmployeesJobs[]
 }
 

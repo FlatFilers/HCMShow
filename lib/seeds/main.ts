@@ -30,7 +30,7 @@ export const main = async () => {
   await upsertLocations();
   await upsertEmployeeTypes();
   await upsertJobFamilies();
-  await upsertJobs();
+
   await upsertHireReasons();
   await upsertTitleTypes();
   await upsertTitles();
@@ -38,10 +38,10 @@ export const main = async () => {
   await upsertPayRates();
   await upsertAdditionalJobClassifications();
   await upsertAddresses();
-
   await createOtherData();
 
   const user = await upsertUser();
+  await upsertJobs(user.organizationId);
 
   await seedNewAccount(user);
 };
@@ -123,11 +123,14 @@ const upsertJobFamilies = async () => {
   await Promise.all(promises);
 };
 
-const upsertJobs = async () => {
+const upsertJobs = async (organizationId: string) => {
   // [ 'ID', 'Profile Name', 'Job Code', 'Effective Date', 'Inactive', 'Include Job Code In Name', 'Title', 'Summary', 'Description', 'Additional Description', 'Work Shift Required', 'Is Job Public', 'Job Family']
   // const jobFamilyId = ((await prismaClient.jobFamily.findFirst()) as JobFamily)
   //   .id;
-  type CsvJobType = Omit<Job, "id" | "createdAt" | "updatedAt">;
+  type CsvJobType = Omit<
+    Job,
+    "id" | "createdAt" | "updatedAt" | "organizationId"
+  >;
   const parseCsv: Promise<CsvJobType[]> = new Promise((resolve, reject) => {
     const data: CsvJobType[] = [];
 
@@ -163,6 +166,7 @@ const upsertJobs = async () => {
 
       let mappedData: Omit<CsvJobType, "jobFamilyId"> & {
         jobFamily?: any;
+        organization?: any;
       } = {
         ...rest,
       };
@@ -181,6 +185,11 @@ const upsertJobs = async () => {
               id: jobFamily.id,
             },
           },
+          organization: {
+            connect: {
+              id: organizationId,
+            },
+          },
         };
       }
 
@@ -192,6 +201,8 @@ const upsertJobs = async () => {
 
   await Promise.all(
     dataWithJobFamilyId.map(async (data) => {
+      console.log("data", data);
+
       await prismaClient.job.upsert({
         where: {
           slug: data.slug,
