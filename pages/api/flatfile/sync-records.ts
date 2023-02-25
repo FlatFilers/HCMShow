@@ -11,7 +11,7 @@ import {
   WorkerCompensationCode,
 } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
-import { getRecords } from "../../../lib/flatfile";
+import { getAccessToken, getRecords } from "../../../lib/flatfile";
 import { upsertEmployee, validRecords } from "../../../lib/employee";
 import { ActionType, createAction } from "../../../lib/action";
 import { prismaClient } from "../../../lib/prisma-client";
