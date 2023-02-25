@@ -166,9 +166,14 @@ const upsertJobs = async (organizationId: string) => {
 
       let mappedData: Omit<CsvJobType, "jobFamilyId"> & {
         jobFamily?: any;
-        organization?: any;
+        organization: any;
       } = {
         ...rest,
+        organization: {
+          connect: {
+            id: organizationId,
+          },
+        },
       };
 
       if (data.jobFamilyId && !data.jobFamilyId.includes("N/A")) {
@@ -185,11 +190,6 @@ const upsertJobs = async (organizationId: string) => {
               id: jobFamily.id,
             },
           },
-          organization: {
-            connect: {
-              id: organizationId,
-            },
-          },
         };
       }
 
@@ -201,8 +201,6 @@ const upsertJobs = async (organizationId: string) => {
 
   await Promise.all(
     dataWithJobFamilyId.map(async (data) => {
-      console.log("data", data);
-
       await prismaClient.job.upsert({
         where: {
           slug: data.slug,

@@ -107,7 +107,7 @@ export const validJobRecords = async (records: Record[]) => {
     WHERE table_name = 'Job'
       AND is_nullable = 'NO'
       AND column_name NOT IN ('createdAt', 'updatedAt', 'slug')
-      AND (column_name = 'name' OR column_name NOT ILIKE '%id')
+      AND column_name NOT ILIKE '%id'
   `;
 
   const requiredFields = result.map((r) => r.column_name);
@@ -131,7 +131,7 @@ export const upsertJobRecords = async (validJobs: Record[], token: JWT) => {
         (await prismaClient.jobFamily.findUnique({
           where: { slug: r.values.jobFamily.value as string },
         })) as JobFamily
-      ).id;
+      )?.id;
 
       let data: Parameters<typeof upsertJob>[0] = {
         organizationId: token.organizationId,
@@ -141,8 +141,14 @@ export const upsertJobRecords = async (validJobs: Record[], token: JWT) => {
         isInactive: r.values.inactive.value === "y",
         includeJobCodeInName: r.values.includeJobCodeInName?.value === "y",
         title: r.values.privateTitle?.value as string,
-        summary: r.values.jobSummary.value as string,
-        description: r.values.jobDescription.value as string,
+        summary:
+          (r.values.jobSummary.value as string) === null
+            ? "N/A"
+            : (r.values.jobSummary.value as string),
+        description:
+          (r.values.jobDescription.value as string) === null
+            ? "N/A"
+            : (r.values.jobDescription.value as string),
         additionalDescription: r.values.additionalJobDescription
           ?.value as string,
         workShift: r.values.workShiftRequired?.value === "y",
