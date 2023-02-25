@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["extendedWhereUnique"]
 }
 
 datasource db {
@@ -44,6 +45,7 @@ model Action {
 
   type String
   description String
+  metadata Json @db.JsonB @default("{}")
 
   userId String @db.Uuid
   user User @relation(fields: [userId], references: [id])
@@ -342,6 +344,8 @@ model Space {
 
   userId String @db.Uuid
   user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, type])
 }
 
 model Title {

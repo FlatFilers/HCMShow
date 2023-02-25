@@ -13,6 +13,7 @@ import {
   ArrowPathIcon,
   ArrowTopRightOnSquareIcon,
 } from "@heroicons/react/24/outline";
+import { SpaceType } from "../lib/space";
 
 interface Props {
   space?: Space;
@@ -71,7 +72,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
 
   const [steps, setSteps] = useState<Step[]>(initialSteps);
 
-  const storageKey = "has-downloaded-sample-data";
+  const storageKey = "workbook-upload-has-downloaded-sample-data";
 
   useEffect(() => {
     if (!space && localStorage.getItem(storageKey) === "true") {
@@ -312,12 +313,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   const prisma = new PrismaClient();
-  const space = await prisma.space.findFirst({
+  const space = await prisma.space.findUnique({
     where: {
-      userId: token.sub,
-    },
-    orderBy: {
-      createdAt: "desc",
+      userId_type: {
+        userId: token.sub as string,
+        type: SpaceType.WorkbookUpload,
+      },
     },
   });
 

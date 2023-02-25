@@ -1,7 +1,14 @@
-import { Action, PrismaClient } from "@prisma/client";
+import { Action, Prisma, PrismaClient } from "@prisma/client";
 
 export enum ActionType {
   SyncRecords = "sync-records",
+  FileFeedEvent = "file-feed-event",
+}
+
+export enum ActionState {
+  Initial = "initial",
+  Complete = "complete",
+  Error = "error",
 }
 
 export const getActions = async (organizationId: string) => {
@@ -23,5 +30,10 @@ export const createAction = async (
   data: Omit<Action, "id" | "createdAt" | "updatedAt">
 ) => {
   const prisma = new PrismaClient();
-  return await prisma.action.create({ data });
+  return await prisma.action.create({
+    data: {
+      ...data,
+      metadata: data.metadata || {},
+    },
+  });
 };

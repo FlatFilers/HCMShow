@@ -8,6 +8,7 @@ import { DateTime } from "luxon";
 const mapActionTypeToLabel = (type: string) => {
   const mappings = {
     [ActionType.SyncRecords]: "Sync Records",
+    [ActionType.FileFeedEvent]: "File Feed Event",
   };
 
   return mappings[type as ActionType];
@@ -83,7 +84,10 @@ const ActivityLog: NextPage<Props> = ({ actions }) => {
                             )}
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {a.description}
+                            {a.type === ActionType.SyncRecords && a.description}
+                            {a.type === ActionType.FileFeedEvent &&
+                              (a.metadata as { description: string })
+                                .description}
                           </td>
                         </tr>
                       );
