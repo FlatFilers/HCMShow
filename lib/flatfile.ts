@@ -9,10 +9,10 @@ import {
   AddSpaceRequest,
 } from "@flatfile/api";
 import { PrismaClient, Space, User, prisma } from "@prisma/client";
+import { Flatfile, FlatfileClient } from "@flatfile/api-beta";
+import { Space as FlatfileSpace } from "@flatfile/api-beta/api/resources/spaces/types/Space";
 import { DateTime } from "luxon";
 import { inspect } from "util";
-
-import { Flatfile, FlatfileClient } from "@flatfile/api-beta";
 
 export interface Field {
   value: string | number | null;
@@ -176,19 +176,12 @@ const getWorkbookIdAndSheetId = async (
   };
 };
 
-export const createSpace = async (accessToken: string) => {
-  // Pre-setup space config ID
-  const spaceConfigId = process.env.ONBOARDING_SPACE_CONFIG_ID;
-
-  if (!spaceConfigId) {
-    throw "Missing ENV var: ONBOARDING_SPACE_CONFIG_ID";
-  }
-
+export const createSpace = async (spaceName: string) => {
   try {
     const spaceResponse = await flatfile.spaces.create({
-      spaceConfigId,
+      spaceConfigId: process.env.ONBOARDING_SPACE_CONFIG_ID as string,
       environmentId: process.env.FLATFILE_ENVIRONMENT_ID as string,
-      name: "Onboarding",
+      name: spaceName,
     });
 
     return spaceResponse.data;
@@ -198,76 +191,37 @@ export const createSpace = async (accessToken: string) => {
   }
 };
 
-export const getSpace = async (
-  flatfileSpaceId: string,
-  accessToken: string
-) => {
-  // Query the space to get the guest URL
-  const getSpaceResponse: Response = await fetch(
-    `${BASE_PATH}/spaces/${flatfileSpaceId}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-
-  // console.log("getSpaceResponse", getSpaceResponse);
-
-  if (!getSpaceResponse.ok) {
+export const getSpace = async (flatfileSpaceId: string) => {
+  try {
+    const res = await flatfile.spaces.get(flatfileSpaceId);
+    return res.data;
+  } catch (e) {
+    console.log("Error getting space", e);
     throw new Error("Error retrieving space");
   }
-
-  const getSpaceResult = await getSpaceResponse.json();
-  // console.log("getSpaceResult", getSpaceResult);
-
-  return getSpaceResult.data as FlatfileSpaceData;
 };
 
 export const addGuestToSpace = async (
   user: User,
-  flatfileSpaceData: FlatfileSpaceData,
-  accessToken: string
+  flatfileSpace: FlatfileSpace
 ) => {
-  const payload = [
-    {
-      environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
-      email: user.email,
-      name: "Guest",
-      spaces: [
-        {
-          id: flatfileSpaceData.id,
-        },
-      ],
-    },
-  ];
-
-  // TODO: Need guest methods on API wrapper to call
-  const addGuestToSpaceResponse: Response = await fetch(`${BASE_PATH}/guests`, {
-    method: "POST",
-    body: JSON.stringify(payload),
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    },
-  });
-
-  // console.log("addGuestToSpaceResponse", addGuestToSpaceResponse);
-  // console.log(
-  //   "addGuestToSpaceResponse body",
-  //   await addGuestToSpaceResponse.json()
-  // );
-
-  if (!addGuestToSpaceResponse.ok) {
-    return await addGuestToSpaceResponse.json();
+  try {
+    await flatfile.guests.create([
+      {
+        environmentId: process.env.FLATFILE_ENVIRONMENT_ID as string,
+        email: user.email,
+        name: "Guest",
+        spaces: [
+          {
+            id: flatfileSpace.id,
+          },
+        ],
+      },
+    ]);
+  } catch (e) {
+    console.log("Error adding guest to space", e);
+    throw new Error("Error adding you to the space.");
   }
-
-  const addGuestResult = await addGuestToSpaceResponse.json();
-  // console.log("addGuestResult", addGuestResult, addGuestResult.data.spaces);
-
-  return addGuestResult.data;
 };
 
 export const inviteGuestToSpace = async (
@@ -308,37 +262,15 @@ export const inviteGuestToSpace = async (
 export const addDocumentToSpace = async (
   title: string,
   body: string,
-  spaceId: string,
-  accessToken: string
+  spaceId: string
 ) => {
-  const payload = {
-    title: title,
-    body: body,
-  };
-
-  const addDocumentToSpaceResponse: Response = await fetch(
-    `${BASE_PATH}/spaces/${spaceId}/documents`,
-    {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-
-  // console.log("addDocumentToSpaceResponse", addDocumentToSpaceResponse);
-  // console.log(
-  //   "addDocumentToSpaceResponse body",
-  //   await addDocumentToSpaceResponse.json()
-  // );
-
-  if (!addDocumentToSpaceResponse.ok) {
-    throw new Error("Error adding document to space");
+  try {
+    await flatfile.documents.create(spaceId, {
+      title,
+      body,
+    });
+  } catch (e) {
+    console.log("Error adding document to space", e);
+    throw new Error("Error setting up space.");
   }
-
-  const addDocumentResult = await addDocumentToSpaceResponse.json();
-
-  return addDocumentResult.data;
 };

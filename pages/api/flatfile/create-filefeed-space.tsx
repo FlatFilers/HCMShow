@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
-import { createSpace, getAccessToken } from "../../../lib/flatfile";
+import { createSpace } from "../../../lib/flatfile";
 import { SpaceType } from "../../../lib/space";
 
 export default async function handler(
@@ -33,9 +33,7 @@ export default async function handler(
     throw new Error("No user found");
   }
 
-  const accessToken = await getAccessToken();
-
-  const flatfileSpaceData = await createSpace(accessToken);
+  const flatfileSpaceData = await createSpace("HCM.show Filefeed Workflow");
 
   const space: Space = await prisma.space.create({
     data: {

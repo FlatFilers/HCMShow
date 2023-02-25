@@ -6,9 +6,7 @@ import {
   addDocumentToSpace,
   addGuestToSpace,
   createSpace,
-  getAccessToken,
   getSpace,
-  inviteGuestToSpace,
 } from "../../../lib/flatfile";
 import { SpaceType } from "../../../lib/space";
 
@@ -39,30 +37,22 @@ export default async function handler(
     throw new Error("No user found");
   }
 
-  const accessToken = await getAccessToken();
+  const flatfileSpace = await createSpace("HCM.show Workbook Upload Workflow");
+  const spaceId = flatfileSpace.id;
 
-  const flatfileSpaceData = await createSpace(accessToken);
-  const spaceId = flatfileSpaceData.id;
+  await addGuestToSpace(user, flatfileSpace);
 
-  const addGuestToSpaceResponse = await addGuestToSpace(
-    user,
-    flatfileSpaceData,
-    accessToken
-  );
+  // TODO: how do we error handle?
+  // if (
+  //   addGuestToSpaceResponse.errors &&
+  //   addGuestToSpaceResponse.errors[0].message
+  // ) {
+  //   res.redirect(
+  //     "/workbook-upload?flash=error&message=Error setting up Flatfile"
+  //   );
+  // }
 
-  if (
-    addGuestToSpaceResponse.errors &&
-    addGuestToSpaceResponse.errors[0].message
-  ) {
-    res.redirect(
-      "/workbook-upload?flash=error&message=Error setting up Flatfile"
-    );
-  }
-
-  const flatfileSpaceDataRefetch = await getSpace(
-    flatfileSpaceData.id,
-    accessToken
-  );
+  const flatfileSpaceDataRefetch = await getSpace(flatfileSpace.id);
 
   // TODO: Don't need this, already sending an email on create?
   // const inviteGuestsToSpaceResponse = await inviteGuestToSpace(
@@ -81,9 +71,6 @@ export default async function handler(
       type: SpaceType.WorkbookUpload,
     },
   });
-
-  // console.log("space", space);
-  // console.log("space data", space.flatfileData);
 
   const basePathUrl = `${process.env.BASEPATH_URL}/workbook-upload`;
   const initialDocumentBody = `<div> 
@@ -109,14 +96,7 @@ export default async function handler(
     href="${basePathUrl}">Return to HCM.show</a>
 </div>`;
 
-  const addDocumentToSpaceResponse = await addDocumentToSpace(
-    "Welcome",
-    initialDocumentBody,
-    spaceId,
-    accessToken
-  );
-
-  // console.log("addDocumentToSpaceResponse", addDocumentToSpaceResponse);
+  await addDocumentToSpace("Welcome", initialDocumentBody, spaceId);
 
   res.redirect("/workbook-upload?flash=success&message=Setup Flatfile!");
 }
