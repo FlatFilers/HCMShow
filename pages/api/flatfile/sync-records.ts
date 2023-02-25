@@ -270,6 +270,7 @@ export default async function handler(
     organizationId: token.organizationId,
     type: ActionType.SyncRecords,
     description: message,
+    metadata: {},
   });
 
   res.redirect(`/workbook-upload?flash=success&message=${message}`);
