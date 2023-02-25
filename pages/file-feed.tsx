@@ -38,7 +38,7 @@ const FileFeed: NextPage<Props> = ({ space, actions }) => {
     <div className="ml-12 mt-16">
       {!space && <SetupSpace />}
 
-      {space && <Events actions={actions} />}
+      {space && <Events initialActions={actions} />}
     </div>
   );
 };
