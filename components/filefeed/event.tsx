@@ -1,6 +1,5 @@
 import { Action } from "@prisma/client";
 import { useState, FormEvent, useEffect } from "react";
-import toast from "react-hot-toast";
 import { ActionState } from "../../lib/action";
 import { DateTime } from "luxon";
 
@@ -45,9 +44,7 @@ export const Event = ({ action }: Props) => {
     description: string;
   };
 
-  // todo useEffect here to update state
   useEffect(() => {
-    // after 3 seconds, set state to complete
     if (metadata.state === ActionState.Initial) {
       setTimeout(() => {
         updateAction(action).then((a) => {

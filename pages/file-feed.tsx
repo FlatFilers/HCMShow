@@ -1,6 +1,6 @@
 import { Action, PrismaClient, Space } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useState } from "react";
 import { getToken } from "next-auth/jwt";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
@@ -14,19 +14,7 @@ interface Props {
   actions: Action[];
 }
 
-const sampleDataFileName = "/sample-hcm-employees.csv";
-
 const FileFeed: NextPage<Props> = ({ space, actions }) => {
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  let defaultText = space ? "Sync Records" : "Setup Flatfile";
-  const [buttonText, setButtonText] = useState<string>(defaultText);
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    setIsSubmitting(true);
-    space
-      ? setButtonText("Syncing records...")
-      : setButtonText("Setting up Flatfile...");
-  };
-
   const router = useRouter();
 
   useEffect(() => {
