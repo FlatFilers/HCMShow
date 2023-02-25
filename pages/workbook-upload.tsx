@@ -13,6 +13,7 @@ import {
   ArrowPathIcon,
   ArrowTopRightOnSquareIcon,
 } from "@heroicons/react/24/outline";
+import { SpaceType } from "../lib/space";
 
 interface Props {
   space?: Space;
@@ -312,12 +313,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   const prisma = new PrismaClient();
-  const space = await prisma.space.findFirst({
+  const space = await prisma.space.findUnique({
     where: {
-      userId: token.sub,
-    },
-    orderBy: {
-      createdAt: "desc",
+      userId_type: {
+        userId: token.sub as string,
+        type: SpaceType.WorkbookUpload,
+      },
     },
   });
 

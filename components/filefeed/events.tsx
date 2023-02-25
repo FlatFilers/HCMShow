@@ -10,11 +10,11 @@ type Props = {
 
 export const Events = ({ actions }: Props) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  let defaultText = "Simulate File Feed Event";
+  let defaultText = "Listen For File Feed Event";
   const [buttonText, setButtonText] = useState<string>(defaultText);
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);
-    setButtonText("Simulating...");
+    setButtonText("Listening...");
   };
 
   return (
@@ -22,7 +22,7 @@ export const Events = ({ actions }: Props) => {
       <p className="text-2xl mb-2">Ready and listening for files. 🎉 </p>
 
       <p className="text-gray-600 mb-4 max-w-lg">
-        Next, click the button below to simulate a file upload occurring.
+        Next, click the button below to listen for a file upload.
       </p>
 
       <form
@@ -31,7 +31,7 @@ export const Events = ({ actions }: Props) => {
         className="mb-8"
       >
         <button
-          onClick={() => toast.loading("Simulating event...")}
+          onClick={() => toast.loading("Listening for event...")}
           disabled={isSubmitting}
           className={`${
             isSubmitting

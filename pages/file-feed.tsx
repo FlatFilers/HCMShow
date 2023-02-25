@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { SetupSpace } from "../components/filefeed/setup-space";
 import { Events } from "../components/filefeed/events";
+import { SpaceType } from "../lib/space";
 
 interface Props {
   space?: Space;
@@ -68,12 +69,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   const prisma = new PrismaClient();
-  const space = await prisma.space.findFirst({
+  const space = await prisma.space.findUnique({
     where: {
-      userId: token.sub,
-    },
-    orderBy: {
-      createdAt: "desc",
+      userId_type: {
+        userId: token.sub as string,
+        type: SpaceType.FileFeed,
+      },
     },
   });
 

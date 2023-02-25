@@ -344,6 +344,8 @@ model Space {
 
   userId String @db.Uuid
   user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, type])
 }
 
 model Title {

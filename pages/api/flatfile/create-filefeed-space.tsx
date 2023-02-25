@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { createSpace, getAccessToken } from "../../../lib/flatfile";
+import { SpaceType } from "../../../lib/space";
 
 export default async function handler(
   req: NextApiRequest,
@@ -36,10 +37,10 @@ export default async function handler(
 
   const flatfileSpaceData = await createSpace(accessToken);
 
-  // TODO: Add space type here
   const space: Space = await prisma.space.create({
     data: {
       userId: user.id,
+      type: SpaceType.FileFeed,
       flatfileData: flatfileSpaceData as unknown as Prisma.InputJsonValue,
     },
   });
