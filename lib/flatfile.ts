@@ -12,6 +12,8 @@ import { PrismaClient, Space, User, prisma } from "@prisma/client";
 import { DateTime } from "luxon";
 import { inspect } from "util";
 
+import { Flatfile, FlatfileClient } from "@flatfile/api-beta";
+
 export interface Field {
   value: string | number | null;
   valid: boolean;
@@ -51,6 +53,11 @@ export interface FlatfileSpaceData {
 }
 
 const BASE_PATH = "https://api.x.flatfile.com/v1";
+
+const flatfile = new FlatfileClient({
+  clientId: process.env.FLATFILE_CLIENT_ID,
+  clientSecret: process.env.FLATFILE_CLIENT_SECRET,
+});
 
 export async function getAccessToken() {
   const configParams: ConfigurationParameters = {
@@ -177,45 +184,18 @@ export const createSpace = async (accessToken: string) => {
     throw "Missing ENV var: ONBOARDING_SPACE_CONFIG_ID";
   }
 
-  const spaceConfig: SpaceConfig = {
-    spaceConfigId: spaceConfigId,
-    environmentId: process.env.FLATFILE_ENVIRONMENT_ID as string,
-    name: "Onboarding",
-  };
+  try {
+    const spaceResponse = await flatfile.spaces.create({
+      spaceConfigId,
+      environmentId: process.env.FLATFILE_ENVIRONMENT_ID as string,
+      name: "Onboarding",
+    });
 
-  const spaceRequestParameters: AddSpaceRequest = {
-    spaceConfig,
-  };
-  // TODO: Is there a way to use the SDK / OpenAPI wrapper to set these headers more elegantly?
-  // client.setHeaders/setToken() etc that will remember it moving forward
-  const spacePayload = {
-    spaceConfigId: spaceConfigId,
-    environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
-  };
-
-  const spaceResponse = await fetch(`${BASE_PATH}/spaces`, {
-    method: "POST",
-    body: JSON.stringify(spacePayload),
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    },
-  });
-  // const spaceResponse = await client.addSpace(spaceRequestParameters, options);
-
-  // console.log("spaceResponse", spaceResponse);
-
-  if (!spaceResponse.ok) {
-    throw new Error("Error creating space");
+    return spaceResponse.data;
+  } catch (err) {
+    console.log("Error creating space", err);
+    throw new Error("Error setting up space");
   }
-
-  const spaceResult = await spaceResponse.json();
-
-  // console.log("spaceResult body", spaceResult);
-
-  // const spaceId: string = spaceResult.data.id;
-
-  return spaceResult.data as FlatfileSpaceData;
 };
 
 export const getSpace = async (
