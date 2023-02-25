@@ -8,4 +8,4 @@
 ALTER TABLE "Space" ADD COLUMN     "type" TEXT NOT NULL DEFAULT 'workbook-upload';
 
 -- Remove the default
---ALTER TABLE "Space" ALTER COLUMN "type" DROP DEFAULT;
+ALTER TABLE "Space" ALTER COLUMN "type" DROP DEFAULT;
