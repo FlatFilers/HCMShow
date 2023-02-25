@@ -18,6 +18,7 @@ import { ActionType, createAction } from "../../../lib/action";
 import { inspect } from "util";
 import { prismaClient } from "../../../lib/prisma-client";
 import { DateTime } from "luxon";
+import { SpaceType } from "../../../lib/space";
 
 type Data = {
   message?: string;
@@ -38,7 +39,11 @@ export default async function handler(
 
   const accessToken = await getAccessToken();
 
-  const records = await getRecords(token.sub, accessToken);
+  const records = await getRecords(
+    token.sub,
+    accessToken,
+    SpaceType.WorkbookUpload
+  );
 
   if (records.length === 0) {
     res.redirect(
@@ -139,12 +144,12 @@ export default async function handler(
         lastName: r.values.lastName.value as string,
         hireDate: DateTime.fromFormat(
           r.values.hireDate.value as string,
-          "L/d/yyyy"
+          "yyyy-MM-dd"
         ).toJSDate(),
         endEmploymentDate: r.values.hireDate.value
           ? DateTime.fromFormat(
               r.values.hireDate.value as string,
-              "L/d/yyyy"
+              "yyyy-MM-dd"
             ).toJSDate()
           : null,
         positionTitle: r.values.positionTitle.value as string,
