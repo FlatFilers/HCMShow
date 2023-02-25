@@ -10,6 +10,7 @@ import {
   getSpace,
   inviteGuestToSpace,
 } from "../../../lib/flatfile";
+import { SpaceType } from "../../../lib/space";
 
 export default async function handler(
   req: NextApiRequest,
@@ -77,6 +78,7 @@ export default async function handler(
       userId: user.id,
       flatfileData:
         flatfileSpaceDataRefetch as unknown as Prisma.InputJsonValue,
+      type: SpaceType.WorkbookUpload,
     },
   });
 
