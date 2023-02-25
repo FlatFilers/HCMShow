@@ -11,6 +11,7 @@ import {
 import { PrismaClient, Space, User, prisma } from "@prisma/client";
 import { DateTime } from "luxon";
 import { inspect } from "util";
+import { SpaceType } from "./space";
 
 export interface Field {
   value: string | number | null;
@@ -82,16 +83,17 @@ export async function getAccessToken() {
 
 export const getRecords = async (
   userId: string,
-  accessToken: string
+  accessToken: string,
+  spaceType: SpaceType
 ): Promise<Record[]> => {
   const prisma = new PrismaClient();
 
-  const space = await prisma.space.findFirst({
+  const space = await prisma.space.findUnique({
     where: {
-      userId,
-    },
-    orderBy: {
-      createdAt: "desc",
+      userId_type: {
+        userId,
+        type: spaceType,
+      },
     },
   });
 

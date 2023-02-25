@@ -79,12 +79,6 @@ const Employees: NextPage<Props> = ({ employees }) => {
                     >
                       Location
                     </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Origin
-                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
@@ -105,14 +99,6 @@ const Employees: NextPage<Props> = ({ employees }) => {
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {employee.location.name}
-                      </td>
-                      <td
-                        className={`relative whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6
-                           ${
-                             employee.flatfileRecordId ? "text-green-500" : ""
-                           }`}
-                      >
-                        {employee.flatfileRecordId && <div>Flatfile</div>}
                       </td>
                     </tr>
                   ))}
