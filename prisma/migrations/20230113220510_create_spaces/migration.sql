@@ -4,7 +4,6 @@ CREATE TABLE "Space" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "flatfileSpaceId" TEXT NOT NULL,
-    "type" TEXT NOT NULL,
     "userId" UUID NOT NULL,
 
     CONSTRAINT "Space_pkey" PRIMARY KEY ("id")
