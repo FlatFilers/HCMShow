@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { SetupSpace } from "../components/filefeed/setup-space";
 import { Events } from "../components/filefeed/events";
 import { SpaceType } from "../lib/space";
+import { ActionType } from "../lib/action";
 
 interface Props {
   space?: Space;
@@ -74,6 +75,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const actions = await prisma.action.findMany({
     where: {
+      type: ActionType.FileFeedEvent,
       organizationId: token.organizationId,
     },
     orderBy: {
