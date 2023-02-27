@@ -97,10 +97,10 @@ export async function getAccessToken() {
   return accessTokenResponse.data.accessToken;
 }
 
-export const getRecordsOfType = async (
+export const getRecordsByName = async (
   userId: string,
   accessToken: string,
-  sheetType: string,
+  sheetName: string,
   spaceType: SpaceType
 ): Promise<Record[]> => {
   const prisma = new PrismaClient();
@@ -123,7 +123,7 @@ export const getRecordsOfType = async (
   const { workbookId, sheetId } = await getWorkbookIdAndSheetIds(
     (space.flatfileData as unknown as FlatfileSpaceData).id,
     accessToken,
-    sheetType
+    sheetName
   );
 
   // console.log("w, s", workbookId, sheetIds);
@@ -136,7 +136,7 @@ export const getRecordsOfType = async (
 const getWorkbookIdAndSheetIds = async (
   flatfileSpaceId: string,
   accessToken: string,
-  sheetType: string
+  sheetName: string
 ): Promise<{ workbookId: string; sheetId: string }> => {
   const response = await fetch(
     `${BASE_PATH}/workbooks?spaceId=${flatfileSpaceId}`,
@@ -157,10 +157,10 @@ const getWorkbookIdAndSheetIds = async (
   // console.log("sheets", result["data"][0]["sheets"]);
 
   const workbookObj = result.data.find((workbookObj: WorkbookObject) => {
-    return workbookObj.name === process.env.CREATED_SPACE_WORKBOOK_NAME;
+    return workbookObj.name === process.env.WORKBOOK_UPLOAD_WORKBOOK_NAME;
   });
   const sheetId = workbookObj.sheets.find(
-    (s: { id: string; name: string; config: any }) => s.name === sheetType
+    (s: { id: string; name: string; config: any }) => s.name === sheetName
   )!.id;
 
   return {

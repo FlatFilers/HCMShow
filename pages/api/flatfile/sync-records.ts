@@ -12,7 +12,7 @@ import {
   WorkerCompensationCode,
 } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
-import { getAccessToken, getRecordsOfType } from "../../../lib/flatfile";
+import { getAccessToken, getRecordsByName } from "../../../lib/flatfile";
 import { upsertEmployee, validEmployeeRecords } from "../../../lib/employee";
 import { ActionType, createAction } from "../../../lib/action";
 import { inspect } from "util";
@@ -40,13 +40,13 @@ export default async function handler(
 
   const accessToken = await getAccessToken();
 
-  const employeeRecords = await getRecordsOfType(
+  const employeeRecords = await getRecordsByName(
     token.sub,
     accessToken,
     "Employees",
     SpaceType.WorkbookUpload
   );
-  const jobRecords = await getRecordsOfType(
+  const jobRecords = await getRecordsByName(
     token.sub,
     accessToken,
     "Jobs",
