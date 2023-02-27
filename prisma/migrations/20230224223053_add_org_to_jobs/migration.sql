@@ -5,14 +5,14 @@
 
 */
 -- AlterTable
-ALTER TABLE "Job" ADD COLUMN     "organizationId" UUID NOT NULL DEFAULT uuid_generate_v4();
+ALTER TABLE "Job" ADD COLUMN     "organizationId" UUID NULL;
 
 UPDATE "Job" 
 SET "organizationId" = "Employee"."organizationId"
 FROM "Employee"
 WHERE "Job"."employeeId" = "Employee"."id";
 
-ALTER TABLE "Job" ALTER COLUMN "organizationId" DROP DEFAULT;
+ALTER TABLE "Job" ALTER COLUMN "organizationId" SET NOT NULL;
 
 -- AddForeignKey
 ALTER TABLE "Job" ADD CONSTRAINT "Job_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
