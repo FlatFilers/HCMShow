@@ -7,6 +7,11 @@
 -- AlterTable
 ALTER TABLE "Job" ADD COLUMN     "organizationId" UUID NOT NULL DEFAULT uuid_generate_v4();
 
+UPDATE "Job" 
+SET "organizationId" = "Employee"."organizationId"
+FROM "Employee"
+WHERE "Job"."employeeId" = "Employee"."id";
+
 ALTER TABLE "Job" ALTER COLUMN "organizationId" DROP DEFAULT;
 
 -- AddForeignKey
