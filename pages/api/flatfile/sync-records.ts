@@ -12,13 +12,14 @@ import {
   WorkerCompensationCode,
 } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
-import { getAccessToken, getRecords } from "../../../lib/flatfile";
-import { upsertEmployee, validRecords } from "../../../lib/employee";
+import { getAccessToken, getRecordsByName } from "../../../lib/flatfile";
+import { upsertEmployee, validEmployeeRecords } from "../../../lib/employee";
 import { ActionType, createAction } from "../../../lib/action";
 import { inspect } from "util";
 import { prismaClient } from "../../../lib/prisma-client";
 import { DateTime } from "luxon";
 import { SpaceType } from "../../../lib/space";
+import { upsertJobRecords, validJobRecords } from "../../../lib/job";
 
 type Data = {
   message?: string;
@@ -39,24 +40,34 @@ export default async function handler(
 
   const accessToken = await getAccessToken();
 
-  const records = await getRecords(
+  const employeeRecords = await getRecordsByName(
     token.sub,
     accessToken,
+    "Employees",
+    SpaceType.WorkbookUpload
+  );
+  const jobRecords = await getRecordsByName(
+    token.sub,
+    accessToken,
+    "Jobs",
     SpaceType.WorkbookUpload
   );
 
-  if (records.length === 0) {
+  const totalRecords = employeeRecords.length + jobRecords.length;
+
+  if (totalRecords === 0) {
     res.redirect(
       "/workbook-upload?flash=error&message=No Records Found. Did you upload the sample data in Flatfile?"
     );
     return;
   }
 
-  const valids = await validRecords(records);
+  const validEmployees = await validEmployeeRecords(employeeRecords);
 
-  console.log("Valid records to sync", valids.length);
+  console.log("Valid records to sync", validEmployees.length);
 
-  const validsManagersFirst = valids.sort((a, b) => {
+  // TODO: Refactor employee logic to its lib file
+  const validsManagersFirst = validEmployees.sort((a, b) => {
     return a.values.managerId.value ? 1 : -1;
   });
 
@@ -70,7 +81,7 @@ export default async function handler(
     take: 2,
   });
 
-  const upserts = validsManagersFirst.map(async (r) => {
+  const upsertEmployees = validsManagersFirst.map(async (r) => {
     try {
       const values = r.values;
       const employeeTypeId = (
@@ -266,9 +277,15 @@ export default async function handler(
     }
   });
 
-  await Promise.all(upserts);
+  await Promise.all(upsertEmployees);
 
-  const message = `Found ${records.length} records. Synced ${valids.length} Employee records.`;
+  const validJobs = await validJobRecords(jobRecords);
+
+  console.log("Valid job records to sync", validJobs.length);
+
+  const upsertJobs = await upsertJobRecords(validJobs, token);
+
+  const message = `Found ${totalRecords} total records. Synced ${validEmployees.length} Employee records.  Synced ${validJobs.length} Job records.`;
 
   await createAction({
     userId: token.sub,

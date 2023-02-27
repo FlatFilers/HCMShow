@@ -51,6 +51,22 @@ export interface FlatfileSpaceData {
   ];
 }
 
+type WorkbookObject = {
+  id: string;
+  name: string;
+  labels: string[];
+  spaceId: string;
+  environmentId: string;
+  blueprint: object | null;
+  sheets: [
+    {
+      id: string;
+      name: string;
+      config: object[];
+    }
+  ];
+};
+
 const BASE_PATH = "https://api.x.flatfile.com/v1";
 
 export async function getAccessToken() {
@@ -81,9 +97,10 @@ export async function getAccessToken() {
   return accessTokenResponse.data.accessToken;
 }
 
-export const getRecords = async (
+export const getRecordsByName = async (
   userId: string,
   accessToken: string,
+  sheetName: string,
   spaceType: SpaceType
 ): Promise<Record[]> => {
   const prisma = new PrismaClient();
@@ -103,54 +120,32 @@ export const getRecords = async (
 
   // console.log("space", space);
 
-  const headers = {
-    Authorization: `Bearer ${accessToken}`,
-    "Content-Type": "application/json",
-  };
-
-  const { workbookId, sheetId } = await getWorkbookIdAndSheetId(
+  const { workbookId, sheetId } = await getWorkbookIdAndSheetIds(
     (space.flatfileData as unknown as FlatfileSpaceData).id,
-    headers
+    accessToken,
+    sheetName
   );
 
-  // console.log("w, s", workbookId, sheetId);
+  // console.log("w, s", workbookId, sheetIds);
 
-  const recordsResponse = await fetch(
-    // TODO: eventually use valid filter here
-    // `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records?filter=valid`,
-    `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records`,
-    {
-      method: "GET",
-      headers: headers,
-    }
-  );
+  const records = await fetchRecords(space, workbookId, sheetId, accessToken);
 
-  // console.log("recordsResponse", recordsResponse);
-
-  if (!recordsResponse.ok) {
-    throw new Error(
-      `Error getting records for spaceId: ${space.id}, flatfileSpaceId: ${
-        (space.flatfileData as unknown as FlatfileSpaceData).id
-      }, flatfile workbookId: ${workbookId}, flatfile sheetId: ${sheetId}`
-    );
-  }
-
-  const recordsResult = await recordsResponse.json();
-
-  // console.log("recordsResult", recordsResult);
-
-  return recordsResult.data.records;
+  return records;
 };
 
-const getWorkbookIdAndSheetId = async (
+const getWorkbookIdAndSheetIds = async (
   flatfileSpaceId: string,
-  headers: any
+  accessToken: string,
+  sheetName: string
 ): Promise<{ workbookId: string; sheetId: string }> => {
   const response = await fetch(
     `${BASE_PATH}/workbooks?spaceId=${flatfileSpaceId}`,
     {
       method: "GET",
-      headers,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
     }
   );
 
@@ -161,14 +156,48 @@ const getWorkbookIdAndSheetId = async (
   // TODO: Assuming just 1 workbook for this demo (but multiple sheets).
   // console.log("sheets", result["data"][0]["sheets"]);
 
-  const sheetId = result["data"][0]["sheets"].find(
-    (s: { id: string; name: string; config: any }) => s.name === "Employees"
-  ).id;
+  const workbookObj = result.data.find((workbookObj: WorkbookObject) => {
+    return workbookObj.name === process.env.WORKBOOK_UPLOAD_WORKBOOK_NAME;
+  });
+  const sheetId = workbookObj.sheets.find(
+    (s: { id: string; name: string; config: any }) => s.name === sheetName
+  )!.id;
 
   return {
-    workbookId: result["data"][0]["id"],
+    workbookId: workbookObj.id,
     sheetId: sheetId,
   };
+};
+
+const fetchRecords = async (
+  space: Space,
+  workbookId: string,
+  sheetId: string,
+  accessToken: string
+): Promise<Record[]> => {
+  const response = await fetch(
+    `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Error getting records for spaceId: ${space.id}, flatfileSpaceId: ${
+        (space.flatfileData as unknown as FlatfileSpaceData).id
+      }, flatfile workbookId: ${workbookId}`
+    );
+  }
+
+  const recordsResult = await response.json();
+  // console.log("rr", recordsResult.data.records);
+
+  return await recordsResult.data.records;
 };
 
 export const createSpace = async (accessToken: string) => {
