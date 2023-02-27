@@ -60,8 +60,8 @@ type WorkbookObject = {
   blueprint: object | null;
   sheets: [
     {
-      id: "us_sh_yyhOp0e0";
-      name: "Employees";
+      id: string;
+      name: string;
       config: object[];
     }
   ];

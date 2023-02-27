@@ -141,14 +141,8 @@ export const upsertJobRecords = async (validJobs: Record[], token: JWT) => {
         isInactive: r.values.inactive.value === "y",
         includeJobCodeInName: r.values.includeJobCodeInName?.value === "y",
         title: r.values.privateTitle?.value as string,
-        summary:
-          (r.values.jobSummary.value as string) === null
-            ? "N/A"
-            : (r.values.jobSummary.value as string),
-        description:
-          (r.values.jobDescription.value as string) === null
-            ? "N/A"
-            : (r.values.jobDescription.value as string),
+        summary: r.values.jobSummary.value as string,
+        description: r.values.jobDescription.value as string,
         additionalDescription: r.values.additionalJobDescription
           ?.value as string,
         workShift: r.values.workShiftRequired?.value === "y",
