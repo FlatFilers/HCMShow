@@ -12,7 +12,7 @@ import {
   WorkerCompensationCode,
 } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
-import { getAccessToken, getRecords } from "../../../lib/flatfile";
+import { getAccessToken, getRecordsOfType } from "../../../lib/flatfile";
 import { upsertEmployee, validEmployeeRecords } from "../../../lib/employee";
 import { ActionType, createAction } from "../../../lib/action";
 import { inspect } from "util";
@@ -40,20 +40,29 @@ export default async function handler(
 
   const accessToken = await getAccessToken();
 
-  const records = await getRecords(
+  const employeeRecords = await getRecordsOfType(
     token.sub,
     accessToken,
+    "Employees",
+    SpaceType.WorkbookUpload
+  );
+  const jobRecords = await getRecordsOfType(
+    token.sub,
+    accessToken,
+    "Jobs",
     SpaceType.WorkbookUpload
   );
 
-  if (Object.keys(records).length === 0) {
+  const totalRecords = employeeRecords.length + jobRecords.length;
+
+  if (totalRecords === 0) {
     res.redirect(
       "/workbook-upload?flash=error&message=No Records Found. Did you upload the sample data in Flatfile?"
     );
     return;
   }
 
-  const validEmployees = await validEmployeeRecords(records.employees);
+  const validEmployees = await validEmployeeRecords(employeeRecords);
 
   console.log("Valid records to sync", validEmployees.length);
 
@@ -270,15 +279,11 @@ export default async function handler(
 
   await Promise.all(upsertEmployees);
 
-  const validJobs = await validJobRecords(records.jobs);
+  const validJobs = await validJobRecords(jobRecords);
 
   console.log("Valid job records to sync", validJobs.length);
 
   const upsertJobs = await upsertJobRecords(validJobs, token);
-
-  const totalRecords = Object.values(records).reduce((acc, key) => {
-    return acc + key.length;
-  }, 0);
 
   const message = `Found ${totalRecords} total records. Synced ${validEmployees.length} Employee records.  Synced ${validJobs.length} Job records.`;
 

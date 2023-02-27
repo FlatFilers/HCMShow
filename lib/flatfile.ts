@@ -51,9 +51,20 @@ export interface FlatfileSpaceData {
   ];
 }
 
-type Headers = {
-  Authorization: string;
-  "Content-Type": string;
+type WorkbookObject = {
+  id: string;
+  name: string;
+  labels: string[];
+  spaceId: string;
+  environmentId: string;
+  blueprint: object | null;
+  sheets: [
+    {
+      id: "us_sh_yyhOp0e0";
+      name: "Employees";
+      config: object[];
+    }
+  ];
 };
 
 const BASE_PATH = "https://api.x.flatfile.com/v1";
@@ -86,9 +97,10 @@ export async function getAccessToken() {
   return accessTokenResponse.data.accessToken;
 }
 
-export const getRecords = async (
+export const getRecordsOfType = async (
   userId: string,
   accessToken: string,
+  sheetType: string,
   spaceType: SpaceType
 ): Promise<Record[]> => {
   const prisma = new PrismaClient();
@@ -108,40 +120,32 @@ export const getRecords = async (
 
   // console.log("space", space);
 
-  const headers = {
-    Authorization: `Bearer ${accessToken}`,
-    "Content-Type": "application/json",
-  };
-
-  const { workbookId, sheetIds } = await getWorkbookIdAndSheetIds(
+  const { workbookId, sheetId } = await getWorkbookIdAndSheetIds(
     (space.flatfileData as unknown as FlatfileSpaceData).id,
-    headers
+    accessToken,
+    sheetType
   );
 
   // console.log("w, s", workbookId, sheetIds);
 
-  let [employeeSheetId, jobSheetId] = sheetIds;
+  const records = await fetchRecords(space, workbookId, sheetId, accessToken);
 
-  const employeeRecords = await fetchRecords(
-    space,
-    workbookId,
-    employeeSheetId,
-    headers
-  );
-  const jobRecords = await fetchRecords(space, workbookId, jobSheetId, headers);
-
-  return { employees: employeeRecords, jobs: jobRecords };
+  return records;
 };
 
 const getWorkbookIdAndSheetIds = async (
   flatfileSpaceId: string,
-  headers: Headers
-): Promise<{ workbookId: string; sheetIds: string[] }> => {
+  accessToken: string,
+  sheetType: string
+): Promise<{ workbookId: string; sheetId: string }> => {
   const response = await fetch(
     `${BASE_PATH}/workbooks?spaceId=${flatfileSpaceId}`,
     {
       method: "GET",
-      headers,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
     }
   );
 
@@ -152,16 +156,16 @@ const getWorkbookIdAndSheetIds = async (
   // TODO: Assuming just 1 workbook for this demo (but multiple sheets).
   // console.log("sheets", result["data"][0]["sheets"]);
 
-  let sheetIds = ["Employees", "Jobs"].map(
-    (sheetName) =>
-      result["data"][0]["sheets"].find(
-        (s: { id: string; name: string; config: any }) => s.name === sheetName
-      ).id
-  );
+  const workbookObj = result.data.find((workbookObj: WorkbookObject) => {
+    return workbookObj.name === process.env.CREATED_SPACE_WORKBOOK_NAME;
+  });
+  const sheetId = workbookObj.sheets.find(
+    (s: { id: string; name: string; config: any }) => s.name === sheetType
+  )!.id;
 
   return {
-    workbookId: result["data"][0]["id"],
-    sheetIds: sheetIds,
+    workbookId: workbookObj.id,
+    sheetId: sheetId,
   };
 };
 
@@ -169,13 +173,16 @@ const fetchRecords = async (
   space: Space,
   workbookId: string,
   sheetId: string,
-  headers: Headers
+  accessToken: string
 ): Promise<Record[]> => {
   const response = await fetch(
     `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records`,
     {
       method: "GET",
-      headers: headers,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
     }
   );
 
