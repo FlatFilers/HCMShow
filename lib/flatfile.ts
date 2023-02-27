@@ -122,20 +122,20 @@ export const getRecords = async (
 
   let [employeeSheetId, jobSheetId] = sheetIds;
 
-  const employeeRecords = await mergeRecords(
+  const employeeRecords = await fetchRecords(
     space,
     workbookId,
     employeeSheetId,
     headers
   );
-  const jobRecords = await mergeRecords(space, workbookId, jobSheetId, headers);
+  const jobRecords = await fetchRecords(space, workbookId, jobSheetId, headers);
 
-  return [employeeRecords, jobRecords].flat();
+  return { employees: employeeRecords, jobs: jobRecords };
 };
 
 const getWorkbookIdAndSheetIds = async (
   flatfileSpaceId: string,
-  headers: any
+  headers: Headers
 ): Promise<{ workbookId: string; sheetIds: string[] }> => {
   const response = await fetch(
     `${BASE_PATH}/workbooks?spaceId=${flatfileSpaceId}`,
@@ -165,7 +165,7 @@ const getWorkbookIdAndSheetIds = async (
   };
 };
 
-const mergeRecords = async (
+const fetchRecords = async (
   space: Space,
   workbookId: string,
   sheetId: string,
@@ -190,7 +190,7 @@ const mergeRecords = async (
   const recordsResult = await response.json();
   // console.log("rr", recordsResult.data.records);
 
-  return await Promise.all(recordsResult.data.records);
+  return await recordsResult.data.records;
 };
 
 export const createSpace = async (accessToken: string) => {

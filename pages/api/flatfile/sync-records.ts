@@ -46,14 +46,14 @@ export default async function handler(
     SpaceType.WorkbookUpload
   );
 
-  if (records.length === 0) {
+  if (Object.keys(records).length === 0) {
     res.redirect(
       "/workbook-upload?flash=error&message=No Records Found. Did you upload the sample data in Flatfile?"
     );
     return;
   }
 
-  const validEmployees = await validEmployeeRecords(records);
+  const validEmployees = await validEmployeeRecords(records.employees);
 
   console.log("Valid records to sync", validEmployees.length);
 
@@ -270,13 +270,17 @@ export default async function handler(
 
   await Promise.all(upsertEmployees);
 
-  const validJobs = await validJobRecords(records);
+  const validJobs = await validJobRecords(records.jobs);
 
   console.log("Valid job records to sync", validJobs.length);
 
   const upsertJobs = await upsertJobRecords(validJobs, token);
 
-  const message = `Found ${records.length} total records. Synced ${validEmployees.length} Employee records.  Synced ${validJobs.length} Job records.`;
+  const totalRecords = Object.values(records).reduce((acc, key) => {
+    return acc + key.length;
+  }, 0);
+
+  const message = `Found ${totalRecords} total records. Synced ${validEmployees.length} Employee records.  Synced ${validJobs.length} Job records.`;
 
   await createAction({
     userId: token.sub,
