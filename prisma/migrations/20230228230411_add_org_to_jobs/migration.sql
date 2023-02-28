@@ -5,7 +5,7 @@
 
 */
 -- AlterTable
-ALTER TABLE "Job" ADD COLUMN     "organizationId" UUID SET NOT NULL;
+ALTER TABLE "Job" ADD COLUMN     "organizationId" UUID NOT NULL;
 
 -- AddForeignKey
 ALTER TABLE "Job" ADD CONSTRAINT "Job_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
