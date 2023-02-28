@@ -10,7 +10,8 @@ ALTER TABLE "Job" ADD COLUMN     "organizationId" UUID NULL;
 UPDATE "Job" 
 SET "organizationId" = "Employee"."organizationId"
 FROM "Employee"
-WHERE "Job"."employeeId" = "Employee"."id";
+JOIN "EmployeesJobs" ON "EmployeesJobs"."employeeId" = "Employee"."id"
+WHERE "Job"."id" = "EmployeesJobs"."jobId";
 
 ALTER TABLE "Job" ALTER COLUMN "organizationId" SET NOT NULL;
 
