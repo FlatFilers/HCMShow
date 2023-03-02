@@ -1,7 +1,6 @@
 import { NextPageWithLayout } from "./_app";
 import { useState, useCallback } from "react";
 import { useSpace, ISpaceConfig } from "@flatfile/react";
-import { FlatfileEnvironmentData, setupEmbedded } from "../lib/embed_flatfile";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import { config } from "../lib/embed_flatfile_config";
@@ -9,10 +8,11 @@ import {
   ArrowPathIcon,
   ArrowTopRightOnSquareIcon,
 } from "@heroicons/react/24/outline";
+import { getAccessToken } from "../lib/flatfile";
 
 interface Props {
   accessToken: string;
-  environmentToken: FlatfileEnvironmentData;
+  environmentToken: string;
 }
 
 const Embedded: NextPageWithLayout<Props> = ({
@@ -22,7 +22,7 @@ const Embedded: NextPageWithLayout<Props> = ({
   const [showSpace, setShowSpace] = useState(false);
   const spaceProps: ISpaceConfig = {
     accessToken: accessToken as string,
-    environmentId: environmentToken.id as string,
+    environmentId: environmentToken as string,
     spaceConfig: config,
     sidebarConfig: {
       showDataChecklist: false,
@@ -54,7 +54,7 @@ const Embedded: NextPageWithLayout<Props> = ({
               className="bg-primary text-white px-4 py-2 rounded-lg flex flex-row items-center"
               onClick={() => setShowSpace(!showSpace)}
             >
-              {showSpace ? "Close" : "Open"} Space
+              {showSpace ? "Close" : "Open"} Portal
               <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-2" />
             </button>
           </div>
@@ -119,7 +119,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const { accessToken, environmentToken } = await setupEmbedded();
+  const accessToken = await getAccessToken();
+  const environmentToken = process.env.FLATFILE_ENVIRONMENT_ID;
 
   return {
     props: { accessToken, environmentToken },
