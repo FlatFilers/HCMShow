@@ -51,7 +51,7 @@ const Embedded: NextPageWithLayout<Props> = ({
               Then, follow the instructions below to import your data.
             </p>
             <button
-              className="bg-primary text-white px-4 py-2 rounded-lg flex flex-row items-center"
+              className="bg-primary text-white px-4 py-2 inline-flex items-center justify-center rounded-md border border-transparent text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
               onClick={() => setShowSpace(!showSpace)}
             >
               {showSpace ? "Close" : "Open"} Portal
