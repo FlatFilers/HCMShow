@@ -26,7 +26,6 @@ export interface FlatfileEnvironmentData {
 export const createEnvironment = async (accessToken: string) => {
   const environmentPayload = {
     name: "HCM Show",
-    // default is false for isProd. Not sure what this affects
     isProd: process.env.NODE_ENV_IS_PROD === "true",
     guestAuthentication: ["shared_link"],
   };
