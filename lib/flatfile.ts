@@ -220,7 +220,7 @@ export const addGuestToSpace = async (
     ]);
   } catch (e) {
     console.log("Error adding guest to space", e);
-    throw new Error("Error adding you to the space.");
+    throw new Error("Error adding you to the Flatfile workspace.");
   }
 };
 
