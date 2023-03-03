@@ -3,7 +3,6 @@ import { useState, useCallback } from "react";
 import { useSpace, ISpaceConfig } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
-import { config } from "../lib/embed_flatfile_config";
 import {
   ArrowPathIcon,
   ArrowTopRightOnSquareIcon,
@@ -13,17 +12,19 @@ import { getAccessToken } from "../lib/flatfile";
 interface Props {
   accessToken: string;
   environmentToken: string;
+  spaceConfigId: string;
 }
 
 const Embedded: NextPageWithLayout<Props> = ({
   accessToken,
   environmentToken,
+  spaceConfigId,
 }) => {
   const [showSpace, setShowSpace] = useState(false);
   const spaceProps: ISpaceConfig = {
     accessToken: accessToken as string,
     environmentId: environmentToken as string,
-    spaceConfig: config,
+    spaceConfigId: spaceConfigId,
     sidebarConfig: {
       showDataChecklist: false,
     },
@@ -121,9 +122,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const accessToken = await getAccessToken();
   const environmentToken = process.env.FLATFILE_ENVIRONMENT_ID;
+  const spaceConfigId = process.env.ONBOARDING_SPACE_CONFIG_ID;
 
   return {
-    props: { accessToken, environmentToken },
+    props: { accessToken, environmentToken, spaceConfigId },
   };
 };
 
