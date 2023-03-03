@@ -123,7 +123,10 @@ export const validJobRecords = async (records: Record[]) => {
   });
 };
 
-export const upsertJobRecords = async (validJobs: Record[], token: JWT) => {
+export const upsertJobRecords = async (
+  validJobs: Record[],
+  { userId, organizationId }: { userId: string; organizationId: string }
+) => {
   const upserts = validJobs.map(async (r) => {
     try {
       let jobFamilyId;
@@ -134,7 +137,7 @@ export const upsertJobRecords = async (validJobs: Record[], token: JWT) => {
       )?.id;
 
       let data: Parameters<typeof upsertJob>[0] = {
-        organizationId: token.organizationId,
+        organizationId: organizationId,
         slug: r.values.jobCode.value as string,
         name: r.values.jobName.value as string,
         effectiveDate: new Date(r.values.effectiveDate.value as string),
@@ -153,7 +156,7 @@ export const upsertJobRecords = async (validJobs: Record[], token: JWT) => {
       await upsertJob(data);
     } catch (error) {
       console.error(
-        `Error: syncing record for user ${token.sub}, record ${r.id}`,
+        `Error: syncing job record for user ${userId}, record ${r.id}`,
         error
       );
     }
