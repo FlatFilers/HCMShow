@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { prismaClient } from "../../../../lib/prisma-client";
-import { syncWorkbookRecords } from "../../../../lib/sync-records";
+import { prismaClient } from "../../../lib/prisma-client";
+import { syncWorkbookRecords } from "../../../lib/sync-records";
 
 export default async function handler(
   req: NextApiRequest,
