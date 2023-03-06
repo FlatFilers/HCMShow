@@ -38,7 +38,7 @@ const Embedded: NextPageWithLayout<Props> = ({
   }, [error]);
 
   const [downloaded, setDownloaded] = useState(false);
-  const storageKey = "workbook-upload-has-downloaded-sample-data";
+  const storageKey = "embedded-has-downloaded-sample-data";
   const sampleDataFileName = "/sample-hcm-employees.csv";
 
   useEffect(() => {
