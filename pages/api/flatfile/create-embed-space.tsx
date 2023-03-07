@@ -43,22 +43,6 @@ export default async function handler(
 
   console.log("flatfileSpaceData", flatfileSpaceData);
 
-  const existingSpace = await prisma.space.findFirst({
-    where: {
-      userId: user.id,
-    },
-  });
-
-  if (!existingSpace) {
-    const space: Space = await prisma.space.create({
-      data: {
-        userId: user.id,
-        type: SpaceType.Embed,
-        flatfileData: flatfileSpaceData as unknown as Prisma.InputJsonValue,
-      },
-    });
-  }
-
   // console.log("space", space);
   // console.log("space data", flatfileSpaceData);
 
@@ -81,5 +65,5 @@ export default async function handler(
     accessToken
   );
 
-  res.redirect("/embedded");
+  res.redirect(`/embedded?createdSpaceId=${flatfileSpaceData.id}`);
 }

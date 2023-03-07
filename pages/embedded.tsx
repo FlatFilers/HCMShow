@@ -5,57 +5,44 @@ import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import {
   ArrowPathIcon,
-  ArrowTopRightOnSquareIcon,
+  ArrowDownTrayIcon,
+  ArrowsPointingOutIcon,
+  ArrowsPointingInIcon,
+  PencilIcon,
 } from "@heroicons/react/24/outline";
 import { getAccessToken } from "../lib/flatfile";
-import { Action, PrismaClient, Space } from "@prisma/client";
+import { Action, PrismaClient } from "@prisma/client";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 interface Props {
   accessToken: string;
   environmentToken: string;
-  existingSpace: Space;
   lastSyncAction?: Action;
 }
 
 const Embedded: NextPageWithLayout<Props> = ({
   accessToken,
   environmentToken,
-  existingSpace,
   lastSyncAction,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>("Sync Records");
   const [spaceCreated, setSpaceCreated] = useState<boolean>(false);
+  const router = useRouter();
+  const existingSpaceId = router.query.createdSpaceId;
   const handleSubmit = (event: { preventDefault: () => void; target: any }) => {
     event.preventDefault();
     setIsSubmitting(true);
     setButtonText("Syncing records...");
-    event.target.action = "/api/flatfile/sync-records";
-    event.target.submit();
   };
+
   const [showSpace, setShowSpace] = useState(false);
-
-  type FlatfileSpaceData = {
-    id: string;
-    name: string;
-    metadata: null;
-    createdAt: string;
-    guestLink: string;
-    displayOrder: number;
-    environmentId: string;
-    spaceConfigId: string;
-    createdByUserId: string;
-    primaryWorkbookId: string;
-  };
-
-  const flatfileSpaceData = existingSpace?.flatfileData as FlatfileSpaceData;
-
   const spaceProps: ISpaceConfig = {
     accessToken: accessToken as string,
     environmentId: environmentToken as string,
-    spaceId: flatfileSpaceData?.id,
+    spaceId: existingSpaceId as string,
     sidebarConfig: {
       showDataChecklist: false,
       showSidebar: false,
@@ -77,7 +64,7 @@ const Embedded: NextPageWithLayout<Props> = ({
     if (localStorage.getItem(storageKey) === "true") {
       setDownloaded(true);
     }
-    if (existingSpace) {
+    if (existingSpaceId) {
       setSpaceCreated(true);
     }
   }, []);
@@ -109,7 +96,7 @@ const Embedded: NextPageWithLayout<Props> = ({
                   }}
                 >
                   Download
-                  <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-2" />
+                  <ArrowDownTrayIcon className="w-4 h-4 ml-2" />
                 </a>
               </div>
             </div>
@@ -131,7 +118,7 @@ const Embedded: NextPageWithLayout<Props> = ({
               <form action="/api/flatfile/create-embed-space">
                 <button className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mb-6 bg-primary text-white border-transparent">
                   Create Space
-                  <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-2" />
+                  <PencilIcon className="w-4 h-4 ml-2" />
                 </button>
               </form>
             </div>
@@ -168,7 +155,11 @@ const Embedded: NextPageWithLayout<Props> = ({
                     }`}
                   >
                     {showSpace ? "Close" : "Open"} Portal
-                    <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-2" />
+                    {showSpace ? (
+                      <ArrowsPointingInIcon className="w-4 h-4 ml-2" />
+                    ) : (
+                      <ArrowsPointingOutIcon className="w-4 h-4 ml-2" />
+                    )}
                   </button>
                 </div>
               </div>
@@ -186,6 +177,7 @@ const Embedded: NextPageWithLayout<Props> = ({
                 <div>
                   <form
                     method="post"
+                    action="/api/flatfile/sync-records"
                     onSubmit={handleSubmit}
                     className="mt-14 mb-6"
                   >
@@ -255,12 +247,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const accessToken = await getAccessToken();
   const environmentToken = process.env.FLATFILE_ENVIRONMENT_ID;
-  const spaceConfigId = process.env.ONBOARDING_SPACE_CONFIG_ID;
-  const existingSpace = await prisma.space.findFirst({
-    where: {
-      userId: user.id,
-    },
-  });
   const lastSyncAction = await prisma.action.findFirst({
     where: {
       organizationId: token.organizationId,
@@ -274,8 +260,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       accessToken,
       environmentToken,
-      spaceConfigId,
-      existingSpace,
       lastSyncAction,
     },
   };
