@@ -27,6 +27,7 @@ const Embedded: NextPageWithLayout<Props> = ({
 }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>("Sync Records");
+  const [spaceCreated, setSpaceCreated] = useState<boolean>(false);
   const handleSubmit = (event: { preventDefault: () => void; target: any }) => {
     event.preventDefault();
     setIsSubmitting(true);
@@ -34,36 +35,7 @@ const Embedded: NextPageWithLayout<Props> = ({
     event.target.action = "/api/flatfile/sync-records";
     event.target.submit();
   };
-
-  async function createSpace(event: {
-    preventDefault?: () => void;
-    target: any;
-  }) {
-    event.target.action = "/api/flatfile/create-embed-space";
-    event.target.submit();
-  }
-  const handlePortalSubmit = async (event: {
-    preventDefault: () => void;
-    target: any;
-  }) => {
-    event.preventDefault();
-    console.log("existingSpace", existingSpace);
-    if (!existingSpace) {
-      await createSpace(event);
-    }
-    setShowSpace(!showSpace);
-  };
   const [showSpace, setShowSpace] = useState(false);
-  const initialDocumentBody = `<div> 
-  <h1 style="margin-bottom: 0px;">Welcome! Let's import your data.</h1>
-  <p style="margin-top: 0px; margin-bottom: 12px;">Follow the steps below in order. Note: you can always return to this page by clicking "Welcome" in the left-hand sidebar.</p>
-  <h2 style="margin-bottom: 0px;">1. Visit Files</h2>
-  <p style="margin-top: 0px; margin-bottom: 8px;">Click "Files" in the left-hand sidebar. This is where you can upload files you want to import into Flatfile.</p>
-  <h2 style="margin-bottom: 0px;">2. Upload the sample data</h2>
-  <p style="margin-top: 0px; margin-bottom: 8px;">On the Files page, click "Add files" or drag-and-drop the sample data you downloaded previously onto the page.</p>
-  <p style="margin-top: 0px; margin-bottom: 8px;">After the file uploads, click "Import" and follow the steps to completion to import the workbook.</p>
-  <h2 style="margin-bottom: 0px;">3. Return to HCM.show</h2>
-  <p style="margin-top: 0px; margin-bottom: 12px;">After uploading and importing the sample data, click the button below to return to HCM.show and click "Sync Records" to sync the data back into HCM.show.</p>`;
 
   type FlatfileSpaceData = {
     id: string;
@@ -88,7 +60,6 @@ const Embedded: NextPageWithLayout<Props> = ({
       showDataChecklist: false,
       showSidebar: false,
     },
-    document: { title: "Welcome", body: initialDocumentBody },
   };
   const { error, data } = useSpace({ ...spaceProps });
 
@@ -106,54 +77,89 @@ const Embedded: NextPageWithLayout<Props> = ({
     if (localStorage.getItem(storageKey) === "true") {
       setDownloaded(true);
     }
+    if (existingSpace) {
+      setSpaceCreated(true);
+    }
   }, []);
 
   return (
     <div className="mx-12 flex flex-col justify-between mt-16 self-center">
-      <p className="text-2xl mb-12">
-        Your workspace is pre-configured and ready for use. 🎉{" "}
-      </p>
       {!downloaded && (
-        <div className="max-w-5xl mb-14">
-          <div className="flex flex-row">
-            <div className="max-w-lg">
-              <div className="font-semibold mb-6 max-w-lg">Getting Started</div>
-              <div className="mb-10">
-                First, let's download some sample data. Click below to download.
+        <div>
+          <p className="text-2xl mb-12">
+            Let's get ready to upload data into Flatfile.
+          </p>
+          <div className="max-w-5xl mb-14">
+            <div className="flex flex-row">
+              <div className="max-w-lg">
+                <div className="font-semibold mb-6 max-w-lg">
+                  Getting Started
+                </div>
+                <div className="mb-10">
+                  First, let's download some sample data. Click below to
+                  download.
+                </div>
+                <a
+                  className="bg-primary text-white px-4 py-2 mb-6 inline-flex items-center justify-center rounded-md border border-transparent text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
+                  download={sampleDataFileName}
+                  href={sampleDataFileName}
+                  onClick={() => {
+                    localStorage.setItem(storageKey, "true");
+                    setDownloaded(true);
+                  }}
+                >
+                  Download
+                  <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-2" />
+                </a>
               </div>
-              <a
-                className="bg-primary text-white px-4 py-2 mb-6 inline-flex items-center justify-center rounded-md border border-transparent text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
-                download={sampleDataFileName}
-                href={sampleDataFileName}
-                onClick={() => {
-                  localStorage.setItem(storageKey, "true");
-                  setDownloaded(true);
-                }}
-              >
-                Download
-                <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-2" />
-              </a>
             </div>
           </div>
         </div>
       )}
-      {downloaded && (
-        <div className="max-w-5xl mb-14">
-          <div className="flex flex-row">
-            <div className="min-w-[35%] flex flex-col justify-between">
-              <div>
-                <div className="font-semibold mb-6 max-w-lg">
-                  {showSpace ? "Close portal" : "Connect to the portal"}
-                </div>
-                <div className="text-gray-600 mb-10 max-w-lg">
-                  {showSpace
-                    ? "Click below to disconnect the portal"
-                    : "Click below to connect the embedded portal."}
-                </div>
+      {downloaded && !spaceCreated && (
+        <div>
+          <p className="text-2xl mb-12">Let's customize a space for you</p>
+          <div className="flex flex-col justify-between">
+            <div>
+              <div className="font-semibold mb-6 max-w-lg">Create a space</div>
+              <div className="text-gray-600 mb-10 max-w-lg">
+                Click below to create a flatfile space
               </div>
-              <div>
-                <form onSubmit={handlePortalSubmit}>
+            </div>
+            <div>
+              <form action="/api/flatfile/create-embed-space">
+                <button className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mb-6 bg-primary text-white border-transparent">
+                  Create Space
+                  <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-2" />
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+      {downloaded && spaceCreated && (
+        <div>
+          <p className="text-2xl mb-12">
+            Your workspace is configured and ready for use. 🎉{" "}
+          </p>
+          <div className="max-w-5xl mb-14">
+            <div className="flex flex-row">
+              <div className="min-w-[35%] flex flex-col justify-between">
+                <div>
+                  <div className="font-semibold mb-6 max-w-lg">
+                    {showSpace ? "Close portal" : "Connect to the portal"}
+                  </div>
+                  <div className="text-gray-600 mb-10 max-w-lg">
+                    {showSpace
+                      ? "Click below to disconnect the portal"
+                      : "Click below to connect the embedded portal."}
+                  </div>
+                </div>
+                <div>
                   <button
+                    onClick={() => {
+                      setShowSpace(!showSpace);
+                    }}
                     className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mt-14 mb-6 ${
                       showSpace
                         ? "bg-white text-primary border-2 border-primary"
@@ -163,49 +169,49 @@ const Embedded: NextPageWithLayout<Props> = ({
                     {showSpace ? "Close" : "Open"} Portal
                     <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-2" />
                   </button>
-                </form>
+                </div>
               </div>
-            </div>
 
-            <div className="border-r border-gray-300 mx-12"></div>
+              <div className="border-r border-gray-300 mx-12"></div>
 
-            <div className="flex flex-col justify-between">
-              <div>
-                <p className="font-semibold mb-6">Sync Records to HCM.show</p>
-                <p className="text-gray-600 mb-6 max-w-lg">
-                  After uploading records in Flatfile, click the button below to
-                  sync the records into HCM.show.
-                </p>
-              </div>
-              <div>
-                <form
-                  method="post"
-                  onSubmit={handleSubmit}
-                  className="mt-14 mb-6"
-                >
-                  <button
-                    onClick={() => toast.loading("Syncing...")}
-                    disabled={isSubmitting}
-                    type="submit"
-                    className={`${
-                      isSubmitting
-                        ? "bg-primary-dark hover:cursor-not-allowed"
-                        : "bg-primary hover:bg-primary-dark "
-                    } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto}`}
-                  >
-                    {buttonText}
-                    <ArrowPathIcon className="w-4 h-4 ml-1" />
-                  </button>
-                </form>
-
-                {lastSyncAction && (
-                  <p className="text-xs block text-gray-600 italic mt-2">
-                    Last sync{" "}
-                    {DateTime.fromJSDate(lastSyncAction.createdAt).toFormat(
-                      "MM/dd/yy hh:mm:ss a"
-                    )}
+              <div className="flex flex-col justify-between">
+                <div>
+                  <p className="font-semibold mb-6">Sync Records to HCM.show</p>
+                  <p className="text-gray-600 mb-6 max-w-lg">
+                    After uploading records in Flatfile, click the button below
+                    to sync the records into HCM.show.
                   </p>
-                )}
+                </div>
+                <div>
+                  <form
+                    method="post"
+                    onSubmit={handleSubmit}
+                    className="mt-14 mb-6"
+                  >
+                    <button
+                      onClick={() => toast.loading("Syncing...")}
+                      disabled={isSubmitting}
+                      type="submit"
+                      className={`${
+                        isSubmitting
+                          ? "bg-primary-dark hover:cursor-not-allowed"
+                          : "bg-primary hover:bg-primary-dark "
+                      } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto}`}
+                    >
+                      {buttonText}
+                      <ArrowPathIcon className="w-4 h-4 ml-1" />
+                    </button>
+                  </form>
+
+                  {lastSyncAction && (
+                    <p className="text-xs block text-gray-600 italic mt-2">
+                      Last sync{" "}
+                      {DateTime.fromJSDate(lastSyncAction.createdAt).toFormat(
+                        "MM/dd/yy hh:mm:ss a"
+                      )}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>

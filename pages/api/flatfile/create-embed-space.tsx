@@ -62,6 +62,24 @@ export default async function handler(
   // console.log("space", space);
   // console.log("space data", flatfileSpaceData);
 
-  res.status(200).end();
-  return;
+  const initialDocumentBody = `<div> 
+  <h1 style="margin-bottom: 0px;">Welcome! Let's import your data.</h1>
+  <p style="margin-top: 0px; margin-bottom: 12px;">Follow the steps below in order. Note: you can always return to this page by clicking "Welcome" in the left-hand sidebar.</p>
+  <h2 style="margin-bottom: 0px;">1. Visit Files</h2>
+  <p style="margin-top: 0px; margin-bottom: 8px;">Click "Files" in the left-hand sidebar. This is where you can upload files you want to import into Flatfile.</p>
+  <h2 style="margin-bottom: 0px;">2. Upload the sample data</h2>
+  <p style="margin-top: 0px; margin-bottom: 8px;">On the Files page, click "Add files" or drag-and-drop the sample data you downloaded previously onto the page.</p>
+  <p style="margin-top: 0px; margin-bottom: 8px;">After the file uploads, click "Import" and follow the steps to completion to import the workbook.</p>
+  <h2 style="margin-bottom: 0px;">3. Return to HCM.show</h2>
+  <p style="margin-top: 0px; margin-bottom: 12px;">After uploading and importing the sample data, click the button below to return to HCM.show and click "Sync Records" to sync the data back into HCM.show.</p>
+</div>`;
+
+  const addDocumentToSpaceResponse = await addDocumentToSpace(
+    "Welcome",
+    initialDocumentBody,
+    flatfileSpaceData.id,
+    accessToken
+  );
+
+  res.redirect("/embedded");
 }
