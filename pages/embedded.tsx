@@ -11,38 +11,40 @@ import {
   PencilIcon,
 } from "@heroicons/react/24/outline";
 import { getAccessToken } from "../lib/flatfile";
-import { Action, PrismaClient } from "@prisma/client";
+import { Action, PrismaClient, Space } from "@prisma/client";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
-import { useRouter } from "next/router";
+import { SpaceType } from "../lib/space";
+import { FlatfileSpaceData } from "../lib/flatfile";
 
 interface Props {
   accessToken: string;
   environmentToken: string;
   lastSyncAction?: Action;
+  existingSpace: Space;
 }
 
 const Embedded: NextPageWithLayout<Props> = ({
   accessToken,
   environmentToken,
   lastSyncAction,
+  existingSpace,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>("Sync Records");
-  const [spaceCreated, setSpaceCreated] = useState<boolean>(false);
-  const router = useRouter();
-  const existingSpaceId = router.query.createdSpaceId;
   const handleSubmit = (event: { preventDefault: () => void; target: any }) => {
     event.preventDefault();
     setIsSubmitting(true);
     setButtonText("Syncing records...");
   };
 
+  const flatfleSpace =
+    existingSpace?.flatfileData as unknown as FlatfileSpaceData;
   const [showSpace, setShowSpace] = useState(false);
   const spaceProps: ISpaceConfig = {
     accessToken: accessToken as string,
     environmentId: environmentToken as string,
-    spaceId: existingSpaceId as string,
+    spaceId: flatfleSpace?.id as string,
     sidebarConfig: {
       showDataChecklist: false,
       showSidebar: false,
@@ -63,9 +65,6 @@ const Embedded: NextPageWithLayout<Props> = ({
   useEffect(() => {
     if (localStorage.getItem(storageKey) === "true") {
       setDownloaded(true);
-    }
-    if (existingSpaceId) {
-      setSpaceCreated(true);
     }
   }, []);
 
@@ -103,7 +102,7 @@ const Embedded: NextPageWithLayout<Props> = ({
           </div>
         </div>
       )}
-      {downloaded && !spaceCreated && (
+      {downloaded && !existingSpace && (
         <div>
           <p className="text-2xl mb-12">Let's customize a space for you</p>
           <div className="flex flex-col justify-between">
@@ -125,7 +124,7 @@ const Embedded: NextPageWithLayout<Props> = ({
           </div>
         </div>
       )}
-      {downloaded && spaceCreated && (
+      {downloaded && existingSpace && (
         <div>
           <p className="text-2xl mb-12">
             Your workspace is configured and ready for use. 🎉{" "}
@@ -245,6 +244,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     throw new Error("No user found");
   }
 
+  const existingSpace = await prisma.space.findUnique({
+    where: {
+      userId_type: {
+        userId: token.sub as string,
+        type: SpaceType.Embed,
+      },
+    },
+  });
+
+  console.log("existingSpace", existingSpace);
+
   const accessToken = await getAccessToken();
   const environmentToken = process.env.FLATFILE_ENVIRONMENT_ID;
   const lastSyncAction = await prisma.action.findFirst({
@@ -261,6 +271,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       accessToken,
       environmentToken,
       lastSyncAction,
+      existingSpace,
     },
   };
 };

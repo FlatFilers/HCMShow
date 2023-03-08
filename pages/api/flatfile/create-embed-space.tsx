@@ -6,6 +6,7 @@ import {
   addDocumentToSpace,
   createSpace,
   getAccessToken,
+  getSpace,
 } from "../../../lib/flatfile";
 import { SpaceType } from "../../../lib/space";
 
@@ -42,6 +43,20 @@ export default async function handler(
   const flatfileSpaceData = await createSpace(accessToken);
 
   console.log("flatfileSpaceData", flatfileSpaceData);
+
+  const flatfileSpaceDataRefetch = await getSpace(
+    flatfileSpaceData.id,
+    accessToken
+  );
+
+  const space: Space = await prisma.space.create({
+    data: {
+      userId: user.id,
+      flatfileData:
+        flatfileSpaceDataRefetch as unknown as Prisma.InputJsonValue,
+      type: SpaceType.Embed,
+    },
+  });
 
   // console.log("space", space);
   // console.log("space data", flatfileSpaceData);
