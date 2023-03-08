@@ -26,24 +26,24 @@ import { faker } from "@faker-js/faker";
 export const main = async () => {
   console.log("Seeding...");
 
-  await upsertCountries();
-  await upsertLocations();
+  // await upsertCountries();
+  // await upsertLocations();
   await upsertEmployeeTypes();
   await upsertJobFamilies();
 
-  await upsertHireReasons();
-  await upsertTitleTypes();
-  await upsertTitles();
+  // await upsertHireReasons();
+  // await upsertTitleTypes();
+  // await upsertTitles();
   await upsertPositionTimes();
-  await upsertPayRates();
-  await upsertAdditionalJobClassifications();
-  await upsertAddresses();
-  await createOtherData();
+  // await upsertPayRates();
+  // await upsertAdditionalJobClassifications();
+  // await upsertAddresses();
+  // await createOtherData();
 
   const user = await upsertUser();
   await upsertJobs(user.organizationId);
 
-  await seedNewAccount(user);
+  // await seedNewAccount(user);
 };
 
 const upsertAddresses = async () => {
@@ -411,39 +411,39 @@ const upsertEmployeeTypes = async () => {
 
   const employeeTypes = await Promise.all(employeeTypesUpserts);
 
-  const updates = employeeTypes.map(async (e) => {
-    const countryCodes =
-      csvData.find((row) => e.slug === row.slug)?.countryCodes || [];
+  // const updates = employeeTypes.map(async (e) => {
+  //   const countryCodes =
+  //     csvData.find((row) => e.slug === row.slug)?.countryCodes || [];
 
-    const countryUpdates = countryCodes.map(async (code) => {
-      const country = (await prismaClient.country.findUnique({
-        where: { code },
-      })) as Country;
+  //   const countryUpdates = countryCodes.map(async (code) => {
+  //     const country = (await prismaClient.country.findUnique({
+  //       where: { code },
+  //     })) as Country;
 
-      await prismaClient.employeeType.update({
-        where: { id: e.id },
-        data: {
-          countries: {
-            connectOrCreate: {
-              where: {
-                employeeTypeId_countryId: {
-                  employeeTypeId: e.id,
-                  countryId: country.id,
-                },
-              },
-              create: {
-                countryId: country.id,
-              },
-            },
-          },
-        },
-      });
-    });
+  //     await prismaClient.employeeType.update({
+  //       where: { id: e.id },
+  //       data: {
+  //         countries: {
+  //           connectOrCreate: {
+  //             where: {
+  //               employeeTypeId_countryId: {
+  //                 employeeTypeId: e.id,
+  //                 countryId: country.id,
+  //               },
+  //             },
+  //             create: {
+  //               countryId: country.id,
+  //             },
+  //           },
+  //         },
+  //       },
+  //     });
+  //       });
 
-    await Promise.all(countryUpdates);
-  });
+  //   await Promise.all(countryUpdates);
+  // });
 
-  await Promise.all(updates);
+  // await Promise.all(updates);
 };
 
 const upsertLocations = async () => {

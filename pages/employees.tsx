@@ -9,7 +9,6 @@ import { useEffect } from "react";
 const employeeWithRelations = Prisma.validator<Prisma.EmployeeArgs>()({
   include: {
     manager: true,
-    location: true,
   },
 });
 
@@ -73,12 +72,6 @@ const Employees: NextPage<Props> = ({ employees }) => {
                     >
                       Title
                     </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Location
-                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
@@ -86,19 +79,19 @@ const Employees: NextPage<Props> = ({ employees }) => {
                     <tr key={employee.id}>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                         <Link href={`/employees/${employee.id}`}>
-                          {employee.name}
+                          {employee.firstName} {employee.lastName}
                         </Link>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {employee.manager && (
-                          <div>{employee.manager?.name}</div>
+                          <div>
+                            {employee.manager.firstName}{" "}
+                            {employee.manager.lastName}
+                          </div>
                         )}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {employee.positionTitle}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {employee.location.name}
                       </td>
                     </tr>
                   ))}
@@ -134,7 +127,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
     include: {
       manager: true,
-      location: true,
     },
   });
 
