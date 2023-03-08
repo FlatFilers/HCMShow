@@ -5,28 +5,49 @@ import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import {
   ArrowPathIcon,
-  ArrowTopRightOnSquareIcon,
+  ArrowDownTrayIcon,
+  ArrowsPointingOutIcon,
+  ArrowsPointingInIcon,
+  PencilIcon,
 } from "@heroicons/react/24/outline";
 import { getAccessToken } from "../lib/flatfile";
+import { Action, PrismaClient, Space } from "@prisma/client";
+import { DateTime } from "luxon";
+import toast from "react-hot-toast";
+import { SpaceType } from "../lib/space";
+import { FlatfileSpaceData } from "../lib/flatfile";
 
 interface Props {
   accessToken: string;
   environmentToken: string;
-  spaceConfigId: string;
+  lastSyncAction?: Action;
+  existingSpace: Space;
 }
 
 const Embedded: NextPageWithLayout<Props> = ({
   accessToken,
   environmentToken,
-  spaceConfigId,
+  lastSyncAction,
+  existingSpace,
 }) => {
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [buttonText, setButtonText] = useState<string>("Sync Records");
+  const handleSubmit = (event: { preventDefault: () => void; target: any }) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setButtonText("Syncing records...");
+  };
+
+  const flatfleSpace =
+    existingSpace?.flatfileData as unknown as FlatfileSpaceData;
   const [showSpace, setShowSpace] = useState(false);
   const spaceProps: ISpaceConfig = {
     accessToken: accessToken as string,
     environmentId: environmentToken as string,
-    spaceConfigId: spaceConfigId,
+    spaceId: flatfleSpace?.id as string,
     sidebarConfig: {
       showDataChecklist: false,
+      showSidebar: false,
     },
   };
   const { error, data } = useSpace({ ...spaceProps });
@@ -49,108 +70,140 @@ const Embedded: NextPageWithLayout<Props> = ({
 
   return (
     <div className="mx-12 flex flex-col justify-between mt-16 self-center">
-      <p className="text-2xl mb-12">
-        Your workspace is pre-configured and ready for use. 🎉{" "}
-      </p>
       {!downloaded && (
-        <div className="max-w-5xl mb-14">
-          <div className="flex flex-row">
-            <div className="max-w-lg">
-              <div className="font-semibold mb-6 max-w-lg">Getting Started</div>
-              <div className="mb-10">
-                First, let's download some sample data. Click below to download.
+        <div>
+          <p className="text-2xl mb-12">
+            Let's get ready to upload data into Flatfile.
+          </p>
+          <div className="max-w-5xl mb-14">
+            <div className="flex flex-row">
+              <div className="max-w-lg">
+                <div className="font-semibold mb-6 max-w-lg">
+                  Getting Started
+                </div>
+                <div className="mb-10">
+                  First, let's download some sample data. Click below to
+                  download.
+                </div>
+                <a
+                  className="bg-primary text-white px-4 py-2 mb-6 inline-flex items-center justify-center rounded-md border border-transparent text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
+                  download={sampleDataFileName}
+                  href={sampleDataFileName}
+                  onClick={() => {
+                    localStorage.setItem(storageKey, "true");
+                    setDownloaded(true);
+                  }}
+                >
+                  Download
+                  <ArrowDownTrayIcon className="w-4 h-4 ml-2" />
+                </a>
               </div>
-              <a
-                className="bg-primary text-white px-4 py-2 mb-6 inline-flex items-center justify-center rounded-md border border-transparent text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
-                download={sampleDataFileName}
-                href={sampleDataFileName}
-                onClick={() => {
-                  localStorage.setItem(storageKey, "true");
-                  setDownloaded(true);
-                }}
-              >
-                Download
-                <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-2" />
-              </a>
             </div>
           </div>
         </div>
       )}
-      {downloaded && (
-        <div className="max-w-7xl mb-14">
-          <div className="flex flex-row justify-around">
-            <div className="min-w-[25%] flex flex-col justify-between">
-              <div>
-                <div className="font-semibold mb-6 max-w-lg">
-                  {showSpace ? "Close portal" : "Connect to the portal"}
-                </div>
-                <div className="text-gray-600 mb-10 max-w-lg">
-                  {showSpace
-                    ? "Click below to disconnect the portal"
-                    : "Click below to connect the embedded portal."}
-                </div>
-              </div>
-              <div>
-                <button
-                  className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mb-12 ${
-                    showSpace
-                      ? "bg-white text-primary border-2 border-primary"
-                      : "bg-primary text-white border-transparent"
-                  }`}
-                  onClick={() => setShowSpace(!showSpace)}
-                >
-                  {showSpace ? "Close" : "Open"} Portal
-                  <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-2" />
-                </button>
-              </div>
-            </div>
-            <div className="border-r border-gray-300 mx-12"></div>
+      {downloaded && !existingSpace && (
+        <div>
+          <p className="text-2xl mb-12">Let's customize a space for you</p>
+          <div className="flex flex-col justify-between">
             <div>
-              <div className="mb-2 font-semibold">Let's import your data</div>
-              <div className="text-xs block text-gray-600 mb-6">
-                To download the sample data again{" "}
-                <a
-                  className="underline text-primary"
-                  download={sampleDataFileName}
-                  href={sampleDataFileName}
-                >
-                  click here.
-                </a>
+              <div className="font-semibold mb-6 max-w-lg">Create a space</div>
+              <div className="text-gray-600 mb-10 max-w-lg">
+                Click below to create a flatfile space
               </div>
-              <div className="mb-2">1. Visit Files</div>
-              <p className="mb-6">
-                Click "Files" in the left-hand sidebar. This is where you can
-                upload files you want to import into Flatfile.
-              </p>
-              <div className="mb-2">2. Upload the sample data</div>
-              <p className="mb-2">
-                On the Files page, click "Add files" or drag-and-drop the sample
-                data you downloaded previously onto the page.
-              </p>
-              <p>
-                After the file uploads, click "Import" and follow the steps to
-                completion to import the workbook.
-              </p>
             </div>
-
-            <div className="border-r border-gray-300 mx-12"></div>
-
-            <div className="flex flex-col justify-between">
-              <div>
-                <p className="font-semibold mb-6">Sync Records to HCM.show</p>
-                <p className="text-gray-600 mb-6 max-w-lg">
-                  After uploading records in Flatfile, click the button below to
-                  sync the records into HCM.show.
-                </p>
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  className=" bg-slate-400 hover:cursor-not-allowed inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mb-12"
-                >
-                  Sync Records
-                  <ArrowPathIcon className="w-4 h-4 ml-1" />
+            <div>
+              {/* TODO: Add creating space toast and toast on redirect */}
+              <form action="/api/flatfile/create-embed-space">
+                <button className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mb-6 bg-primary text-white border-transparent">
+                  Create Space
+                  <PencilIcon className="w-4 h-4 ml-2" />
                 </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+      {downloaded && existingSpace && (
+        <div>
+          <p className="text-2xl mb-12">
+            Your workspace is configured and ready for use. 🎉{" "}
+          </p>
+          <div className="max-w-5xl mb-14">
+            <div className="flex flex-row">
+              <div className="min-w-[35%] flex flex-col justify-between">
+                <div>
+                  <div className="font-semibold mb-6 max-w-lg">
+                    {showSpace ? "Close portal" : "Connect to the portal"}
+                  </div>
+                  <div className="text-gray-600 mb-10 max-w-lg">
+                    {showSpace
+                      ? "Click below to disconnect the portal"
+                      : "Click below to connect the embedded portal."}
+                  </div>
+                </div>
+                <div>
+                  <button
+                    onClick={() => {
+                      setShowSpace(!showSpace);
+                    }}
+                    className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mt-14 mb-6 ${
+                      showSpace
+                        ? "bg-white text-primary border-2 border-primary"
+                        : "bg-primary text-white border-transparent"
+                    }`}
+                  >
+                    {showSpace ? "Close" : "Open"} Portal
+                    {showSpace ? (
+                      <ArrowsPointingInIcon className="w-4 h-4 ml-2" />
+                    ) : (
+                      <ArrowsPointingOutIcon className="w-4 h-4 ml-2" />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              <div className="border-r border-gray-300 mx-12"></div>
+
+              <div className="flex flex-col justify-between">
+                <div>
+                  <p className="font-semibold mb-6">Sync Records to HCM.show</p>
+                  <p className="text-gray-600 mb-6 max-w-lg">
+                    After uploading records in Flatfile, click the button below
+                    to sync the records into HCM.show.
+                  </p>
+                </div>
+                <div>
+                  <form
+                    method="post"
+                    action="/api/flatfile/sync-records"
+                    onSubmit={handleSubmit}
+                    className="mt-14 mb-6"
+                  >
+                    <button
+                      onClick={() => toast.loading("Syncing...")}
+                      disabled={isSubmitting}
+                      type="submit"
+                      className={`${
+                        isSubmitting
+                          ? "bg-primary-dark hover:cursor-not-allowed"
+                          : "bg-primary hover:bg-primary-dark "
+                      } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto}`}
+                    >
+                      {buttonText}
+                      <ArrowPathIcon className="w-4 h-4 ml-1" />
+                    </button>
+                  </form>
+
+                  {lastSyncAction && (
+                    <p className="text-xs block text-gray-600 italic mt-2">
+                      Last sync{" "}
+                      {DateTime.fromJSDate(lastSyncAction.createdAt).toFormat(
+                        "MM/dd/yy hh:mm:ss a"
+                      )}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -180,12 +233,46 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
+  const prisma = new PrismaClient();
+  const user = await prisma.user.findUnique({
+    where: {
+      id: token.sub,
+    },
+  });
+
+  if (!user) {
+    throw new Error("No user found");
+  }
+
+  const existingSpace = await prisma.space.findUnique({
+    where: {
+      userId_type: {
+        userId: token.sub as string,
+        type: SpaceType.Embed,
+      },
+    },
+  });
+
+  console.log("existingSpace", existingSpace);
+
   const accessToken = await getAccessToken();
   const environmentToken = process.env.FLATFILE_ENVIRONMENT_ID;
-  const spaceConfigId = process.env.ONBOARDING_SPACE_CONFIG_ID;
+  const lastSyncAction = await prisma.action.findFirst({
+    where: {
+      organizationId: token.organizationId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
   return {
-    props: { accessToken, environmentToken, spaceConfigId },
+    props: {
+      accessToken,
+      environmentToken,
+      lastSyncAction,
+      existingSpace,
+    },
   };
 };
 
