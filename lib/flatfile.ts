@@ -87,10 +87,7 @@ export async function getAccessToken() {
   return accessTokenResponse.data.accessToken;
 }
 
-export const getRecords = async (
-  userId: string,
-  accessToken: string
-): Promise<Record[]> => {
+export const getRecords = async (userId: string, accessToken: string) => {
   const prisma = new PrismaClient();
 
   const space = await prisma.space.findFirst({
@@ -120,31 +117,56 @@ export const getRecords = async (
 
   // console.log("w, s", workbookId, sheetId);
 
-  const recordsResponse = await fetch(
-    // TODO: eventually use valid filter here
-    // `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records?filter=valid`,
-    `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records`,
-    {
-      method: "GET",
-      headers: headers,
-    }
-  );
-
-  // console.log("recordsResponse", recordsResponse);
-
-  if (!recordsResponse.ok) {
-    throw new Error(
-      `Error getting records for spaceId: ${space.id}, flatfileSpaceId: ${
-        (space.flatfileData as unknown as FlatfileSpaceData).id
-      }, flatfile workbookId: ${workbookId}, flatfile sheetId: ${sheetId}`
+  try {
+    const recordsResponse = await flatfile.sheets.getRecords(
+      workbookId,
+      sheetId,
+      {}
     );
+
+    throw 'boop'
+
+    throw recordsResponse.data.records;
+
+    return recordsResponse.data.records;
+  } catch (err) {
+    throw err;
+    const message = `Error getting records for spaceId: ${
+      space.id
+    }, flatfileSpaceId: ${
+      (space.flatfileData as unknown as FlatfileSpaceData).id
+    }, flatfile workbookId: ${workbookId}, flatfile sheetId: ${sheetId}`;
+    console.log(message, err);
+    throw new Error(message);
   }
 
-  const recordsResult = await recordsResponse.json();
+  // console.log("w, s", workbookId, sheetId);
 
-  // console.log("recordsResult", recordsResult);
+  // const recordsResponse = await fetch(
+  //   // TODO: eventually use valid filter here
+  //   // `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records?filter=valid`,
+  //   `${BASE_PATH}/workbooks/${workbookId}/sheets/${sheetId}/records`,
+  //   {
+  //     method: "GET",
+  //     headers: headers,
+  //   }
+  // );
 
-  return recordsResult.data.records;
+  // // console.log("recordsResponse", recordsResponse);
+
+  // if (!recordsResponse.ok) {
+  //   throw new Error(
+  //     `Error getting records for spaceId: ${space.id}, flatfileSpaceId: ${
+  //       (space.flatfileData as unknown as FlatfileSpaceData).id
+  //     }, flatfile workbookId: ${workbookId}, flatfile sheetId: ${sheetId}`
+  //   );
+  // }
+
+  // const recordsResult = await recordsResponse.json();
+
+  // // console.log("recordsResult", recordsResult);
+
+  // return recordsResult.data.records;
 };
 
 const getWorkbookIdAndSheetId = async (
