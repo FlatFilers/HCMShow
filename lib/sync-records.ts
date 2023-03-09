@@ -10,9 +10,11 @@ import { validJobRecords, upsertJobRecords } from "./job";
 export const syncWorkbookRecords = async ({
   userId,
   organizationId,
+  spaceType,
 }: {
   userId: string;
   organizationId: string;
+  spaceType: string;
 }) => {
   const accessToken = await getAccessToken();
 
@@ -20,13 +22,13 @@ export const syncWorkbookRecords = async ({
     userId,
     accessToken,
     "Employees",
-    SpaceType.WorkbookUpload
+    spaceType as SpaceType
   );
   const jobRecords = await getRecordsByName(
     userId,
     accessToken,
     "Jobs",
-    SpaceType.WorkbookUpload
+    spaceType as SpaceType
   );
 
   const totalRecords = employeeRecords.length + jobRecords.length;

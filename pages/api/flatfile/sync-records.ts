@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
 import { syncWorkbookRecords } from "../../../lib/sync-records";
+import { SpaceType } from "../../../lib/space";
 
 type Data = {
   message?: string;
@@ -20,11 +21,20 @@ export default async function handler(
     throw new Error("No session");
   }
 
+  const pageToSpaceType = {
+    embedded: "Embed",
+    workbook_upload: "WorkbookUpload",
+  };
+
+  let spaceTypeKey =
+    pageToSpaceType[req.body.page as keyof typeof pageToSpaceType];
+
   const { success, message } = await syncWorkbookRecords({
     userId: token.sub,
     organizationId: token.organizationId,
+    spaceType: SpaceType[spaceTypeKey as keyof typeof SpaceType],
   });
   const flash = success ? "success" : "error";
 
-  res.redirect(`/workbook-upload?flash=${flash}&message=${message}`);
+  res.redirect(`/${req.body.page}?flash=${flash}&message=${message}`);
 }

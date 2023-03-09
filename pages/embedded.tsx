@@ -16,6 +16,7 @@ import { DateTime } from "luxon";
 import toast from "react-hot-toast";
 import { SpaceType } from "../lib/space";
 import { FlatfileSpaceData } from "../lib/flatfile";
+import { useRouter } from "next/router";
 
 interface Props {
   accessToken: string;
@@ -32,8 +33,7 @@ const Embedded: NextPageWithLayout<Props> = ({
 }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>("Sync Records");
-  const handleSubmit = (event: { preventDefault: () => void; target: any }) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     setIsSubmitting(true);
     setButtonText("Syncing records...");
   };
@@ -62,9 +62,25 @@ const Embedded: NextPageWithLayout<Props> = ({
   const storageKey = "embedded-has-downloaded-sample-data";
   const sampleDataFileName = "/sample-hcm-employees.csv";
 
+  const router = useRouter();
+
   useEffect(() => {
     if (localStorage.getItem(storageKey) === "true") {
       setDownloaded(true);
+    }
+
+    if (router.query.flash === "success") {
+      window.history.replaceState(null, "", "/embedded");
+      toast.success(router.query.message as string, {
+        id: router.query.message as string,
+        duration: 4000,
+        style: {
+          minWidth: "450px",
+        },
+      });
+    } else if (router.query.flash === "error") {
+      window.history.replaceState(null, "", "/embedded");
+      toast.error(router.query.message as string, { id: "error" });
     }
   }, []);
 
@@ -75,7 +91,7 @@ const Embedded: NextPageWithLayout<Props> = ({
           <p className="text-2xl mb-12">
             Let's get ready to upload data into Flatfile.
           </p>
-          <div className="max-w-5xl mb-14">
+          <div className="w-[35%] mb-14">
             <div className="flex flex-row">
               <div className="max-w-lg">
                 <div className="font-semibold mb-6 max-w-lg">
@@ -98,6 +114,7 @@ const Embedded: NextPageWithLayout<Props> = ({
                   <ArrowDownTrayIcon className="w-4 h-4 ml-2" />
                 </a>
               </div>
+              <div className="border-r border-gray-300 mx-12"></div>
             </div>
           </div>
         </div>
@@ -105,21 +122,30 @@ const Embedded: NextPageWithLayout<Props> = ({
       {downloaded && !existingSpace && (
         <div>
           <p className="text-2xl mb-12">Let's customize a space for you</p>
-          <div className="flex flex-col justify-between">
-            <div>
-              <div className="font-semibold mb-6 max-w-lg">Create a space</div>
-              <div className="text-gray-600 mb-10 max-w-lg">
-                Click below to create a flatfile space
+          <div className="w-[35%] mb-14">
+            <div className="flex flex-row justify-between">
+              <div>
+                <div>
+                  <div className="font-semibold mb-6 max-w-lg">
+                    Create a space
+                  </div>
+                  <div className="text-gray-600 mb-10 max-w-lg">
+                    Click below to create a flatfile space
+                  </div>
+                </div>
+                <div>
+                  <form action="/api/flatfile/create-embed-space">
+                    <button
+                      onClick={() => toast.loading("Creating a space...")}
+                      className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mb-6 bg-primary text-white border-transparent"
+                    >
+                      Create Space
+                      <PencilIcon className="w-4 h-4 ml-2" />
+                    </button>
+                  </form>
+                </div>
               </div>
-            </div>
-            <div>
-              {/* TODO: Add creating space toast and toast on redirect */}
-              <form action="/api/flatfile/create-embed-space">
-                <button className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mb-6 bg-primary text-white border-transparent">
-                  Create Space
-                  <PencilIcon className="w-4 h-4 ml-2" />
-                </button>
-              </form>
+              <div className="border-r border-gray-300 mx-12"></div>
             </div>
           </div>
         </div>
@@ -147,11 +173,13 @@ const Embedded: NextPageWithLayout<Props> = ({
                     onClick={() => {
                       setShowSpace(!showSpace);
                     }}
-                    className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mt-14 mb-6 ${
+                    className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mt-14  ${
                       showSpace
                         ? "bg-white text-primary border-2 border-primary"
                         : "bg-primary text-white border-transparent"
-                    }`}
+                    }
+                      ${lastSyncAction ? "mb-10" : "mb-6"}
+                    `}
                   >
                     {showSpace ? "Close" : "Open"} Portal
                     {showSpace ? (
@@ -180,6 +208,7 @@ const Embedded: NextPageWithLayout<Props> = ({
                     onSubmit={handleSubmit}
                     className="mt-14 mb-6"
                   >
+                    <input type="hidden" value="embedded" name="page" />
                     <button
                       onClick={() => toast.loading("Syncing...")}
                       disabled={isSubmitting}
@@ -253,7 +282,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  console.log("existingSpace", existingSpace);
+  // console.log("existingSpace", existingSpace);
 
   const accessToken = await getAccessToken();
   const environmentToken = process.env.FLATFILE_ENVIRONMENT_ID;
