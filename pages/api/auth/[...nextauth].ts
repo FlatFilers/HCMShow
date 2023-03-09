@@ -18,6 +18,9 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
+        firstName: { label: "First name", type: "hidden" },
+        lastName: { label: "Last name", type: "hidden" },
+        companyName: { label: "Company name", type: "hidden" },
         isSignup: { label: "isSignup", type: "hidden" },
       },
 
@@ -30,10 +33,7 @@ export const authOptions: NextAuthOptions = {
         if (credentials?.isSignup === "true") {
           console.log("signup flow");
 
-          const user = await setupNewAccount(
-            credentials.email,
-            credentials.password
-          );
+          const user = await setupNewAccount(credentials);
 
           return user;
         } else {
