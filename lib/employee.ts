@@ -37,9 +37,9 @@ export const upsertEmployee = async ({
       },
     },
     create: {
-      employeeId: employeeId,
-      managerId: managerId,
-      organizationId: organizationId,
+      organizationId,
+      employeeId,
+      managerId,
       firstName,
       lastName,
       employeeTypeId,

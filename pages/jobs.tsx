@@ -41,25 +41,7 @@ const Jobs: NextPage<Props> = ({ jobs }) => {
                   scope="col"
                   className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                 >
-                  Summary
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Description
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Work Shift Required
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Public Job
+                  Department
                 </th>
                 <th
                   scope="col"
@@ -85,18 +67,7 @@ const Jobs: NextPage<Props> = ({ jobs }) => {
                     }
                   </td>
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {job.summary ? job.summary?.slice(0, 40) + "..." : ""}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {job.description
-                      ? job.description?.slice(0, 40) + "..."
-                      : ""}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {job.workShift ? "Yes" : "No"}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {job.jobPublic ? "Yes" : "No"}
+                    {job.department}
                   </td>
                   <td
                     className={`whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6

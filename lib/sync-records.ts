@@ -1,13 +1,4 @@
-import {
-  AdditionalJobClassification,
-  EmployeeType,
-  HireReason,
-  PayRate,
-  PositionTime,
-  Title,
-  WorkerCompensationCode,
-  Location,
-} from "@prisma/client";
+import { EmployeeType } from "@prisma/client";
 import { upsertEmployee, validEmployeeRecords } from "./employee";
 import { getAccessToken, getRecordsByName } from "./flatfile";
 import { prismaClient } from "./prisma-client";
@@ -74,9 +65,9 @@ export const syncWorkbookRecords = async ({
           r.values.hireDate.value as string,
           "yyyy-MM-dd"
         ).toJSDate(),
-        endEmploymentDate: r.values.hireDate.value
+        endEmploymentDate: r.values.endEmploymentDate.value
           ? DateTime.fromFormat(
-              r.values.hireDate.value as string,
+              r.values.endEmploymentDate.value as string,
               "yyyy-MM-dd"
             ).toJSDate()
           : null,
