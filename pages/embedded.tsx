@@ -87,7 +87,7 @@ const Embedded: NextPageWithLayout<Props> = ({
   return (
     <div className="mx-12 flex flex-col justify-between mt-16 self-center">
       {!downloaded && (
-        <div>
+        <div className="max-w-7xl">
           <p className="text-2xl mb-12">
             Let's get ready to upload data into Flatfile.
           </p>
@@ -114,13 +114,13 @@ const Embedded: NextPageWithLayout<Props> = ({
                   <ArrowDownTrayIcon className="w-4 h-4 ml-2" />
                 </a>
               </div>
-              <div className="border-r border-gray-300 mx-12"></div>
+              <div className="border-r border-gray-300"></div>
             </div>
           </div>
         </div>
       )}
       {downloaded && !existingSpace && (
-        <div>
+        <div className="max-w-7xl">
           <p className="text-2xl mb-12">Let's customize a space for you</p>
           <div className="w-[35%] mb-14">
             <div className="flex flex-row justify-between">
@@ -130,7 +130,8 @@ const Embedded: NextPageWithLayout<Props> = ({
                     Create a space
                   </div>
                   <div className="text-gray-600 mb-10 max-w-lg">
-                    Click below to create a flatfile space
+                    Next, let's configure a space to work with. Click below to
+                    create a flatfile space
                   </div>
                 </div>
                 <div>
@@ -145,53 +146,52 @@ const Embedded: NextPageWithLayout<Props> = ({
                   </form>
                 </div>
               </div>
-              <div className="border-r border-gray-300 mx-12"></div>
+              <div className="border-r border-gray-300"></div>
             </div>
           </div>
         </div>
       )}
       {downloaded && existingSpace && (
-        <div>
+        <div className="max-w-7xl">
           <p className="text-2xl mb-12">
             Your workspace is configured and ready for use. 🎉{" "}
           </p>
-          <div className="max-w-5xl mb-14">
+          <div className="w-full mb-14">
             <div className="flex flex-row">
-              <div className="min-w-[35%] flex flex-col justify-between">
-                <div>
-                  <div className="font-semibold mb-6 max-w-lg">
-                    {showSpace ? "Close portal" : "Connect to the portal"}
+              <div className="w-[35%]">
+                <div className="flex flex-col justify-between">
+                  <div>
+                    <div className="font-semibold mb-6 max-w-lg">
+                      {showSpace ? "Close portal" : "Connect to the portal"}
+                    </div>
+                    <div className="text-gray-600 mb-10 max-w-lg">
+                      {showSpace
+                        ? "Click below to disconnect the portal"
+                        : "Click below to connect the embedded portal."}
+                    </div>
                   </div>
-                  <div className="text-gray-600 mb-10 max-w-lg">
-                    {showSpace
-                      ? "Click below to disconnect the portal"
-                      : "Click below to connect the embedded portal."}
+                  <div>
+                    <button
+                      onClick={() => {
+                        setShowSpace(!showSpace);
+                      }}
+                      className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mt-16 mb-6 ${
+                        showSpace
+                          ? "bg-white text-primary border-2 border-primary"
+                          : "bg-primary text-white border-transparent"
+                      }`}
+                    >
+                      {showSpace ? "Close" : "Open"} Portal
+                      {showSpace ? (
+                        <ArrowsPointingInIcon className="w-4 h-4 ml-2" />
+                      ) : (
+                        <ArrowsPointingOutIcon className="w-4 h-4 ml-2" />
+                      )}
+                    </button>
                   </div>
-                </div>
-                <div>
-                  <button
-                    onClick={() => {
-                      setShowSpace(!showSpace);
-                    }}
-                    className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mt-14  ${
-                      showSpace
-                        ? "bg-white text-primary border-2 border-primary"
-                        : "bg-primary text-white border-transparent"
-                    }
-                      ${lastSyncAction ? "mb-10" : "mb-6"}
-                    `}
-                  >
-                    {showSpace ? "Close" : "Open"} Portal
-                    {showSpace ? (
-                      <ArrowsPointingInIcon className="w-4 h-4 ml-2" />
-                    ) : (
-                      <ArrowsPointingOutIcon className="w-4 h-4 ml-2" />
-                    )}
-                  </button>
                 </div>
               </div>
-
-              <div className="border-r border-gray-300 mx-12"></div>
+              <div className="border-r border-gray-300 mr-12"></div>
 
               <div className="flex flex-col justify-between">
                 <div>
@@ -204,7 +204,7 @@ const Embedded: NextPageWithLayout<Props> = ({
                 <div>
                   <form
                     method="post"
-                    action="/api/flatfile/sync-records"
+                    action="/api/flatfile/sync-embed-records"
                     onSubmit={handleSubmit}
                     className="mt-14 mb-6"
                   >

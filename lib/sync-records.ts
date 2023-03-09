@@ -14,7 +14,7 @@ export const syncWorkbookRecords = async ({
 }: {
   userId: string;
   organizationId: string;
-  spaceType: string;
+  spaceType: SpaceType;
 }) => {
   const accessToken = await getAccessToken();
 
@@ -22,13 +22,13 @@ export const syncWorkbookRecords = async ({
     userId,
     accessToken,
     "Employees",
-    spaceType as SpaceType
+    spaceType
   );
   const jobRecords = await getRecordsByName(
     userId,
     accessToken,
     "Jobs",
-    spaceType as SpaceType
+    spaceType
   );
 
   const totalRecords = employeeRecords.length + jobRecords.length;
