@@ -40,8 +40,8 @@ export const main = async () => {
   // await upsertAddresses();
   // await createOtherData();
 
-  const user = await upsertUser();
-  await upsertJobs(user.organizationId);
+  // const user = await upsertUser();
+  // await upsertJobs(user.organizationId);
 
   // await seedNewAccount(user);
 };
@@ -753,38 +753,38 @@ const upsertEmployees = async (organizationId: string) => {
   await Promise.all(directReports);
 };
 
-const upsertUser = async () => {
-  const email = "user@email.com";
+// const upsertUser = async () => {
+//   const email = "user@email.com";
 
-  const orgData = {
-    email,
-  };
+//   const orgData = {
+//     email,
+//   };
 
-  const organization = await prismaClient.organization.upsert({
-    where: {
-      email,
-    },
-    create: orgData,
-    update: {},
-  });
+//   const organization = await prismaClient.organization.upsert({
+//     where: {
+//       email,
+//     },
+//     create: orgData,
+//     update: {},
+//   });
 
-  const data = {
-    email: email,
-    password: await hashPassword("badpassword"),
-    organization: {
-      connect: {
-        id: organization.id,
-      },
-    },
-  };
+//   const data = {
+//     email: email,
+//     password: await hashPassword("badpassword"),
+//     organization: {
+//       connect: {
+//         id: organization.id,
+//       },
+//     },
+//   };
 
-  const user: User = await prismaClient.user.upsert({
-    where: {
-      email: data.email,
-    },
-    create: data,
-    update: {},
-  });
+//   const user: User = await prismaClient.user.upsert({
+//     where: {
+//       email: data.email,
+//     },
+//     create: data,
+//     update: {},
+//   });
 
-  return user;
-};
+//   return user;
+// };

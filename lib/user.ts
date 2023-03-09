@@ -12,18 +12,32 @@ export const findUser = async (email: string) => {
   });
 };
 
-const createUser = async (email: string, plaintextPassword: string) => {
+const createUser = async (
+  credentials: Record<
+    | "email"
+    | "password"
+    | "firstName"
+    | "lastName"
+    | "companyName"
+    | "isSignup",
+    string
+  >
+) => {
+  const { email, password, firstName, lastName, companyName } = credentials;
+
   try {
     const organization = await prisma.organization.create({
       data: {
-        email: email,
+        companyName,
       },
     });
 
     return await prisma.user.create({
       data: {
-        email: email,
-        password: await hashPassword(plaintextPassword),
+        email,
+        firstName,
+        lastName,
+        password: await hashPassword(password),
         organization: {
           connect: {
             id: organization.id,
@@ -45,10 +59,17 @@ const createUser = async (email: string, plaintextPassword: string) => {
 };
 
 export const setupNewAccount = async (
-  email: string,
-  plaintextPassword: string
+  credentials: Record<
+    | "email"
+    | "password"
+    | "firstName"
+    | "lastName"
+    | "companyName"
+    | "isSignup",
+    string
+  >
 ) => {
-  const user = await createUser(email, plaintextPassword);
+  const user = await createUser(credentials);
 
   return user;
 };

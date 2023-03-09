@@ -16,7 +16,7 @@ model Organization {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  email String @unique
+  companyName String
 
   users User[]
   employees Employee[]
@@ -31,6 +31,8 @@ model User {
 
   email String @unique @db.Text
   password String 
+  firstName String
+  lastName String
 
   organizationId String @db.Uuid
   organization Organization @relation(fields: [organizationId], references: [id])
