@@ -80,5 +80,7 @@ export default async function handler(
     accessToken
   );
 
-  res.redirect(`/embedded?createdSpaceId=${flatfileSpaceData.id}`);
+  res.redirect(
+    `/embedded?flash=success&message=Space Created!&createdSpaceId=${flatfileSpaceData.id}`
+  );
 }
