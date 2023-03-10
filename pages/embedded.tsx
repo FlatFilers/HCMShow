@@ -74,9 +74,6 @@ const Embedded: NextPageWithLayout<Props> = ({
       toast.success(router.query.message as string, {
         id: router.query.message as string,
         duration: 4000,
-        style: {
-          minWidth: "450px",
-        },
       });
     } else if (router.query.flash === "error") {
       window.history.replaceState(null, "", "/embedded");
@@ -208,7 +205,6 @@ const Embedded: NextPageWithLayout<Props> = ({
                     onSubmit={handleSubmit}
                     className="mt-14 mb-6"
                   >
-                    <input type="hidden" value="embedded" name="page" />
                     <button
                       onClick={() => toast.loading("Syncing...")}
                       disabled={isSubmitting}

@@ -264,7 +264,6 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
                 method="post"
                 onSubmit={handleSubmit}
               >
-                <input type="hidden" value="workbook_upload" name="page" />
                 <button
                   onClick={() => toast.loading("Syncing...")}
                   disabled={isSubmitting}
