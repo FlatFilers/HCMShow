@@ -724,17 +724,6 @@ export const upsertEmployees = async (organizationId: string) => {
     addresses,
     jobs,
   };
-  // let mappedData: Omit<CsvJobType, "jobFamilyId"> & {
-  //   jobFamily?: any;
-  //   organization: any;
-  // } = {
-  //   ...rest,
-  //   organization: {
-  //     connect: {
-  //       id: organizationId,
-  //     },
-  //   },
-  // };
   const manager: Employee = await upsertEmployee(data);
 
   const directReports = Array.from({ length: 5 }).map(
