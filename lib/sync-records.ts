@@ -92,7 +92,7 @@ export const syncWorkbookRecords = async ({
         scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
         flatfileRecordId: r.id,
         jobs: {
-          create: { job: { connect: { slug: job.slug } } },
+          create: { job: { connect: { id: job.id } } },
         },
       };
 

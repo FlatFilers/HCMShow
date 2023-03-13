@@ -704,7 +704,7 @@ export const upsertEmployees = async (organizationId: string) => {
   });
   const job = await prismaClient.job.findFirst();
   const jobs = {
-    create: { job: { connect: { slug: job!.slug } } },
+    create: { job: { connect: { id: job!.id } } },
   }!;
 >>>>>>> 990e19f (edit to create connect on relation table)
 
