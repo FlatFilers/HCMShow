@@ -701,7 +701,6 @@ export const upsertEmployees = async (organizationId: string) => {
   const addresses = await prismaClient.address.findMany({
     take: 2,
   });
-  // TODO: Remove hardcode when adding back jobs to seed
   const job = await prismaClient.job.findFirst();
   const jobs = {
     create: { job: { connect: { slug: job!.slug } } },
