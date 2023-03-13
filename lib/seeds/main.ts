@@ -703,7 +703,7 @@ export const upsertEmployees = async (organizationId: string) => {
   });
   const job = await prismaClient.job.findFirst();
   const jobs = {
-    create: { job: { connect: { slug: job!.slug } } },
+    create: { job: { connect: { id: job!.id } } },
   }!;
   const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,
