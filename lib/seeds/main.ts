@@ -681,74 +681,42 @@ const createOtherData = async () => {
     });
 };
 
-const upsertEmployees = async (organizationId: string) => {
+export const upsertEmployees = async (organizationId: string) => {
   const employeeTypeId = (
     (await prismaClient.employeeType.findFirst()) as EmployeeType
-  ).id;
-  const titleId = ((await prismaClient.title.findFirst()) as Title).id;
-  const socialSuffixId = ((await prismaClient.title.findFirst()) as Title).id;
-  const hireReasonId = (
-    (await prismaClient.hireReason.findFirst()) as HireReason
   ).id;
   const hireDate = DateTime.now().toJSDate();
   const endEmploymentDate = null;
   const positionTitle = "Sales Rep";
-  const businessTitle = "Sales Rep";
-  const locationId = ((await prismaClient.location.findFirst()) as Location).id;
-  const workspaceId = (
-    (await prismaClient.location.findFirst({
-      orderBy: { name: "desc" },
-    })) as Location
-  ).id;
-  const positionTimeId = (
-    (await prismaClient.positionTime.findFirst()) as PositionTime
-  ).id;
   const defaultWeeklyHours = 40;
   const scheduledWeeklyHours = 40;
-  const payRateId = ((await prismaClient.payRate.findFirst()) as PayRate).id;
-  const additionalJobClassificationId = (
-    (await prismaClient.additionalJobClassification.findFirst()) as AdditionalJobClassification
-  ).id;
-  const workerCompensationCodeId = (
-    (await prismaClient.workerCompensationCode.findFirst()) as WorkerCompensationCode
-  ).id;
-  const addresses = await prismaClient.address.findMany({
-    take: 2,
-  });
 
-  const data = {
+  const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,
     employeeId: crypto.randomBytes(16).toString("hex"),
-    titleId,
-    socialSuffixId,
-    hireReasonId,
     firstName: faker.name.firstName(),
-    middleName: faker.name.middleName(),
     lastName: faker.name.lastName(),
     hireDate,
     endEmploymentDate,
     positionTitle,
-    businessTitle,
-    locationId,
-    workspaceId,
     employeeTypeId,
-    positionTimeId,
     defaultWeeklyHours,
     scheduledWeeklyHours,
-    payRateId,
-    additionalJobClassificationId,
-    workerCompensationCodeId,
-    addresses,
   };
   const manager: Employee = await upsertEmployee(data);
 
-  const directReports = Array.from({ length: 10 }).map(async () => {
-    await upsertEmployee({
-      ...data,
-      employeeId: crypto.randomBytes(16).toString("hex"),
-      managerId: manager.id,
-    });
-  });
+  const directReports = Array.from({ length: 5 }).map(
+    async (_element, index) => {
+      // Pre-seed a couple employees with employeeIDs we can validate against in the config.
+      await upsertEmployee({
+        ...data,
+        employeeId: (21001 + index).toString(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        managerId: manager.id,
+      });
+    }
+  );
 
   await Promise.all(directReports);
 };
