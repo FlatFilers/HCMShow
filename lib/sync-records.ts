@@ -40,6 +40,15 @@ export const syncWorkbookRecords = async ({
     };
   }
 
+  const validJobs = await validJobRecords(jobRecords);
+
+  console.log("Valid job records to sync", validJobs.length);
+
+  const upsertJobs = await upsertJobRecords(validJobs, {
+    userId,
+    organizationId,
+  });
+
   const validEmployees = await validEmployeeRecords(employeeRecords);
 
   console.log("Valid records to sync", validEmployees.length);
@@ -124,15 +133,6 @@ export const syncWorkbookRecords = async ({
   });
 
   await Promise.all(upsertEmployees);
-
-  const validJobs = await validJobRecords(jobRecords);
-
-  console.log("Valid job records to sync", validJobs.length);
-
-  const upsertJobs = await upsertJobRecords(validJobs, {
-    userId,
-    organizationId,
-  });
 
   const message = `Found ${totalRecords} total records. Synced ${validEmployees.length} Employee records.  Synced ${validJobs.length} Job records.`;
 
