@@ -20,7 +20,7 @@ interface Props {
   lastSyncAction?: Action;
 }
 
-const sampleDataFileName = "/sample-hcm-employees.csv";
+const sampleDataFileName = "/hcm-sample-data.xlsx";
 
 const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
