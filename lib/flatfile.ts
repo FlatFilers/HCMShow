@@ -133,7 +133,7 @@ export const getRecordsByName = async (
     sheetName
   );
 
-  // console.log("w, s", workbookId, sheetIds);
+  console.log("w, s", workbookId, sheetId);
 
   try {
     const recordsResponse = await flatfile.sheets.getRecords(
