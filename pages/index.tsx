@@ -40,9 +40,9 @@ const Home: NextPageWithLayout = () => {
             height={180}
             priority
           />
-          <h2 className="mt-4 text-center text-2xl tracking-tight text-gray-900">
+          <p className="mt-4 text-gray-500 text-center text-md">
             Sign in to HCM.show
-          </h2>
+          </p>
         </div>
 
         <form className="mt-8 space-y-2" action="#" onSubmit={handleSubmit}>

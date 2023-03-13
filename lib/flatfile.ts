@@ -8,11 +8,12 @@ import {
   SpaceConfig,
   AddSpaceRequest,
 } from "@flatfile/api";
-import { PrismaClient, Space, User, prisma } from "@prisma/client";
+import { PrismaClient, Space, User } from "@prisma/client";
 import { Flatfile, FlatfileClient } from "@flatfile/api-beta";
 import { Space as FlatfileSpace } from "@flatfile/api-beta/api/resources/spaces/types/Space";
 import { DateTime } from "luxon";
 import { inspect } from "util";
+import { SpaceType } from "./space";
 
 export interface Field {
   value: string | number | null;
@@ -52,11 +53,27 @@ export interface FlatfileSpaceData {
   ];
 }
 
+type WorkbookObject = {
+  id: string;
+  name: string;
+  labels: string[];
+  spaceId: string;
+  environmentId: string;
+  blueprint: object | null;
+  sheets: [
+    {
+      id: string;
+      name: string;
+      config: object[];
+    }
+  ];
+};
+
 const BASE_PATH = "https://api.x.flatfile.com/v1";
 
 const flatfile = new FlatfileClient({
-  clientId: process.env.FLATFILE_CLIENT_ID,
-  clientSecret: process.env.FLATFILE_CLIENT_SECRET,
+  clientId: process.env.FLATFILE_CLIENT_ID as string,
+  clientSecret: process.env.FLATFILE_CLIENT_SECRET as string,
 });
 
 export async function getAccessToken() {
@@ -87,15 +104,20 @@ export async function getAccessToken() {
   return accessTokenResponse.data.accessToken;
 }
 
-export const getRecords = async (userId: string, accessToken: string) => {
+export const getRecordsByName = async (
+  userId: string,
+  accessToken: string,
+  sheetName: string,
+  spaceType: SpaceType
+) => {
   const prisma = new PrismaClient();
 
-  const space = await prisma.space.findFirst({
+  const space = await prisma.space.findUnique({
     where: {
-      userId,
-    },
-    orderBy: {
-      createdAt: "desc",
+      userId_type: {
+        userId,
+        type: spaceType,
+      },
     },
   });
 
@@ -105,17 +127,13 @@ export const getRecords = async (userId: string, accessToken: string) => {
 
   // console.log("space", space);
 
-  const headers = {
-    Authorization: `Bearer ${accessToken}`,
-    "Content-Type": "application/json",
-  };
-
-  const { workbookId, sheetId } = await getWorkbookIdAndSheetId(
+  const { workbookId, sheetId } = await getWorkbookIdAndSheetIds(
     (space.flatfileData as unknown as FlatfileSpaceData).id,
-    headers
+    accessToken,
+    sheetName
   );
 
-  // console.log("w, s", workbookId, sheetId);
+  // console.log("w, s", workbookId, sheetIds);
 
   try {
     const recordsResponse = await flatfile.sheets.getRecords(
@@ -124,13 +142,8 @@ export const getRecords = async (userId: string, accessToken: string) => {
       {}
     );
 
-    throw 'boop'
-
-    throw recordsResponse.data.records;
-
     return recordsResponse.data.records;
   } catch (err) {
-    throw err;
     const message = `Error getting records for spaceId: ${
       space.id
     }, flatfileSpaceId: ${
@@ -169,15 +182,19 @@ export const getRecords = async (userId: string, accessToken: string) => {
   // return recordsResult.data.records;
 };
 
-const getWorkbookIdAndSheetId = async (
+const getWorkbookIdAndSheetIds = async (
   flatfileSpaceId: string,
-  headers: any
+  accessToken: string,
+  sheetName: string
 ): Promise<{ workbookId: string; sheetId: string }> => {
   const response = await fetch(
     `${BASE_PATH}/workbooks?spaceId=${flatfileSpaceId}`,
     {
       method: "GET",
-      headers,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
     }
   );
 
@@ -188,12 +205,15 @@ const getWorkbookIdAndSheetId = async (
   // TODO: Assuming just 1 workbook for this demo (but multiple sheets).
   // console.log("sheets", result["data"][0]["sheets"]);
 
-  const sheetId = result["data"][0]["sheets"].find(
-    (s: { id: string; name: string; config: any }) => s.name === "Employees"
-  ).id;
+  const workbookObj = result.data.find((workbookObj: WorkbookObject) => {
+    return workbookObj.name === process.env.WORKBOOK_UPLOAD_WORKBOOK_NAME;
+  });
+  const sheetId = workbookObj.sheets.find(
+    (s: { id: string; name: string; config: any }) => s.name === sheetName
+  )!.id;
 
   return {
-    workbookId: result["data"][0]["id"],
+    workbookId: workbookObj.id,
     sheetId: sheetId,
   };
 };

@@ -16,11 +16,12 @@ model Organization {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  email String @unique
+  companyName String
 
   users User[]
   employees Employee[]
   actions Action[]
+  jobs Job[]
 }
 
 model User {
@@ -30,6 +31,8 @@ model User {
 
   email String @unique @db.Text
   password String 
+  firstName String
+  lastName String
 
   organizationId String @db.Uuid
   organization Organization @relation(fields: [organizationId], references: [id])
@@ -61,51 +64,63 @@ model Employee {
   managerId String? @db.Uuid
   manager Employee? @relation("Manager", fields: [managerId], references: [id])
 
-  // FF fields
   employeeId String 
-  countryId String? @db.Uuid
-  country Country? @relation(fields: [countryId], references: [id])
-  titleId String? @db.Uuid
-  title Title? @relation("Title", fields: [titleId], references: [id])
   firstName String 
-  middleName String?
   lastName String
-  socialSuffixId String? @db.Uuid
-  socialSuffix Title? @relation("SocialSuffix", fields: [socialSuffixId], references: [id])
   employeeTypeId String @db.Uuid
   employeeType EmployeeType @relation(fields: [employeeTypeId], references: [id])
-  hireReasonId String @db.Uuid
-  hireReason HireReason @relation(fields: [hireReasonId], references: [id])
   hireDate DateTime
   endEmploymentDate DateTime?
   jobs EmployeesJobs[]
   positionTitle String
-  businessTitle String?
-  locationId String @db.Uuid
-  location Location @relation("Location", fields: [locationId], references: [id])
-  workspaceId String? @db.Uuid
-  workspace Location? @relation("Workspace", fields: [workspaceId], references: [id])
-  positionTimeId String @db.Uuid
-  positionTime PositionTime @relation(fields: [positionTimeId], references: [id])
-  workShiftId String? @db.Uuid
-  workShift WorkShift? @relation(fields: [workShiftId], references: [id])
   defaultWeeklyHours Float
   scheduledWeeklyHours Float
-  payRateId String @db.Uuid
-  payRate PayRate @relation(fields: [payRateId], references: [id])
-  additionalJobClassificationId String? @db.Uuid
-  additionalJobClassification AdditionalJobClassification? @relation(fields: [additionalJobClassificationId], references: [id])
-  workerCompensationCodeId String @db.Uuid
-  workerCompensationCode WorkerCompensationCode @relation(fields: [workerCompensationCodeId], references: [id])
-  
-  addresses AddressEmployee[]
   phoneNumbers PhoneNumberEmployee[]
   emailAddresses EmailAddressEmployee[]
+
+  // countryId String? @db.Uuid
+  // country Country? @relation(fields: [countryId], references: [id])
+  // titleId String? @db.Uuid
+  // title Title? @relation("Title", fields: [titleId], references: [id])
+  // // firstName String 
+  // middleName String?
+  // // lastName String
+  // socialSuffixId String? @db.Uuid
+  // socialSuffix Title? @relation("SocialSuffix", fields: [socialSuffixId], references: [id])
+  // employeeTypeId String @db.Uuid
+  // employeeType EmployeeType @relation(fields: [employeeTypeId], references: [id])
+  // hireReasonId String @db.Uuid
+  // hireReason HireReason @relation(fields: [hireReasonId], references: [id])
+  // hireDate DateTime
+  // endEmploymentDate DateTime?
+  // jobs EmployeesJobs[]
+  // positionTitle String
+  // businessTitle String?
+  // locationId String @db.Uuid
+  // location Location @relation("Location", fields: [locationId], references: [id])
+  // workspaceId String? @db.Uuid
+  // workspace Location? @relation("Workspace", fields: [workspaceId], references: [id])
+  // positionTimeId String @db.Uuid
+  // positionTime PositionTime @relation(fields: [positionTimeId], references: [id])
+  // workShiftId String? @db.Uuid
+  // workShift WorkShift? @relation(fields: [workShiftId], references: [id])
+  // defaultWeeklyHours Float
+  // scheduledWeeklyHours Float
+  // payRateId String @db.Uuid
+  // payRate PayRate @relation(fields: [payRateId], references: [id])
+  // additionalJobClassificationId String? @db.Uuid
+  // additionalJobClassification AdditionalJobClassification? @relation(fields: [additionalJobClassificationId], references: [id])
+  // workerCompensationCodeId String @db.Uuid
+  // workerCompensationCode WorkerCompensationCode @relation(fields: [workerCompensationCodeId], references: [id])
+  
+  // addresses AddressEmployee[]
+  // phoneNumbers PhoneNumberEmployee[]
+  // emailAddresses EmailAddressEmployee[]
 
   // App fields
   directReports Employee[] @relation("Manager")
   // todo: remove name
-  name String?
+  // name String?
   flatfileRecordId String?
   organizationId String @db.Uuid
   organization Organization @relation(fields: [organizationId], references: [id])
@@ -120,11 +135,11 @@ model EmployeeType {
 
   name String @unique
   slug String @unique
-  description String?
-  isFixedTerm Boolean
-  isSeasonal Boolean
-  isTrainee Boolean
-  isInactive Boolean
+  // description String?
+  // isFixedTerm Boolean
+  // isSeasonal Boolean
+  // isTrainee Boolean
+  // isInactive Boolean
 
   employees Employee[]
   countries EmployeeTypeCountry[] 
@@ -165,7 +180,7 @@ model Country {
   type String
   code String @unique
 
-  employees Employee[]
+  // employees Employee[]
   employeeTypes EmployeeTypeCountry[]
   locations Location[]
   workShifts WorkShift[]
@@ -201,7 +216,7 @@ model HireReason {
   reason String
   isManagerReason Boolean
 
-  employees Employee[]
+  // employees Employee[]
 }
 
 
@@ -224,20 +239,24 @@ model Job {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name String
   slug String @unique
+  name String
+  department String
   effectiveDate DateTime
   isInactive Boolean
-  includeJobCodeInName Boolean?
-  title String?
-  summary String
-  description String
-  additionalDescription String?
-  workShift Boolean?
-  jobPublic Boolean
+
+  // includeJobCodeInName Boolean?
+  // title String?
+  // summary String
+  // description String
+  // additionalDescription String?
+  // workShift Boolean?
+  // jobPublic Boolean
 
   jobFamilyId String? @db.Uuid
   jobFamily JobFamily? @relation(fields: [jobFamilyId], references: [id])
+  organizationId String @db.Uuid
+  organization Organization @relation(fields: [organizationId], references: [id])
   employees EmployeesJobs[]
 }
 
@@ -264,8 +283,8 @@ model Location {
   countryId String? @db.Uuid
   country Country? @relation(fields: [countryId], references: [id])
 
-  locationEmployees Employee[] @relation("Location")
-  workspaceEmployees Employee[] @relation("Workspace")
+  // locationEmployees Employee[] @relation("Location")
+  // workspaceEmployees Employee[] @relation("Workspace")
 }
 
 model PositionTime {
@@ -276,7 +295,7 @@ model PositionTime {
   slug String @unique
   name String
 
-  employees Employee[]
+  // employees Employee[]
 }
 
 model WorkShift {
@@ -293,7 +312,7 @@ model WorkShift {
 
   isInactive Boolean
 
-  employees Employee[]
+  // employees Employee[]
 }
 
 model PayRate {
@@ -307,7 +326,7 @@ model PayRate {
   // TODO: should be an association
   frequency String?
 
-  employees Employee[]
+  // employees Employee[]
 }
 
 model AdditionalJobClassification { 
@@ -322,7 +341,7 @@ model AdditionalJobClassification {
   description String
   isInactive Boolean
 
-  employees Employee[]
+  // employees Employee[]
 }
 
 // WIP
@@ -331,7 +350,7 @@ model WorkerCompensationCode {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  employees Employee[]
+  // employees Employee[]
 }
 
 model Space {
@@ -360,8 +379,8 @@ model Title {
   titleType TitleType? @relation(fields: [titleTypeId], references: [id])
   value String
 
-  employeesWithTitles Employee[] @relation("Title")
-  employeesWithSuffixes Employee[] @relation("SocialSuffix")
+  // employeesWithTitles Employee[] @relation("Title")
+  // employeesWithSuffixes Employee[] @relation("SocialSuffix")
 }
 
 model TitleType {
@@ -417,7 +436,7 @@ model AddressEmployee {
   addressId String @db.Uuid
   address Address @relation(fields: [addressId], references: [id])
   employeeId String @db.Uuid
-  employee Employee @relation(fields: [employeeId], references: [id])
+  // employee Employee @relation(fields: [employeeId], references: [id])
 
   @@id([addressId, employeeId])
 }

@@ -23,10 +23,22 @@ const Signup: NextPageWithLayout = () => {
     const password = (
       event.currentTarget.elements.namedItem("password") as HTMLInputElement
     ).value;
+    const firstName = (
+      event.currentTarget.elements.namedItem("first-name") as HTMLInputElement
+    ).value;
+    const lastName = (
+      event.currentTarget.elements.namedItem("last-name") as HTMLInputElement
+    ).value;
+    const companyName = (
+      event.currentTarget.elements.namedItem("company-name") as HTMLInputElement
+    ).value;
 
     signIn("credentials", {
       email,
       password,
+      firstName,
+      lastName,
+      companyName,
       isSignup: true,
       callbackUrl: "/workbook-upload",
     });
@@ -73,6 +85,47 @@ const Signup: NextPageWithLayout = () => {
                 required
                 className="bg-white relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
                 placeholder="Email address"
+              />
+            </div>
+            <div className="flex flex-row items-center">
+              <div className="w-1/2">
+                <label htmlFor="first-name" className="sr-only">
+                  First name
+                </label>
+                <input
+                  id="first-name"
+                  name="first-name"
+                  type="text"
+                  required
+                  className="bg-white relative block w-full appearance-none rounded-none border-r-0 border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
+                  placeholder="First name"
+                />
+              </div>
+              <div className="w-1/2">
+                <label htmlFor="last-name" className="sr-only">
+                  Last name
+                </label>
+                <input
+                  id="last-name"
+                  name="last-name"
+                  type="text"
+                  required
+                  className="bg-white relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
+                  placeholder="Last name"
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="company-name" className="sr-only">
+                Company name
+              </label>
+              <input
+                id="company-name"
+                name="company-name"
+                type="text"
+                required
+                className="bg-white relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
+                placeholder="Company name"
               />
             </div>
             <div>

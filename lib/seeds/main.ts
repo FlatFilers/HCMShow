@@ -26,24 +26,24 @@ import { faker } from "@faker-js/faker";
 export const main = async () => {
   console.log("Seeding...");
 
-  await upsertCountries();
-  await upsertLocations();
+  // await upsertCountries();
+  // await upsertLocations();
   await upsertEmployeeTypes();
   await upsertJobFamilies();
-  await upsertJobs();
-  await upsertHireReasons();
-  await upsertTitleTypes();
-  await upsertTitles();
+
+  // await upsertHireReasons();
+  // await upsertTitleTypes();
+  // await upsertTitles();
   await upsertPositionTimes();
-  await upsertPayRates();
-  await upsertAdditionalJobClassifications();
-  await upsertAddresses();
+  // await upsertPayRates();
+  // await upsertAdditionalJobClassifications();
+  // await upsertAddresses();
+  // await createOtherData();
 
-  await createOtherData();
+  // const user = await upsertUser();
+  // await upsertJobs(user.organizationId);
 
-  const user = await upsertUser();
-
-  await seedNewAccount(user);
+  // await seedNewAccount(user);
 };
 
 const upsertAddresses = async () => {
@@ -123,11 +123,11 @@ const upsertJobFamilies = async () => {
   await Promise.all(promises);
 };
 
-const upsertJobs = async () => {
-  // [ 'ID', 'Profile Name', 'Job Code', 'Effective Date', 'Inactive', 'Include Job Code In Name', 'Title', 'Summary', 'Description', 'Additional Description', 'Work Shift Required', 'Is Job Public', 'Job Family']
-  // const jobFamilyId = ((await prismaClient.jobFamily.findFirst()) as JobFamily)
-  //   .id;
-  type CsvJobType = Omit<Job, "id" | "createdAt" | "updatedAt">;
+const upsertJobs = async (organizationId: string) => {
+  type CsvJobType = Omit<
+    Job,
+    "id" | "createdAt" | "updatedAt" | "organizationId"
+  >;
   const parseCsv: Promise<CsvJobType[]> = new Promise((resolve, reject) => {
     const data: CsvJobType[] = [];
 
@@ -138,15 +138,9 @@ const upsertJobs = async () => {
         data.push({
           slug: row[0],
           name: row[1],
+          department: "",
           effectiveDate: DateTime.fromFormat(row[2], "M/d/yyyy").toJSDate(),
           isInactive: row[3] !== "y",
-          includeJobCodeInName: row[4] === "" ? null : row[4] === "y",
-          title: row[5],
-          summary: row[6],
-          description: row[7],
-          additionalDescription: row[8],
-          workShift: row[9] === "" ? null : row[9] === "y",
-          jobPublic: row[10] === "y",
           jobFamilyId: row[11],
         });
       })
@@ -163,8 +157,14 @@ const upsertJobs = async () => {
 
       let mappedData: Omit<CsvJobType, "jobFamilyId"> & {
         jobFamily?: any;
+        organization: any;
       } = {
         ...rest,
+        organization: {
+          connect: {
+            id: organizationId,
+          },
+        },
       };
 
       if (data.jobFamilyId && !data.jobFamilyId.includes("N/A")) {
@@ -354,87 +354,25 @@ const upsertCountries = async () => {
 };
 
 const upsertEmployeeTypes = async () => {
-  type CsvType = Omit<
-    EmployeeType & { countryCodes: string[] },
-    "id" | "createdAt" | "updatedAt"
-  >;
+  const data: { [key: string]: string } = {
+    ft: "Full-Time",
+    pt: "Part-Time",
+    tm: "Temporary",
+    ct: "Contract",
+  };
 
-  // Employee Type Name,ID,Employee Type Description,Fixed Term Employee Type,Seasonal,Trainee,Inactive,Restricted to Countries
-  const parseCsv: Promise<CsvType[]> = new Promise((resolve, reject) => {
-    const data: CsvType[] = [];
-
-    fs.createReadStream("./lib/seeds/data/seed_employee_types.csv")
-      .pipe(parse({ skipRows: 1 }))
-      .on("error", reject)
-      .on("data", (row: any) => {
-        data.push({
-          name: row[0],
-          slug: row[1],
-          description: row[2],
-          isFixedTerm: row[3] === "y",
-          isSeasonal: row[4] === "y",
-          isTrainee: row[5] === "y",
-          isInactive: row[6] === "y",
-          countryCodes: row[7]
-            ?.split(",")
-            ?.filter((c: string) => c.trim() !== ""),
-        });
-      })
-      .on("end", () => {
-        resolve(data);
-      });
-  });
-
-  const csvData = await Promise.resolve(parseCsv);
-
-  // Tried to make the upsert/connect query all in one, but wasn't able to figure it out.
-  const employeeTypesUpserts = csvData.map(async (data) => {
-    const { countryCodes, ...employeeTypeData } = data;
-
-    return await prismaClient.employeeType.upsert({
+  Object.keys(data).map(async (key) => {
+    await prismaClient.employeeType.upsert({
       where: {
-        slug: data.slug,
+        slug: key,
       },
-      create: employeeTypeData,
+      create: {
+        name: data[key],
+        slug: key,
+      },
       update: {},
     });
   });
-
-  const employeeTypes = await Promise.all(employeeTypesUpserts);
-
-  const updates = employeeTypes.map(async (e) => {
-    const countryCodes =
-      csvData.find((row) => e.slug === row.slug)?.countryCodes || [];
-
-    const countryUpdates = countryCodes.map(async (code) => {
-      const country = (await prismaClient.country.findUnique({
-        where: { code },
-      })) as Country;
-
-      await prismaClient.employeeType.update({
-        where: { id: e.id },
-        data: {
-          countries: {
-            connectOrCreate: {
-              where: {
-                employeeTypeId_countryId: {
-                  employeeTypeId: e.id,
-                  countryId: country.id,
-                },
-              },
-              create: {
-                countryId: country.id,
-              },
-            },
-          },
-        },
-      });
-    });
-
-    await Promise.all(countryUpdates);
-  });
-
-  await Promise.all(updates);
 };
 
 const upsertLocations = async () => {
@@ -815,38 +753,38 @@ const upsertEmployees = async (organizationId: string) => {
   await Promise.all(directReports);
 };
 
-const upsertUser = async () => {
-  const email = "user@email.com";
+// const upsertUser = async () => {
+//   const email = "user@email.com";
 
-  const orgData = {
-    email,
-  };
+//   const orgData = {
+//     email,
+//   };
 
-  const organization = await prismaClient.organization.upsert({
-    where: {
-      email,
-    },
-    create: orgData,
-    update: {},
-  });
+//   const organization = await prismaClient.organization.upsert({
+//     where: {
+//       email,
+//     },
+//     create: orgData,
+//     update: {},
+//   });
 
-  const data = {
-    email: email,
-    password: await hashPassword("badpassword"),
-    organization: {
-      connect: {
-        id: organization.id,
-      },
-    },
-  };
+//   const data = {
+//     email: email,
+//     password: await hashPassword("badpassword"),
+//     organization: {
+//       connect: {
+//         id: organization.id,
+//       },
+//     },
+//   };
 
-  const user: User = await prismaClient.user.upsert({
-    where: {
-      email: data.email,
-    },
-    create: data,
-    update: {},
-  });
+//   const user: User = await prismaClient.user.upsert({
+//     where: {
+//       email: data.email,
+//     },
+//     create: data,
+//     update: {},
+//   });
 
-  return user;
-};
+//   return user;
+// };

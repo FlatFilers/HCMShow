@@ -3,18 +3,49 @@ import { useState, FormEvent } from "react";
 import toast from "react-hot-toast";
 
 import { Event } from "./event";
+import { DateTime } from "luxon";
 
 type Props = {
-  actions: Action[];
+  initialActions: Action[];
 };
 
-export const Events = ({ actions }: Props) => {
+export const Events = ({ initialActions }: Props) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   let defaultText = "Listen For File Feed Event";
   const [buttonText, setButtonText] = useState<string>(defaultText);
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    setIsSubmitting(true);
-    setButtonText("Listening...");
+
+  const [actions, setActions] = useState<Action[]>(initialActions);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const createRes = await fetch("/api/flatfile/create-filefeed-event", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!createRes.ok) {
+      setIsSubmitting(false);
+      setButtonText(defaultText);
+      toast.error("An error occurred listening for a file feed event.");
+      return;
+    }
+
+    const action = await createRes.json();
+    setActions([
+      ...actions,
+      {
+        ...action,
+        createdAt: DateTime.fromISO(action.createdAt).toJSDate(),
+      },
+    ]);
+
+    setIsSubmitting(false);
+    setButtonText(defaultText);
+
+    toast.success("New file feed event found!");
   };
 
   return (
@@ -25,13 +56,8 @@ export const Events = ({ actions }: Props) => {
         Next, click the button below to listen for a file upload.
       </p>
 
-      <form
-        action="/api/flatfile/create-filefeed-event"
-        onSubmit={handleSubmit}
-        className="mb-8"
-      >
+      <form onSubmit={handleSubmit} className="mb-8">
         <button
-          onClick={() => toast.loading("Listening for event...")}
           disabled={isSubmitting}
           className={`${
             isSubmitting
@@ -71,12 +97,6 @@ export const Events = ({ actions }: Props) => {
         </thead>
         <tbody>
           {actions.map((a, i) => {
-            const metadata = a.metadata as {
-              state: string;
-              description: string;
-            };
-            const state = metadata.state;
-
             return (
               <tr key={i}>
                 <Event action={a} />

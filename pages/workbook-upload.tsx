@@ -20,7 +20,7 @@ interface Props {
   lastSyncAction?: Action;
 }
 
-const sampleDataFileName = "/sample-hcm-employees.csv";
+const sampleDataFileName = "/hcm-sample-data.xlsx";
 
 const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -44,13 +44,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
       });
     } else if (router.query.flash === "error") {
       window.history.replaceState(null, "", "/workbook-upload");
-      toast.error(router.query.message as string, {
-        id: "error",
-        duration: 5000,
-      });
-    } else if (router.query.message === "Created space") {
-      window.history.replaceState(null, "", "/workbook-upload");
-      toast.success("Created space", { id: "created", duration: 4000 });
+      toast.error(router.query.message as string, { id: "error" });
     }
   }, []);
 
