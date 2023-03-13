@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prismaClient } from "../../../lib/prisma-client";
 import { syncWorkbookRecords } from "../../../lib/sync-records";
-import { SpaceType } from "../../../lib/space";
+import { SpaceType, getSpaceForFlatfileSpaceId } from "../../../lib/space";
 
 export default async function handler(
   req: NextApiRequest,
@@ -11,22 +11,7 @@ export default async function handler(
 
   const { spaceId } = req.body;
 
-  const spaces = await prismaClient.space.findMany({
-    where: {
-      flatfileData: {
-        path: ["id"],
-        equals: spaceId,
-      },
-    },
-  });
-
-  if (spaces.length > 1) {
-    throw new Error("More than one space found for spaceId", spaceId);
-  } else if (spaces.length === 0) {
-    throw new Error("No space found for spaceId", spaceId);
-  }
-
-  const space = spaces[0];
+  const space = await getSpaceForFlatfileSpaceId(spaceId);
 
   const user = await prismaClient.user.findUnique({
     where: {
