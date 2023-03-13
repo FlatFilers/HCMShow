@@ -60,7 +60,7 @@ const Embedded: NextPageWithLayout<Props> = ({
 
   const [downloaded, setDownloaded] = useState(false);
   const storageKey = "embedded-has-downloaded-sample-data";
-  const sampleDataFileName = "/sample-hcm-employees.csv";
+  const sampleDataFileName = "/hcm-sample-data.xlsx";
 
   const router = useRouter();
 
