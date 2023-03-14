@@ -15,6 +15,8 @@ export const upsertEmployee = async ({
   defaultWeeklyHours,
   scheduledWeeklyHours,
   flatfileRecordId,
+  jobName,
+  jobCode,
 }: {
   organizationId: string;
   employeeId: string;
@@ -28,6 +30,8 @@ export const upsertEmployee = async ({
   defaultWeeklyHours: number;
   scheduledWeeklyHours: number;
   flatfileRecordId?: string;
+  jobName: string;
+  jobCode: string;
 }) => {
   const employee = await prismaClient.employee.upsert({
     where: {
@@ -49,6 +53,8 @@ export const upsertEmployee = async ({
       defaultWeeklyHours,
       scheduledWeeklyHours,
       flatfileRecordId,
+      jobName,
+      jobCode,
     },
     update: {},
   });
