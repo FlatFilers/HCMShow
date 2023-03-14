@@ -690,23 +690,6 @@ export const upsertEmployees = async (organizationId: string) => {
   const positionTitle = "Sales Rep";
   const defaultWeeklyHours = 40;
   const scheduledWeeklyHours = 40;
-<<<<<<< HEAD
-=======
-  const payRateId = ((await prismaClient.payRate.findFirst()) as PayRate).id;
-  const additionalJobClassificationId = (
-    (await prismaClient.additionalJobClassification.findFirst()) as AdditionalJobClassification
-  ).id;
-  const workerCompensationCodeId = (
-    (await prismaClient.workerCompensationCode.findFirst()) as WorkerCompensationCode
-  ).id;
-  const addresses = await prismaClient.address.findMany({
-    take: 2,
-  });
-  const job = await prismaClient.job.findFirst();
-  const jobs = {
-    create: { job: { connect: { id: job!.id } } },
-  }!;
->>>>>>> 990e19f (edit to create connect on relation table)
 
   const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,
@@ -719,14 +702,6 @@ export const upsertEmployees = async (organizationId: string) => {
     employeeTypeId,
     defaultWeeklyHours,
     scheduledWeeklyHours,
-<<<<<<< HEAD
-=======
-    payRateId,
-    additionalJobClassificationId,
-    workerCompensationCodeId,
-    addresses,
-    jobs,
->>>>>>> 990e19f (edit to create connect on relation table)
   };
   const manager: Employee = await upsertEmployee(data);
 
