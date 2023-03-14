@@ -11,6 +11,7 @@ import {
   WindowIcon,
   FolderArrowDownIcon,
   ListBulletIcon,
+  VariableIcon
 } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -65,6 +66,12 @@ const SidebarLayout = ({ children }: Props) => {
       href: "/embedded",
       icon: WindowIcon,
       current: router.pathname === "/embedded",
+    },
+    {
+      name: "Dynamic Templates",
+      href: "/dynamic-templates",
+      icon: VariableIcon,
+      current: router.pathname === "/dynamic-templates",
     },
   ];
   const userNavigation: { name: string; href: string }[] = [
