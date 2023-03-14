@@ -691,7 +691,21 @@ export const upsertEmployees = async (organizationId: string) => {
   const defaultWeeklyHours = 40;
   const scheduledWeeklyHours = 40;
   const jobId = (await prismaClient.job.findFirst())!.id;
-
+  const payRateId = ((await prismaClient.payRate.findFirst()) as PayRate).id;
+  const additionalJobClassificationId = (
+    (await prismaClient.additionalJobClassification.findFirst()) as AdditionalJobClassification
+  ).id;
+  const workerCompensationCodeId = (
+    (await prismaClient.workerCompensationCode.findFirst()) as WorkerCompensationCode
+  ).id;
+  const addresses = await prismaClient.address.findMany({
+    take: 2,
+  });
+  // TODO: Remove hardcode when adding back jobs to seed
+  const job = await prismaClient.job.findFirst();
+  const jobs = {
+    create: { job: { connect: { slug: job!.slug } } },
+  }!;
   const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,
     employeeId: crypto.randomBytes(16).toString("hex"),
@@ -704,7 +718,23 @@ export const upsertEmployees = async (organizationId: string) => {
     defaultWeeklyHours,
     scheduledWeeklyHours,
     jobId,
+    payRateId,
+    additionalJobClassificationId,
+    workerCompensationCodeId,
+    addresses,
+    jobs,
   };
+  // let mappedData: Omit<CsvJobType, "jobFamilyId"> & {
+  //   jobFamily?: any;
+  //   organization: any;
+  // } = {
+  //   ...rest,
+  //   organization: {
+  //     connect: {
+  //       id: organizationId,
+  //     },
+  //   },
+  // };
   const manager: Employee = await upsertEmployee(data);
 
   const directReports = Array.from({ length: 5 }).map(
