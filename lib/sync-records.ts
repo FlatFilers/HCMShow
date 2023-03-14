@@ -67,9 +67,9 @@ export const syncWorkbookRecords = async ({
         })) as EmployeeType
       ).id;
 
-      const job = (await prismaClient.job.findUnique({
+      const jobId = (await prismaClient.job.findUnique({
         where: { slug: values.jobCode.value as string },
-      })) as Job;
+      }))!.id;
 
       let data: Parameters<typeof upsertEmployee>[0] = {
         organizationId,
@@ -91,9 +91,7 @@ export const syncWorkbookRecords = async ({
         defaultWeeklyHours: r.values.defaultWeeklyHours.value as number,
         scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
         flatfileRecordId: r.id,
-        jobs: {
-          create: { job: { connect: { id: job.id } } },
-        },
+        jobId: jobId,
       };
 
       if (
