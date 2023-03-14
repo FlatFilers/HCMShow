@@ -691,20 +691,7 @@ export const upsertEmployees = async (organizationId: string) => {
   const defaultWeeklyHours = 40;
   const scheduledWeeklyHours = 40;
   const jobId = (await prismaClient.job.findFirst())!.id;
-  const payRateId = ((await prismaClient.payRate.findFirst()) as PayRate).id;
-  const additionalJobClassificationId = (
-    (await prismaClient.additionalJobClassification.findFirst()) as AdditionalJobClassification
-  ).id;
-  const workerCompensationCodeId = (
-    (await prismaClient.workerCompensationCode.findFirst()) as WorkerCompensationCode
-  ).id;
-  const addresses = await prismaClient.address.findMany({
-    take: 2,
-  });
-  const job = await prismaClient.job.findFirst();
-  const jobs = {
-    create: { job: { connect: { id: job!.id } } },
-  }!;
+
   const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,
     employeeId: crypto.randomBytes(16).toString("hex"),
@@ -717,11 +704,6 @@ export const upsertEmployees = async (organizationId: string) => {
     defaultWeeklyHours,
     scheduledWeeklyHours,
     jobId,
-    payRateId,
-    additionalJobClassificationId,
-    workerCompensationCodeId,
-    addresses,
-    jobs,
   };
   const manager: Employee = await upsertEmployee(data);
 
