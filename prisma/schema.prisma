@@ -71,8 +71,6 @@ model Employee {
   employeeType EmployeeType @relation(fields: [employeeTypeId], references: [id])
   hireDate DateTime
   endEmploymentDate DateTime?
-  jobName String
-  jobCode String
   jobs EmployeesJobs[]
   positionTitle String
   defaultWeeklyHours Float

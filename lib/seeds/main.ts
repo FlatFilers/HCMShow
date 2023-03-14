@@ -19,7 +19,7 @@ import { DateTime } from "luxon";
 import * as fs from "fs";
 import { parse } from "fast-csv";
 import { hashPassword } from "../user";
-import crypto from "crypto";
+import crypto, { randomUUID } from "crypto";
 import { upsertEmployee } from "../employee";
 import { faker } from "@faker-js/faker";
 
@@ -40,8 +40,8 @@ export const main = async () => {
   // await upsertAddresses();
   // await createOtherData();
 
-  // const user = await upsertUser();
-  // await upsertJobs(user.organizationId);
+  const user = await upsertUser();
+  await upsertJobs(user.organizationId);
 
   // await seedNewAccount(user);
 };
@@ -690,6 +690,24 @@ export const upsertEmployees = async (organizationId: string) => {
   const positionTitle = "Sales Rep";
   const defaultWeeklyHours = 40;
   const scheduledWeeklyHours = 40;
+<<<<<<< HEAD
+=======
+  const payRateId = ((await prismaClient.payRate.findFirst()) as PayRate).id;
+  const additionalJobClassificationId = (
+    (await prismaClient.additionalJobClassification.findFirst()) as AdditionalJobClassification
+  ).id;
+  const workerCompensationCodeId = (
+    (await prismaClient.workerCompensationCode.findFirst()) as WorkerCompensationCode
+  ).id;
+  const addresses = await prismaClient.address.findMany({
+    take: 2,
+  });
+  // TODO: Remove hardcode when adding back jobs to seed
+  const job = await prismaClient.job.findFirst();
+  const jobs = {
+    create: { job: { connect: { slug: job!.slug } } },
+  }!;
+>>>>>>> 990e19f (edit to create connect on relation table)
 
   const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,
@@ -702,7 +720,26 @@ export const upsertEmployees = async (organizationId: string) => {
     employeeTypeId,
     defaultWeeklyHours,
     scheduledWeeklyHours,
+<<<<<<< HEAD
+=======
+    payRateId,
+    additionalJobClassificationId,
+    workerCompensationCodeId,
+    addresses,
+    jobs,
+>>>>>>> 990e19f (edit to create connect on relation table)
   };
+  // let mappedData: Omit<CsvJobType, "jobFamilyId"> & {
+  //   jobFamily?: any;
+  //   organization: any;
+  // } = {
+  //   ...rest,
+  //   organization: {
+  //     connect: {
+  //       id: organizationId,
+  //     },
+  //   },
+  // };
   const manager: Employee = await upsertEmployee(data);
 
   const directReports = Array.from({ length: 5 }).map(
@@ -721,38 +758,41 @@ export const upsertEmployees = async (organizationId: string) => {
   await Promise.all(directReports);
 };
 
-// const upsertUser = async () => {
-//   const email = "user@email.com";
+const upsertUser = async () => {
+  const companyName = "Company Name";
 
-//   const orgData = {
-//     email,
-//   };
+  const orgData = {
+    companyName,
+  };
 
-//   const organization = await prismaClient.organization.upsert({
-//     where: {
-//       email,
-//     },
-//     create: orgData,
-//     update: {},
-//   });
+  const organization = await prismaClient.organization.upsert({
+    where: {
+      id: randomUUID(),
+      companyName,
+    },
+    create: orgData,
+    update: {},
+  });
 
-//   const data = {
-//     email: email,
-//     password: await hashPassword("badpassword"),
-//     organization: {
-//       connect: {
-//         id: organization.id,
-//       },
-//     },
-//   };
+  const data = {
+    firstName: "First Name",
+    lastName: "Last Name",
+    email: "email@email.com",
+    password: await hashPassword("badpassword"),
+    organization: {
+      connect: {
+        id: organization.id,
+      },
+    },
+  };
 
-//   const user: User = await prismaClient.user.upsert({
-//     where: {
-//       email: data.email,
-//     },
-//     create: data,
-//     update: {},
-//   });
+  const user: User = await prismaClient.user.upsert({
+    where: {
+      email: data.email,
+    },
+    create: data,
+    update: {},
+  });
 
-//   return user;
-// };
+  return user;
+};

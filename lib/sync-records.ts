@@ -1,4 +1,4 @@
-import { EmployeeType } from "@prisma/client";
+import { EmployeeType, Job } from "@prisma/client";
 import { upsertEmployee, validEmployeeRecords } from "./employee";
 import { getAccessToken, getRecordsByName } from "./flatfile";
 import { prismaClient } from "./prisma-client";
@@ -58,6 +58,10 @@ export const syncWorkbookRecords = async ({
         })) as EmployeeType
       ).id;
 
+      const job = (await prismaClient.job.findUnique({
+        where: { slug: values.jobCode.value as string },
+      })) as Job;
+
       let data: Parameters<typeof upsertEmployee>[0] = {
         organizationId,
         employeeId: r.values.employeeId.value as string,
@@ -78,8 +82,9 @@ export const syncWorkbookRecords = async ({
         defaultWeeklyHours: r.values.defaultWeeklyHours.value as number,
         scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
         flatfileRecordId: r.id,
-        jobName: r.values.jobName.value as string,
-        jobCode: r.values.jobCode.value as string,
+        jobs: {
+          create: { job: { connect: { slug: job.slug } } },
+        },
       };
 
       if (
