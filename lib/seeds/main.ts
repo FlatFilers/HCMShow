@@ -44,7 +44,7 @@ export const main = async () => {
   const user = await upsertUser();
   await upsertJobs(user.organizationId);
 
-  // await seedNewAccount(user);
+  await seedNewAccount(user);
 };
 
 const upsertAddresses = async () => {
