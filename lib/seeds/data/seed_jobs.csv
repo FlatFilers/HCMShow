@@ -1,3 +1,8 @@
 jobCode,jobName,jobDept,effectiveDate,inactive
 Chief_Executive_Officer,Chief Executive Officer,Executive Management,1/1/2000,
 Chief_Information_Officer,Chief Information Officer,Executive Management ,1/1/2000,
+Chief_Financial_Officer,Chief Financial Officer,Executive Management,1/1/2000,
+Chief_Operating_Officer,Chief Operating Officer,Executive Management,1/1/2000,
+General_Counsel,General Counsel,FA Management,1/1/2000,
+Chief_Human_Resources_Officer,Chief Human Resources Officer,Executive Management,1/1/2000,
+Director_Employee_Benefits,"Director, Employee Benefits",HR Management,1/1/2000,
