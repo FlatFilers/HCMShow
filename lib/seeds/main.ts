@@ -14,6 +14,7 @@ import {
   User,
   Title,
   TitleType,
+  BenefitPlan,
 } from "@prisma/client";
 import { DateTime } from "luxon";
 import * as fs from "fs";
@@ -30,7 +31,7 @@ export const main = async () => {
   // await upsertLocations();
   await upsertEmployeeTypes();
   await upsertJobFamilies();
-
+  await upsertBenefitPlans();
   // await upsertHireReasons();
   // await upsertTitleTypes();
   // await upsertTitles();
@@ -201,6 +202,42 @@ const upsertJobs = async (organizationId: string) => {
       });
     })
   );
+};
+
+const upsertBenefitPlans = async () => {
+  // [ 'ID', 'Effective Date', 'Name', 'Summary', 'Inactive', '', '' ]
+  type CsvJobType = Omit<BenefitPlan, "id" | "createdAt" | "updatedAt">;
+  const parseCsv: Promise<CsvJobType[]> = new Promise((resolve, reject) => {
+    const data: CsvJobType[] = [];
+
+    fs.createReadStream("./lib/seeds/data/seed_benefit_plans.csv")
+      .pipe(parse({ skipRows: 1 }))
+      .on("error", reject)
+      .on("data", (row: any) => {
+        data.push({
+          slug: row[0],
+          name: row[1],
+        });
+      })
+
+      .on("end", () => {
+        resolve(data);
+      });
+  });
+
+  const csvData = await Promise.resolve(parseCsv);
+
+  const promises = csvData.map(async (data) => {
+    const benefitPlan: BenefitPlan = await prismaClient.benefitPlan.upsert({
+      where: {
+        slug: data.slug,
+      },
+      create: data,
+      update: {},
+    });
+  });
+
+  await Promise.all(promises);
 };
 
 const upsertTitleTypes = async () => {
@@ -691,6 +728,10 @@ export const upsertEmployees = async (organizationId: string) => {
   const defaultWeeklyHours = 40;
   const scheduledWeeklyHours = 40;
   const jobId = (await prismaClient.job.findFirst())!.id;
+  const benefitPlan = await prismaClient.benefitPlan.findFirst();
+  const benefitPlans = {
+    create: { benefitPlan: { connect: { slug: benefitPlan!.slug } } },
+  }!;
 
   const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,
@@ -704,6 +745,7 @@ export const upsertEmployees = async (organizationId: string) => {
     defaultWeeklyHours,
     scheduledWeeklyHours,
     jobId,
+    benefitPlans,
   };
   const manager: Employee = await upsertEmployee(data);
 

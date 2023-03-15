@@ -1,4 +1,4 @@
-import { EmployeeType, Job } from "@prisma/client";
+import { BenefitPlan, EmployeeType, Job } from "@prisma/client";
 import { upsertEmployee, validEmployeeRecords } from "./employee";
 import { getAccessToken, getRecordsByName } from "./flatfile";
 import { prismaClient } from "./prisma-client";
@@ -76,6 +76,10 @@ export const syncWorkbookRecords = async ({
         })) as Job
       ).id;
 
+      const benefitPlan = (await prismaClient.benefitPlan.findUnique({
+        where: { slug: values.benefitPlan.value as string },
+      })) as BenefitPlan;
+
       let data: Parameters<typeof upsertEmployee>[0] = {
         organizationId,
         employeeId: r.values.employeeId.value as string,
@@ -97,6 +101,9 @@ export const syncWorkbookRecords = async ({
         scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
         flatfileRecordId: r.id,
         jobId: jobId,
+        benefitPlans: {
+          create: { benefitPlan: { connect: { slug: benefitPlan.slug } } },
+        },
       };
 
       if (
