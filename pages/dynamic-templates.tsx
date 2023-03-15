@@ -8,7 +8,7 @@ import {
   ArrowDownTrayIcon,
   ArrowsPointingOutIcon,
   ArrowsPointingInIcon,
-  PencilIcon,
+  SparklesIcon
 } from "@heroicons/react/24/outline";
 import {
   SpaceConfigWithBlueprints,
@@ -44,14 +44,15 @@ const initialOptions: Option[] = [
   { id: 4, input: "ct", output: "Contract" },
 ];
 
-const DynamicTemplates: NextPageWithLayout<Props> = ({
-  accessToken,
-  environmentId,
-  workbookName,
+const filterConfig = ({
   baseConfig,
+  workbookName,
+  options,
+}: {
+  baseConfig: SpaceConfigWithBlueprints;
+  workbookName: string;
+  options: Option[];
 }) => {
-  const [options, setOptions] = useState(initialOptions);
-
   const blueprint = baseConfig.blueprints.find((b) => b.name === workbookName);
   const sheet = blueprint?.sheets.find((s) => s.name === "Employees");
   const field = sheet?.fields.find((f) => f.key === "employeeType");
@@ -92,10 +93,22 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 
   console.log("filteredConfig", filteredConfig);
 
+  return filteredConfig;
+};
+
+const DynamicTemplates: NextPageWithLayout<Props> = ({
+  accessToken,
+  environmentId,
+  workbookName,
+  baseConfig,
+}) => {
+  const [options, setOptions] = useState(initialOptions);
+  const [showSpace, setShowSpace] = useState(false);
+
   const spaceProps: ISpaceConfig = {
     accessToken,
     environmentId,
-    spaceConfig: filteredConfig,
+    spaceConfig: filterConfig({ baseConfig, workbookName, options }),
     sidebarConfig: {
       showDataChecklist: false,
       showSidebar: false,
@@ -110,40 +123,50 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
         Adjust the field options below, then click Open Portal to add your data.
       </p>
 
-      <OptionBuilder
-        options={options.sort((a, b) => a.id - b.id)}
-        updateInput={(option, value) => {
-          const filteredOptions = options.filter((o) => {
-            return o.id !== option.id;
-          });
+      <div className="mb-8">
+        <OptionBuilder
+          options={options.sort((a, b) => a.id - b.id)}
+          updateInput={(option, value) => {
+            const filteredOptions = options.filter((o) => {
+              return o.id !== option.id;
+            });
 
-          setOptions([...filteredOptions, { ...option, input: value }]);
-        }}
-        updateOutput={(option, value) => {
-          const filteredOptions = options.filter((o) => {
-            return o.id !== option.id;
-          });
+            setOptions([...filteredOptions, { ...option, input: value }]);
+          }}
+          updateOutput={(option, value) => {
+            const filteredOptions = options.filter((o) => {
+              return o.id !== option.id;
+            });
 
-          setOptions([...filteredOptions, { ...option, output: value }]);
-        }}
-        addNewOption={() => {
-          const maxId = options.reduce((max, option) => {
-            return Math.max(max, option.id);
-          }, 0);
+            setOptions([...filteredOptions, { ...option, output: value }]);
+          }}
+          addNewOption={() => {
+            const maxId = options.reduce((max, option) => {
+              return Math.max(max, option.id);
+            }, 0);
 
-          setOptions([...options, { id: maxId + 1, input: "", output: "" }]);
-        }}
-        removeOption={(option) => {
-          const filteredObjects = options.filter((o) => {
-            return o.id !== option.id;
-          });
+            setOptions([...options, { id: maxId + 1, input: "", output: "" }]);
+          }}
+          removeOption={(option) => {
+            const filteredObjects = options.filter((o) => {
+              return o.id !== option.id;
+            });
 
-          setOptions(filteredObjects);
-        }}
-      />
+            setOptions(filteredObjects);
+          }}
+        />
+      </div>
+
+      <button
+        onClick={() => setShowSpace(true)}
+        className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mb-6 bg-primary text-white border-transparent"
+      >
+        Generate Space
+        <SparklesIcon className="w-4 h-4 ml-2" />
+      </button>
 
       {error && <div>{error}</div>}
-      {!error && (
+      {!error && showSpace && (
         <div>
           <div>{data?.component}</div>
         </div>
