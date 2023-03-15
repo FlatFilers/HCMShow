@@ -10,7 +10,11 @@ import {
   ArrowsPointingInIcon,
   PencilIcon,
 } from "@heroicons/react/24/outline";
-import { getAccessToken } from "../lib/flatfile";
+import {
+  SpaceConfigWithBlueprints,
+  getAccessToken,
+  getSpaceConfig,
+} from "../lib/flatfile";
 import { Action, PrismaClient, Space } from "@prisma/client";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
@@ -18,22 +22,14 @@ import { SpaceType } from "../lib/space";
 import { FlatfileSpaceData } from "../lib/flatfile";
 import { useRouter } from "next/router";
 import { OptionBuilder } from "../components/dynamic-templates/option-builder";
+import { Property, SheetConfig } from "@flatfile/api";
 
-interface Props {}
-
-// employeeType: FF.OptionField({
-//   label: 'Employee Type',
-//   description: "The worker's employee type.",
-//   primary: false,
-//   required: true,
-//   unique: false,
-//   options: {
-//     ft: 'Full-Time',
-//     pt: 'Part-Time',
-//     tm: 'Temporary',
-//     ct: 'Contract',
-//   },
-// }),
+interface Props {
+  accessToken: string;
+  environmentId: string;
+  workbookName: string;
+  baseConfig: SpaceConfigWithBlueprints;
+}
 
 export interface Option {
   id: number;
@@ -48,8 +44,64 @@ const initialOptions: Option[] = [
   { id: 4, input: "ct", output: "Contract" },
 ];
 
-const DynamicTemplates: NextPageWithLayout<Props> = ({}) => {
+const DynamicTemplates: NextPageWithLayout<Props> = ({
+  accessToken,
+  environmentId,
+  workbookName,
+  baseConfig,
+}) => {
   const [options, setOptions] = useState(initialOptions);
+
+  const blueprint = baseConfig.blueprints.find((b) => b.name === workbookName);
+  const sheet = blueprint?.sheets.find((s) => s.name === "Employees");
+  const field = sheet?.fields.find((f) => f.key === "employeeType");
+
+  const otherBlueprints = baseConfig.blueprints.filter((b) => {
+    return b.name !== workbookName;
+  });
+  const otherSheets = blueprint?.sheets.filter((s) => {
+    return s.name !== "Employees";
+  }) as SheetConfig[];
+  const otherFields = sheet?.fields.filter((f) => {
+    return f.key !== "employeeType";
+  }) as Property[];
+
+  const mappedOptions = options.map((option) => {
+    return { value: option.input, label: option.output };
+  });
+
+  const filteredConfig = {
+    ...baseConfig,
+    blueprints: [
+      ...otherBlueprints,
+      {
+        ...blueprint,
+        sheets: [
+          ...otherSheets,
+          {
+            ...sheet,
+            fields: [
+              ...otherFields,
+              { ...field, config: { options: mappedOptions } },
+            ],
+          },
+        ],
+      },
+    ],
+  };
+
+  console.log("filteredConfig", filteredConfig);
+
+  const spaceProps: ISpaceConfig = {
+    accessToken,
+    environmentId,
+    spaceConfig: filteredConfig,
+    sidebarConfig: {
+      showDataChecklist: false,
+      showSidebar: false,
+    },
+  };
+  const { error, data } = useSpace({ ...spaceProps });
 
   return (
     <div className="ml-12 mt-16">
@@ -89,24 +141,41 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({}) => {
           setOptions(filteredObjects);
         }}
       />
+
+      {error && <div>{error}</div>}
+      {!error && (
+        <div>
+          <div>{data?.component}</div>
+        </div>
+      )}
     </div>
   );
 };
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const token = await getToken({
-//     req: context.req,
-//   });
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const token = await getToken({
+    req: context.req,
+  });
 
-//   if (!token) {
-//     console.log("No session token found");
+  if (!token?.sub) {
+    console.log("No session token found");
 
-//     return {
-//       notFound: true,
-//     };
-//   }
+    return {
+      notFound: true,
+    };
+  }
 
-//   return {};
-// };
+  const accessToken = await getAccessToken();
+  const baseConfig = await getSpaceConfig(accessToken);
+
+  return {
+    props: {
+      accessToken,
+      environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
+      workbookName: process.env.WORKBOOK_UPLOAD_WORKBOOK_NAME,
+      baseConfig,
+    },
+  };
+};
 
 export default DynamicTemplates;
