@@ -690,8 +690,7 @@ export const upsertEmployees = async (organizationId: string) => {
   const positionTitle = "Sales Rep";
   const defaultWeeklyHours = 40;
   const scheduledWeeklyHours = 40;
-  const job = await prismaClient.job.findFirst();
-  const jobId = job!.id;
+  const jobId = (await prismaClient.job.findFirst())!.id;
 
   const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,
