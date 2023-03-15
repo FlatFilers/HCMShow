@@ -68,7 +68,10 @@ export const syncWorkbookRecords = async ({
       ).id;
 
       const jobId = (await prismaClient.job.findUnique({
-        where: { slug: values.jobCode.value as string },
+        where: {
+          slug: values.jobCode.value as string,
+          organization: { id: organizationId },
+        },
       }))!.id;
 
       let data: Parameters<typeof upsertEmployee>[0] = {
