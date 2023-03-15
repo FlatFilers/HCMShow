@@ -1,4 +1,4 @@
-import { EmployeeType } from "@prisma/client";
+import { EmployeeType, Job } from "@prisma/client";
 import { upsertEmployee, validEmployeeRecords } from "./employee";
 import { getAccessToken, getRecordsByName } from "./flatfile";
 import { prismaClient } from "./prisma-client";
@@ -40,6 +40,15 @@ export const syncWorkbookRecords = async ({
     };
   }
 
+  const validJobs = await validJobRecords(jobRecords);
+
+  console.log("Valid job records to sync", validJobs.length);
+
+  const upsertJobs = await upsertJobRecords(validJobs, {
+    userId,
+    organizationId,
+  });
+
   const validEmployees = await validEmployeeRecords(employeeRecords);
 
   console.log("Valid records to sync", validEmployees.length);
@@ -57,6 +66,13 @@ export const syncWorkbookRecords = async ({
           where: { slug: values.employeeType.value as string },
         })) as EmployeeType
       ).id;
+
+      const jobId = (await prismaClient.job.findUnique({
+        where: {
+          slug: values.jobCode.value as string,
+          organization: { id: organizationId },
+        },
+      }))!.id;
 
       let data: Parameters<typeof upsertEmployee>[0] = {
         organizationId,
@@ -78,6 +94,7 @@ export const syncWorkbookRecords = async ({
         defaultWeeklyHours: r.values.defaultWeeklyHours.value as number,
         scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
         flatfileRecordId: r.id,
+        jobId: jobId,
       };
 
       if (
@@ -117,15 +134,6 @@ export const syncWorkbookRecords = async ({
   });
 
   await Promise.all(upsertEmployees);
-
-  const validJobs = await validJobRecords(jobRecords);
-
-  console.log("Valid job records to sync", validJobs.length);
-
-  const upsertJobs = await upsertJobRecords(validJobs, {
-    userId,
-    organizationId,
-  });
 
   const message = `Found ${totalRecords} total records. Synced ${validEmployees.length} Employee records.  Synced ${validJobs.length} Job records.`;
 

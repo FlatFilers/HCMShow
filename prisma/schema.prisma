@@ -71,7 +71,8 @@ model Employee {
   employeeType EmployeeType @relation(fields: [employeeTypeId], references: [id])
   hireDate DateTime
   endEmploymentDate DateTime?
-  jobs EmployeesJobs[]
+  job Job @relation(fields: [jobId], references: [id])
+  jobId String @db.Uuid
   positionTitle String
   defaultWeeklyHours Float
   scheduledWeeklyHours Float
@@ -156,19 +157,6 @@ model EmployeeTypeCountry {
   country Country @relation(fields: [countryId], references: [id])
 
   @@id([employeeTypeId, countryId])
-}
-
-model EmployeesJobs {
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  employeeId String @db.Uuid
-  employee Employee @relation(fields: [employeeId], references: [id])
-
-  jobId String @db.Uuid
-  job Job @relation(fields: [jobId], references: [id])
-
-  @@id([employeeId, jobId])
 }
 
 model Country {
@@ -257,7 +245,7 @@ model Job {
   jobFamily JobFamily? @relation(fields: [jobFamilyId], references: [id])
   organizationId String @db.Uuid
   organization Organization @relation(fields: [organizationId], references: [id])
-  employees EmployeesJobs[]
+  employees Employee[]
 }
 
 // WIP 
