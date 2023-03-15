@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import { SpaceType } from "../lib/space";
 import { FlatfileSpaceData } from "../lib/flatfile";
 import { useRouter } from "next/router";
+import { OptionBuilder } from "../components/dynamic-templates/option-builder";
 
 interface Props {}
 
@@ -34,7 +35,7 @@ interface Props {}
 //   },
 // }),
 
-interface Option {
+export interface Option {
   id: number;
   input: string;
   output: string;
@@ -57,110 +58,37 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({}) => {
         Adjust the field options below, then click Open Portal to add your data.
       </p>
 
-      <div className="max-w-sm">
-        <div className="flex flex-row justify-between items-center mb-2">
-          <p className="w-1/2">Input value in sheet</p>
-          <p className="w-1/2">Output value on record</p>
-        </div>
+      <OptionBuilder
+        options={options.sort((a, b) => a.id - b.id)}
+        updateInput={(option, value) => {
+          const filteredOptions = options.filter((o) => {
+            return o.id !== option.id;
+          });
 
-        {options
-          .sort((a, b) => a.id - b.id)
-          .map((option) => {
-            return (
-              <div
-                key={option.id}
-                className="flex flex-row justify-between items-center mb-2"
-              >
-                <input
-                  type="text"
-                  defaultValue={option.input}
-                  onChange={(e) => {
-                    const filteredOptions = options.filter((o) => {
-                      return o.id !== option.id;
-                    });
+          setOptions([...filteredOptions, { ...option, input: value }]);
+        }}
+        updateOutput={(option, value) => {
+          const filteredOptions = options.filter((o) => {
+            return o.id !== option.id;
+          });
 
-                    setOptions([
-                      ...filteredOptions,
-                      { ...option, input: e.target.value },
-                    ]);
-                  }}
-                  className="border border-gray-200 rounded px-4 py-2 mr-2 w-1/2"
-                />
+          setOptions([...filteredOptions, { ...option, output: value }]);
+        }}
+        addNewOption={() => {
+          const maxId = options.reduce((max, option) => {
+            return Math.max(max, option.id);
+          }, 0);
 
-                <input
-                  type="text"
-                  defaultValue={option.output}
-                  onChange={(e) => {
-                    const filteredOptions = options.filter((o) => {
-                      return o.id !== option.id;
-                    });
+          setOptions([...options, { id: maxId + 1, input: "", output: "" }]);
+        }}
+        removeOption={(option) => {
+          const filteredObjects = options.filter((o) => {
+            return o.id !== option.id;
+          });
 
-                    setOptions([
-                      ...filteredOptions,
-                      { ...option, output: e.target.value },
-                    ]);
-                  }}
-                  className="border border-gray-200 rounded px-4 py-2 w-1/2"
-                />
-
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6 text-gray-300 ml-2 cursor-pointer"
-                  onClick={() => {
-                    const filteredObjects = options.filter((o) => {
-                      return o.id !== option.id;
-                    });
-
-                    console.log("filteredObjects", filteredObjects);
-
-                    setOptions(filteredObjects);
-                  }}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </div>
-            );
-          })}
-
-        <div
-          onClick={() => {
-            console.log("add");
-            console.log("options", options);
-
-            const maxId = options.reduce((max, option) => {
-              return Math.max(max, option.id);
-            }, 0);
-
-            setOptions([...options, { id: maxId + 1, input: "", output: "" }]);
-          }}
-          className="flex flex-row items-center justify-start text-gray-400 text-sm cursor-pointer"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-4 h-4"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 6v12m6-6H6"
-            />
-          </svg>
-
-          <p>New Option</p>
-        </div>
-      </div>
+          setOptions(filteredObjects);
+        }}
+      />
     </div>
   );
 };

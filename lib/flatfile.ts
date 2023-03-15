@@ -8,7 +8,7 @@ import {
   SpaceConfig,
   AddSpaceRequest,
 } from "@flatfile/api";
-import { PrismaClient, Space, User, prisma } from "@prisma/client";
+import { PrismaClient, Space, User } from "@prisma/client";
 import { DateTime } from "luxon";
 import { inspect } from "util";
 import { SpaceType } from "./space";
