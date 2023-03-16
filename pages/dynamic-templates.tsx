@@ -1,26 +1,14 @@
 import { NextPageWithLayout } from "./_app";
-import { useState, useCallback, useEffect } from "react";
+import { useState } from "react";
 import { useSpace, ISpaceConfig } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
-import {
-  ArrowPathIcon,
-  ArrowDownTrayIcon,
-  ArrowsPointingOutIcon,
-  ArrowsPointingInIcon,
-  SparklesIcon,
-} from "@heroicons/react/24/outline";
+import { SparklesIcon } from "@heroicons/react/24/outline";
 import {
   SpaceConfigWithBlueprints,
   getAccessToken,
   getSpaceConfig,
 } from "../lib/flatfile";
-import { Action, PrismaClient, Space } from "@prisma/client";
-import { DateTime } from "luxon";
-import toast from "react-hot-toast";
-import { SpaceType } from "../lib/space";
-import { FlatfileSpaceData } from "../lib/flatfile";
-import { useRouter } from "next/router";
 import { OptionBuilder } from "../components/dynamic-templates/option-builder";
 import { Property, SheetConfig } from "@flatfile/api";
 import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";
@@ -92,7 +80,7 @@ const filterConfig = ({
     ],
   };
 
-  console.log("filteredConfig", filteredConfig);
+  // console.log("filteredConfig", filteredConfig);
 
   return filteredConfig;
 };
@@ -105,6 +93,9 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 }) => {
   const [options, setOptions] = useState(initialOptions);
   const [showSpace, setShowSpace] = useState(false);
+  const [customFieldConfig, setCustomFieldConfig] = useState();
+
+  console.log("customFieldConfig", customFieldConfig);
 
   const spaceProps: ISpaceConfig = {
     accessToken,
@@ -125,7 +116,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
       </p>
 
       <div className="flex flex-row mb-12">
-        <CustomFieldBuilder />
+        <CustomFieldBuilder onChange={setCustomFieldConfig} />
 
         <div className="border-r border-gray-300 mx-12"></div>
 
