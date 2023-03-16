@@ -1,3 +1,4 @@
+const util = require("util");
 import {
   DefaultApi,
   Configuration,
@@ -7,8 +8,9 @@ import {
   AccessTokenResponse,
   SpaceConfig,
   AddSpaceRequest,
+  Blueprint,
 } from "@flatfile/api";
-import { PrismaClient, Space, User, prisma } from "@prisma/client";
+import { PrismaClient, Space, User } from "@prisma/client";
 import { DateTime } from "luxon";
 import { inspect } from "util";
 import { SpaceType } from "./space";
@@ -392,4 +394,43 @@ export const addDocumentToSpace = async (
   const addDocumentResult = await addDocumentToSpaceResponse.json();
 
   return addDocumentResult.data;
+};
+
+export interface SpaceConfigWithBlueprints {
+  id: string;
+  slug: string;
+  name: string;
+  blueprints: Blueprint[];
+}
+
+export const getSpaceConfig = async (accessToken: string) => {
+  const spaceConfigResponse: Response = await fetch(
+    `${BASE_PATH}/spaces/configs`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (!spaceConfigResponse.ok) {
+    throw new Error("Error getting space config");
+  }
+
+  const spaceConfigResult = await spaceConfigResponse.json();
+
+  // spaceConfigResult.data.map(())
+
+  const config = spaceConfigResult.data.find((config: SpaceConfigWithBlueprints) => {
+    return config.id === process.env.ONBOARDING_SPACE_CONFIG_ID;
+  });
+
+  console.log("spaceConfigResult", spaceConfigResult.data);
+  console.log("config ID", process.env.ONBOARDING_SPACE_CONFIG_ID);
+
+  console.log("config", util.inspect(config, { depth: null }));
+
+  return config;
 };
