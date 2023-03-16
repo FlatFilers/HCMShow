@@ -18,25 +18,37 @@ const dateFormats = {
   "dd-mm-yyyy": "dd-mm-yyyy",
 };
 
-export const CustomFieldBuilder = ({ onChange }: Props) => {
-  // todo: work this into one object
-  const [customFieldName, setCustomFieldName] = useState("");
-  const [selectedFieldType, setSelectedFieldType] =
-    useState<keyof typeof fieldTypes>("date");
-  const [isRequired, setIsRequired] = useState(false);
-  const [selectedDateFormat, setSelectedDateFormat] =
-    useState<keyof typeof dateFormats>("yyyy-mm-dd");
-  const [decimalPlaces, setDecimalPlaces] = useState<number>(2);
+interface CustomField {
+  name: string;
+  type: keyof typeof fieldTypes;
+  required: boolean;
+  dateFormat: keyof typeof dateFormats;
+  decimals: number;
+}
 
-  const formCustomField = () => {
-    return {
-      key: customFieldName?.replace(/\s/, ""),
-      type: selectedFieldType,
-      label: customFieldName,
-      description: "Custom field",
-      constraints: [{ type: "required" }],
-    };
-  };
+export const CustomFieldBuilder = ({ onChange }: Props) => {
+  const [customField, setCustomField] = useState<CustomField>({
+    name: "Employee Birthdate",
+    type: "date",
+    required: true,
+    dateFormat: "yyyy-mm-dd",
+    decimals: 2,
+  } as CustomField);
+
+  console.log("customfield", customField);
+
+
+  // TODO:  map to custom field and feed down from parent
+
+  // const formCustomField = () => {
+  //   return {
+  //     key: customFieldName?.replace(/\s/, ""),
+  //     type: selectedFieldType,
+  //     label: customFieldName,
+  //     description: "Custom field",
+  //     constraints: [{ type: "required" }],
+  //   };
+  // };
 
   // console.log("customfield", customField);
 
@@ -56,9 +68,9 @@ export const CustomFieldBuilder = ({ onChange }: Props) => {
         type="text"
         className="border border-gray-200 rounded px-2 py-2 w-full mb-4"
         placeholder="Employee Birthdate"
+        value={customField.name}
         onChange={(e) => {
-          setCustomFieldName(e.target.value);
-          onChange(formCustomField());
+          setCustomField({ ...customField, name: e.target.value });
         }}
       />
 
@@ -66,10 +78,9 @@ export const CustomFieldBuilder = ({ onChange }: Props) => {
       <select
         name="custom-field-type"
         className="border border-gray-200 rounded px-2 py-2 w-full mb-4"
-        value={selectedFieldType}
+        value={customField.type}
         onChange={(e) => {
-          setSelectedFieldType(e.target.value as keyof typeof fieldTypes);
-          onChange(formCustomField());
+          setCustomField({ ...customField, type: e.target.value });
         }}
       >
         {Object.keys(fieldTypes).map((key) => {
@@ -89,10 +100,9 @@ export const CustomFieldBuilder = ({ onChange }: Props) => {
           name="custom-field-required-validation"
           type="checkbox"
           className="mr-2"
-          checked={isRequired}
+          checked={customField.required}
           onChange={(e) => {
-            setIsRequired(e.target.checked);
-            onChange(formCustomField());
+            setCustomField({ ...customField, required: e.target.checked });
           }}
         />
         <label
@@ -103,7 +113,7 @@ export const CustomFieldBuilder = ({ onChange }: Props) => {
         </label>
       </div>
 
-      {selectedFieldType === "date" && (
+      {customField.type === "date" && (
         <div>
           <label className="block text-sm font-semibold mb-1">
             Date Format
@@ -111,10 +121,9 @@ export const CustomFieldBuilder = ({ onChange }: Props) => {
           <select
             name="custom-field-type"
             className="border border-gray-200 rounded px-2 py-2 w-1/2 mb-4"
-            value={selectedDateFormat}
+            value={customField.dateFormat}
             onChange={(e) => {
-              setSelectedDateFormat(e.target.value as keyof typeof dateFormats);
-              onChange(formCustomField());
+              setCustomField({ ...customField, dateFormat: e.target.value });
             }}
           >
             {Object.keys(dateFormats).map((key) => {
@@ -128,7 +137,7 @@ export const CustomFieldBuilder = ({ onChange }: Props) => {
         </div>
       )}
 
-      {selectedFieldType === "number" && (
+      {customField.type === "number" && (
         <div>
           <label className="block text-sm font-semibold mb-1">
             Decimal Places
@@ -140,10 +149,12 @@ export const CustomFieldBuilder = ({ onChange }: Props) => {
             step={1}
             className="border border-gray-200 rounded px-2 py-2 mb-4 w-16"
             placeholder="2"
-            defaultValue={decimalPlaces}
+            defaultValue={customField.decimals}
             onChange={(e) => {
-              setDecimalPlaces(parseInt(e.target.value));
-              onChange(formCustomField());
+              setCustomField({
+                ...customField,
+                decimals: parseInt(e.target.value),
+              });
             }}
           />
         </div>
