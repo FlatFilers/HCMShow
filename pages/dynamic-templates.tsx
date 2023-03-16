@@ -8,7 +8,7 @@ import {
   ArrowDownTrayIcon,
   ArrowsPointingOutIcon,
   ArrowsPointingInIcon,
-  SparklesIcon
+  SparklesIcon,
 } from "@heroicons/react/24/outline";
 import {
   SpaceConfigWithBlueprints,
@@ -23,6 +23,7 @@ import { FlatfileSpaceData } from "../lib/flatfile";
 import { useRouter } from "next/router";
 import { OptionBuilder } from "../components/dynamic-templates/option-builder";
 import { Property, SheetConfig } from "@flatfile/api";
+import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";
 
 interface Props {
   accessToken: string;
@@ -119,11 +120,15 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   return (
     <div className="ml-12 mt-16">
       <p className="text-2xl mb-2">Customize your workspace</p>
-      <p className="mb-12">
+      <p className="mb-8 text-gray-600">
         Adjust the field options below, then click Open Portal to add your data.
       </p>
 
-      <div className="mb-8">
+      <div className="flex flex-row mb-12">
+        <CustomFieldBuilder />
+
+        <div className="border-r border-gray-300 mx-12"></div>
+
         <OptionBuilder
           options={options.sort((a, b) => a.id - b.id)}
           updateInput={(option, value) => {
