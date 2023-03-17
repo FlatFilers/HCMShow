@@ -29,6 +29,7 @@ export const upsertJob = async ({
   const job = await prismaClient.job.upsert({
     where: {
       slug,
+      organizationId,
     },
     create: {
       organizationId,
