@@ -1,5 +1,5 @@
 import { NextPageWithLayout } from "./_app";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useSpace, ISpaceConfig } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
@@ -20,6 +20,28 @@ interface Props {
   baseConfig: SpaceConfigWithBlueprints;
 }
 
+export interface CustomField {
+  name: string;
+  type: keyof typeof fieldTypes;
+  required: boolean;
+  dateFormat: keyof typeof dateFormats;
+  decimals: number;
+}
+
+export const fieldTypes = {
+  string: "Text",
+  number: "Number",
+  date: "Date",
+  enum: "Category",
+  boolean: "Checkbox",
+};
+
+export const dateFormats = {
+  "yyyy-mm-dd": "yyyy-mm-dd",
+  "mm-dd-yyyy": "mm-dd-yyyy",
+  "dd-mm-yyyy": "dd-mm-yyyy",
+};
+
 export interface Option {
   id: number;
   input: string;
@@ -37,10 +59,12 @@ const filterConfig = ({
   baseConfig,
   workbookName,
   options,
+  customFieldConfig,
 }: {
   baseConfig: SpaceConfigWithBlueprints;
   workbookName: string;
   options: Option[];
+  customFieldConfig: any;
 }) => {
   const blueprint = baseConfig.blueprints.find((b) => b.name === workbookName);
   const sheet = blueprint?.sheets.find((s) => s.name === "Employees");
@@ -73,6 +97,7 @@ const filterConfig = ({
             fields: [
               ...otherFields,
               { ...field, config: { options: mappedOptions } },
+              customFieldConfig,
             ],
           },
         ],
@@ -80,7 +105,7 @@ const filterConfig = ({
     ],
   };
 
-  // console.log("filteredConfig", filteredConfig);
+  console.log("filteredConfig", filteredConfig);
 
   return filteredConfig;
 };
@@ -93,20 +118,45 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 }) => {
   const [options, setOptions] = useState(initialOptions);
   const [showSpace, setShowSpace] = useState(false);
-  const [customFieldConfig, setCustomFieldConfig] = useState();
+  const [customField, setCustomField] = useState<CustomField>({
+    name: "Employee Birthdate",
+    type: "date",
+    required: true,
+    dateFormat: "yyyy-mm-dd",
+    decimals: 2,
+  } as CustomField);
 
-  console.log("customFieldConfig", customFieldConfig);
+  const customFieldConfig = {
+    key: customField.name?.replace(/\s/, ""),
+    type: customField.type,
+    label: customField.name,
+    description: "Custom field",
+    constraints: [{ type: "required" }],
+  };
 
   const spaceProps: ISpaceConfig = {
     accessToken,
     environmentId,
-    spaceConfig: filterConfig({ baseConfig, workbookName, options }),
+    spaceConfig: filterConfig({
+      baseConfig,
+      workbookName,
+      options,
+      customFieldConfig,
+    }),
     sidebarConfig: {
       showDataChecklist: false,
       showSidebar: false,
     },
   };
   const { error, data } = useSpace({ ...spaceProps });
+
+  console.log("customFieldConfig", customFieldConfig);
+
+  useCallback(() => {
+    if (error) {
+      setShowSpace(false);
+    }
+  }, [error]);
 
   return (
     <div className="ml-12 mt-16">
@@ -116,7 +166,12 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
       </p>
 
       <div className="flex flex-row mb-12">
-        <CustomFieldBuilder onChange={setCustomFieldConfig} />
+        <CustomFieldBuilder
+          customField={customField}
+          setCustomField={setCustomField}
+          fieldTypes={fieldTypes}
+          dateFormats={dateFormats}
+        />
 
         <div className="border-r border-gray-300 mx-12"></div>
 
