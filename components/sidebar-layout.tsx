@@ -11,7 +11,7 @@ import {
   WindowIcon,
   FolderArrowDownIcon,
   ListBulletIcon,
-  VariableIcon
+  VariableIcon,
 } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -100,13 +100,15 @@ const SidebarLayout = ({ children }: Props) => {
       <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 pt-5">
-          <div className="flex flex-shrink-0 items-center px-4">
+          <div className="flex flex-shrink-0 items-center px-4 relative ml-4 h-7 w-40">
             <Image
               className=""
               src={"/images/hcm_logo_LR.png"}
               alt="Your Company"
-              width={160}
-              height={160}
+              fill={true}
+              sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
               priority
             />
           </div>

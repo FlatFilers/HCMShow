@@ -83,13 +83,15 @@ const MobileSidebar = ({
                   </button>
                 </div>
               </Transition.Child>
-              <div className="flex flex-shrink-0 items-center px-4">
+              <div className="flex flex-shrink-0 items-center px-4 relative ml-4 h-7 w-40">
                 <Image
-                  className=""
+                  className="h-8 w-8"
                   src={"/images/hcm_logo_LR.png"}
                   alt="Your Company"
-                  width={160}
-                  height={160}
+                  fill={true}
+                  sizes="(max-width: 768px) 100vw,
+                  (max-width: 1200px) 50vw,
+                  33vw"
                   priority
                 />
               </div>
