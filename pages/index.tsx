@@ -32,14 +32,18 @@ const Home: NextPageWithLayout = () => {
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-white h-screen">
       <div className="w-full max-w-md space-y-8">
         <div className="relative flex flex-col items-center w-full">
-          <Image
-            className="mx-auto"
-            src={"/images/hcm_logo.png"}
-            alt="Your Company"
-            width={180}
-            height={180}
-            priority
-          />
+          <div className="relative h-20 w-44">
+            <Image
+              className=""
+              src={"/images/hcm_logo.png"}
+              alt="Your Company"
+              fill={true}
+              sizes="(max-width: 768px) 100vw,
+                (max-width: 1200px) 50vw,
+                33vw"
+              priority
+            />
+          </div>
           <p className="mt-4 text-gray-500 text-center text-md">
             Sign in to HCM.show
           </p>
