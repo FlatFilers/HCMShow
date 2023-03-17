@@ -26,6 +26,7 @@ export interface CustomField {
   required: boolean;
   dateFormat: keyof typeof dateFormats;
   decimals: number;
+  enumOptions: Option[];
 }
 
 export const fieldTypes = {
@@ -48,7 +49,7 @@ export interface Option {
   output: string;
 }
 
-const initialOptions: Option[] = [
+export const initialOptions: Option[] = [
   { id: 1, input: "ft", output: "Full-Time" },
   { id: 2, input: "pt", output: "Part-Time" },
   { id: 3, input: "tm", output: "Temporary" },
@@ -124,6 +125,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     required: true,
     dateFormat: "yyyy-mm-dd",
     decimals: 2,
+    enumOptions: initialOptions,
   } as CustomField);
 
   const customFieldConfig = {
@@ -169,43 +171,50 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
         <CustomFieldBuilder
           customField={customField}
           setCustomField={setCustomField}
-          fieldTypes={fieldTypes}
-          dateFormats={dateFormats}
         />
 
         <div className="border-r border-gray-300 mx-12"></div>
 
-        <OptionBuilder
-          options={options.sort((a, b) => a.id - b.id)}
-          updateInput={(option, value) => {
-            const filteredOptions = options.filter((o) => {
-              return o.id !== option.id;
-            });
+        <div className="flex flex-col">
+          <p className="text-lg font-semibold mb-4">
+            Adjust Employee Type Options
+          </p>
 
-            setOptions([...filteredOptions, { ...option, input: value }]);
-          }}
-          updateOutput={(option, value) => {
-            const filteredOptions = options.filter((o) => {
-              return o.id !== option.id;
-            });
+          <OptionBuilder
+            options={options.sort((a, b) => a.id - b.id)}
+            updateInput={(option, value) => {
+              const filteredOptions = options.filter((o) => {
+                return o.id !== option.id;
+              });
 
-            setOptions([...filteredOptions, { ...option, output: value }]);
-          }}
-          addNewOption={() => {
-            const maxId = options.reduce((max, option) => {
-              return Math.max(max, option.id);
-            }, 0);
+              setOptions([...filteredOptions, { ...option, input: value }]);
+            }}
+            updateOutput={(option, value) => {
+              const filteredOptions = options.filter((o) => {
+                return o.id !== option.id;
+              });
 
-            setOptions([...options, { id: maxId + 1, input: "", output: "" }]);
-          }}
-          removeOption={(option) => {
-            const filteredObjects = options.filter((o) => {
-              return o.id !== option.id;
-            });
+              setOptions([...filteredOptions, { ...option, output: value }]);
+            }}
+            addNewOption={() => {
+              const maxId = options.reduce((max, option) => {
+                return Math.max(max, option.id);
+              }, 0);
 
-            setOptions(filteredObjects);
-          }}
-        />
+              setOptions([
+                ...options,
+                { id: maxId + 1, input: "", output: "" },
+              ]);
+            }}
+            removeOption={(option) => {
+              const filteredObjects = options.filter((o) => {
+                return o.id !== option.id;
+              });
+
+              setOptions(filteredObjects);
+            }}
+          />
+        </div>
       </div>
 
       <button

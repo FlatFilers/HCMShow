@@ -3,15 +3,16 @@ import {
   dateFormats,
   fieldTypes,
 } from "../../pages/dynamic-templates";
+import { OptionBuilder } from "./option-builder";
 
 type Props = {
   customField: CustomField;
   setCustomField: (customField: CustomField) => void;
-  fieldTypes: typeof fieldTypes;
-  dateFormats: typeof dateFormats;
 };
 
 export const CustomFieldBuilder = ({ customField, setCustomField }: Props) => {
+  const options = customField.enumOptions;
+
   return (
     <div className="max-w-lg">
       <p className="text-lg font-semibold mb-1">Custom Field</p>
@@ -118,6 +119,63 @@ export const CustomFieldBuilder = ({ customField, setCustomField }: Props) => {
               setCustomField({
                 ...customField,
                 decimals: parseInt(e.target.value),
+              });
+            }}
+          />
+        </div>
+      )}
+
+      {customField.type === "enum" && (
+        <div>
+          <label
+            htmlFor="custom-field-required-validation"
+            className="block text-sm cursor-pointer mb-2"
+          >
+            Category options
+          </label>
+          <OptionBuilder
+            options={options.sort((a, b) => a.id - b.id)}
+            updateInput={(option, value) => {
+              const filteredOptions = options.filter((o) => {
+                return o.id !== option.id;
+              });
+
+              setCustomField({
+                ...customField,
+                enumOptions: [...filteredOptions, { ...option, input: value }],
+              });
+            }}
+            updateOutput={(option, value) => {
+              const filteredOptions = options.filter((o) => {
+                return o.id !== option.id;
+              });
+
+              setCustomField({
+                ...customField,
+                enumOptions: [...filteredOptions, { ...option, output: value }],
+              });
+            }}
+            addNewOption={() => {
+              const maxId = options.reduce((max, option) => {
+                return Math.max(max, option.id);
+              }, 0);
+
+              setCustomField({
+                ...customField,
+                enumOptions: [
+                  ...options,
+                  { id: maxId + 1, input: "", output: "" },
+                ],
+              });
+            }}
+            removeOption={(option) => {
+              const filteredObjects = options.filter((o) => {
+                return o.id !== option.id;
+              });
+
+              setCustomField({
+                ...customField,
+                enumOptions: filteredObjects,
               });
             }}
           />

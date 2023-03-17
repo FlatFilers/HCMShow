@@ -17,8 +17,6 @@ export const OptionBuilder = ({
 }: Props) => {
   return (
     <div className="max-w-lg">
-      <p className="text-lg font-semibold mb-4">Adjust Employee Type Options</p>
-
       <div className="flex flex-row justify-between items-center mb-2">
         <p className="text-xs w-1/2 text-gray-600">Input value in sheet</p>
         <p className="text-xs w-1/2 text-gray-600">Output value on record</p>
