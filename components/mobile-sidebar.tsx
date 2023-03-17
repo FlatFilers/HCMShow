@@ -85,7 +85,7 @@ const MobileSidebar = ({
               </Transition.Child>
               <div className="flex flex-shrink-0 items-center px-4 relative ml-4 h-7 w-40">
                 <Image
-                  className="h-8 w-8"
+                  className=""
                   src={"/images/hcm_logo_LR.png"}
                   alt="Your Company"
                   fill={true}
