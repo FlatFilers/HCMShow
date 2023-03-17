@@ -106,7 +106,7 @@ const filterConfig = ({
     ],
   };
 
-  console.log("filteredConfig", filteredConfig);
+  // console.log("filteredConfig", filteredConfig);
 
   return filteredConfig;
 };
