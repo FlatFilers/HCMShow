@@ -1,28 +1,17 @@
 import { NextPageWithLayout } from "./_app";
-import { useState, useCallback, useEffect } from "react";
+import { useCallback, useState } from "react";
 import { useSpace, ISpaceConfig } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
-import {
-  ArrowPathIcon,
-  ArrowDownTrayIcon,
-  ArrowsPointingOutIcon,
-  ArrowsPointingInIcon,
-  SparklesIcon
-} from "@heroicons/react/24/outline";
+import { SparklesIcon } from "@heroicons/react/24/outline";
 import {
   SpaceConfigWithBlueprints,
   getAccessToken,
   getSpaceConfig,
 } from "../lib/flatfile";
-import { Action, PrismaClient, Space } from "@prisma/client";
-import { DateTime } from "luxon";
-import toast from "react-hot-toast";
-import { SpaceType } from "../lib/space";
-import { FlatfileSpaceData } from "../lib/flatfile";
-import { useRouter } from "next/router";
 import { OptionBuilder } from "../components/dynamic-templates/option-builder";
 import { Property, SheetConfig } from "@flatfile/api";
+import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";
 
 interface Props {
   accessToken: string;
@@ -31,13 +20,36 @@ interface Props {
   baseConfig: SpaceConfigWithBlueprints;
 }
 
+export interface CustomField {
+  name: string;
+  type: keyof typeof fieldTypes;
+  required: boolean;
+  dateFormat: keyof typeof dateFormats;
+  decimals: number;
+  enumOptions: Option[];
+}
+
+export const fieldTypes = {
+  string: "Text",
+  number: "Number",
+  date: "Date",
+  enum: "Category",
+  boolean: "Checkbox",
+};
+
+export const dateFormats = {
+  "yyyy-mm-dd": "yyyy-mm-dd",
+  "mm-dd-yyyy": "mm-dd-yyyy",
+  "dd-mm-yyyy": "dd-mm-yyyy",
+};
+
 export interface Option {
   id: number;
   input: string;
   output: string;
 }
 
-const initialOptions: Option[] = [
+export const initialOptions: Option[] = [
   { id: 1, input: "ft", output: "Full-Time" },
   { id: 2, input: "pt", output: "Part-Time" },
   { id: 3, input: "tm", output: "Temporary" },
@@ -48,10 +60,12 @@ const filterConfig = ({
   baseConfig,
   workbookName,
   options,
+  customFieldConfig,
 }: {
   baseConfig: SpaceConfigWithBlueprints;
   workbookName: string;
   options: Option[];
+  customFieldConfig: any;
 }) => {
   const blueprint = baseConfig.blueprints.find((b) => b.name === workbookName);
   const sheet = blueprint?.sheets.find((s) => s.name === "Employees");
@@ -84,6 +98,7 @@ const filterConfig = ({
             fields: [
               ...otherFields,
               { ...field, config: { options: mappedOptions } },
+              customFieldConfig,
             ],
           },
         ],
@@ -91,7 +106,7 @@ const filterConfig = ({
     ],
   };
 
-  console.log("filteredConfig", filteredConfig);
+  // console.log("filteredConfig", filteredConfig);
 
   return filteredConfig;
 };
@@ -104,11 +119,32 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 }) => {
   const [options, setOptions] = useState(initialOptions);
   const [showSpace, setShowSpace] = useState(false);
+  const [customField, setCustomField] = useState<CustomField>({
+    name: "Employee Birthdate",
+    type: "date",
+    required: true,
+    dateFormat: "yyyy-mm-dd",
+    decimals: 2,
+    enumOptions: initialOptions,
+  } as CustomField);
+
+  const customFieldConfig = {
+    key: customField.name?.replace(/\s/, ""),
+    type: customField.type,
+    label: customField.name,
+    description: "Custom field",
+    constraints: [{ type: "required" }],
+  };
 
   const spaceProps: ISpaceConfig = {
     accessToken,
     environmentId,
-    spaceConfig: filterConfig({ baseConfig, workbookName, options }),
+    spaceConfig: filterConfig({
+      baseConfig,
+      workbookName,
+      options,
+      customFieldConfig,
+    }),
     sidebarConfig: {
       showDataChecklist: false,
       showSidebar: false,
@@ -116,45 +152,69 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   };
   const { error, data } = useSpace({ ...spaceProps });
 
+  console.log("customFieldConfig", customFieldConfig);
+
+  useCallback(() => {
+    if (error) {
+      setShowSpace(false);
+    }
+  }, [error]);
+
   return (
     <div className="ml-12 mt-16">
       <p className="text-2xl mb-2">Customize your workspace</p>
-      <p className="mb-12">
+      <p className="mb-8 text-gray-600">
         Adjust the field options below, then click Open Portal to add your data.
       </p>
 
-      <div className="mb-8">
-        <OptionBuilder
-          options={options.sort((a, b) => a.id - b.id)}
-          updateInput={(option, value) => {
-            const filteredOptions = options.filter((o) => {
-              return o.id !== option.id;
-            });
-
-            setOptions([...filteredOptions, { ...option, input: value }]);
-          }}
-          updateOutput={(option, value) => {
-            const filteredOptions = options.filter((o) => {
-              return o.id !== option.id;
-            });
-
-            setOptions([...filteredOptions, { ...option, output: value }]);
-          }}
-          addNewOption={() => {
-            const maxId = options.reduce((max, option) => {
-              return Math.max(max, option.id);
-            }, 0);
-
-            setOptions([...options, { id: maxId + 1, input: "", output: "" }]);
-          }}
-          removeOption={(option) => {
-            const filteredObjects = options.filter((o) => {
-              return o.id !== option.id;
-            });
-
-            setOptions(filteredObjects);
-          }}
+      <div className="flex flex-row mb-12">
+        <CustomFieldBuilder
+          customField={customField}
+          setCustomField={setCustomField}
         />
+
+        <div className="border-r border-gray-300 mx-12"></div>
+
+        <div className="flex flex-col">
+          <p className="text-lg font-semibold mb-4">
+            Adjust Employee Type Options
+          </p>
+
+          <OptionBuilder
+            options={options.sort((a, b) => a.id - b.id)}
+            updateInput={(option, value) => {
+              const filteredOptions = options.filter((o) => {
+                return o.id !== option.id;
+              });
+
+              setOptions([...filteredOptions, { ...option, input: value }]);
+            }}
+            updateOutput={(option, value) => {
+              const filteredOptions = options.filter((o) => {
+                return o.id !== option.id;
+              });
+
+              setOptions([...filteredOptions, { ...option, output: value }]);
+            }}
+            addNewOption={() => {
+              const maxId = options.reduce((max, option) => {
+                return Math.max(max, option.id);
+              }, 0);
+
+              setOptions([
+                ...options,
+                { id: maxId + 1, input: "", output: "" },
+              ]);
+            }}
+            removeOption={(option) => {
+              const filteredObjects = options.filter((o) => {
+                return o.id !== option.id;
+              });
+
+              setOptions(filteredObjects);
+            }}
+          />
+        </div>
       </div>
 
       <button

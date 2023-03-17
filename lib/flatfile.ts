@@ -423,14 +423,16 @@ export const getSpaceConfig = async (accessToken: string) => {
 
   // spaceConfigResult.data.map(())
 
-  const config = spaceConfigResult.data.find((config: SpaceConfigWithBlueprints) => {
-    return config.id === process.env.ONBOARDING_SPACE_CONFIG_ID;
-  });
+  const config = spaceConfigResult.data.find(
+    (config: SpaceConfigWithBlueprints) => {
+      return config.id === process.env.ONBOARDING_SPACE_CONFIG_ID;
+    }
+  );
 
-  console.log("spaceConfigResult", spaceConfigResult.data);
-  console.log("config ID", process.env.ONBOARDING_SPACE_CONFIG_ID);
+  // console.log("spaceConfigResult", spaceConfigResult.data);
+  // console.log("config ID", process.env.ONBOARDING_SPACE_CONFIG_ID);
 
-  console.log("config", util.inspect(config, { depth: null }));
+  // console.log("config", util.inspect(config, { depth: null }));
 
   return config;
 };

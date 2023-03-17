@@ -16,10 +16,10 @@ export const OptionBuilder = ({
   removeOption,
 }: Props) => {
   return (
-    <div className="max-w-sm">
+    <div className="max-w-lg">
       <div className="flex flex-row justify-between items-center mb-2">
-        <p className="w-1/2">Input value in sheet</p>
-        <p className="w-1/2">Output value on record</p>
+        <p className="text-xs w-1/2 text-gray-600">Input value in sheet</p>
+        <p className="text-xs w-1/2 text-gray-600">Output value on record</p>
       </div>
 
       {options.map((option) => {
