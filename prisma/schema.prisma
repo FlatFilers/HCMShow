@@ -22,6 +22,7 @@ model Organization {
   employees Employee[]
   actions Action[]
   jobs Job[]
+  benefitPlans BenefitPlan[]
 }
 
 model User {
@@ -568,6 +569,8 @@ model BenefitPlan {
   slug String @unique
   name String
 
+  organizationId String @db.Uuid
+  organization Organization @relation(fields: [organizationId], references: [id])
   employees EmployeeBenefitPlan[]
 }
 

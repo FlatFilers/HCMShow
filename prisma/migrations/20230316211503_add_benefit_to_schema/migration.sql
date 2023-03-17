@@ -15,6 +15,7 @@ CREATE TABLE "BenefitPlan" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "organizationId" UUID NOT NULL,
 
     CONSTRAINT "BenefitPlan_pkey" PRIMARY KEY ("id")
 );
@@ -27,3 +28,6 @@ ALTER TABLE "EmployeeBenefitPlan" ADD CONSTRAINT "EmployeeBenefitPlan_employeeId
 
 -- AddForeignKey
 ALTER TABLE "EmployeeBenefitPlan" ADD CONSTRAINT "EmployeeBenefitPlan_benefitPlanId_fkey" FOREIGN KEY ("benefitPlanId") REFERENCES "BenefitPlan"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "BenefitPlan" ADD CONSTRAINT "BenefitPlan_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

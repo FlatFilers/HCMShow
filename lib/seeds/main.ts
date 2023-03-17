@@ -31,7 +31,6 @@ export const main = async () => {
   // await upsertLocations();
   await upsertEmployeeTypes();
   await upsertJobFamilies();
-  await upsertBenefitPlans();
   // await upsertHireReasons();
   // await upsertTitleTypes();
   // await upsertTitles();
@@ -43,6 +42,7 @@ export const main = async () => {
 
   const user = await upsertUser();
   await upsertJobs(user.organizationId);
+  await upsertBenefitPlans(user.organizationId);
 
   await seedNewAccount(user);
 };
@@ -204,30 +204,51 @@ const upsertJobs = async (organizationId: string) => {
   );
 };
 
-const upsertBenefitPlans = async () => {
-  // [ 'ID', 'Effective Date', 'Name', 'Summary', 'Inactive', '', '' ]
-  type CsvJobType = Omit<BenefitPlan, "id" | "createdAt" | "updatedAt">;
-  const parseCsv: Promise<CsvJobType[]> = new Promise((resolve, reject) => {
-    const data: CsvJobType[] = [];
+const upsertBenefitPlans = async (organizationId: string) => {
+  type CsvBenefitPlanType = Omit<
+    BenefitPlan,
+    "id" | "createdAt" | "updatedAt" | "organizationId"
+  >;
+  const parseCsv: Promise<CsvBenefitPlanType[]> = new Promise(
+    (resolve, reject) => {
+      const data: CsvBenefitPlanType[] = [];
 
-    fs.createReadStream("./lib/seeds/data/seed_benefit_plans.csv")
-      .pipe(parse({ skipRows: 1 }))
-      .on("error", reject)
-      .on("data", (row: any) => {
-        data.push({
-          slug: row[0],
-          name: row[1],
+      fs.createReadStream("./lib/seeds/data/seed_benefit_plans.csv")
+        .pipe(parse({ skipRows: 1 }))
+        .on("error", reject)
+        .on("data", (row: any) => {
+          data.push({
+            name: row[0],
+            slug: row[1],
+          });
+        })
+
+        .on("end", () => {
+          resolve(data);
         });
-      })
-
-      .on("end", () => {
-        resolve(data);
-      });
-  });
+    }
+  );
 
   const csvData = await Promise.resolve(parseCsv);
 
-  const promises = csvData.map(async (data) => {
+  const dataWithOrg = await Promise.all(
+    csvData.map(async (data) => {
+      let mappedData = {
+        ...data,
+        organization: {
+          connect: {
+            id: organizationId,
+          },
+        },
+      };
+
+      return {
+        ...mappedData,
+      };
+    })
+  );
+
+  const promises = dataWithOrg.map(async (data) => {
     const benefitPlan: BenefitPlan = await prismaClient.benefitPlan.upsert({
       where: {
         slug: data.slug,

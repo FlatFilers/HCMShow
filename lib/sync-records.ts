@@ -6,6 +6,7 @@ import { SpaceType } from "./space";
 import { DateTime } from "luxon";
 import { createAction, ActionType } from "./action";
 import { validJobRecords, upsertJobRecords } from "./job";
+import { upsertBenefitPlanRecords } from "./benefit-plan";
 
 export const syncWorkbookRecords = async ({
   userId,
@@ -30,8 +31,15 @@ export const syncWorkbookRecords = async ({
     "Jobs",
     spaceType
   );
+  const benefitPlanRecords = await getRecordsByName(
+    userId,
+    accessToken,
+    "BenefitPlans",
+    spaceType
+  );
 
-  const totalRecords = employeeRecords.length + jobRecords.length;
+  const totalRecords =
+    employeeRecords.length + jobRecords.length + benefitPlanRecords.length;
 
   if (totalRecords === 0) {
     return {
@@ -45,6 +53,15 @@ export const syncWorkbookRecords = async ({
   console.log("Valid job records to sync", validJobs.length);
 
   const upsertJobs = await upsertJobRecords(validJobs, {
+    userId,
+    organizationId,
+  });
+
+  const validBenefitPlans = await validJobRecords(benefitPlanRecords);
+
+  console.log("Valid benefit plan records to sync", validBenefitPlans.length);
+
+  const upsertBenefitPlan = await upsertBenefitPlanRecords(validBenefitPlans, {
     userId,
     organizationId,
   });
