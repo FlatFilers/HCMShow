@@ -1,4 +1,4 @@
-import { BenefitPlan, EmployeeType, Job } from "@prisma/client";
+import { EmployeeType } from "@prisma/client";
 import { upsertEmployee, validEmployeeRecords } from "./employee";
 import { getAccessToken, getRecordsByName } from "./flatfile";
 import { prismaClient } from "./prisma-client";
@@ -67,18 +67,57 @@ export const syncWorkbookRecords = async ({
         })) as EmployeeType
       ).id;
 
-      const jobId = (
-        (await prismaClient.job.findFirst({
-          where: {
-            organizationId,
-            name: values.jobName.value as string,
-          },
-        })) as Job
-      ).id;
+      let job = await prismaClient.job.findFirst({
+        where: {
+          organizationId,
+          name: values.jobName.value as string,
+        },
+      });
 
-      const benefitPlan = (await prismaClient.benefitPlan.findUnique({
-        where: { slug: values.benefitPlan.value as string },
-      })) as BenefitPlan;
+      job ||= await prismaClient.job.upsert({
+        where: {
+          organizationId_slug: {
+            slug: values.jobCode.value as string,
+            organizationId,
+          },
+        },
+        create: {
+          slug: "test-job-for-employee",
+          name: "Test Job for Employee",
+          department: "Test Department",
+          effectiveDate: DateTime.now().toJSDate(),
+          isInactive: false,
+          organization: {
+            connect: {
+              id: organizationId,
+            },
+          },
+        },
+        update: {},
+      });
+
+      const jobId = job.id;
+
+      let benefitPlan = await prismaClient.benefitPlan.findFirst();
+
+      benefitPlan ||= await prismaClient.benefitPlan.upsert({
+        where: {
+          organizationId_slug: {
+            slug: "test-benefit-plan-for-emplyee",
+            organizationId,
+          },
+        },
+        create: {
+          slug: "test-benefit-plan-for-employee",
+          name: "Test Benefit Plan for Employee",
+          organization: {
+            connect: {
+              id: organizationId,
+            },
+          },
+        },
+        update: {},
+      });
 
       let data: Parameters<typeof upsertEmployee>[0] = {
         organizationId,
@@ -102,7 +141,15 @@ export const syncWorkbookRecords = async ({
         flatfileRecordId: r.id,
         jobId: jobId,
         benefitPlans: {
-          create: { benefitPlan: { connect: { slug: benefitPlan.slug } } },
+          create: [
+            {
+              benefitPlan: {
+                connect: {
+                  id: benefitPlan.id,
+                },
+              },
+            },
+          ],
         },
       };
 

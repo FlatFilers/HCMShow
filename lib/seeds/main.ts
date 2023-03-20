@@ -195,7 +195,10 @@ const upsertJobs = async (organizationId: string) => {
     dataWithJobFamilyId.map(async (data) => {
       await prismaClient.job.upsert({
         where: {
-          slug: data.slug,
+          organizationId_slug: {
+            organizationId,
+            slug: data.slug,
+          },
         },
         create: data,
         update: {},
@@ -251,7 +254,10 @@ const upsertBenefitPlans = async (organizationId: string) => {
   const promises = dataWithOrg.map(async (data) => {
     const benefitPlan: BenefitPlan = await prismaClient.benefitPlan.upsert({
       where: {
-        slug: data.slug,
+        organizationId_slug: {
+          organizationId,
+          slug: data.slug,
+        },
       },
       create: data,
       update: {},
@@ -749,10 +755,24 @@ export const upsertEmployees = async (organizationId: string) => {
   const defaultWeeklyHours = 40;
   const scheduledWeeklyHours = 40;
   const jobId = (await prismaClient.job.findFirst())!.id;
-  const benefitPlan = await prismaClient.benefitPlan.findFirst();
-  const benefitPlans = {
-    create: { benefitPlan: { connect: { slug: benefitPlan!.slug } } },
-  }!;
+  const benefitPlanRecord = await prismaClient.benefitPlan.upsert({
+    where: {
+      organizationId_slug: {
+        slug: "benefit-plan-seed",
+        organizationId,
+      },
+    },
+    create: {
+      slug: "benefit-plan-seed",
+      name: "Benefit Plan Seed",
+      organization: {
+        connect: {
+          id: organizationId,
+        },
+      },
+    },
+    update: {},
+  });
 
   const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,
@@ -766,7 +786,17 @@ export const upsertEmployees = async (organizationId: string) => {
     defaultWeeklyHours,
     scheduledWeeklyHours,
     jobId,
-    benefitPlans,
+    benefitPlans: {
+      create: [
+        {
+          benefitPlan: {
+            connect: {
+              id: benefitPlanRecord.id,
+            },
+          },
+        },
+      ],
+    },
   };
   const manager: Employee = await upsertEmployee(data);
 

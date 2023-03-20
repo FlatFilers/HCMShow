@@ -17,8 +17,10 @@ export const upsertBenefitPlan = async ({
 }) => {
   const benefitPlan = await prismaClient.benefitPlan.upsert({
     where: {
-      slug,
-      organizationId,
+      organizationId_slug: {
+        organizationId,
+        slug,
+      },
     },
     create: {
       organizationId,

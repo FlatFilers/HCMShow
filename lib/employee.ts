@@ -32,7 +32,15 @@ export const upsertEmployee = async ({
   flatfileRecordId?: string;
   jobId: string;
   benefitPlans: {
-    create: { benefitPlan: { connect: { slug: string } } };
+    create: [
+      {
+        benefitPlan: {
+          connect: {
+            id: string;
+          };
+        };
+      }
+    ];
   };
 }) => {
   const employee = await prismaClient.employee.upsert({
