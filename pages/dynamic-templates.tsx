@@ -92,9 +92,6 @@ const filterConfig = ({
   const { id: _baseConfigId, ...baseConfigWithoutId } = baseConfig;
   const { id: _blueprintId, ...blueprintWithoutId } = blueprint;
 
-  console.log("baseConfigWithoutId", baseConfigWithoutId);
-  console.log("blueprintWithoutId", blueprintWithoutId);
-
   const filteredConfig = {
     ...baseConfigWithoutId,
     slug: `${baseConfig.slug}-${Date.now()}`,
@@ -118,7 +115,7 @@ const filterConfig = ({
     ],
   };
 
-  console.log("filteredConfig", filteredConfig);
+  // console.log("filteredConfig", filteredConfig);
 
   return filteredConfig;
 };
