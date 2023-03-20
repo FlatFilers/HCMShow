@@ -396,11 +396,14 @@ export const addDocumentToSpace = async (
   return addDocumentResult.data;
 };
 
+export interface BlueprintWithId extends Blueprint {
+  id: string;
+}
 export interface SpaceConfigWithBlueprints {
   id: string;
   slug: string;
   name: string;
-  blueprints: Blueprint[];
+  blueprints: BlueprintWithId[];
 }
 
 export const getSpaceConfig = async (accessToken: string) => {

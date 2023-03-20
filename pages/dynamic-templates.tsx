@@ -5,6 +5,7 @@ import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import { SparklesIcon } from "@heroicons/react/24/outline";
 import {
+  BlueprintWithId,
   SpaceConfigWithBlueprints,
   getAccessToken,
   getSpaceConfig,
@@ -67,7 +68,10 @@ const filterConfig = ({
   options: Option[];
   customFieldConfig: any;
 }) => {
-  const blueprint = baseConfig.blueprints.find((b) => b.name === workbookName);
+  // TODO: We should look up blueprint by ID or slug not name
+  const blueprint = baseConfig.blueprints.find(
+    (b) => b.name === workbookName
+  ) as BlueprintWithId;
   const sheet = blueprint?.sheets.find((s) => s.name === "Employees");
   const field = sheet?.fields.find((f) => f.key === "employeeType");
 
@@ -85,12 +89,17 @@ const filterConfig = ({
     return { value: option.input, label: option.output };
   });
 
+  const { id: _baseConfigId, ...baseConfigWithoutId } = baseConfig;
+  const { id: _blueprintId, ...blueprintWithoutId } = blueprint;
+
   const filteredConfig = {
-    ...baseConfig,
+    ...baseConfigWithoutId,
+    slug: `${baseConfig.slug}-${Date.now()}`,
     blueprints: [
       ...otherBlueprints,
       {
-        ...blueprint,
+        ...blueprintWithoutId,
+        slug: `${blueprint.slug}-${Date.now()}`,
         sheets: [
           ...otherSheets,
           {
@@ -150,9 +159,11 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
       showSidebar: false,
     },
   };
+
+  // console.log("spaceProps", spaceProps);
   const { error, data } = useSpace({ ...spaceProps });
 
-  console.log("customFieldConfig", customFieldConfig);
+  // console.log("customFieldConfig", customFieldConfig);
 
   useCallback(() => {
     if (error) {
