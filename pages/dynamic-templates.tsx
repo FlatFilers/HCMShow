@@ -11,7 +11,7 @@ import {
   getSpaceConfig,
 } from "../lib/flatfile";
 import { OptionBuilder } from "../components/dynamic-templates/option-builder";
-import { Blueprint, Property, SheetConfig } from "@flatfile/api";
+import { Property, SheetConfig } from "@flatfile/api";
 import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";
 
 interface Props {
