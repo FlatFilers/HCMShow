@@ -67,23 +67,16 @@ export const syncWorkbookRecords = async ({
         })) as EmployeeType
       ).id;
 
-      let job = await prismaClient.job.findFirst({
+      let job = await prismaClient.job.upsert({
         where: {
-          organizationId,
-          name: values.jobName.value as string,
-        },
-      });
-
-      job ||= await prismaClient.job.upsert({
-        where: {
-          organizationId_slug: {
-            slug: values.jobCode.value as string,
+          organizationId_name: {
             organizationId,
+            name: values.jobName.value as string,
           },
         },
         create: {
-          slug: "test-job-for-employee",
-          name: "Test Job for Employee",
+          slug: "job-for-employee",
+          name: values.jobName.value as string,
           department: "Test Department",
           effectiveDate: DateTime.now().toJSDate(),
           isInactive: false,
@@ -98,18 +91,20 @@ export const syncWorkbookRecords = async ({
 
       const jobId = job.id;
 
-      let benefitPlan = await prismaClient.benefitPlan.findFirst();
-
-      benefitPlan ||= await prismaClient.benefitPlan.upsert({
+      const benefitPlan = await prismaClient.benefitPlan.upsert({
         where: {
           organizationId_slug: {
-            slug: "test-benefit-plan-for-emplyee",
+            slug: ("benefit-plan-for-employee" +
+              " " +
+              r.values.employeeId.value) as string,
             organizationId,
           },
         },
         create: {
-          slug: "test-benefit-plan-for-employee",
-          name: "Test Benefit Plan for Employee",
+          slug: ("benefit-plan-for-employee" +
+            " " +
+            r.values.employeeId.value) as string,
+          name: "Benefit Plan for Employee",
           organization: {
             connect: {
               id: organizationId,

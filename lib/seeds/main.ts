@@ -195,9 +195,9 @@ const upsertJobs = async (organizationId: string) => {
     dataWithJobFamilyId.map(async (data) => {
       await prismaClient.job.upsert({
         where: {
-          organizationId_slug: {
+          organizationId_name: {
             organizationId,
-            slug: data.slug,
+            name: data.name,
           },
         },
         create: data,
