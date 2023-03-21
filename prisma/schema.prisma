@@ -171,6 +171,10 @@ model EmployeeBenefitPlan {
   benefitPlanId String @db.Uuid
   benefitPlan BenefitPlan @relation(fields: [benefitPlanId], references: [id])
 
+  currentlyEnrolled Boolean @default(false)
+  coverageBeginDate DateTime @default(now())
+  employeeContribution Float @default(0)
+
   @@id([employeeId, benefitPlanId])
 }
 

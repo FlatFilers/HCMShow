@@ -138,6 +138,9 @@ export const syncWorkbookRecords = async ({
         benefitPlans: {
           create: [
             {
+              currentlyEnrolled: true,
+              coverageBeginDate: DateTime.now().toJSDate(),
+              employeeContribution: 100.01,
               benefitPlan: {
                 connect: {
                   id: benefitPlan.id,

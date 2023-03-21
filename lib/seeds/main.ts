@@ -789,6 +789,9 @@ export const upsertEmployees = async (organizationId: string) => {
     benefitPlans: {
       create: [
         {
+          currentlyEnrolled: true,
+          coverageBeginDate: DateTime.now().toJSDate(),
+          employeeContribution: 543.21,
           benefitPlan: {
             connect: {
               id: benefitPlanRecord.id,
