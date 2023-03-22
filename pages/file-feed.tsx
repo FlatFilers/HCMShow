@@ -34,6 +34,8 @@ const FileFeed: NextPage<Props> = ({ space, actions }) => {
     }
   }, []);
 
+  // TODO: remove the hardcoded stuff here and use the actual events
+
   return (
     <div className="ml-12 mt-16">
       {!space && <SetupSpace />}
