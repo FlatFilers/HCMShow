@@ -5,6 +5,7 @@ import { getToken } from "next-auth/jwt";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
+import { DateTime } from "luxon";
 
 const employeeWithRelations = Prisma.validator<Prisma.EmployeeArgs>()({
   include: {
@@ -72,6 +73,24 @@ const Employees: NextPage<Props> = ({ employees }) => {
                     >
                       Title
                     </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Hire Date
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      End Date
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    >
+                      Weekly Hours
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
@@ -92,6 +111,21 @@ const Employees: NextPage<Props> = ({ employees }) => {
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {employee.positionTitle}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {DateTime.fromJSDate(employee.hireDate).toFormat(
+                          "MM/dd/yyyy"
+                        )}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {employee.endEmploymentDate
+                          ? DateTime.fromJSDate(
+                              employee.endEmploymentDate
+                            ).toFormat("MM/dd/yyyy")
+                          : "-"}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {employee.scheduledWeeklyHours}
                       </td>
                     </tr>
                   ))}

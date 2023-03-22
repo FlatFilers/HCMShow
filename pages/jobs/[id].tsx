@@ -9,7 +9,7 @@ interface Props {
 const Jobs: NextPage<Props> = ({ job }) => {
   return (
     <div className="h-screen overflow-auto">
-      <div className="w-fit mr-8 mb-16 bg-white shadow sm:rounded-lg border border-gray-200">
+      <div className="w-1/2 mr-8 mb-16 bg-white shadow sm:rounded-lg border border-gray-200">
         <div className="px-4 py-5 sm:px-6 bg-white border-b border-gray-200 rounded-lg">
           <h3 className="text-lg font-medium leading-6 text-gray-900">
             Job Information
