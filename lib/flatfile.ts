@@ -202,12 +202,15 @@ const fetchRecords = async (
   return await recordsResult.data.records;
 };
 
-export const createSpace = async (accessToken: string) => {
-  // Pre-setup space config ID
-  const spaceConfigId = process.env.ONBOARDING_SPACE_CONFIG_ID;
-
+export const createSpace = async ({
+  accessToken,
+  spaceConfigId,
+}: {
+  accessToken: string;
+  spaceConfigId: string;
+}) => {
   if (!spaceConfigId) {
-    throw "Missing ENV var: ONBOARDING_SPACE_CONFIG_ID";
+    throw "No spaceConfigID found. Possible missing ENV var.";
   }
 
   const spaceConfig: SpaceConfig = {
