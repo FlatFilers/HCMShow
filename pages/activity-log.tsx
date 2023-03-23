@@ -1,9 +1,12 @@
 import { GetServerSideProps, NextPage } from "next";
-import React from "react";
+import { useEffect, useState } from "react";
 import { getToken } from "next-auth/jwt";
 import { ActionType, getActions } from "../lib/action";
 import { Action, User } from "@prisma/client";
 import { DateTime } from "luxon";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const mapActionTypeToLabel = (type: string) => {
   const mappings = {
@@ -19,6 +22,29 @@ interface Props {
 }
 
 const ActivityLog: NextPage<Props> = ({ actions }) => {
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [buttonText, setButtonText] = useState<string>("Delete All Records");
+  const handleSubmit = () => {
+    setIsSubmitting(true);
+    setButtonText("Clearing Records...");
+  };
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.query.flash === "success") {
+      window.history.replaceState(null, "", "/activity-log");
+      toast.success(router.query.message as string, {
+        id: router.query.message as string,
+        duration: 4000,
+      });
+    } else if (router.query.message === "Failed to clear database") {
+      window.history.replaceState(null, "", "/activity-log");
+      toast.error("Failed to clear database", {
+        id: router.query.message as string,
+      });
+    }
+  }, []);
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
@@ -31,6 +57,24 @@ const ActivityLog: NextPage<Props> = ({ actions }) => {
               Your activity history from Flatfile will show here.
             </p>
           </div>
+          <form
+            method="post"
+            action="/api/purge-records"
+            onSubmit={handleSubmit}
+            className="mt-14 mb-6"
+          >
+            <button
+              onClick={() => toast.loading("Deleting records...")}
+              disabled={isSubmitting}
+              type="submit"
+              className={`${
+                isSubmitting ? "hover:cursor-not-allowed" : "hover:bg-red-600 "
+              } bg-red-500 inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 sm:w-auto}`}
+            >
+              {buttonText}
+              <TrashIcon className="w-4 h-4 ml-1" />
+            </button>
+          </form>
         </div>
       </div>
       <div className="mt-8 flex flex-col">
