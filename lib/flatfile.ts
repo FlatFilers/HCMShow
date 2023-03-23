@@ -224,6 +224,9 @@ export const createSpace = async (accessToken: string) => {
   const spacePayload = {
     spaceConfigId: spaceConfigId,
     environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
+    name: "HCM.show",
+    metadata: {},
+    actions: [],
   };
 
   const spaceResponse = await fetch(`${BASE_PATH}/spaces`, {
