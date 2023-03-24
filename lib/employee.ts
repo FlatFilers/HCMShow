@@ -34,6 +34,9 @@ export const upsertEmployee = async ({
   benefitPlans: {
     create: [
       {
+        currentlyEnrolled: boolean;
+        coverageBeginDate: Date;
+        employeeContribution: number;
         benefitPlan: {
           connect: {
             id: string;
