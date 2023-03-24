@@ -139,7 +139,7 @@ const upsertJobs = async (organizationId: string) => {
         data.push({
           slug: row[0],
           name: row[1],
-          department: "",
+          department: "Seed Department",
           effectiveDate: DateTime.fromFormat(row[3], "M/d/yyyy").toJSDate(),
           isInactive: row[4] !== "y",
           jobFamilyId: row[5],
@@ -195,9 +195,9 @@ const upsertJobs = async (organizationId: string) => {
     dataWithJobFamilyId.map(async (data) => {
       await prismaClient.job.upsert({
         where: {
-          organizationId_name: {
+          organizationId_slug: {
             organizationId,
-            name: data.name,
+            slug: data.slug,
           },
         },
         create: data,

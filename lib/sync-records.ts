@@ -67,15 +67,25 @@ export const syncWorkbookRecords = async ({
         })) as EmployeeType
       ).id;
 
+      let recordJobCode = () => {
+        if (values.jobCode && values.jobCode.value) {
+          return values.jobCode.value as string;
+        } else {
+          let jobName = values.jobName.value as string;
+
+          return jobName.replaceAll(" ", "_");
+        }
+      };
+
       let job = await prismaClient.job.upsert({
         where: {
-          organizationId_name: {
+          organizationId_slug: {
             organizationId,
-            name: values.jobName.value as string,
+            slug: recordJobCode(),
           },
         },
         create: {
-          slug: "job-for-employee",
+          slug: recordJobCode(),
           name: values.jobName.value as string,
           department: "Test Department",
           effectiveDate: DateTime.now().toJSDate(),
