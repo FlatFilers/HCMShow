@@ -9,6 +9,7 @@ import {
 } from "@flatfile/api";
 import { PrismaClient, Space, User } from "@prisma/client";
 import { SpaceType } from "./space";
+import { theme } from "./theme";
 
 export interface Field {
   value: string | number | boolean | null;
@@ -230,6 +231,7 @@ export const createSpace = async ({
     name: "HCM.show",
     metadata: {
       userId,
+      theme: theme,
     },
     actions: [],
   };
