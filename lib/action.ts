@@ -11,6 +11,12 @@ export enum ActionState {
   Error = "error",
 }
 
+export enum FileFeedEventType {
+  RecordsCreated = "records:created",
+  RecordsUpdated = "records:updated",
+  RecordsDeleted = "records:deleted",
+}
+
 export const getActions = async (organizationId: string) => {
   const prisma = new PrismaClient();
   return await prisma.action.findMany({

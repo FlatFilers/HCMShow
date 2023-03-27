@@ -2,7 +2,12 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { prismaClient } from "../../../lib/prisma-client";
 import { syncWorkbookRecords } from "../../../lib/sync-records";
 import { SpaceType, getSpaceForFlatfileSpaceId } from "../../../lib/space";
-import { ActionState, ActionType, createAction } from "../../../lib/action";
+import {
+  ActionState,
+  ActionType,
+  FileFeedEventType,
+  createAction,
+} from "../../../lib/action";
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,9 +15,20 @@ export default async function handler(
 ) {
   console.log("/sync-file-feed", req.body);
 
-  const { spaceId } = req.body;
+  const { spaceId, eventType } = req.body;
+
+  if (
+    ![
+      FileFeedEventType.RecordsCreated,
+      FileFeedEventType.RecordsUpdated,
+      FileFeedEventType.RecordsDeleted,
+    ].includes(eventType as FileFeedEventType)
+  ) {
+    throw new Error("/sync-file-feed: invalid eventType", eventType);
+  }
 
   console.log("spaceId", spaceId);
+  console.log("eventType", eventType);
 
   const space = await getSpaceForFlatfileSpaceId(spaceId);
 
@@ -32,30 +48,31 @@ export default async function handler(
     type: ActionType.FileFeedEvent,
     description: "",
     metadata: {
-      state: ActionState.Initial,
+      eventType,
     },
   });
 
   // Not awaiting for early response back to Flatfile server
-  syncWorkbookRecords({
-    userId: user.id,
-    organizationId: user.organizationId,
-    spaceType: space.type as SpaceType,
-  }).then(() => {
-    console.log("Filefeed: syncWorkbookRecords complete");
+  // TODO: Make sync work for filefeed ENV vars
+  // syncWorkbookRecords({
+  //   userId: user.id,
+  //   organizationId: user.organizationId,
+  //   spaceType: space.type as SpaceType,
+  // }).then(() => {
+  //   console.log("Filefeed: syncWorkbookRecords complete");
 
-    prismaClient.action.update({
-      where: {
-        id: action.id,
-      },
-      data: {
-        metadata: {
-          state: "complete",
-          description: "Synced X Records",
-        },
-      },
-    });
-  });
+  // prismaClient.action.update({
+  //   where: {
+  //     id: action.id,
+  //   },
+  //   data: {
+  //     metadata: {
+  //       state: "complete",
+  //       description: "Synced X Records",
+  //     },
+  //   },
+  // });
+  // });
 
-  res.status(200).json({ name: "John Doe" });
+  res.status(200).json({ message: "success" });
 }
