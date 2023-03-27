@@ -15,20 +15,20 @@ export default async function handler(
 ) {
   console.log("/sync-file-feed", req.body);
 
-  const { spaceId, eventType } = req.body;
+  const { spaceId, topic } = req.body;
 
   if (
     ![
       FileFeedEventType.RecordsCreated,
       FileFeedEventType.RecordsUpdated,
       FileFeedEventType.RecordsDeleted,
-    ].includes(eventType as FileFeedEventType)
+    ].includes(topic as FileFeedEventType)
   ) {
-    throw new Error("/sync-file-feed: invalid eventType", eventType);
+    throw new Error("/sync-file-feed: invalid topic", topic);
   }
 
   console.log("spaceId", spaceId);
-  console.log("eventType", eventType);
+  console.log("topic", topic);
 
   const space = await getSpaceForFlatfileSpaceId(spaceId);
 
@@ -48,7 +48,7 @@ export default async function handler(
     type: ActionType.FileFeedEvent,
     description: "",
     metadata: {
-      eventType,
+      topic,
     },
   });
 

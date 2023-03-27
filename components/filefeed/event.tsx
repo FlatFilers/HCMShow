@@ -22,26 +22,26 @@ const descriptionForEventType = (eventType: string) => {
 
 export const Event = ({ action }: Props) => {
   const metadata = action.metadata as {
-    eventType: string;
+    topic: string;
   };
 
   return (
     <>
       <td className="whitespace-nowrap py-4 pl-6 pr-3 text-sm">
         <div className="flex flex-row items-center">
-          {metadata.eventType === FileFeedEventType.RecordsCreated && (
+          {metadata.topic === FileFeedEventType.RecordsCreated && (
             <>
               <div className="blob bg-green-800"></div>
               <span className="">Records created</span>
             </>
           )}
-          {metadata.eventType === FileFeedEventType.RecordsUpdated && (
+          {metadata.topic === FileFeedEventType.RecordsUpdated && (
             <>
               <div className="blob bg-primary"></div>
               <span className="">Records updated</span>
             </>
           )}
-          {metadata.eventType === FileFeedEventType.RecordsDeleted && (
+          {metadata.topic === FileFeedEventType.RecordsDeleted && (
             <>
               <div className="blob bg-red-800"></div>
               <span className="">Records deleted</span>
@@ -51,7 +51,7 @@ export const Event = ({ action }: Props) => {
       </td>
 
       <td className="whitespace-nowrap py-4 pl-6 pr-3 text-sm">
-        <span className="">{descriptionForEventType(metadata.eventType)}</span>
+        <span className="">{descriptionForEventType(metadata.topic)}</span>
       </td>
 
       <td className="whitespace-nowrap py-4 pl-6 pr-3 text-sm">
