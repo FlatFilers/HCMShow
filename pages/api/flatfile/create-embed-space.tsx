@@ -75,7 +75,8 @@ export default async function handler(
   <p style="margin-top: 0px; margin-bottom: 8px;">Click "Files" in the left-hand sidebar. This is where you can upload files you want to import into Flatfile.</p>
   <h2 style="margin-bottom: 0px;">2. Upload the sample data</h2>
   <p style="margin-top: 0px; margin-bottom: 8px;">On the Files page, click "Add files" or drag-and-drop the sample data you downloaded previously onto the page.</p>
-  <p style="margin-top: 0px; margin-bottom: 8px;">Note: There are multiple tabs in the sample data. Be sure to
+  <p style="margin-top: 0px; margin-bottom: 8px;">
+  <div style="font-weight: 600">Note:</div> There are multiple tabs in the sample data. Be sure to
   upload data from each tab.</p>
   <p style="margin-top: 0px; margin-bottom: 8px;">After the file uploads, click "Import" and follow the steps to completion to import the workbook.</p>
   <h2 style="margin-bottom: 0px;">3. Return to HCM.show</h2>
