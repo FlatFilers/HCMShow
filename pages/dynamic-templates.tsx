@@ -1,6 +1,6 @@
 import { NextPageWithLayout } from "./_app";
 import { useCallback, useState } from "react";
-import { useSpace, ISpaceConfig } from "@flatfile/react";
+import { useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import { SparklesIcon } from "@heroicons/react/24/outline";
@@ -94,6 +94,7 @@ const filterConfig = ({
 
   const filteredConfig = {
     ...baseConfigWithoutId,
+    name: "HCM Show - Dynamic Templates",
     slug: `${baseConfig.slug}-${Date.now()}`,
     blueprints: [
       ...otherBlueprints,
@@ -145,7 +146,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     constraints: [{ type: "required" }],
   };
 
-  const spaceProps: ISpaceConfig = {
+  const spaceProps = {
     accessToken,
     environmentId,
     spaceConfig: filterConfig({
