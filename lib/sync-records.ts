@@ -1,4 +1,4 @@
-import { EmployeeType, Job } from "@prisma/client";
+import { EmployeeType } from "@prisma/client";
 import { upsertEmployee, validEmployeeRecords } from "./employee";
 import { getAccessToken, getRecordsByName } from "./flatfile";
 import { prismaClient } from "./prisma-client";
@@ -67,14 +67,62 @@ export const syncWorkbookRecords = async ({
         })) as EmployeeType
       ).id;
 
-      const jobId = (
-        (await prismaClient.job.findFirst({
-          where: {
+      let recordJobCode = () => {
+        if (values.jobCode && values.jobCode.value) {
+          return values.jobCode.value as string;
+        } else {
+          let jobName = values.jobName.value as string;
+
+          return jobName.replaceAll(" ", "_");
+        }
+      };
+
+      let job = await prismaClient.job.upsert({
+        where: {
+          organizationId_slug: {
             organizationId,
-            name: values.jobName.value as string,
+            slug: recordJobCode(),
           },
-        })) as Job
-      ).id;
+        },
+        create: {
+          slug: recordJobCode(),
+          name: values.jobName.value as string,
+          department: "Test Department",
+          effectiveDate: DateTime.now().toJSDate(),
+          isInactive: false,
+          organization: {
+            connect: {
+              id: organizationId,
+            },
+          },
+        },
+        update: {},
+      });
+
+      const jobId = job.id;
+
+      const benefitPlan = await prismaClient.benefitPlan.upsert({
+        where: {
+          organizationId_slug: {
+            slug: ("benefit-plan-for-employee" +
+              " " +
+              r.values.employeeId.value) as string,
+            organizationId,
+          },
+        },
+        create: {
+          slug: ("benefit-plan-for-employee" +
+            " " +
+            r.values.employeeId.value) as string,
+          name: "Benefit Plan for Employee",
+          organization: {
+            connect: {
+              id: organizationId,
+            },
+          },
+        },
+        update: {},
+      });
 
       let data: Parameters<typeof upsertEmployee>[0] = {
         organizationId,
@@ -97,6 +145,20 @@ export const syncWorkbookRecords = async ({
         scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
         flatfileRecordId: r.id,
         jobId: jobId,
+        benefitPlans: {
+          create: [
+            {
+              currentlyEnrolled: true,
+              coverageBeginDate: DateTime.now().toJSDate(),
+              employeeContribution: 100.01,
+              benefitPlan: {
+                connect: {
+                  id: benefitPlan.id,
+                },
+              },
+            },
+          ],
+        },
       };
 
       if (

@@ -28,7 +28,10 @@ export const upsertJob = async ({
 }) => {
   const job = await prismaClient.job.upsert({
     where: {
-      slug,
+      organizationId_slug: {
+        organizationId,
+        slug,
+      },
     },
     create: {
       organizationId,
@@ -57,11 +60,11 @@ export const validJobRecords = async (records: Record[]) => {
 
   const requiredFields = result.map((r) => r.column_name);
 
-  console.log("requiredFields", requiredFields);
+  // console.log("requiredFields", requiredFields);
 
   // Record is valid if every required field is valid
   return records.filter((r) => {
-    console.log("r", r);
+    // console.log("r", r);
     return requiredFields.every((f) => {
       const field = jobSheetMapping[f as keyof typeof jobSheetMapping];
 
