@@ -41,7 +41,10 @@ export default async function handler(
 
   const accessToken = await getAccessToken();
 
-  const flatfileSpaceData = await createSpace(accessToken);
+  const flatfileSpaceData = await createSpace({
+    accessToken,
+    spaceConfigId: process.env.ONBOARDING_SPACE_CONFIG_ID as string,
+  });
   const spaceId = flatfileSpaceData.id;
 
   const addGuestToSpaceResponse = await addGuestToSpace(

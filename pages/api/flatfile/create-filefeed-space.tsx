@@ -33,9 +33,16 @@ export default async function handler(
     throw new Error("No user found");
   }
 
-  const accessToken = await getAccessToken();
+  const accessToken = await getAccessToken(
+    process.env.FILEFEED_CLIENT_ID as string,
+    process.env.FILEFEED_CLIENT_SECRET as string
+  );
 
-  const flatfileSpaceData = await createSpace(accessToken);
+  const flatfileSpaceData = await createSpace({
+    accessToken,
+    spaceConfigId: process.env.FILEFEED_SPACE_CONFIG_ID as string,
+    environmentId: process.env.FILEFEED_ENVIRONMENT_ID as string,
+  });
 
   const space: Space = await prisma.space.create({
     data: {

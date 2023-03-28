@@ -1,74 +1,45 @@
 import { Action } from "@prisma/client";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import toast from "react-hot-toast";
 
 import { Event } from "./event";
 import { DateTime } from "luxon";
+import { GetFileFeedActionsResult } from "../../pages/api/flatfile/get-filefeed-actions";
 
 type Props = {
   initialActions: Action[];
 };
 
 export const Events = ({ initialActions }: Props) => {
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  let defaultText = "Listen For File Feed Event";
-  const [buttonText, setButtonText] = useState<string>(defaultText);
-
   const [actions, setActions] = useState<Action[]>(initialActions);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  useEffect(() => {
+    const timer = setInterval(() => {
+      fetch("/api/flatfile/get-filefeed-actions").then((res) => {
+        res.json().then((res: { actions: any[] }) => {
+          console.log("data", res);
 
-    const createRes = await fetch("/api/flatfile/create-filefeed-event", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!createRes.ok) {
-      setIsSubmitting(false);
-      setButtonText(defaultText);
-      toast.error("An error occurred listening for a file feed event.");
-      return;
-    }
-
-    const action = await createRes.json();
-    setActions([
-      ...actions,
-      {
-        ...action,
-        createdAt: DateTime.fromISO(action.createdAt).toJSDate(),
-      },
-    ]);
-
-    setIsSubmitting(false);
-    setButtonText(defaultText);
-
-    toast.success("New file feed event found!");
-  };
+          const data = res.actions.map((action) => {
+            return {
+              ...action,
+              createdAt: DateTime.fromISO(action.createdAt).toJSDate(),
+            };
+          });
+          setActions(data);
+        });
+      });
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div className="max-w-5xl">
       <p className="text-2xl mb-2">Ready and listening for files. 🎉 </p>
 
       <p className="text-gray-600 mb-4 max-w-lg">
-        Next, click the button below to listen for a file upload.
+        As new records are created or updated in Flatfile those events will
+        populate here.
       </p>
-
-      <form onSubmit={handleSubmit} className="mb-8">
-        <button
-          disabled={isSubmitting}
-          className={`${
-            isSubmitting
-              ? "bg-primary-dark hover:cursor-not-allowed"
-              : "bg-primary hover:bg-primary-dark "
-          } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto}`}
-          type="submit"
-        >
-          {buttonText}
-        </button>
-      </form>
 
       <div className="border-1 border border-gray-100 my-6"></div>
 
@@ -79,13 +50,13 @@ export const Events = ({ initialActions }: Props) => {
               scope="col"
               className="w-20 py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900"
             >
-              Status
+              Event
             </th>
             <th
               scope="col"
               className="w-48 px-6 py-3.5 text-left text-sm font-semibold text-gray-900"
             >
-              Result
+              Description
             </th>
             <th
               scope="col"

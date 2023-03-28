@@ -1,4 +1,3 @@
-const util = require("util");
 import {
   DefaultApi,
   Configuration,
@@ -6,13 +5,9 @@ import {
   GetAccessTokenOperationRequest,
   GetAccessTokenRequest,
   AccessTokenResponse,
-  SpaceConfig,
-  AddSpaceRequest,
   Blueprint,
 } from "@flatfile/api";
 import { PrismaClient, Space, User } from "@prisma/client";
-import { DateTime } from "luxon";
-import { inspect } from "util";
 import { SpaceType } from "./space";
 
 export interface Field {
@@ -25,11 +20,6 @@ export interface Record {
   id: string;
   values: {
     [key: string]: Field;
-    // endEmployementDate: Field;
-    // employeeId: Field;
-    // managerId: Field;
-    // employeeType: Field;
-    // hireDate: Field;
   };
 }
 
@@ -71,7 +61,10 @@ type WorkbookObject = {
 
 const BASE_PATH = "https://api.x.flatfile.com/v1";
 
-export async function getAccessToken() {
+export async function getAccessToken(
+  clientId: string = process.env.FLATFILE_CLIENT_ID as string,
+  secret: string = process.env.FLATFILE_CLIENT_SECRET as string
+): Promise<string> {
   const configParams: ConfigurationParameters = {
     basePath: BASE_PATH,
   };
@@ -79,8 +72,8 @@ export async function getAccessToken() {
   const client = new DefaultApi(config);
 
   const getAccessTokenRequest: GetAccessTokenRequest = {
-    clientId: process.env.FLATFILE_CLIENT_ID,
-    secret: process.env.FLATFILE_CLIENT_SECRET,
+    clientId,
+    secret,
   };
 
   const getAccessTokenOperationRequest: GetAccessTokenOperationRequest = {
@@ -202,28 +195,22 @@ const fetchRecords = async (
   return await recordsResult.data.records;
 };
 
-export const createSpace = async (accessToken: string) => {
-  // Pre-setup space config ID
-  const spaceConfigId = process.env.ONBOARDING_SPACE_CONFIG_ID;
-
+export const createSpace = async ({
+  accessToken,
+  spaceConfigId,
+  environmentId = process.env.FLATFILE_ENVIRONMENT_ID as string,
+}: {
+  accessToken: string;
+  spaceConfigId: string;
+  environmentId?: string;
+}) => {
   if (!spaceConfigId) {
-    throw "Missing ENV var: ONBOARDING_SPACE_CONFIG_ID";
+    throw "No spaceConfigID found. Possible missing ENV var.";
   }
 
-  const spaceConfig: SpaceConfig = {
-    spaceConfigId: spaceConfigId,
-    environmentId: process.env.FLATFILE_ENVIRONMENT_ID as string,
-    name: "Onboarding",
-  };
-
-  const spaceRequestParameters: AddSpaceRequest = {
-    spaceConfig,
-  };
-  // TODO: Is there a way to use the SDK / OpenAPI wrapper to set these headers more elegantly?
-  // client.setHeaders/setToken() etc that will remember it moving forward
   const spacePayload = {
-    spaceConfigId: spaceConfigId,
-    environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
+    spaceConfigId,
+    environmentId,
     name: "HCM.show",
     metadata: {},
     actions: [],
