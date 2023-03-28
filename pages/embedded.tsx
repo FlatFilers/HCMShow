@@ -1,6 +1,6 @@
 import { NextPageWithLayout } from "./_app";
 import { useState, useCallback, useEffect } from "react";
-import { useSpace, ISpaceConfig } from "@flatfile/react";
+import { useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import {
@@ -41,7 +41,7 @@ const Embedded: NextPageWithLayout<Props> = ({
   const flatfleSpace =
     existingSpace?.flatfileData as unknown as FlatfileSpaceData;
   const [showSpace, setShowSpace] = useState(false);
-  const spaceProps: ISpaceConfig = {
+  const spaceProps = {
     accessToken: accessToken as string,
     environmentId: environmentToken as string,
     spaceId: flatfleSpace?.id as string,

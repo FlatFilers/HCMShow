@@ -8,6 +8,7 @@ import {
   XMarkIcon,
   ArrowLeftOnRectangleIcon,
   BriefcaseIcon,
+  ClipboardIcon,
   WindowIcon,
   FolderArrowDownIcon,
   ListBulletIcon,
@@ -46,6 +47,12 @@ const SidebarLayout = ({ children }: Props) => {
       href: "/jobs",
       icon: BriefcaseIcon,
       current: router.pathname === "/jobs",
+    },
+    {
+      name: "Benefit Plans",
+      href: "/benefit-plans",
+      icon: ClipboardIcon,
+      current: router.pathname === "/benefit-plans",
     },
   ];
   const workflowsNavigation = [

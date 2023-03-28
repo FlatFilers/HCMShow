@@ -1,4 +1,3 @@
-const util = require("util");
 import {
   DefaultApi,
   Configuration,
@@ -6,13 +5,9 @@ import {
   GetAccessTokenOperationRequest,
   GetAccessTokenRequest,
   AccessTokenResponse,
-  SpaceConfig,
-  AddSpaceRequest,
   Blueprint,
 } from "@flatfile/api";
 import { PrismaClient, Space, User } from "@prisma/client";
-import { DateTime } from "luxon";
-import { inspect } from "util";
 import { SpaceType } from "./space";
 
 export interface Field {
@@ -25,11 +20,6 @@ export interface Record {
   id: string;
   values: {
     [key: string]: Field;
-    // endEmployementDate: Field;
-    // employeeId: Field;
-    // managerId: Field;
-    // employeeType: Field;
-    // hireDate: Field;
   };
 }
 
@@ -221,6 +211,9 @@ export const createSpace = async ({
   const spacePayload = {
     spaceConfigId,
     environmentId,
+    name: "HCM.show",
+    metadata: {},
+    actions: [],
   };
 
   const spaceResponse = await fetch(`${BASE_PATH}/spaces`, {

@@ -1,0 +1,2 @@
+TRUNCATE Employees;
+TRUNCATE Jobs;
