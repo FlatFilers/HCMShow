@@ -198,7 +198,7 @@ const fetchRecords = async (
 export const createSpace = async ({
   accessToken,
   spaceConfigId,
-  environmentId = process.env.FLATFILE_ENVIRONMENT_ID as string,
+  environmentId,
 }: {
   accessToken: string;
   spaceConfigId: string;
@@ -208,6 +208,11 @@ export const createSpace = async ({
     throw "No spaceConfigID found. Possible missing ENV var.";
   }
 
+  console.log("spaceConfigId", spaceConfigId);
+  console.log("accessToken", accessToken);
+  console.log("environmentId", environmentId);
+
+  throw "hi";
   const spacePayload = {
     spaceConfigId,
     environmentId,
@@ -229,6 +234,7 @@ export const createSpace = async ({
   // console.log("spaceResponse", spaceResponse);
 
   if (!spaceResponse.ok) {
+    console.log("spaceResponse", await spaceResponse.json());
     throw new Error("Error creating space");
   }
 
@@ -272,11 +278,12 @@ export const getSpace = async (
 export const addGuestToSpace = async (
   user: User,
   flatfileSpaceData: FlatfileSpaceData,
-  accessToken: string
+  accessToken: string,
+  environmentId: string = process.env.FLATFILE_ENVIRONMENT_ID as string
 ) => {
   const payload = [
     {
-      environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
+      environmentId,
       email: user.email,
       name: "Guest",
       spaces: [
@@ -428,4 +435,42 @@ export const getSpaceConfig = async (accessToken: string) => {
   // console.log("config", util.inspect(config, { depth: null }));
 
   return config;
+};
+
+const FormData = require("form-data");
+
+export const postFile = async (
+  accessToken: string,
+  spaceId: string,
+  file: any
+) => {
+  console.log("file in func", file);
+
+  const formData = new FormData();
+  formData.append("spaceId", spaceId);
+  formData.append("environmentId", process.env.FILEFEED_ENVIRONMENT_ID);
+  formData.append("file", Buffer.from(file), {
+    filename: `Test boop.csv`,
+  });
+
+  const filesResponse: Response = await fetch(`${BASE_PATH}/files`, {
+    method: "POST",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      ...formData.getHeaders(),
+      // "Content-Type": "application/json",
+    },
+  });
+
+  console.log("filesResponse", filesResponse);
+
+  if (!filesResponse.ok) {
+    console.log("filesResponse body", await filesResponse.json());
+    throw new Error("Error posting file");
+  }
+
+  const fileResult = await filesResponse.json();
+
+  console.log("file result", fileResult);
 };

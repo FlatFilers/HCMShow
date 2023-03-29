@@ -1,16 +1,18 @@
-import { Action } from "@prisma/client";
+import { Action, Space } from "@prisma/client";
 import { useState, FormEvent, useEffect } from "react";
 import toast from "react-hot-toast";
 
 import { Event } from "./event";
 import { DateTime } from "luxon";
 import { GetFileFeedActionsResult } from "../../pages/api/flatfile/get-filefeed-actions";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 
 type Props = {
+  urlToSpace: string;
   initialActions: Action[];
 };
 
-export const Events = ({ initialActions }: Props) => {
+export const Events = ({ urlToSpace, initialActions }: Props) => {
   const [actions, setActions] = useState<Action[]>(initialActions);
 
   useEffect(() => {
@@ -34,12 +36,25 @@ export const Events = ({ initialActions }: Props) => {
 
   return (
     <div className="max-w-5xl">
-      <p className="text-2xl mb-2">Ready and listening for files. 🎉 </p>
+      <p className="text-2xl mb-2">Ready and listening for events. 🎉 </p>
+
+      <p className="text-gray-600 mb-2 max-w-lg">
+        A file has been uploaded to your Flatfile space.
+      </p>
 
       <p className="text-gray-600 mb-4 max-w-lg">
         As new records are created or updated in Flatfile those events will
         populate here.
       </p>
+
+      <a
+        target="_blank"
+        href={urlToSpace}
+        className="inline-flex flex-row items-center justify-between mb-8 rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+      >
+        Visit Workspace
+        <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
+      </a>
 
       <div className="border-1 border border-gray-100 my-6"></div>
 

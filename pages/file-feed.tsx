@@ -9,13 +9,14 @@ import { SetupSpace } from "../components/filefeed/setup-space";
 import { Events } from "../components/filefeed/events";
 import { SpaceType } from "../lib/space";
 import { ActionType } from "../lib/action";
+import { FlatfileSpaceData } from "../lib/flatfile";
 
 interface Props {
-  space?: Space;
+  urlToSpace: string;
   actions: Action[];
 }
 
-const FileFeed: NextPage<Props> = ({ space, actions }) => {
+const FileFeed: NextPage<Props> = ({ urlToSpace, actions }) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -38,9 +39,11 @@ const FileFeed: NextPage<Props> = ({ space, actions }) => {
 
   return (
     <div className="ml-12 mt-16">
-      {!space && <SetupSpace />}
+      {!urlToSpace && <SetupSpace />}
 
-      {space && <Events initialActions={actions} />}
+      {urlToSpace && (
+        <Events urlToSpace={urlToSpace} initialActions={actions} />
+      )}
     </div>
   );
 };
@@ -84,9 +87,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       createdAt: "desc",
     },
   });
+  const urlToSpace = (space.flatfileData as unknown as FlatfileSpaceData)
+    .guestLink;
 
   return {
-    props: { space, actions },
+    props: { urlToSpace, actions },
   };
 };
 
