@@ -208,11 +208,6 @@ export const createSpace = async ({
     throw "No spaceConfigID found. Possible missing ENV var.";
   }
 
-  console.log("spaceConfigId", spaceConfigId);
-  console.log("accessToken", accessToken);
-  console.log("environmentId", environmentId);
-
-  throw "hi";
   const spacePayload = {
     spaceConfigId,
     environmentId,
@@ -444,13 +439,11 @@ export const postFile = async (
   spaceId: string,
   file: any
 ) => {
-  console.log("file in func", file);
-
   const formData = new FormData();
   formData.append("spaceId", spaceId);
   formData.append("environmentId", process.env.FILEFEED_ENVIRONMENT_ID);
   formData.append("file", Buffer.from(file), {
-    filename: `Test boop.csv`,
+    filename: `HCM Example Employees.csv`,
   });
 
   const filesResponse: Response = await fetch(`${BASE_PATH}/files`, {
@@ -459,18 +452,11 @@ export const postFile = async (
     headers: {
       Authorization: `Bearer ${accessToken}`,
       ...formData.getHeaders(),
-      // "Content-Type": "application/json",
     },
   });
-
-  console.log("filesResponse", filesResponse);
 
   if (!filesResponse.ok) {
     console.log("filesResponse body", await filesResponse.json());
     throw new Error("Error posting file");
   }
-
-  const fileResult = await filesResponse.json();
-
-  console.log("file result", fileResult);
 };

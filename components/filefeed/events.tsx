@@ -50,7 +50,7 @@ export const Events = ({ urlToSpace, initialActions }: Props) => {
       <a
         target="_blank"
         href={urlToSpace}
-        className="inline-flex flex-row items-center justify-between mb-8 rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        className="inline-flex flex-row items-center justify-between mb-8 rounded-md border text-primary border-primary px-4 py-2 text-sm font-medium shadow-sm hover:bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
       >
         Visit Workspace
         <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />

@@ -95,11 +95,10 @@ export default async function handler(
     },
   });
 
-  // console.log("Fetching file from drive");
-  // const file = await fetchFileFromDrive();
-  //
-  // const spaceId = (space.flatfileData as unknown as FlatfileSpaceData).id;
-  // await postFile(accessToken, spaceId, file);
+  const file = await fetchFileFromDrive();
+
+  const spaceId = (space.flatfileData as unknown as FlatfileSpaceData).id;
+  await postFile(accessToken, spaceId, file);
 
   res.redirect("/file-feed?flash=success&message=Setup Flatfile!");
 }
