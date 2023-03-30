@@ -198,7 +198,7 @@ const fetchRecords = async (
 export const createSpace = async ({
   accessToken,
   spaceConfigId,
-  environmentId = process.env.FLATFILE_ENVIRONMENT_ID as string,
+  environmentId,
 }: {
   accessToken: string;
   spaceConfigId: string;
@@ -229,6 +229,7 @@ export const createSpace = async ({
   // console.log("spaceResponse", spaceResponse);
 
   if (!spaceResponse.ok) {
+    console.log("spaceResponse", await spaceResponse.json());
     throw new Error("Error creating space");
   }
 
@@ -272,11 +273,12 @@ export const getSpace = async (
 export const addGuestToSpace = async (
   user: User,
   flatfileSpaceData: FlatfileSpaceData,
-  accessToken: string
+  accessToken: string,
+  environmentId: string = process.env.FLATFILE_ENVIRONMENT_ID as string
 ) => {
   const payload = [
     {
-      environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
+      environmentId,
       email: user.email,
       name: "Guest",
       spaces: [
@@ -428,4 +430,33 @@ export const getSpaceConfig = async (accessToken: string) => {
   // console.log("config", util.inspect(config, { depth: null }));
 
   return config;
+};
+
+const FormData = require("form-data");
+
+export const postFile = async (
+  accessToken: string,
+  spaceId: string,
+  file: any
+) => {
+  const formData = new FormData();
+  formData.append("spaceId", spaceId);
+  formData.append("environmentId", process.env.FILEFEED_ENVIRONMENT_ID);
+  formData.append("file", Buffer.from(file), {
+    filename: `HCM Example Employees.csv`,
+  });
+
+  const filesResponse: Response = await fetch(`${BASE_PATH}/files`, {
+    method: "POST",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      ...formData.getHeaders(),
+    },
+  });
+
+  if (!filesResponse.ok) {
+    console.log("filesResponse body", await filesResponse.json());
+    throw new Error("Error posting file");
+  }
 };
