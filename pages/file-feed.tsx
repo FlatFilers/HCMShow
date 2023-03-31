@@ -8,15 +8,21 @@ import { useRouter } from "next/router";
 import { SetupSpace } from "../components/filefeed/setup-space";
 import { Events } from "../components/filefeed/events";
 import { SpaceType } from "../lib/space";
-import { ActionType } from "../lib/action";
+import {
+  ActionType,
+  FileFeedEvent,
+  FileFeedEventType,
+  fileFeedEventFromAction,
+} from "../lib/action";
 import { FlatfileSpaceData } from "../lib/flatfile";
+import { DateTime } from "luxon";
 
 interface Props {
   urlToSpace: string;
-  actions: Action[];
+  events: FileFeedEvent[];
 }
 
-const FileFeed: NextPage<Props> = ({ urlToSpace, actions }) => {
+const FileFeed: NextPage<Props> = ({ urlToSpace, events }) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -41,9 +47,7 @@ const FileFeed: NextPage<Props> = ({ urlToSpace, actions }) => {
     <div className="ml-12 mt-16">
       {!urlToSpace && <SetupSpace />}
 
-      {urlToSpace && (
-        <Events urlToSpace={urlToSpace} initialActions={actions} />
-      )}
+      {urlToSpace && <Events urlToSpace={urlToSpace} events={events} />}
     </div>
   );
 };
@@ -87,11 +91,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       createdAt: "desc",
     },
   });
+
+  const events = actions.map((a) => fileFeedEventFromAction(a));
+
   const urlToSpace = (space.flatfileData as unknown as FlatfileSpaceData)
     .guestLink;
 
   return {
-    props: { urlToSpace, actions },
+    props: { urlToSpace, events },
   };
 };
 

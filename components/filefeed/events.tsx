@@ -1,19 +1,16 @@
-import { Action, Space } from "@prisma/client";
-import { useState, FormEvent, useEffect } from "react";
-import toast from "react-hot-toast";
-
+import { useState, useEffect } from "react";
 import { Event } from "./event";
 import { DateTime } from "luxon";
-import { GetFileFeedActionsResult } from "../../pages/api/flatfile/get-filefeed-actions";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
+import { FileFeedEvent } from "../../lib/action";
 
 type Props = {
   urlToSpace: string;
-  initialActions: Action[];
+  events: FileFeedEvent[];
 };
 
-export const Events = ({ urlToSpace, initialActions }: Props) => {
-  const [actions, setActions] = useState<Action[]>(initialActions);
+export const Events = ({ urlToSpace, events }: Props) => {
+  const [actions, setActions] = useState<FileFeedEvent[]>(events);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -24,7 +21,7 @@ export const Events = ({ urlToSpace, initialActions }: Props) => {
           const data = res.actions.map((action) => {
             return {
               ...action,
-              createdAt: DateTime.fromISO(action.createdAt).toJSDate(),
+              formattedCreatedAt: DateTime.fromISO(action.createdAt).toJSDate(),
             };
           });
           setActions(data);
@@ -40,6 +37,11 @@ export const Events = ({ urlToSpace, initialActions }: Props) => {
 
       <p className="text-gray-600 mb-2 max-w-lg">
         A file has been uploaded to your Flatfile space.
+      </p>
+
+      <p className="text-gray-600 mb-2 max-w-lg">
+        Visit your space by clicking the button below. Import the file that is
+        waiting there ready to be imported.
       </p>
 
       <p className="text-gray-600 mb-4 max-w-lg">
@@ -85,7 +87,7 @@ export const Events = ({ urlToSpace, initialActions }: Props) => {
           {actions.map((a, i) => {
             return (
               <tr key={i}>
-                <Event action={a} />
+                <Event event={a} />
               </tr>
             );
           })}
