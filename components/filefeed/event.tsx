@@ -31,7 +31,7 @@ export const Event = ({ event }: Props) => {
       </td>
 
       <td className="whitespace-nowrap py-4 pl-6 pr-3 text-sm">
-        <span className="">{event.topic}</span>
+        <span className="">{event.description}</span>
       </td>
 
       <td className="whitespace-nowrap py-4 pl-6 pr-3 text-sm">

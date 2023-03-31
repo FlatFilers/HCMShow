@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 import { Event } from "./event";
 import { DateTime } from "luxon";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
-import { FileFeedEvent } from "../../lib/action";
+import { FileFeedEvent, fileFeedEventFromAction } from "../../lib/action";
 
 type Props = {
   urlToSpace: string;
-  events: FileFeedEvent[];
+  initialEvents: FileFeedEvent[];
 };
 
-export const Events = ({ urlToSpace, events }: Props) => {
-  const [actions, setActions] = useState<FileFeedEvent[]>(events);
+export const Events = ({ urlToSpace, initialEvents }: Props) => {
+  const [events, setEvents] = useState<FileFeedEvent[]>(initialEvents);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -18,13 +18,8 @@ export const Events = ({ urlToSpace, events }: Props) => {
         res.json().then((res: { actions: any[] }) => {
           console.log("data", res);
 
-          const data = res.actions.map((action) => {
-            return {
-              ...action,
-              formattedCreatedAt: DateTime.fromISO(action.createdAt).toJSDate(),
-            };
-          });
-          setActions(data);
+          const data = res.actions.map((a) => fileFeedEventFromAction(a));
+          setEvents(data);
         });
       });
     }, 3000);
@@ -84,7 +79,7 @@ export const Events = ({ urlToSpace, events }: Props) => {
           </tr>
         </thead>
         <tbody>
-          {actions.map((a, i) => {
+          {events.map((a, i) => {
             return (
               <tr key={i}>
                 <Event event={a} />

@@ -13,6 +13,7 @@ import {
   FileFeedEvent,
   FileFeedEventType,
   fileFeedEventFromAction,
+  getActions,
 } from "../lib/action";
 import { FlatfileSpaceData } from "../lib/flatfile";
 import { DateTime } from "luxon";
@@ -47,7 +48,7 @@ const FileFeed: NextPage<Props> = ({ urlToSpace, events }) => {
     <div className="ml-12 mt-16">
       {!urlToSpace && <SetupSpace />}
 
-      {urlToSpace && <Events urlToSpace={urlToSpace} events={events} />}
+      {urlToSpace && <Events urlToSpace={urlToSpace} initialEvents={events} />}
     </div>
   );
 };
@@ -82,16 +83,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const actions = await prisma.action.findMany({
-    where: {
-      type: ActionType.FileFeedEvent,
-      organizationId: token.organizationId,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
+  const actions = await getActions(token.organizationId);
   const events = actions.map((a) => fileFeedEventFromAction(a));
 
   const urlToSpace = (space.flatfileData as unknown as FlatfileSpaceData)

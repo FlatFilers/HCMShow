@@ -51,17 +51,20 @@ export const createAction = async (
   });
 };
 
-export const fileFeedEventFromAction = (action: Action) => {
+export const fileFeedEventFromAction = (action: Action): FileFeedEvent => {
   const metadata = action.metadata as {
     topic: string;
   };
 
+  const date =
+    typeof action.createdAt === "string"
+      ? DateTime.fromISO(action.createdAt)
+      : DateTime.fromJSDate(action.createdAt);
+
   return {
-    topic: metadata.topic,
+    topic: metadata.topic as FileFeedEventType,
     description: descriptionForEventType(metadata.topic),
-    when: DateTime.fromJSDate(action.createdAt).toFormat(
-      "MM/dd/yyyy hh:mm:ssa"
-    ),
+    when: date.toFormat("MM/dd/yyyy hh:mm:ssa"),
   };
 };
 

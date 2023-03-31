@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
 import { prismaClient } from "../../../lib/prisma-client";
-import { ActionType } from "../../../lib/action";
+import { ActionType, getActions } from "../../../lib/action";
 import { Action } from "@prisma/client";
 
 export type GetFileFeedActionsResult = {
@@ -22,12 +22,6 @@ export default async function handler(
     throw new Error("No session");
   }
 
-  const actions = await prismaClient.action.findMany({
-    where: {
-      userId: token.sub,
-      organizationId: token.organizationId,
-      type: ActionType.FileFeedEvent,
-    },
-  });
+  const actions = await getActions(token.organizationId);
   res.send({ actions });
 }
