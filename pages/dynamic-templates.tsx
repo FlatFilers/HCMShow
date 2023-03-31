@@ -173,7 +173,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   }, [error]);
 
   return (
-    <div className="ml-12 mt-16">
+    <div className="ml-12 mt-16 flex flex-col">
       <p className="text-2xl mb-2">Customize your workspace</p>
       <p className="mb-8 text-gray-600">
         Adjust the field options below, then click Open Portal to add your data.

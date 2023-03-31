@@ -1,9 +1,12 @@
+import { SparklesIcon } from "@heroicons/react/24/outline";
 import {
   CustomField,
   dateFormats,
   fieldTypes,
 } from "../../pages/dynamic-templates";
 import { OptionBuilder } from "./option-builder";
+import toast from "react-hot-toast";
+import { FormEvent } from "react";
 
 type Props = {
   customField: CustomField;
@@ -12,6 +15,38 @@ type Props = {
 
 export const CustomFieldBuilder = ({ customField, setCustomField }: Props) => {
   const options = customField.enumOptions;
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target as HTMLFormElement);
+    const customField = JSON.parse(formData.get("customField") as string);
+    const name = customField.name;
+    const type = customField.type;
+    const required = customField.required;
+    const dateFormat = customField.dateFormat;
+    const decimals = customField.decimals;
+
+    try {
+      const response = await fetch("/api/flatfile/save-custom-field", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          type,
+          required,
+          dateFormat,
+          decimals,
+        }),
+      });
+
+      const data = await response.json();
+      console.log("custom field saved", data.customField);
+    } catch (error) {
+      console.error("Error saving custom field:", error);
+    }
+  };
 
   return (
     <div className="max-w-lg">
@@ -181,6 +216,21 @@ export const CustomFieldBuilder = ({ customField, setCustomField }: Props) => {
           />
         </div>
       )}
+      <form className="w-fit mt-10 mx-auto" onSubmit={handleSubmit}>
+        <input
+          type="hidden"
+          id="customField"
+          name="customField"
+          value={JSON.stringify(customField)}
+        />
+        <button
+          onClick={() => toast.loading("Saving Custom Field...")}
+          className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto bg-primary text-white border-transparent"
+        >
+          Save Custom Field
+          <SparklesIcon className="w-4 h-4 ml-2" />
+        </button>
+      </form>
     </div>
   );
 };

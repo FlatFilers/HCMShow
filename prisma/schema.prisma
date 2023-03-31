@@ -582,3 +582,39 @@ model BenefitPlan {
   @@unique([organizationId, slug])
 }
 
+model CustomField {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+  type String
+  required Boolean
+  dateFormat String?
+  decimals Int?
+  enumOptions Options? 
+}
+
+model Options {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  customFieldId String @unique @db.Uuid
+  customField CustomField @relation(fields: [customFieldId], references: [id])
+
+  option Option[]
+}
+
+model Option {
+  id String @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  idForOption Int
+  input String
+  output String
+
+  options Options @relation(fields: [optionsId], references: [id])
+  optionsId String @db.Uuid
+}
