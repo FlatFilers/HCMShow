@@ -1,19 +1,16 @@
-import { Action, Space } from "@prisma/client";
-import { useState, FormEvent, useEffect } from "react";
-import toast from "react-hot-toast";
-
+import { useState, useEffect } from "react";
 import { Event } from "./event";
 import { DateTime } from "luxon";
-import { GetFileFeedActionsResult } from "../../pages/api/flatfile/get-filefeed-actions";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
+import { FileFeedEvent, fileFeedEventFromAction } from "../../lib/action";
 
 type Props = {
   urlToSpace: string;
-  initialActions: Action[];
+  initialEvents: FileFeedEvent[];
 };
 
-export const Events = ({ urlToSpace, initialActions }: Props) => {
-  const [actions, setActions] = useState<Action[]>(initialActions);
+export const Events = ({ urlToSpace, initialEvents }: Props) => {
+  const [events, setEvents] = useState<FileFeedEvent[]>(initialEvents);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -21,13 +18,8 @@ export const Events = ({ urlToSpace, initialActions }: Props) => {
         res.json().then((res: { actions: any[] }) => {
           console.log("data", res);
 
-          const data = res.actions.map((action) => {
-            return {
-              ...action,
-              createdAt: DateTime.fromISO(action.createdAt).toJSDate(),
-            };
-          });
-          setActions(data);
+          const data = res.actions.map((a) => fileFeedEventFromAction(a));
+          setEvents(data);
         });
       });
     }, 3000);
@@ -40,6 +32,11 @@ export const Events = ({ urlToSpace, initialActions }: Props) => {
 
       <p className="text-gray-600 mb-2 max-w-lg">
         A file has been uploaded to your Flatfile space.
+      </p>
+
+      <p className="text-gray-600 mb-2 max-w-lg">
+        Visit your space by clicking the button below. Import the file that is
+        waiting there ready to be imported.
       </p>
 
       <p className="text-gray-600 mb-4 max-w-lg">
@@ -82,10 +79,10 @@ export const Events = ({ urlToSpace, initialActions }: Props) => {
           </tr>
         </thead>
         <tbody>
-          {actions.map((a, i) => {
+          {events.map((a, i) => {
             return (
               <tr key={i}>
-                <Event action={a} />
+                <Event event={a} />
               </tr>
             );
           })}

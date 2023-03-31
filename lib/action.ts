@@ -1,4 +1,5 @@
-import { Action, Prisma, PrismaClient } from "@prisma/client";
+import { Action, PrismaClient } from "@prisma/client";
+import { DateTime } from "luxon";
 
 export enum ActionType {
   SyncRecords = "sync-records",
@@ -16,6 +17,12 @@ export enum FileFeedEventType {
   RecordsUpdated = "records:updated",
   RecordsDeleted = "records:deleted",
 }
+
+export type FileFeedEvent = {
+  topic: FileFeedEventType;
+  description: string;
+  when: string;
+};
 
 export const getActions = async (organizationId: string) => {
   const prisma = new PrismaClient();
@@ -42,4 +49,34 @@ export const createAction = async (
       metadata: data.metadata || {},
     },
   });
+};
+
+export const fileFeedEventFromAction = (action: Action): FileFeedEvent => {
+  const metadata = action.metadata as {
+    topic: string;
+  };
+
+  const date =
+    typeof action.createdAt === "string"
+      ? DateTime.fromISO(action.createdAt)
+      : DateTime.fromJSDate(action.createdAt);
+
+  return {
+    topic: metadata.topic as FileFeedEventType,
+    description: descriptionForEventType(metadata.topic),
+    when: date.toFormat("MM/dd/yyyy hh:mm:ssa"),
+  };
+};
+
+const descriptionForEventType = (eventType: string) => {
+  switch (eventType) {
+    case FileFeedEventType.RecordsCreated:
+      return "New records were created in Flatfile.";
+    case FileFeedEventType.RecordsUpdated:
+      return "Records were updated in Flatfile.";
+    case FileFeedEventType.RecordsDeleted:
+      return "Records were deleted in Flatfile.";
+    default:
+      return "An unknown event occurred.";
+  }
 };
