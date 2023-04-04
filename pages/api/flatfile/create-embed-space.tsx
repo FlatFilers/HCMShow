@@ -43,6 +43,7 @@ export default async function handler(
   const flatfileSpaceData = await createSpace({
     accessToken,
     spaceConfigId: process.env.ONBOARDING_SPACE_CONFIG_ID as string,
+    environmentId: process.env.FLATFILE_ENVIRONMENT_ID as string,
   });
 
   console.log("flatfileSpaceData", flatfileSpaceData);
