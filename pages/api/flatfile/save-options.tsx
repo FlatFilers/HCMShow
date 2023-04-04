@@ -21,18 +21,18 @@ export default async function handler(
 
   const prisma = new PrismaClient();
 
+  // console.log("req.body.options", req.body.options);
+
+  const options = [...req.body.options];
+
   // find and update action from the req body
-  const customField = await prisma.customField.create({
+  const optionsRecords = await prisma.options.create({
     data: {
-      name: req.body.name,
-      type: req.body.type,
-      required: req.body.required,
-      dateFormat: req.body.dateFormat,
-      decimals: req.body.decimals,
+      options: options,
     },
   });
 
-  console.log("customField", customField);
+  // console.log("optionsRecords", optionsRecords);
 
-  res.send(customField);
+  res.send(optionsRecords);
 }

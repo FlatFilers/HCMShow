@@ -1,4 +1,4 @@
-import { SparklesIcon } from "@heroicons/react/24/outline";
+import { FolderPlusIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import {
   CustomField,
   dateFormats,
@@ -11,9 +11,14 @@ import { FormEvent } from "react";
 type Props = {
   customField: CustomField;
   setCustomField: (customField: CustomField) => void;
+  setForEmbedCustomField: (customField: CustomField) => void;
 };
 
-export const CustomFieldBuilder = ({ customField, setCustomField }: Props) => {
+export const CustomFieldBuilder = ({
+  customField,
+  setCustomField,
+  setForEmbedCustomField,
+}: Props) => {
   const options = customField.enumOptions;
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,14 +47,24 @@ export const CustomFieldBuilder = ({ customField, setCustomField }: Props) => {
       });
 
       const data = await response.json();
-      console.log("custom field saved", data.customField);
+      const customField = {
+        name: data.name,
+        type: data.type,
+        required: data.required,
+        dateFormat: data.dateFormat,
+        decimals: data.decimals,
+        enumOptions: data.enumOptions,
+      };
+
+      setForEmbedCustomField(customField);
+      console.log("custom field saved", customField);
     } catch (error) {
       console.error("Error saving custom field:", error);
     }
   };
 
   return (
-    <div className="max-w-lg">
+    <div className="max-w-lg w-[33%]">
       <p className="text-lg font-semibold mb-1">Custom Field</p>
 
       <p className="text-xs text-gray-600 mb-8">
@@ -224,11 +239,11 @@ export const CustomFieldBuilder = ({ customField, setCustomField }: Props) => {
           value={JSON.stringify(customField)}
         />
         <button
-          onClick={() => toast.loading("Saving Custom Field...")}
-          className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto bg-primary text-white border-transparent"
+          onClick={() => toast.success("Saved Custom Field")}
+          className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto bg-emerald-500 text-white border-transparent"
         >
           Save Custom Field
-          <SparklesIcon className="w-4 h-4 ml-2" />
+          <FolderPlusIcon className="w-4 h-4 ml-2" />
         </button>
       </form>
     </div>

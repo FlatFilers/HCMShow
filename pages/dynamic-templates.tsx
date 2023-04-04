@@ -1,9 +1,9 @@
 import { NextPageWithLayout } from "./_app";
-import { useCallback, useState } from "react";
+import { FormEvent, useCallback, useState, useEffect } from "react";
 import { useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
-import { SparklesIcon } from "@heroicons/react/24/outline";
+import { FolderPlusIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import {
   BlueprintWithId,
   SpaceConfigWithBlueprints,
@@ -13,12 +13,16 @@ import {
 import { OptionBuilder } from "../components/dynamic-templates/option-builder";
 import { Property, SheetConfig } from "@flatfile/api";
 import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";
+import toast from "react-hot-toast";
+import { PrismaClient } from "@prisma/client";
 
 interface Props {
   accessToken: string;
   environmentId: string;
   workbookName: string;
   baseConfig: SpaceConfigWithBlueprints;
+  customFieldRecord: CustomField;
+  optionsRecord: Option[];
 }
 
 export interface CustomField {
@@ -28,6 +32,15 @@ export interface CustomField {
   dateFormat: keyof typeof dateFormats;
   decimals: number;
   enumOptions: Option[];
+}
+
+export interface CustomFieldRecord {
+  name: string;
+  type: string;
+  required: boolean;
+  dateFormat: string;
+  decimals: number;
+  enumOptions?: Option[];
 }
 
 export const fieldTypes = {
@@ -60,12 +73,12 @@ export const initialOptions: Option[] = [
 const filterConfig = ({
   baseConfig,
   workbookName,
-  options,
+  optionsRecordOrDefault,
   customFieldConfig,
 }: {
   baseConfig: SpaceConfigWithBlueprints;
   workbookName: string;
-  options: Option[];
+  optionsRecordOrDefault: Option[];
   customFieldConfig: any;
 }) => {
   // TODO: We should look up blueprint by ID or slug not name
@@ -85,7 +98,7 @@ const filterConfig = ({
     return f.key !== "employeeType";
   }) as Property[];
 
-  const mappedOptions = options.map((option) => {
+  const mappedOptions = optionsRecordOrDefault.map((option) => {
     return { value: option.input, label: option.output };
   });
 
@@ -107,8 +120,11 @@ const filterConfig = ({
             ...sheet,
             fields: [
               ...otherFields,
-              { ...field, config: { options: mappedOptions } },
-              customFieldConfig,
+              {
+                ...field,
+                config: { options: mappedOptions },
+                slug: `${field?.key}-${Date.now()}`,
+              },
             ],
           },
         ],
@@ -116,7 +132,19 @@ const filterConfig = ({
     ],
   };
 
+  if (customFieldConfig.type !== "reset") {
+    // filteredConfig.blueprints.at(-1).sheets[1].fields[14];
+    filteredConfig.blueprints
+      .at(-1)
+      ?.sheets.at(-1)
+      ?.fields.push(customFieldConfig);
+  }
+
   // console.log("filteredConfig", filteredConfig);
+  // console.log("field", field);
+  // console.log("otherFields", otherFields);
+  // console.log("mappedOptions", mappedOptions);
+  // console.log("sheets", filteredConfig.blueprints[0].sheets[1].fields[14]);
 
   return filteredConfig;
 };
@@ -126,6 +154,8 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   environmentId,
   workbookName,
   baseConfig,
+  customFieldRecord,
+  optionsRecord,
 }) => {
   const [options, setOptions] = useState(initialOptions);
   const [showSpace, setShowSpace] = useState(false);
@@ -137,11 +167,17 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     decimals: 2,
     enumOptions: initialOptions,
   } as CustomField);
+  const [forEmbedCustomField, setForEmbedCustomField] =
+    useState(customFieldRecord);
+
+  const optionsRecordOrDefault = optionsRecord ? optionsRecord : options;
+
+  console.log("forEmbedCustomField", forEmbedCustomField);
 
   const customFieldConfig = {
-    key: customField.name?.replace(/\s/, ""),
-    type: customField.type,
-    label: customField.name,
+    key: forEmbedCustomField.name?.replace(/\s/, ""),
+    type: forEmbedCustomField.type,
+    label: forEmbedCustomField.name,
     description: "Custom field",
     constraints: [{ type: "required" }],
   };
@@ -152,7 +188,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     spaceConfig: filterConfig({
       baseConfig,
       workbookName,
-      options,
+      optionsRecordOrDefault,
       customFieldConfig,
     }),
     sidebarConfig: {
@@ -161,7 +197,10 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     },
   };
 
-  // console.log("spaceProps", spaceProps);
+  // console.log(
+  //   "spaceProps",
+  //   spaceProps.spaceConfig.blueprints[0].sheets[1].fields
+  // );
   const { error, data } = useSpace({ ...spaceProps });
 
   // console.log("customFieldConfig", customFieldConfig);
@@ -172,22 +211,87 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     }
   }, [error]);
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target as HTMLFormElement);
+    const options = JSON.parse(formData.get("options") as string);
+
+    console.log("options", options);
+
+    try {
+      const response = await fetch("/api/flatfile/save-options", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          options,
+        }),
+      });
+
+      const data = await response.json();
+      console.log("options saved", data);
+    } catch (error) {
+      console.error("Error saving options:", error);
+    }
+  };
+
+  useEffect(() => {
+    const resetFields = async () => {
+      try {
+        const resetCustomField = await fetch(
+          "/api/flatfile/save-custom-field",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: "resetThyCustomFieldRecord",
+              type: "reset",
+              required: true,
+              dateFormat: "",
+              decimals: 0,
+              enumOptions: null,
+            }),
+          }
+        );
+
+        const resetOptions = await fetch("/api/flatfile/save-options", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            options: initialOptions,
+          }),
+        });
+      } catch (error) {
+        console.error("Error resetting field options", error);
+      }
+    };
+    resetFields();
+  }, []);
+
   return (
-    <div className="ml-12 mt-16 flex flex-col">
+    <div className="ml-12 mr-16 mt-16 flex flex-col">
       <p className="text-2xl mb-2">Customize your workspace</p>
       <p className="mb-8 text-gray-600">
-        Adjust the field options below, then click Open Portal to add your data.
+        Adjust the field options below. Save each as you complete them and then
+        click Generate Space to add your data.
       </p>
 
-      <div className="flex flex-row mb-12">
+      <div className="flex flex-row mb-12 w-full">
         <CustomFieldBuilder
           customField={customField}
           setCustomField={setCustomField}
+          setForEmbedCustomField={setForEmbedCustomField}
         />
 
         <div className="border-r border-gray-300 mx-12"></div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col w-[33%]">
           <p className="text-lg font-semibold mb-4">
             Adjust Employee Type Options
           </p>
@@ -226,27 +330,46 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
               setOptions(filteredObjects);
             }}
           />
+          <form className="w-fit mt-10 mx-auto my-auto" onSubmit={handleSubmit}>
+            <input
+              type="hidden"
+              id="options"
+              name="options"
+              value={JSON.stringify(options)}
+            />
+            <button
+              onClick={() => toast.success("Saved Options")}
+              className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto bg-emerald-500 text-white border-transparent"
+            >
+              Save Options
+              <FolderPlusIcon className="w-4 h-4 ml-2" />
+            </button>
+          </form>
+        </div>
+
+        <div className="border-r border-gray-300 mx-12"></div>
+
+        <div className="flex flex-col w-[33%]">
+          <div className="flex flex-col flex-grow">
+            <p className="text-lg font-semibold mb-1">
+              Generate your workspace
+            </p>
+            <p className="text-xs text-gray-600 mb-8">
+              Click below to generate your workspace, then scroll down to add
+              your data.
+            </p>
+          </div>
+          <div className="w-fit h-[30%] mx-auto">
+            <button
+              onClick={() => setShowSpace(true)}
+              className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto bg-primary text-white border-transparent"
+            >
+              Generate Space
+              <SparklesIcon className="w-4 h-4 ml-2" />
+            </button>
+          </div>
         </div>
       </div>
-
-      {!showSpace && (
-        <button
-          onClick={() => setShowSpace(true)}
-          className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mb-6 bg-primary text-white border-transparent"
-        >
-          Generate Space
-          <SparklesIcon className="w-4 h-4 ml-2" />
-        </button>
-      )}
-      {showSpace && (
-        <button
-          onClick={() => setShowSpace(false)}
-          className="px-4 py-2 inline-flex items-center justify-center rounded-md border border-primary text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mb-6 bg-white text-primary "
-        >
-          Close Space
-          <SparklesIcon className="w-4 h-4 ml-2" />
-        </button>
-      )}
 
       {error && <div>{error}</div>}
       {!error && showSpace && (
@@ -276,13 +399,33 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     secret: process.env.DYNAMIC_TEMPLATES_CLIENT_SECRET as string,
   });
   const baseConfig = await getSpaceConfig(accessToken);
+  const prisma = new PrismaClient();
+  const customFieldDBRecord = await prisma.customField.findFirst({
+    orderBy: { createdAt: "desc" },
+  });
+  const customFieldRecord = {
+    name: customFieldDBRecord?.name,
+    type: customFieldDBRecord?.type,
+    required: customFieldDBRecord?.required,
+    dateFormat: customFieldDBRecord?.dateFormat,
+    decimals: customFieldDBRecord?.decimals,
+    enumOptions: customFieldDBRecord?.enumOptions,
+  };
+  const optionsDBRecord = await prisma.options.findFirst({
+    orderBy: { createdAt: "desc" },
+  });
+  const optionsRecord = optionsDBRecord?.options;
 
+  // console.log("customFieldRecord", customFieldRecord);
+  // console.log("optionsRecord", optionsRecord);
   return {
     props: {
       accessToken,
       environmentId: process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID,
       workbookName: process.env.DYNAMIC_TEMPLATES_WORKBOOK_NAME,
       baseConfig,
+      customFieldRecord,
+      optionsRecord,
     },
   };
 };
