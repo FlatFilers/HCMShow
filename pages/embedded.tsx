@@ -9,6 +9,7 @@ import {
   ArrowsPointingOutIcon,
   ArrowsPointingInIcon,
   PencilIcon,
+  SparklesIcon,
 } from "@heroicons/react/24/outline";
 import { getAccessToken } from "../lib/flatfile";
 import { Action, PrismaClient, Space } from "@prisma/client";
@@ -21,14 +22,14 @@ import { useRouter } from "next/router";
 interface Props {
   accessToken: string;
   environmentToken: string;
-  lastSyncAction?: Action;
+  lastSyncedAt?: string;
   existingSpace: Space;
 }
 
 const Embedded: NextPageWithLayout<Props> = ({
   accessToken,
   environmentToken,
-  lastSyncAction,
+  lastSyncedAt,
   existingSpace,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -138,7 +139,7 @@ const Embedded: NextPageWithLayout<Props> = ({
                       className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mb-6 bg-primary text-white border-transparent"
                     >
                       Create Space
-                      <PencilIcon className="w-4 h-4 ml-2" />
+                      <SparklesIcon className="w-4 h-4 ml-2" />
                     </button>
                   </form>
                 </div>
@@ -220,12 +221,9 @@ const Embedded: NextPageWithLayout<Props> = ({
                     </button>
                   </form>
 
-                  {lastSyncAction && (
+                  {lastSyncedAt && (
                     <p className="text-xs block text-gray-600 italic mt-2">
-                      Last sync{" "}
-                      {DateTime.fromJSDate(lastSyncAction.createdAt).toFormat(
-                        "MM/dd/yy hh:mm:ss a"
-                      )}
+                      Last sync {lastSyncedAt}
                     </p>
                   )}
                 </div>
@@ -276,13 +274,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         type: SpaceType.Embed,
       },
     },
+    select: {
+      flatfileData: true,
+    },
   });
 
   // console.log("existingSpace", existingSpace);
 
   const accessToken = await getAccessToken();
   const environmentToken = process.env.FLATFILE_ENVIRONMENT_ID;
-  const lastSyncAction = await prisma.action.findFirst({
+  const lastSync = await prisma.action.findFirst({
     where: {
       organizationId: token.organizationId,
     },
@@ -295,7 +296,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       accessToken,
       environmentToken,
-      lastSyncAction,
+      lastSyncedAt: lastSync
+        ? DateTime.fromJSDate(lastSync.createdAt).toFormat(
+            "MM/dd/yy hh:mm:ss a"
+          )
+        : "",
       existingSpace,
     },
   };
