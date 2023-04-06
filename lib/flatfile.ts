@@ -446,6 +446,8 @@ export const postFile = async (
     filename: `HCM Example Employees.csv`,
   });
 
+  console.log("formData", formData);
+
   const filesResponse: Response = await fetch(`${BASE_PATH}/files`, {
     method: "POST",
     body: formData,
