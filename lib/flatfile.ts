@@ -432,7 +432,8 @@ export const getSpaceConfig = async (accessToken: string) => {
   return config;
 };
 
-const FormData = require("form-data");
+import FormData from "form-data";
+import { Readable } from "stream";
 
 export const postFile = async (
   accessToken: string,
@@ -442,7 +443,11 @@ export const postFile = async (
   const formData = new FormData();
   formData.append("spaceId", spaceId);
   formData.append("environmentId", process.env.FILEFEED_ENVIRONMENT_ID);
-  formData.append("file", Buffer.from(file), {
+
+  const fileBuffer = Buffer.from(file);
+  const fileStream = Readable.from(fileBuffer);
+
+  formData.append("file", fileStream, {
     filename: `HCM Example Employees.csv`,
   });
 
@@ -450,7 +455,7 @@ export const postFile = async (
 
   const filesResponse: Response = await fetch(`${BASE_PATH}/files`, {
     method: "POST",
-    body: formData,
+    body: formData as any,
     headers: {
       Authorization: `Bearer ${accessToken}`,
       ...formData.getHeaders(),
