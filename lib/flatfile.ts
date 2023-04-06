@@ -445,10 +445,10 @@ export const postFile = async (
   formData.append("environmentId", process.env.FILEFEED_ENVIRONMENT_ID);
 
   const fileBuffer = Buffer.from(file);
-  const fileStream = Readable.from(fileBuffer);
 
-  formData.append("file", fileStream, {
-    filename: `HCM Example Employees.csv`,
+  formData.append("file", fileBuffer, {
+    filename: "HCM Example Employees.csv",
+    contentType: "text/csv",
   });
 
   console.log("formData", formData);
