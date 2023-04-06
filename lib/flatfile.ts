@@ -434,6 +434,7 @@ export const getSpaceConfig = async (accessToken: string) => {
 
 import FormData from "form-data";
 import { Readable } from "stream";
+import axios from "axios";
 
 export const postFile = async (
   accessToken: string,
@@ -443,27 +444,49 @@ export const postFile = async (
   const formData = new FormData();
   formData.append("spaceId", spaceId);
   formData.append("environmentId", process.env.FILEFEED_ENVIRONMENT_ID);
-
-  const fileBuffer = Buffer.from(file);
-
-  formData.append("file", fileBuffer, {
+  formData.append("file", Buffer.from(file), {
     filename: "HCM Example Employees.csv",
-    contentType: "text/csv",
   });
 
-  console.log("formData", formData);
-
-  const filesResponse: Response = await fetch(`${BASE_PATH}/files`, {
-    method: "POST",
-    body: formData as any,
+  const resp = await axios.post(`${BASE_PATH}/files`, formData, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
       ...formData.getHeaders(),
     },
+    transformRequest: () => formData,
   });
 
-  if (!filesResponse.ok) {
-    console.log("filesResponse body", await filesResponse.json());
+  if (resp.status < 200 || resp.status >= 300) {
+    console.log("resp.data", resp.data);
     throw new Error("Error posting file");
   }
+
+  // const formData = new FormData();
+  // formData.append("spaceId", spaceId);
+  // formData.append("environmentId", process.env.FILEFEED_ENVIRONMENT_ID);
+
+  // const fileBuffer = Buffer.from(file);
+
+  // formData.append("file", fileBuffer, {
+  //   filename: "HCM Example Employees.csv",
+  //   contentType: "text/csv",
+  // });
+
+  // console.log("formData", formData);
+  // console.log("formData", formData.getHeaders());
+
+  // throw "hi";
+  // const filesResponse: Response = await fetch(`${BASE_PATH}/files`, {
+  //   method: "POST",
+  //   body: formData as any,
+  //   headers: {
+  //     Authorization: `Bearer ${accessToken}`,
+  //     ...formData.getHeaders(),
+  //   },
+  // });
+
+  // if (!filesResponse.ok) {
+  //   console.log("filesResponse body", await filesResponse.json());
+  //   throw new Error("Error posting file");
+  // }
 };
