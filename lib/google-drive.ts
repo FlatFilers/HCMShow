@@ -14,7 +14,7 @@ export const fetchFileFromDrive = async () => {
       alt: "media",
     });
 
-    console.log("response", response);
+    // console.log("response", response);
 
     file = response.data;
 
