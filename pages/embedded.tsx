@@ -61,7 +61,7 @@ const Embedded: NextPageWithLayout<Props> = ({
 
   const [downloaded, setDownloaded] = useState(false);
   const storageKey = "embedded-has-downloaded-sample-data";
-  const sampleDataFileName = "/hcm-sample-data.xlsx";
+  const sampleDataFileName = "/HCM.show benefits sample data.csv";
 
   const router = useRouter();
 
@@ -160,13 +160,27 @@ const Embedded: NextPageWithLayout<Props> = ({
                 <div className="flex flex-col justify-between">
                   <div>
                     <div className="font-semibold mb-6 max-w-lg">
-                      {showSpace ? "Close portal" : "Connect to the portal"}
+                      Connect to the portal
                     </div>
-                    <div className="text-gray-600 mb-10 max-w-lg">
+                    <div className="text-gray-600 max-w-lg mb-1">
                       {showSpace
-                        ? "Click below to disconnect the portal"
+                        ? "Click below to disconnect the portal."
                         : "Click below to connect the embedded portal."}
                     </div>
+
+                    <p className="text-xs text-gray-600">
+                      Need the sample data?
+                      <a
+                        className="ml-1 underline"
+                        download={sampleDataFileName}
+                        href={sampleDataFileName}
+                        onClick={() => {
+                          localStorage.setItem(storageKey, "true");
+                        }}
+                      >
+                        Click here to download it again.
+                      </a>
+                    </p>
                   </div>
                   <div>
                     <button
