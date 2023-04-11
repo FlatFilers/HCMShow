@@ -445,7 +445,7 @@ export const postFile = async (
   formData.append("spaceId", spaceId);
   formData.append("environmentId", process.env.FILEFEED_ENVIRONMENT_ID);
   formData.append("file", Buffer.from(file), {
-    filename: "HCM Example Employees.csv",
+    filename: "HCM.show benefits sample data.csv",
   });
 
   const resp = await axios.post(`${BASE_PATH}/files`, formData, {
