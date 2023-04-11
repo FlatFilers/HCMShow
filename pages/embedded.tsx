@@ -295,8 +295,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // console.log("existingSpace", existingSpace);
 
-  const accessToken = await getAccessToken();
-  const environmentToken = process.env.FLATFILE_ENVIRONMENT_ID;
+  const accessToken = await getAccessToken(
+    process.env.EMBEDDED_CLIENT_ID,
+    process.env.EMBEDDED_CLIENT_SECRET
+  );
+  const environmentToken = process.env.EMBEDDED_ENVIRONMENT_ID;
   const lastSync = await prisma.action.findFirst({
     where: {
       organizationId: token.organizationId,

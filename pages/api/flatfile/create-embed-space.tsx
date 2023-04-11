@@ -38,12 +38,15 @@ export default async function handler(
     throw new Error("No user found");
   }
 
-  const accessToken = await getAccessToken();
+  const accessToken = await getAccessToken(
+    process.env.EMBEDDED_CLIENT_ID,
+    process.env.EMBEDDED_CLIENT_SECRET
+  );
 
   const flatfileSpaceData = await createSpace({
     accessToken,
     spaceConfigId: process.env.EMBEDDED_SPACE_CONFIG_ID as string,
-    environmentId: process.env.FLATFILE_ENVIRONMENT_ID as string,
+    environmentId: process.env.EMBEDDED_ENVIRONMENT_ID as string,
   });
 
   console.log("flatfileSpaceData", flatfileSpaceData);
