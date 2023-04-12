@@ -29,10 +29,9 @@ export default async function handler(
   const optionsRecords = await prisma.options.create({
     data: {
       options: options,
+      user: { connect: { id: token.sub } },
     },
   });
 
-  // console.log("optionsRecords", optionsRecords);
-
-  res.send(optionsRecords);
+  res.send(optionsRecords.options);
 }

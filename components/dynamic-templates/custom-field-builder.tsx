@@ -11,7 +11,7 @@ import { FormEvent } from "react";
 type Props = {
   customField: CustomField;
   setCustomField: (customField: CustomField) => void;
-  setForEmbedCustomField: (customField: CustomField) => void;
+  setForEmbedCustomField: any;
 };
 
 export const CustomFieldBuilder = ({

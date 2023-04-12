@@ -14,15 +14,12 @@ import { OptionBuilder } from "../components/dynamic-templates/option-builder";
 import { Property, SheetConfig } from "@flatfile/api";
 import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";
 import toast from "react-hot-toast";
-import { PrismaClient } from "@prisma/client";
 
 interface Props {
   accessToken: string;
   environmentId: string;
   workbookName: string;
   baseConfig: SpaceConfigWithBlueprints;
-  customFieldRecord: CustomField;
-  optionsRecord: Option[];
 }
 
 export interface CustomField {
@@ -32,15 +29,6 @@ export interface CustomField {
   dateFormat: keyof typeof dateFormats;
   decimals: number;
   enumOptions: Option[];
-}
-
-export interface CustomFieldRecord {
-  name: string;
-  type: string;
-  required: boolean;
-  dateFormat: string;
-  decimals: number;
-  enumOptions?: Option[];
 }
 
 export const fieldTypes = {
@@ -73,12 +61,12 @@ export const initialOptions: Option[] = [
 const filterConfig = ({
   baseConfig,
   workbookName,
-  optionsRecordOrDefault,
+  forEmbedOptions,
   customFieldConfig,
 }: {
   baseConfig: SpaceConfigWithBlueprints;
   workbookName: string;
-  optionsRecordOrDefault: Option[];
+  forEmbedOptions: Option[];
   customFieldConfig: any;
 }) => {
   // TODO: We should look up blueprint by ID or slug not name
@@ -98,7 +86,9 @@ const filterConfig = ({
     return f.key !== "employeeType";
   }) as Property[];
 
-  const mappedOptions = optionsRecordOrDefault.map((option) => {
+  console.log("forEmbedOptions", forEmbedOptions);
+
+  const mappedOptions = forEmbedOptions.map((option) => {
     return { value: option.input, label: option.output };
   });
 
@@ -132,8 +122,7 @@ const filterConfig = ({
     ],
   };
 
-  if (customFieldConfig.type !== "reset") {
-    // filteredConfig.blueprints.at(-1).sheets[1].fields[14];
+  if (customFieldConfig.forEmbed) {
     filteredConfig.blueprints
       .at(-1)
       ?.sheets.at(-1)
@@ -154,8 +143,6 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   environmentId,
   workbookName,
   baseConfig,
-  customFieldRecord,
-  optionsRecord,
 }) => {
   const [options, setOptions] = useState(initialOptions);
   const [showSpace, setShowSpace] = useState(false);
@@ -168,18 +155,15 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     enumOptions: initialOptions,
   } as CustomField);
   const [forEmbedCustomField, setForEmbedCustomField] =
-    useState(customFieldRecord);
-
-  const optionsRecordOrDefault = optionsRecord ? optionsRecord : options;
-
-  console.log("forEmbedCustomField", forEmbedCustomField);
-
+    useState<CustomField | null>(null);
+  const [forEmbedOptions, setForEmbedOptions] = useState(initialOptions);
   const customFieldConfig = {
-    key: forEmbedCustomField.name?.replace(/\s/, ""),
-    type: forEmbedCustomField.type,
-    label: forEmbedCustomField.name,
+    key: customField.name?.replace(/\s/, ""),
+    type: customField.type,
+    label: customField.name,
     description: "Custom field",
     constraints: [{ type: "required" }],
+    forEmbed: forEmbedCustomField ? true : false,
   };
 
   const spaceProps = {
@@ -188,7 +172,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     spaceConfig: filterConfig({
       baseConfig,
       workbookName,
-      optionsRecordOrDefault,
+      forEmbedOptions,
       customFieldConfig,
     }),
     sidebarConfig: {
@@ -197,14 +181,9 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     },
   };
 
-  // console.log(
-  //   "spaceProps",
-  //   spaceProps.spaceConfig.blueprints[0].sheets[1].fields
-  // );
   const { error, data } = useSpace({ ...spaceProps });
 
   // console.log("customFieldConfig", customFieldConfig);
-
   useCallback(() => {
     if (error) {
       setShowSpace(false);
@@ -231,48 +210,12 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
       });
 
       const data = await response.json();
+      setForEmbedOptions(data);
       console.log("options saved", data);
     } catch (error) {
       console.error("Error saving options:", error);
     }
   };
-
-  useEffect(() => {
-    const resetFields = async () => {
-      try {
-        const resetCustomField = await fetch(
-          "/api/flatfile/save-custom-field",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: "resetThyCustomFieldRecord",
-              type: "reset",
-              required: true,
-              dateFormat: "",
-              decimals: 0,
-              enumOptions: null,
-            }),
-          }
-        );
-
-        const resetOptions = await fetch("/api/flatfile/save-options", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            options: initialOptions,
-          }),
-        });
-      } catch (error) {
-        console.error("Error resetting field options", error);
-      }
-    };
-    resetFields();
-  }, []);
 
   return (
     <div className="ml-12 mr-16 mt-16 flex flex-col">
@@ -358,6 +301,15 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
               Click below to generate your workspace, then scroll down to add
               your data.
             </p>
+            <div className="font-semibold mb-6">Workspace Save Status:</div>
+            <div className="mb-2 flex flex-row">
+              <div className="mr-2">Custom Field:</div>
+              <div className="mb-2">No Custom Field saved</div>
+            </div>
+            <div className="mb-2 flex flex-row">
+              <div className="mr-2">Options:</div>
+              <div className="mb-2">No Options saved</div>
+            </div>
           </div>
           <div className="w-fit h-[30%] mx-auto">
             <button
@@ -399,33 +351,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     secret: process.env.DYNAMIC_TEMPLATES_CLIENT_SECRET as string,
   });
   const baseConfig = await getSpaceConfig(accessToken);
-  const prisma = new PrismaClient();
-  const customFieldDBRecord = await prisma.customField.findFirst({
-    orderBy: { createdAt: "desc" },
-  });
-  const customFieldRecord = {
-    name: customFieldDBRecord?.name,
-    type: customFieldDBRecord?.type,
-    required: customFieldDBRecord?.required,
-    dateFormat: customFieldDBRecord?.dateFormat,
-    decimals: customFieldDBRecord?.decimals,
-    enumOptions: customFieldDBRecord?.enumOptions,
-  };
-  const optionsDBRecord = await prisma.options.findFirst({
-    orderBy: { createdAt: "desc" },
-  });
-  const optionsRecord = optionsDBRecord?.options;
 
-  // console.log("customFieldRecord", customFieldRecord);
-  // console.log("optionsRecord", optionsRecord);
   return {
     props: {
       accessToken,
       environmentId: process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID,
       workbookName: process.env.DYNAMIC_TEMPLATES_WORKBOOK_NAME,
       baseConfig,
-      customFieldRecord,
-      optionsRecord,
     },
   };
 };

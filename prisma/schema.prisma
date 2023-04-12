@@ -40,6 +40,8 @@ model User {
 
   actions Action[]
   spaces Space[]
+  customField CustomField[]
+  options Options[]
 }
 
 model Action {
@@ -593,6 +595,9 @@ model CustomField {
   dateFormat String?
   decimals Int?
   enumOptions Json? @db.JsonB
+
+  userId String @db.Uuid
+  user User @relation(fields: [userId], references: [id])
 }
 
 model Options {
@@ -601,4 +606,7 @@ model Options {
   updatedAt DateTime @updatedAt
 
   options Json? @db.JsonB
+
+  userId String @db.Uuid
+  user User @relation(fields: [userId], references: [id])
 }

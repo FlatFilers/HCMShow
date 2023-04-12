@@ -9,6 +9,7 @@ CREATE TABLE "CustomField" (
     "dateFormat" TEXT,
     "decimals" INTEGER,
     "enumOptions" JSONB,
+    "userId" UUID NOT NULL,
 
     CONSTRAINT "CustomField_pkey" PRIMARY KEY ("id")
 );
@@ -19,6 +20,13 @@ CREATE TABLE "Options" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "options" JSONB,
+    "userId" UUID NOT NULL,
 
     CONSTRAINT "Options_pkey" PRIMARY KEY ("id")
 );
+
+-- AddForeignKey
+ALTER TABLE "CustomField" ADD CONSTRAINT "CustomField_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Options" ADD CONSTRAINT "Options_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
