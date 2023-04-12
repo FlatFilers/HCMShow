@@ -83,7 +83,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const actions = await getActions(token.organizationId);
+  const actions = await getActions(
+    token.organizationId,
+    ActionType.FileFeedEvent
+  );
   const events = actions.map((a) => fileFeedEventFromAction(a));
 
   const urlToSpace = (space.flatfileData as unknown as FlatfileSpaceData)

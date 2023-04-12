@@ -24,12 +24,22 @@ export type FileFeedEvent = {
   when: string;
 };
 
-export const getActions = async (organizationId: string) => {
+export const getActions = async (organizationId: string, type?: ActionType) => {
   const prisma = new PrismaClient();
+
+  let whereParams: { organizationId: string; type?: ActionType } = {
+    organizationId,
+  };
+
+  if (type) {
+    whereParams = {
+      ...whereParams,
+      type,
+    };
+  }
+
   return await prisma.action.findMany({
-    where: {
-      organizationId,
-    },
+    where: whereParams,
     orderBy: {
       createdAt: "desc",
     },
