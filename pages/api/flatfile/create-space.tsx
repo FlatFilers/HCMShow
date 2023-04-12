@@ -39,19 +39,23 @@ export default async function handler(
     throw new Error("No user found");
   }
 
-  const accessToken = await getAccessToken();
+  const accessToken = await getAccessToken({
+    clientId: process.env.ONBOARDING_CLIENT_ID as string,
+    secret: process.env.ONBOARDING_CLIENT_SECRET as string,
+  });
 
   const flatfileSpaceData = await createSpace({
     accessToken,
     spaceConfigId: process.env.ONBOARDING_SPACE_CONFIG_ID as string,
-    environmentId: process.env.FLATFILE_ENVIRONMENT_ID as string,
+    environmentId: process.env.ONBOARDING_ENVIRONMENT_ID as string,
   });
   const spaceId = flatfileSpaceData.id;
 
   const addGuestToSpaceResponse = await addGuestToSpace(
     user,
     flatfileSpaceData,
-    accessToken
+    accessToken,
+    process.env.ONBOARDING_ENVIRONMENT_ID as string
   );
 
   if (

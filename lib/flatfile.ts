@@ -61,10 +61,13 @@ type WorkbookObject = {
 
 const BASE_PATH = "https://api.x.flatfile.com/v1";
 
-export async function getAccessToken(
-  clientId: string = process.env.FLATFILE_CLIENT_ID as string,
-  secret: string = process.env.FLATFILE_CLIENT_SECRET as string
-): Promise<string> {
+export async function getAccessToken({
+  clientId,
+  secret,
+}: {
+  clientId: string;
+  secret: string;
+}): Promise<string> {
   const configParams: ConfigurationParameters = {
     basePath: BASE_PATH,
   };
@@ -274,7 +277,7 @@ export const addGuestToSpace = async (
   user: User,
   flatfileSpaceData: FlatfileSpaceData,
   accessToken: string,
-  environmentId: string = process.env.FLATFILE_ENVIRONMENT_ID as string
+  environmentId: string
 ) => {
   const payload = [
     {

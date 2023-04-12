@@ -16,7 +16,10 @@ export const syncWorkbookRecords = async ({
   organizationId: string;
   spaceType: SpaceType;
 }) => {
-  const accessToken = await getAccessToken();
+  const accessToken = await getAccessToken({
+    clientId: process.env.ONBOARDING_CLIENT_ID as string,
+    secret: process.env.ONBOARDING_CLIENT_SECRET as string,
+  });
 
   const employeeRecords = await getRecordsByName(
     userId,

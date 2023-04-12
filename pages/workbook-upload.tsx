@@ -17,12 +17,12 @@ import { SpaceType } from "../lib/space";
 
 interface Props {
   space?: Space;
-  lastSyncAction?: Action;
+  lastSyncedAt?: string;
 }
 
 const sampleDataFileName = "/hcm-sample-data.xlsx";
 
-const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
+const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   let defaultText = space ? "Sync Records" : "Setup Flatfile";
   const [buttonText, setButtonText] = useState<string>(defaultText);
@@ -279,12 +279,9 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncAction }) => {
                 </button>
               </form>
 
-              {lastSyncAction && (
+              {lastSyncedAt && (
                 <p className="text-xs block text-gray-600 italic mt-2">
-                  Last sync{" "}
-                  {DateTime.fromJSDate(lastSyncAction.createdAt).toFormat(
-                    "MM/dd/yy hh:mm:ss a"
-                  )}
+                  Last sync {lastSyncedAt}
                 </p>
               )}
             </div>
@@ -334,8 +331,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
+  let lastSyncedAt;
+
+  if (lastSyncAction) {
+    lastSyncedAt = DateTime.fromJSDate(lastSyncAction.createdAt).toFormat(
+      "MM/dd/yy hh:mm:ss a"
+    );
+  }
+
   return {
-    props: { space, lastSyncAction },
+    props: { space, lastSyncedAt },
   };
 };
 

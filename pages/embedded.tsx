@@ -295,10 +295,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // console.log("existingSpace", existingSpace);
 
-  const accessToken = await getAccessToken(
-    process.env.EMBEDDED_CLIENT_ID,
-    process.env.EMBEDDED_CLIENT_SECRET
-  );
+  const accessToken = await getAccessToken({
+    clientId: process.env.EMBEDDED_CLIENT_ID as string,
+    secret: process.env.EMBEDDED_CLIENT_SECRET as string,
+  });
   const environmentToken = process.env.EMBEDDED_ENVIRONMENT_ID;
   const lastSync = await prisma.action.findFirst({
     where: {

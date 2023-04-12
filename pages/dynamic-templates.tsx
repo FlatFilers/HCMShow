@@ -271,13 +271,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const accessToken = await getAccessToken();
+  const accessToken = await getAccessToken({
+    clientId: process.env.ONBOARDING_CLIENT_ID as string,
+    secret: process.env.ONBOARDING_CLIENT_SECRET as string,
+  });
   const baseConfig = await getSpaceConfig(accessToken);
 
   return {
     props: {
       accessToken,
-      environmentId: process.env.FLATFILE_ENVIRONMENT_ID,
+      environmentId: process.env.ONBOARDING_ENVIRONMENT_ID,
       workbookName: process.env.WORKBOOK_UPLOAD_WORKBOOK_NAME,
       baseConfig,
     },
