@@ -423,12 +423,12 @@ export const getSpaceConfig = async (accessToken: string) => {
 
   const config = spaceConfigResult.data.find(
     (config: SpaceConfigWithBlueprints) => {
-      return config.id === process.env.ONBOARDING_SPACE_CONFIG_ID;
+      return config.id === process.env.DYNAMIC_TEMPLATES_SPACE_CONFIG_ID;
     }
   );
 
   // console.log("spaceConfigResult", spaceConfigResult.data);
-  // console.log("config ID", process.env.ONBOARDING_SPACE_CONFIG_ID);
+  // console.log("config ID", process.env.DYNAMIC_TEMPLATES_SPACE_CONFIG_ID);
 
   // console.log("config", util.inspect(config, { depth: null }));
 
