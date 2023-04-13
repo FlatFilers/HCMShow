@@ -95,12 +95,19 @@ export async function getAccessToken({
   return accessTokenResponse.data.accessToken;
 }
 
-export const getRecordsByName = async (
-  userId: string,
-  accessToken: string,
-  sheetName: string,
-  spaceType: SpaceType
-): Promise<Record[]> => {
+export const getRecordsByName = async ({
+  userId,
+  accessToken,
+  workbookName,
+  sheetName,
+  spaceType,
+}: {
+  userId: string;
+  accessToken: string;
+  workbookName: string;
+  sheetName: string;
+  spaceType: SpaceType;
+}): Promise<Record[]> => {
   const prisma = new PrismaClient();
 
   const space = await prisma.space.findUnique({
@@ -118,11 +125,12 @@ export const getRecordsByName = async (
 
   // console.log("space", space);
 
-  const { workbookId, sheetId } = await getWorkbookIdAndSheetIds(
-    (space.flatfileData as unknown as FlatfileSpaceData).id,
+  const { workbookId, sheetId } = await getWorkbookIdAndSheetIds({
+    flatfileSpaceId: (space.flatfileData as unknown as FlatfileSpaceData).id,
     accessToken,
-    sheetName
-  );
+    workbookName,
+    sheetName,
+  });
 
   // console.log("w, s", workbookId, sheetIds);
 
@@ -131,11 +139,17 @@ export const getRecordsByName = async (
   return records;
 };
 
-const getWorkbookIdAndSheetIds = async (
-  flatfileSpaceId: string,
-  accessToken: string,
-  sheetName: string
-): Promise<{ workbookId: string; sheetId: string }> => {
+const getWorkbookIdAndSheetIds = async ({
+  flatfileSpaceId,
+  accessToken,
+  workbookName,
+  sheetName,
+}: {
+  flatfileSpaceId: string;
+  accessToken: string;
+  workbookName: string;
+  sheetName: string;
+}): Promise<{ workbookId: string; sheetId: string }> => {
   const response = await fetch(
     `${BASE_PATH}/workbooks?spaceId=${flatfileSpaceId}`,
     {
@@ -151,11 +165,8 @@ const getWorkbookIdAndSheetIds = async (
 
   const result = await response.json();
 
-  // TODO: Assuming just 1 workbook for this demo (but multiple sheets).
-  // console.log("sheets", result["data"][0]["sheets"]);
-
   const workbookObj = result.data.find((workbookObj: WorkbookObject) => {
-    return workbookObj.name === process.env.WORKBOOK_UPLOAD_WORKBOOK_NAME;
+    return workbookObj.name === workbookName;
   });
   const sheetId = workbookObj.sheets.find(
     (s: { id: string; name: string; config: any }) => s.name === sheetName
