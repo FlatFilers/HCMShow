@@ -24,7 +24,7 @@ export default async function handler(
   const { success, message } = await syncWorkbookRecords({
     userId: token.sub,
     organizationId: token.organizationId,
-    spaceType: SpaceType.ProjectOnboarding,
+    spaceType: SpaceType.WorkbookUpload,
   });
   const flash = success ? "success" : "error";
 
