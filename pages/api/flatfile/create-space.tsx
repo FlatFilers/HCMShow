@@ -86,7 +86,7 @@ export default async function handler(
       userId: user.id,
       flatfileData:
         flatfileSpaceDataRefetch as unknown as Prisma.InputJsonValue,
-      type: SpaceType.ProjectOnboarding,
+      type: SpaceType.WorkbookUpload,
     },
   });
 

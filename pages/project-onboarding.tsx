@@ -311,7 +311,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     where: {
       userId_type: {
         userId: token.sub as string,
-        type: SpaceType.ProjectOnboarding,
+        type: SpaceType.WorkbookUpload,
       },
     },
   });
