@@ -367,7 +367,7 @@ model Space {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  type String @default("project onboarding")
+  type String
   flatfileData Json @db.JsonB
 
   userId String @db.Uuid
