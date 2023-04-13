@@ -73,11 +73,11 @@ export default async function handler(
   );
 
   // TODO: Don't need this, already sending an email on create?
-  const inviteGuestsToSpaceResponse = await inviteGuestToSpace(
-    addGuestToSpaceResponse[0].id,
-    spaceId,
-    accessToken
-  );
+  // const inviteGuestsToSpaceResponse = await inviteGuestToSpace(
+  //   addGuestToSpaceResponse[0].id,
+  //   spaceId,
+  //   accessToken
+  // );
 
   // console.log('inviteGuestsToSpaceResponse', inviteGuestsToSpaceResponse.success);
 
