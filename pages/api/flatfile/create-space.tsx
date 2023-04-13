@@ -63,7 +63,7 @@ export default async function handler(
     addGuestToSpaceResponse.errors[0].message
   ) {
     res.redirect(
-      "/workbook-upload?flash=error&message=Error setting up Flatfile"
+      "/project-onboarding?flash=error&message=Error setting up Flatfile"
     );
   }
 
@@ -73,11 +73,11 @@ export default async function handler(
   );
 
   // TODO: Don't need this, already sending an email on create?
-  // const inviteGuestsToSpaceResponse = await inviteGuestToSpace(
-  //   addGuestToSpaceResponse[0].id,
-  //   spaceId,
-  //   accessToken
-  // );
+  const inviteGuestsToSpaceResponse = await inviteGuestToSpace(
+    addGuestToSpaceResponse[0].id,
+    spaceId,
+    accessToken
+  );
 
   // console.log('inviteGuestsToSpaceResponse', inviteGuestsToSpaceResponse.success);
 
@@ -86,14 +86,14 @@ export default async function handler(
       userId: user.id,
       flatfileData:
         flatfileSpaceDataRefetch as unknown as Prisma.InputJsonValue,
-      type: SpaceType.WorkbookUpload,
+      type: SpaceType.ProjectOnboarding,
     },
   });
 
   // console.log("space", space);
   // console.log("space data", space.flatfileData);
 
-  const basePathUrl = `${process.env.BASEPATH_URL}/workbook-upload`;
+  const basePathUrl = `${process.env.BASEPATH_URL}/project-onboarding`;
   const initialDocumentBody = `<div> 
   <h1 style="margin-bottom: 0px;">Welcome! Let's import your data.</h1>
   <p style="margin-top: 0px; margin-bottom: 12px;">Follow the steps below in order. Note: you can always return to this page by clicking "Welcome" in the left-hand sidebar.</p>
@@ -126,5 +126,5 @@ export default async function handler(
 
   // console.log("addDocumentToSpaceResponse", addDocumentToSpaceResponse);
 
-  res.redirect("/workbook-upload?flash=success&message=Setup Flatfile!");
+  res.redirect("/project-onboarding?flash=success&message=Setup Flatfile!");
 }

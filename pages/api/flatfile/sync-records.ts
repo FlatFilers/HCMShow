@@ -24,9 +24,9 @@ export default async function handler(
   const { success, message } = await syncWorkbookRecords({
     userId: token.sub,
     organizationId: token.organizationId,
-    spaceType: SpaceType.WorkbookUpload,
+    spaceType: SpaceType.ProjectOnboarding,
   });
   const flash = success ? "success" : "error";
 
-  res.redirect(`/workbook-upload?flash=${flash}&message=${message}`);
+  res.redirect(`/project-onboarding?flash=${flash}&message=${message}`);
 }

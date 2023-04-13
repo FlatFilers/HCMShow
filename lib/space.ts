@@ -2,7 +2,7 @@ import { Space } from "@prisma/client";
 import { prismaClient } from "../lib/prisma-client";
 
 export enum SpaceType {
-  WorkbookUpload = "workbook-upload",
+  ProjectOnboarding = "project-onboarding",
   FileFeed = "file-feed",
   Embed = "embed",
 }

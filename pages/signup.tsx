@@ -40,7 +40,7 @@ const Signup: NextPageWithLayout = () => {
       lastName,
       companyName,
       isSignup: true,
-      callbackUrl: "/workbook-upload",
+      callbackUrl: "/project-onboarding",
     });
   };
 

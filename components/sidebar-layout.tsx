@@ -57,10 +57,10 @@ const SidebarLayout = ({ children }: Props) => {
   ];
   const workflowsNavigation = [
     {
-      name: "Workbook Upload",
-      href: "/workbook-upload",
+      name: "Project Onboarding",
+      href: "/project-onboarding",
       icon: FolderIcon,
-      current: router.pathname === "/workbook-upload",
+      current: router.pathname === "/project-onboarding",
     },
     {
       name: "File Feed",
