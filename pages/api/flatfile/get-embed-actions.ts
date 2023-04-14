@@ -14,7 +14,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<GetFileFeedActionsResult>
 ) {
-  console.log("/get-file-feed-actions", req.query);
+  // console.log("/get-file-feed-actions", req.query);
 
   const token = await getToken({
     req: req,

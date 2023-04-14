@@ -11,6 +11,10 @@ import {
   upsertBenefitPlanRecords,
   validBenefitPlanRecords,
 } from "./benefit-plan";
+import {
+  upsertEmployeeBenefitPlanRecords,
+  validEmployeeBenefitPlanRecords,
+} from "./employee-benefit-plan";
 
 export const syncWorkbookRecords = async ({
   userId,
@@ -202,7 +206,7 @@ export const syncBenefitPlanRecords = async ({
     secret: process.env.EMBEDDED_CLIENT_SECRET as string,
   });
 
-  const benefitRecords = await getRecordsByName({
+  const employeeBenefitRecords = await getRecordsByName({
     userId,
     accessToken,
     workbookName: process.env.EMBEDDED_WORKBOOK_NAME as string,
@@ -210,14 +214,14 @@ export const syncBenefitPlanRecords = async ({
     spaceType,
   });
 
-  const totalRecords = benefitRecords.length;
+  const totalRecords = employeeBenefitRecords.length;
 
   if (totalRecords === 0) {
     await createAction({
       userId,
       organizationId,
       type: ActionType.SyncEmbedRecords,
-      description: "Synced Benefit Plans. No records found.",
+      description: "Synced employee benefits. No records found.",
       metadata: {
         seen: false,
       },
@@ -226,13 +230,18 @@ export const syncBenefitPlanRecords = async ({
     return;
   }
 
-  const validPlans = await validBenefitPlanRecords(benefitRecords);
+  const validPlans = await validEmployeeBenefitPlanRecords(
+    employeeBenefitRecords
+  );
 
   console.log("Valid records to sync", validPlans.length);
 
-  await upsertBenefitPlanRecords(validPlans, { userId, organizationId });
+  const count = await upsertEmployeeBenefitPlanRecords(employeeBenefitRecords, {
+    userId,
+    organizationId,
+  });
 
-  const message = `Synced ${validPlans.length} Benefit Plans.`;
+  const message = `Synced ${count}/${validPlans.length} employee benefit plans.`;
 
   await createAction({
     userId,

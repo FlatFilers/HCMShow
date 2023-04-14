@@ -11,7 +11,7 @@ import { PrismaClient, Space, User } from "@prisma/client";
 import { SpaceType } from "./space";
 
 export interface Field {
-  value: string | number | null;
+  value: string | number | boolean | null;
   valid: boolean;
   message: [];
 }
