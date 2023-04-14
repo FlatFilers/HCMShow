@@ -755,24 +755,6 @@ export const upsertEmployees = async (organizationId: string) => {
   const defaultWeeklyHours = 40;
   const scheduledWeeklyHours = 40;
   const jobId = (await prismaClient.job.findFirst())!.id;
-  const benefitPlanRecord = await prismaClient.benefitPlan.upsert({
-    where: {
-      organizationId_slug: {
-        slug: "benefit-plan-seed",
-        organizationId,
-      },
-    },
-    create: {
-      slug: "benefit-plan-seed",
-      name: "Benefit Plan Seed",
-      organization: {
-        connect: {
-          id: organizationId,
-        },
-      },
-    },
-    update: {},
-  });
 
   const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,
@@ -786,20 +768,6 @@ export const upsertEmployees = async (organizationId: string) => {
     defaultWeeklyHours,
     scheduledWeeklyHours,
     jobId,
-    benefitPlans: {
-      create: [
-        {
-          currentlyEnrolled: true,
-          coverageBeginDate: DateTime.now().toJSDate(),
-          employeeContribution: 543.21,
-          benefitPlan: {
-            connect: {
-              id: benefitPlanRecord.id,
-            },
-          },
-        },
-      ],
-    },
   };
   const manager: Employee = await upsertEmployee(data);
 

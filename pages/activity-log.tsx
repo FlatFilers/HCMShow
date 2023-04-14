@@ -9,6 +9,7 @@ const mapActionTypeToLabel = (type: string) => {
   const mappings = {
     [ActionType.SyncRecords]: "Sync Records",
     [ActionType.FileFeedEvent]: "File Feed Event",
+    [ActionType.SyncEmbedRecords]: "Sync Embedded Records",
   };
 
   return mappings[type as ActionType];
@@ -88,6 +89,8 @@ const ActivityLog: NextPage<Props> = ({ actions }) => {
                             {a.type === ActionType.FileFeedEvent &&
                               (a.metadata as { description: string })
                                 .description}
+                            {a.type === ActionType.SyncEmbedRecords &&
+                              a.description}
                           </td>
                         </tr>
                       );

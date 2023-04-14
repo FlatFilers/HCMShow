@@ -1,4 +1,4 @@
-import { EmployeeType } from "@prisma/client";
+import { EmployeeType, Prisma } from "@prisma/client";
 import { upsertEmployee, validEmployeeRecords } from "./employee";
 import { getAccessToken, getRecordsByName } from "./flatfile";
 import { prismaClient } from "./prisma-client";
@@ -6,6 +6,15 @@ import { SpaceType } from "./space";
 import { DateTime } from "luxon";
 import { createAction, ActionType } from "./action";
 import { validJobRecords, upsertJobRecords } from "./job";
+import {
+  upsertBenefitPlan,
+  upsertBenefitPlanRecords,
+  validBenefitPlanRecords,
+} from "./benefit-plan";
+import {
+  upsertEmployeeBenefitPlanRecords,
+  validEmployeeBenefitPlanRecords,
+} from "./employee-benefit-plan";
 
 export const syncWorkbookRecords = async ({
   userId,
@@ -21,18 +30,20 @@ export const syncWorkbookRecords = async ({
     secret: process.env.ONBOARDING_CLIENT_SECRET as string,
   });
 
-  const employeeRecords = await getRecordsByName(
+  const employeeRecords = await getRecordsByName({
     userId,
     accessToken,
-    "Employees",
-    spaceType
-  );
-  const jobRecords = await getRecordsByName(
+    workbookName: process.env.WORKBOOK_UPLOAD_WORKBOOK_NAME as string,
+    sheetName: "Employees",
+    spaceType,
+  });
+  const jobRecords = await getRecordsByName({
     userId,
     accessToken,
-    "Jobs",
-    spaceType
-  );
+    workbookName: process.env.WORKBOOK_UPLOAD_WORKBOOK_NAME as string,
+    sheetName: "Jobs",
+    spaceType,
+  });
 
   const totalRecords = employeeRecords.length + jobRecords.length;
 
@@ -104,29 +115,6 @@ export const syncWorkbookRecords = async ({
 
       const jobId = job.id;
 
-      const benefitPlan = await prismaClient.benefitPlan.upsert({
-        where: {
-          organizationId_slug: {
-            slug: ("benefit-plan-for-employee" +
-              " " +
-              r.values.employeeId.value) as string,
-            organizationId,
-          },
-        },
-        create: {
-          slug: ("benefit-plan-for-employee" +
-            " " +
-            r.values.employeeId.value) as string,
-          name: "Benefit Plan for Employee",
-          organization: {
-            connect: {
-              id: organizationId,
-            },
-          },
-        },
-        update: {},
-      });
-
       let data: Parameters<typeof upsertEmployee>[0] = {
         organizationId,
         employeeId: r.values.employeeId.value as string,
@@ -148,20 +136,6 @@ export const syncWorkbookRecords = async ({
         scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
         flatfileRecordId: r.id,
         jobId: jobId,
-        benefitPlans: {
-          create: [
-            {
-              currentlyEnrolled: true,
-              coverageBeginDate: DateTime.now().toJSDate(),
-              employeeContribution: 100.01,
-              benefitPlan: {
-                connect: {
-                  id: benefitPlan.id,
-                },
-              },
-            },
-          ],
-        },
       };
 
       if (
@@ -210,6 +184,73 @@ export const syncWorkbookRecords = async ({
     type: ActionType.SyncRecords,
     description: message,
     metadata: {},
+  });
+
+  return {
+    success: true,
+    message,
+  };
+};
+
+export const syncBenefitPlanRecords = async ({
+  userId,
+  organizationId,
+  spaceType,
+}: {
+  userId: string;
+  organizationId: string;
+  spaceType: SpaceType;
+}) => {
+  const accessToken = await getAccessToken({
+    clientId: process.env.EMBEDDED_CLIENT_ID as string,
+    secret: process.env.EMBEDDED_CLIENT_SECRET as string,
+  });
+
+  const employeeBenefitRecords = await getRecordsByName({
+    userId,
+    accessToken,
+    workbookName: process.env.EMBEDDED_WORKBOOK_NAME as string,
+    sheetName: "Benefit Elections",
+    spaceType,
+  });
+
+  const totalRecords = employeeBenefitRecords.length;
+
+  if (totalRecords === 0) {
+    await createAction({
+      userId,
+      organizationId,
+      type: ActionType.SyncEmbedRecords,
+      description: "Synced employee benefits. No records found.",
+      metadata: {
+        seen: false,
+      },
+    });
+
+    return;
+  }
+
+  const validPlans = await validEmployeeBenefitPlanRecords(
+    employeeBenefitRecords
+  );
+
+  console.log("Valid records to sync", validPlans.length);
+
+  const count = await upsertEmployeeBenefitPlanRecords(employeeBenefitRecords, {
+    userId,
+    organizationId,
+  });
+
+  const message = `Synced ${count}/${validPlans.length} employee benefit plans.`;
+
+  await createAction({
+    userId,
+    organizationId,
+    type: ActionType.SyncEmbedRecords,
+    description: message,
+    metadata: {
+      seen: false,
+    },
   });
 
   return {
