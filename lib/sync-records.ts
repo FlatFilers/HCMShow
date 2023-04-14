@@ -1,4 +1,4 @@
-import { EmployeeType } from "@prisma/client";
+import { EmployeeType, Prisma } from "@prisma/client";
 import { upsertEmployee, validEmployeeRecords } from "./employee";
 import { getAccessToken, getRecordsByName } from "./flatfile";
 import { prismaClient } from "./prisma-client";
@@ -213,10 +213,17 @@ export const syncBenefitPlanRecords = async ({
   const totalRecords = benefitRecords.length;
 
   if (totalRecords === 0) {
-    return {
-      success: false,
-      message: "No Records Found. Did you upload the sample data in Flatfile?",
-    };
+    await createAction({
+      userId,
+      organizationId,
+      type: ActionType.SyncEmbedRecords,
+      description: "Synced Benefit Plans. No records found.",
+      metadata: {
+        seen: false,
+      },
+    });
+
+    return;
   }
 
   const validPlans = await validBenefitPlanRecords(benefitRecords);
@@ -232,7 +239,9 @@ export const syncBenefitPlanRecords = async ({
     organizationId,
     type: ActionType.SyncEmbedRecords,
     description: message,
-    metadata: {},
+    metadata: {
+      seen: false,
+    },
   });
 
   return {

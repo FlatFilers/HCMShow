@@ -82,6 +82,32 @@ const Embedded: NextPageWithLayout<Props> = ({
     }
   }, []);
 
+  const [currentTime, setCurrentTime] = useState<DateTime>();
+
+  useEffect(() => {
+    if (!showSpace) {
+      return;
+    }
+
+    const timer = setInterval(() => {
+      fetch(
+        `/api/flatfile/get-embed-actions?afterTimestamp=${currentTime?.toISO()}`
+      ).then((res) => {
+        res.json().then((res: { actions: any[] }) => {
+          console.log("data", res);
+
+          res.actions.forEach((a) => {
+            toast.success(a.description, {
+              id: DateTime.now().toISO(),
+              duration: 4000,
+            });
+          });
+        });
+      });
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [showSpace]);
+
   return (
     <div className="mx-12 flex flex-col justify-between mt-16 self-center">
       {!downloaded && (
@@ -156,13 +182,13 @@ const Embedded: NextPageWithLayout<Props> = ({
           </p>
           <div className="w-full mb-14">
             <div className="flex flex-row">
-              <div className="w-[35%]">
+              <div className="">
                 <div className="flex flex-col justify-between">
                   <div>
-                    <div className="font-semibold mb-6 max-w-lg">
+                    <div className="font-semibold mb-6">
                       Connect to the portal
                     </div>
-                    <div className="text-gray-600 max-w-lg mb-1">
+                    <div className="text-gray-600 mb-1">
                       {showSpace
                         ? "Click below to disconnect the portal."
                         : "Click below to connect the embedded portal."}
@@ -185,9 +211,14 @@ const Embedded: NextPageWithLayout<Props> = ({
                   <div>
                     <button
                       onClick={() => {
+                        // When the space is opened, save the time we started listening for events
+                        if (showSpace === false) {
+                          setCurrentTime(DateTime.now().toUTC());
+                        }
+
                         setShowSpace(!showSpace);
                       }}
-                      className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mt-16 mb-6 ${
+                      className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mt-4 ${
                         showSpace
                           ? "bg-white text-primary border-2 border-primary"
                           : "bg-primary text-white border-transparent"
@@ -201,45 +232,6 @@ const Embedded: NextPageWithLayout<Props> = ({
                       )}
                     </button>
                   </div>
-                </div>
-              </div>
-              <div className="border-r border-gray-300 mr-12"></div>
-
-              <div className="flex flex-col justify-between">
-                <div>
-                  <p className="font-semibold mb-6">Sync Records to HCM.show</p>
-                  <p className="text-gray-600 mb-6 max-w-lg">
-                    After uploading records in Flatfile, click the button below
-                    to sync the records into HCM.show.
-                  </p>
-                </div>
-                <div>
-                  <form
-                    method="post"
-                    action="/api/flatfile/sync-embed-records"
-                    onSubmit={handleSubmit}
-                    className="mt-14 mb-6"
-                  >
-                    <button
-                      onClick={() => toast.loading("Syncing...")}
-                      disabled={isSubmitting}
-                      type="submit"
-                      className={`${
-                        isSubmitting
-                          ? "bg-primary-dark hover:cursor-not-allowed"
-                          : "bg-primary hover:bg-primary-dark "
-                      } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto}`}
-                    >
-                      {buttonText}
-                      <ArrowPathIcon className="w-4 h-4 ml-1" />
-                    </button>
-                  </form>
-
-                  {lastSyncedAt && (
-                    <p className="text-xs block text-gray-600 italic mt-2">
-                      Last sync {lastSyncedAt}
-                    </p>
-                  )}
                 </div>
               </div>
             </div>
