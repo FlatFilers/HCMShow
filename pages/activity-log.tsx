@@ -1,9 +1,11 @@
 import { GetServerSideProps, NextPage } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import { getToken } from "next-auth/jwt";
 import { ActionType, getActions } from "../lib/action";
 import { Action, User } from "@prisma/client";
 import { DateTime } from "luxon";
+import router from "next/router";
+import toast from "react-hot-toast";
 
 const mapActionTypeToLabel = (type: string) => {
   const mappings = {
@@ -20,6 +22,18 @@ interface Props {
 }
 
 const ActivityLog: NextPage<Props> = ({ actions }) => {
+  useEffect(() => {
+    if (router.query.flash === "success") {
+      window.history.replaceState(null, "", "/embedded");
+      toast.success(router.query.message as string, {
+        id: router.query.message as string,
+        duration: 4000,
+      });
+    } else if (router.query.flash === "error") {
+      window.history.replaceState(null, "", "/embedded");
+      toast.error(router.query.message as string, { id: "error" });
+    }
+  }, []);
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">

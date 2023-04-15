@@ -16,7 +16,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import MobileSidebar from "./mobile-sidebar";
 import Image from "next/image";
 
@@ -179,6 +179,17 @@ const SidebarLayout = ({ children }: Props) => {
                 ))}
               </div>
               <div className="flex flex-col">
+                <form action="/api/v1/reset-account" method="post">
+                  <button
+                    onClick={() => {
+                      localStorage.clear();
+                      toast.loading("Resetting Account...");
+                    }}
+                    className="w-full border border-primary text-primary rounded-xl mb-4 bg-white"
+                  >
+                    <div className="mx-auto w-fit py-2">Reset Account</div>
+                  </button>
+                </form>
                 <a
                   key="Activity Log"
                   href="/activity-log"
