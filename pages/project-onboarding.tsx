@@ -20,7 +20,7 @@ interface Props {
   lastSyncedAt?: string;
 }
 
-const sampleDataFileName = "/hcm-sample-data.xlsx";
+const sampleDataFileName = "/hcm-show-project-onboarding-data.xlsx";
 
 const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -37,7 +37,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
 
   useEffect(() => {
     if (router.query.flash === "success") {
-      window.history.replaceState(null, "", "/workbook-upload");
+      window.history.replaceState(null, "", "/project-onboarding");
       toast.success(router.query.message as string, {
         id: router.query.message as string,
         duration: 4000,
@@ -46,7 +46,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
         },
       });
     } else if (router.query.flash === "error") {
-      window.history.replaceState(null, "", "/workbook-upload");
+      window.history.replaceState(null, "", "/project-onboarding");
       toast.error(router.query.message as string, { id: "error" });
     }
   }, []);
@@ -69,7 +69,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
 
   const [steps, setSteps] = useState<Step[]>(initialSteps);
 
-  const storageKey = "workbook-upload-has-downloaded-sample-data";
+  const storageKey = "project-onboarding-has-downloaded-sample-data";
 
   useEffect(() => {
     if (!space && localStorage.getItem(storageKey) === "true") {

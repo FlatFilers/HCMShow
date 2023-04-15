@@ -28,5 +28,5 @@ export default async function handler(
   });
   const flash = success ? "success" : "error";
 
-  res.redirect(`/workbook-upload?flash=${flash}&message=${message}`);
+  res.redirect(`/project-onboarding?flash=${flash}&message=${message}`);
 }

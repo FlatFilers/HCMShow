@@ -191,10 +191,10 @@ const Embedded: NextPageWithLayout<Props> = ({
                     <div className="text-gray-600 mb-1">
                       {showSpace
                         ? "Click below to disconnect the portal."
-                        : "Click below to connect the embedded portal."}
+                        : "Click below to import benefit elections."}
                     </div>
 
-                    <p className="text-xs text-gray-600">
+                    <p className="text-xs text-gray-600 mb-10">
                       Need the sample data?
                       <a
                         className="ml-1 underline"
@@ -224,7 +224,7 @@ const Embedded: NextPageWithLayout<Props> = ({
                           : "bg-primary text-white border-transparent"
                       }`}
                     >
-                      {showSpace ? "Close" : "Open"} Portal
+                      {showSpace ? "Close Portal" : "Import Benefit Elections"}
                       {showSpace ? (
                         <ArrowsPointingInIcon className="w-4 h-4 ml-2" />
                       ) : (

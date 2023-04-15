@@ -25,7 +25,11 @@ const Home: NextPageWithLayout = () => {
       event.currentTarget.elements.namedItem("password") as HTMLInputElement
     ).value;
 
-    signIn("credentials", { email, password, callbackUrl: "/workbook-upload" });
+    signIn("credentials", {
+      email,
+      password,
+      callbackUrl: "/project-onboarding",
+    });
   };
 
   return (
