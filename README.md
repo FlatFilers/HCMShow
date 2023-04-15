@@ -33,7 +33,7 @@ Currently the production app is running configs in one account (john.mosesman+hc
 ```
 ONBOARDING_ENVIRONMENT_ID=us_env_zxH9wUWW
 ONBOARDING_SPACE_CONFIG_ID=us_sc_rac9hkch
-WORKBOOK_UPLOAD_WORKBOOK_NAME="HCM Workbook"
+ONBOARDING_WORKBOOK_NAME="HCM Workbook"
 
 FILEFEED_ENVIRONMENT_ID=us_env_V9OGQOUo
 FILEFEED_SPACE_CONFIG_ID=us_sc_RhaG8IOT

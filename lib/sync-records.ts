@@ -33,14 +33,14 @@ export const syncWorkbookRecords = async ({
   const employeeRecords = await getRecordsByName({
     userId,
     accessToken,
-    workbookName: process.env.WORKBOOK_UPLOAD_WORKBOOK_NAME as string,
+    workbookName: process.env.ONBOARDING_WORKBOOK_NAME as string,
     sheetName: "Employees",
     spaceType,
   });
   const jobRecords = await getRecordsByName({
     userId,
     accessToken,
-    workbookName: process.env.WORKBOOK_UPLOAD_WORKBOOK_NAME as string,
+    workbookName: process.env.ONBOARDING_WORKBOOK_NAME as string,
     sheetName: "Jobs",
     spaceType,
   });
