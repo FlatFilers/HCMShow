@@ -222,6 +222,10 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
                 Once inside the space, upload the sample data you downloaded
                 previously.
               </p>
+              <p className="text-gray-600 mb-2 max-w-lg">
+                <p className="font-semibold">Note:</p> There are multiple tabs
+                in the sample data. Be sure to upload data for each tab.
+              </p>
               <p className="text-gray-600 mb-6 max-w-lg">
                 After uploading, return back here to HCM.show to sync the
                 records into the app.
