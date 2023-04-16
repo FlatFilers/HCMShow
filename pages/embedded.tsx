@@ -1,6 +1,6 @@
 import { NextPageWithLayout } from "./_app";
 import { useState, useCallback, useEffect } from "react";
-import { useSpace, makeTheme } from "@flatfile/react";
+import { useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import {
@@ -16,8 +16,9 @@ import { Action, PrismaClient, Space } from "@prisma/client";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
 import { SpaceType } from "../lib/space";
-import { FlatfileSpaceData } from "../lib/flatfile";
+import { FlatfileSpaceData, SpacePropsObject } from "../lib/flatfile";
 import { useRouter } from "next/router";
+import { theme } from "../lib/theme";
 
 interface Props {
   accessToken: string;
@@ -42,21 +43,17 @@ const Embedded: NextPageWithLayout<Props> = ({
   const flatfleSpace =
     existingSpace?.flatfileData as unknown as FlatfileSpaceData;
   const [showSpace, setShowSpace] = useState(false);
-  const theme = makeTheme({
-    primaryColor: "rgb(8 117 225)",
-    textColor: "white",
-    logo: "https://images.ctfassets.net/hjneo4qi4goj/gL6Blz3kTPdZXWknuIDVx/7bb7c73d93b111ed542d2ed426b42fd5/flatfile.svg",
-  });
   const spaceProps = {
     accessToken: accessToken as string,
     environmentId: environmentToken as string,
     spaceId: flatfleSpace?.id as string,
-    themeConfig: theme,
+    themeConfig: theme("#ffd900"),
+    name: "HCM.show Embedded",
     sidebarConfig: {
       showDataChecklist: false,
       showSidebar: false,
     },
-  };
+  } as SpacePropsObject;
   const { error, data } = useSpace({ ...spaceProps });
 
   useCallback(() => {

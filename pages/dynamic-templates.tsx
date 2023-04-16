@@ -1,6 +1,6 @@
 import { NextPageWithLayout } from "./_app";
 import { useCallback, useState } from "react";
-import { useSpace, makeTheme } from "@flatfile/react";
+import { useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import { SparklesIcon } from "@heroicons/react/24/outline";
@@ -9,10 +9,12 @@ import {
   SpaceConfigWithBlueprints,
   getAccessToken,
   getSpaceConfig,
+  SpacePropsObject,
 } from "../lib/flatfile";
 import { OptionBuilder } from "../components/dynamic-templates/option-builder";
 import { Property, SheetConfig } from "@flatfile/api";
 import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";
+import { theme } from "../lib/theme";
 
 interface Props {
   accessToken: string;
@@ -145,15 +147,12 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     description: "Custom field",
     constraints: [{ type: "required" }],
   };
-  const theme = makeTheme({
-    primaryColor: "rgb(8 117 225)",
-    textColor: "white",
-    logo: "https://images.ctfassets.net/hjneo4qi4goj/gL6Blz3kTPdZXWknuIDVx/7bb7c73d93b111ed542d2ed426b42fd5/flatfile.svg",
-  });
+
   const spaceProps = {
     accessToken,
     environmentId,
-    themeConfig: theme,
+    themeConfig: theme("#42ff00"),
+    name: "HCM.show Dynamic Templates",
     spaceConfig: filterConfig({
       baseConfig,
       workbookName,
@@ -164,7 +163,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
       showDataChecklist: false,
       showSidebar: false,
     },
-  };
+  } as SpacePropsObject;
 
   // console.log("spaceProps", spaceProps);
   const { error, data } = useSpace({ ...spaceProps });
