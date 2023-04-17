@@ -151,7 +151,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   const spaceProps = {
     accessToken,
     environmentId,
-    themeConfig: theme("#42ff00"),
+    themeConfig: theme("rgb(251 207 232)"),
     name: "HCM.show Dynamic Templates",
     spaceConfig: filterConfig({
       baseConfig,

@@ -133,6 +133,37 @@ const SidebarLayout = ({ children }: Props) => {
   const homeItem = homeNavItem(router);
   const workflowsNavigation = workflowItems(router);
 
+  function pageColors(currentPath: string, href: string) {
+    switch (href) {
+      case `/project-onboarding`:
+        if (currentPath === href) {
+          return `border-2 border-yellow-300 bg-yellow-100`;
+        } else {
+          return `border border-yellow-300`;
+        }
+      case `/file-feed`:
+        if (currentPath === href) {
+          return `border-2 border-purple-300 bg-purple-100`;
+        } else {
+          return `border border-purple-300`;
+        }
+      case `/embedded`:
+        if (currentPath === href) {
+          return `border-2 border-emerald-300 bg-emerald-100`;
+        } else {
+          return `border border-emerald-300`;
+        }
+      case `/dynamic-templates`:
+        if (currentPath === href) {
+          return `border-2 border-pink-300 bg-pink-200`;
+        } else {
+          return `border border-pink-300`;
+        }
+      default:
+        return `border border-gray-300`;
+    }
+  }
+
   return (
     <div className="h-screen w-screen bg-white">
       <Toaster />
@@ -188,7 +219,7 @@ const SidebarLayout = ({ children }: Props) => {
                 </a>
 
                 <div className="mb-6">
-                  <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2">
+                  <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2 mt-6">
                     Workflows
                   </p>
 
