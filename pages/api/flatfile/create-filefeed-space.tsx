@@ -52,6 +52,7 @@ export default async function handler(
     accessToken,
     spaceConfigId: process.env.FILEFEED_SPACE_CONFIG_ID as string,
     environmentId,
+    userId: user.id,
   });
 
   const addGuestToSpaceResponse = await addGuestToSpace(
