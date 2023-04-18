@@ -25,40 +25,22 @@ interface Props {
 const ActivityLog: NextPage<Props> = ({ actions }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>("Reset Account");
-  const [showConfirm, setShowConfirm] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-  const confirmRef = useRef<HTMLDivElement>(null);
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      confirmRef.current &&
-      !confirmRef.current.contains(event.target as Node)
-    ) {
-      setShowConfirm(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside, true);
-    return () => {
-      document.removeEventListener("click", handleClickOutside, true);
-    };
-  }, []);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setShowConfirm(true);
-  };
-
-  const handleConfirm = () => {
-    setIsSubmitting(true);
-    setButtonText("Resetting Account...");
-    toast.loading("Resetting Account...");
-    localStorage.clear();
-    if (formRef.current) {
-      formRef.current.submit();
+    if (confirm("Are you sure you want to reset your account?")) {
+      setIsSubmitting(true);
+      setButtonText("Resetting Account...");
+      toast.loading("Resetting Account...");
+      localStorage.clear();
+      if (formRef.current) {
+        formRef.current.submit();
+      }
     }
   };
+
+  const handleConfirm = () => {};
 
   const router = useRouter();
   useEffect(() => {
@@ -184,35 +166,6 @@ const ActivityLog: NextPage<Props> = ({ actions }) => {
           </div>
         </div>
       </div>
-      {showConfirm && (
-        <div
-          ref={confirmRef}
-          className="absolute left-0 right-0 top-0 bottom-0 m-auto h-fit w-fit bg-white shadow-sm shadow-stone-400 rounded-xl"
-        >
-          <div className="w-full py-4 text-white bg-red-700 bg-gradient-to-r text-center text-xl rounded-t-xl font-semibold">
-            Confirm
-          </div>
-          <div className="px-6 py-4 bg-white mx-10 mt-6 shadow-stone-500 shadow-sm rounded text-gray-600">
-            Are you sure you want to reset the account?
-          </div>
-          <div className=" px-16 py-12">
-            <div
-              className="flex flex-row justify-around"
-              onClick={() => setShowConfirm(false)}
-            >
-              <button
-                className="px-4 py-2 rounded-lg border hover:text-white hover:bg-red-700 text-red-700 border-red-700"
-                onClick={handleConfirm}
-              >
-                Reset
-              </button>
-              <button className="border border-gray-400 px-4 py-2 rounded-lg hover:border-gray-600 hover:text-gray-800 text-gray-600">
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
