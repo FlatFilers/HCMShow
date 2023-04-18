@@ -7,6 +7,34 @@ export enum SpaceType {
   Embed = "embed",
 }
 
+export const findSpace = async ({
+  userId,
+  flatfileSpaceId,
+}: {
+  userId: string;
+  flatfileSpaceId: string;
+}) => {
+  const spaces = await prismaClient.space.findMany({
+    where: {
+      userId,
+      flatfileData: {
+        path: ["id"],
+        equals: flatfileSpaceId,
+      },
+    },
+  });
+
+  if (spaces.length > 1) {
+    throw new Error(
+      `More than one space found for flatfileSpaceId ${flatfileSpaceId}}`
+    );
+  } else if (spaces.length === 0) {
+    throw new Error(`No space found for flatfileSpaceId ${flatfileSpaceId}`);
+  }
+
+  return spaces[0];
+};
+
 export const getSpaceForFlatfileSpaceId = async (
   flatfileSpaceId: string
 ): Promise<Space> => {
