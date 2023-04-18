@@ -213,10 +213,12 @@ export const createSpace = async ({
   accessToken,
   spaceConfigId,
   environmentId,
+  userId,
 }: {
   accessToken: string;
   spaceConfigId: string;
   environmentId?: string;
+  userId: string;
 }) => {
   if (!spaceConfigId) {
     throw "No spaceConfigID found. Possible missing ENV var.";
@@ -226,7 +228,9 @@ export const createSpace = async ({
     spaceConfigId,
     environmentId,
     name: "HCM.show",
-    metadata: {},
+    metadata: {
+      userId,
+    },
     actions: [],
   };
 

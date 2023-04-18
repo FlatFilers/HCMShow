@@ -48,6 +48,7 @@ export default async function handler(
     accessToken,
     spaceConfigId: process.env.ONBOARDING_SPACE_CONFIG_ID as string,
     environmentId: process.env.ONBOARDING_ENVIRONMENT_ID as string,
+    userId: user.id,
   });
   const spaceId = flatfileSpaceData.id;
 

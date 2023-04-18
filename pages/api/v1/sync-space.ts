@@ -4,7 +4,7 @@ import {
   syncBenefitPlanRecords,
   syncWorkbookRecords,
 } from "../../../lib/sync-records";
-import { SpaceType, getSpaceForFlatfileSpaceId } from "../../../lib/space";
+import { SpaceType, findSpace } from "../../../lib/space";
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,20 +12,20 @@ export default async function handler(
 ) {
   console.log("/sync-space", req.body);
 
-  const { spaceId } = req.body;
-
-  // TODO: This and the sync code does redunandant user/space look up work
-  const space = await getSpaceForFlatfileSpaceId(spaceId);
+  const { userId, spaceId } = req.body;
 
   const user = await prismaClient.user.findUnique({
     where: {
-      id: space.userId,
+      id: userId,
     },
   });
 
   if (!user) {
-    throw new Error("No user found for space", spaceId);
+    throw new Error("No user found for userId", userId);
   }
+
+  // TODO: This and the sync code does redunandant user/space look up work
+  const space = await findSpace({ userId, flatfileSpaceId: spaceId });
 
   // Not awaiting for early response back to Flatfile server
   if (space.type === SpaceType.WorkbookUpload) {
@@ -47,5 +47,5 @@ export default async function handler(
   // else if (space.type === SpaceType.WorkbookUpload) {
   // }
 
-  res.status(200).json({ name: "John Doe" });
+  res.status(200).json({ success: true });
 }

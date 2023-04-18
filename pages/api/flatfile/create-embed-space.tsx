@@ -28,15 +28,8 @@ export default async function handler(
   }
 
   const prisma = new PrismaClient();
-  const user = await prisma.user.findUnique({
-    where: {
-      id: token.sub,
-    },
-  });
 
-  if (!user) {
-    throw new Error("No user found");
-  }
+  const userId = token.sub;
 
   const accessToken = await getAccessToken({
     clientId: process.env.EMBEDDED_CLIENT_ID as string,
@@ -47,6 +40,7 @@ export default async function handler(
     accessToken,
     spaceConfigId: process.env.EMBEDDED_SPACE_CONFIG_ID as string,
     environmentId: process.env.EMBEDDED_ENVIRONMENT_ID as string,
+    userId,
   });
 
   console.log("flatfileSpaceData", flatfileSpaceData);
@@ -58,7 +52,7 @@ export default async function handler(
 
   const space: Space = await prisma.space.create({
     data: {
-      userId: user.id,
+      userId,
       flatfileData:
         flatfileSpaceDataRefetch as unknown as Prisma.InputJsonValue,
       type: SpaceType.Embed,

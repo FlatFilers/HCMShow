@@ -30,6 +30,8 @@ export default async function handler(
   console.log("spaceId", spaceId);
   console.log("topic", topic);
 
+  // TODO: Once we get lookup userId in listener config and pass it here,
+  // this should use `findSpace` like in /sync-space
   const space = await getSpaceForFlatfileSpaceId(spaceId);
 
   const user = await prismaClient.user.findUnique({
