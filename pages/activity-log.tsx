@@ -24,13 +24,13 @@ interface Props {
 const ActivityLog: NextPage<Props> = ({ actions }) => {
   useEffect(() => {
     if (router.query.flash === "success") {
-      window.history.replaceState(null, "", "/embedded");
+      window.history.replaceState(null, "", "/activity-log");
       toast.success(router.query.message as string, {
         id: router.query.message as string,
         duration: 4000,
       });
     } else if (router.query.flash === "error") {
-      window.history.replaceState(null, "", "/embedded");
+      window.history.replaceState(null, "", "/activity-log");
       toast.error(router.query.message as string, { id: "error" });
     }
   }, []);

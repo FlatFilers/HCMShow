@@ -66,11 +66,8 @@ export default async function handler(
     },
   });
 
-  const runResetSeedFile = async () => {
-    await main();
-  };
-
-  runResetSeedFile();
+  // Reseed the database
+  await main();
 
   const pauseApp = (ms: number) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
