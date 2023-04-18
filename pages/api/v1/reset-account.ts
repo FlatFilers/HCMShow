@@ -69,12 +69,5 @@ export default async function handler(
   // Reseed the database
   await main();
 
-  const pauseApp = (ms: number) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  };
-
-  // Need to wait for the seed file to run and complete
-  await pauseApp(3000);
-
   res.redirect(`/activity-log?flash=success&message=Account Reset`);
 }
