@@ -48,6 +48,8 @@ const Embedded: NextPageWithLayout<Props> = ({
     accessToken: accessToken as string,
     environmentId: environmentToken as string,
     spaceId: flatfleSpace?.id as string,
+    // TODO: This may change in the future as the SDK evolves.
+    // These metadata properties are setup in an odd way.
     spaceInfo: {
       userId,
     },
