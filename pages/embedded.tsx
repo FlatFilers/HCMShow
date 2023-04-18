@@ -24,6 +24,7 @@ interface Props {
   environmentToken: string;
   lastSyncedAt?: string;
   existingSpace: Space;
+  userId: string;
 }
 
 const Embedded: NextPageWithLayout<Props> = ({
@@ -31,6 +32,7 @@ const Embedded: NextPageWithLayout<Props> = ({
   environmentToken,
   lastSyncedAt,
   existingSpace,
+  userId,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>("Sync Records");
@@ -46,6 +48,11 @@ const Embedded: NextPageWithLayout<Props> = ({
     accessToken: accessToken as string,
     environmentId: environmentToken as string,
     spaceId: flatfleSpace?.id as string,
+    // TODO: This may change in the future as the SDK evolves.
+    // These metadata properties are setup in an odd way.
+    spaceInfo: {
+      userId,
+    },
     sidebarConfig: {
       showDataChecklist: false,
       showSidebar: false,
@@ -311,6 +318,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           )
         : "",
       existingSpace,
+      userId: user.id,
     },
   };
 };
