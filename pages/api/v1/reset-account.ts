@@ -67,7 +67,7 @@ export default async function handler(
   });
 
   // Reseed the database
-  await main();
+  await main(token.organizationId);
 
   res.redirect(`/activity-log?flash=success&message=Account Reset`);
 }

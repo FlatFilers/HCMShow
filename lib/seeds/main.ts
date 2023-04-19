@@ -24,7 +24,7 @@ import crypto, { randomUUID } from "crypto";
 import { upsertEmployee } from "../employee";
 import { faker } from "@faker-js/faker";
 
-export const main = async () => {
+export const main = async (organizationId: string | null) => {
   console.log("Seeding...");
 
   // await upsertCountries();
@@ -45,6 +45,10 @@ export const main = async () => {
   await upsertBenefitPlans(user.organizationId);
 
   await seedNewAccount(user);
+
+  if (organizationId) {
+    await upsertEmployees(organizationId);
+  }
 };
 
 const upsertAddresses = async () => {
