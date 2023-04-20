@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
+import { prismaClient } from "../../../lib/prisma-client";
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,7 +19,7 @@ export default async function handler(
     };
   }
 
-  const prisma = new PrismaClient();
+  const prisma = prismaClient;
 
   // find and update action from the req body
   const customField = await prisma.customField.create({

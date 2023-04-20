@@ -3,7 +3,11 @@ import { FormEvent, useCallback, useState, useEffect } from "react";
 import { useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
-import { FolderPlusIcon, SparklesIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowsPointingInIcon,
+  FolderPlusIcon,
+  SparklesIcon,
+} from "@heroicons/react/24/outline";
 import {
   BlueprintWithId,
   SpaceConfigWithBlueprints,
@@ -14,12 +18,15 @@ import { OptionBuilder } from "../components/dynamic-templates/option-builder";
 import { Property, SheetConfig } from "@flatfile/api";
 import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";
 import toast from "react-hot-toast";
+import { prismaClient } from "../lib/prisma-client";
 
 interface Props {
   accessToken: string;
   environmentId: string;
   workbookName: string;
   baseConfig: SpaceConfigWithBlueprints;
+  dbCustomField: CustomField;
+  dbCustomOptions: Option[];
 }
 
 export interface CustomField {
@@ -145,22 +152,36 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   environmentId,
   workbookName,
   baseConfig,
+  dbCustomField,
+  dbCustomOptions,
 }) => {
-  const [options, setOptions] = useState(initialOptions);
+  const [options, setOptions] = useState(
+    dbCustomOptions ? dbCustomOptions : initialOptions
+  );
   const [showSpace, setShowSpace] = useState(false);
-  const [customFieldStatus, setCustomFieldStatus] = useState<string>("None");
-  const [optionsStatus, setOptionsStatus] = useState<string>("Default");
-  const [customField, setCustomField] = useState<CustomField>({
-    name: "Employee Birthdate",
-    type: "date",
-    required: true,
-    dateFormat: "yyyy-mm-dd",
-    decimals: 2,
-    enumOptions: initialOptions,
-  } as CustomField);
+  const [customFieldStatus, setCustomFieldStatus] = useState<string>(
+    dbCustomField ? "Saved" : "None"
+  );
+  const [optionsStatus, setOptionsStatus] = useState<string>(
+    dbCustomOptions ? "Saved" : "Default"
+  );
+  const [customField, setCustomField] = useState<CustomField>(
+    dbCustomField
+      ? dbCustomField
+      : ({
+          name: "Employee Birthdate",
+          type: "date",
+          required: true,
+          dateFormat: "yyyy-mm-dd",
+          decimals: 2,
+          enumOptions: initialOptions,
+        } as CustomField)
+  );
   const [forEmbedCustomField, setForEmbedCustomField] =
-    useState<CustomField | null>(null);
-  const [forEmbedOptions, setForEmbedOptions] = useState(initialOptions);
+    useState<CustomField | null>(dbCustomField ? dbCustomField : null);
+  const [forEmbedOptions, setForEmbedOptions] = useState(
+    dbCustomOptions ? dbCustomOptions : initialOptions
+  );
   const customFieldConfig = {
     key: customField.name?.replace(/\s/, ""),
     type: customField.type,
@@ -309,7 +330,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
               Click below to generate your workspace, then scroll down to add
               your data.
             </p>
-            <div className=" max-w-[50%]">
+            <div className="max-w-[50%]">
               <div className="font-semibold mb-6">Workspace Save Status:</div>
               <div className="mb-2 flex flex-row justify-between">
                 <div className="mr-2">Custom Field:</div>
@@ -337,13 +358,21 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
               </div>
             </div>
           </div>
-          <div className="w-fit h-[30%] mx-auto">
+          <div className="w-fit h-[33%] mx-auto">
             <button
-              onClick={() => setShowSpace(true)}
-              className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto bg-primary text-white border-transparent"
+              onClick={() => setShowSpace(!showSpace)}
+              className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mt-4 ${
+                showSpace
+                  ? "bg-white text-primary border-2 border-primary"
+                  : "bg-primary text-white border-transparent"
+              }`}
             >
-              Generate Space
-              <SparklesIcon className="w-4 h-4 ml-2" />
+              {showSpace ? "Close Portal" : "Generate New Space"}
+              {showSpace ? (
+                <ArrowsPointingInIcon className="w-4 h-4 ml-2" />
+              ) : (
+                <SparklesIcon className="w-4 h-4 ml-2" />
+              )}
             </button>
           </div>
         </div>
@@ -378,12 +407,36 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
   const baseConfig = await getSpaceConfig(accessToken);
 
+  const prisma = prismaClient;
+
+  const dbCustomField = await prisma.customField.findFirst({
+    where: {
+      userId: token.sub,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  const dbCustomOptionsRecord = await prisma.options.findFirst({
+    where: {
+      userId: token.sub,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  const dbCustomOptions = dbCustomOptionsRecord?.options;
+
   return {
     props: {
       accessToken,
       environmentId: process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID,
       workbookName: process.env.DYNAMIC_TEMPLATES_WORKBOOK_NAME,
       baseConfig,
+      dbCustomField,
+      dbCustomOptions,
     },
   };
 };
