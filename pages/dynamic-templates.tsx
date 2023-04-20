@@ -155,32 +155,29 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   dbCustomField,
   dbCustomOptions,
 }) => {
-  const [options, setOptions] = useState(
-    dbCustomOptions ? dbCustomOptions : initialOptions
-  );
   const [showSpace, setShowSpace] = useState(false);
+  const [options, setOptions] = useState(dbCustomOptions ?? initialOptions);
+  const [customField, setCustomField] = useState<CustomField>(
+    dbCustomField ??
+      ({
+        name: "Employee Birthdate",
+        type: "date",
+        required: true,
+        dateFormat: "yyyy-mm-dd",
+        decimals: 2,
+        enumOptions: initialOptions,
+      } as CustomField)
+  );
   const [customFieldStatus, setCustomFieldStatus] = useState<string>(
     dbCustomField ? "Saved" : "None"
   );
   const [optionsStatus, setOptionsStatus] = useState<string>(
     dbCustomOptions ? "Saved" : "Default"
   );
-  const [customField, setCustomField] = useState<CustomField>(
-    dbCustomField
-      ? dbCustomField
-      : ({
-          name: "Employee Birthdate",
-          type: "date",
-          required: true,
-          dateFormat: "yyyy-mm-dd",
-          decimals: 2,
-          enumOptions: initialOptions,
-        } as CustomField)
-  );
   const [forEmbedCustomField, setForEmbedCustomField] =
-    useState<CustomField | null>(dbCustomField ? dbCustomField : null);
-  const [forEmbedOptions, setForEmbedOptions] = useState(
-    dbCustomOptions ? dbCustomOptions : initialOptions
+    useState<CustomField | null>(dbCustomField ?? null);
+  const [forEmbedOptions, setForEmbedOptions] = useState<Option[]>(
+    dbCustomOptions ?? initialOptions
   );
   const customFieldConfig = {
     key: customField.name?.replace(/\s/, ""),
