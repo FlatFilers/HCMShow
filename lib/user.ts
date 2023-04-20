@@ -71,7 +71,7 @@ export const setupNewAccount = async (
 ) => {
   const user = await createUser(credentials);
 
-  await upsertEmployees(user.organizationId);
+  await upsertEmployees(user.organizationId, "new");
 
   return user;
 };

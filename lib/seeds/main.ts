@@ -44,10 +44,10 @@ export const main = async (organizationId: string | null) => {
   await upsertJobs(user.organizationId);
   await upsertBenefitPlans(user.organizationId);
 
-  await seedNewAccount(user);
+  await seedNewAccount(user, "seed");
 
   if (organizationId) {
-    await upsertEmployees(organizationId);
+    await upsertEmployees(organizationId, "new");
   }
 };
 
@@ -76,7 +76,7 @@ const upsertAddresses = async () => {
   );
 };
 
-export const seedNewAccount = async (user: User) => {
+export const seedNewAccount = async (user: User, seed: string) => {
   const existingEmployees = await prismaClient.employee.findMany({
     where: {
       organizationId: user.organizationId,
@@ -86,7 +86,7 @@ export const seedNewAccount = async (user: User) => {
   if (existingEmployees.length === 0) {
     // TODO: Eventually as we migrate the models we'll need to tie more
     // into the specific organization
-    await upsertEmployees(user.organizationId);
+    await upsertEmployees(user.organizationId, seed);
   }
 };
 
@@ -749,7 +749,7 @@ const createOtherData = async () => {
     });
 };
 
-export const upsertEmployees = async (organizationId: string) => {
+export const upsertEmployees = async (organizationId: string, type: string) => {
   const employeeTypeId = (
     (await prismaClient.employeeType.findFirst()) as EmployeeType
   ).id;
@@ -758,7 +758,16 @@ export const upsertEmployees = async (organizationId: string) => {
   const positionTitle = "Sales Rep";
   const defaultWeeklyHours = 40;
   const scheduledWeeklyHours = 40;
-  const jobId = (await prismaClient.job.findFirst())!.id;
+  let jobId;
+  if (type === "seed") {
+    jobId = (await prismaClient.job.findFirst())!.id;
+  } else {
+    jobId = (await prismaClient.job.findFirst({
+      where: {
+        organizationId,
+      },
+    }))!.id;
+  }
 
   const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,
