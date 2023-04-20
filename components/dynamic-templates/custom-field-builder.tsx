@@ -12,12 +12,14 @@ type Props = {
   customField: CustomField;
   setCustomField: (customField: CustomField) => void;
   setForEmbedCustomField: any;
+  setCustomFieldStatus: any;
 };
 
 export const CustomFieldBuilder = ({
   customField,
   setCustomField,
   setForEmbedCustomField,
+  setCustomFieldStatus,
 }: Props) => {
   const options = customField.enumOptions;
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -239,7 +241,10 @@ export const CustomFieldBuilder = ({
           value={JSON.stringify(customField)}
         />
         <button
-          onClick={() => toast.success("Saved Custom Field")}
+          onClick={() => {
+            toast.success("Saved Custom Field");
+            setCustomFieldStatus("Saved");
+          }}
           className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto bg-emerald-500 text-white border-transparent"
         >
           Save Custom Field

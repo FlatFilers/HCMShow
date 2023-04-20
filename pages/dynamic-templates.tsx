@@ -146,6 +146,9 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 }) => {
   const [options, setOptions] = useState(initialOptions);
   const [showSpace, setShowSpace] = useState(false);
+  const [customFieldStatus, setCustomFieldStatus] =
+    useState<string>("Not saved");
+  const [optionsStatus, setOptionsStatus] = useState<string>("Not saved");
   const [customField, setCustomField] = useState<CustomField>({
     name: "Employee Birthdate",
     type: "date",
@@ -230,6 +233,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
           customField={customField}
           setCustomField={setCustomField}
           setForEmbedCustomField={setForEmbedCustomField}
+          setCustomFieldStatus={setCustomFieldStatus}
         />
 
         <div className="border-r border-gray-300 mx-12"></div>
@@ -281,7 +285,10 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
               value={JSON.stringify(options)}
             />
             <button
-              onClick={() => toast.success("Saved Options")}
+              onClick={() => {
+                toast.success("Saved Options");
+                setOptionsStatus("Saved");
+              }}
               className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto bg-emerald-500 text-white border-transparent"
             >
               Save Options
@@ -301,14 +308,32 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
               Click below to generate your workspace, then scroll down to add
               your data.
             </p>
-            <div className="font-semibold mb-6">Workspace Save Status:</div>
-            <div className="mb-2 flex flex-row">
-              <div className="mr-2">Custom Field:</div>
-              <div className="mb-2">No Custom Field saved</div>
-            </div>
-            <div className="mb-2 flex flex-row">
-              <div className="mr-2">Options:</div>
-              <div className="mb-2">No Options saved</div>
+            <div className=" max-w-[50%]">
+              <div className="font-semibold mb-6">Workspace Save Status:</div>
+              <div className="mb-2 flex flex-row justify-between">
+                <div className="mr-2">Custom Field:</div>
+                <div
+                  className={`text-right ${
+                    customFieldStatus === "Not saved"
+                      ? "text-red-500"
+                      : "text-green-500"
+                  }`}
+                >
+                  {customFieldStatus}
+                </div>
+              </div>
+              <div className="mb-2 flex flex-row justify-between">
+                <div className="mr-2">Options:</div>
+                <div
+                  className={`text-right ${
+                    optionsStatus === "Not saved"
+                      ? "text-red-500"
+                      : "text-green-500"
+                  }`}
+                >
+                  {optionsStatus}
+                </div>
+              </div>
             </div>
           </div>
           <div className="w-fit h-[30%] mx-auto">
