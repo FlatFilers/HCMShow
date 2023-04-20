@@ -86,8 +86,6 @@ const filterConfig = ({
     return f.key !== "employeeType";
   }) as Property[];
 
-  console.log("forEmbedOptions", forEmbedOptions);
-
   const mappedOptions = forEmbedOptions.map((option) => {
     return { value: option.input, label: option.output };
   });
@@ -133,7 +131,11 @@ const filterConfig = ({
   // console.log("field", field);
   // console.log("otherFields", otherFields);
   // console.log("mappedOptions", mappedOptions);
-  // console.log("sheets", filteredConfig.blueprints[0].sheets[1].fields[14]);
+  // console.log("sheets", filteredConfig.blueprints[0].sheets[1]);
+  // console.log(
+  //   "single field",
+  //   filteredConfig.blueprints[0].sheets[1].fields[13]
+  // );
 
   return filteredConfig;
 };
