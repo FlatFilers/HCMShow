@@ -148,9 +148,8 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 }) => {
   const [options, setOptions] = useState(initialOptions);
   const [showSpace, setShowSpace] = useState(false);
-  const [customFieldStatus, setCustomFieldStatus] =
-    useState<string>("Not saved");
-  const [optionsStatus, setOptionsStatus] = useState<string>("Not saved");
+  const [customFieldStatus, setCustomFieldStatus] = useState<string>("None");
+  const [optionsStatus, setOptionsStatus] = useState<string>("Default");
   const [customField, setCustomField] = useState<CustomField>({
     name: "Employee Birthdate",
     type: "date",
@@ -316,7 +315,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
                 <div className="mr-2">Custom Field:</div>
                 <div
                   className={`text-right ${
-                    customFieldStatus === "Not saved"
+                    customFieldStatus === "None"
                       ? "text-red-500"
                       : "text-green-500"
                   }`}
@@ -328,7 +327,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
                 <div className="mr-2">Options:</div>
                 <div
                   className={`text-right ${
-                    optionsStatus === "Not saved"
+                    optionsStatus === "Default"
                       ? "text-red-500"
                       : "text-green-500"
                   }`}

@@ -26,12 +26,9 @@ export const CustomFieldBuilder = ({
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
-    const customField = JSON.parse(formData.get("customField") as string);
-    const name = customField.name;
-    const type = customField.type;
-    const required = customField.required;
-    const dateFormat = customField.dateFormat;
-    const decimals = customField.decimals;
+    const { name, type, required, dateFormat, decimals } = JSON.parse(
+      formData.get("customField") as string
+    );
 
     try {
       const response = await fetch("/api/flatfile/save-custom-field", {
@@ -49,6 +46,8 @@ export const CustomFieldBuilder = ({
       });
 
       const data = await response.json();
+      // console.log("data", data);
+
       const customField = {
         name: data.name,
         type: data.type,
