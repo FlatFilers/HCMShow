@@ -40,13 +40,13 @@ export default async function handler(
       },
     });
 
-  const deleteJobs = await prismaClient.job.deleteMany({
+  const deleteEmployees = await prismaClient.employee.deleteMany({
     where: {
       organizationId,
     },
   });
 
-  const deleteEmployees = await prismaClient.employee.deleteMany({
+  const deleteJobs = await prismaClient.job.deleteMany({
     where: {
       organizationId,
     },
