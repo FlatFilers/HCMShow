@@ -1,7 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prismaClient } from "../../../lib/prisma-client";
 import { getToken } from "next-auth/jwt";
-import { main } from "../../../lib/seeds/main";
+import {
+  upsertBenefitPlans,
+  upsertEmployees,
+  upsertJobs,
+} from "../../../lib/seeds/main";
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,18 +21,6 @@ export default async function handler(
   if (!token?.sub) {
     throw new Error("No session");
   }
-
-  const deleteSpaces = await prismaClient.space.deleteMany({
-    where: {
-      userId: token.sub,
-    },
-  });
-
-  const deleteActions = await prismaClient.action.deleteMany({
-    where: {
-      userId: token.sub,
-    },
-  });
 
   const user = await prismaClient.user.findUnique({
     where: { id: token.sub },
@@ -48,13 +40,13 @@ export default async function handler(
       },
     });
 
-  const deleteEmployees = await prismaClient.employee.deleteMany({
+  const deleteJobs = await prismaClient.job.deleteMany({
     where: {
       organizationId,
     },
   });
 
-  const deleteJobs = await prismaClient.job.deleteMany({
+  const deleteEmployees = await prismaClient.employee.deleteMany({
     where: {
       organizationId,
     },
@@ -66,8 +58,21 @@ export default async function handler(
     },
   });
 
-  // Reseed the database
-  await main(token.organizationId);
+  const deleteSpaces = await prismaClient.space.deleteMany({
+    where: {
+      userId: token.sub,
+    },
+  });
+
+  const deleteActions = await prismaClient.action.deleteMany({
+    where: {
+      userId: token.sub,
+    },
+  });
+
+  await upsertJobs(organizationId as string);
+  await upsertBenefitPlans(organizationId as string);
+  await upsertEmployees(organizationId as string);
 
   res.redirect(`/activity-log?flash=success&message=Account Reset`);
 }

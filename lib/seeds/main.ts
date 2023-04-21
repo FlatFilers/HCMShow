@@ -24,7 +24,7 @@ import crypto, { randomUUID } from "crypto";
 import { upsertEmployee } from "../employee";
 import { faker } from "@faker-js/faker";
 
-export const main = async (organizationId: string | null) => {
+export const main = async () => {
   console.log("Seeding...");
 
   // await upsertCountries();
@@ -44,11 +44,7 @@ export const main = async (organizationId: string | null) => {
   await upsertJobs(user.organizationId);
   await upsertBenefitPlans(user.organizationId);
 
-  await seedNewAccount(user, "seed");
-
-  if (organizationId) {
-    await upsertEmployees(organizationId, "new");
-  }
+  await seedNewAccount(user);
 };
 
 const upsertAddresses = async () => {
@@ -76,7 +72,7 @@ const upsertAddresses = async () => {
   );
 };
 
-export const seedNewAccount = async (user: User, seed: string) => {
+export const seedNewAccount = async (user: User) => {
   const existingEmployees = await prismaClient.employee.findMany({
     where: {
       organizationId: user.organizationId,
@@ -86,11 +82,11 @@ export const seedNewAccount = async (user: User, seed: string) => {
   if (existingEmployees.length === 0) {
     // TODO: Eventually as we migrate the models we'll need to tie more
     // into the specific organization
-    await upsertEmployees(user.organizationId, seed);
+    await upsertEmployees(user.organizationId);
   }
 };
 
-const upsertJobFamilies = async () => {
+export const upsertJobFamilies = async () => {
   // [ 'ID', 'Effective Date', 'Name', 'Summary', 'Inactive', '', '' ]
   const parseCsv: Promise<Omit<JobFamily, "id" | "createdAt" | "updatedAt">[]> =
     new Promise((resolve, reject) => {
@@ -128,7 +124,7 @@ const upsertJobFamilies = async () => {
   await Promise.all(promises);
 };
 
-const upsertJobs = async (organizationId: string) => {
+export const upsertJobs = async (organizationId: string) => {
   type CsvJobType = Omit<
     Job,
     "id" | "createdAt" | "updatedAt" | "organizationId"
@@ -211,7 +207,7 @@ const upsertJobs = async (organizationId: string) => {
   );
 };
 
-const upsertBenefitPlans = async (organizationId: string) => {
+export const upsertBenefitPlans = async (organizationId: string) => {
   type CsvBenefitPlanType = Omit<
     BenefitPlan,
     "id" | "createdAt" | "updatedAt" | "organizationId"
@@ -749,7 +745,7 @@ const createOtherData = async () => {
     });
 };
 
-export const upsertEmployees = async (organizationId: string, type: string) => {
+export const upsertEmployees = async (organizationId: string) => {
   const employeeTypeId = (
     (await prismaClient.employeeType.findFirst()) as EmployeeType
   ).id;
@@ -758,16 +754,7 @@ export const upsertEmployees = async (organizationId: string, type: string) => {
   const positionTitle = "Sales Rep";
   const defaultWeeklyHours = 40;
   const scheduledWeeklyHours = 40;
-  let jobId;
-  if (type === "seed") {
-    jobId = (await prismaClient.job.findFirst())!.id;
-  } else {
-    jobId = (await prismaClient.job.findFirst({
-      where: {
-        organizationId,
-      },
-    }))!.id;
-  }
+  const jobId = (await prismaClient.job.findFirst())!.id;
 
   const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,

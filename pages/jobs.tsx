@@ -104,7 +104,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const prisma = new PrismaClient();
 
-  const jobs: Job[] = await prisma.job.findMany();
+  const jobs: Job[] = await prisma.job.findMany({
+    where: {
+      organizationId: token.organizationId,
+    },
+  });
 
   return {
     props: {
