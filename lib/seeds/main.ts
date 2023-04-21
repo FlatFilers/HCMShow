@@ -86,7 +86,7 @@ export const seedNewAccount = async (user: User) => {
   }
 };
 
-const upsertJobFamilies = async () => {
+export const upsertJobFamilies = async () => {
   // [ 'ID', 'Effective Date', 'Name', 'Summary', 'Inactive', '', '' ]
   const parseCsv: Promise<Omit<JobFamily, "id" | "createdAt" | "updatedAt">[]> =
     new Promise((resolve, reject) => {
@@ -124,7 +124,7 @@ const upsertJobFamilies = async () => {
   await Promise.all(promises);
 };
 
-const upsertJobs = async (organizationId: string) => {
+export const upsertJobs = async (organizationId: string) => {
   type CsvJobType = Omit<
     Job,
     "id" | "createdAt" | "updatedAt" | "organizationId"
@@ -207,7 +207,7 @@ const upsertJobs = async (organizationId: string) => {
   );
 };
 
-const upsertBenefitPlans = async (organizationId: string) => {
+export const upsertBenefitPlans = async (organizationId: string) => {
   type CsvBenefitPlanType = Omit<
     BenefitPlan,
     "id" | "createdAt" | "updatedAt" | "organizationId"
@@ -754,7 +754,11 @@ export const upsertEmployees = async (organizationId: string) => {
   const positionTitle = "Sales Rep";
   const defaultWeeklyHours = 40;
   const scheduledWeeklyHours = 40;
-  const jobId = (await prismaClient.job.findFirst())!.id;
+  const jobId = (await prismaClient.job.findFirst({
+    where: {
+      organizationId,
+    },
+  }))!.id;
 
   const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,

@@ -1,9 +1,12 @@
 import { GetServerSideProps, NextPage } from "next";
-import React from "react";
+import React, { FormEvent, useEffect, useState, useRef } from "react";
 import { getToken } from "next-auth/jwt";
 import { ActionType, getActions } from "../lib/action";
 import { Action, User } from "@prisma/client";
 import { DateTime } from "luxon";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
+import { ArrowPathRoundedSquareIcon } from "@heroicons/react/24/outline";
 
 const mapActionTypeToLabel = (type: string) => {
   const mappings = {
@@ -20,10 +23,40 @@ interface Props {
 }
 
 const ActivityLog: NextPage<Props> = ({ actions }) => {
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [buttonText, setButtonText] = useState<string>("Reset Account");
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (confirm("Are you sure you want to reset your account?")) {
+      setIsSubmitting(true);
+      setButtonText("Resetting Account...");
+      toast.loading("Resetting Account...");
+      localStorage.clear();
+      if (formRef.current) {
+        formRef.current.submit();
+      }
+    }
+  };
+
+  const router = useRouter();
+  useEffect(() => {
+    if (router.query.flash === "success") {
+      window.history.replaceState(null, "", "/activity-log");
+      toast.success(router.query.message as string, {
+        id: router.query.message as string,
+        duration: 4000,
+      });
+    } else if (router.query.flash === "error") {
+      window.history.replaceState(null, "", "/activity-log");
+      toast.error(router.query.message as string, { id: "error" });
+    }
+  }, []);
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
-        <div className="w-full flex flex-row justify-between items-center mb-8">
+        <div className="w-full flex flex-row justify-between mb-8">
           <div className="sm:flex-auto">
             <h1 className="text-xl font-semibold text-gray-900">
               Activity Log
@@ -32,6 +65,25 @@ const ActivityLog: NextPage<Props> = ({ actions }) => {
               Your activity history from Flatfile will show here.
             </p>
           </div>
+          <form
+            ref={formRef}
+            action="/api/v1/reset-account"
+            method="post"
+            onSubmit={handleSubmit}
+          >
+            <button
+              disabled={isSubmitting}
+              type="submit"
+              className={`${
+                isSubmitting
+                  ? "hover:cursor-not-allowed"
+                  : "hover:bg-red-600 hover:text-white"
+              } bg-white inline-flex items-center justify-center rounded-xl border border-red-600 px-12 py-2 text-base text0 font-medium text-red-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 sm:w-auto}`}
+            >
+              {buttonText}
+              <ArrowPathRoundedSquareIcon className="w-5 h-5 ml-2" />
+            </button>
+          </form>
         </div>
       </div>
       <div className="mt-8 flex flex-col">

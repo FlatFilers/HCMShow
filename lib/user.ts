@@ -1,6 +1,11 @@
 import { Prisma, PrismaClient, User } from "@prisma/client";
 import * as bcrypt from "bcrypt";
-import { seedNewAccount, upsertEmployees } from "./seeds/main";
+import {
+  seedNewAccount,
+  upsertBenefitPlans,
+  upsertEmployees,
+  upsertJobs,
+} from "./seeds/main";
 
 const prisma = new PrismaClient();
 
@@ -71,6 +76,8 @@ export const setupNewAccount = async (
 ) => {
   const user = await createUser(credentials);
 
+  await upsertJobs(user.organizationId);
+  await upsertBenefitPlans(user.organizationId);
   await upsertEmployees(user.organizationId);
 
   return user;
