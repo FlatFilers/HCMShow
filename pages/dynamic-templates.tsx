@@ -406,7 +406,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const prisma = prismaClient;
 
-  const dbCustomField = await prisma.customField.findFirst({
+  const dbCustomField = await prisma.customField?.findFirst({
     where: {
       userId: token.sub,
     },
@@ -415,7 +415,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  const dbCustomOptionsRecord = await prisma.options.findFirst({
+  const dbCustomOptionsRecord = await prisma.options?.findFirst({
     where: {
       userId: token.sub,
     },
