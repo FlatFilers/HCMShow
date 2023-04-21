@@ -1,20 +1,71 @@
+import { FolderPlusIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import {
   CustomField,
   dateFormats,
   fieldTypes,
 } from "../../pages/dynamic-templates";
 import { OptionBuilder } from "./option-builder";
+import toast from "react-hot-toast";
+import { FormEvent } from "react";
 
 type Props = {
   customField: CustomField;
   setCustomField: (customField: CustomField) => void;
+  setForEmbedCustomField: any;
+  setCustomFieldStatus: any;
 };
 
-export const CustomFieldBuilder = ({ customField, setCustomField }: Props) => {
+export const CustomFieldBuilder = ({
+  customField,
+  setCustomField,
+  setForEmbedCustomField,
+  setCustomFieldStatus,
+}: Props) => {
   const options = customField.enumOptions;
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target as HTMLFormElement);
+    const { name, type, required, dateFormat, decimals } = JSON.parse(
+      formData.get("customField") as string
+    );
+
+    try {
+      const response = await fetch("/api/flatfile/save-custom-field", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          type,
+          required,
+          dateFormat,
+          decimals,
+        }),
+      });
+
+      const data = await response.json();
+      // console.log("data", data);
+
+      const customField = {
+        name: data.name,
+        type: data.type,
+        required: data.required,
+        dateFormat: data.dateFormat,
+        decimals: data.decimals,
+        enumOptions: data.enumOptions,
+      };
+
+      setForEmbedCustomField(customField);
+      console.log("custom field saved", customField);
+    } catch (error) {
+      console.error("Error saving custom field:", error);
+    }
+  };
 
   return (
-    <div className="max-w-lg">
+    <div className="max-w-lg w-[33%]">
       <p className="text-lg font-semibold mb-1">Custom Field</p>
 
       <p className="text-xs text-gray-600 mb-8">
@@ -181,6 +232,24 @@ export const CustomFieldBuilder = ({ customField, setCustomField }: Props) => {
           />
         </div>
       )}
+      <form className="w-fit mt-10 mx-auto" onSubmit={handleSubmit}>
+        <input
+          type="hidden"
+          id="customField"
+          name="customField"
+          value={JSON.stringify(customField)}
+        />
+        <button
+          onClick={() => {
+            toast.success("Saved Custom Field");
+            setCustomFieldStatus("Saved");
+          }}
+          className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto bg-emerald-500 text-white border-transparent"
+        >
+          Save Custom Field
+          <FolderPlusIcon className="w-4 h-4 ml-2" />
+        </button>
+      </form>
     </div>
   );
 };
