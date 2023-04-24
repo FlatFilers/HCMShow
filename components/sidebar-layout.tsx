@@ -13,15 +13,61 @@ import {
   FolderArrowDownIcon,
   ListBulletIcon,
   VariableIcon,
+  HomeIcon,
 } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
 import MobileSidebar from "./mobile-sidebar";
 import Image from "next/image";
 
 type Props = {
   children: React.ReactNode;
+};
+
+export const workflowItems = (router: NextRouter) => {
+  return [
+    {
+      name: "Project Onboarding",
+      href: "/project-onboarding",
+      icon: FolderIcon,
+      current: router.pathname === "/project-onboarding",
+      color: "border-project-onboarding",
+      highlightColor: "hover:border-project-onboarding-highlight",
+      description:
+        "Flatfile enables multiple team members to collaborate over the course of a project in real-time, validating, transforming, and loading data into HCM.Show while ensuring everyone is on the same page.",
+    },
+    {
+      name: "File Feed",
+      href: "/file-feed",
+      icon: FolderArrowDownIcon,
+      current: router.pathname === "/file-feed",
+      color: "border-file-feed",
+      highlightColor: "hover:border-file-feed-highlight",
+      description:
+        "Flatfile automatically picks up a file from an external source and initiates data onboarding on behalf of users. After the file is retrieved, users can take advantage of Flatfile's mapping engine and data table to provide them with a streamlined import experience.",
+    },
+    {
+      name: "Embedded Portal",
+      href: "/embedded",
+      icon: WindowIcon,
+      current: router.pathname === "/embedded",
+      color: "border-embedded-portal",
+      highlightColor: "hover:border-embedded-portal-highlight",
+      description:
+        "Flatfile's deeply configurable import experience is available right inside HCM Show. See how Flatfile simplifies the data onboarding process, eliminating the need for manual data mapping and significantly reducing errors.",
+    },
+    {
+      name: "Dynamic Templates",
+      href: "/dynamic-templates",
+      icon: VariableIcon,
+      current: router.pathname === "/dynamic-templates",
+      color: "border-dynamic-portal",
+      highlightColor: "hover:border-dynamic-portal-highlight",
+      description:
+        "Flatfile’s configuration can be updated based on the settings from within the HCM Show application, allowing for fields to be added and picklist values to be updated. These changes are then reflected in an embedded iFrame modal.",
+    },
+  ];
 };
 
 export interface NavigationItem {
@@ -35,6 +81,12 @@ const SidebarLayout = ({ children }: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
 
+  const homeItem = {
+    name: "Home",
+    href: "/home",
+    icon: HomeIcon,
+    current: router.pathname === "/home",
+  };
   const itemsNavigation = [
     {
       name: "Employees",
@@ -55,32 +107,6 @@ const SidebarLayout = ({ children }: Props) => {
       current: router.pathname === "/benefit-plans",
     },
   ];
-  const workflowsNavigation = [
-    {
-      name: "Project Onboarding",
-      href: "/project-onboarding",
-      icon: FolderIcon,
-      current: router.pathname === "/project-onboarding",
-    },
-    {
-      name: "File Feed",
-      href: "/file-feed",
-      icon: FolderArrowDownIcon,
-      current: router.pathname === "/file-feed",
-    },
-    {
-      name: "Embedded Portal",
-      href: "/embedded",
-      icon: WindowIcon,
-      current: router.pathname === "/embedded",
-    },
-    {
-      name: "Dynamic Templates",
-      href: "/dynamic-templates",
-      icon: VariableIcon,
-      current: router.pathname === "/dynamic-templates",
-    },
-  ];
   const userNavigation: { name: string; href: string }[] = [
     // { name: "Your Profile", href: "#" },
     // { name: "Settings", href: "#" },
@@ -89,6 +115,8 @@ const SidebarLayout = ({ children }: Props) => {
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
   }
+
+  const workflowsNavigation = workflowItems(router);
 
   return (
     <div className="h-screen w-screen bg-white">
@@ -99,6 +127,7 @@ const SidebarLayout = ({ children }: Props) => {
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
         signOut={signOut}
+        homeItem={homeItem}
         itemsNavigation={itemsNavigation}
         workflowsNavigation={workflowsNavigation}
       />
@@ -111,7 +140,7 @@ const SidebarLayout = ({ children }: Props) => {
             <Image
               className=""
               src={"/images/hcm_logo_LR.png"}
-              alt="Your Company"
+              alt="HCM.show"
               fill={true}
               sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
@@ -122,6 +151,27 @@ const SidebarLayout = ({ children }: Props) => {
           <div className="mt-6 flex flex-grow flex-col">
             <nav className="flex flex-col px-2 pb-4 h-full justify-between mt-4">
               <div>
+                <a
+                  href={homeItem.href}
+                  className={classNames(
+                    homeItem.current
+                      ? "bg-slate-200 text-gray-900"
+                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                    "group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-6"
+                  )}
+                >
+                  <homeItem.icon
+                    className={classNames(
+                      homeItem.current
+                        ? "text-gray-800"
+                        : "text-gray-400 group-hover:text-gray-500",
+                      "mr-3 flex-shrink-0 h-6 w-6"
+                    )}
+                    aria-hidden="true"
+                  />
+                  {homeItem.name}
+                </a>
+
                 <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2">
                   Resources
                 </p>
