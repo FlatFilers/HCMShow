@@ -25,6 +25,15 @@ type Props = {
   children: React.ReactNode;
 };
 
+export const homeNavItem = (router?: NextRouter) => {
+  return {
+    name: "Home",
+    href: "/home",
+    icon: HomeIcon,
+    current: router?.pathname === "/home",
+  };
+};
+
 export const workflowItems = (router?: NextRouter) => {
   return [
     {
@@ -85,12 +94,6 @@ const SidebarLayout = ({ children }: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
 
-  const homeItem = {
-    name: "Home",
-    href: "/home",
-    icon: HomeIcon,
-    current: router.pathname === "/home",
-  };
   const itemsNavigation = [
     {
       name: "Employees",
@@ -120,6 +123,7 @@ const SidebarLayout = ({ children }: Props) => {
     return classes.filter(Boolean).join(" ");
   }
 
+  const homeItem = homeNavItem(router);
   const workflowsNavigation = workflowItems(router);
 
   return (
