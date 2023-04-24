@@ -48,6 +48,17 @@ export const workflowItems = (router?: NextRouter) => {
         "Flatfile enables multiple team members to collaborate over the course of a project in real-time, validating, transforming, and loading data into HCM.Show while ensuring everyone is on the same page.",
     },
     {
+      slug: "embedded",
+      name: "Embedded Portal",
+      href: "/embedded-portal",
+      icon: WindowIcon,
+      current: router?.pathname === "/embedded-portal",
+      color: "border-embedded-portal",
+      highlightColor: "hover:border-embedded-portal-highlight",
+      description:
+        "Flatfile's deeply configurable import experience is available right inside HCM Show. See how Flatfile simplifies the data onboarding process, eliminating the need for manual data mapping and significantly reducing errors.",
+    },
+    {
       slug: "file-feed",
       name: "File Feed",
       href: "/file-feed",
@@ -59,22 +70,11 @@ export const workflowItems = (router?: NextRouter) => {
         "Flatfile automatically picks up a file from an external source and initiates data onboarding on behalf of users. After the file is retrieved, users can take advantage of Flatfile's mapping engine and data table to provide them with a streamlined import experience.",
     },
     {
-      slug: "embedded",
-      name: "Embedded Portal",
-      href: "/embedded",
-      icon: WindowIcon,
-      current: router?.pathname === "/embedded",
-      color: "border-embedded-portal",
-      highlightColor: "hover:border-embedded-portal-highlight",
-      description:
-        "Flatfile's deeply configurable import experience is available right inside HCM Show. See how Flatfile simplifies the data onboarding process, eliminating the need for manual data mapping and significantly reducing errors.",
-    },
-    {
       slug: "dynamic-templates",
-      name: "Dynamic Templates",
-      href: "/dynamic-templates",
+      name: "Dynamic Portal",
+      href: "/dynamic-portal",
       icon: VariableIcon,
-      current: router?.pathname === "/dynamic-templates",
+      current: router?.pathname === "/dynamic-portal",
       color: "border-dynamic-portal",
       highlightColor: "hover:border-dynamic-portal-highlight",
       description:
