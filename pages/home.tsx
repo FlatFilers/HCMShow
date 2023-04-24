@@ -2,15 +2,12 @@ import { GetServerSideProps, NextPage } from "next";
 import { BenefitPlan, PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { getToken } from "next-auth/jwt";
-import { useRouter } from "next/router";
 import { workflowItems } from "../components/sidebar-layout";
 
 interface Props {}
 
 const Home: NextPage<Props> = ({}) => {
-  const router = useRouter();
-
-  const sections = workflowItems(router);
+  const sections = workflowItems();
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
