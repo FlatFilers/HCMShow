@@ -1,7 +1,4 @@
-import { GetServerSideProps, NextPage } from "next";
-import { BenefitPlan, PrismaClient } from "@prisma/client";
-import Link from "next/link";
-import { getToken } from "next-auth/jwt";
+import { NextPage } from "next";
 import { workflowItems } from "../components/sidebar-layout";
 
 interface Props {}
@@ -68,24 +65,6 @@ const Home: NextPage<Props> = ({}) => {
       </div>
     </div>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  // const token = await getToken({
-  //   req: context.req,
-  // });
-
-  // if (!token) {
-  //   console.log("No session token found");
-
-  //   return {
-  //     notFound: true,
-  //   };
-  // }
-
-  return {
-    props: {},
-  };
 };
 
 export default Home;
