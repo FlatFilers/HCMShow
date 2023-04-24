@@ -249,11 +249,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     e.preventDefault();
 
     try {
-      if (
-        confirm(
-          "This will reset current adjusted field options and delete all saved data. Are your sure you want to reset?"
-        )
-      ) {
+      if (confirm("This will reset all field options. Are your sure?")) {
         const response = await fetch("/api/v1/reset-workspace", {
           method: "POST",
           headers: {

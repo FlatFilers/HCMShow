@@ -17,19 +17,17 @@ export default async function handler(
     throw new Error("No session");
   }
 
-  const prisma = prismaClient;
-
-  const deleteOptions = await prisma.options.deleteMany({
+  const deleteOptions = await prismaClient.options.deleteMany({
     where: {
       userId: token.sub,
     },
   });
 
-  const deleteCustomFields = await prisma.customField.deleteMany({
+  const deleteCustomFields = await prismaClient.customField.deleteMany({
     where: {
       userId: token.sub,
     },
   });
 
-  res.send("Options and Custom Fields deleted");
+  res.status(200).json({ message: "Options and Custom Fields deleted" });
 }
