@@ -91,7 +91,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
         <div
           className={`border-t-[6px] w-12 mb-2 ${projectOnboardingItem.color}`}
         ></div>
-        <p className="text-sm font-semibold">Project Onboarding</p>
+        <p className="text-sm font-semibold">{projectOnboardingItem.name}</p>
       </div>
 
       <div className="flex flex-row justify-between ">
