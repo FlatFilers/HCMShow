@@ -36,9 +36,13 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
 
   const router = useRouter();
 
+  const projectOnboardingItem = workflowItems(router).find(
+    (i) => i.slug === "project-onboarding"
+  )!;
+
   useEffect(() => {
     if (router.query.flash === "success") {
-      window.history.replaceState(null, "", "/project-onboarding");
+      window.history.replaceState(null, "", projectOnboardingItem.href);
       toast.success(router.query.message as string, {
         id: router.query.message as string,
         duration: 4000,
@@ -47,7 +51,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
         },
       });
     } else if (router.query.flash === "error") {
-      window.history.replaceState(null, "", "/project-onboarding");
+      window.history.replaceState(null, "", projectOnboardingItem.href);
       toast.error(router.query.message as string, { id: "error" });
     }
   }, []);
@@ -81,17 +85,13 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
     }
   }, []);
 
-  const projectOnboarding = workflowItems().find(
-    (i) => i.slug === "project-onboarding"
-  )!;
-
   return (
     <div className="ml-12 max-w-5xl mt-16">
       <div className="mb-12">
         <div
-          className={`border-t-[6px] w-12 mb-2 ${projectOnboarding.color}`}
+          className={`border-t-[6px] w-12 mb-2 ${projectOnboardingItem.color}`}
         ></div>
-        <p className="text-xs font-semibold">Project Onboarding</p>
+        <p className="text-sm font-semibold">Project Onboarding</p>
       </div>
 
       <div className="flex flex-row justify-between ">
@@ -107,7 +107,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
                 </p>
                 <div className="mt-4 flex">
                   <a
-                    className="hover:text-white mb-12 inline-flex items-center justify-center rounded-md border text-primary border-primary px-4 py-2 text-sm font-medium shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
+                    className="hover:text-white mb-12 inline-flex items-center justify-center rounded-md border text-project-onboarding border-project-onboarding px-4 py-2 text-sm font-medium shadow-sm hover:bg-project-onboarding focus:outline-none focus:ring-2 focus:ring-project-onboarding focus:ring-offset-2 sm:w-auto"
                     download={sampleDataFileName}
                     href={sampleDataFileName}
                     onClick={() => {
@@ -145,9 +145,9 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
                     disabled={isSubmitting}
                     className={`${
                       isSubmitting
-                        ? "bg-primary-dark hover:cursor-not-allowed"
-                        : "bg-primary hover:bg-primary-dark "
-                    } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto}`}
+                        ? "bg-project-onboarding hover:cursor-not-allowed"
+                        : "bg-project-onboarding hover:bg-project-onboarding "
+                    } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-project-onboarding focus:ring-offset-2 sm:w-auto}`}
                     type="submit"
                   >
                     {buttonText}
@@ -157,7 +157,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
                 <p className="text-xs block text-gray-600">
                   To download the sample data again{" "}
                   <a
-                    className="underline text-primary"
+                    className="underline text-project-onboarding"
                     download={sampleDataFileName}
                     href={sampleDataFileName}
                   >
@@ -176,7 +176,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
                         <span className="flex items-start">
                           <span className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
                             <CheckCircleIcon
-                              className="h-full w-full text-primary"
+                              className="h-full w-full text-project-onboarding"
                               aria-hidden="true"
                             />
                           </span>
@@ -192,9 +192,9 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
                           aria-hidden="true"
                         >
                           <span className="absolute h-4 w-4 rounded-full bg-blue-200" />
-                          <span className="relative block h-2 w-2 rounded-full bg-primary" />
+                          <span className="relative block h-2 w-2 rounded-full bg-project-onboarding" />
                         </span>
-                        <span className="ml-3 text-sm font-medium text-primary">
+                        <span className="ml-3 text-sm font-medium text-project-onboarding">
                           {step.name}
                         </span>
                       </a>
@@ -250,7 +250,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
                     (space.flatfileData as unknown as FlatfileSpaceData)
                       .guestLink
                   }
-                  className="inline-flex flex-row items-center justify-between mb-8 rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="inline-flex flex-row items-center justify-between mb-8 rounded-md border border-transparent bg-project-onboarding px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-project-onboarding focus:outline-none focus:ring-2 focus:ring-project-onboarding focus:ring-offset-2"
                 >
                   Visit Workspace
                   <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
@@ -259,7 +259,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
                 <p className="text-xs block text-gray-600">
                   To download the sample data again{" "}
                   <a
-                    className="underline text-primary"
+                    className="underline text-project-onboarding"
                     download={sampleDataFileName}
                     href={sampleDataFileName}
                   >
@@ -288,9 +288,9 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
                     type="submit"
                     className={`${
                       isSubmitting
-                        ? "bg-primary-dark hover:cursor-not-allowed"
-                        : "bg-primary hover:bg-primary-dark "
-                    } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto}`}
+                        ? "bg-project-onboarding hover:cursor-not-allowed"
+                        : "bg-project-onboarding hover:bg-project-onboarding "
+                    } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-project-onboarding focus:ring-offset-2 sm:w-auto}`}
                   >
                     {buttonText}
                     <ArrowPathIcon className="w-4 h-4 ml-1" />
