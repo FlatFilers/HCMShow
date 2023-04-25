@@ -4,6 +4,7 @@ import { useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import {
+  ArrowPathRoundedSquareIcon,
   ArrowsPointingInIcon,
   FolderPlusIcon,
   SparklesIcon,
@@ -213,7 +214,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     }
   }, [error]);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleOptionsSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
@@ -244,6 +245,38 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     (i) => i.slug === "dynamic-portal"
   )!;
 
+  const handleResetSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      if (confirm("This will reset all field options. Are your sure?")) {
+        const response = await fetch("/api/v1/reset-workspace", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        setCustomField({
+          name: "Employee Birthdate",
+          type: "date",
+          required: true,
+          dateFormat: "yyyy-mm-dd",
+          decimals: 2,
+          enumOptions: initialOptions,
+        } as CustomField);
+        setOptions(initialOptions);
+        setCustomFieldStatus("None");
+        setOptionsStatus("Default");
+        setForEmbedCustomField(null);
+        setForEmbedOptions(initialOptions);
+        toast.success("Workspace Reset");
+      }
+    } catch (error) {
+      console.error("Error Resetting Workspace:", error);
+    }
+  };
+
   return (
     <div className="ml-12 mr-16 mt-16 flex flex-col">
       <div className="mb-12">
@@ -256,7 +289,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
       <p className="text-2xl mb-2">Customize your workspace</p>
       <p className="mb-8 text-gray-600">
         Adjust the field options below. Save each as you complete them and then
-        click Generate Space to add your data.
+        click Generate New Space to add your data.
       </p>
 
       <div className="flex flex-row mb-12 w-full">
@@ -308,7 +341,10 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
               setOptions(filteredObjects);
             }}
           />
-          <form className="w-fit mt-10 mx-auto my-auto" onSubmit={handleSubmit}>
+          <form
+            className="w-fit mt-10 mx-auto my-auto"
+            onSubmit={handleOptionsSubmit}
+          >
             <input
               type="hidden"
               id="options"
@@ -331,16 +367,11 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
         <div className="border-r border-gray-300 mx-12"></div>
 
         <div className="flex flex-col w-[33%]">
-          <div className="flex flex-col flex-grow">
-            <p className="text-lg font-semibold mb-1">
-              Generate your workspace
-            </p>
-            <p className="text-xs text-gray-600 mb-8">
-              Click below to generate your workspace, then scroll down to add
-              your data.
-            </p>
+          <div className="flex flex-col mb-20">
             <div className="max-w-[50%]">
-              <div className="font-semibold mb-6">Workspace Save Status:</div>
+              <div className="text-lg font-semibold mb-6">
+                Workspace Save Status:
+              </div>
               <div className="mb-2 flex flex-row justify-between">
                 <div className="mr-2">Custom Field:</div>
                 <div
@@ -353,7 +384,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
                   {customFieldStatus}
                 </div>
               </div>
-              <div className="mb-2 flex flex-row justify-between">
+              <div className="flex flex-row justify-between mb-12">
                 <div className="mr-2">Options:</div>
                 <div
                   className={`text-right ${
@@ -365,9 +396,22 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
                   {optionsStatus}
                 </div>
               </div>
+              <form className="w-full" onSubmit={handleResetSubmit}>
+                <button className="hover:bg-red-600 hover:text-white bg-white inline-flex items-center justify-center rounded-xl border border-red-600 px-12 py-2 text-base text0 font-medium text-red-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 w-full">
+                  Reset
+                  <ArrowPathRoundedSquareIcon className="w-5 h-5 ml-2" />
+                </button>
+              </form>
             </div>
           </div>
-          <div className="w-fit h-[33%] mx-auto">
+          <div className="w-fit mx-auto">
+            <p className="text-lg font-semibold mb-1">
+              Generate your workspace
+            </p>
+            <p className="text-xs text-gray-600 mb-8">
+              Click below to generate your workspace, then scroll down to add
+              your data.
+            </p>
             <button
               onClick={() => setShowSpace(!showSpace)}
               className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-dynamic-portal focus:ring-offset-2 sm:w-auto mt-4 ${
