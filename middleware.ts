@@ -1,5 +1,6 @@
 import withAuth from "next-auth/middleware";
 import { NextResponse } from "next/server";
+import { homeNavItem } from "./components/sidebar-layout";
 
 // The authorized callback, when returning true, will hit the middleware. Returning false will redirect to the signin page.
 
@@ -12,7 +13,8 @@ export default withAuth(
     ) {
       console.log("middleware redirecting");
 
-      return NextResponse.redirect(new URL("/employees", req.url));
+      const homeItem = homeNavItem();
+      return NextResponse.redirect(new URL(homeItem.href, req.url));
     }
   },
   {
