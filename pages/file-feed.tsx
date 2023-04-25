@@ -17,6 +17,7 @@ import {
 } from "../lib/action";
 import { FlatfileSpaceData } from "../lib/flatfile";
 import { DateTime } from "luxon";
+import { workflowItems } from "../components/sidebar-layout";
 
 interface Props {
   urlToSpace: string;
@@ -26,18 +27,22 @@ interface Props {
 const FileFeed: NextPage<Props> = ({ urlToSpace, events }) => {
   const router = useRouter();
 
+  const fileFeedItem = workflowItems(router).find(
+    (i) => i.slug === "file-feed"
+  )!;
+
   useEffect(() => {
     if (router.query.flash === "success") {
-      window.history.replaceState(null, "", "/file-feed");
+      window.history.replaceState(null, "", fileFeedItem.href);
       toast.success(router.query.message as string, {
         id: router.query.message as string,
         duration: 4000,
       });
     } else if (router.query.flash === "error") {
-      window.history.replaceState(null, "", "/file-feed");
+      window.history.replaceState(null, "", fileFeedItem.href);
       toast.error(router.query.message as string, { id: "error" });
     } else if (router.query.message === "Created space") {
-      window.history.replaceState(null, "", "/file-feed");
+      window.history.replaceState(null, "", fileFeedItem.href);
       toast.success("Created space", { id: "created" });
     }
   }, []);
@@ -46,9 +51,18 @@ const FileFeed: NextPage<Props> = ({ urlToSpace, events }) => {
 
   return (
     <div className="ml-12 mt-16">
-      {!urlToSpace && <SetupSpace />}
+      <div className="mb-12">
+        <div className={`border-t-[6px] w-12 mb-2 ${fileFeedItem.color}`}></div>
+        <p className="text-sm font-semibold">{fileFeedItem.name}</p>
+      </div>
 
-      {urlToSpace && <Events urlToSpace={urlToSpace} initialEvents={events} />}
+      <div>
+        {!urlToSpace && <SetupSpace />}
+
+        {urlToSpace && (
+          <Events urlToSpace={urlToSpace} initialEvents={events} />
+        )}
+      </div>
     </div>
   );
 };

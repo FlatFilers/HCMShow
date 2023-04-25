@@ -5,12 +5,15 @@ import { NextPageWithLayout } from "./_app";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { homeNavItem } from "../components/sidebar-layout";
 
 const Home: NextPageWithLayout = () => {
   const { error } = useRouter().query;
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>("Sign in");
+
+  const router = useRouter();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -25,10 +28,12 @@ const Home: NextPageWithLayout = () => {
       event.currentTarget.elements.namedItem("password") as HTMLInputElement
     ).value;
 
+    const homeItem = homeNavItem(router);
+
     signIn("credentials", {
       email,
       password,
-      callbackUrl: "/project-onboarding",
+      callbackUrl: homeItem.href,
     });
   };
 
@@ -40,7 +45,7 @@ const Home: NextPageWithLayout = () => {
             <Image
               className=""
               src={"/images/hcm_logo.png"}
-              alt="Your Company"
+              alt="HCM.show"
               fill={true}
               sizes="(max-width: 768px) 100vw,
                 (max-width: 1200px) 50vw,

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Event } from "./event";
-import { DateTime } from "luxon";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import { FileFeedEvent, fileFeedEventFromAction } from "../../lib/action";
 
@@ -47,7 +46,7 @@ export const Events = ({ urlToSpace, initialEvents }: Props) => {
       <a
         target="_blank"
         href={urlToSpace}
-        className="inline-flex flex-row items-center justify-between mb-8 rounded-md border text-primary border-primary px-4 py-2 text-sm font-medium shadow-sm hover:bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        className="inline-flex flex-row items-center justify-between mb-8 rounded-md border text-file-feed border-file-feed px-4 py-2 text-sm font-medium shadow-sm hover:bg-file-feed hover:text-white focus:outline-none focus:ring-2 focus:ring-file-feed focus:ring-offset-2"
       >
         Visit Workspace
         <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />

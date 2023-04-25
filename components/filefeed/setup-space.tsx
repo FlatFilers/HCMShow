@@ -45,10 +45,8 @@ export const SetupSpace = () => {
             onClick={() => toast.loading("Setting up Flatfile")}
             disabled={isSubmitting}
             className={`${
-              isSubmitting
-                ? "bg-primary-dark hover:cursor-not-allowed"
-                : "bg-primary hover:bg-primary-dark "
-            } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto}`}
+              isSubmitting ? "hover:cursor-not-allowed" : ""
+            } bg-file-feed inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-file-feed focus:ring-offset-2 sm:w-auto}`}
             type="submit"
           >
             {buttonText}
@@ -65,7 +63,7 @@ export const SetupSpace = () => {
                   <span className="flex items-start">
                     <span className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
                       <CheckCircleIcon
-                        className="h-full w-full text-primary"
+                        className="h-full w-full text-file-feed"
                         aria-hidden="true"
                       />
                     </span>
@@ -81,9 +79,9 @@ export const SetupSpace = () => {
                     aria-hidden="true"
                   >
                     <span className="absolute h-4 w-4 rounded-full bg-blue-200" />
-                    <span className="relative block h-2 w-2 rounded-full bg-primary" />
+                    <span className="relative block h-2 w-2 rounded-full bg-file-feed" />
                   </span>
-                  <span className="ml-3 text-sm font-medium text-primary">
+                  <span className="ml-3 text-sm font-medium text-file-feed">
                     {step.name}
                   </span>
                 </a>

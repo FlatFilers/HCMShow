@@ -85,6 +85,6 @@ export default async function handler(
   );
 
   res.redirect(
-    `/embedded?flash=success&message=Space Created!&createdSpaceId=${flatfileSpaceData.id}`
+    `/embedded-portal?flash=success&message=Space Created!&createdSpaceId=${flatfileSpaceData.id}`
   );
 }

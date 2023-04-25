@@ -5,9 +5,11 @@ import { NextPageWithLayout } from "./_app";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { homeNavItem } from "../components/sidebar-layout";
 
 const Signup: NextPageWithLayout = () => {
-  const { error } = useRouter().query;
+  const router = useRouter();
+  const { error } = router.query;
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>("Create My Account");
 
@@ -33,6 +35,8 @@ const Signup: NextPageWithLayout = () => {
       event.currentTarget.elements.namedItem("company-name") as HTMLInputElement
     ).value;
 
+    const homeItem = homeNavItem(router);
+
     signIn("credentials", {
       email,
       password,
@@ -40,7 +44,7 @@ const Signup: NextPageWithLayout = () => {
       lastName,
       companyName,
       isSignup: true,
-      callbackUrl: "/project-onboarding",
+      callbackUrl: homeItem.href,
     });
   };
 

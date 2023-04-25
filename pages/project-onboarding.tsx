@@ -14,6 +14,7 @@ import {
   ArrowTopRightOnSquareIcon,
 } from "@heroicons/react/24/outline";
 import { SpaceType } from "../lib/space";
+import { workflowItems } from "../components/sidebar-layout";
 
 interface Props {
   space?: Space;
@@ -35,9 +36,13 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
 
   const router = useRouter();
 
+  const projectOnboardingItem = workflowItems(router).find(
+    (i) => i.slug === "project-onboarding"
+  )!;
+
   useEffect(() => {
     if (router.query.flash === "success") {
-      window.history.replaceState(null, "", "/project-onboarding");
+      window.history.replaceState(null, "", projectOnboardingItem.href);
       toast.success(router.query.message as string, {
         id: router.query.message as string,
         duration: 4000,
@@ -46,7 +51,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
         },
       });
     } else if (router.query.flash === "error") {
-      window.history.replaceState(null, "", "/project-onboarding");
+      window.history.replaceState(null, "", projectOnboardingItem.href);
       toast.error(router.query.message as string, { id: "error" });
     }
   }, []);
@@ -81,217 +86,227 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
   }, []);
 
   return (
-    <div className="ml-12 flex flex-row justify-between max-w-5xl mt-16">
-      {!space && (
-        <>
-          {steps[0].status === "current" && (
-            <div>
-              <h2 className="text-2xl font-semibold mb-2">
-                Let's get ready to upload data into Flatfile.
-              </h2>
-              <p className="text-gray-600">
-                First, download the sample data we'll import into Flatfile. 👇
-              </p>
-              <div className="mt-4 flex">
-                <a
-                  className="hover:text-white mb-12 inline-flex items-center justify-center rounded-md border text-primary border-primary px-4 py-2 text-sm font-medium shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto"
-                  download={sampleDataFileName}
-                  href={sampleDataFileName}
-                  onClick={() => {
-                    localStorage.setItem(storageKey, "true");
+    <div className="ml-12 max-w-5xl mt-16">
+      <div className="mb-12">
+        <div
+          className={`border-t-[6px] w-12 mb-2 ${projectOnboardingItem.color}`}
+        ></div>
+        <p className="text-sm font-semibold">{projectOnboardingItem.name}</p>
+      </div>
 
-                    // set steps but change the status of the current step
-                    setSteps([
-                      { ...steps[0], status: "complete" },
-                      { ...steps[1], status: "current" },
-                    ]);
-                  }}
-                >
-                  Download sample data
-                </a>
+      <div className="flex flex-row justify-between ">
+        {!space && (
+          <>
+            {steps[0].status === "current" && (
+              <div>
+                <h2 className="text-2xl font-semibold mb-2">
+                  Let's get ready to upload data into Flatfile.
+                </h2>
+                <p className="text-gray-600">
+                  First, download the sample data we'll import into Flatfile. 👇
+                </p>
+                <div className="mt-4 flex">
+                  <a
+                    className="hover:text-white mb-12 inline-flex items-center justify-center rounded-md border text-project-onboarding border-project-onboarding px-4 py-2 text-sm font-medium shadow-sm hover:bg-project-onboarding focus:outline-none focus:ring-2 focus:ring-project-onboarding focus:ring-offset-2 sm:w-auto"
+                    download={sampleDataFileName}
+                    href={sampleDataFileName}
+                    onClick={() => {
+                      localStorage.setItem(storageKey, "true");
+
+                      // set steps but change the status of the current step
+                      setSteps([
+                        { ...steps[0], status: "complete" },
+                        { ...steps[1], status: "current" },
+                      ]);
+                    }}
+                  >
+                    Download sample data
+                  </a>
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {steps[1].status === "current" && (
-            <div>
-              <h2 className="text-2xl font-semibold mb-2">
-                🎉 Great! Now let's setup Flatfile to import those records.
-              </h2>
-              <p className="text-gray-600 mb-4">
-                Click the button below and we'll configure the upload space and
-                invite you to it. 👇
-              </p>
-              <form
-                action="/api/flatfile/create-space"
-                onSubmit={handleSubmit}
-                className="mb-8"
-              >
-                <button
-                  onClick={() => toast.loading("Setting up Flatfile")}
-                  disabled={isSubmitting}
-                  className={`${
-                    isSubmitting
-                      ? "bg-primary-dark hover:cursor-not-allowed"
-                      : "bg-primary hover:bg-primary-dark "
-                  } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto}`}
-                  type="submit"
+            {steps[1].status === "current" && (
+              <div>
+                <h2 className="text-2xl font-semibold mb-2">
+                  🎉 Great! Now let's setup Flatfile to import those records.
+                </h2>
+                <p className="text-gray-600 mb-4">
+                  Click the button below and we'll configure the upload space
+                  and invite you to it. 👇
+                </p>
+                <form
+                  action="/api/flatfile/create-space"
+                  onSubmit={handleSubmit}
+                  className="mb-8"
                 >
-                  {buttonText}
-                </button>
-              </form>
+                  <button
+                    onClick={() => toast.loading("Setting up Flatfile")}
+                    disabled={isSubmitting}
+                    className={`${
+                      isSubmitting
+                        ? "bg-project-onboarding hover:cursor-not-allowed"
+                        : "bg-project-onboarding hover:bg-project-onboarding "
+                    } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-project-onboarding focus:ring-offset-2 sm:w-auto}`}
+                    type="submit"
+                  >
+                    {buttonText}
+                  </button>
+                </form>
 
-              <p className="text-xs block text-gray-600">
-                To download the sample data again{" "}
-                <a
-                  className="underline text-primary"
-                  download={sampleDataFileName}
-                  href={sampleDataFileName}
-                >
-                  click here.
-                </a>
-              </p>
-            </div>
-          )}
+                <p className="text-xs block text-gray-600">
+                  To download the sample data again{" "}
+                  <a
+                    className="underline text-project-onboarding"
+                    download={sampleDataFileName}
+                    href={sampleDataFileName}
+                  >
+                    click here.
+                  </a>
+                </p>
+              </div>
+            )}
 
-          <nav className="flex justify-center" aria-label="Progress">
-            <ol role="list" className="space-y-6">
-              {steps.map((step) => (
-                <li key={step.name}>
-                  {step.status === "complete" ? (
-                    <a className="group">
-                      <span className="flex items-start">
-                        <span className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
-                          <CheckCircleIcon
-                            className="h-full w-full text-primary"
-                            aria-hidden="true"
-                          />
+            <nav className="flex justify-center" aria-label="Progress">
+              <ol role="list" className="space-y-6">
+                {steps.map((step) => (
+                  <li key={step.name}>
+                    {step.status === "complete" ? (
+                      <a className="group">
+                        <span className="flex items-start">
+                          <span className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center">
+                            <CheckCircleIcon
+                              className="h-full w-full text-project-onboarding"
+                              aria-hidden="true"
+                            />
+                          </span>
+                          <span className="ml-3 text-sm font-medium text-gray-500">
+                            {step.name}
+                          </span>
                         </span>
-                        <span className="ml-3 text-sm font-medium text-gray-500">
-                          {step.name}
-                        </span>
-                      </span>
-                    </a>
-                  ) : step.status === "current" ? (
-                    <a className="flex items-start" aria-current="step">
-                      <span
-                        className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center"
-                        aria-hidden="true"
-                      >
-                        <span className="absolute h-4 w-4 rounded-full bg-blue-200" />
-                        <span className="relative block h-2 w-2 rounded-full bg-primary" />
-                      </span>
-                      <span className="ml-3 text-sm font-medium text-primary">
-                        {step.name}
-                      </span>
-                    </a>
-                  ) : (
-                    <a className="group">
-                      <div className="flex items-start">
-                        <div
+                      </a>
+                    ) : step.status === "current" ? (
+                      <a className="flex items-start" aria-current="step">
+                        <span
                           className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center"
                           aria-hidden="true"
                         >
-                          <div className="h-2 w-2 rounded-full bg-gray-300" />
-                        </div>
-                        <p className="ml-3 text-sm font-medium text-gray-500">
+                          <span className="absolute h-4 w-4 rounded-full bg-blue-200" />
+                          <span className="relative block h-2 w-2 rounded-full bg-project-onboarding" />
+                        </span>
+                        <span className="ml-3 text-sm font-medium text-project-onboarding">
                           {step.name}
-                        </p>
-                      </div>
-                    </a>
-                  )}
-                </li>
-              ))}
-            </ol>
-          </nav>
-        </>
-      )}
+                        </span>
+                      </a>
+                    ) : (
+                      <a className="group">
+                        <div className="flex items-start">
+                          <div
+                            className="relative flex h-5 w-5 flex-shrink-0 items-center justify-center"
+                            aria-hidden="true"
+                          >
+                            <div className="h-2 w-2 rounded-full bg-gray-300" />
+                          </div>
+                          <p className="ml-3 text-sm font-medium text-gray-500">
+                            {step.name}
+                          </p>
+                        </div>
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </>
+        )}
 
-      {space && (
-        <div>
-          <p className="text-2xl mb-8">Your workspace is configured. 🎉 </p>
+        {space && (
+          <div>
+            <p className="text-2xl mb-8">Your workspace is configured. 🎉 </p>
 
-          <div className="flex flex-row justify-between">
-            <div>
-              <p className="font-semibold mb-2">Upload Records in Flatfile</p>
-              <p className="text-gray-600 mb-2 max-w-lg">
-                Click the button below to go to your space and receive a sign-in
-                link in your inbox.
-              </p>
-              <p className="text-gray-600 mb-2 max-w-lg">
-                Once inside the space, upload the sample data you downloaded
-                previously.
-              </p>
-              <p className="text-gray-600 mb-2 max-w-lg">
-                <p className="font-semibold">Note:</p> There are multiple tabs
-                in the sample data. Be sure to upload data for each tab.
-              </p>
-              <p className="text-gray-600 mb-6 max-w-lg">
-                After uploading, return back here to HCM.show to sync the
-                records into the app.
-              </p>
-
-              <a
-                target="_blank"
-                href={
-                  (space.flatfileData as unknown as FlatfileSpaceData).guestLink
-                }
-                className="inline-flex flex-row items-center justify-between mb-8 rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              >
-                Visit Workspace
-                <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
-              </a>
-
-              <p className="text-xs block text-gray-600">
-                To download the sample data again{" "}
-                <a
-                  className="underline text-primary"
-                  download={sampleDataFileName}
-                  href={sampleDataFileName}
-                >
-                  click here.
-                </a>
-              </p>
-            </div>
-
-            <div className="border-r border-gray-300 mx-16"></div>
-
-            <div>
-              <p className="font-semibold mb-2">Sync Records to HCM.show</p>
-              <p className="text-gray-600 mb-6 max-w-lg">
-                After uploading records in Flatfile, click the button below to
-                sync the records into HCM.show.
-              </p>
-
-              <form
-                action="/api/flatfile/sync-records"
-                method="post"
-                onSubmit={handleSubmit}
-              >
-                <button
-                  onClick={() => toast.loading("Syncing...")}
-                  disabled={isSubmitting}
-                  type="submit"
-                  className={`${
-                    isSubmitting
-                      ? "bg-primary-dark hover:cursor-not-allowed"
-                      : "bg-primary hover:bg-primary-dark "
-                  } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto}`}
-                >
-                  {buttonText}
-                  <ArrowPathIcon className="w-4 h-4 ml-1" />
-                </button>
-              </form>
-
-              {lastSyncedAt && (
-                <p className="text-xs block text-gray-600 italic mt-2">
-                  Last sync {lastSyncedAt}
+            <div className="flex flex-row justify-between">
+              <div>
+                <p className="font-semibold mb-2">Upload Records in Flatfile</p>
+                <p className="text-gray-600 mb-2 max-w-lg">
+                  Click the button below to go to your space and receive a
+                  sign-in link in your inbox.
                 </p>
-              )}
+                <p className="text-gray-600 mb-2 max-w-lg">
+                  Once inside the space, upload the sample data you downloaded
+                  previously.
+                </p>
+                <p className="text-gray-600 mb-2 max-w-lg">
+                  <p className="font-semibold">Note:</p> There are multiple tabs
+                  in the sample data. Be sure to upload data for each tab.
+                </p>
+                <p className="text-gray-600 mb-6 max-w-lg">
+                  After uploading, return back here to HCM.show to sync the
+                  records into the app.
+                </p>
+
+                <a
+                  target="_blank"
+                  href={
+                    (space.flatfileData as unknown as FlatfileSpaceData)
+                      .guestLink
+                  }
+                  className="inline-flex flex-row items-center justify-between mb-8 rounded-md border border-transparent bg-project-onboarding px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-project-onboarding focus:outline-none focus:ring-2 focus:ring-project-onboarding focus:ring-offset-2"
+                >
+                  Visit Workspace
+                  <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
+                </a>
+
+                <p className="text-xs block text-gray-600">
+                  To download the sample data again{" "}
+                  <a
+                    className="underline text-project-onboarding"
+                    download={sampleDataFileName}
+                    href={sampleDataFileName}
+                  >
+                    click here.
+                  </a>
+                </p>
+              </div>
+
+              <div className="border-r border-gray-300 mx-16"></div>
+
+              <div>
+                <p className="font-semibold mb-2">Sync Records to HCM.show</p>
+                <p className="text-gray-600 mb-6 max-w-lg">
+                  After uploading records in Flatfile, click the button below to
+                  sync the records into HCM.show.
+                </p>
+
+                <form
+                  action="/api/flatfile/sync-records"
+                  method="post"
+                  onSubmit={handleSubmit}
+                >
+                  <button
+                    onClick={() => toast.loading("Syncing...")}
+                    disabled={isSubmitting}
+                    type="submit"
+                    className={`${
+                      isSubmitting
+                        ? "bg-project-onboarding hover:cursor-not-allowed"
+                        : "bg-project-onboarding hover:bg-project-onboarding "
+                    } inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-project-onboarding focus:ring-offset-2 sm:w-auto}`}
+                  >
+                    {buttonText}
+                    <ArrowPathIcon className="w-4 h-4 ml-1" />
+                  </button>
+                </form>
+
+                {lastSyncedAt && (
+                  <p className="text-xs block text-gray-600 italic mt-2">
+                    Last sync {lastSyncedAt}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import {
   CustomField,
   dateFormats,
   fieldTypes,
-} from "../../pages/dynamic-templates";
+} from "../../pages/dynamic-portal";
 import { OptionBuilder } from "./option-builder";
 import toast from "react-hot-toast";
 import { FormEvent } from "react";

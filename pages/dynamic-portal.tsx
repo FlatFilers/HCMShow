@@ -19,6 +19,7 @@ import { Property, SheetConfig } from "@flatfile/api";
 import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";
 import toast from "react-hot-toast";
 import { prismaClient } from "../lib/prisma-client";
+import { workflowItems } from "../components/sidebar-layout";
 
 interface Props {
   accessToken: string;
@@ -239,8 +240,19 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     }
   };
 
+  const dynamicPortalItem = workflowItems().find(
+    (i) => i.slug === "dynamic-portal"
+  )!;
+
   return (
     <div className="ml-12 mr-16 mt-16 flex flex-col">
+      <div className="mb-12">
+        <div
+          className={`border-t-[6px] w-12 mb-2 ${dynamicPortalItem.color}`}
+        ></div>
+        <p className="text-sm font-semibold">{dynamicPortalItem.name}</p>
+      </div>
+
       <p className="text-2xl mb-2">Customize your workspace</p>
       <p className="mb-8 text-gray-600">
         Adjust the field options below. Save each as you complete them and then
@@ -358,10 +370,10 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
           <div className="w-fit h-[33%] mx-auto">
             <button
               onClick={() => setShowSpace(!showSpace)}
-              className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto mt-4 ${
+              className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-dynamic-portal focus:ring-offset-2 sm:w-auto mt-4 ${
                 showSpace
-                  ? "bg-white text-primary border-2 border-primary"
-                  : "bg-primary text-white border-transparent"
+                  ? "bg-white text-dynamic-portal border-2 border-dynamic-portal"
+                  : "bg-dynamic-portal text-white border-transparent"
               }`}
             >
               {showSpace ? "Close Portal" : "Generate New Space"}
