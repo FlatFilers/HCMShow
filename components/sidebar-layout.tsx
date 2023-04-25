@@ -48,7 +48,7 @@ export const workflowItems = (router?: NextRouter) => {
         "Flatfile enables multiple team members to collaborate over the course of a project in real-time, validating, transforming, and loading data into HCM.Show while ensuring everyone is on the same page.",
     },
     {
-      slug: "embedded",
+      slug: "embedded-portal",
       name: "Embedded Portal",
       href: "/embedded-portal",
       icon: WindowIcon,
@@ -70,7 +70,7 @@ export const workflowItems = (router?: NextRouter) => {
         "Flatfile automatically picks up a file from an external source and initiates data onboarding on behalf of users. After the file is retrieved, users can take advantage of Flatfile's mapping engine and data table to provide them with a streamlined import experience.",
     },
     {
-      slug: "dynamic-templates",
+      slug: "dynamic-portal",
       name: "Dynamic Portal",
       href: "/dynamic-portal",
       icon: VariableIcon,
@@ -180,6 +180,36 @@ const SidebarLayout = ({ children }: Props) => {
                   {homeItem.name}
                 </a>
 
+                <div className="mb-6">
+                  <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2">
+                    Workflows
+                  </p>
+
+                  {workflowsNavigation.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className={classNames(
+                        item.current
+                          ? "bg-slate-200 text-gray-900"
+                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                        "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                      )}
+                    >
+                      <item.icon
+                        className={classNames(
+                          item.current
+                            ? "text-gray-800"
+                            : "text-gray-400 group-hover:text-gray-500",
+                          "mr-3 flex-shrink-0 h-6 w-6"
+                        )}
+                        aria-hidden="true"
+                      />
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+
                 <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2">
                   Resources
                 </p>
@@ -207,35 +237,8 @@ const SidebarLayout = ({ children }: Props) => {
                     {item.name}
                   </a>
                 ))}
-
-                <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2 mt-6">
-                  Workflows
-                </p>
-
-                {workflowsNavigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className={classNames(
-                      item.current
-                        ? "bg-slate-200 text-gray-900"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                    )}
-                  >
-                    <item.icon
-                      className={classNames(
-                        item.current
-                          ? "text-gray-800"
-                          : "text-gray-400 group-hover:text-gray-500",
-                        "mr-3 flex-shrink-0 h-6 w-6"
-                      )}
-                      aria-hidden="true"
-                    />
-                    {item.name}
-                  </a>
-                ))}
               </div>
+
               <div className="flex flex-col">
                 <a
                   key="Activity Log"

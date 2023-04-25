@@ -3,6 +3,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
 import { syncWorkbookRecords } from "../../../lib/sync-records";
 import { SpaceType } from "../../../lib/space";
+import { useRouter } from "next/router";
+import { workflowItems } from "../../../components/sidebar-layout";
 
 type Data = {
   message?: string;
@@ -28,5 +30,11 @@ export default async function handler(
   });
   const flash = success ? "success" : "error";
 
-  res.redirect(`/embedded?flash=${flash}&message=${message}`);
+  const router = useRouter();
+
+  const embeddedItem = workflowItems(router).find(
+    (i) => i.slug === "embedded-portal"
+  )!;
+
+  res.redirect(`${embeddedItem.href}?flash=${flash}&message=${message}`);
 }

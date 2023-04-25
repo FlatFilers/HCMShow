@@ -28,7 +28,7 @@ interface Props {
   userId: string;
 }
 
-const Embedded: NextPageWithLayout<Props> = ({
+const EmbeddedPortal: NextPageWithLayout<Props> = ({
   accessToken,
   environmentToken,
   lastSyncedAt,
@@ -74,7 +74,7 @@ const Embedded: NextPageWithLayout<Props> = ({
   const router = useRouter();
 
   const embeddedItem = workflowItems(router).find(
-    (i) => i.slug === "embedded"
+    (i) => i.slug === "embedded-portal"
   )!;
 
   useEffect(() => {
@@ -83,13 +83,13 @@ const Embedded: NextPageWithLayout<Props> = ({
     }
 
     if (router.query.flash === "success") {
-      window.history.replaceState(null, "", "/embedded");
+      window.history.replaceState(null, "", embeddedItem.href);
       toast.success(router.query.message as string, {
         id: router.query.message as string,
         duration: 4000,
       });
     } else if (router.query.flash === "error") {
-      window.history.replaceState(null, "", "/embedded");
+      window.history.replaceState(null, "", embeddedItem.href);
       toast.error(router.query.message as string, { id: "error" });
     }
   }, []);
@@ -156,7 +156,6 @@ const Embedded: NextPageWithLayout<Props> = ({
                     <ArrowDownTrayIcon className="w-4 h-4 ml-2" />
                   </a>
                 </div>
-                <div className="border-r border-gray-300"></div>
               </div>
             </div>
           </div>
@@ -337,4 +336,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default Embedded;
+export default EmbeddedPortal;

@@ -52,6 +52,7 @@ const Home: NextPage<Props> = ({}) => {
           {sections.map((s) => {
             return (
               <a
+                key={s.slug}
                 href={s.href}
                 className={`border-2 border-gray-100 ${s.highlightColor} rounded-xl p-6 transform hover:scale-[101%] transition duration-200`}
               >

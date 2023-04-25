@@ -241,7 +241,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   };
 
   const dynamicPortalItem = workflowItems().find(
-    (i) => i.slug === "dynamic-templates"
+    (i) => i.slug === "dynamic-portal"
   )!;
 
   return (
