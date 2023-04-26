@@ -51,7 +51,7 @@ npx ts-node -O '{"module": "commonjs"}' prisma/seed.ts
 
 ## Production configs
 
-Currently the production app is running configs in one account (john.mosesman+hcmshow@flatfile.io), with each flow in a different environment:
+Currently the production app is running configs in one account (john.mosesman+hcmshow@flatfile.io - credentials in 1pass), with each flow in a different environment:
 
 ```
 ONBOARDING_ENVIRONMENT_ID=us_env_zxH9wUWW
