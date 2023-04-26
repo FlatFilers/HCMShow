@@ -222,8 +222,8 @@ export const createSpace = async ({
   spaceConfigId: string;
   environmentId?: string;
   userId: string;
-  focusBgColor: string;
-  backgroundColor: string;
+  focusBgColor: string | null;
+  backgroundColor: string | null;
 }) => {
   if (!spaceConfigId) {
     throw "No spaceConfigID found. Possible missing ENV var.";

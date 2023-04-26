@@ -41,6 +41,9 @@ export default async function handler(
     spaceConfigId: process.env.EMBEDDED_SPACE_CONFIG_ID as string,
     environmentId: process.env.EMBEDDED_ENVIRONMENT_ID as string,
     userId,
+    // Theme colors are set in spaceProps in the useSpace call
+    focusBgColor: null,
+    backgroundColor: null,
   });
 
   console.log("flatfileSpaceData", flatfileSpaceData);
