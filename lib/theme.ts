@@ -1,4 +1,4 @@
-export function theme(color: string) {
+export function theme(focusBgColor: string, backgroundColor: string) {
   return {
     root: {
       primaryColor: "rgb(8 117 225)",
@@ -6,14 +6,15 @@ export function theme(color: string) {
       warningColor: "yellow",
     },
     sidebar: {
+      // TODO: White Logo needs to be added on the config side, then the logo can be removed from here
       logo: "https://images.ctfassets.net/hjneo4qi4goj/gL6Blz3kTPdZXWknuIDVx/7bb7c73d93b111ed542d2ed426b42fd5/flatfile.svg",
       textColor: "white",
-      titleColor: color,
-      focusBgColor: "white",
-      focusTextColor: "rgb(8 117 225)",
-      backgroundColor: "rgb(8 117 225)",
+      titleColor: "white",
+      focusBgColor: focusBgColor,
+      focusTextColor: "white",
+      backgroundColor: backgroundColor,
       footerTextColor: "white",
-      textUltralightColor: "blue",
+      textUltralightColor: "red",
     },
     table: {
       inputs: {

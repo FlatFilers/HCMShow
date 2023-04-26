@@ -151,8 +151,8 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   const spaceProps = {
     accessToken,
     environmentId,
-    themeConfig: theme("rgb(251 207 232)"),
-    name: "HCM.show Dynamic Templates",
+    themeConfig: theme("D64B32", "E28170"),
+    name: "Dynamic-templates",
     spaceConfig: filterConfig({
       baseConfig,
       workbookName,

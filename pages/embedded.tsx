@@ -47,8 +47,8 @@ const Embedded: NextPageWithLayout<Props> = ({
     accessToken: accessToken as string,
     environmentId: environmentToken as string,
     spaceId: flatfleSpace?.id as string,
-    themeConfig: theme("rgb(209 250 229"),
-    name: "HCM.show Embedded",
+    themeConfig: theme("#4DCA94", "#32A673"),
+    name: "Embedded",
     sidebarConfig: {
       showDataChecklist: false,
       showSidebar: false,

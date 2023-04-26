@@ -137,30 +137,28 @@ const SidebarLayout = ({ children }: Props) => {
     switch (href) {
       case `/project-onboarding`:
         if (currentPath === href) {
-          return `border-2 border-yellow-300 bg-yellow-100`;
+          return `border border-[#3B2FC9] bg-[#3B2FC9] text-white`;
         } else {
-          return `border border-yellow-300`;
+          return `text-[#3B2FC9] hover:bg-[#3B2FC9] hover:text-white`;
         }
       case `/file-feed`:
         if (currentPath === href) {
-          return `border-2 border-purple-300 bg-purple-100`;
+          return `border border-[#090B2B] bg-[#090B2B] text-white`;
         } else {
-          return `border border-purple-300`;
+          return `text-[#090B2B] hover:bg-[#090B2B] hover:text-white`;
         }
       case `/embedded`:
         if (currentPath === href) {
-          return `border-2 border-emerald-300 bg-emerald-100`;
+          return `border border-[#32A673] bg-[#32A673] text-white`;
         } else {
-          return `border border-emerald-300`;
+          return `text-[#32A673] hover:bg-[#32A673] hover:text-white`;
         }
       case `/dynamic-templates`:
         if (currentPath === href) {
-          return `border-2 border-pink-300 bg-pink-200`;
+          return `border border-[#D64B32] bg-[#D64B32] text-white`;
         } else {
-          return `border border-pink-300`;
+          return `text-[#D64B32] hover:bg-[#D64B32] hover:text-white`;
         }
-      default:
-        return `border border-gray-300`;
     }
   }
 
