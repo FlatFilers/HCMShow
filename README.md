@@ -4,9 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 1. Copy the file `.env.example` to `.env` and update the variables.
 
-2. Adjust your `DATABASE_URL` in `.env` if you aren't using the default username/password for postgres.
-
-(If you don't have Postgres installed and are using a Mac, https://postgresapp.com/ is a great option.)
+2. Adjust your `DATABASE_URL` in `.env` if you aren't using the default username/password for postgres. (If you don't have Postgres installed and are using a Mac, https://postgresapp.com/ is a great option.)
 
 3. Next setup the database and seed the data:
 
