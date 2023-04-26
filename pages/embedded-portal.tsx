@@ -55,7 +55,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     environmentId: environmentToken as string,
     spaceId: flatfleSpace?.id as string,
     themeConfig: theme("#4DCA94", "#32A673"),
-    name: "Embedded",
+    name: "Embedded Portal",
     // TODO: This may change in the future as the SDK evolves.
     // These metadata properties are setup in an odd way.
     spaceInfo: {

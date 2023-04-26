@@ -137,27 +137,27 @@ const SidebarLayout = ({ children }: Props) => {
     switch (href) {
       case `/project-onboarding`:
         if (currentPath === href) {
-          return `border border-[#3B2FC9] bg-[#3B2FC9] text-white`;
+          return `border border-project-onboarding bg-project-onboarding text-white`;
         } else {
-          return `text-[#3B2FC9] hover:bg-[#3B2FC9] hover:text-white`;
+          return `text-project-onboarding hover:bg-project-onboarding hover:text-white`;
         }
       case `/file-feed`:
         if (currentPath === href) {
-          return `border border-[#090B2B] bg-[#090B2B] text-white`;
+          return `border border-file-feed bg-file-feed text-white`;
         } else {
-          return `text-[#090B2B] hover:bg-[#090B2B] hover:text-white`;
+          return `text-file-feed hover:bg-file-feed hover:text-white`;
         }
       case `/embedded-portal`:
         if (currentPath === href) {
-          return `border border-[#32A673] bg-[#32A673] text-white`;
+          return `border border-embedded-portal bg-embedded-portal text-white`;
         } else {
-          return `text-[#32A673] hover:bg-[#32A673] hover:text-white`;
+          return `text-embedded-portal hover:bg-embedded-portal hover:text-white`;
         }
       case `/dynamic-portal`:
         if (currentPath === href) {
-          return `border border-[#D64B32] bg-[#D64B32] text-white`;
+          return `border border-dynamic-portal bg-dynamic-portal text-white`;
         } else {
-          return `text-[#D64B32] hover:bg-[#D64B32] hover:text-white`;
+          return `text-dynamic-portal hover:bg-dynamic-portal hover:text-white`;
         }
     }
   }

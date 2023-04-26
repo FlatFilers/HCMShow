@@ -210,7 +210,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   const spaceProps = {
     accessToken,
     environmentId,
-    name: "Dynamic-templates",
+    name: "Dynamic Templates",
     themeConfig: theme("#E28170", "#D64B32"),
     spaceConfig: filterConfig({
       baseConfig,

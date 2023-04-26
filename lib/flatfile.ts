@@ -60,16 +60,6 @@ type WorkbookObject = {
   ];
 };
 
-export type SpacePropsObject = {
-  accessToken: string;
-  environmentId: string;
-  themeConfig: any;
-  spaceId?: string;
-  name: string;
-  spaceConfig: any;
-  sidebarConfig: any;
-};
-
 const BASE_PATH = "https://api.x.flatfile.com/v1";
 
 export async function getAccessToken({
