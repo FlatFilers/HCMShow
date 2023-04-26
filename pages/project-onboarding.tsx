@@ -91,7 +91,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
         <div className="flex flex-row justify-between">
           {steps[0].status === "current" && (
             <DownloadFile
-            type="project-onboarding"
+              type="project-onboarding"
               fileName={sampleDataFileName}
               onClick={() => {
                 localStorage.setItem(storageKey, "true");

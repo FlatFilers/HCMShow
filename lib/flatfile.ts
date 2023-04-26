@@ -215,11 +215,15 @@ export const createSpace = async ({
   spaceConfigId,
   environmentId,
   userId,
+  focusBgColor,
+  backgroundColor,
 }: {
   accessToken: string;
   spaceConfigId: string;
   environmentId?: string;
   userId: string;
+  focusBgColor: string;
+  backgroundColor: string;
 }) => {
   if (!spaceConfigId) {
     throw "No spaceConfigID found. Possible missing ENV var.";
@@ -231,7 +235,7 @@ export const createSpace = async ({
     name: "HCM.show",
     metadata: {
       userId,
-      theme: theme,
+      theme: theme(focusBgColor, backgroundColor),
     },
     actions: [],
   };

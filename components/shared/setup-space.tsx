@@ -49,6 +49,8 @@ const SetupSpace = ({
         you to it. 👇
       </p>
       <form action={actionHref} onSubmit={() => handleSubmit} className="mb-8">
+        <input type="hidden" name="focusBgColor" value="#6673FF" />
+        <input type="hidden" name="backgroundColor" value="#3B2FC9" />
         <button
           onClick={() => toast.loading("Setting up Flatfile")}
           disabled={isSubmitting}

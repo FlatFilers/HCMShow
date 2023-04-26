@@ -7,7 +7,8 @@ export function theme(focusBgColor: string, backgroundColor: string) {
     },
     sidebar: {
       // TODO: White Logo needs to be added on the config side, then the logo can be removed from here
-      logo: "https://images.ctfassets.net/hjneo4qi4goj/gL6Blz3kTPdZXWknuIDVx/7bb7c73d93b111ed542d2ed426b42fd5/flatfile.svg",
+      logo: `http://localhost:3000/images/white-logo.png`,
+      // logo: "https://images.ctfassets.net/hjneo4qi4goj/gL6Blz3kTPdZXWknuIDVx/7bb7c73d93b111ed542d2ed426b42fd5/flatfile.svg",
       textColor: "white",
       titleColor: "white",
       focusBgColor: focusBgColor,
