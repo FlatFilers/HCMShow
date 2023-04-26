@@ -27,6 +27,7 @@ import toast from "react-hot-toast";
 import { prismaClient } from "../lib/prisma-client";
 import { workflowItems } from "../components/sidebar-layout";
 import FeaturesList from "../components/shared/features-list";
+import { theme } from "../lib/theme";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -209,6 +210,8 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   const spaceProps = {
     accessToken,
     environmentId,
+    name: "Dynamic-templates",
+    themeConfig: theme("#E28170", "#D64B32"),
     spaceConfig: filterConfig({
       baseConfig,
       workbookName,

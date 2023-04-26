@@ -147,13 +147,13 @@ const SidebarLayout = ({ children }: Props) => {
         } else {
           return `text-[#090B2B] hover:bg-[#090B2B] hover:text-white`;
         }
-      case `/embedded`:
+      case `/embedded-portal`:
         if (currentPath === href) {
           return `border border-[#32A673] bg-[#32A673] text-white`;
         } else {
           return `text-[#32A673] hover:bg-[#32A673] hover:text-white`;
         }
-      case `/dynamic-templates`:
+      case `/dynamic-portal`:
         if (currentPath === href) {
           return `border border-[#D64B32] bg-[#D64B32] text-white`;
         } else {
