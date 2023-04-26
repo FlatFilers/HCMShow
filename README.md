@@ -1,18 +1,43 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## ENV vars
+## Up and running
 
-Copy `.env.example` to `.env` and update the variables.
+1. Copy the file `.env.example` to `.env` and update the variables.
 
-## Database setup
+2. Adjust your `DATABASE_URL` in `.env` if you aren't using the default username/password for postgres.
 
-Set your `DATABASE_URL` in `.env`.
+(If you don't have Postgres installed and are using a Mac, https://postgresapp.com/ is a great option.)
 
-Migrate:
+3. Next setup the database and seed the data:
 
 ```bash
 npx prisma migrate dev
+npx ts-node -O '{"module": "commonjs"}' prisma/seed.ts
 ```
+
+4. Run the server
+
+```bash
+npm run dev
+```
+
+You should be good to go.
+
+## Using ngrok to test space actions that need to ping HCM.show locally
+
+Most push actions in the configs ping HCM.show, the production app.
+
+To have hooks ping your local app, download a tool like https://ngrok.com/.
+
+```bash
+ngrok http 3000
+```
+
+(Replace `3000` with whatever port your server is running on.)
+
+Take the ngrok URL given (something like `984187213.ngrok.app`) and use that as the hostname in the [config project](https://github.com/FlatFilers/hcm-show-config) as the `hostname`.
+
+Deploy that config change and you should see ngrok forward requests to your localhost.
 
 ## Seeding the database
 
@@ -40,6 +65,7 @@ FILEFEED_SPACE_CONFIG_ID=us_sc_RhaG8IOT
 
 EMBEDDED_ENVIRONMENT_ID=us_env_GKfWJ5c0
 EMBEDDED_SPACE_CONFIG_ID=us_sc_aGKb2DST
+EMBEDDED_WORKBOOK_NAME="Benefits Workbook"
 
 DYNAMIC_TEMPLATES_ENVIRONMENT_ID=us_env_n0cbQ7IH
 DYNAMIC_TEMPLATES_SPACE_CONFIG_ID=us_sc_MhfblItm
