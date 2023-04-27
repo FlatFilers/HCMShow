@@ -1,8 +1,7 @@
-import { Action, PrismaClient, Space } from "@prisma/client";
-import { GetServerSideProps, NextPage } from "next";
+import { PrismaClient, Space } from "@prisma/client";
+import { GetServerSideProps } from "next";
 import { FormEvent, useState } from "react";
 import { getToken } from "next-auth/jwt";
-import { FlatfileSpaceData } from "../lib/flatfile";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
@@ -11,8 +10,8 @@ import { NextPageWithLayout } from "./_app";
 import { SpaceType } from "../lib/space";
 import { workflowItems } from "../components/sidebar-layout";
 import StepList, { Step } from "../components/shared/step-list";
-import DownloadFile from "../components/project-onboarding/download-file";
-import SetupSpace from "../components/project-onboarding/setup-space";
+import DownloadFile from "../components/shared/download-file";
+import SetupSpace from "../components/shared/setup-space";
 import Workspace from "../components/project-onboarding/workspace";
 
 interface Props {
@@ -92,6 +91,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
         <div className="flex flex-row justify-between">
           {steps[0].status === "current" && (
             <DownloadFile
+            type="project-onboarding"
               fileName={sampleDataFileName}
               onClick={() => {
                 localStorage.setItem(storageKey, "true");
@@ -111,10 +111,12 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
               handleSubmit={handleSubmit}
               isSubmitting={isSubmitting}
               buttonText={buttonText}
+              actionHref="/api/flatfile/create-space"
+              type="project-onboarding"
             />
           )}
 
-          <StepList steps={steps} />
+          <StepList type="project-onboarding" steps={steps} />
         </div>
       )}
 

@@ -2,7 +2,6 @@ import {
   ArrowPathIcon,
   ArrowTopRightOnSquareIcon,
   BoltIcon,
-  CheckIcon,
   PuzzlePieceIcon,
   SparklesIcon,
   UserGroupIcon,
@@ -43,7 +42,7 @@ const Workspace = ({
 }: Props) => {
   return (
     <>
-      <p className="text-2xl mb-8">Your Flatfile workspace is configured. 🎉 </p>
+      <p className="text-2xl mb-8">Your Flatfile workspace is configured. 🎉</p>
 
       <div className="flex flex-row justify-between">
         <div>
