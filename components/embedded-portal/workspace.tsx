@@ -12,6 +12,7 @@ import {
 import toast from "react-hot-toast";
 import { FlatfileSpaceData } from "../../lib/flatfile";
 import { Space } from "@prisma/client";
+import FeaturesList from "../shared/features-list";
 
 export interface Step {
   name: string;
@@ -81,21 +82,11 @@ const Workspace = ({ fileName, onClick, showSpace }: Props) => {
           </p>
         </div>
 
-        <div>
-          <p className="font-semibold mb-4">Flatfile features covered:</p>
-          <ul className="space-y-3">
-            {Object.keys(features).map((key) => {
-              const ComponentName = features[key as keyof typeof features];
-
-              return (
-                <li className="flex flex-row items-center">
-                  <ComponentName className="mr-2 w-6 h-6 text-embedded-portal" />
-                  <span className="text-sm">{key}</span>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        <FeaturesList
+          type="embedded-portal"
+          githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/src/workflows/embedded-workflow/index.ts"
+          features={features}
+        />
       </div>
     </div>
   );
