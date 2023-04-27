@@ -22,6 +22,7 @@ import { workflowItems } from "../components/sidebar-layout";
 import DownloadFile from "../components/shared/download-file";
 import SetupSpace from "../components/shared/setup-space";
 import StepList, { Step } from "../components/shared/step-list";
+import Workspace from "../components/embedded-portal/workspace";
 
 interface Props {
   accessToken: string;
@@ -135,8 +136,17 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   ];
   const [steps, setSteps] = useState<Step[]>(initialSteps);
 
+  useEffect(() => {
+    if (!existingSpace && localStorage.getItem(storageKey) === "true") {
+      setSteps([
+        { ...steps[0], status: "complete" },
+        { ...steps[1], status: "current" },
+      ]);
+    }
+  }, []);
+
   return (
-    <div className="mx-12 mt-16 self-center">
+    <div className="mx-12 max-w-5xl mt-16 self-center">
       <div className="mb-12">
         <div className={`border-t-[6px] w-12 mb-2 ${embeddedItem.color}`}></div>
         <p className="text-sm font-semibold">{embeddedItem.name}</p>
@@ -175,71 +185,20 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
         </div>
       )}
 
-      <div className="flex flex-col justify-between ">
+      <div className="flex flex-col justify-between">
         {downloaded && existingSpace && (
-          <div className="max-w-7xl">
-            <p className="text-2xl mb-12">
-              Your workspace is configured and ready for use. 🎉{" "}
-            </p>
-            <div className="w-full mb-14">
-              <div className="flex flex-row">
-                <div className="">
-                  <div className="flex flex-col justify-between">
-                    <div>
-                      <div className="font-semibold mb-6">
-                        Connect to the portal
-                      </div>
-                      <div className="text-gray-600 mb-1">
-                        {showSpace
-                          ? "Click below to disconnect the portal."
-                          : "Click below to import benefit elections."}
-                      </div>
+          <Workspace
+            fileName={sampleDataFileName}
+            onClick={() => {
+              // When the space is opened, save the time we started listening for events
+              if (showSpace === false) {
+                setCurrentTime(DateTime.now().toUTC());
+              }
 
-                      <p className="text-xs text-gray-600 mb-10">
-                        Need the sample data?
-                        <a
-                          className="ml-1 underline"
-                          download={sampleDataFileName}
-                          href={sampleDataFileName}
-                          onClick={() => {
-                            localStorage.setItem(storageKey, "true");
-                          }}
-                        >
-                          Click here to download it again.
-                        </a>
-                      </p>
-                    </div>
-                    <div>
-                      <button
-                        onClick={() => {
-                          // When the space is opened, save the time we started listening for events
-                          if (showSpace === false) {
-                            setCurrentTime(DateTime.now().toUTC());
-                          }
-
-                          setShowSpace(!showSpace);
-                        }}
-                        className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-embedded-portal focus:ring-offset-2 sm:w-auto mt-4 ${
-                          showSpace
-                            ? "bg-white text-embedded-portal border-2 border-embedded-portal"
-                            : "bg-embedded-portal text-white border-transparent"
-                        }`}
-                      >
-                        {showSpace
-                          ? "Close Portal"
-                          : "Import Benefit Elections"}
-                        {showSpace ? (
-                          <ArrowsPointingInIcon className="w-4 h-4 ml-2" />
-                        ) : (
-                          <ArrowsPointingOutIcon className="w-4 h-4 ml-2" />
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+              setShowSpace(!showSpace);
+            }}
+            showSpace={showSpace}
+          />
         )}
 
         {error && <div>{error}</div>}
