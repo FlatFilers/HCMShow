@@ -1,6 +1,6 @@
 import { NextPageWithLayout } from "./_app";
 import { useState, useCallback, useEffect } from "react";
-import { useSpace } from "@flatfile/react";
+import { IThemeConfig, useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import {
@@ -54,7 +54,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     accessToken: accessToken as string,
     environmentId: environmentToken as string,
     spaceId: flatfleSpace?.id as string,
-    themeConfig: theme("#4DCA94", "#32A673"),
+    themeConfig: theme("#4DCA94", "#32A673") as IThemeConfig,
     name: "Embedded Portal",
     // TODO: This may change in the future as the SDK evolves.
     // These metadata properties are setup in an odd way.

@@ -1,6 +1,6 @@
 import { NextPageWithLayout } from "./_app";
 import { FormEvent, useCallback, useState, useEffect } from "react";
-import { useSpace } from "@flatfile/react";
+import { IThemeConfig, useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import {
@@ -211,7 +211,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     accessToken,
     environmentId,
     name: "Dynamic Portal",
-    themeConfig: theme("#E28170", "#D64B32"),
+    themeConfig: theme("#E28170", "#D64B32") as IThemeConfig,
     spaceConfig: filterConfig({
       baseConfig,
       workbookName,
