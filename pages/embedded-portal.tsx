@@ -226,15 +226,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   const prisma = new PrismaClient();
-  const user = await prisma.user.findUnique({
-    where: {
-      id: token.sub,
-    },
-  });
-
-  if (!user) {
-    throw new Error("No user found");
-  }
 
   const existingSpace = await prisma.space.findUnique({
     where: {
@@ -274,7 +265,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           )
         : "",
       existingSpace,
-      userId: user.id,
+      userId: token.sub,
     },
   };
 };

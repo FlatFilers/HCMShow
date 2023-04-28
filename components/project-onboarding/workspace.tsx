@@ -84,7 +84,7 @@ const Workspace = ({
                 type="submit"
                 className={`${
                   isSubmitting ? "hover:cursor-not-allowed" : ""
-                } border border-project-onboarding inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-project-onboarding`}
+                } border border-project-onboarding inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-project-onboarding hover:bg-project-onboarding hover:text-white`}
               >
                 {buttonText}
                 <ArrowPathIcon className="w-4 h-4 ml-1" />

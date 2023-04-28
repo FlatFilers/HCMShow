@@ -36,7 +36,7 @@ const FeaturesList = ({ type, features, githubUrl }: Props) => {
 
       <p className="text-xs text-gray-600">
         View the code for this workflow{" "}
-        <a className={`${klasses} underline`} href={githubUrl}>
+        <a target='_blank' className={`${klasses} underline`} href={githubUrl}>
           on Github.
         </a>
       </p>
