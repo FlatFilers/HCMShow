@@ -42,7 +42,9 @@ export const workflowItems = (router?: NextRouter) => {
       href: "/project-onboarding",
       icon: FolderIcon,
       current: router?.pathname === "/project-onboarding",
-      color: "border-project-onboarding",
+      color: "border-project-onboarding text-project-onboarding",
+      hoverColor:
+        "group-hover:border-project-onboarding group-hover:text-project-onboarding",
       highlightColor: "hover:border-project-onboarding-highlight",
       description:
         "Flatfile enables multiple team members to collaborate over the course of a project in real-time, validating, transforming, and loading data into HCM.Show while ensuring everyone is on the same page.",
@@ -53,7 +55,9 @@ export const workflowItems = (router?: NextRouter) => {
       href: "/embedded-portal",
       icon: WindowIcon,
       current: router?.pathname === "/embedded-portal",
-      color: "border-embedded-portal",
+      color: "border-embedded-portal text-embedded-portal",
+      hoverColor:
+        "group-hover:border-embedded-portal group-hover:text-embedded-portal",
       highlightColor: "hover:border-embedded-portal-highlight",
       description:
         "Flatfile's deeply configurable import experience is available right inside HCM Show. See how Flatfile simplifies the data onboarding process, eliminating the need for manual data mapping and significantly reducing errors.",
@@ -64,7 +68,8 @@ export const workflowItems = (router?: NextRouter) => {
       href: "/file-feed",
       icon: FolderArrowDownIcon,
       current: router?.pathname === "/file-feed",
-      color: "border-file-feed",
+      color: "border-file-feed text-file-feed",
+      hoverColor: "group-hover:border-file-feed group-hover:text-file-feed",
       highlightColor: "hover:border-file-feed-highlight",
       description:
         "Flatfile automatically picks up a file from an external source and initiates data onboarding on behalf of users. After the file is retrieved, users can take advantage of Flatfile's mapping engine and data table to provide them with a streamlined import experience.",
@@ -75,7 +80,9 @@ export const workflowItems = (router?: NextRouter) => {
       href: "/dynamic-portal",
       icon: VariableIcon,
       current: router?.pathname === "/dynamic-portal",
-      color: "border-dynamic-portal",
+      color: "border-dynamic-portal text-dynamic-portal",
+      hoverColor:
+        "group-hover:border-dynamic-portal group-hover:text-dynamic-portal",
       highlightColor: "hover:border-dynamic-portal-highlight",
       description:
         "Flatfile’s configuration can be updated based on the settings from within the HCM Show application, allowing for fields to be added and picklist values to be updated. These changes are then reflected in an embedded iFrame modal.",
@@ -190,22 +197,26 @@ const SidebarLayout = ({ children }: Props) => {
                       key={item.name}
                       href={item.href}
                       className={classNames(
-                        item.current
-                          ? "bg-slate-200 text-gray-900"
-                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                        "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                        item.current ? `${item.color} ` : "text-gray-600 ",
+                        `${item.hoverColor} group flex items-center px-2 py-2 text-sm font-medium rounded-md`
                       )}
                     >
-                      <item.icon
-                        className={classNames(
-                          item.current
-                            ? "text-gray-800"
-                            : "text-gray-400 group-hover:text-gray-500",
-                          "mr-3 flex-shrink-0 h-6 w-6"
-                        )}
-                        aria-hidden="true"
-                      />
-                      {item.name}
+                      <div
+                        className={`${
+                          item.current ? item.color : "border-transparent"
+                        } ${
+                          item.hoverColor
+                        } border-l-4 flex flex-row items-center pl-3`}
+                      >
+                        <item.icon
+                          className={classNames(
+                            item.current ? item.color : "text-gray-400",
+                            `${item.hoverColor} mr-2 flex-shrink-0 h-6 w-6`
+                          )}
+                          aria-hidden="true"
+                        />
+                        {item.name}
+                      </div>
                     </a>
                   ))}
                 </div>
