@@ -50,7 +50,7 @@ const FileFeed: NextPage<Props> = ({ urlToSpace, events }) => {
   // TODO: remove the hardcoded stuff here and use the actual events
 
   return (
-    <div className="ml-12 mt-16">
+    <div className="ml-12 max-w-5xl mt-16">
       <div className="mb-12">
         <div className={`border-t-[6px] w-12 mb-2 ${fileFeedItem.color}`}></div>
         <p className="text-sm font-semibold">{fileFeedItem.name}</p>

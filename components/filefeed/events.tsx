@@ -1,7 +1,24 @@
 import { useState, useEffect } from "react";
 import { Event } from "./event";
-import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowTopRightOnSquareIcon,
+  BoltIcon,
+  ExclamationCircleIcon,
+  PuzzlePieceIcon,
+  SparklesIcon,
+  VariableIcon,
+} from "@heroicons/react/24/outline";
 import { FileFeedEvent, fileFeedEventFromAction } from "../../lib/action";
+import FeaturesList from "../shared/features-list";
+
+const features = {
+  "Event-based workflow": ExclamationCircleIcon,
+  "Plug-in functionality": PuzzlePieceIcon,
+  "Custom actions": BoltIcon,
+  "External API calls": ArrowTopRightOnSquareIcon,
+  "Custom Theming": VariableIcon,
+  "Data Hooks": SparklesIcon,
+};
 
 type Props = {
   urlToSpace: string;
@@ -26,67 +43,94 @@ export const Events = ({ urlToSpace, initialEvents }: Props) => {
   }, []);
 
   return (
-    <div className="max-w-5xl">
-      <p className="text-2xl mb-2">Ready and listening for events. 🎉 </p>
+    <div className="flex flex-row justify-between">
+      <div>
+        <p className="text-2xl mb-2">Ready and listening for events. 🎉 </p>
+        <p className="text-gray-600 mb-2 max-w-lg">
+          Congratulations! A Flatfile space has been configured and we’ve been
+          able to pick up a file from a vendor for you!
+        </p>
+        <p className="text-gray-600 mb-2 max-w-lg">
+          Click the "Visit Flatfile Space" button below to access your dedicated
+          space in Flatfile.
+        </p>
+        <p className="text-gray-600 mb-2 max-w-lg">
+          As new records are created or updated in Flatfile, events will appear
+          in real-time on this page. These events will include information such
+          as the event type, description, and when the event occurred.
+        </p>
+        <p className="text-gray-600 mb-6 max-w-lg text-xs">
+          You can view the file uploaded to your space from Google Drive{" "}
+          <a
+            className="underline text-file-feed"
+            href="https://drive.google.com/file/d/1Gmbvhra7xIhs0gDqZHjHELgyViq4VwD9/view?usp=share_link"
+          >
+            here.
+          </a>
+        </p>
+        <a
+          target="_blank"
+          href={urlToSpace}
+          className="inline-flex flex-row items-center justify-between mb-8 rounded-md border text-file-feed border-file-feed px-4 py-2 text-sm font-semibold hover:bg-file-feed hover:text-white"
+        >
+          Visit Workspace
+          <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
+        </a>
+        <div className="border-1 border border-gray-100 my-6"></div>
+        <table className="min-w-full divide-y divide-gray-300">
+          <thead className="bg-gray-50">
+            <tr>
+              <th
+                scope="col"
+                className="w-20 py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900"
+              >
+                Event
+              </th>
+              <th
+                scope="col"
+                className="w-48 px-6 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                Description
+              </th>
+              <th
+                scope="col"
+                className="w-48 px-6 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                When
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {!events ||
+              (events.length === 0 && (
+                <tr>
+                  <td
+                    colSpan={3}
+                    className="text-gray-600 text-sm py-4 text-center"
+                  >
+                    No events yet
+                  </td>
+                </tr>
+              ))}
 
-      <p className="text-gray-600 mb-2 max-w-lg">
-        A file has been uploaded to your Flatfile space.
-      </p>
+            {events &&
+              events.length > 0 &&
+              events.map((a, i) => {
+                return (
+                  <tr key={i}>
+                    <Event event={a} />
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+      </div>
 
-      <p className="text-gray-600 mb-2 max-w-lg">
-        Visit your space by clicking the button below. Import the file that is
-        waiting there ready to be imported.
-      </p>
-
-      <p className="text-gray-600 mb-4 max-w-lg">
-        As new records are created or updated in Flatfile those events will
-        populate here.
-      </p>
-
-      <a
-        target="_blank"
-        href={urlToSpace}
-        className="inline-flex flex-row items-center justify-between mb-8 rounded-md border text-file-feed border-file-feed px-4 py-2 text-sm font-medium shadow-sm hover:bg-file-feed hover:text-white focus:outline-none focus:ring-2 focus:ring-file-feed focus:ring-offset-2"
-      >
-        Visit Workspace
-        <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
-      </a>
-
-      <div className="border-1 border border-gray-100 my-6"></div>
-
-      <table className="min-w-full divide-y divide-gray-300">
-        <thead className="bg-gray-50">
-          <tr>
-            <th
-              scope="col"
-              className="w-20 py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900"
-            >
-              Event
-            </th>
-            <th
-              scope="col"
-              className="w-48 px-6 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              Description
-            </th>
-            <th
-              scope="col"
-              className="w-48 px-6 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              When
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {events.map((a, i) => {
-            return (
-              <tr key={i}>
-                <Event event={a} />
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <FeaturesList
+        type="file-feed"
+        githubUrl="https://github.com/FlatFilers/hcm-show-config/tree/main/src/workflows/filefeed-workflow"
+        features={features}
+      />
     </div>
   );
 };
