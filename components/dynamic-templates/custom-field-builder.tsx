@@ -65,11 +65,13 @@ export const CustomFieldBuilder = ({
   };
 
   return (
-    <div className="max-w-lg w-[33%]">
-      <p className="text-lg font-semibold mb-1">Custom Field</p>
+    <div className="">
+      <p className="font-semibold mb-1">Customize Your Fields</p>
 
       <p className="text-xs text-gray-600 mb-8">
-        Create your custom field and choose its data type and validations.
+        Create a custom field in HCM Show that captures the organization's
+        specific requirements beyond the standard fields and ensure that it is
+        reflected in the Flatfile.
       </p>
 
       <label className="block font-semibold mb-1">Name</label>
@@ -232,7 +234,8 @@ export const CustomFieldBuilder = ({
           />
         </div>
       )}
-      <form className="w-fit mt-10 mx-auto" onSubmit={handleSubmit}>
+
+      <form className="" onSubmit={handleSubmit}>
         <input
           type="hidden"
           id="customField"
@@ -244,10 +247,9 @@ export const CustomFieldBuilder = ({
             toast.success("Saved Custom Field");
             setCustomFieldStatus("Saved");
           }}
-          className="px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto bg-emerald-500 text-white border-transparent"
+          className="px-4 py-2 inline-flex items-center justify-center rounded-md text-sm font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
         >
           Save Custom Field
-          <FolderPlusIcon className="w-4 h-4 ml-2" />
         </button>
       </form>
     </div>

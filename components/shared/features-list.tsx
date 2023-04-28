@@ -26,7 +26,7 @@ const FeaturesList = ({ type, features, githubUrl }: Props) => {
           const ComponentName = features[key as keyof typeof features];
 
           return (
-            <li className="flex flex-row items-center">
+            <li key={key} className="flex flex-row items-center">
               <ComponentName className={`${klasses} mr-2 w-6 h-6`} />
               <span className="text-sm">{key}</span>
             </li>
