@@ -18,24 +18,7 @@ export const validEmployeeBenefitPlanRecords = async (records: Record[]) => {
   return records.filter((r) => {
     console.log("r", r);
     return requiredFields.every((f) => {
-      const value = r.values[f]?.value;
-      const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-      const datetimePattern =
-        /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?(Z|([+-]\d{2}:\d{2}))?$/;
-
-      if (f !== "coverageBeginDate") {
-        return r.values[f]?.valid;
-      }
-
-      if (
-        value &&
-        (datePattern.test(value as string) ||
-          datetimePattern.test(value as string))
-      ) {
-        return true;
-      } else {
-        return false;
-      }
+      return r.values[f]?.valid;
     });
   });
 };
