@@ -133,35 +133,6 @@ const SidebarLayout = ({ children }: Props) => {
   const homeItem = homeNavItem(router);
   const workflowsNavigation = workflowItems(router);
 
-  function pageColors(currentPath: string, href: string) {
-    switch (href) {
-      case `/project-onboarding`:
-        if (currentPath === href) {
-          return `border border-project-onboarding bg-project-onboarding text-white`;
-        } else {
-          return `text-project-onboarding hover:bg-project-onboarding hover:text-white`;
-        }
-      case `/file-feed`:
-        if (currentPath === href) {
-          return `border border-file-feed bg-file-feed text-white`;
-        } else {
-          return `text-file-feed hover:bg-file-feed hover:text-white`;
-        }
-      case `/embedded-portal`:
-        if (currentPath === href) {
-          return `border border-embedded-portal bg-embedded-portal text-white`;
-        } else {
-          return `text-embedded-portal hover:bg-embedded-portal hover:text-white`;
-        }
-      case `/dynamic-portal`:
-        if (currentPath === href) {
-          return `border border-dynamic-portal bg-dynamic-portal text-white`;
-        } else {
-          return `text-dynamic-portal hover:bg-dynamic-portal hover:text-white`;
-        }
-    }
-  }
-
   return (
     <div className="h-screen w-screen bg-white">
       <Toaster />
@@ -217,7 +188,7 @@ const SidebarLayout = ({ children }: Props) => {
                 </a>
 
                 <div className="mb-6">
-                  <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2 mt-6">
+                  <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2">
                     Workflows
                   </p>
 
