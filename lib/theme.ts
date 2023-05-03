@@ -4,7 +4,7 @@ export function theme(
 ) {
   return {
     root: {
-      primaryColor: "rgb(8 117 225)",
+      primaryColor: backgroundColor,
       dangerColor: "salmon",
       warningColor: "yellow",
     },
