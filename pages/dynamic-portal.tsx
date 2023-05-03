@@ -384,15 +384,20 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
                   name="options"
                   value={JSON.stringify(options)}
                 />
-                <button
-                  onClick={() => {
-                    toast.success("Saved Options");
-                    setOptionsStatus("Saved");
-                  }}
-                  className="px-4 py-1 inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
-                >
-                  Save Category Options
-                </button>
+
+                <div className="flex flex-row items-center">
+                  <button
+                    onClick={() => {
+                      toast.success("Saved Options");
+                      setOptionsStatus("Saved");
+                    }}
+                    className="px-4 py-1 inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
+                  >
+                    Save Category Options
+                  </button>
+
+                  <p>{customFieldStatus}</p>
+                </div>
               </form>
             </div>
 
@@ -474,7 +479,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 
       {error && <div>{error}</div>}
       {!error && showSpace && (
-        <div>
+        <div className="mr-16">
           <div>{data?.component}</div>
         </div>
       )}

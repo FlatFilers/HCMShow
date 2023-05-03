@@ -149,68 +149,72 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   }, []);
 
   return (
-    <div className="mx-12 max-w-5xl mt-16 self-center">
-      <div className="mb-12">
-        <div className={`border-t-[6px] w-12 mb-2 ${embeddedItem.color}`}></div>
-        <p className="text-sm font-semibold">{embeddedItem.name}</p>
-      </div>
-
-      {!existingSpace && (
-        <div className="flex flex-row justify-between">
-          {steps[0].status === "current" && (
-            <DownloadFile
-              type="embedded-portal"
-              fileName={sampleDataFileName}
-              onClick={() => {
-                localStorage.setItem(storageKey, "true");
-
-                // set steps but change the status of the current step
-                setSteps([
-                  { ...steps[0], status: "complete" },
-                  { ...steps[1], status: "current" },
-                ]);
-              }}
-            />
-          )}
-
-          {steps[1].status === "current" && (
-            <SetupSpace
-              fileName={sampleDataFileName}
-              handleSubmit={handleSubmit}
-              isSubmitting={isSubmitting}
-              buttonText={buttonText}
-              actionHref="/api/flatfile/create-embed-space"
-              type="embedded-portal"
-            />
-          )}
-
-          <StepList type="embedded-portal" steps={steps} />
+    <div className="mx-12 mt-16 self-center">
+      <div className="max-w-5xl">
+        <div className="mb-12">
+          <div
+            className={`border-t-[6px] w-12 mb-2 ${embeddedItem.color}`}
+          ></div>
+          <p className="text-sm font-semibold">{embeddedItem.name}</p>
         </div>
-      )}
 
-      <div className="flex flex-col justify-between">
-        {downloaded && existingSpace && (
-          <Workspace
-            fileName={sampleDataFileName}
-            onClick={() => {
-              // When the space is opened, save the time we started listening for events
-              if (showSpace === false) {
-                setCurrentTime(DateTime.now().toUTC());
-              }
+        {!existingSpace && (
+          <div className="flex flex-row justify-between">
+            {steps[0].status === "current" && (
+              <DownloadFile
+                type="embedded-portal"
+                fileName={sampleDataFileName}
+                onClick={() => {
+                  localStorage.setItem(storageKey, "true");
 
-              setShowSpace(!showSpace);
-            }}
-            showSpace={showSpace}
-          />
-        )}
+                  // set steps but change the status of the current step
+                  setSteps([
+                    { ...steps[0], status: "complete" },
+                    { ...steps[1], status: "current" },
+                  ]);
+                }}
+              />
+            )}
 
-        {error && <div>{error}</div>}
-        {!error && showSpace && (
-          <div>
-            <div>{data?.component}</div>
+            {steps[1].status === "current" && (
+              <SetupSpace
+                fileName={sampleDataFileName}
+                handleSubmit={handleSubmit}
+                isSubmitting={isSubmitting}
+                buttonText={buttonText}
+                actionHref="/api/flatfile/create-embed-space"
+                type="embedded-portal"
+              />
+            )}
+
+            <StepList type="embedded-portal" steps={steps} />
           </div>
         )}
+
+        <div className="flex flex-col justify-between">
+          {downloaded && existingSpace && (
+            <Workspace
+              fileName={sampleDataFileName}
+              onClick={() => {
+                // When the space is opened, save the time we started listening for events
+                if (showSpace === false) {
+                  setCurrentTime(DateTime.now().toUTC());
+                }
+
+                setShowSpace(!showSpace);
+              }}
+              showSpace={showSpace}
+            />
+          )}
+        </div>
       </div>
+
+      {error && <div>{error}</div>}
+      {!error && showSpace && (
+        <div className="mr-16">
+          <div>{data?.component}</div>
+        </div>
+      )}
     </div>
   );
 };
