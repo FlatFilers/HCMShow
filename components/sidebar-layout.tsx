@@ -125,11 +125,6 @@ const SidebarLayout = ({ children }: Props) => {
     // { name: "Your Profile", href: "#" },
     // { name: "Settings", href: "#" },
   ];
-
-  function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(" ");
-  }
-
   const homeItem = homeNavItem(router);
   const workflowsNavigation = workflowItems(router);
 
@@ -168,20 +163,19 @@ const SidebarLayout = ({ children }: Props) => {
               <div>
                 <a
                   href={homeItem.href}
-                  className={classNames(
+                  className={`${
                     homeItem.current
                       ? "bg-slate-200 text-gray-900"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                    "group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-6"
-                  )}
+                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  }
+                    group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-6`}
                 >
                   <homeItem.icon
-                    className={classNames(
-                      homeItem.current
+                    className={`
+                      ${homeItem.current}
                         ? "text-gray-800"
-                        : "text-gray-400 group-hover:text-gray-500",
-                      "mr-3 flex-shrink-0 h-6 w-6"
-                    )}
+                        : "text-gray-400 group-hover:text-gray-500"
+                      mr-3 flex-shrink-0 h-6 w-6`}
                     aria-hidden="true"
                   />
                   {homeItem.name}
@@ -196,10 +190,11 @@ const SidebarLayout = ({ children }: Props) => {
                     <a
                       key={item.name}
                       href={item.href}
-                      className={classNames(
-                        item.current ? `${item.color} ` : "text-gray-600 ",
-                        `${item.hoverColor} group flex items-center px-2 py-2 text-sm font-medium rounded-md`
-                      )}
+                      className={`${
+                        item.current ? `${item.color} ` : "text-gray-600 "
+                      } ${
+                        item.hoverColor
+                      } group flex items-center px-2 py-2 text-sm font-medium rounded-md`}
                     >
                       <div
                         className={`${
@@ -209,10 +204,10 @@ const SidebarLayout = ({ children }: Props) => {
                         } border-l-4 flex flex-row items-center pl-3`}
                       >
                         <item.icon
-                          className={classNames(
-                            item.current ? item.color : "text-gray-400",
-                            `${item.hoverColor} mr-2 flex-shrink-0 h-6 w-6`
-                          )}
+                          className={`${
+                            item.current ? item.color : "text-gray-400"
+                          }
+                            ${item.hoverColor} mr-2 flex-shrink-0 h-6 w-6`}
                           aria-hidden="true"
                         />
                         {item.name}
@@ -229,20 +224,22 @@ const SidebarLayout = ({ children }: Props) => {
                   <a
                     key={item.name}
                     href={item.href}
-                    className={classNames(
-                      item.current
-                        ? "bg-slate-200 text-gray-900"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                    )}
+                    className={`
+                      ${
+                        item.current
+                          ? "bg-slate-200 text-gray-900"
+                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                      }
+                      group flex items-center px-2 py-2 text-sm font-medium rounded-md`}
                   >
                     <item.icon
-                      className={classNames(
-                        item.current
-                          ? "text-gray-800"
-                          : "text-gray-400 group-hover:text-gray-500",
-                        "mr-3 flex-shrink-0 h-6 w-6"
-                      )}
+                      className={`
+                        ${
+                          item.current
+                            ? "text-gray-800"
+                            : "text-gray-400 group-hover:text-gray-500"
+                        }
+                        mr-3 flex-shrink-0 h-6 w-6`}
                       aria-hidden="true"
                     />
                     {item.name}
@@ -254,20 +251,22 @@ const SidebarLayout = ({ children }: Props) => {
                 <a
                   key="Activity Log"
                   href="/activity-log"
-                  className={classNames(
-                    router.pathname === "/activity-log"
-                      ? "bg-slate-200 text-gray-900"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                    "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                  )}
+                  className={`
+                    ${
+                      router.pathname === "/activity-log"
+                        ? "bg-slate-200 text-gray-900"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    }
+                    group flex items-center px-2 py-2 text-sm font-medium rounded-md`}
                 >
                   <ListBulletIcon
-                    className={classNames(
-                      router.pathname === "/activity-log"
-                        ? "text-gray-800"
-                        : "text-gray-400 group-hover:text-gray-500",
-                      "mr-3 flex-shrink-0 h-6 w-6"
-                    )}
+                    className={`
+                      ${
+                        router.pathname === "/activity-log"
+                          ? "text-gray-800"
+                          : "text-gray-400 group-hover:text-gray-500"
+                      }
+                      mr-3 flex-shrink-0 h-6 w-6`}
                     aria-hidden="true"
                   />
                   Activity Log
@@ -277,16 +276,10 @@ const SidebarLayout = ({ children }: Props) => {
                   <a
                     href="#"
                     onClick={() => signOut()}
-                    className={classNames(
-                      "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                      "w-full group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-1"
-                    )}
+                    className="text-gray-600 hover:bg-gray-50 hover:text-gray-900 w-full group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-1"
                   >
                     <ArrowLeftOnRectangleIcon
-                      className={classNames(
-                        "text-gray-400 group-hover:text-gray-500",
-                        "mr-3 flex-shrink-0 h-6 w-6"
-                      )}
+                      className="text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6"
                       aria-hidden="true"
                     />
                     Sign Out
