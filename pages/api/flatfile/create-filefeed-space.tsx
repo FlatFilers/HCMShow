@@ -53,6 +53,8 @@ export default async function handler(
     spaceConfigId: process.env.FILEFEED_SPACE_CONFIG_ID as string,
     environmentId,
     userId: user.id,
+    focusBgColor: "#616A7D",
+    backgroundColor: "#090B2B",
   });
 
   const addGuestToSpaceResponse = await addGuestToSpace(

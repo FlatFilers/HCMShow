@@ -9,6 +9,7 @@ import {
 } from "@flatfile/api";
 import { PrismaClient, Space, User } from "@prisma/client";
 import { SpaceType } from "./space";
+import { theme } from "./theme";
 
 export interface Field {
   value: string | number | boolean | null;
@@ -214,11 +215,15 @@ export const createSpace = async ({
   spaceConfigId,
   environmentId,
   userId,
+  focusBgColor,
+  backgroundColor,
 }: {
   accessToken: string;
   spaceConfigId: string;
   environmentId?: string;
   userId: string;
+  focusBgColor: string | null;
+  backgroundColor: string | null;
 }) => {
   if (!spaceConfigId) {
     throw "No spaceConfigID found. Possible missing ENV var.";
@@ -230,6 +235,7 @@ export const createSpace = async ({
     name: "HCM.show",
     metadata: {
       userId,
+      theme: theme(focusBgColor, backgroundColor),
     },
     actions: [],
   };

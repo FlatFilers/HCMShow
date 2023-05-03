@@ -1,6 +1,6 @@
 import { NextPageWithLayout } from "./_app";
 import { FormEvent, useCallback, useState, useEffect } from "react";
-import { useSpace } from "@flatfile/react";
+import { IThemeConfig, useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import {
@@ -27,6 +27,7 @@ import toast from "react-hot-toast";
 import { prismaClient } from "../lib/prisma-client";
 import { workflowItems } from "../components/sidebar-layout";
 import FeaturesList from "../components/shared/features-list";
+import { theme } from "../lib/theme";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -209,6 +210,8 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   const spaceProps = {
     accessToken,
     environmentId,
+    name: "Dynamic Portal",
+    themeConfig: theme("#E28170", "#D64B32") as IThemeConfig,
     spaceConfig: filterConfig({
       baseConfig,
       workbookName,
