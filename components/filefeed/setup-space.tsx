@@ -41,8 +41,6 @@ export const SetupSpace = () => {
           onSubmit={handleSubmit}
           className="mb-8"
         >
-          <input type="hidden" name="focusBgColor" value="#616A7D" />
-          <input type="hidden" name="backgroundColor" value="#090B2B" />
           <button
             onClick={() => toast.loading("Setting up Flatfile")}
             disabled={isSubmitting}

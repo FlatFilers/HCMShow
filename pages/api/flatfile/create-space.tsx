@@ -49,8 +49,8 @@ export default async function handler(
     spaceConfigId: process.env.ONBOARDING_SPACE_CONFIG_ID as string,
     environmentId: process.env.ONBOARDING_ENVIRONMENT_ID as string,
     userId: user.id,
-    focusBgColor: req.query.focusBgColor as string,
-    backgroundColor: req.query.backgroundColor as string,
+    focusBgColor: "#6673FF",
+    backgroundColor: "#3B2FC9",
   });
   const spaceId = flatfileSpaceData.id;
 
