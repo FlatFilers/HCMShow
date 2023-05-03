@@ -7,20 +7,23 @@ import {
 } from "../../pages/dynamic-portal";
 import { OptionBuilder } from "./option-builder";
 import toast from "react-hot-toast";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
+import { DateTime } from "luxon";
 
 type Props = {
   customField: CustomField;
   setCustomField: (customField: CustomField) => void;
   setForEmbedCustomField: any;
-  setCustomFieldStatus: any;
+  lastSavedAt: string;
+  setLastSavedAt: Function;
 };
 
 export const CustomFieldBuilder = ({
   customField,
   setCustomField,
   setForEmbedCustomField,
-  setCustomFieldStatus,
+  lastSavedAt,
+  setLastSavedAt,
 }: Props) => {
   const options = customField.enumOptions || initialOptions;
 
@@ -61,6 +64,7 @@ export const CustomFieldBuilder = ({
       };
 
       setForEmbedCustomField(customField);
+      setLastSavedAt();
       console.log("custom field saved", customField);
     } catch (error) {
       console.error("Error saving custom field:", error);
@@ -69,7 +73,7 @@ export const CustomFieldBuilder = ({
 
   return (
     <div className="">
-      <p className="font-semibold mb-1">Customize Your Fields</p>
+      <p className="font-semibold mb-1">Customize Fields</p>
 
       <p className="text-xs text-gray-600 mb-4">
         Create a custom field in HCM Show that captures the organization's
@@ -251,15 +255,23 @@ export const CustomFieldBuilder = ({
           name="customField"
           value={JSON.stringify(customField)}
         />
-        <button
-          onClick={() => {
-            toast.success("Saved Custom Field");
-            setCustomFieldStatus("Saved");
-          }}
-          className="px-4 py-1 inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
-        >
-          Save Custom Field
-        </button>
+
+        <div className="flex flex-row items-center">
+          <button
+            onClick={() => {
+              toast.success("Saved Custom Field");
+            }}
+            className="px-4 py-1 inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
+          >
+            Save Custom Field
+          </button>
+
+          {lastSavedAt && (
+            <p className="text-[10px] text-gray-400 ml-4">
+              Saved {lastSavedAt}
+            </p>
+          )}
+        </div>
       </form>
     </div>
   );

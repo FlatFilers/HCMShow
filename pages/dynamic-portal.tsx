@@ -1,5 +1,5 @@
 import { NextPageWithLayout } from "./_app";
-import { FormEvent, useCallback, useState, useEffect } from "react";
+import { FormEvent, useCallback, useState } from "react";
 import { IThemeConfig, useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
@@ -28,6 +28,7 @@ import { prismaClient } from "../lib/prisma-client";
 import { workflowItems } from "../components/sidebar-layout";
 import FeaturesList from "../components/shared/features-list";
 import { theme } from "../lib/theme";
+import { DateTime } from "luxon";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -46,6 +47,8 @@ interface Props {
   baseConfig: SpaceConfigWithBlueprints;
   dbCustomField: CustomField;
   dbCustomOptions: Option[];
+  initialCustomFieldLastSavedAt: string;
+  initialCustomOptionsLastSavedAt: string;
 }
 
 export interface CustomField {
@@ -176,6 +179,8 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   baseConfig,
   dbCustomField,
   dbCustomOptions,
+  initialCustomFieldLastSavedAt,
+  initialCustomOptionsLastSavedAt,
 }) => {
   const [showSpace, setShowSpace] = useState(false);
   const [options, setOptions] = useState(dbCustomOptions ?? initialOptions);
@@ -190,12 +195,13 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
         enumOptions: initialOptions,
       } as CustomField)
   );
-  const [customFieldStatus, setCustomFieldStatus] = useState<string>(
-    dbCustomField ? "Saved" : "None"
+
+  const [customFieldLastSavedAt, setCustomFieldLastSavedAt] = useState<string>(
+    initialCustomFieldLastSavedAt
   );
-  const [optionsStatus, setOptionsStatus] = useState<string>(
-    dbCustomOptions ? "Saved" : "Default"
-  );
+  const [customOptionsLastSavedAt, setCustomOptionsLastSavedAt] =
+    useState<string>(initialCustomOptionsLastSavedAt);
+
   const [forEmbedCustomField, setForEmbedCustomField] =
     useState<CustomField | null>(dbCustomField ?? null);
   const [forEmbedOptions, setForEmbedOptions] = useState<Option[]>(
@@ -229,7 +235,6 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 
   const { error, data } = useSpace({ ...spaceProps });
 
-  // console.log("customFieldConfig", customFieldConfig);
   useCallback(() => {
     if (error) {
       setShowSpace(false);
@@ -241,8 +246,6 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 
     const formData = new FormData(e.target as HTMLFormElement);
     const options = JSON.parse(formData.get("options") as string);
-
-    console.log("options", options);
 
     try {
       const response = await fetch("/api/flatfile/save-options", {
@@ -257,6 +260,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 
       const data = await response.json();
       setForEmbedOptions(data);
+      setCustomOptionsLastSavedAt(DateTime.now().toFormat("MM/dd/yyyy h:mm a"));
       console.log("options saved", data);
     } catch (error) {
       console.error("Error saving options:", error);
@@ -271,7 +275,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     e.preventDefault();
 
     try {
-      if (confirm("This will reset all field options. Are your sure?")) {
+      if (confirm("Reset field and field options?")) {
         const response = await fetch("/api/v1/reset-workspace", {
           method: "POST",
           headers: {
@@ -288,10 +292,10 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
           enumOptions: initialOptions,
         } as CustomField);
         setOptions(initialOptions);
-        setCustomFieldStatus("None");
-        setOptionsStatus("Default");
         setForEmbedCustomField(null);
         setForEmbedOptions(initialOptions);
+        setCustomOptionsLastSavedAt("");
+        setCustomFieldLastSavedAt("");
         toast.success("Workspace Reset");
       }
     } catch (error) {
@@ -310,9 +314,9 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
         </div>
 
         <p className="text-2xl mb-2">Customize your workspace</p>
-        <p className="mb-8 text-gray-600 max-w-xl">
+        <p className="mb-8 text-gray-600 max-w-xl text-sm">
           Adjust the field options below. Save each as you complete them and
-          then click Generate New Space to add your data.
+          then click Open Portal to add your data.
         </p>
 
         <div className="flex flex-row justify-between mb-12">
@@ -322,7 +326,12 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
                 customField={customField}
                 setCustomField={setCustomField}
                 setForEmbedCustomField={setForEmbedCustomField}
-                setCustomFieldStatus={setCustomFieldStatus}
+                lastSavedAt={customFieldLastSavedAt}
+                setLastSavedAt={() => {
+                  setCustomFieldLastSavedAt(
+                    DateTime.now().toFormat("MM/dd/yyyy h:mm a")
+                  );
+                }}
               />
             </div>
 
@@ -389,14 +398,17 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
                   <button
                     onClick={() => {
                       toast.success("Saved Options");
-                      setOptionsStatus("Saved");
                     }}
                     className="px-4 py-1 inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
                   >
-                    Save Category Options
+                    Save Options
                   </button>
 
-                  <p>{customFieldStatus}</p>
+                  {customOptionsLastSavedAt && (
+                    <p className="text-[10px] text-gray-400 ml-4">
+                      Saved {customOptionsLastSavedAt}
+                    </p>
+                  )}
                 </div>
               </form>
             </div>
@@ -404,38 +416,11 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
             <div className="border-r border-gray-300 mx-12"></div>
 
             <div className="flex flex-col">
-              <div className="flex flex-col mb-20">
+              <div className="flex flex-col mb-12">
                 <div className="">
-                  <div className="text-lg font-semibold mb-6">
-                    Workspace Save Status:
-                  </div>
-                  <div className="mb-2 flex flex-row justify-between">
-                    <div className="mr-2">Custom Field:</div>
-                    <div
-                      className={`text-right ${
-                        customFieldStatus === "None"
-                          ? "text-red-500"
-                          : "text-green-500"
-                      }`}
-                    >
-                      {customFieldStatus}
-                    </div>
-                  </div>
-                  <div className="flex flex-row justify-between mb-12">
-                    <div className="mr-2">Options:</div>
-                    <div
-                      className={`text-right ${
-                        optionsStatus === "Default"
-                          ? "text-red-500"
-                          : "text-green-500"
-                      }`}
-                    >
-                      {optionsStatus}
-                    </div>
-                  </div>
                   <form className="w-full" onSubmit={handleResetSubmit}>
-                    <button className="hover:bg-red-600 hover:text-white bg-white inline-flex items-center justify-center rounded-xl border border-red-600 px-12 py-2 text-base text0 font-medium text-red-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 w-full">
-                      Reset
+                    <button className="flex flex-row items-center text-sm underline text-gray-400">
+                      Reset customizations
                       <ArrowPathRoundedSquareIcon className="w-5 h-5 ml-2" />
                     </button>
                   </form>
@@ -443,22 +428,22 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
               </div>
 
               <div className="">
-                <p className="text-lg font-semibold mb-1">
+                <p className="text-xl font-semibold mb-1">
                   Generate your workspace
                 </p>
-                <p className="text-xs text-gray-600 mb-8">
+                <p className="text-xs text-gray-600 mb-4">
                   Click below to generate your workspace, then scroll down to
                   add your data.
                 </p>
                 <button
                   onClick={() => setShowSpace(!showSpace)}
-                  className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-dynamic-portal focus:ring-offset-2 sm:w-auto mt-4 ${
+                  className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm ${
                     showSpace
                       ? "bg-white text-dynamic-portal border-2 border-dynamic-portal"
                       : "bg-dynamic-portal text-white border-transparent"
                   }`}
                 >
-                  {showSpace ? "Close Portal" : "Generate New Space"}
+                  {showSpace ? "Close Portal" : "Open Portal"}
                   {showSpace ? (
                     <ArrowsPointingInIcon className="w-4 h-4 ml-2" />
                   ) : (
@@ -536,6 +521,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       baseConfig,
       dbCustomField,
       dbCustomOptions,
+      initialCustomFieldLastSavedAt: dbCustomField
+        ? DateTime.fromJSDate(dbCustomField.updatedAt).toFormat(
+            "MM/dd/yyyy h:mm a"
+          )
+        : "",
+      initialCustomOptionsLastSavedAt: dbCustomOptionsRecord
+        ? DateTime.fromJSDate(dbCustomOptionsRecord.updatedAt).toFormat(
+            "MM/dd/yyyy h:mm a"
+          )
+        : "",
     },
   };
 };
