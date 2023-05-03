@@ -95,21 +95,24 @@ const filterConfig = ({
   forEmbedOptions: Option[];
   customFieldConfig: any;
 }) => {
+  const sheetName = "Benefit Elections";
+  const dynamicFieldType = "benefitCoverageType";
+
   // TODO: We should look up blueprint by ID or slug not name
   const blueprint = baseConfig.blueprints.find(
     (b) => b.name === workbookName
   ) as BlueprintWithId;
-  const sheet = blueprint?.sheets.find((s) => s.name === "Employees");
-  const field = sheet?.fields.find((f) => f.key === "employeeType");
+  const sheet = blueprint?.sheets.find((s) => s.name === sheetName);
+  const field = sheet?.fields.find((f) => f.key === dynamicFieldType);
 
   const otherBlueprints = baseConfig.blueprints.filter((b) => {
     return b.name !== workbookName;
   });
   const otherSheets = blueprint?.sheets.filter((s) => {
-    return s.name !== "Employees";
+    return s.name !== sheetName;
   }) as SheetConfig[];
   const otherFields = sheet?.fields.filter((f) => {
-    return f.key !== "employeeType";
+    return f.key !== dynamicFieldType;
   }) as Property[];
 
   const mappedOptions = forEmbedOptions.map((option) => {
