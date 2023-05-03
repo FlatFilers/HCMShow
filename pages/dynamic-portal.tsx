@@ -317,7 +317,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 
         <div className="flex flex-row justify-between mb-12">
           <div className="max-w-md">
-            <div className="mb-8">
+            <div className="mb-12">
               <CustomFieldBuilder
                 customField={customField}
                 setCustomField={setCustomField}
@@ -328,13 +328,13 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 
             <div className="flex flex-col mb-8">
               <p className="font-semibold mb-1">Adjust category values</p>
-              <p className="text-xs text-gray-600 mb-8">
+              <p className="text-xs text-gray-600 mb-4">
                 Make sure to adjust the category values in HCM Show as per the
                 evolving specific offerings of the organization and ensure that
                 these updates are also reflected in the Flatfile.
               </p>
 
-              <div className="mb-4">
+              <div className="">
                 <OptionBuilder
                   options={options.sort((a, b) => a.id - b.id)}
                   updateInput={(option, value) => {
@@ -389,9 +389,9 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
                     toast.success("Saved Options");
                     setOptionsStatus("Saved");
                   }}
-                  className="px-4 py-2 inline-flex items-center justify-center rounded-md text-sm font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
+                  className="px-4 py-1 inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
                 >
-                  Save Options
+                  Save Category Options
                 </button>
               </form>
             </div>
