@@ -1,5 +1,5 @@
 import { NextPageWithLayout } from "./_app";
-import { FormEvent, useCallback, useState, useEffect } from "react";
+import { FormEvent, useCallback, useState } from "react";
 import { IThemeConfig, useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
@@ -28,6 +28,7 @@ import { prismaClient } from "../lib/prisma-client";
 import { workflowItems } from "../components/sidebar-layout";
 import FeaturesList from "../components/shared/features-list";
 import { theme } from "../lib/theme";
+import { DateTime } from "luxon";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -46,6 +47,8 @@ interface Props {
   baseConfig: SpaceConfigWithBlueprints;
   dbCustomField: CustomField;
   dbCustomOptions: Option[];
+  initialCustomFieldLastSavedAt: string;
+  initialCustomOptionsLastSavedAt: string;
 }
 
 export interface CustomField {
@@ -95,21 +98,24 @@ const filterConfig = ({
   forEmbedOptions: Option[];
   customFieldConfig: any;
 }) => {
+  const sheetName = "Benefit Elections";
+  const dynamicFieldType = "benefitCoverageType";
+
   // TODO: We should look up blueprint by ID or slug not name
   const blueprint = baseConfig.blueprints.find(
     (b) => b.name === workbookName
   ) as BlueprintWithId;
-  const sheet = blueprint?.sheets.find((s) => s.name === "Employees");
-  const field = sheet?.fields.find((f) => f.key === "employeeType");
+  const sheet = blueprint?.sheets.find((s) => s.name === sheetName);
+  const field = sheet?.fields.find((f) => f.key === dynamicFieldType);
 
   const otherBlueprints = baseConfig.blueprints.filter((b) => {
     return b.name !== workbookName;
   });
   const otherSheets = blueprint?.sheets.filter((s) => {
-    return s.name !== "Employees";
+    return s.name !== sheetName;
   }) as SheetConfig[];
   const otherFields = sheet?.fields.filter((f) => {
-    return f.key !== "employeeType";
+    return f.key !== dynamicFieldType;
   }) as Property[];
 
   const mappedOptions = forEmbedOptions.map((option) => {
@@ -173,6 +179,8 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   baseConfig,
   dbCustomField,
   dbCustomOptions,
+  initialCustomFieldLastSavedAt,
+  initialCustomOptionsLastSavedAt,
 }) => {
   const [showSpace, setShowSpace] = useState(false);
   const [options, setOptions] = useState(dbCustomOptions ?? initialOptions);
@@ -187,12 +195,13 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
         enumOptions: initialOptions,
       } as CustomField)
   );
-  const [customFieldStatus, setCustomFieldStatus] = useState<string>(
-    dbCustomField ? "Saved" : "None"
+
+  const [customFieldLastSavedAt, setCustomFieldLastSavedAt] = useState<string>(
+    initialCustomFieldLastSavedAt
   );
-  const [optionsStatus, setOptionsStatus] = useState<string>(
-    dbCustomOptions ? "Saved" : "Default"
-  );
+  const [customOptionsLastSavedAt, setCustomOptionsLastSavedAt] =
+    useState<string>(initialCustomOptionsLastSavedAt);
+
   const [forEmbedCustomField, setForEmbedCustomField] =
     useState<CustomField | null>(dbCustomField ?? null);
   const [forEmbedOptions, setForEmbedOptions] = useState<Option[]>(
@@ -226,7 +235,6 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 
   const { error, data } = useSpace({ ...spaceProps });
 
-  // console.log("customFieldConfig", customFieldConfig);
   useCallback(() => {
     if (error) {
       setShowSpace(false);
@@ -238,8 +246,6 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 
     const formData = new FormData(e.target as HTMLFormElement);
     const options = JSON.parse(formData.get("options") as string);
-
-    console.log("options", options);
 
     try {
       const response = await fetch("/api/flatfile/save-options", {
@@ -254,6 +260,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 
       const data = await response.json();
       setForEmbedOptions(data);
+      setCustomOptionsLastSavedAt(DateTime.now().toFormat("MM/dd/yyyy h:mm a"));
       console.log("options saved", data);
     } catch (error) {
       console.error("Error saving options:", error);
@@ -268,7 +275,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     e.preventDefault();
 
     try {
-      if (confirm("This will reset all field options. Are your sure?")) {
+      if (confirm("Reset field and field options?")) {
         const response = await fetch("/api/v1/reset-workspace", {
           method: "POST",
           headers: {
@@ -285,10 +292,10 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
           enumOptions: initialOptions,
         } as CustomField);
         setOptions(initialOptions);
-        setCustomFieldStatus("None");
-        setOptionsStatus("Default");
         setForEmbedCustomField(null);
         setForEmbedOptions(initialOptions);
+        setCustomOptionsLastSavedAt("");
+        setCustomFieldLastSavedAt("");
         toast.success("Workspace Reset");
       }
     } catch (error) {
@@ -297,176 +304,172 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   };
 
   return (
-    <div className="ml-12 max-w-5xl mt-16">
-      <div className="mb-12">
-        <div
-          className={`border-t-[6px] w-12 mb-2 ${dynamicPortalItem.color}`}
-        ></div>
-        <p className="text-sm font-semibold">{dynamicPortalItem.name}</p>
-      </div>
-
-      <p className="text-2xl mb-2">Customize your workspace</p>
-      <p className="mb-8 text-gray-600 max-w-xl">
-        Adjust the field options below. Save each as you complete them and then
-        click Generate New Space to add your data.
-      </p>
-
-      <div className="flex flex-row justify-between mb-12">
-        <div className="max-w-md">
-          <div className="mb-8">
-            <CustomFieldBuilder
-              customField={customField}
-              setCustomField={setCustomField}
-              setForEmbedCustomField={setForEmbedCustomField}
-              setCustomFieldStatus={setCustomFieldStatus}
-            />
-          </div>
-
-          <div className="flex flex-col mb-8">
-            <p className="font-semibold mb-1">Adjust category values</p>
-            <p className="text-xs text-gray-600 mb-8">
-              Make sure to adjust the category values in HCM Show as per the
-              evolving specific offerings of the organization and ensure that
-              these updates are also reflected in the Flatfile.
-            </p>
-
-            <div className="mb-4">
-              <OptionBuilder
-                options={options.sort((a, b) => a.id - b.id)}
-                updateInput={(option, value) => {
-                  const filteredOptions = options.filter((o) => {
-                    return o.id !== option.id;
-                  });
-
-                  setOptions([...filteredOptions, { ...option, input: value }]);
-                }}
-                updateOutput={(option, value) => {
-                  const filteredOptions = options.filter((o) => {
-                    return o.id !== option.id;
-                  });
-
-                  setOptions([
-                    ...filteredOptions,
-                    { ...option, output: value },
-                  ]);
-                }}
-                addNewOption={() => {
-                  const maxId = options.reduce((max, option) => {
-                    return Math.max(max, option.id);
-                  }, 0);
-
-                  setOptions([
-                    ...options,
-                    { id: maxId + 1, input: "", output: "" },
-                  ]);
-                }}
-                removeOption={(option) => {
-                  const filteredObjects = options.filter((o) => {
-                    return o.id !== option.id;
-                  });
-
-                  setOptions(filteredObjects);
-                }}
-              />
-            </div>
-
-            <form className="" onSubmit={handleOptionsSubmit}>
-              <input
-                type="hidden"
-                id="options"
-                name="options"
-                value={JSON.stringify(options)}
-              />
-              <button
-                onClick={() => {
-                  toast.success("Saved Options");
-                  setOptionsStatus("Saved");
-                }}
-                className="px-4 py-2 inline-flex items-center justify-center rounded-md text-sm font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
-              >
-                Save Options
-              </button>
-            </form>
-          </div>
-
-          <div className="border-r border-gray-300 mx-12"></div>
-
-          <div className="flex flex-col">
-            <div className="flex flex-col mb-20">
-              <div className="">
-                <div className="text-lg font-semibold mb-6">
-                  Workspace Save Status:
-                </div>
-                <div className="mb-2 flex flex-row justify-between">
-                  <div className="mr-2">Custom Field:</div>
-                  <div
-                    className={`text-right ${
-                      customFieldStatus === "None"
-                        ? "text-red-500"
-                        : "text-green-500"
-                    }`}
-                  >
-                    {customFieldStatus}
-                  </div>
-                </div>
-                <div className="flex flex-row justify-between mb-12">
-                  <div className="mr-2">Options:</div>
-                  <div
-                    className={`text-right ${
-                      optionsStatus === "Default"
-                        ? "text-red-500"
-                        : "text-green-500"
-                    }`}
-                  >
-                    {optionsStatus}
-                  </div>
-                </div>
-                <form className="w-full" onSubmit={handleResetSubmit}>
-                  <button className="hover:bg-red-600 hover:text-white bg-white inline-flex items-center justify-center rounded-xl border border-red-600 px-12 py-2 text-base text0 font-medium text-red-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 w-full">
-                    Reset
-                    <ArrowPathRoundedSquareIcon className="w-5 h-5 ml-2" />
-                  </button>
-                </form>
-              </div>
-            </div>
-
-            <div className="">
-              <p className="text-lg font-semibold mb-1">
-                Generate your workspace
-              </p>
-              <p className="text-xs text-gray-600 mb-8">
-                Click below to generate your workspace, then scroll down to add
-                your data.
-              </p>
-              <button
-                onClick={() => setShowSpace(!showSpace)}
-                className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-dynamic-portal focus:ring-offset-2 sm:w-auto mt-4 ${
-                  showSpace
-                    ? "bg-white text-dynamic-portal border-2 border-dynamic-portal"
-                    : "bg-dynamic-portal text-white border-transparent"
-                }`}
-              >
-                {showSpace ? "Close Portal" : "Generate New Space"}
-                {showSpace ? (
-                  <ArrowsPointingInIcon className="w-4 h-4 ml-2" />
-                ) : (
-                  <SparklesIcon className="w-4 h-4 ml-2" />
-                )}
-              </button>
-            </div>
-          </div>
+    <div className="ml-12 mt-16">
+      <div className="max-w-5xl">
+        <div className="mb-12">
+          <div
+            className={`border-t-[6px] w-12 mb-2 ${dynamicPortalItem.color}`}
+          ></div>
+          <p className="text-sm font-semibold">{dynamicPortalItem.name}</p>
         </div>
 
-        <FeaturesList
-          type="dynamic-portal"
-          githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/src/workflows/dynamic-templates/index.ts"
-          features={features}
-        />
+        <div className="flex flex-row justify-between">
+          <div>
+            <p className="text-2xl mb-2">Customize your workspace</p>
+            <p className="mb-8 text-gray-600 max-w-xl text-sm">
+              Adjust the field options below. Save each as you complete them and
+              then click Open Portal to add your data.
+            </p>
+
+            <div className="flex flex-row justify-between mb-12">
+              <div className="max-w-md">
+                <div className="mb-12">
+                  <CustomFieldBuilder
+                    customField={customField}
+                    setCustomField={setCustomField}
+                    setForEmbedCustomField={setForEmbedCustomField}
+                    lastSavedAt={customFieldLastSavedAt}
+                    setLastSavedAt={() => {
+                      setCustomFieldLastSavedAt(
+                        DateTime.now().toFormat("MM/dd/yyyy h:mm a")
+                      );
+                    }}
+                  />
+                </div>
+
+                <div className="flex flex-col mb-8">
+                  <p className="font-semibold mb-1">Adjust category values</p>
+                  <p className="text-xs text-gray-600 mb-4">
+                    Make sure to adjust the category values in HCM Show as per
+                    the evolving specific offerings of the organization and
+                    ensure that these updates are also reflected in the
+                    Flatfile.
+                  </p>
+
+                  <div className="">
+                    <OptionBuilder
+                      options={options.sort((a, b) => a.id - b.id)}
+                      updateInput={(option, value) => {
+                        const filteredOptions = options.filter((o) => {
+                          return o.id !== option.id;
+                        });
+
+                        setOptions([
+                          ...filteredOptions,
+                          { ...option, input: value },
+                        ]);
+                      }}
+                      updateOutput={(option, value) => {
+                        const filteredOptions = options.filter((o) => {
+                          return o.id !== option.id;
+                        });
+
+                        setOptions([
+                          ...filteredOptions,
+                          { ...option, output: value },
+                        ]);
+                      }}
+                      addNewOption={() => {
+                        const maxId = options.reduce((max, option) => {
+                          return Math.max(max, option.id);
+                        }, 0);
+
+                        setOptions([
+                          ...options,
+                          { id: maxId + 1, input: "", output: "" },
+                        ]);
+                      }}
+                      removeOption={(option) => {
+                        const filteredObjects = options.filter((o) => {
+                          return o.id !== option.id;
+                        });
+
+                        setOptions(filteredObjects);
+                      }}
+                    />
+                  </div>
+
+                  <form className="" onSubmit={handleOptionsSubmit}>
+                    <input
+                      type="hidden"
+                      id="options"
+                      name="options"
+                      value={JSON.stringify(options)}
+                    />
+
+                    <div className="flex flex-row items-center">
+                      <button
+                        onClick={() => {
+                          toast.success("Saved Options");
+                        }}
+                        className="px-4 py-1 inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
+                      >
+                        Save Options
+                      </button>
+
+                      {customOptionsLastSavedAt && (
+                        <p className="text-[10px] text-gray-400 ml-4">
+                          Saved {customOptionsLastSavedAt}
+                        </p>
+                      )}
+                    </div>
+                  </form>
+                </div>
+
+                <div className="border-r border-gray-300 mx-12"></div>
+
+                <div className="flex flex-col">
+                  <div className="flex flex-col mb-12">
+                    <div className="">
+                      <form className="w-full" onSubmit={handleResetSubmit}>
+                        <button className="flex flex-row items-center text-sm underline text-gray-400">
+                          Reset customizations
+                          <ArrowPathRoundedSquareIcon className="w-5 h-5 ml-2" />
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+
+                  <div className="">
+                    <p className="text-xl font-semibold mb-1">
+                      Generate your workspace
+                    </p>
+                    <p className="text-xs text-gray-600 mb-4">
+                      Click below to generate your workspace, then scroll down
+                      to add your data.
+                    </p>
+                    <button
+                      onClick={() => setShowSpace(!showSpace)}
+                      className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm ${
+                        showSpace
+                          ? "bg-white text-dynamic-portal border-2 border-dynamic-portal"
+                          : "bg-dynamic-portal text-white border-transparent"
+                      }`}
+                    >
+                      {showSpace ? "Close Portal" : "Open Portal"}
+                      {showSpace ? (
+                        <ArrowsPointingInIcon className="w-4 h-4 ml-2" />
+                      ) : (
+                        <SparklesIcon className="w-4 h-4 ml-2" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <FeaturesList
+            type="dynamic-portal"
+            githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/src/workflows/dynamic-templates/index.ts"
+            features={features}
+          />
+        </div>
       </div>
 
       {error && <div>{error}</div>}
       {!error && showSpace && (
-        <div>
+        <div className="mr-16">
           <div>{data?.component}</div>
         </div>
       )}
@@ -523,6 +526,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       baseConfig,
       dbCustomField,
       dbCustomOptions,
+      initialCustomFieldLastSavedAt: dbCustomField
+        ? DateTime.fromJSDate(dbCustomField.updatedAt).toFormat(
+            "MM/dd/yyyy h:mm a"
+          )
+        : "",
+      initialCustomOptionsLastSavedAt: dbCustomOptionsRecord
+        ? DateTime.fromJSDate(dbCustomOptionsRecord.updatedAt).toFormat(
+            "MM/dd/yyyy h:mm a"
+          )
+        : "",
     },
   };
 };

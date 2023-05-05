@@ -3,25 +3,31 @@ import {
   CustomField,
   dateFormats,
   fieldTypes,
+  initialOptions,
 } from "../../pages/dynamic-portal";
 import { OptionBuilder } from "./option-builder";
 import toast from "react-hot-toast";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
+import { DateTime } from "luxon";
 
 type Props = {
   customField: CustomField;
   setCustomField: (customField: CustomField) => void;
   setForEmbedCustomField: any;
-  setCustomFieldStatus: any;
+  lastSavedAt: string;
+  setLastSavedAt: Function;
 };
 
 export const CustomFieldBuilder = ({
   customField,
   setCustomField,
   setForEmbedCustomField,
-  setCustomFieldStatus,
+  lastSavedAt,
+  setLastSavedAt,
 }: Props) => {
-  const options = customField.enumOptions;
+  const options = customField.enumOptions || initialOptions;
+
+  console.log("options", options);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -58,6 +64,7 @@ export const CustomFieldBuilder = ({
       };
 
       setForEmbedCustomField(customField);
+      setLastSavedAt();
       console.log("custom field saved", customField);
     } catch (error) {
       console.error("Error saving custom field:", error);
@@ -66,48 +73,54 @@ export const CustomFieldBuilder = ({
 
   return (
     <div className="">
-      <p className="font-semibold mb-1">Customize Your Fields</p>
+      <p className="font-semibold mb-1">Customize Fields</p>
 
-      <p className="text-xs text-gray-600 mb-8">
+      <p className="text-xs text-gray-600 mb-4">
         Create a custom field in HCM Show that captures the organization's
         specific requirements beyond the standard fields and ensure that it is
         reflected in the Flatfile.
       </p>
 
-      <label className="block font-semibold mb-1">Name</label>
-      <input
-        name="custom-field-name"
-        type="text"
-        className="border border-gray-200 rounded px-2 py-2 w-full mb-4"
-        placeholder="Employee Birthdate"
-        value={customField.name}
-        onChange={(e) => {
-          setCustomField({ ...customField, name: e.target.value });
-        }}
-      />
+      <div className="flex flex-row items-center">
+        <div className="mr-2">
+          <label className="block text-xs font-semibold mb-1">Name</label>
+          <input
+            name="custom-field-name"
+            type="text"
+            className="border border-gray-200 text-sm rounded px-2 py-2 w-full mb-4"
+            placeholder="Employee Birthdate"
+            value={customField.name}
+            onChange={(e) => {
+              setCustomField({ ...customField, name: e.target.value });
+            }}
+          />
+        </div>
 
-      <label className="block font-semibold mb-1">Type</label>
-      <select
-        name="custom-field-type"
-        className="border border-gray-200 rounded px-2 py-2 w-full mb-4"
-        value={customField.type}
-        onChange={(e) => {
-          setCustomField({
-            ...customField,
-            type: e.target.value as keyof typeof fieldTypes,
-          });
-        }}
-      >
-        {Object.keys(fieldTypes).map((key) => {
-          return (
-            <option key={key} value={key}>
-              {fieldTypes[key as keyof typeof fieldTypes]}
-            </option>
-          );
-        })}
-      </select>
+        <div>
+          <label className="block text-xs font-semibold mb-1">Type</label>
+          <select
+            name="custom-field-type"
+            className="border border-gray-200 text-sm rounded px-2 py-2 w-full mb-4 h-[39px]"
+            value={customField.type}
+            onChange={(e) => {
+              setCustomField({
+                ...customField,
+                type: e.target.value as keyof typeof fieldTypes,
+              });
+            }}
+          >
+            {Object.keys(fieldTypes).map((key) => {
+              return (
+                <option key={key} value={key}>
+                  {fieldTypes[key as keyof typeof fieldTypes]}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+      </div>
 
-      <label className="block font-semibold mb-1">Validations</label>
+      <label className="block text-xs font-semibold mb-1">Validations</label>
 
       <div className="flex flex-row items-center mb-4">
         <input
@@ -122,7 +135,7 @@ export const CustomFieldBuilder = ({
         />
         <label
           htmlFor="custom-field-required-validation"
-          className="block text-sm cursor-pointer"
+          className="block text-xs cursor-pointer"
         >
           Field is required
         </label>
@@ -130,12 +143,12 @@ export const CustomFieldBuilder = ({
 
       {customField.type === "date" && (
         <div>
-          <label className="block text-sm font-semibold mb-1">
+          <label className="block text-xs font-semibold mb-1">
             Date Format
           </label>
           <select
             name="custom-field-type"
-            className="border border-gray-200 rounded px-2 py-2 w-1/2 mb-4"
+            className="border border-gray-200 text-sm rounded px-2 py-2 w-1/2 mb-4"
             value={customField.dateFormat}
             onChange={(e) => {
               setCustomField({
@@ -157,7 +170,7 @@ export const CustomFieldBuilder = ({
 
       {customField.type === "number" && (
         <div>
-          <label className="block text-sm font-semibold mb-1">
+          <label className="block text-xs font-semibold mb-1">
             Decimal Places
           </label>
           <input
@@ -165,7 +178,7 @@ export const CustomFieldBuilder = ({
             type="number"
             min={0}
             step={1}
-            className="border border-gray-200 rounded px-2 py-2 mb-4 w-16"
+            className="border border-gray-200 text-xs rounded px-2 py-2 mb-4 w-16"
             placeholder="2"
             defaultValue={customField.decimals}
             onChange={(e) => {
@@ -182,7 +195,7 @@ export const CustomFieldBuilder = ({
         <div>
           <label
             htmlFor="custom-field-required-validation"
-            className="block text-sm cursor-pointer mb-2"
+            className="block text-xs cursor-pointer mb-2"
           >
             Category options
           </label>
@@ -242,15 +255,23 @@ export const CustomFieldBuilder = ({
           name="customField"
           value={JSON.stringify(customField)}
         />
-        <button
-          onClick={() => {
-            toast.success("Saved Custom Field");
-            setCustomFieldStatus("Saved");
-          }}
-          className="px-4 py-2 inline-flex items-center justify-center rounded-md text-sm font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
-        >
-          Save Custom Field
-        </button>
+
+        <div className="flex flex-row items-center">
+          <button
+            onClick={() => {
+              toast.success("Saved Custom Field");
+            }}
+            className="px-4 py-1 inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
+          >
+            Save Custom Field
+          </button>
+
+          {lastSavedAt && (
+            <p className="text-[10px] text-gray-400 ml-4">
+              Saved {lastSavedAt}
+            </p>
+          )}
+        </div>
       </form>
     </div>
   );

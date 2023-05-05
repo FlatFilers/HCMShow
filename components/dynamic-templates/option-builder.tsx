@@ -26,7 +26,7 @@ export const OptionBuilder = ({
         return (
           <div
             key={option.id}
-            className="flex flex-row justify-between items-center mb-2"
+            className="flex flex-row justify-between text-sm items-center mb-2"
           >
             <input
               type="text"
@@ -69,7 +69,7 @@ export const OptionBuilder = ({
 
       <div
         onClick={addNewOption}
-        className="flex flex-row items-center justify-start text-gray-400 text-sm cursor-pointer"
+        className="flex flex-row items-center justify-start text-gray-400 text-xs cursor-pointer mb-4"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
