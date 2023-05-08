@@ -96,31 +96,22 @@ export default async function handler(
   // console.log("space", space);
   // console.log("space data", space.flatfileData);
 
-  const basePathUrl = `${process.env.BASEPATH_URL}/project-onboarding`;
   const initialDocumentBody = `<div> 
-  <h1 style="margin-bottom: 0px;">Welcome! Let's import your data.</h1>
-  <p style="margin-top: 0px; margin-bottom: 12px;">Follow the steps below in order. Note: you can always return to this page by clicking "Welcome" in the left-hand sidebar.</p>
-  <h2 style="margin-bottom: 0px;">1. Visit Files</h2>
-  <p style="margin-top: 0px; margin-bottom: 8px;">Click "Files" in the left-hand sidebar. This is where you can upload files you want to import into Flatfile.</p>
-  <h2 style="margin-bottom: 0px;">2. Upload the sample data</h2>
-  <p style="margin-top: 0px; margin-bottom: 8px;">On the Files page, click "Add files" or drag-and-drop the sample data you downloaded previously onto the page.</p>
-  <p style="margin-top: 0px; margin-bottom: 8px;">
-  <div style="font-weight: 600">Note:</div> There are multiple tabs in the sample data. Be sure to
-  upload data from each tab.</p>
-  <p style="margin-top: 0px; margin-bottom: 8px;">After the file uploads, click "Import" and follow the steps to completion to import the workbook.</p>
-  <h2 style="margin-bottom: 0px;">3. Return to HCM.show</h2>
-  <p style="margin-top: 0px; margin-bottom: 12px;">After uploading and importing the sample data, click the button below to return to HCM.show and click "Sync Records" to sync the data back into HCM.show.</p>
-  <a 
-    class="return-button"
-    style="
-      padding: 8px 12px;
-      border-radius: 4px;
-      border: 1px solid #4c48ef;
-      text-decoration: none;
-      background-color: white;
-      color: #4c48ef;
-      display: inline-block;"
-    href="${basePathUrl}">Return to HCM.show</a>
+  <h1 style="margin-bottom: 36px;">Welcome! We're excited to help you import your data to HCM Show.</h1>
+  <h2 style="margin-top: 0px; margin-bottom: 12px;">Follow the steps below to get started:</h2>
+  <h2 style="margin-bottom: 0px;">1. Upload your file</h2>
+  <p style="margin-top: 0px; margin-bottom: 8px;">Click "Files" in the left-hand sidebar, and upload the sample data you want to import into Flatfile. You can do this by clicking "Add files" or dragging and dropping the file onto the page.</p>
+  <h2 style="margin-bottom: 0px;">2. Import your Jobs Data</h2>
+  <p style="margin-top: 0px; margin-bottom: 8px;">Click "Import" and select the Jobs data. Follow the mapping instructions in Flatfile to complete the import. Once the data has been mapped, it will be loaded into Flatfile's table UI, where validations and transformations have been applied.</p>
+  <h2 style="margin-bottom: 0px;">3. Import your Employee Data</h2>
+  <p style="margin-top: 0px; margin-bottom: 8px;">Click "Import" and select the Employee data. Follow the mapping instructions in Flatfile to complete the import. Once the data has been mapped, it will be loaded into Flatfile's table UI, where validations and transformations have been applied.</p>
+  <h2 style="margin-bottom: 0px;">4. Validate and Transform Data</h2>
+  <p style="margin-top: 0px; margin-bottom: 8px;">Ensure that the data is correctly formatted and transformed By Flatfile. You can easily address any issues and errors within Flatfile's user interface.</p>
+  <h2 style="margin-bottom: 0px;">5. Load Data into HCM.Show</h2>
+  <p style="margin-top: 0px; margin-bottom: 12px;">Once the data has been validated and transformed, use the custom action on each sheet to load the data into HCM.Show application.</p>
+  <h2 style="margin-bottom: 0px;">6. Return to HCM.Show</h2>
+  <p style="margin-top: 0px; margin-bottom: 36px;">Once you have loaded the data from Flatfile to HCM Show, return to HCM.Show and navigate to the Data Templates section within the application to view the Jobs and Employees data that you have just loaded.</p>
+  <h3 style="margin-top: 0px; margin-bottom: 12px;">Remember, if you need any assistance, you can always refer back to this page by clicking "Welcome" in the left-hand sidebar!</h3>
 </div>`;
 
   const addDocumentToSpaceResponse = await addDocumentToSpace(
