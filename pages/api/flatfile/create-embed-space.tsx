@@ -66,18 +66,19 @@ export default async function handler(
   // console.log("space data", flatfileSpaceData);
 
   const initialDocumentBody = `<div> 
-  <h1 style="margin-bottom: 0px;">Welcome! Let's import your data.</h1>
-  <p style="margin-top: 0px; margin-bottom: 12px;">Follow the steps below in order. Note: you can always return to this page by clicking "Welcome" in the left-hand sidebar.</p>
-  <h2 style="margin-bottom: 0px;">1. Visit Files</h2>
-  <p style="margin-top: 0px; margin-bottom: 8px;">Click "Files" in the left-hand sidebar. This is where you can upload files you want to import into Flatfile.</p>
-  <h2 style="margin-bottom: 0px;">2. Upload the sample data</h2>
-  <p style="margin-top: 0px; margin-bottom: 8px;">On the Files page, click "Add files" or drag-and-drop the sample data you downloaded previously onto the page.</p>
-  <p style="margin-top: 0px; margin-bottom: 8px;">
-  <div style="font-weight: 600">Note:</div> There are multiple tabs in the sample data. Be sure to
-  upload data from each tab.</p>
-  <p style="margin-top: 0px; margin-bottom: 8px;">After the file uploads, click "Import" and follow the steps to completion to import the workbook.</p>
-  <h2 style="margin-bottom: 0px;">3. Return to HCM.show</h2>
-  <p style="margin-top: 0px; margin-bottom: 12px;">After uploading and importing the sample data, click the button below to return to HCM.show and click "Sync Records" to sync the data back into HCM.show.</p>
+  <h1 style="margin-bottom: 36px;">Welcome! We're excited to help you import your data to HCM Show.</h1>
+  <h2 style="margin-top: 0px; margin-bottom: 12px;">Follow the steps below to get started:</h2>
+  <h2 style="margin-bottom: 0px;">1. Upload your file</h2>
+  <p style="margin-top: 0px; margin-bottom: 8px;">Click "Files" in the left-hand sidebar, and upload the sample data you want to import into Flatfile. You can do this by clicking "Add files" or dragging and dropping the file onto the page.</p>
+  <h2 style="margin-bottom: 0px;">2. Import the Benefit Elections Data</h2>
+  <p style="margin-top: 0px; margin-bottom: 8px;">Click "Import" and select the benefit elections data. Follow the mapping instructions in Flatfile to complete the import. Once the data has been mapped, it will be loaded into Flatfile's table UI, where validations and transformations have been applied.</p>
+  <h2 style="margin-bottom: 0px;">3. Validate and Transform Data</h2>
+  <p style="margin-top: 0px; margin-bottom: 8px;">Make sure to verify that your data is correctly formatted and transformed by Flatfile. Flatfile will handle formatting dates, rounding amounts, and validating the existence of employees and benefit plans for you! If there are any issues or errors, you can easily address them within Flatfile's user interface.</p>
+  <h2 style="margin-bottom: 0px;">4. Load Data into HCM.Show</h2>
+  <p style="margin-top: 0px; margin-bottom: 12px;">Once the data has been validated and transformed, use the “Push records to HCM.show” button to load data into the HCM.Show application.</p>
+  <h2 style="margin-bottom: 0px;">5. Return to HCM.Show</h2>
+  <p style="margin-top: 0px; margin-bottom: 36px;">Once you have loaded the data from Flatfile to HCM Show, return to HCM.Show and navigate to the Data Templates section within the application to view the benefit elections data that you have just loaded.</p>
+  <h3 style="margin-top: 0px; margin-bottom: 12px;">Remember, if you need any assistance, you can always refer back to this page by clicking "Welcome" in the left-hand sidebar!</h3>
 </div>`;
 
   const addDocumentToSpaceResponse = await addDocumentToSpace(
