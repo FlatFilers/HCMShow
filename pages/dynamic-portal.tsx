@@ -81,11 +81,46 @@ export interface Option {
 }
 
 export const initialOptions: Option[] = [
-  { id: 1, input: "ft", output: "Full-Time" },
-  { id: 2, input: "pt", output: "Part-Time" },
-  { id: 3, input: "tm", output: "Temporary" },
-  { id: 4, input: "ct", output: "Contract" },
+  {
+    id: 1,
+    input: "Insurance_Coverage_Type_Insurance",
+    output: "Insurance",
+  },
+
+  {
+    id: 2,
+    input: "Health_Care_Coverage_Type_Medical",
+    output: "Medical",
+  },
+  {
+    id: 3,
+    input: "Health_Care_Coverage_Type_Dental",
+    output: "Dental",
+  },
+  {
+    id: 4,
+    input: "Retirement_Savings_Coverage_Type_Retirement",
+    output: "Retirement",
+  },
+  {
+    id: 5,
+    input: "Additional_Benefits_Coverage_Type_Other",
+    output: "Other",
+  },
 ];
+
+const customOptionsConfig = (options: Option[]) => {
+  const mappedOptions = options.map((o) => {
+    return {
+      value: o.input,
+      label: o.output,
+    };
+  });
+
+  return {
+    config: { options: mappedOptions },
+  };
+};
 
 const filterConfig = ({
   baseConfig,
@@ -118,10 +153,6 @@ const filterConfig = ({
     return f.key !== dynamicFieldType;
   }) as Property[];
 
-  const mappedOptions = forEmbedOptions.map((option) => {
-    return { value: option.input, label: option.output };
-  });
-
   const { id: _baseConfigId, ...baseConfigWithoutId } = baseConfig;
   const { id: _blueprintId, ...blueprintWithoutId } = blueprint;
 
@@ -142,7 +173,9 @@ const filterConfig = ({
               ...otherFields,
               {
                 ...field,
-                config: { options: mappedOptions },
+                ...(customFieldConfig.type === "enum" &&
+                  forEmbedOptions &&
+                  customOptionsConfig(forEmbedOptions)),
                 slug: `${field?.key}-${Date.now()}`,
               },
             ],
@@ -213,6 +246,9 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     label: customField.name,
     description: "Custom field",
     constraints: [{ type: "required" }],
+    ...(customField.type === "enum" &&
+      customField.enumOptions &&
+      customOptionsConfig(customField.enumOptions)),
     forEmbed: forEmbedCustomField ? true : false,
   };
 
@@ -322,7 +358,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
             </p>
 
             <div className="flex flex-row justify-between mb-12">
-              <div className="max-w-md">
+              <div className="max-w-lg">
                 <div className="mb-12">
                   <CustomFieldBuilder
                     customField={customField}
