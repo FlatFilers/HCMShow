@@ -87,6 +87,19 @@ export const initialOptions: Option[] = [
   { id: 4, input: "ct", output: "Contract" },
 ];
 
+const customOptionsConfig = (options: Option[]) => {
+  const mappedOptions = options.map((o) => {
+    return {
+      value: o.input,
+      label: o.output,
+    };
+  });
+
+  return {
+    config: { options: mappedOptions },
+  };
+};
+
 const filterConfig = ({
   baseConfig,
   workbookName,
@@ -118,10 +131,6 @@ const filterConfig = ({
     return f.key !== dynamicFieldType;
   }) as Property[];
 
-  const mappedOptions = forEmbedOptions.map((option) => {
-    return { value: option.input, label: option.output };
-  });
-
   const { id: _baseConfigId, ...baseConfigWithoutId } = baseConfig;
   const { id: _blueprintId, ...blueprintWithoutId } = blueprint;
 
@@ -142,7 +151,9 @@ const filterConfig = ({
               ...otherFields,
               {
                 ...field,
-                config: { options: mappedOptions },
+                ...(customFieldConfig.type === "enum" &&
+                  forEmbedOptions &&
+                  customOptionsConfig(forEmbedOptions)),
                 slug: `${field?.key}-${Date.now()}`,
               },
             ],
@@ -213,6 +224,9 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     label: customField.name,
     description: "Custom field",
     constraints: [{ type: "required" }],
+    ...(customField.type === "enum" &&
+      customField.enumOptions &&
+      customOptionsConfig(customField.enumOptions)),
     forEmbed: forEmbedCustomField ? true : false,
   };
 
