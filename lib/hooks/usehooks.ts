@@ -1,6 +1,6 @@
 import { useEffect, RefObject } from "react";
 
-type Handler = (event: MouseEvent | TouchEvent) => void;
+type Handler = (event: MouseEvent | TouchEvent | KeyboardEvent) => void;
 
 export function useOnClickOutside<T extends HTMLElement = HTMLElement>(
   ref: RefObject<T>,
@@ -21,12 +21,20 @@ export function useOnClickOutside<T extends HTMLElement = HTMLElement>(
       handler(event);
     };
 
+    const escapeKeyListener = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        handler(event);
+      }
+    };
+
     document.addEventListener("mousedown", mouseDownListener);
     document.addEventListener("touchstart", touchStartListener);
+    document.addEventListener("keydown", escapeKeyListener);
 
     return () => {
       document.removeEventListener("mousedown", mouseDownListener);
       document.removeEventListener("touchstart", touchStartListener);
+      document.removeEventListener("keydown", escapeKeyListener);
     };
   }, [ref, handler]);
 }
