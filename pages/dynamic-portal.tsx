@@ -1,5 +1,5 @@
 import { NextPageWithLayout } from "./_app";
-import { FormEvent, useCallback, useState } from "react";
+import { FormEvent, useCallback, useState, useRef } from "react";
 import { IThemeConfig, useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
@@ -13,6 +13,7 @@ import {
   PuzzlePieceIcon,
   SparklesIcon,
   VariableIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
 import {
   BlueprintWithId,
@@ -29,6 +30,7 @@ import { workflowItems } from "../components/sidebar-layout";
 import FeaturesList from "../components/shared/features-list";
 import { theme } from "../lib/theme";
 import { DateTime } from "luxon";
+import { useOnClickOutside } from "../lib/hooks/usehooks";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -339,174 +341,186 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     }
   };
 
+  const modalRef = useRef<HTMLDivElement | null>(null);
+
+  useOnClickOutside(modalRef, () => setShowSpace(false));
+
   return (
     <div className="ml-12 mt-16">
-      <div className="max-w-5xl">
-        <div className="mb-12">
-          <div
-            className={`border-t-[6px] w-12 mb-2 ${dynamicPortalItem.color}`}
-          ></div>
-          <p className="text-sm font-semibold">{dynamicPortalItem.name}</p>
-        </div>
+      <div
+        className={`border-t-[6px] w-12 mb-2 ${dynamicPortalItem.color}`}
+      ></div>
+      <p className="text-sm font-semibold pb-6">{dynamicPortalItem.name}</p>
+      <div className="h-screen overflow-scroll pb-36">
+        <div className="max-w-5xl">
+          <div className="flex flex-row justify-between pt-12">
+            <div>
+              <p className="text-2xl mb-2">Customize your workspace</p>
+              <p className="mb-8 text-gray-600 max-w-xl text-sm">
+                Adjust the field options below. Save each as you complete them
+                and then click Open Portal to add your data.
+              </p>
 
-        <div className="flex flex-row justify-between">
-          <div>
-            <p className="text-2xl mb-2">Customize your workspace</p>
-            <p className="mb-8 text-gray-600 max-w-xl text-sm">
-              Adjust the field options below. Save each as you complete them and
-              then click Open Portal to add your data.
-            </p>
-
-            <div className="flex flex-row justify-between mb-12">
-              <div className="max-w-lg">
-                <div className="mb-12">
-                  <CustomFieldBuilder
-                    customField={customField}
-                    setCustomField={setCustomField}
-                    setForEmbedCustomField={setForEmbedCustomField}
-                    lastSavedAt={customFieldLastSavedAt}
-                    setLastSavedAt={() => {
-                      setCustomFieldLastSavedAt(
-                        DateTime.now().toFormat("MM/dd/yyyy h:mm a")
-                      );
-                    }}
-                  />
-                </div>
-
-                <div className="flex flex-col mb-8">
-                  <p className="font-semibold mb-1">Adjust category values</p>
-                  <p className="text-xs text-gray-600 mb-4">
-                    Make sure to adjust the category values in HCM Show as per
-                    the evolving specific offerings of the organization and
-                    ensure that these updates are also reflected in the
-                    Flatfile.
-                  </p>
-
-                  <div className="">
-                    <OptionBuilder
-                      options={options.sort((a, b) => a.id - b.id)}
-                      updateInput={(option, value) => {
-                        const filteredOptions = options.filter((o) => {
-                          return o.id !== option.id;
-                        });
-
-                        setOptions([
-                          ...filteredOptions,
-                          { ...option, input: value },
-                        ]);
-                      }}
-                      updateOutput={(option, value) => {
-                        const filteredOptions = options.filter((o) => {
-                          return o.id !== option.id;
-                        });
-
-                        setOptions([
-                          ...filteredOptions,
-                          { ...option, output: value },
-                        ]);
-                      }}
-                      addNewOption={() => {
-                        const maxId = options.reduce((max, option) => {
-                          return Math.max(max, option.id);
-                        }, 0);
-
-                        setOptions([
-                          ...options,
-                          { id: maxId + 1, input: "", output: "" },
-                        ]);
-                      }}
-                      removeOption={(option) => {
-                        const filteredObjects = options.filter((o) => {
-                          return o.id !== option.id;
-                        });
-
-                        setOptions(filteredObjects);
+              <div className="flex flex-row justify-between mb-12">
+                <div className="max-w-lg">
+                  <div className="mb-12">
+                    <CustomFieldBuilder
+                      customField={customField}
+                      setCustomField={setCustomField}
+                      setForEmbedCustomField={setForEmbedCustomField}
+                      lastSavedAt={customFieldLastSavedAt}
+                      setLastSavedAt={() => {
+                        setCustomFieldLastSavedAt(
+                          DateTime.now().toFormat("MM/dd/yyyy h:mm a")
+                        );
                       }}
                     />
                   </div>
 
-                  <form className="" onSubmit={handleOptionsSubmit}>
-                    <input
-                      type="hidden"
-                      id="options"
-                      name="options"
-                      value={JSON.stringify(options)}
-                    />
-
-                    <div className="flex flex-row items-center">
-                      <button
-                        onClick={() => {
-                          toast.success("Saved Options");
-                        }}
-                        className="px-4 py-1 inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
-                      >
-                        Save Options
-                      </button>
-
-                      {customOptionsLastSavedAt && (
-                        <p className="text-[10px] text-gray-400 ml-4">
-                          Saved {customOptionsLastSavedAt}
-                        </p>
-                      )}
-                    </div>
-                  </form>
-                </div>
-
-                <div className="border-r border-gray-300 mx-12"></div>
-
-                <div className="flex flex-col">
-                  <div className="flex flex-col mb-12">
-                    <div className="">
-                      <form className="w-full" onSubmit={handleResetSubmit}>
-                        <button className="flex flex-row items-center text-sm underline text-gray-400">
-                          Reset customizations
-                          <ArrowPathRoundedSquareIcon className="w-5 h-5 ml-2" />
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-
-                  <div className="">
-                    <p className="text-xl font-semibold mb-1">
-                      Generate your workspace
-                    </p>
+                  <div className="flex flex-col mb-8">
+                    <p className="font-semibold mb-1">Adjust category values</p>
                     <p className="text-xs text-gray-600 mb-4">
-                      Click below to generate your workspace, then scroll down
-                      to add your data.
+                      Make sure to adjust the category values in HCM Show as per
+                      the evolving specific offerings of the organization and
+                      ensure that these updates are also reflected in the
+                      Flatfile.
                     </p>
-                    <button
-                      onClick={() => setShowSpace(!showSpace)}
-                      className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm ${
-                        showSpace
-                          ? "bg-white text-dynamic-portal border-2 border-dynamic-portal"
-                          : "bg-dynamic-portal text-white border-transparent"
-                      }`}
-                    >
-                      {showSpace ? "Close Portal" : "Open Portal"}
-                      {showSpace ? (
-                        <ArrowsPointingInIcon className="w-4 h-4 ml-2" />
-                      ) : (
-                        <SparklesIcon className="w-4 h-4 ml-2" />
-                      )}
-                    </button>
+
+                    <div className="">
+                      <OptionBuilder
+                        options={options.sort((a, b) => a.id - b.id)}
+                        updateInput={(option, value) => {
+                          const filteredOptions = options.filter((o) => {
+                            return o.id !== option.id;
+                          });
+
+                          setOptions([
+                            ...filteredOptions,
+                            { ...option, input: value },
+                          ]);
+                        }}
+                        updateOutput={(option, value) => {
+                          const filteredOptions = options.filter((o) => {
+                            return o.id !== option.id;
+                          });
+
+                          setOptions([
+                            ...filteredOptions,
+                            { ...option, output: value },
+                          ]);
+                        }}
+                        addNewOption={() => {
+                          const maxId = options.reduce((max, option) => {
+                            return Math.max(max, option.id);
+                          }, 0);
+
+                          setOptions([
+                            ...options,
+                            { id: maxId + 1, input: "", output: "" },
+                          ]);
+                        }}
+                        removeOption={(option) => {
+                          const filteredObjects = options.filter((o) => {
+                            return o.id !== option.id;
+                          });
+
+                          setOptions(filteredObjects);
+                        }}
+                      />
+                    </div>
+
+                    <form className="" onSubmit={handleOptionsSubmit}>
+                      <input
+                        type="hidden"
+                        id="options"
+                        name="options"
+                        value={JSON.stringify(options)}
+                      />
+
+                      <div className="flex flex-row items-center">
+                        <button
+                          onClick={() => {
+                            toast.success("Saved Options");
+                          }}
+                          className="px-4 py-1 inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
+                        >
+                          Save Options
+                        </button>
+
+                        {customOptionsLastSavedAt && (
+                          <p className="text-[10px] text-gray-400 ml-4">
+                            Saved {customOptionsLastSavedAt}
+                          </p>
+                        )}
+                      </div>
+                    </form>
+                  </div>
+
+                  <div className="border-r border-gray-300 mx-12"></div>
+
+                  <div className="flex flex-col">
+                    <div className="flex flex-col mb-12">
+                      <div className="">
+                        <form className="w-full" onSubmit={handleResetSubmit}>
+                          <button className="flex flex-row items-center text-sm underline text-gray-400">
+                            Reset customizations
+                            <ArrowPathRoundedSquareIcon className="w-5 h-5 ml-2" />
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+
+                    <div className="">
+                      <p className="text-xl font-semibold mb-1">
+                        Generate your workspace
+                      </p>
+                      <p className="text-xs text-gray-600 mb-4">
+                        Click below to generate your workspace, then scroll down
+                        to add your data.
+                      </p>
+                      <button
+                        onClick={() => setShowSpace(!showSpace)}
+                        className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm ${
+                          showSpace
+                            ? "bg-white text-dynamic-portal border-2 border-dynamic-portal"
+                            : "bg-dynamic-portal text-white border-transparent"
+                        }`}
+                      >
+                        {showSpace ? "Close Portal" : "Open Portal"}
+                        {showSpace ? (
+                          <ArrowsPointingInIcon className="w-4 h-4 ml-2" />
+                        ) : (
+                          <SparklesIcon className="w-4 h-4 ml-2" />
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <FeaturesList
-            type="dynamic-portal"
-            githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/src/workflows/dynamic-templates/index.ts"
-            features={features}
-          />
+            <FeaturesList
+              type="dynamic-portal"
+              githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/src/workflows/dynamic-templates/index.ts"
+              features={features}
+            />
+          </div>
         </div>
       </div>
 
       {error && <div>{error}</div>}
+      {/* TODO: Add spinner while embed is loading */}
       {!error && showSpace && (
-        <div className="mr-16">
-          <div>{data?.component}</div>
+        <div className="absolute top-0 right-0 w-full h-full bg-black/60">
+          <div className="relative mt-16 mx-auto max-w-7xl">
+            <XCircleIcon
+              className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
+              onClick={() => setShowSpace(false)}
+            >
+              X
+            </XCircleIcon>
+            <div ref={modalRef}>{data?.component}</div>
+          </div>
         </div>
       )}
     </div>
