@@ -348,10 +348,12 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   return (
     <div className="ml-12 mt-16">
       <div className="max-w-5xl">
-        <div
-          className={`border-t-[6px] w-12 mb-2 ${dynamicPortalItem.color}`}
-        ></div>
-        <p className="text-sm font-semibold pb-12">{dynamicPortalItem.name}</p>
+        <div className="mb-12">
+          <div
+            className={`border-t-[6px] w-12 mb-2 ${dynamicPortalItem.color}`}
+          ></div>
+          <p className="text-sm font-semibold">{dynamicPortalItem.name}</p>
+        </div>
         <div className="flex flex-row justify-between">
           <div>
             <p className="text-2xl mb-2">Customize your workspace</p>
