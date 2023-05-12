@@ -1,5 +1,5 @@
 import { NextPageWithLayout } from "./_app";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { IThemeConfig, useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
@@ -10,6 +10,7 @@ import {
   ArrowsPointingInIcon,
   PencilIcon,
   SparklesIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { getAccessToken } from "../lib/flatfile";
 import { Action, PrismaClient, Space } from "@prisma/client";
@@ -24,6 +25,7 @@ import SetupSpace from "../components/shared/setup-space";
 import StepList, { Step } from "../components/shared/step-list";
 import Workspace from "../components/embedded-portal/workspace";
 import { theme } from "../lib/theme";
+import { useOnClickOutside } from "../lib/hooks/usehooks";
 
 interface Props {
   accessToken: string;
@@ -148,6 +150,10 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     }
   }, []);
 
+  const modalRef = useRef<HTMLDivElement | null>(null);
+
+  useOnClickOutside(modalRef, () => setShowSpace(false));
+
   return (
     <div className="mx-12 mt-16 self-center">
       <div className="max-w-5xl">
@@ -211,8 +217,16 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
 
       {error && <div>{error}</div>}
       {!error && showSpace && (
-        <div className="mr-16">
-          <div>{data?.component}</div>
+        <div className="absolute top-0 right-0 h-full w-full bg-black/60">
+          <div className="relative mt-16 mx-auto max-w-7xl">
+            <XCircleIcon
+              className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
+              onClick={() => setShowSpace(false)}
+            >
+              X
+            </XCircleIcon>
+            <div ref={modalRef}>{data?.component}</div>
+          </div>
         </div>
       )}
     </div>
