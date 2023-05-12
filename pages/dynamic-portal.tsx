@@ -1,5 +1,5 @@
 import { NextPageWithLayout } from "./_app";
-import { FormEvent, useCallback, useState } from "react";
+import { FormEvent, useCallback, useState, useRef } from "react";
 import { IThemeConfig, useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
@@ -13,6 +13,7 @@ import {
   PuzzlePieceIcon,
   SparklesIcon,
   VariableIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
 import {
   BlueprintWithId,
@@ -29,6 +30,7 @@ import { workflowItems } from "../components/sidebar-layout";
 import FeaturesList from "../components/shared/features-list";
 import { theme } from "../lib/theme";
 import { DateTime } from "luxon";
+import { useOnClickOutside } from "../lib/hooks/usehooks";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -339,6 +341,10 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     }
   };
 
+  const modalRef = useRef<HTMLDivElement | null>(null);
+
+  useOnClickOutside(modalRef, () => setShowSpace(false));
+
   return (
     <div className="ml-12 mt-16">
       <div className="max-w-5xl">
@@ -348,7 +354,6 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
           ></div>
           <p className="text-sm font-semibold">{dynamicPortalItem.name}</p>
         </div>
-
         <div className="flex flex-row justify-between">
           <div>
             <p className="text-2xl mb-2">Customize your workspace</p>
@@ -504,9 +509,18 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
       </div>
 
       {error && <div>{error}</div>}
+      {/* TODO: Add spinner while embed is loading */}
       {!error && showSpace && (
-        <div className="mr-16">
-          <div>{data?.component}</div>
+        <div className="absolute top-0 right-0 w-full h-full bg-black/60">
+          <div className="relative mt-16 mx-auto max-w-7xl">
+            <XCircleIcon
+              className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
+              onClick={() => setShowSpace(false)}
+            >
+              X
+            </XCircleIcon>
+            <div ref={modalRef}>{data?.component}</div>
+          </div>
         </div>
       )}
     </div>

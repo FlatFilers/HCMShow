@@ -129,7 +129,7 @@ const SidebarLayout = ({ children }: Props) => {
   const workflowsNavigation = workflowItems(router);
 
   return (
-    <div className="h-screen w-screen bg-white">
+    <div className="h-screen w-screen bg-white overflow-auto">
       <Toaster />
 
       <MobileSidebar
