@@ -70,12 +70,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   };
   const { error, data } = useSpace({ ...spaceProps });
 
-  const whatdata = useSpace({ ...spaceProps });
-
-  console.log("whatdata", whatdata.data?.component);
-
-  console.log("data", data);
-
   useCallback(() => {
     if (error) {
       setShowSpace(false);
