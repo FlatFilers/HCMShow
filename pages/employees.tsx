@@ -3,9 +3,8 @@ import { Prisma, PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { getToken } from "next-auth/jwt";
 import { useRouter } from "next/router";
-import toast from "react-hot-toast";
-import { useEffect } from "react";
 import { DateTime } from "luxon";
+import { useFlashMessages } from "../lib/hooks/usehooks";
 
 const employeeWithRelations = Prisma.validator<Prisma.EmployeeArgs>()({
   include: {
@@ -24,18 +23,7 @@ interface Props {
 const Employees: NextPage<Props> = ({ employees }) => {
   const router = useRouter();
 
-  useEffect(() => {
-    if (router.query.flash === "success") {
-      window.history.replaceState(null, "", "/employees");
-      toast.success(router.query.message as string, {
-        id: router.query.message as string,
-        duration: 4000,
-      });
-    } else if (router.query.message === "No Records Found") {
-      window.history.replaceState(null, "", "/employees");
-      toast.error("No Records Found", { id: "no-records" });
-    }
-  }, []);
+  useFlashMessages(router.query, "/employees");
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">

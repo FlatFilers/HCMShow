@@ -7,6 +7,7 @@ import { DateTime } from "luxon";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { ArrowPathRoundedSquareIcon } from "@heroicons/react/24/outline";
+import { useFlashMessages } from "../lib/hooks/usehooks";
 
 const mapActionTypeToLabel = (type: string) => {
   const mappings = {
@@ -41,18 +42,9 @@ const ActivityLog: NextPage<Props> = ({ actions }) => {
   };
 
   const router = useRouter();
-  useEffect(() => {
-    if (router.query.flash === "success") {
-      window.history.replaceState(null, "", "/activity-log");
-      toast.success(router.query.message as string, {
-        id: router.query.message as string,
-        duration: 4000,
-      });
-    } else if (router.query.flash === "error") {
-      window.history.replaceState(null, "", "/activity-log");
-      toast.error(router.query.message as string, { id: "error" });
-    }
-  }, []);
+
+  useFlashMessages(router.query, "/activity-log");
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">

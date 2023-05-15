@@ -1,4 +1,6 @@
+import { ParsedUrlQuery } from "querystring";
 import { useEffect, RefObject } from "react";
+import toast from "react-hot-toast";
 
 type Handler = (event: MouseEvent | TouchEvent | KeyboardEvent) => void;
 
@@ -37,4 +39,28 @@ export function useOnClickOutside<T extends HTMLElement = HTMLElement>(
       document.removeEventListener("keydown", escapeKeyListener);
     };
   }, [ref, handler]);
+}
+
+export function useFlashMessages(
+  routerQuery: ParsedUrlQuery,
+  replaceUrl: string
+) {
+  useEffect(() => {
+    if (routerQuery.flash === "success") {
+      window.history.replaceState(null, "", replaceUrl);
+      toast.success(routerQuery.message as string, {
+        id: routerQuery.message as string,
+        duration: 4000,
+      });
+    } else if (routerQuery.flash === "error") {
+      window.history.replaceState(null, "", replaceUrl);
+      toast.error(routerQuery.message as string);
+    } else if (routerQuery.message === "No Records Found") {
+      window.history.replaceState(null, "", replaceUrl);
+      toast.error("No Records Found", { id: "No Records Found" });
+    } else if (routerQuery.message === "Created space") {
+      window.history.replaceState(null, "", replaceUrl);
+      toast.success("Created space", { id: "Created space" });
+    }
+  }, []);
 }
