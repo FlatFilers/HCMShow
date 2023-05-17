@@ -238,7 +238,7 @@ export const createSpace = async ({
       theme: theme(focusBgColor, backgroundColor),
     },
     actions: [],
-    guestAuthentication: ["shared_link"],
+    guestAuthentication: ["shared_link", "magic_link"],
   };
 
   const spaceResponse = await fetch(`${BASE_PATH}/spaces`, {
