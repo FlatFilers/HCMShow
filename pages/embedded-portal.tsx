@@ -25,7 +25,7 @@ import SetupSpace from "../components/shared/setup-space";
 import StepList, { Step } from "../components/shared/step-list";
 import Workspace from "../components/embedded-portal/workspace";
 import { theme } from "../lib/theme";
-import { useOnClickOutside } from "../lib/hooks/usehooks";
+import { useFlashMessages, useOnClickOutside } from "../lib/hooks/usehooks";
 
 interface Props {
   accessToken: string;
@@ -90,18 +90,9 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     if (localStorage.getItem(storageKey) === "true") {
       setDownloaded(true);
     }
-
-    if (router.query.flash === "success") {
-      window.history.replaceState(null, "", embeddedItem.href);
-      toast.success(router.query.message as string, {
-        id: router.query.message as string,
-        duration: 4000,
-      });
-    } else if (router.query.flash === "error") {
-      window.history.replaceState(null, "", embeddedItem.href);
-      toast.error(router.query.message as string, { id: "error" });
-    }
   }, []);
+
+  useFlashMessages(router.query, embeddedItem.href);
 
   const [currentTime, setCurrentTime] = useState<DateTime>();
 

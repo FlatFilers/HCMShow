@@ -18,6 +18,7 @@ import {
 import { FlatfileSpaceData } from "../lib/flatfile";
 import { DateTime } from "luxon";
 import { workflowItems } from "../components/sidebar-layout";
+import { useFlashMessages } from "../lib/hooks/usehooks";
 
 interface Props {
   urlToSpace: string;
@@ -31,21 +32,7 @@ const FileFeed: NextPage<Props> = ({ urlToSpace, events }) => {
     (i) => i.slug === "file-feed"
   )!;
 
-  useEffect(() => {
-    if (router.query.flash === "success") {
-      window.history.replaceState(null, "", fileFeedItem.href);
-      toast.success(router.query.message as string, {
-        id: router.query.message as string,
-        duration: 4000,
-      });
-    } else if (router.query.flash === "error") {
-      window.history.replaceState(null, "", fileFeedItem.href);
-      toast.error(router.query.message as string, { id: "error" });
-    } else if (router.query.message === "Created space") {
-      window.history.replaceState(null, "", fileFeedItem.href);
-      toast.success("Created space", { id: "created" });
-    }
-  }, []);
+  useFlashMessages(router.query, fileFeedItem.href);
 
   // TODO: remove the hardcoded stuff here and use the actual events
 

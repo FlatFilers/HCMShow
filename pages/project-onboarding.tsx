@@ -13,6 +13,7 @@ import StepList, { Step } from "../components/shared/step-list";
 import DownloadFile from "../components/shared/download-file";
 import SetupSpace from "../components/shared/setup-space";
 import Workspace from "../components/project-onboarding/workspace";
+import { useFlashMessages } from "../lib/hooks/usehooks";
 
 interface Props {
   space?: Space;
@@ -38,21 +39,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
     (i) => i.slug === "project-onboarding"
   )!;
 
-  useEffect(() => {
-    if (router.query.flash === "success") {
-      window.history.replaceState(null, "", projectOnboardingItem.href);
-      toast.success(router.query.message as string, {
-        id: router.query.message as string,
-        duration: 4000,
-        style: {
-          minWidth: "450px",
-        },
-      });
-    } else if (router.query.flash === "error") {
-      window.history.replaceState(null, "", projectOnboardingItem.href);
-      toast.error(router.query.message as string, { id: "error" });
-    }
-  }, []);
+  useFlashMessages(router.query, projectOnboardingItem.href);
 
   const initialSteps: Step[] = [
     {
