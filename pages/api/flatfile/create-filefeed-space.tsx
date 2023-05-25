@@ -43,8 +43,8 @@ export default async function handler(
   }
 
   const accessToken = await getAccessToken({
-    clientId: process.env.FILEFEED_CLIENT_ID as string,
-    secret: process.env.FILEFEED_CLIENT_SECRET as string,
+    clientId: process.env.CLIENT_ID as string,
+    secret: process.env.CLIENT_SECRET as string,
   });
 
   const environmentId = process.env.FILEFEED_ENVIRONMENT_ID as string;

@@ -541,8 +541,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   const accessToken = await getAccessToken({
-    clientId: process.env.DYNAMIC_TEMPLATES_CLIENT_ID as string,
-    secret: process.env.DYNAMIC_TEMPLATES_CLIENT_SECRET as string,
+    clientId: process.env.CLIENT_ID as string,
+    secret: process.env.CLIENT_SECRET as string,
   });
   const baseConfig = await getSpaceConfig(accessToken);
 

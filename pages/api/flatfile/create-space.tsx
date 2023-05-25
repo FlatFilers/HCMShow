@@ -40,8 +40,8 @@ export default async function handler(
   }
 
   const accessToken = await getAccessToken({
-    clientId: process.env.ONBOARDING_CLIENT_ID as string,
-    secret: process.env.ONBOARDING_CLIENT_SECRET as string,
+    clientId: process.env.CLIENT_ID as string,
+    secret: process.env.CLIENT_SECRET as string,
   });
 
   const flatfileSpaceData = await createSpace({

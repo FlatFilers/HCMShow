@@ -26,8 +26,8 @@ export const syncWorkbookRecords = async ({
   spaceType: SpaceType;
 }) => {
   const accessToken = await getAccessToken({
-    clientId: process.env.ONBOARDING_CLIENT_ID as string,
-    secret: process.env.ONBOARDING_CLIENT_SECRET as string,
+    clientId: process.env.CLIENT_ID as string,
+    secret: process.env.CLIENT_SECRET as string,
   });
 
   const employeeRecords = await getRecordsByName({
@@ -202,8 +202,8 @@ export const syncBenefitPlanRecords = async ({
   spaceType: SpaceType;
 }) => {
   const accessToken = await getAccessToken({
-    clientId: process.env.EMBEDDED_CLIENT_ID as string,
-    secret: process.env.EMBEDDED_CLIENT_SECRET as string,
+    clientId: process.env.CLIENT_ID as string,
+    secret: process.env.CLIENT_SECRET as string,
   });
 
   const employeeBenefitRecords = await getRecordsByName({

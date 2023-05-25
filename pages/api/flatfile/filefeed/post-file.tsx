@@ -39,8 +39,8 @@ export default async function handler(
 
   // Post to flatfile api
   const accessToken = await getAccessToken({
-    clientId: process.env.FILEFEED_CLIENT_ID as string,
-    secret: process.env.FILEFEED_CLIENT_SECRET as string,
+    clientId: process.env.CLIENT_ID as string,
+    secret: process.env.CLIENT_SECRET as string,
   });
   const spaceId = (space.flatfileData as unknown as FlatfileSpaceData).id;
 
