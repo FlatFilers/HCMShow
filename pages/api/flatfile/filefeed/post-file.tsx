@@ -38,10 +38,7 @@ export default async function handler(
   })) as Space;
 
   // Post to flatfile api
-  const accessToken = await getAccessToken({
-    clientId: process.env.CLIENT_ID as string,
-    secret: process.env.CLIENT_SECRET as string,
-  });
+  const accessToken = await getAccessToken();
   const spaceId = (space.flatfileData as unknown as FlatfileSpaceData).id;
 
   const file = await fetchFileFromDrive();

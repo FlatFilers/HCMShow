@@ -540,10 +540,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const accessToken = await getAccessToken({
-    clientId: process.env.CLIENT_ID as string,
-    secret: process.env.CLIENT_SECRET as string,
-  });
+  const accessToken = await getAccessToken();
   const baseConfig = await getSpaceConfig(accessToken);
 
   const prisma = prismaClient;
