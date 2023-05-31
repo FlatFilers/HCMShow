@@ -39,10 +39,7 @@ export default async function handler(
     throw new Error("No user found");
   }
 
-  const accessToken = await getAccessToken({
-    clientId: process.env.ONBOARDING_CLIENT_ID as string,
-    secret: process.env.ONBOARDING_CLIENT_SECRET as string,
-  });
+  const accessToken = await getAccessToken();
 
   const flatfileSpaceData = await createSpace({
     accessToken,

@@ -31,10 +31,7 @@ export default async function handler(
 
   const userId = token.sub;
 
-  const accessToken = await getAccessToken({
-    clientId: process.env.EMBEDDED_CLIENT_ID as string,
-    secret: process.env.EMBEDDED_CLIENT_SECRET as string,
-  });
+  const accessToken = await getAccessToken();
 
   const flatfileSpaceData = await createSpace({
     accessToken,

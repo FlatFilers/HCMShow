@@ -42,10 +42,7 @@ export default async function handler(
     throw new Error("No user found");
   }
 
-  const accessToken = await getAccessToken({
-    clientId: process.env.FILEFEED_CLIENT_ID as string,
-    secret: process.env.FILEFEED_CLIENT_SECRET as string,
-  });
+  const accessToken = await getAccessToken();
 
   const environmentId = process.env.FILEFEED_ENVIRONMENT_ID as string;
 
