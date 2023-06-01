@@ -12,7 +12,7 @@
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
     "@fast-csv/parse": "^4.3.6",
-    "@flatfile/api": "^0.0.8",
+    "@flatfile/api": "^1.5.3",
     "@flatfile/react": "^5.0.10",
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
