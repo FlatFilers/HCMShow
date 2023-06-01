@@ -17,16 +17,6 @@ export default async function handler(
 
   const { spaceId, topic } = req.body;
 
-  if (
-    ![
-      FileFeedEventType.RecordsCreated,
-      FileFeedEventType.RecordsUpdated,
-      FileFeedEventType.RecordsDeleted,
-    ].includes(topic as FileFeedEventType)
-  ) {
-    throw new Error("/sync-file-feed: invalid topic", topic);
-  }
-
   console.log("spaceId", spaceId);
   console.log("topic", topic);
 
