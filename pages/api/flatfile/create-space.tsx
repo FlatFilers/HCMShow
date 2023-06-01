@@ -2,16 +2,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
-import {
-  addDocumentToSpace,
-  addGuestToSpace,
-  createSpace,
-  createSpaceNew,
-  getAccessToken,
-  getSpace,
-  inviteGuestToSpace,
-} from "../../../lib/flatfile";
 import { SpaceType } from "../../../lib/space";
+import { addGuestToSpace, createSpace } from "../../../lib/new-flatfile";
 
 export default async function handler(
   req: NextApiRequest,

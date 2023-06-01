@@ -6,6 +6,7 @@ import {
   GetAccessTokenRequest,
   AccessTokenResponse,
   Blueprint,
+  FlatfileClient,
 } from "@flatfile/api";
 import { PrismaClient, Space, User } from "@prisma/client";
 import { SpaceType } from "./space";
@@ -206,61 +207,43 @@ const fetchRecords = async (
   return await recordsResult.data.records;
 };
 
-export const createSpace = async ({
-  accessToken,
-  spaceConfigId,
-  environmentId,
-  userId,
-  focusBgColor,
-  backgroundColor,
-}: {
-  accessToken: string;
-  spaceConfigId: string;
-  environmentId?: string;
-  userId: string;
-  focusBgColor: string | null;
-  backgroundColor: string | null;
-}) => {
-  if (!spaceConfigId) {
-    throw "No spaceConfigID found. Possible missing ENV var.";
+const flatfileClient = () => {
+  const token = process.env.FLATFILE_API_KEY;
+
+  if (!token) {
+    throw new Error("No FLATFILE_API_KEY ENV");
   }
 
-  const spacePayload = {
-    spaceConfigId,
-    environmentId,
-    name: "HCM.show",
-    metadata: {
-      userId,
-      theme: theme(focusBgColor, backgroundColor),
-    },
-    actions: [],
-    guestAuthentication: ["shared_link", "magic_link"],
-  };
-
-  const spaceResponse = await fetch(`${BASE_PATH}/spaces`, {
-    method: "POST",
-    body: JSON.stringify(spacePayload),
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    },
+  return new FlatfileClient({
+    token,
   });
-  // const spaceResponse = await client.addSpace(spaceRequestParameters, options);
+};
 
-  // console.log("spaceResponse", spaceResponse);
+export const createSpace = async ({
+  userId,
+  environmentId,
+  spaceName,
+}: {
+  userId: string;
+  environmentId: string;
+  spaceName: string;
+}) => {
+  const flatfile = flatfileClient();
 
-  if (!spaceResponse.ok) {
-    console.log("spaceResponse", await spaceResponse.json());
-    throw new Error("Error creating space");
+  try {
+    const result = await flatfile.spaces.create({
+      name: spaceName,
+      environmentId,
+      metadata: {
+        userId,
+      },
+    });
+
+    return result.data;
+  } catch (e) {
+    console.log("error", JSON.stringify(e, null, 2));
+    return null;
   }
-
-  const spaceResult = await spaceResponse.json();
-
-  // console.log("spaceResult body", spaceResult);
-
-  // const spaceId: string = spaceResult.data.id;
-
-  return spaceResult.data as FlatfileSpaceData;
 };
 
 export const getSpace = async (
@@ -291,7 +274,41 @@ export const getSpace = async (
   return getSpaceResult.data as FlatfileSpaceData;
 };
 
-export const addGuestToSpace = async (
+export const addGuestToSpace = async ({
+  environmentId,
+  email,
+  name,
+  spaceId,
+}: {
+  environmentId: string;
+  email: string;
+  name: string;
+  spaceId: string;
+}) => {
+  try {
+    const flatfile = flatfileClient();
+
+    const result = await flatfile.guests.create([
+      {
+        environmentId,
+        email,
+        name,
+        spaces: [
+          {
+            id: spaceId,
+          },
+        ],
+      },
+    ]);
+
+    return result.data;
+  } catch (e) {
+    console.log("error", JSON.stringify(e, null, 2));
+    return null;
+  }
+};
+
+export const addGuestToSpace2 = async (
   user: User,
   flatfileSpaceData: FlatfileSpaceData,
   accessToken: string,
