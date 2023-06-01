@@ -62,7 +62,7 @@ type WorkbookObject = {
 
 const BASE_PATH = "https://api.x.flatfile.com/v1";
 const clientId = process.env.CLIENT_ID;
-const clientSecret = process.env.CLIENT_SECRET;
+const secret = process.env.CLIENT_SECRET;
 
 export async function getAccessToken(): Promise<string> {
   const configParams: ConfigurationParameters = {
@@ -73,7 +73,7 @@ export async function getAccessToken(): Promise<string> {
 
   const getAccessTokenRequest: GetAccessTokenRequest = {
     clientId,
-    clientSecret,
+    secret,
   } as GetAccessTokenRequest;
 
   const getAccessTokenOperationRequest: GetAccessTokenOperationRequest = {
