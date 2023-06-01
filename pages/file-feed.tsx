@@ -11,7 +11,6 @@ import { SpaceType } from "../lib/space";
 import {
   ActionType,
   FileFeedEvent,
-  FileFeedEventType,
   fileFeedEventFromAction,
   getActions,
 } from "../lib/action";

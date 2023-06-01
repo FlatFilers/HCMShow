@@ -2,12 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { prismaClient } from "../../../lib/prisma-client";
 import { syncWorkbookRecords } from "../../../lib/sync-records";
 import { SpaceType, getSpaceForFlatfileSpaceId } from "../../../lib/space";
-import {
-  ActionState,
-  ActionType,
-  FileFeedEventType,
-  createAction,
-} from "../../../lib/action";
+import { ActionState, ActionType, createAction } from "../../../lib/action";
 
 export default async function handler(
   req: NextApiRequest,

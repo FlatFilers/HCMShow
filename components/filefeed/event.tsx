@@ -1,4 +1,4 @@
-import { FileFeedEvent, FileFeedEventType } from "../../lib/action";
+import { FileFeedEvent } from "../../lib/action";
 
 type Props = {
   event: FileFeedEvent;
@@ -11,32 +11,41 @@ const greenEventKeywords = [
   "ready",
   "uploaded",
 ];
-const primaryEventKeywords = ["updated", "outcome-acknowledged", "scheduled"];
 const redEventKeywords = ["deleted"];
+const primaryEventKeywords = ["updated", "outcome-acknowledged", "scheduled"];
 
 const eventColors = (topic: string) => {
   if (greenEventKeywords.some((keyword: string) => topic.includes(keyword))) {
     return "bg-green-800";
   } else if (
-    primaryEventKeywords.some((keyword: string) => topic.includes(keyword))
+    redEventKeywords.some((keyword: string) => topic.includes(keyword))
   ) {
-    return "bg-primary";
-  } else {
     return "bg-red-800";
+  } else {
+    return "bg-primary";
   }
 };
 
 export const Event = ({ event }: Props) => {
   const capitalizeAndReplace = (topic: string) => {
-    topic = topic.replace("records", "commit");
-    topic = topic.replace("upload:completed", "file created");
-    topic = topic.replace("upload", "file");
-    const replaceColon = topic.replace(/:/g, " ");
-    const capitalizedString =
-      replaceColon.charAt(0).toUpperCase() + replaceColon.slice(1);
+    try {
+      const splitTopic = topic.split(":");
+      const capitalizedWords = splitTopic.map((word) => {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      });
+      const capitalizedString = capitalizedWords.join(" ");
 
-    return capitalizedString;
+      return capitalizedString;
+    } catch (error) {
+      console.log(
+        "Error formatting topic. Returning unformatted event topic. Error:",
+        error
+      );
+
+      return topic;
+    }
   };
+
   return (
     <>
       <td className="whitespace-nowrap py-4 pl-6 pr-3 text-sm">
@@ -48,10 +57,6 @@ export const Event = ({ event }: Props) => {
             </>
           )}
         </div>
-      </td>
-
-      <td className="whitespace-nowrap py-4 pl-6 pr-3 text-sm">
-        <span className="">{event.description}</span>
       </td>
 
       <td className="whitespace-nowrap py-4 pl-6 pr-3 text-sm">
