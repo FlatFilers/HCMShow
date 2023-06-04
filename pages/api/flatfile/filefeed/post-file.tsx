@@ -1,15 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
-import {
-  FlatfileSpaceData,
-  getAccessToken,
-  postFile,
-} from "../../../../lib/flatfile";
+import { FlatfileSpaceData } from "../../../../lib/flatfile";
 import { prismaClient } from "../../../../lib/prisma-client";
 import { SpaceType } from "../../../../lib/space";
 import { Space } from "@prisma/client";
 import { fetchFileFromDrive } from "../../../../lib/google-drive";
+import { postFile } from "../../../../lib/new-flatfile";
 
 export default async function handler(
   req: NextApiRequest,
@@ -38,11 +35,11 @@ export default async function handler(
   })) as Space;
 
   // Post to flatfile api
-  const accessToken = await getAccessToken();
   const spaceId = (space.flatfileData as unknown as FlatfileSpaceData).id;
-
+  const environmentId = process.env.FILEFEED_ENVIRONMENT_ID as string;
   const file = await fetchFileFromDrive();
-  await postFile(accessToken, spaceId, file);
+
+  await postFile({ spaceId, environmentId, file });
 
   res.status(200);
 }

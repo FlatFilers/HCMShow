@@ -2,17 +2,15 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
+import { FlatfileSpaceData, getSpace } from "../../../lib/flatfile";
+import { SpaceType } from "../../../lib/space";
+import { fetchFileFromDrive } from "../../../lib/google-drive";
 import {
-  FlatfileSpaceData,
   addDocumentToSpace,
   addGuestToSpace,
   createSpace,
-  getAccessToken,
-  getSpace,
   postFile,
-} from "../../../lib/flatfile";
-import { SpaceType } from "../../../lib/space";
-import { fetchFileFromDrive } from "../../../lib/google-drive";
+} from "../../../lib/new-flatfile";
 
 export default async function handler(
   req: NextApiRequest,
@@ -42,41 +40,29 @@ export default async function handler(
     throw new Error("No user found");
   }
 
-  const accessToken = await getAccessToken();
-
   const environmentId = process.env.FILEFEED_ENVIRONMENT_ID as string;
+  const userId = user.id;
 
-  const flatfileSpaceData = await createSpace({
-    accessToken,
-    spaceConfigId: process.env.FILEFEED_SPACE_CONFIG_ID as string,
+  const spaceResult = await createSpace({
+    userId,
     environmentId,
-    userId: user.id,
-    focusBgColor: "#616A7D",
-    backgroundColor: "#090B2B",
+    spaceName: "HCM.show File Feed",
   });
 
-  const addGuestToSpaceResponse = await addGuestToSpace(
-    user,
-    flatfileSpaceData,
-    accessToken,
-    environmentId
-  );
+  const spaceId = spaceResult!.id;
+
+  const addGuestToSpaceResponse = await addGuestToSpace({
+    environmentId,
+    email: user.email,
+    name: `${user.firstName} ${user.lastName}`,
+    spaceId,
+  });
 
   console.log("addGuestToSpaceResponse", addGuestToSpaceResponse);
 
-  if (
-    addGuestToSpaceResponse.errors &&
-    addGuestToSpaceResponse.errors[0].message
-  ) {
+  if (addGuestToSpaceResponse?.length === 0) {
     res.redirect("/file-feed?flash=error&message=Error setting up Flatfile");
   }
-
-  const flatfileSpaceDataRefetch = await getSpace(
-    flatfileSpaceData.id,
-    accessToken
-  );
-
-  console.log("flatfileSpaceDataRefetch", flatfileSpaceDataRefetch);
 
   // TODO: Don't need this, already sending an email on create?
   // const inviteGuestsToSpaceResponse = await inviteGuestToSpace(
@@ -91,8 +77,7 @@ export default async function handler(
     data: {
       userId: user.id,
       type: SpaceType.FileFeed,
-      flatfileData:
-        flatfileSpaceDataRefetch as unknown as Prisma.InputJsonValue,
+      flatfileData: spaceResult as unknown as Prisma.InputJsonValue,
     },
   });
 
@@ -112,19 +97,20 @@ export default async function handler(
   <h3 style="margin-top: 0px; margin-bottom: 12px;">Remember, if you need any assistance, you can always refer back to this page by clicking "Welcome" in the left-hand sidebar!</h3>
 </div>`;
 
-  const addDocumentToSpaceResponse = await addDocumentToSpace(
-    "Welcome",
-    initialDocumentBody,
-    flatfileSpaceData.id,
-    accessToken
-  );
+  const title = "Welcome";
+  const body = initialDocumentBody;
+
+  const addDocumentToSpaceResponse = await addDocumentToSpace({
+    title,
+    body,
+    spaceId,
+  });
 
   // console.log("addDocumentToSpaceResponse", addDocumentToSpaceResponse);
 
   const file = await fetchFileFromDrive();
 
-  const spaceId = (space.flatfileData as unknown as FlatfileSpaceData).id;
-  await postFile(accessToken, spaceId, file);
+  await postFile({ spaceId, environmentId, file });
 
   res.redirect("/file-feed?flash=success&message=Setup Flatfile!");
 }

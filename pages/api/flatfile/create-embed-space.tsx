@@ -2,13 +2,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
-import {
-  addDocumentToSpace,
-  createSpace,
-  getAccessToken,
-  getSpace,
-} from "../../../lib/flatfile";
 import { SpaceType } from "../../../lib/space";
+import { addDocumentToSpace, createSpace } from "../../../lib/new-flatfile";
 
 export default async function handler(
   req: NextApiRequest,
@@ -31,30 +26,24 @@ export default async function handler(
 
   const userId = token.sub;
 
-  const accessToken = await getAccessToken();
+  const environmentId = process.env.ONBOARDING_ENVIRONMENT_ID;
+
+  if (!environmentId) {
+    throw new Error("Missing ONBOARDING_ENVIRONMENT_ID env var");
+  }
 
   const flatfileSpaceData = await createSpace({
-    accessToken,
-    spaceConfigId: process.env.EMBEDDED_SPACE_CONFIG_ID as string,
-    environmentId: process.env.EMBEDDED_ENVIRONMENT_ID as string,
     userId,
-    // Theme colors are set in spaceProps in the useSpace call
-    focusBgColor: null,
-    backgroundColor: null,
+    environmentId,
+    spaceName: "HCM.show Embedded",
   });
 
   console.log("flatfileSpaceData", flatfileSpaceData);
 
-  const flatfileSpaceDataRefetch = await getSpace(
-    flatfileSpaceData.id,
-    accessToken
-  );
-
   const space: Space = await prisma.space.create({
     data: {
       userId,
-      flatfileData:
-        flatfileSpaceDataRefetch as unknown as Prisma.InputJsonValue,
+      flatfileData: flatfileSpaceData as unknown as Prisma.InputJsonValue,
       type: SpaceType.Embed,
     },
   });
@@ -78,14 +67,19 @@ export default async function handler(
   <h3 style="margin-top: 0px; margin-bottom: 12px;">Remember, if you need any assistance, you can always refer back to this page by clicking "Welcome" in the left-hand sidebar!</h3>
 </div>`;
 
-  const addDocumentToSpaceResponse = await addDocumentToSpace(
-    "Welcome",
-    initialDocumentBody,
-    flatfileSpaceData.id,
-    accessToken
-  );
+  const title = "Welcome";
+  const body = initialDocumentBody;
+  const spaceId = flatfileSpaceData?.id as string;
+
+  const addDocumentToSpaceResponse = await addDocumentToSpace({
+    title,
+    body,
+    spaceId,
+  });
+
+  console.log("addDocumentToSpaceResponse", addDocumentToSpaceResponse);
 
   res.redirect(
-    `/embedded-portal?flash=success&message=Space Created!&createdSpaceId=${flatfileSpaceData.id}`
+    `/embedded-portal?flash=success&message=Space Created!&createdSpaceId=${flatfileSpaceData?.id}`
   );
 }

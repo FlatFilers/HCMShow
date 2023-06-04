@@ -15,14 +15,8 @@ import {
   VariableIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import {
-  BlueprintWithId,
-  SpaceConfigWithBlueprints,
-  getAccessToken,
-  getSpaceConfig,
-} from "../lib/flatfile";
+import { SpaceConfigWithBlueprints, getSpaceConfig } from "../lib/flatfile";
 import { OptionBuilder } from "../components/dynamic-templates/option-builder";
-import { Property, SheetConfig } from "@flatfile/api";
 import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";
 import toast from "react-hot-toast";
 import { prismaClient } from "../lib/prisma-client";
@@ -31,6 +25,7 @@ import FeaturesList from "../components/shared/features-list";
 import { theme } from "../lib/theme";
 import { DateTime } from "luxon";
 import { useOnClickOutside } from "../lib/hooks/usehooks";
+import { listSpaces, listWorkbooks } from "../lib/new-flatfile";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -43,10 +38,9 @@ const features = {
 };
 
 interface Props {
-  accessToken: string;
   environmentId: string;
+  blueprintSheets: any;
   workbookName: string;
-  baseConfig: SpaceConfigWithBlueprints;
   dbCustomField: CustomField;
   dbCustomOptions: Option[];
   initialCustomFieldLastSavedAt: string;
@@ -125,74 +119,74 @@ const customOptionsConfig = (options: Option[]) => {
 };
 
 const filterConfig = ({
-  baseConfig,
+  blueprintSheets,
   workbookName,
   forEmbedOptions,
   customFieldConfig,
 }: {
-  baseConfig: SpaceConfigWithBlueprints;
+  blueprintSheets: any;
   workbookName: string;
   forEmbedOptions: Option[];
   customFieldConfig: any;
 }) => {
-  const sheetName = "Benefit Elections";
-  const dynamicFieldType = "benefitCoverageType";
+  // const sheetName = "Benefit Elections";
+  // const dynamicFieldType = "benefitCoverageType";
 
-  // TODO: We should look up blueprint by ID or slug not name
-  const blueprint = baseConfig.blueprints.find(
-    (b) => b.name === workbookName
-  ) as BlueprintWithId;
-  const sheet = blueprint?.sheets.find((s) => s.name === sheetName);
-  const field = sheet?.fields.find((f) => f.key === dynamicFieldType);
+  // // TODO: We should look up blueprint by ID or slug not name
+  // // const blueprint = baseConfig.blueprints.find(
+  // //   (b) => b.name === workbookName
+  // // ) as BlueprintWithId;
+  // // const sheet = blueprint?.sheets.find((s) => s.name === sheetName);
+  // // const field = sheet?.fields.find((f) => f.key === dynamicFieldType);
 
-  const otherBlueprints = baseConfig.blueprints.filter((b) => {
-    return b.name !== workbookName;
-  });
-  const otherSheets = blueprint?.sheets.filter((s) => {
-    return s.name !== sheetName;
-  }) as SheetConfig[];
-  const otherFields = sheet?.fields.filter((f) => {
-    return f.key !== dynamicFieldType;
-  }) as Property[];
+  // // const otherBlueprints = baseConfig.blueprints.filter((b) => {
+  // //   return b.name !== workbookName;
+  // // });
+  // // const otherSheets = blueprint?.sheets.filter((s) => {
+  // //   return s.name !== sheetName;
+  // // }) as SheetConfig[];
+  // // const otherFields = sheet?.fields.filter((f) => {
+  // //   return f.key !== dynamicFieldType;
+  // // }) as Property[];
 
-  const { id: _baseConfigId, ...baseConfigWithoutId } = baseConfig;
-  const { id: _blueprintId, ...blueprintWithoutId } = blueprint;
+  // // const { id: _baseConfigId, ...baseConfigWithoutId } = blueprintSheets;
+  // // const { id: _blueprintId, ...blueprintWithoutId } = blueprint;
 
-  const filteredConfig = {
-    ...baseConfigWithoutId,
-    name: "HCM Show - Dynamic Templates",
-    slug: `${baseConfig.slug}-${Date.now()}`,
-    blueprints: [
-      ...otherBlueprints,
-      {
-        ...blueprintWithoutId,
-        slug: `${blueprint.slug}-${Date.now()}`,
-        sheets: [
-          ...otherSheets,
-          {
-            ...sheet,
-            fields: [
-              ...otherFields,
-              {
-                ...field,
-                ...(customFieldConfig.type === "enum" &&
-                  forEmbedOptions &&
-                  customOptionsConfig(forEmbedOptions)),
-                slug: `${field?.key}-${Date.now()}`,
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  };
+  // const filteredConfig = {
+  //   ...baseConfigWithoutId,
+  //   name: "HCM Show - Dynamic Templates",
+  //   slug: `${blueprintSheets.slug}-${Date.now()}`,
+  //   blueprints: [
+  //     ...otherBlueprints,
+  //     {
+  //       ...blueprintWithoutId,
+  //       slug: `${blueprint.slug}-${Date.now()}`,
+  //       sheets: [
+  //         ...otherSheets,
+  //         {
+  //           ...sheet,
+  //           fields: [
+  //             ...otherFields,
+  //             {
+  //               ...field,
+  //               ...(customFieldConfig.type === "enum" &&
+  //                 forEmbedOptions &&
+  //                 customOptionsConfig(forEmbedOptions)),
+  //               slug: `${field?.key}-${Date.now()}`,
+  //             },
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // };
 
-  if (customFieldConfig.forEmbed) {
-    filteredConfig.blueprints
-      .at(-1)
-      ?.sheets.at(-1)
-      ?.fields.push(customFieldConfig);
-  }
+  // if (customFieldConfig.forEmbed) {
+  //   filteredConfig.blueprints
+  //     .at(-1)
+  //     ?.sheets.at(-1)
+  //     ?.fields.push(customFieldConfig);
+  // }
 
   // console.log("filteredConfig", filteredConfig);
   // console.log("field", field);
@@ -204,14 +198,13 @@ const filterConfig = ({
   //   filteredConfig.blueprints[0].sheets[1].fields[13]
   // );
 
-  return filteredConfig;
+  return true;
 };
 
 const DynamicTemplates: NextPageWithLayout<Props> = ({
-  accessToken,
   environmentId,
   workbookName,
-  baseConfig,
+  blueprintSheets,
   dbCustomField,
   dbCustomOptions,
   initialCustomFieldLastSavedAt,
@@ -255,12 +248,11 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   };
 
   const spaceProps = {
-    accessToken,
     environmentId,
     name: "Dynamic Portal",
     themeConfig: theme("#E28170", "#D64B32") as IThemeConfig,
     spaceConfig: filterConfig({
-      baseConfig,
+      blueprintSheets,
       workbookName,
       forEmbedOptions,
       customFieldConfig,
@@ -540,9 +532,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const accessToken = await getAccessToken();
-  const baseConfig = await getSpaceConfig(accessToken);
-
   const prisma = prismaClient;
 
   const dbCustomField = await prisma.customField.findFirst({
@@ -565,12 +554,45 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const dbCustomOptions = dbCustomOptionsRecord?.options;
 
+  const environmentId = process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID as string;
+
+  const environmentSpaces = await listSpaces({
+    environmentId,
+  });
+
+  console.log("environmentSpaces", environmentSpaces);
+
+  const currentSpace = environmentSpaces?.data.sort((a: any, b: any) => {
+    return b.createdAt - a.createdAt;
+  })[0];
+
+  console.log("currentSpace", currentSpace);
+
+  const spaceId = currentSpace?.id as string;
+
+  const getWorkbooks = await listWorkbooks({ spaceId });
+
+  console.log("getWorkbooks", getWorkbooks);
+
+  const currentWorkbook = getWorkbooks?.data.sort((a: any, b: any) => {
+    return b.createdAt - a.createdAt;
+  })[0];
+
+  console.log("currentWorkbook", currentWorkbook);
+
+  const sheets = currentWorkbook?.sheets;
+
+  console.log("sheets", sheets);
+
+  const blueprintSheets = sheets ? sheets[0] : null;
+
+  console.log("blueprintSheets", blueprintSheets);
+
   return {
     props: {
-      accessToken,
-      environmentId: process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID,
+      environmentId,
+      blueprintSheets,
       workbookName: process.env.DYNAMIC_TEMPLATES_WORKBOOK_NAME,
-      baseConfig,
       dbCustomField,
       dbCustomOptions,
       initialCustomFieldLastSavedAt: dbCustomField

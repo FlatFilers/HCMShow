@@ -12,7 +12,6 @@ import {
   SparklesIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import { getAccessToken } from "../lib/flatfile";
 import { Action, PrismaClient, Space } from "@prisma/client";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
@@ -36,7 +35,6 @@ interface Props {
 }
 
 const EmbeddedPortal: NextPageWithLayout<Props> = ({
-  accessToken,
   environmentToken,
   lastSyncedAt,
   existingSpace,
@@ -53,7 +51,9 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     existingSpace?.flatfileData as unknown as FlatfileSpaceData;
   const [showSpace, setShowSpace] = useState(false);
   const spaceProps = {
-    accessToken: accessToken as string,
+    // UPGRADE to use new Flatfile React
+    // publishableKey: process.env.FLATFILE_PUB_KEY as string,
+    // workbook: GET WORKBOOK,
     environmentId: environmentToken as string,
     spaceId: flatfleSpace?.id as string,
     themeConfig: theme("#4DCA94", "#32A673") as IThemeConfig,
@@ -253,7 +253,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // console.log("existingSpace", existingSpace);
 
-  const accessToken = await getAccessToken();
   const environmentToken = process.env.EMBEDDED_ENVIRONMENT_ID;
   const lastSync = await prisma.action.findFirst({
     where: {
@@ -266,7 +265,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      accessToken,
       environmentToken,
       lastSyncedAt: lastSync
         ? DateTime.fromJSDate(lastSync.createdAt).toFormat(
