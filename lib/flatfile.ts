@@ -80,7 +80,7 @@ export const getRecordsByName = async ({
     throw new Error(`No space for user ${userId}`);
   }
 
-  console.log("space", space);
+  // console.log("space", space);
 
   const { workbookId, sheetId } = await getWorkbookIdAndSheetIds({
     flatfileSpaceId: (space.flatfileData as unknown as FlatfileSpaceData).id,
