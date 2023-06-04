@@ -106,8 +106,6 @@ const getWorkbookIdAndSheetIds = async ({
   workbookName: string;
   sheetName: string;
 }): Promise<{ workbookId: string; sheetId: string }> => {
-  console.log("spaceID", flatfileSpaceId);
-
   const response = await listWorkbooks({ spaceId: flatfileSpaceId });
 
   // const response = await fetch(
