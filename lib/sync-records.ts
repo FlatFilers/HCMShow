@@ -1,6 +1,6 @@
 import { EmployeeType, Prisma } from "@prisma/client";
 import { upsertEmployee, validEmployeeRecords } from "./employee";
-import { getAccessToken, getRecordsByName } from "./flatfile";
+import { getRecordsByName } from "./flatfile";
 import { prismaClient } from "./prisma-client";
 import { SpaceType } from "./space";
 import { DateTime } from "luxon";
@@ -15,6 +15,8 @@ import {
   upsertEmployeeBenefitPlanRecords,
   validEmployeeBenefitPlanRecords,
 } from "./employee-benefit-plan";
+import { RecordsWithLinks } from "@flatfile/api/api";
+import { Record } from "./flatfile";
 
 export const syncWorkbookRecords = async ({
   userId,
@@ -25,24 +27,20 @@ export const syncWorkbookRecords = async ({
   organizationId: string;
   spaceType: SpaceType;
 }) => {
-  const accessToken = await getAccessToken();
-
   const employeeRecords = await getRecordsByName({
     userId,
-    accessToken,
     workbookName: process.env.ONBOARDING_WORKBOOK_NAME as string,
     sheetName: "Employees",
     spaceType,
   });
   const jobRecords = await getRecordsByName({
     userId,
-    accessToken,
     workbookName: process.env.ONBOARDING_WORKBOOK_NAME as string,
     sheetName: "Jobs",
     spaceType,
   });
 
-  const totalRecords = employeeRecords.length + jobRecords.length;
+  const totalRecords = employeeRecords!.length + jobRecords!.length;
 
   if (totalRecords === 0) {
     return {
@@ -51,7 +49,7 @@ export const syncWorkbookRecords = async ({
     };
   }
 
-  const validJobs = await validJobRecords(jobRecords);
+  const validJobs = await validJobRecords(jobRecords as RecordsWithLinks);
 
   console.log("Valid job records to sync", validJobs.length);
 
@@ -60,7 +58,9 @@ export const syncWorkbookRecords = async ({
     organizationId,
   });
 
-  const validEmployees = await validEmployeeRecords(employeeRecords);
+  const validEmployees = await validEmployeeRecords(
+    employeeRecords as RecordsWithLinks
+  );
 
   console.log("Valid records to sync", validEmployees.length);
 
@@ -198,17 +198,14 @@ export const syncBenefitPlanRecords = async ({
   organizationId: string;
   spaceType: SpaceType;
 }) => {
-  const accessToken = await getAccessToken();
-
   const employeeBenefitRecords = await getRecordsByName({
     userId,
-    accessToken,
     workbookName: process.env.EMBEDDED_WORKBOOK_NAME as string,
     sheetName: "Benefit Elections",
     spaceType,
   });
 
-  const totalRecords = employeeBenefitRecords.length;
+  const totalRecords = employeeBenefitRecords?.length;
 
   if (totalRecords === 0) {
     await createAction({
@@ -223,32 +220,36 @@ export const syncBenefitPlanRecords = async ({
 
     return;
   }
+  if (employeeBenefitRecords) {
+    const validPlans = await validEmployeeBenefitPlanRecords(
+      employeeBenefitRecords
+    );
 
-  const validPlans = await validEmployeeBenefitPlanRecords(
-    employeeBenefitRecords
-  );
+    console.log("Valid records to sync", validPlans.length);
 
-  console.log("Valid records to sync", validPlans.length);
+    const count = await upsertEmployeeBenefitPlanRecords(
+      employeeBenefitRecords,
+      {
+        userId,
+        organizationId,
+      }
+    );
 
-  const count = await upsertEmployeeBenefitPlanRecords(employeeBenefitRecords, {
-    userId,
-    organizationId,
-  });
+    const message = `Synced ${count}/${validPlans.length} employee benefit plans.`;
 
-  const message = `Synced ${count}/${validPlans.length} employee benefit plans.`;
+    await createAction({
+      userId,
+      organizationId,
+      type: ActionType.SyncEmbedRecords,
+      description: message,
+      metadata: {
+        seen: false,
+      },
+    });
 
-  await createAction({
-    userId,
-    organizationId,
-    type: ActionType.SyncEmbedRecords,
-    description: message,
-    metadata: {
-      seen: false,
-    },
-  });
-
-  return {
-    success: true,
-    message,
-  };
+    return {
+      success: true,
+      message,
+    };
+  }
 };

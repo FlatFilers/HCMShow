@@ -1,3 +1,4 @@
+import { RecordsWithLinks } from "@flatfile/api/api";
 import { Record } from "./flatfile";
 import { prismaClient } from "./prisma-client";
 
@@ -59,7 +60,7 @@ export const upsertEmployee = async ({
   return employee;
 };
 
-export const validEmployeeRecords = async (records: Record[]) => {
+export const validEmployeeRecords = async (records: RecordsWithLinks) => {
   // Find required fields
   const result: { column_name: string }[] = await prismaClient.$queryRaw`
     SELECT column_name 

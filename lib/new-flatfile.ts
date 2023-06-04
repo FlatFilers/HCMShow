@@ -1,4 +1,5 @@
 import { FlatfileClient } from "@flatfile/api";
+import { ListWorkbooksRequest } from "@flatfile/api/api";
 
 const flatfileClient = () => {
   const token = process.env.FLATFILE_API_KEY;
@@ -67,6 +68,38 @@ export const addGuestToSpace = async ({
     ]);
 
     return result.data;
+  } catch (e) {
+    console.log("error", JSON.stringify(e, null, 2));
+    return null;
+  }
+};
+
+export const listWorkbooks = async ({ spaceId }: { spaceId: string }) => {
+  try {
+    const flatfile = flatfileClient();
+
+    const result = await flatfile.workbooks.list(
+      spaceId as ListWorkbooksRequest
+    );
+
+    console.log("list now");
+
+    return result;
+  } catch (e) {
+    console.log("error", JSON.stringify(e, null, 2));
+    return null;
+  }
+};
+
+export const getRecords = async ({ sheetId }: { sheetId: string }) => {
+  try {
+    const flatfile = flatfileClient();
+
+    const result = await flatfile.records.get(sheetId);
+
+    console.log("getRecords result", result);
+
+    return result;
   } catch (e) {
     console.log("error", JSON.stringify(e, null, 2));
     return null;

@@ -3,8 +3,11 @@ import { Record } from "./flatfile";
 import { prismaClient } from "./prisma-client";
 import { DateTime } from "luxon";
 import { upsertBenefitPlan } from "./benefit-plan";
+import { RecordsWithLinks } from "@flatfile/api/api";
 
-export const validEmployeeBenefitPlanRecords = async (records: Record[]) => {
+export const validEmployeeBenefitPlanRecords = async (
+  records: RecordsWithLinks
+) => {
   const requiredFields = [
     "employeeId",
     "benefitPlan",
@@ -32,7 +35,7 @@ const stringToSlug = (s: string) => {
 };
 
 export const upsertEmployeeBenefitPlanRecords = async (
-  validBenefitPlans: Record[],
+  validBenefitPlans: RecordsWithLinks,
   { userId, organizationId }: { userId: string; organizationId: string }
 ) => {
   const upserts = validBenefitPlans.map(async (r) => {
