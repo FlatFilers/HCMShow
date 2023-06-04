@@ -78,11 +78,7 @@ export const listWorkbooks = async ({ spaceId }: { spaceId: string }) => {
   try {
     const flatfile = flatfileClient();
 
-    const result = await flatfile.workbooks.list(
-      spaceId as ListWorkbooksRequest
-    );
-
-    console.log("list now");
+    const result = await flatfile.workbooks.list({ spaceId });
 
     return result;
   } catch (e) {
@@ -95,11 +91,9 @@ export const getRecords = async ({ sheetId }: { sheetId: string }) => {
   try {
     const flatfile = flatfileClient();
 
-    const result = await flatfile.records.get(sheetId);
+    const response = await flatfile.records.get(sheetId);
 
-    console.log("getRecords result", result);
-
-    return result;
+    return response.data.records;
   } catch (e) {
     console.log("error", JSON.stringify(e, null, 2));
     return null;

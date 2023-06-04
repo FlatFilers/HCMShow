@@ -5,18 +5,14 @@ import { prismaClient } from "./prisma-client";
 import { SpaceType } from "./space";
 import { DateTime } from "luxon";
 import { createAction, ActionType } from "./action";
-import { validJobRecords, upsertJobRecords } from "./job";
+import { upsertJobRecords } from "./job";
 import {
   upsertBenefitPlan,
   upsertBenefitPlanRecords,
   validBenefitPlanRecords,
 } from "./benefit-plan";
-import {
-  upsertEmployeeBenefitPlanRecords,
-  validEmployeeBenefitPlanRecords,
-} from "./employee-benefit-plan";
+import { upsertEmployeeBenefitPlanRecords } from "./employee-benefit-plan";
 import { RecordsWithLinks } from "@flatfile/api/api";
-import { Record } from "./flatfile";
 
 export const syncWorkbookRecords = async ({
   userId,
@@ -40,7 +36,9 @@ export const syncWorkbookRecords = async ({
     spaceType,
   });
 
-  const totalRecords = employeeRecords!.length + jobRecords!.length;
+  const numEmployeeRecords = employeeRecords ? employeeRecords.length : 0;
+  const numJobRecords = jobRecords ? jobRecords.length : 0;
+  const totalRecords = numEmployeeRecords + numJobRecords;
 
   if (totalRecords === 0) {
     return {
@@ -49,23 +47,15 @@ export const syncWorkbookRecords = async ({
     };
   }
 
-  const validJobs = await validJobRecords(jobRecords as RecordsWithLinks);
-
-  console.log("Valid job records to sync", validJobs.length);
-
-  const upsertJobs = await upsertJobRecords(validJobs, {
+  const upsertJobs = await upsertJobRecords(jobRecords as RecordsWithLinks, {
     userId,
     organizationId,
   });
 
-  const validEmployees = await validEmployeeRecords(
-    employeeRecords as RecordsWithLinks
-  );
-
-  console.log("Valid records to sync", validEmployees.length);
+  console.log("Valid records to sync", numEmployeeRecords);
 
   // TODO: Refactor employee logic to its lib file
-  const validsManagersFirst = validEmployees.sort((a, b) => {
+  const validsManagersFirst = employeeRecords!.sort((a, b) => {
     return a.values.managerId.value ? 1 : -1;
   });
 
@@ -173,7 +163,7 @@ export const syncWorkbookRecords = async ({
 
   await Promise.all(upsertEmployees);
 
-  const message = `Found ${totalRecords} total records. Synced ${validEmployees.length} Employee records.  Synced ${validJobs.length} Job records.`;
+  const message = `Found ${totalRecords} total records. Synced ${numEmployeeRecords} Employee records.  Synced ${numJobRecords} Job records.`;
 
   await createAction({
     userId,
@@ -220,22 +210,19 @@ export const syncBenefitPlanRecords = async ({
 
     return;
   }
+
   if (employeeBenefitRecords) {
-    const validPlans = await validEmployeeBenefitPlanRecords(
-      employeeBenefitRecords
-    );
-
-    console.log("Valid records to sync", validPlans.length);
-
-    const count = await upsertEmployeeBenefitPlanRecords(
+    const upsertEmployeeBenefitPlan = await upsertEmployeeBenefitPlanRecords(
       employeeBenefitRecords,
       {
         userId,
         organizationId,
       }
     );
-
-    const message = `Synced ${count}/${validPlans.length} employee benefit plans.`;
+    const numEmployeeBenefitRecords = employeeBenefitRecords
+      ? employeeBenefitRecords.length
+      : 0;
+    const message = `Synced ${numEmployeeBenefitRecords} employee benefit plans.`;
 
     await createAction({
       userId,

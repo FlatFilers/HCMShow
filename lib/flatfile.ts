@@ -92,9 +92,11 @@ export const getRecordsByName = async ({
 
   const records = await getRecords({ sheetId: sheetId });
 
+  console.log("getRecords", records);
+
   // const records = await fetchRecords(space, workbookId, sheetId);
 
-  return records?.data.records;
+  return records;
 };
 
 const getWorkbookIdAndSheetIds = async ({
@@ -372,15 +374,11 @@ export const addDocumentToSpace = async (
 
   return addDocumentResult.data;
 };
-
-export interface BlueprintWithId {
-  id: string;
-}
 export interface SpaceConfigWithBlueprints {
   id: string;
   slug: string;
   name: string;
-  blueprints: BlueprintWithId[];
+  blueprints: { id: string };
 }
 
 export const getSpaceConfig = async (accessToken: string) => {

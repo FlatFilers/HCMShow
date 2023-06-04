@@ -5,27 +5,6 @@ import { DateTime } from "luxon";
 import { upsertBenefitPlan } from "./benefit-plan";
 import { RecordsWithLinks } from "@flatfile/api/api";
 
-export const validEmployeeBenefitPlanRecords = async (
-  records: RecordsWithLinks
-) => {
-  const requiredFields = [
-    "employeeId",
-    "benefitPlan",
-    "currentlyEnrolled",
-    "employerContribution",
-  ];
-
-  console.log("requiredFields", requiredFields);
-
-  // Record is valid if every required field is valid
-  return records.filter((r) => {
-    console.log("r", r);
-    return requiredFields.every((f) => {
-      return r.values[f]?.valid;
-    });
-  });
-};
-
 const stringToSlug = (s: string) => {
   return s
     .toLowerCase()
