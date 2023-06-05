@@ -92,7 +92,7 @@ export const getRecordsByName = async ({
 
   const records = await getRecords({ sheetId: sheetId });
 
-  console.log("getRecords", records);
+  // console.log("getRecords", records);
 
   // const records = await fetchRecords(space, workbookId, sheetId);
 
@@ -130,10 +130,10 @@ const getWorkbookIdAndSheetIds = async ({
   const workbookObj = sortedByLatestData?.find((workbookObj) => {
     return workbookObj.name === workbookName;
   });
-  console.log("workbookObj", workbookObj);
+  // console.log("workbookObj", workbookObj);
 
   const sheetId = workbookObj?.sheets?.find((s) => s.name === sheetName)!.id;
-  console.log("sheetId", sheetId);
+  // console.log("sheetId", sheetId);
 
   return {
     workbookId: workbookObj!.id,
