@@ -59,21 +59,3 @@ export const upsertEmployee = async ({
 
   return employee;
 };
-
-export const validEmployeeRecords = async (records: RecordsWithLinks) => {
-  // Find required fields
-  const result: { column_name: string }[] = await prismaClient.$queryRaw`
-    SELECT column_name 
-    FROM information_schema.columns
-    WHERE table_name = 'Employee'
-      AND is_nullable = 'NO'
-      AND column_name NOT IN ('createdAt', 'updatedAt')
-      AND (column_name = 'employeeId' OR column_name NOT ILIKE '%id')
-  `;
-  const requiredFields = result.map((r) => r.column_name);
-
-  // Record is valid if every required field is valid
-  return records.filter((r) => {
-    return requiredFields.every((f) => r.values[f]?.valid);
-  });
-};
