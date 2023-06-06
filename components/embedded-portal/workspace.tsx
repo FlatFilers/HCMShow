@@ -8,11 +8,15 @@ import {
   SparklesIcon,
   UserGroupIcon,
   VariableIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
 import { FlatfileSpaceData } from "../../lib/flatfile";
 import { Space } from "@prisma/client";
 import FeaturesList from "../shared/features-list";
+import { useRef } from "react";
+import { useOnClickOutside } from "../../lib/hooks/usehooks";
+import { useSpace } from "@flatfile/react";
 
 export interface Step {
   name: string;
@@ -32,9 +36,23 @@ type Props = {
   fileName: string;
   onClick: Function;
   showSpace: boolean;
+  closeSpace: Function;
+  spaceProps: any; // todo
 };
 
-const Workspace = ({ fileName, onClick, showSpace }: Props) => {
+const Workspace = ({
+  fileName,
+  onClick,
+  showSpace,
+  closeSpace,
+  spaceProps,
+}: Props) => {
+  const modalRef = useRef<HTMLDivElement | null>(null);
+
+  useOnClickOutside(modalRef, () => closeSpace());
+
+  const { component } = useSpace({ ...spaceProps });
+
   return (
     <div className="mb-12">
       <p className="text-2xl mb-8">
@@ -88,6 +106,20 @@ const Workspace = ({ fileName, onClick, showSpace }: Props) => {
           features={features}
         />
       </div>
+
+      {showSpace && (
+        <div className="absolute top-0 right-0 h-full w-full bg-black/60">
+          <div className="relative mt-16 mx-auto max-w-7xl">
+            <XCircleIcon
+              className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
+              onClick={() => closeSpace()}
+            >
+              X
+            </XCircleIcon>
+            <div ref={modalRef}>{component}</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

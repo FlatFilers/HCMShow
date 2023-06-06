@@ -63,8 +63,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     throw "Missing workbook";
   }
 
-  // const x: Flatfile.CreateWorkbookConfig = {};
-
   const flatfleSpace =
     existingSpace?.flatfileData as unknown as FlatfileSpaceData;
   const [showSpace, setShowSpace] = useState(false);
@@ -75,8 +73,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     spaceId: flatfleSpace?.id as string,
     themeConfig: theme("#4DCA94", "#32A673") as IThemeConfig,
     name: "Embedded Portal",
-    // TODO: This may change in the future as the SDK evolves.
-    // These metadata properties are setup in an odd way.
+    // TODO: These metadata properties are setup in an odd way.
     spaceInfo: {
       userId,
     },
@@ -86,13 +83,8 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     },
   };
 
-  const { component } = useSpace({ ...spaceProps });
-
-  // useCallback(() => {
-  //   if (error) {
-  //     setShowSpace(false);
-  //   }
-  // }, [error]);
+  // TODO: Style error component
+  // const { component } = useSpace({ ...spaceProps });
 
   const [downloaded, setDownloaded] = useState(false);
   const storageKey = "embedded-has-downloaded-sample-data";
@@ -159,9 +151,9 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     }
   }, []);
 
-  const modalRef = useRef<HTMLDivElement | null>(null);
+  // const modalRef = useRef<HTMLDivElement | null>(null);
 
-  useOnClickOutside(modalRef, () => setShowSpace(false));
+  // useOnClickOutside(modalRef, () => setShowSpace(false));
 
   return (
     <div className="mx-12 mt-16 self-center">
@@ -219,12 +211,14 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
                 setShowSpace(!showSpace);
               }}
               showSpace={showSpace}
+              closeSpace={() => setShowSpace(false)}
+              spaceProps={spaceProps}
             />
           )}
         </div>
       </div>
 
-      {showSpace && (
+      {/* {showSpace && (
         <div className="absolute top-0 right-0 h-full w-full bg-black/60">
           <div className="relative mt-16 mx-auto max-w-7xl">
             <XCircleIcon
@@ -236,7 +230,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
             <div ref={modalRef}>{component}</div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
@@ -270,6 +264,32 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   console.log("existingSpace", existingSpace);
 
+  const environmentToken = process.env.EMBEDDED_ENVIRONMENT_ID;
+  const lastSync = await prisma.action.findFirst({
+    where: {
+      organizationId: token.organizationId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  if (!existingSpace) {
+    console.log("No space");
+    return {
+      props: {
+        environmentToken,
+        lastSyncedAt: lastSync
+          ? DateTime.fromJSDate(lastSync.createdAt).toFormat(
+              "MM/dd/yy hh:mm:ss a"
+            )
+          : "",
+        existingSpace,
+        userId: token.sub,
+      },
+    };
+  }
+
   const spaceData = await getSpace(
     (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id
   );
@@ -290,16 +310,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // existingSpace?.flatfileData as unknown as FlatfileSpaceData;
   // console.log("existingSpace", existingSpace);
-
-  const environmentToken = process.env.EMBEDDED_ENVIRONMENT_ID;
-  const lastSync = await prisma.action.findFirst({
-    where: {
-      organizationId: token.organizationId,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
 
   const workbookConfig = {
     name: workbook.name || "HCM.show Embedded Portal",
