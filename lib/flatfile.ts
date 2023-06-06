@@ -1,15 +1,7 @@
-import {
-  DefaultApi,
-  Configuration,
-  ConfigurationParameters,
-  GetAccessTokenOperationRequest,
-  GetAccessTokenRequest,
-  AccessTokenResponse,
-  Blueprint,
-} from "@flatfile/api";
 import { PrismaClient, Space, User } from "@prisma/client";
 import { SpaceType } from "./space";
 import { theme } from "./theme";
+import { getRecords, listWorkbooks } from "./new-flatfile";
 
 export interface Field {
   value: string | number | boolean | null;
@@ -61,50 +53,18 @@ type WorkbookObject = {
 };
 
 const BASE_PATH = "https://api.x.flatfile.com/v1";
-const clientId = process.env.CLIENT_ID;
-const secret = process.env.CLIENT_SECRET;
-
-export async function getAccessToken(): Promise<string> {
-  const configParams: ConfigurationParameters = {
-    basePath: BASE_PATH,
-  };
-  const config: Configuration = new Configuration(configParams);
-  const client = new DefaultApi(config);
-
-  const getAccessTokenRequest: GetAccessTokenRequest = {
-    clientId,
-    secret,
-  } as GetAccessTokenRequest;
-
-  const getAccessTokenOperationRequest: GetAccessTokenOperationRequest = {
-    getAccessTokenRequest,
-  };
-  const accessTokenResponse: AccessTokenResponse = await client.getAccessToken(
-    getAccessTokenOperationRequest
-  );
-
-  // console.log("response", accessTokenResponse);
-
-  if (!accessTokenResponse.data?.accessToken) {
-    throw new Error("Error fetching access token");
-  }
-
-  return accessTokenResponse.data.accessToken;
-}
 
 export const getRecordsByName = async ({
   userId,
-  accessToken,
   workbookName,
   sheetName,
   spaceType,
 }: {
   userId: string;
-  accessToken: string;
   workbookName: string;
   sheetName: string;
   spaceType: SpaceType;
-}): Promise<Record[]> => {
+}) => {
   const prisma = new PrismaClient();
 
   const space = await prisma.space.findUnique({
@@ -124,54 +84,60 @@ export const getRecordsByName = async ({
 
   const { workbookId, sheetId } = await getWorkbookIdAndSheetIds({
     flatfileSpaceId: (space.flatfileData as unknown as FlatfileSpaceData).id,
-    accessToken,
     workbookName,
     sheetName,
   });
 
   // console.log("w, s", workbookId, sheetIds);
 
-  const records = await fetchRecords(space, workbookId, sheetId, accessToken);
+  const records = await getRecords({ sheetId: sheetId });
+
+  // console.log("getRecords", records);
+
+  // const records = await fetchRecords(space, workbookId, sheetId);
 
   return records;
 };
 
 const getWorkbookIdAndSheetIds = async ({
   flatfileSpaceId,
-  accessToken,
   workbookName,
   sheetName,
 }: {
   flatfileSpaceId: string;
-  accessToken: string;
   workbookName: string;
   sheetName: string;
 }): Promise<{ workbookId: string; sheetId: string }> => {
-  const response = await fetch(
-    `${BASE_PATH}/workbooks?spaceId=${flatfileSpaceId}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await listWorkbooks({ spaceId: flatfileSpaceId });
+
+  // const response = await fetch(
+  //   `${BASE_PATH}/workbooks?spaceId=${flatfileSpaceId}`,
+  //   {
+  //     method: "GET",
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`,
+  //       "Content-Type": "application/json",
+  //     },
+  //   }
+  // );
 
   // console.log("getWorkbooks response", response);
 
-  const result = await response.json();
+  const sortedByLatestData = response?.data.sort(
+    (a: any, b: any) => b.createdAt - a.createdAt
+  );
 
-  const workbookObj = result.data.find((workbookObj: WorkbookObject) => {
+  const workbookObj = sortedByLatestData?.find((workbookObj) => {
     return workbookObj.name === workbookName;
   });
-  const sheetId = workbookObj.sheets.find(
-    (s: { id: string; name: string; config: any }) => s.name === sheetName
-  )!.id;
+  // console.log("workbookObj", workbookObj);
+
+  const sheetId = workbookObj?.sheets?.find((s) => s.name === sheetName)!.id;
+  // console.log("sheetId", sheetId);
 
   return {
-    workbookId: workbookObj.id,
-    sheetId: sheetId,
+    workbookId: workbookObj!.id,
+    sheetId: sheetId as string,
   };
 };
 
@@ -408,15 +374,11 @@ export const addDocumentToSpace = async (
 
   return addDocumentResult.data;
 };
-
-export interface BlueprintWithId extends Blueprint {
-  id: string;
-}
 export interface SpaceConfigWithBlueprints {
   id: string;
   slug: string;
   name: string;
-  blueprints: BlueprintWithId[];
+  blueprints: { id: string };
 }
 
 export const getSpaceConfig = async (accessToken: string) => {
