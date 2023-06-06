@@ -218,12 +218,6 @@ export const postFile = async ({
 }) => {
   try {
     const flatfile = flatfileClient(flowName);
-    const fileData: Buffer = Buffer.from(file);
-    const blobData: Blob = new Blob([fileData]);
-    const formData = new FormData();
-    formData.append("file", blobData, "HCM.show benefits sample data.csv");
-    file = JSON.stringify(formData);
-
     const response = await flatfile.files.upload({
       spaceId,
       environmentId,
