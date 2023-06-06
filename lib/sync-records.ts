@@ -1,5 +1,5 @@
 import { EmployeeType, Prisma } from "@prisma/client";
-import { upsertEmployee, validEmployeeRecords } from "./employee";
+import { upsertEmployee } from "./employee";
 import { getRecordsByName } from "./flatfile";
 import { prismaClient } from "./prisma-client";
 import { SpaceType } from "./space";
