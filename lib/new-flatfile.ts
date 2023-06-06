@@ -131,6 +131,32 @@ export const listSpaces = async ({
   }
 };
 
+export const getSpace = async (spaceId: string) => {
+  try {
+    const flatfile = flatfileClient();
+
+    const result = await flatfile.spaces.get(spaceId);
+
+    return result.data;
+  } catch (e) {
+    console.log("getSpace() error:", JSON.stringify(e, null, 2));
+    return null;
+  }
+};
+
+export const getWorkbook = async (workbookId: string) => {
+  try {
+    const flatfile = flatfileClient();
+
+    const result = await flatfile.workbooks.get(workbookId);
+
+    return result.data;
+  } catch (e) {
+    console.log("getWorkbook() error:", JSON.stringify(e, null, 2));
+    return null;
+  }
+};
+
 export const getRecords = async ({ sheetId }: { sheetId: string }) => {
   try {
     const flatfile = flatfileClient();

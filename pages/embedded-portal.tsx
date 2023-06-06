@@ -25,12 +25,16 @@ import StepList, { Step } from "../components/shared/step-list";
 import Workspace from "../components/embedded-portal/workspace";
 import { theme } from "../lib/theme";
 import { useFlashMessages, useOnClickOutside } from "../lib/hooks/usehooks";
+import { Flatfile } from "@flatfile/api";
+import { getSpace, getWorkbook } from "../lib/new-flatfile";
+import { Workbook } from "@flatfile/api/api";
 
 interface Props {
   accessToken: string;
   environmentToken: string;
   lastSyncedAt?: string;
   existingSpace: Space;
+  workbookConfig?: Flatfile.CreateWorkbookConfig;
   userId: string;
 }
 
@@ -38,6 +42,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   environmentToken,
   lastSyncedAt,
   existingSpace,
+  workbookConfig,
   userId,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -47,13 +52,25 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     setButtonText("Setting up Flatfile...");
   };
 
+  const publishableKey = process.env.NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY;
+
+  if (!publishableKey) {
+    console.error("Missing NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY env var");
+    throw "Missing NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY env var";
+  }
+
+  if (!workbookConfig) {
+    throw "Missing workbook";
+  }
+
+  // const x: Flatfile.CreateWorkbookConfig = {};
+
   const flatfleSpace =
     existingSpace?.flatfileData as unknown as FlatfileSpaceData;
   const [showSpace, setShowSpace] = useState(false);
   const spaceProps = {
-    // UPGRADE to use new Flatfile React
-    // publishableKey: process.env.FLATFILE_PUB_KEY as string,
-    // workbook: GET WORKBOOK,
+    publishableKey,
+    workbook: workbookConfig,
     environmentId: environmentToken as string,
     spaceId: flatfleSpace?.id as string,
     themeConfig: theme("#4DCA94", "#32A673") as IThemeConfig,
@@ -68,13 +85,14 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       showSidebar: false,
     },
   };
-  const { error, data } = useSpace({ ...spaceProps });
 
-  useCallback(() => {
-    if (error) {
-      setShowSpace(false);
-    }
-  }, [error]);
+  const { component } = useSpace({ ...spaceProps });
+
+  // useCallback(() => {
+  //   if (error) {
+  //     setShowSpace(false);
+  //   }
+  // }, [error]);
 
   const [downloaded, setDownloaded] = useState(false);
   const storageKey = "embedded-has-downloaded-sample-data";
@@ -206,8 +224,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
         </div>
       </div>
 
-      {error && <div>{error}</div>}
-      {!error && showSpace && (
+      {showSpace && (
         <div className="absolute top-0 right-0 h-full w-full bg-black/60">
           <div className="relative mt-16 mx-auto max-w-7xl">
             <XCircleIcon
@@ -216,7 +233,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
             >
               X
             </XCircleIcon>
-            <div ref={modalRef}>{data?.component}</div>
+            <div ref={modalRef}>{component}</div>
           </div>
         </div>
       )}
@@ -251,6 +268,27 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
+  console.log("existingSpace", existingSpace);
+
+  const spaceData = await getSpace(
+    (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id
+  );
+
+  console.log("spaceData", spaceData);
+
+  if (!spaceData) {
+    throw "todo";
+  }
+
+  const workbook = await getWorkbook(spaceData?.primaryWorkbookId as string);
+
+  if (!workbook) {
+    throw "todo";
+  }
+
+  console.log("workbook", JSON.stringify(workbook, null, 2));
+
+  // existingSpace?.flatfileData as unknown as FlatfileSpaceData;
   // console.log("existingSpace", existingSpace);
 
   const environmentToken = process.env.EMBEDDED_ENVIRONMENT_ID;
@@ -263,6 +301,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
+  const workbookConfig = {
+    name: workbook.name || "HCM.show Embedded Portal",
+    sheets: workbook.sheets?.map((s) => {
+      return {
+        name: s.name,
+        slug: s.config?.slug,
+        fields: s.config?.fields,
+      };
+    }),
+    actions: workbook.actions,
+  };
+
+  console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
+
   return {
     props: {
       environmentToken,
@@ -272,6 +324,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           )
         : "",
       existingSpace,
+      workbookConfig,
       userId: token.sub,
     },
   };
