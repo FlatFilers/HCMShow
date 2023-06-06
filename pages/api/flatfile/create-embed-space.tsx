@@ -33,6 +33,7 @@ export default async function handler(
   }
 
   const flatfileSpaceData = await createSpace({
+    flowName: "embedded",
     userId,
     environmentId,
     spaceName: "HCM.show Embedded",
@@ -72,6 +73,7 @@ export default async function handler(
   const spaceId = flatfileSpaceData?.id as string;
 
   const addDocumentToSpaceResponse = await addDocumentToSpace({
+    flowName: "embedded",
     title,
     body,
     spaceId,

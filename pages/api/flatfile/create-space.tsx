@@ -42,6 +42,7 @@ export default async function handler(
   }
 
   const spaceResult = await createSpace({
+    flowName: "onboarding",
     userId: token.sub,
     environmentId,
     spaceName: "HCM.show Project Onboarding",
@@ -54,6 +55,7 @@ export default async function handler(
   }
 
   const guestResult = await addGuestToSpace({
+    flowName: "onboarding",
     environmentId,
     email: user.email,
     name: `${user.firstName} ${user.lastName}`,

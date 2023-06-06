@@ -24,6 +24,7 @@ export default async function handler(
   }
 
   const { success, message } = await syncWorkbookRecords({
+    flowName: "embedded",
     userId: token.sub,
     organizationId: token.organizationId,
     spaceType: SpaceType.Embed,

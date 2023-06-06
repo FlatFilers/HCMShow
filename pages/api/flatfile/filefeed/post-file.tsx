@@ -39,7 +39,7 @@ export default async function handler(
   const environmentId = process.env.FILEFEED_ENVIRONMENT_ID as string;
   const file = await fetchFileFromDrive();
 
-  await postFile({ spaceId, environmentId, file });
+  await postFile({ flowName: "filefeed", spaceId, environmentId, file });
 
   res.status(200);
 }

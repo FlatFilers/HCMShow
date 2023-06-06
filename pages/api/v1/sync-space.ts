@@ -30,6 +30,7 @@ export default async function handler(
   // Not awaiting for early response back to Flatfile server
   if (space.type === SpaceType.WorkbookUpload) {
     syncWorkbookRecords({
+      flowName: "onboarding",
       userId: user.id,
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,
@@ -38,6 +39,7 @@ export default async function handler(
     // TODO
   } else if (space.type === SpaceType.Embed) {
     syncBenefitPlanRecords({
+      flowName: "embedded",
       userId: user.id,
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,

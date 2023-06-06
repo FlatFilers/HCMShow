@@ -538,9 +538,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const environmentId = process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID as string;
 
-  // const environmentSpaces = await listSpaces({
-  //   environmentId,
-  // });
+  const environmentSpaces = await listSpaces({
+    flowName: "dynamic",
+    environmentId,
+  });
 
   // console.log("environmentSpaces", environmentSpaces);
 
@@ -552,7 +553,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // const spaceId = currentSpace?.id as string;
 
-  // const getWorkbooks = await listWorkbooks({ spaceId });
+  const getWorkbooks = await listWorkbooks({ flowName: "dynamic", spaceId });
 
   // console.log("getWorkbooks", getWorkbooks);
 

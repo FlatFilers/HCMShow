@@ -15,21 +15,25 @@ import { upsertEmployeeBenefitPlanRecords } from "./employee-benefit-plan";
 import { RecordsWithLinks } from "@flatfile/api/api";
 
 export const syncWorkbookRecords = async ({
+  flowName,
   userId,
   organizationId,
   spaceType,
 }: {
+  flowName: string;
   userId: string;
   organizationId: string;
   spaceType: SpaceType;
 }) => {
   const employeeRecords = await getRecordsByName({
+    flowName,
     userId,
     workbookName: process.env.ONBOARDING_WORKBOOK_NAME as string,
     sheetName: "Employees",
     spaceType,
   });
   const jobRecords = await getRecordsByName({
+    flowName,
     userId,
     workbookName: process.env.ONBOARDING_WORKBOOK_NAME as string,
     sheetName: "Jobs",
@@ -180,15 +184,18 @@ export const syncWorkbookRecords = async ({
 };
 
 export const syncBenefitPlanRecords = async ({
+  flowName,
   userId,
   organizationId,
   spaceType,
 }: {
+  flowName: string;
   userId: string;
   organizationId: string;
   spaceType: SpaceType;
 }) => {
   const employeeBenefitRecords = await getRecordsByName({
+    flowName,
     userId,
     workbookName: process.env.EMBEDDED_WORKBOOK_NAME as string,
     sheetName: "Benefit Elections",

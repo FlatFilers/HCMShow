@@ -3,8 +3,23 @@ import { ListWorkbooksRequest } from "@flatfile/api/api";
 import { getSpaceConfig } from "./flatfile";
 
 // TODO: Need to take in per-workflow API key here
-const flatfileClient = () => {
-  const token = process.env.FLATFILE_API_KEY;
+const flatfileClient = (flowName: string) => {
+  const onboarding = process.env.ONBOARDING_FLATFILE_API_KEY;
+  const embedded = process.env.FILEFEED_FLATFILE_API_KEY;
+  const filefeed = process.env.EMBEDDED_FLATFILE_API_KEY;
+  const dynamic = process.env.DYNAMIC_FLATFILE_API_KEY;
+  let token;
+
+  switch (flowName) {
+    case "onboarding":
+      token = onboarding;
+    case "embedded":
+      token = embedded;
+    case "filefeed":
+      token = filefeed;
+    case "dynamic":
+      token = dynamic;
+  }
 
   if (!token) {
     throw new Error("No FLATFILE_API_KEY ENV");
@@ -16,15 +31,17 @@ const flatfileClient = () => {
 };
 
 export const createSpace = async ({
+  flowName,
   userId,
   environmentId,
   spaceName,
 }: {
+  flowName: string;
   userId: string;
   environmentId: string;
   spaceName: string;
 }) => {
-  const flatfile = flatfileClient();
+  const flatfile = flatfileClient(flowName);
 
   try {
     const result = await flatfile.spaces.create({
@@ -44,18 +61,20 @@ export const createSpace = async ({
 };
 
 export const addGuestToSpace = async ({
+  flowName,
   environmentId,
   email,
   name,
   spaceId,
 }: {
+  flowName: string;
   environmentId: string;
   email: string;
   name: string;
   spaceId: string;
 }) => {
   try {
-    const flatfile = flatfileClient();
+    const flatfile = flatfileClient(flowName);
 
     const result = await flatfile.guests.create([
       {
@@ -78,16 +97,18 @@ export const addGuestToSpace = async ({
 };
 
 export const addDocumentToSpace = async ({
+  flowName,
   title,
   body,
   spaceId,
 }: {
+  flowName: string;
   title: string;
   body: string;
   spaceId: string;
 }) => {
   try {
-    const flatfile = flatfileClient();
+    const flatfile = flatfileClient(flowName);
 
     const result = await flatfile.documents.create(spaceId, {
       title,
@@ -101,9 +122,15 @@ export const addDocumentToSpace = async ({
   }
 };
 
-export const listWorkbooks = async ({ spaceId }: { spaceId: string }) => {
+export const listWorkbooks = async ({
+  flowName,
+  spaceId,
+}: {
+  flowName: string;
+  spaceId: string;
+}) => {
   try {
-    const flatfile = flatfileClient();
+    const flatfile = flatfileClient(flowName);
 
     const result = await flatfile.workbooks.list({ spaceId });
 
@@ -115,12 +142,14 @@ export const listWorkbooks = async ({ spaceId }: { spaceId: string }) => {
 };
 
 export const listSpaces = async ({
+  flowName,
   environmentId,
 }: {
+  flowName: string;
   environmentId: string;
 }) => {
   try {
-    const flatfile = flatfileClient();
+    const flatfile = flatfileClient(flowName);
 
     const result = await flatfile.spaces.list({ environmentId });
 
@@ -131,9 +160,9 @@ export const listSpaces = async ({
   }
 };
 
-export const getSpace = async (spaceId: string) => {
+export const getSpace = async (flowName: string, spaceId: string) => {
   try {
-    const flatfile = flatfileClient();
+    const flatfile = flatfileClient(flowName);
 
     const result = await flatfile.spaces.get(spaceId);
 
@@ -144,9 +173,9 @@ export const getSpace = async (spaceId: string) => {
   }
 };
 
-export const getWorkbook = async (workbookId: string) => {
+export const getWorkbook = async (flowName: string, workbookId: string) => {
   try {
-    const flatfile = flatfileClient();
+    const flatfile = flatfileClient(flowName);
 
     const result = await flatfile.workbooks.get(workbookId);
 
@@ -157,9 +186,15 @@ export const getWorkbook = async (workbookId: string) => {
   }
 };
 
-export const getRecords = async ({ sheetId }: { sheetId: string }) => {
+export const getRecords = async ({
+  flowName,
+  sheetId,
+}: {
+  flowName: string;
+  sheetId: string;
+}) => {
   try {
-    const flatfile = flatfileClient();
+    const flatfile = flatfileClient(flowName);
 
     const response = await flatfile.records.get(sheetId);
 
@@ -171,16 +206,23 @@ export const getRecords = async ({ sheetId }: { sheetId: string }) => {
 };
 
 export const postFile = async ({
+  flowName,
   spaceId,
   environmentId,
   file,
 }: {
+  flowName: string;
   spaceId: string;
   environmentId: string;
-  file: any;
+  file: string;
 }) => {
   try {
-    const flatfile = flatfileClient();
+    const flatfile = flatfileClient(flowName);
+    const fileData: Buffer = Buffer.from(file);
+    const blobData: Blob = new Blob([fileData]);
+    const formData = new FormData();
+    formData.append("file", blobData, "HCM.show benefits sample data.csv");
+    file = JSON.stringify(formData);
 
     const response = await flatfile.files.upload({
       spaceId,

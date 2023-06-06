@@ -44,6 +44,7 @@ export default async function handler(
   const userId = user.id;
 
   const spaceResult = await createSpace({
+    flowName: "filefeed",
     userId,
     environmentId,
     spaceName: "HCM.show File Feed",
@@ -52,6 +53,7 @@ export default async function handler(
   const spaceId = spaceResult!.id;
 
   const addGuestToSpaceResponse = await addGuestToSpace({
+    flowName: "filefeed",
     environmentId,
     email: user.email,
     name: `${user.firstName} ${user.lastName}`,
@@ -101,6 +103,7 @@ export default async function handler(
   const body = initialDocumentBody;
 
   const addDocumentToSpaceResponse = await addDocumentToSpace({
+    flowName: "filefeed",
     title,
     body,
     spaceId,
@@ -110,7 +113,7 @@ export default async function handler(
 
   const file = await fetchFileFromDrive();
 
-  await postFile({ spaceId, environmentId, file });
+  await postFile({ flowName: "filefeed", spaceId, environmentId, file });
 
   res.redirect("/file-feed?flash=success&message=Setup Flatfile!");
 }

@@ -271,7 +271,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   const spaceData = await getSpace(
-    (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id
+    "embedded",
+    (existingSpace?.flatfileData as unknown as FlatfileSpaceData)?.id
   );
 
   console.log("spaceData", spaceData);
@@ -279,8 +280,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!spaceData) {
     throw "todo";
   }
-
-  const workbook = await getWorkbook(spaceData?.primaryWorkbookId as string);
+  const workbook = await getWorkbook(
+    "embedded",
+    spaceData?.primaryWorkbookId as string
+  );
 
   if (!workbook) {
     throw "todo";

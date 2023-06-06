@@ -55,11 +55,13 @@ type WorkbookObject = {
 const BASE_PATH = "https://api.x.flatfile.com/v1";
 
 export const getRecordsByName = async ({
+  flowName,
   userId,
   workbookName,
   sheetName,
   spaceType,
 }: {
+  flowName: string;
   userId: string;
   workbookName: string;
   sheetName: string;
@@ -83,6 +85,7 @@ export const getRecordsByName = async ({
   // console.log("space", space);
 
   const { workbookId, sheetId } = await getWorkbookIdAndSheetIds({
+    flowName,
     flatfileSpaceId: (space.flatfileData as unknown as FlatfileSpaceData).id,
     workbookName,
     sheetName,
@@ -90,7 +93,7 @@ export const getRecordsByName = async ({
 
   // console.log("w, s", workbookId, sheetIds);
 
-  const records = await getRecords({ sheetId: sheetId });
+  const records = await getRecords({ flowName: flowName, sheetId: sheetId });
 
   // console.log("getRecords", records);
 
@@ -100,15 +103,20 @@ export const getRecordsByName = async ({
 };
 
 const getWorkbookIdAndSheetIds = async ({
+  flowName,
   flatfileSpaceId,
   workbookName,
   sheetName,
 }: {
+  flowName: string;
   flatfileSpaceId: string;
   workbookName: string;
   sheetName: string;
 }): Promise<{ workbookId: string; sheetId: string }> => {
-  const response = await listWorkbooks({ spaceId: flatfileSpaceId });
+  const response = await listWorkbooks({
+    flowName: flowName,
+    spaceId: flatfileSpaceId,
+  });
 
   // const response = await fetch(
   //   `${BASE_PATH}/workbooks?spaceId=${flatfileSpaceId}`,
