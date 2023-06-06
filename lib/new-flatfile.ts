@@ -5,20 +5,24 @@ import { getSpaceConfig } from "./flatfile";
 // TODO: Need to take in per-workflow API key here
 const flatfileClient = (flowName: string) => {
   const onboarding = process.env.ONBOARDING_FLATFILE_API_KEY;
-  const embedded = process.env.FILEFEED_FLATFILE_API_KEY;
-  const filefeed = process.env.EMBEDDED_FLATFILE_API_KEY;
+  const embedded = process.env.EMBEDDED_FLATFILE_API_KEY;
+  const filefeed = process.env.FILEFEED_FLATFILE_API_KEY;
   const dynamic = process.env.DYNAMIC_FLATFILE_API_KEY;
   let token;
 
   switch (flowName) {
     case "onboarding":
       token = onboarding;
+      break;
     case "embedded":
       token = embedded;
+      break;
     case "filefeed":
       token = filefeed;
+      break;
     case "dynamic":
       token = dynamic;
+      break;
   }
 
   if (!token) {
