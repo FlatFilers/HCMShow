@@ -74,6 +74,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     themeConfig: theme("#4DCA94", "#32A673") as IThemeConfig,
     name: "Embedded Portal",
     // TODO: These metadata properties are setup in an odd way.
+    // TODO: Is this still true in the new SDK?
     spaceInfo: {
       userId,
     },
@@ -82,9 +83,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       showSidebar: false,
     },
   };
-
-  // TODO: Style error component
-  // const { component } = useSpace({ ...spaceProps });
 
   const [downloaded, setDownloaded] = useState(false);
   const storageKey = "embedded-has-downloaded-sample-data";
@@ -151,10 +149,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     }
   }, []);
 
-  // const modalRef = useRef<HTMLDivElement | null>(null);
-
-  // useOnClickOutside(modalRef, () => setShowSpace(false));
-
   return (
     <div className="mx-12 mt-16 self-center">
       <div className="max-w-5xl">
@@ -217,20 +211,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
           )}
         </div>
       </div>
-
-      {/* {showSpace && (
-        <div className="absolute top-0 right-0 h-full w-full bg-black/60">
-          <div className="relative mt-16 mx-auto max-w-7xl">
-            <XCircleIcon
-              className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
-              onClick={() => setShowSpace(false)}
-            >
-              X
-            </XCircleIcon>
-            <div ref={modalRef}>{component}</div>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };

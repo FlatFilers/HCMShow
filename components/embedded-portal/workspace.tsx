@@ -51,6 +51,7 @@ const Workspace = ({
 
   useOnClickOutside(modalRef, () => closeSpace());
 
+  // TODO: Style error component
   const { component } = useSpace({ ...spaceProps });
 
   return (
