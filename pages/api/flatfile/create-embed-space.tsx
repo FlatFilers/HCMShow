@@ -26,10 +26,10 @@ export default async function handler(
 
   const userId = token.sub;
 
-  const environmentId = process.env.ONBOARDING_ENVIRONMENT_ID;
+  const environmentId = process.env.EMBEDDED_ENVIRONMENT_ID;
 
   if (!environmentId) {
-    throw new Error("Missing ONBOARDING_ENVIRONMENT_ID env var");
+    throw new Error("Missing EMBEDDED_ENVIRONMENT_ID env var");
   }
 
   const flatfileSpaceData = await createSpace({

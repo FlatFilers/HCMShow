@@ -2,6 +2,7 @@ import { FlatfileClient } from "@flatfile/api";
 import { ListWorkbooksRequest } from "@flatfile/api/api";
 import { getSpaceConfig } from "./flatfile";
 
+// TODO: Need to take in per-workflow API key here
 const flatfileClient = () => {
   const token = process.env.FLATFILE_API_KEY;
 
@@ -29,6 +30,7 @@ export const createSpace = async ({
     const result = await flatfile.spaces.create({
       name: spaceName,
       environmentId,
+      autoConfigure: true,
       metadata: {
         userId,
       },
