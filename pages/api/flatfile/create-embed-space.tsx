@@ -3,7 +3,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { SpaceType } from "../../../lib/space";
-import { addDocumentToSpace, createSpace } from "../../../lib/new-flatfile";
+import {
+  FlowTypes,
+  addDocumentToSpace,
+  createSpace,
+} from "../../../lib/new-flatfile";
 
 export default async function handler(
   req: NextApiRequest,
@@ -33,7 +37,7 @@ export default async function handler(
   }
 
   const flatfileSpaceData = await createSpace({
-    flowName: "embedded",
+    flowName: FlowTypes.Embedded,
     userId,
     environmentId,
     spaceName: "HCM.show Embedded",
@@ -73,7 +77,7 @@ export default async function handler(
   const spaceId = flatfileSpaceData?.id as string;
 
   const addDocumentToSpaceResponse = await addDocumentToSpace({
-    flowName: "embedded",
+    flowName: FlowTypes.Embedded,
     title,
     body,
     spaceId,

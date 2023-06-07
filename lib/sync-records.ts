@@ -13,6 +13,7 @@ import {
 } from "./benefit-plan";
 import { upsertEmployeeBenefitPlanRecords } from "./employee-benefit-plan";
 import { RecordsWithLinks } from "@flatfile/api/api";
+import { FlowTypes } from "./new-flatfile";
 
 export const syncWorkbookRecords = async ({
   flowName,
@@ -20,7 +21,7 @@ export const syncWorkbookRecords = async ({
   organizationId,
   spaceType,
 }: {
-  flowName: string;
+  flowName: FlowTypes;
   userId: string;
   organizationId: string;
   spaceType: SpaceType;
@@ -189,7 +190,7 @@ export const syncBenefitPlanRecords = async ({
   organizationId,
   spaceType,
 }: {
-  flowName: string;
+  flowName: FlowTypes;
   userId: string;
   organizationId: string;
   spaceType: SpaceType;

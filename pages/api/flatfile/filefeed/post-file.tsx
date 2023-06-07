@@ -6,7 +6,7 @@ import { prismaClient } from "../../../../lib/prisma-client";
 import { SpaceType } from "../../../../lib/space";
 import { Space } from "@prisma/client";
 import { fetchFileFromDrive } from "../../../../lib/google-drive";
-import { postFile } from "../../../../lib/new-flatfile";
+import { FlowTypes, postFile } from "../../../../lib/new-flatfile";
 
 export default async function handler(
   req: NextApiRequest,
@@ -39,7 +39,12 @@ export default async function handler(
   const environmentId = process.env.FILEFEED_ENVIRONMENT_ID as string;
   const file = await fetchFileFromDrive();
 
-  await postFile({ flowName: "filefeed", spaceId, environmentId, file });
+  await postFile({
+    flowName: FlowTypes.FileFeed,
+    spaceId,
+    environmentId,
+    file,
+  });
 
   res.status(200);
 }

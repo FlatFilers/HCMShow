@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
 import { syncWorkbookRecords } from "../../../lib/sync-records";
 import { SpaceType } from "../../../lib/space";
+import { FlowTypes } from "../../../lib/new-flatfile";
 
 type Data = {
   message?: string;
@@ -22,7 +23,7 @@ export default async function handler(
   }
 
   const { success, message } = await syncWorkbookRecords({
-    flowName: "onboarding",
+    flowName: FlowTypes.Onboarding,
     userId: token.sub,
     organizationId: token.organizationId,
     spaceType: SpaceType.WorkbookUpload,

@@ -2,6 +2,7 @@ import { PrismaClient, Space, User } from "@prisma/client";
 import { SpaceType } from "./space";
 import { theme } from "./theme";
 import { getRecords, listWorkbooks } from "./new-flatfile";
+import { FlowTypes } from "./new-flatfile";
 
 export interface Field {
   value: string | number | boolean | null;
@@ -61,7 +62,7 @@ export const getRecordsByName = async ({
   sheetName,
   spaceType,
 }: {
-  flowName: string;
+  flowName: FlowTypes;
   userId: string;
   workbookName: string;
   sheetName: string;
@@ -108,7 +109,7 @@ const getWorkbookIdAndSheetIds = async ({
   workbookName,
   sheetName,
 }: {
-  flowName: string;
+  flowName: FlowTypes;
   flatfileSpaceId: string;
   workbookName: string;
   sheetName: string;

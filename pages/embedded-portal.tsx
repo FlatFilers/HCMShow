@@ -26,7 +26,7 @@ import Workspace from "../components/embedded-portal/workspace";
 import { theme } from "../lib/theme";
 import { useFlashMessages, useOnClickOutside } from "../lib/hooks/usehooks";
 import { Flatfile } from "@flatfile/api";
-import { getSpace, getWorkbook } from "../lib/new-flatfile";
+import { FlowTypes, getSpace, getWorkbook } from "../lib/new-flatfile";
 import { Workbook } from "@flatfile/api/api";
 
 interface Props {
@@ -270,20 +270,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const spaceData = await getSpace(
-    "embedded",
-    (existingSpace?.flatfileData as unknown as FlatfileSpaceData)?.id
-  );
+  const spaceData = await getSpace({
+    flowName: FlowTypes.Embedded,
+    spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData)?.id,
+  });
 
   console.log("spaceData", spaceData);
 
   if (!spaceData) {
     throw "todo";
   }
-  const workbook = await getWorkbook(
-    "embedded",
-    spaceData?.primaryWorkbookId as string
-  );
+  const workbook = await getWorkbook({
+    flowName: FlowTypes.Embedded,
+    workbookId: spaceData?.primaryWorkbookId as string,
+  });
 
   if (!workbook) {
     throw "todo";

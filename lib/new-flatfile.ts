@@ -3,30 +3,34 @@ import { ListWorkbooksRequest } from "@flatfile/api/api";
 import { getSpaceConfig } from "./flatfile";
 
 // TODO: Need to take in per-workflow API key here
+
+export enum FlowTypes {
+  Onboarding = "onboarding",
+  Embedded = "embedded",
+  FileFeed = "filefeed",
+  Dynamic = "dynamic",
+}
+
 const flatfileClient = (flowName: string) => {
-  const onboarding = process.env.ONBOARDING_FLATFILE_API_KEY;
-  const embedded = process.env.EMBEDDED_FLATFILE_API_KEY;
-  const filefeed = process.env.FILEFEED_FLATFILE_API_KEY;
-  const dynamic = process.env.DYNAMIC_FLATFILE_API_KEY;
   let token;
 
   switch (flowName) {
     case "onboarding":
-      token = onboarding;
+      token = process.env.ONBOARDING_FLATFILE_API_KEY;
       break;
     case "embedded":
-      token = embedded;
+      token = process.env.EMBEDDED_FLATFILE_API_KEY;
       break;
     case "filefeed":
-      token = filefeed;
+      token = process.env.FILEFEED_FLATFILE_API_KEY;
       break;
     case "dynamic":
-      token = dynamic;
+      token = process.env.DYNAMIC_FLATFILE_API_KEY;
       break;
   }
 
   if (!token) {
-    throw new Error("No FLATFILE_API_KEY ENV");
+    throw new Error(`No FLATFILE_API_KEY ENV for ${flowName}`);
   }
 
   return new FlatfileClient({
@@ -40,7 +44,7 @@ export const createSpace = async ({
   environmentId,
   spaceName,
 }: {
-  flowName: string;
+  flowName: FlowTypes;
   userId: string;
   environmentId: string;
   spaceName: string;
@@ -71,7 +75,7 @@ export const addGuestToSpace = async ({
   name,
   spaceId,
 }: {
-  flowName: string;
+  flowName: FlowTypes;
   environmentId: string;
   email: string;
   name: string;
@@ -106,7 +110,7 @@ export const addDocumentToSpace = async ({
   body,
   spaceId,
 }: {
-  flowName: string;
+  flowName: FlowTypes;
   title: string;
   body: string;
   spaceId: string;
@@ -130,7 +134,7 @@ export const listWorkbooks = async ({
   flowName,
   spaceId,
 }: {
-  flowName: string;
+  flowName: FlowTypes;
   spaceId: string;
 }) => {
   try {
@@ -149,7 +153,7 @@ export const listSpaces = async ({
   flowName,
   environmentId,
 }: {
-  flowName: string;
+  flowName: FlowTypes;
   environmentId: string;
 }) => {
   try {
@@ -164,7 +168,13 @@ export const listSpaces = async ({
   }
 };
 
-export const getSpace = async (flowName: string, spaceId: string) => {
+export const getSpace = async ({
+  flowName,
+  spaceId,
+}: {
+  flowName: FlowTypes;
+  spaceId: string;
+}) => {
   try {
     const flatfile = flatfileClient(flowName);
 
@@ -177,7 +187,13 @@ export const getSpace = async (flowName: string, spaceId: string) => {
   }
 };
 
-export const getWorkbook = async (flowName: string, workbookId: string) => {
+export const getWorkbook = async ({
+  flowName,
+  workbookId,
+}: {
+  flowName: FlowTypes;
+  workbookId: string;
+}) => {
   try {
     const flatfile = flatfileClient(flowName);
 
@@ -194,7 +210,7 @@ export const getRecords = async ({
   flowName,
   sheetId,
 }: {
-  flowName: string;
+  flowName: FlowTypes;
   sheetId: string;
 }) => {
   try {
@@ -215,7 +231,7 @@ export const postFile = async ({
   environmentId,
   file,
 }: {
-  flowName: string;
+  flowName: FlowTypes;
   spaceId: string;
   environmentId: string;
   file: string;

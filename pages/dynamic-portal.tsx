@@ -25,7 +25,12 @@ import FeaturesList from "../components/shared/features-list";
 import { theme } from "../lib/theme";
 import { DateTime } from "luxon";
 import { useOnClickOutside } from "../lib/hooks/usehooks";
-import { getWorkbook, listSpaces, listWorkbooks } from "../lib/new-flatfile";
+import {
+  FlowTypes,
+  getWorkbook,
+  listSpaces,
+  listWorkbooks,
+} from "../lib/new-flatfile";
 import { Portal } from "../components/dynamic-templates/porta";
 import {
   Action,
@@ -539,7 +544,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const environmentId = process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID as string;
 
   const environmentSpaces = await listSpaces({
-    flowName: "dynamic",
+    flowName: FlowTypes.Dynamic,
     environmentId,
   });
 
@@ -553,7 +558,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // const spaceId = currentSpace?.id as string;
 
-  const getWorkbooks = await listWorkbooks({ flowName: "dynamic", spaceId });
+  const getWorkbooks = await listWorkbooks({
+    flowName: FlowTypes.Dynamic,
+    spaceId,
+  });
 
   // console.log("getWorkbooks", getWorkbooks);
 

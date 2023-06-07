@@ -6,6 +6,7 @@ import { FlatfileSpaceData, getSpace } from "../../../lib/flatfile";
 import { SpaceType } from "../../../lib/space";
 import { fetchFileFromDrive } from "../../../lib/google-drive";
 import {
+  FlowTypes,
   addDocumentToSpace,
   addGuestToSpace,
   createSpace,
@@ -44,7 +45,7 @@ export default async function handler(
   const userId = user.id;
 
   const spaceResult = await createSpace({
-    flowName: "filefeed",
+    flowName: FlowTypes.FileFeed,
     userId,
     environmentId,
     spaceName: "HCM.show File Feed",
@@ -53,7 +54,7 @@ export default async function handler(
   const spaceId = spaceResult!.id;
 
   const addGuestToSpaceResponse = await addGuestToSpace({
-    flowName: "filefeed",
+    flowName: FlowTypes.FileFeed,
     environmentId,
     email: user.email,
     name: `${user.firstName} ${user.lastName}`,
@@ -103,7 +104,7 @@ export default async function handler(
   const body = initialDocumentBody;
 
   const addDocumentToSpaceResponse = await addDocumentToSpace({
-    flowName: "filefeed",
+    flowName: FlowTypes.FileFeed,
     title,
     body,
     spaceId,
@@ -113,7 +114,12 @@ export default async function handler(
 
   const file = await fetchFileFromDrive();
 
-  await postFile({ flowName: "filefeed", spaceId, environmentId, file });
+  await postFile({
+    flowName: FlowTypes.FileFeed,
+    spaceId,
+    environmentId,
+    file,
+  });
 
   res.redirect("/file-feed?flash=success&message=Setup Flatfile!");
 }

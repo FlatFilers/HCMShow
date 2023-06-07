@@ -3,7 +3,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { SpaceType } from "../../../lib/space";
-import { addGuestToSpace, createSpace } from "../../../lib/new-flatfile";
+import {
+  FlowTypes,
+  addGuestToSpace,
+  createSpace,
+} from "../../../lib/new-flatfile";
 
 export default async function handler(
   req: NextApiRequest,
@@ -42,7 +46,7 @@ export default async function handler(
   }
 
   const spaceResult = await createSpace({
-    flowName: "onboarding",
+    flowName: FlowTypes.Onboarding,
     userId: token.sub,
     environmentId,
     spaceName: "HCM.show Project Onboarding",
@@ -55,7 +59,7 @@ export default async function handler(
   }
 
   const guestResult = await addGuestToSpace({
-    flowName: "onboarding",
+    flowName: FlowTypes.Onboarding,
     environmentId,
     email: user.email,
     name: `${user.firstName} ${user.lastName}`,
