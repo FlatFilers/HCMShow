@@ -1,6 +1,8 @@
 import { FlatfileClient } from "@flatfile/api";
 import { ListWorkbooksRequest } from "@flatfile/api/api";
 import { getSpaceConfig } from "./flatfile";
+import { Readable } from "stream";
+import fs from "fs";
 
 // TODO: Need to take in per-workflow API key here
 const flatfileClient = () => {
@@ -177,15 +179,14 @@ export const postFile = async ({
 }: {
   spaceId: string;
   environmentId: string;
-  file: any;
+  file: fs.ReadStream;
 }) => {
   try {
     const flatfile = flatfileClient();
 
-    const response = await flatfile.files.upload({
+    const response = await flatfile.files.upload(file, {
       spaceId,
       environmentId,
-      file,
     });
 
     return response.data;
