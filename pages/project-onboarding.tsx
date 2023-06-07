@@ -148,12 +148,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (dbSpace) {
     space = {
       ...dbSpace,
-      createdAt: DateTime.fromJSDate(dbSpace.createdAt)
-        .toFormat("MM/dd/yy hh:mm:ss a")
-        .toString(),
-      updatedAt: DateTime.fromJSDate(dbSpace.updatedAt)
-        .toFormat("MM/dd/yy hh:mm:ss a")
-        .toString(),
+      createdAt: DateTime.fromJSDate(dbSpace.createdAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
+      updatedAt: DateTime.fromJSDate(dbSpace.updatedAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
     };
   }
 

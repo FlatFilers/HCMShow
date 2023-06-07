@@ -92,20 +92,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const updatedActions = actions.map((action) => {
     return {
       ...action,
-      createdAt: DateTime.fromJSDate(action.createdAt)
-        .toFormat("MM/dd/yy hh:mm:ss a")
-        .toString(),
-      updatedAt: DateTime.fromJSDate(action.updatedAt)
-        .toFormat("MM/dd/yy hh:mm:ss a")
-        .toString(),
+      createdAt: DateTime.fromJSDate(action.createdAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
+      updatedAt: DateTime.fromJSDate(action.updatedAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
       user: {
         ...action.user,
-        createdAt: DateTime.fromJSDate(action.user.createdAt)
-          .toFormat("MM/dd/yy hh:mm:ss a")
-          .toString(),
-        updatedAt: DateTime.fromJSDate(action.user.updatedAt)
-          .toFormat("MM/dd/yy hh:mm:ss a")
-          .toString(),
+        createdAt: DateTime.fromJSDate(action.user.createdAt).toFormat(
+          "MM/dd/yy hh:mm:ss a"
+        ),
+        updatedAt: DateTime.fromJSDate(action.user.updatedAt).toFormat(
+          "MM/dd/yy hh:mm:ss a"
+        ),
       },
     };
   });
