@@ -1,16 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    swcPlugins: [
-      [
-        "next-superjson-plugin",
-        {
-          excluded: [],
-        },
-      ],
-    ],
-  },
+  // experimental: {
+  //   swcPlugins: [
+  //     [
+  //       {
+  //         excluded: [],
+  //       },
+  //     ],
+  //   ],
+  // },
 };
 
 module.exports = nextConfig;

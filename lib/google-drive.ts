@@ -1,6 +1,9 @@
+import fs from "fs";
+import tmp from "tmp-promise";
+
 const { google } = require("googleapis");
 
-export const fetchFileFromDrive = async () => {
+export const fetchFileFromDrive = async (): Promise<fs.ReadStream> => {
   const service = google.drive({
     version: "v3",
     auth: process.env.GOOGLE_DRIVE_API_KEY,
@@ -14,9 +17,17 @@ export const fetchFileFromDrive = async () => {
       alt: "media",
     });
 
-    // console.log("response", response);
+    // Create a temporary file and write the data into it
+    const tmpFile = await tmp.file({ prefix: "filefeed-", postfix: ".csv" });
+    fs.writeFileSync(tmpFile.path, response.data);
 
-    file = response.data;
+    // Create a fs.ReadStream from the temporary file
+    file = fs.createReadStream(tmpFile.path);
+
+    // When you're done with the file, close and unlink it
+    file.on("close", () => {
+      tmpFile.cleanup();
+    });
 
     return file;
   } catch (err) {

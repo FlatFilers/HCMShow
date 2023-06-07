@@ -12,7 +12,6 @@ import {
   SparklesIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import { getAccessToken } from "../lib/flatfile";
 import { Action, PrismaClient, Space } from "@prisma/client";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
@@ -26,20 +25,24 @@ import StepList, { Step } from "../components/shared/step-list";
 import Workspace from "../components/embedded-portal/workspace";
 import { theme } from "../lib/theme";
 import { useFlashMessages, useOnClickOutside } from "../lib/hooks/usehooks";
+import { Flatfile } from "@flatfile/api";
+import { getSpace, getWorkbook } from "../lib/new-flatfile";
+import { Workbook } from "@flatfile/api/api";
 
 interface Props {
   accessToken: string;
   environmentToken: string;
   lastSyncedAt?: string;
   existingSpace: Space;
+  workbookConfig?: Flatfile.CreateWorkbookConfig;
   userId: string;
 }
 
 const EmbeddedPortal: NextPageWithLayout<Props> = ({
-  accessToken,
   environmentToken,
   lastSyncedAt,
   existingSpace,
+  workbookConfig,
   userId,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -49,17 +52,29 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     setButtonText("Setting up Flatfile...");
   };
 
+  const publishableKey = process.env.NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY;
+
+  if (!publishableKey) {
+    console.error("Missing NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY env var");
+    throw "Missing NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY env var";
+  }
+
+  if (!workbookConfig) {
+    throw "Missing workbook";
+  }
+
   const flatfleSpace =
     existingSpace?.flatfileData as unknown as FlatfileSpaceData;
   const [showSpace, setShowSpace] = useState(false);
   const spaceProps = {
-    accessToken: accessToken as string,
+    publishableKey,
+    workbook: workbookConfig,
     environmentId: environmentToken as string,
     spaceId: flatfleSpace?.id as string,
     themeConfig: theme("#4DCA94", "#32A673") as IThemeConfig,
     name: "Embedded Portal",
-    // TODO: This may change in the future as the SDK evolves.
-    // These metadata properties are setup in an odd way.
+    // TODO: These metadata properties are setup in an odd way.
+    // TODO: Is this still true in the new SDK?
     spaceInfo: {
       userId,
     },
@@ -68,13 +83,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       showSidebar: false,
     },
   };
-  const { error, data } = useSpace({ ...spaceProps });
-
-  useCallback(() => {
-    if (error) {
-      setShowSpace(false);
-    }
-  }, [error]);
 
   const [downloaded, setDownloaded] = useState(false);
   const storageKey = "embedded-has-downloaded-sample-data";
@@ -141,10 +149,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     }
   }, []);
 
-  const modalRef = useRef<HTMLDivElement | null>(null);
-
-  useOnClickOutside(modalRef, () => setShowSpace(false));
-
   return (
     <div className="mx-12 mt-16 self-center">
       <div className="max-w-5xl">
@@ -201,25 +205,12 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
                 setShowSpace(!showSpace);
               }}
               showSpace={showSpace}
+              closeSpace={() => setShowSpace(false)}
+              spaceProps={spaceProps}
             />
           )}
         </div>
       </div>
-
-      {error && <div>{error}</div>}
-      {!error && showSpace && (
-        <div className="absolute top-0 right-0 h-full w-full bg-black/60">
-          <div className="relative mt-16 mx-auto max-w-7xl">
-            <XCircleIcon
-              className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
-              onClick={() => setShowSpace(false)}
-            >
-              X
-            </XCircleIcon>
-            <div ref={modalRef}>{data?.component}</div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
@@ -251,9 +242,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  // console.log("existingSpace", existingSpace);
+  console.log("existingSpace", existingSpace);
 
-  const accessToken = await getAccessToken();
   const environmentToken = process.env.EMBEDDED_ENVIRONMENT_ID;
   const lastSync = await prisma.action.findFirst({
     where: {
@@ -264,9 +254,59 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
+  if (!existingSpace) {
+    console.log("No space");
+    return {
+      props: {
+        environmentToken,
+        lastSyncedAt: lastSync
+          ? DateTime.fromJSDate(lastSync.createdAt).toFormat(
+              "MM/dd/yy hh:mm:ss a"
+            )
+          : "",
+        existingSpace,
+        userId: token.sub,
+      },
+    };
+  }
+
+  const spaceData = await getSpace(
+    (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id
+  );
+
+  console.log("spaceData", spaceData);
+
+  if (!spaceData) {
+    throw "todo";
+  }
+
+  const workbook = await getWorkbook(spaceData?.primaryWorkbookId as string);
+
+  if (!workbook) {
+    throw "todo";
+  }
+
+  console.log("workbook", JSON.stringify(workbook, null, 2));
+
+  // existingSpace?.flatfileData as unknown as FlatfileSpaceData;
+  // console.log("existingSpace", existingSpace);
+
+  const workbookConfig = {
+    name: workbook.name || "HCM.show Embedded Portal",
+    sheets: workbook.sheets?.map((s) => {
+      return {
+        name: s.name,
+        slug: s.config?.slug,
+        fields: s.config?.fields,
+      };
+    }),
+    actions: workbook.actions,
+  };
+
+  console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
+
   return {
     props: {
-      accessToken,
       environmentToken,
       lastSyncedAt: lastSync
         ? DateTime.fromJSDate(lastSync.createdAt).toFormat(
@@ -274,6 +314,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           )
         : "",
       existingSpace,
+      workbookConfig,
       userId: token.sub,
     },
   };
