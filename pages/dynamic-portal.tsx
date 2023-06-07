@@ -551,13 +551,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  console.log("dbCustomOptionsRecord", dbCustomOptionsRecord);
-
   const dbCustomOptions = dbCustomOptionsRecord
     ? dbCustomOptionsRecord.options
     : null;
-
-  console.log("dbCustomOptions", dbCustomOptions);
 
   const environmentId = process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID as string;
 
@@ -601,7 +597,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const workbook = await getWorkbook("us_wb_RXibxLil");
 
   if (!workbook) {
-    // throw "TODO: no workbook found";
+    throw "TODO: no workbook found";
   }
 
   console.log("workbook", JSON.stringify(workbook, null, 2));
