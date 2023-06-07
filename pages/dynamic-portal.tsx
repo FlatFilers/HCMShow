@@ -530,7 +530,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  let updatedDbCustomField;
+  let updatedDbCustomField = null;
   if (dbCustomField) {
     updatedDbCustomField = {
       ...dbCustomField,

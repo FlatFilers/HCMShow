@@ -278,7 +278,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log("spaceData", spaceData);
 
   if (!spaceData) {
-    console.log("No space data found");
+    throw "todo";
   }
   const workbook = await getWorkbook({
     flowName: FlowTypes.Embedded,
