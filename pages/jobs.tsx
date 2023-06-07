@@ -5,7 +5,7 @@ import { getToken } from "next-auth/jwt";
 import { DateTime } from "luxon";
 
 interface Props {
-  jobs: Job[];
+  jobs: any;
 }
 
 const Jobs: NextPage<Props> = ({ jobs }) => {
@@ -52,19 +52,13 @@ const Jobs: NextPage<Props> = ({ jobs }) => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white w-full">
-              {jobs.map((job) => (
+              {jobs.map((job: any) => (
                 <tr key={job.id}>
                   <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">
                     <Link href={`/jobs/${job.id}`}>{job.name}</Link>
                   </td>
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {
-                      <div>
-                        {DateTime.fromJSDate(job.effectiveDate).toFormat(
-                          "MM/dd/yyyy"
-                        )}
-                      </div>
-                    }
+                    {<div>{job.effectiveDate}</div>}
                   </td>
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     {job.department}
@@ -104,11 +98,29 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const prisma = new PrismaClient();
 
-  const jobs: Job[] = await prisma.job.findMany({
+  const dbJobs: Job[] = await prisma.job.findMany({
     where: {
       organizationId: token.organizationId,
     },
   });
+
+  let jobs = null;
+  if (dbJobs) {
+    jobs = dbJobs.map((job) => {
+      return {
+        ...job,
+        createdAt: DateTime.fromJSDate(job.createdAt).toFormat(
+          "MM/dd/yy hh:mm:ss a"
+        ),
+        updatedAt: DateTime.fromJSDate(job.updatedAt).toFormat(
+          "MM/dd/yy hh:mm:ss a"
+        ),
+        effectiveDate: DateTime.fromJSDate(job.effectiveDate).toFormat(
+          "MM/dd/yyyy"
+        ),
+      };
+    });
+  }
 
   return {
     props: {

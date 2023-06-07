@@ -1,5 +1,6 @@
 import { GetServerSideProps, NextPage } from "next";
 import { BenefitPlan, PrismaClient } from "@prisma/client";
+import { DateTime } from "luxon";
 
 interface Props {
   benefitPlan: BenefitPlan;
@@ -44,11 +45,26 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const benefitPlanId: string = context.params?.id as string;
   const prisma = new PrismaClient();
 
-  const benefitPlan: BenefitPlan | null = await prisma.benefitPlan.findFirst({
-    where: {
-      id: benefitPlanId,
-    },
-  });
+  const dbBbenefitPlan: BenefitPlan | null = await prisma.benefitPlan.findFirst(
+    {
+      where: {
+        id: benefitPlanId,
+      },
+    }
+  );
+
+  let benefitPlan = null;
+  if (dbBbenefitPlan) {
+    benefitPlan = {
+      ...dbBbenefitPlan,
+      createdAt: DateTime.fromJSDate(dbBbenefitPlan.createdAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
+      updatedAt: DateTime.fromJSDate(dbBbenefitPlan.updatedAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
+    };
+  }
 
   if (!benefitPlan) {
     return {

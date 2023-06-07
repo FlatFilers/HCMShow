@@ -13,7 +13,7 @@ type EmployeeWithRelations = Prisma.EmployeeGetPayload<
 >;
 
 interface Props {
-  employee: EmployeeWithRelations;
+  employee: any;
 }
 
 const Employees: NextPage<Props> = ({ employee }) => {
@@ -55,17 +55,13 @@ const Employees: NextPage<Props> = ({ employee }) => {
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Hire Date</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {DateTime.fromJSDate(employee.hireDate).toFormat("MM/dd/yyyy")}
+                {employee.hireDate}
               </dd>
             </div>
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">End Date</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {employee.endEmploymentDate
-                  ? DateTime.fromJSDate(employee.endEmploymentDate).toFormat(
-                      "MM/dd/yyyy"
-                    )
-                  : "-"}
+                {employee.endEmploymentDate ? employee.endEmploymentDate : "-"}
               </dd>
             </div>
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
@@ -87,7 +83,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const employeeId: string = context.params?.id as string;
   const prisma = new PrismaClient();
 
-  const employee: EmployeeWithRelations | null =
+  const dbEmployee: EmployeeWithRelations | null =
     await prisma.employee.findUnique({
       where: {
         id: employeeId,
@@ -96,6 +92,48 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         manager: true,
       },
     });
+
+  let employee = null;
+  if (dbEmployee) {
+    employee = {
+      ...dbEmployee,
+      createdAt: DateTime.fromJSDate(dbEmployee.createdAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
+      updatedAt: DateTime.fromJSDate(dbEmployee.updatedAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
+      hireDate: DateTime.fromJSDate(dbEmployee.hireDate).toFormat("MM/dd/yyyy"),
+      endEmploymentDate: dbEmployee.endEmploymentDate
+        ? DateTime.fromJSDate(dbEmployee.endEmploymentDate).toFormat(
+            "MM/dd/yyyy"
+          )
+        : null,
+      manager: {
+        ...dbEmployee.manager,
+        createdAt: dbEmployee.manager
+          ? DateTime.fromJSDate(dbEmployee.manager.createdAt).toFormat(
+              "MM/dd/yy hh:mm:ss a"
+            )
+          : null,
+        updatedAt: dbEmployee.manager
+          ? DateTime.fromJSDate(dbEmployee.manager.updatedAt).toFormat(
+              "MM/dd/yy hh:mm:ss a"
+            )
+          : null,
+        hireDate: dbEmployee.manager?.hireDate
+          ? DateTime.fromJSDate(dbEmployee.manager.hireDate).toFormat(
+              "MM/dd/yyyy"
+            )
+          : null,
+        endEmploymentDate: dbEmployee.manager?.endEmploymentDate
+          ? DateTime.fromJSDate(dbEmployee.manager.endEmploymentDate).toFormat(
+              "MM/dd/yyyy"
+            )
+          : null,
+      },
+    };
+  }
 
   if (!employee) {
     return {
