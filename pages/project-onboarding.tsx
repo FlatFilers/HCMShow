@@ -144,6 +144,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
+  let updatedSpace;
+  if (space) {
+    updatedSpace = {
+      ...space,
+      createdAt: DateTime.fromJSDate(space.createdAt)
+        .toFormat("MM/dd/yy hh:mm:ss a")
+        .toString(),
+      updatedAt: DateTime.fromJSDate(space.updatedAt)
+        .toFormat("MM/dd/yy hh:mm:ss a")
+        .toString(),
+    };
+  }
+
+  console.log("space", space);
+
   if (!space) {
     return {
       props: {},
@@ -159,16 +174,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  let lastSyncedAt;
+  let lastSyncedAt = null;
 
   if (lastSyncAction) {
-    lastSyncedAt = DateTime.fromJSDate(lastSyncAction.createdAt).toFormat(
-      "MM/dd/yy hh:mm:ss a"
-    );
+    lastSyncedAt = DateTime.fromJSDate(lastSyncAction.createdAt)
+      .toFormat("MM/dd/yy hh:mm:ss a")
+      .toString();
   }
 
   return {
-    props: { space, lastSyncedAt },
+    props: { updatedSpace, lastSyncedAt },
   };
 };
 

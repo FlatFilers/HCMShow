@@ -171,9 +171,30 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const actions = await getActions(token.organizationId);
 
+  const updatedActions = actions.map((action) => {
+    return {
+      ...action,
+      createdAt: DateTime.fromJSDate(action.createdAt)
+        .toFormat("MM/dd/yy hh:mm:ss a")
+        .toString(),
+      updatedAt: DateTime.fromJSDate(action.updatedAt)
+        .toFormat("MM/dd/yy hh:mm:ss a")
+        .toString(),
+      user: {
+        ...action.user,
+        createdAt: DateTime.fromJSDate(action.user.createdAt)
+          .toFormat("MM/dd/yy hh:mm:ss a")
+          .toString(),
+        updatedAt: DateTime.fromJSDate(action.user.updatedAt)
+          .toFormat("MM/dd/yy hh:mm:ss a")
+          .toString(),
+      },
+    };
+  });
+
   return {
     props: {
-      actions,
+      updatedActions,
     },
   };
 };

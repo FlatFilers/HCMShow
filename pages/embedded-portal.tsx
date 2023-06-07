@@ -118,7 +118,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
 
           res.actions.forEach((a) => {
             toast.success(a.description, {
-              id: DateTime.now().toISO(),
+              id: DateTime.now().toISO() as string,
               duration: 4000,
             });
           });
@@ -278,7 +278,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log("spaceData", spaceData);
 
   if (!spaceData) {
-    throw "todo";
+    console.log("No space data found");
   }
   const workbook = await getWorkbook({
     flowName: FlowTypes.Embedded,
@@ -295,15 +295,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // console.log("existingSpace", existingSpace);
 
   const workbookConfig = {
-    name: workbook.name || "HCM.show Embedded Portal",
-    sheets: workbook.sheets?.map((s) => {
-      return {
-        name: s.name,
-        slug: s.config?.slug,
-        fields: s.config?.fields,
-      };
-    }),
-    actions: workbook.actions,
+    name: workbook?.name || "HCM.show Embedded Portal",
+    sheets:
+      workbook?.sheets?.map((s) => {
+        return {
+          name: s.name,
+          slug: s.config?.slug,
+          fields: s.config?.fields,
+        };
+      }) || null,
+    actions: workbook?.actions || null,
   };
 
   console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
