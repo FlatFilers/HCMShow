@@ -25,7 +25,17 @@ import FeaturesList from "../components/shared/features-list";
 import { theme } from "../lib/theme";
 import { DateTime } from "luxon";
 import { useOnClickOutside } from "../lib/hooks/usehooks";
-import { listSpaces, listWorkbooks } from "../lib/new-flatfile";
+import { getWorkbook, listSpaces, listWorkbooks } from "../lib/new-flatfile";
+import { Portal } from "../components/dynamic-templates/porta";
+import {
+  Action,
+  ActionMode,
+  Property,
+  SheetConfig,
+  StringConfigOptions,
+  StringConfig,
+} from "@flatfile/api/api";
+import { Flatfile } from "@flatfile/api";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -39,7 +49,7 @@ const features = {
 
 interface Props {
   environmentId: string;
-  blueprintSheets: any;
+  workbookConfig: Flatfile.CreateWorkbookConfig;
   workbookName: string;
   dbCustomField: CustomField;
   dbCustomOptions: Option[];
@@ -119,92 +129,61 @@ const customOptionsConfig = (options: Option[]) => {
 };
 
 const filterConfig = ({
-  blueprintSheets,
-  workbookName,
+  workbookConfig,
   forEmbedOptions,
   customFieldConfig,
 }: {
-  blueprintSheets: any;
-  workbookName: string;
+  workbookConfig: Flatfile.CreateWorkbookConfig;
   forEmbedOptions: Option[];
   customFieldConfig: any;
 }) => {
-  // const sheetName = "Benefit Elections";
-  // const dynamicFieldType = "benefitCoverageType";
+  const sheetSlug = "benefit-elections-sheet";
+  const dynamicFieldType = "benefitCoverageType";
 
-  // // TODO: We should look up blueprint by ID or slug not name
-  // // const blueprint = baseConfig.blueprints.find(
-  // //   (b) => b.name === workbookName
-  // // ) as BlueprintWithId;
-  // // const sheet = blueprint?.sheets.find((s) => s.name === sheetName);
-  // // const field = sheet?.fields.find((f) => f.key === dynamicFieldType);
+  const sheet = workbookConfig.sheets?.find((s) => s.slug === sheetSlug);
 
-  // // const otherBlueprints = baseConfig.blueprints.filter((b) => {
-  // //   return b.name !== workbookName;
-  // // });
-  // // const otherSheets = blueprint?.sheets.filter((s) => {
-  // //   return s.name !== sheetName;
-  // // }) as SheetConfig[];
-  // // const otherFields = sheet?.fields.filter((f) => {
-  // //   return f.key !== dynamicFieldType;
-  // // }) as Property[];
+  if (!sheet) {
+    throw "TODO - no sheet";
+  }
 
-  // // const { id: _baseConfigId, ...baseConfigWithoutId } = blueprintSheets;
-  // // const { id: _blueprintId, ...blueprintWithoutId } = blueprint;
+  const field = sheet.fields.find((f) => f.key === dynamicFieldType);
 
-  // const filteredConfig = {
-  //   ...baseConfigWithoutId,
-  //   name: "HCM Show - Dynamic Templates",
-  //   slug: `${blueprintSheets.slug}-${Date.now()}`,
-  //   blueprints: [
-  //     ...otherBlueprints,
-  //     {
-  //       ...blueprintWithoutId,
-  //       slug: `${blueprint.slug}-${Date.now()}`,
-  //       sheets: [
-  //         ...otherSheets,
-  //         {
-  //           ...sheet,
-  //           fields: [
-  //             ...otherFields,
-  //             {
-  //               ...field,
-  //               ...(customFieldConfig.type === "enum" &&
-  //                 forEmbedOptions &&
-  //                 customOptionsConfig(forEmbedOptions)),
-  //               slug: `${field?.key}-${Date.now()}`,
-  //             },
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // };
+  if (!field) {
+    throw "TODO - no field";
+  }
 
+  return {
+    ...workbookConfig,
+    sheets: [
+      {
+        ...sheet,
+        fields: [
+          ...sheet.fields,
+          {
+            ...field,
+            ...(customFieldConfig.type === "enum" &&
+              forEmbedOptions &&
+              customOptionsConfig(forEmbedOptions)),
+            slug: `${field.key}-${Date.now()}`,
+          },
+        ],
+      },
+    ],
+  };
+
+  // TODO: do we still need this?
   // if (customFieldConfig.forEmbed) {
   //   filteredConfig.blueprints
   //     .at(-1)
   //     ?.sheets.at(-1)
   //     ?.fields.push(customFieldConfig);
   // }
-
-  // console.log("filteredConfig", filteredConfig);
-  // console.log("field", field);
-  // console.log("otherFields", otherFields);
-  // console.log("mappedOptions", mappedOptions);
-  // console.log("sheets", filteredConfig.blueprints[0].sheets[1]);
-  // console.log(
-  //   "single field",
-  //   filteredConfig.blueprints[0].sheets[1].fields[13]
-  // );
-
-  return true;
 };
 
 const DynamicTemplates: NextPageWithLayout<Props> = ({
   environmentId,
+  workbookConfig,
   workbookName,
-  blueprintSheets,
   dbCustomField,
   dbCustomOptions,
   initialCustomFieldLastSavedAt,
@@ -247,29 +226,41 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     forEmbed: forEmbedCustomField ? true : false,
   };
 
+  const publishableKey = process.env.NEXT_PUBLIC_DYNAMIC_PUBLISHABLE_KEY;
+
+  if (!publishableKey) {
+    console.error("Missing NEXT_PUBLIC_DYNAMIC_PUBLISHABLE_KEY env var");
+    throw "Missing NEXT_PUBLIC_DYNAMIC_PUBLISHABLE_KEY env var";
+  }
+
   const spaceProps = {
     environmentId,
     name: "Dynamic Portal",
+    publishableKey,
+    workbook: workbookConfig,
+    // workbook: filterConfig({
+    //   workbookConfig,
+    //   forEmbedOptions,
+    //   customFieldConfig,
+    // }),
     themeConfig: theme("#E28170", "#D64B32") as IThemeConfig,
-    spaceConfig: filterConfig({
-      blueprintSheets,
-      workbookName,
-      forEmbedOptions,
-      customFieldConfig,
-    }),
+    // spaceConfig: filterConfig({
+    //   forEmbedOptions,
+    //   customFieldConfig,
+    // }),
     sidebarConfig: {
       showDataChecklist: false,
       showSidebar: false,
     },
   };
 
-  const { error, data } = useSpace({ ...spaceProps });
+  // const { error, data } = useSpace({ ...spaceProps });
 
-  useCallback(() => {
-    if (error) {
-      setShowSpace(false);
-    }
-  }, [error]);
+  // useCallback(() => {
+  //   if (error) {
+  //     setShowSpace(false);
+  //   }
+  // }, [error]);
 
   const handleOptionsSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -333,9 +324,9 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     }
   };
 
-  const modalRef = useRef<HTMLDivElement | null>(null);
+  // const modalRef = useRef<HTMLDivElement | null>(null);
 
-  useOnClickOutside(modalRef, () => setShowSpace(false));
+  // useOnClickOutside(modalRef, () => setShowSpace(false));
 
   return (
     <div className="ml-12 mt-16">
@@ -500,20 +491,11 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
         </div>
       </div>
 
-      {error && <div>{error}</div>}
-      {/* TODO: Add spinner while embed is loading */}
-      {!error && showSpace && (
-        <div className="absolute top-0 right-0 w-full h-full bg-black/60">
-          <div className="relative mt-16 mx-auto max-w-7xl">
-            <XCircleIcon
-              className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
-              onClick={() => setShowSpace(false)}
-            >
-              X
-            </XCircleIcon>
-            <div ref={modalRef}>{data?.component}</div>
-          </div>
-        </div>
+      {showSpace && (
+        <Portal
+          closeSpace={() => setShowSpace(false)}
+          spaceProps={spaceProps}
+        />
       )}
     </div>
   );
@@ -556,42 +538,67 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const environmentId = process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID as string;
 
-  const environmentSpaces = await listSpaces({
-    environmentId,
-  });
+  // const environmentSpaces = await listSpaces({
+  //   environmentId,
+  // });
 
-  console.log("environmentSpaces", environmentSpaces);
+  // console.log("environmentSpaces", environmentSpaces);
 
-  const currentSpace = environmentSpaces?.data.sort((a: any, b: any) => {
-    return b.createdAt - a.createdAt;
-  })[0];
+  // const currentSpace = environmentSpaces?.data.sort((a: any, b: any) => {
+  //   return b.createdAt - a.createdAt;
+  // })[0];
 
-  console.log("currentSpace", currentSpace);
+  // console.log("currentSpace", currentSpace);
 
-  const spaceId = currentSpace?.id as string;
+  // const spaceId = currentSpace?.id as string;
 
-  const getWorkbooks = await listWorkbooks({ spaceId });
+  // const getWorkbooks = await listWorkbooks({ spaceId });
 
-  console.log("getWorkbooks", getWorkbooks);
+  // console.log("getWorkbooks", getWorkbooks);
 
-  const currentWorkbook = getWorkbooks?.data.sort((a: any, b: any) => {
-    return b.createdAt - a.createdAt;
-  })[0];
+  // const currentWorkbook = getWorkbooks?.data.sort((a: any, b: any) => {
+  //   return b.createdAt - a.createdAt;
+  // })[0];
 
-  console.log("currentWorkbook", currentWorkbook);
+  // console.log("currentWorkbook", currentWorkbook);
 
-  const sheets = currentWorkbook?.sheets;
+  // const sheets = currentWorkbook?.sheets;
 
-  console.log("sheets", sheets);
+  // console.log("sheets", sheets);
 
-  const blueprintSheets = sheets ? sheets[0] : null;
+  // const blueprintSheets = sheets ? sheets[0] : null;
 
-  console.log("blueprintSheets", blueprintSheets);
+  // console.log("blueprintSheets", blueprintSheets);
 
+  // TODO: How do we get this if we don't have a space already created?
+  const workbook = await getWorkbook("us_wb_RXibxLil");
+
+  if (!workbook) {
+    throw "TODO: no workbook found";
+  }
+
+  console.log("workbook", JSON.stringify(workbook, null, 2));
+
+  // existingSpace?.flatfileData as unknown as FlatfileSpaceData;
+  // console.log("existingSpace", existingSpace);
+
+  const workbookConfig = {
+    name: workbook.name || "HCM.show Embedded Portal",
+    sheets: workbook.sheets?.map((s) => {
+      return {
+        name: s.name,
+        slug: s.config?.slug,
+        fields: s.config?.fields,
+      };
+    }),
+    actions: workbook.actions,
+  };
+
+  console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
   return {
     props: {
       environmentId,
-      blueprintSheets,
+      workbookConfig,
       workbookName: process.env.DYNAMIC_TEMPLATES_WORKBOOK_NAME,
       dbCustomField,
       dbCustomOptions,

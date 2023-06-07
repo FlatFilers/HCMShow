@@ -16,7 +16,7 @@ import { Space } from "@prisma/client";
 import FeaturesList from "../shared/features-list";
 import { useRef } from "react";
 import { useOnClickOutside } from "../../lib/hooks/usehooks";
-import { useSpace } from "@flatfile/react";
+import { ISpace, useSpace } from "@flatfile/react";
 
 export interface Step {
   name: string;
@@ -37,7 +37,7 @@ type Props = {
   onClick: Function;
   showSpace: boolean;
   closeSpace: Function;
-  spaceProps: any; // todo
+  spaceProps: ISpace;
 };
 
 const Workspace = ({
