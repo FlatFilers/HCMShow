@@ -31,7 +31,7 @@ import {
   listSpaces,
   listWorkbooks,
 } from "../lib/new-flatfile";
-import { Portal } from "../components/dynamic-templates/portal";
+import { Portal } from "../components/dynamic-templates/porta";
 import {
   Action,
   ActionMode,
@@ -530,18 +530,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  let updatedDbCustomField = null;
-  if (dbCustomField) {
-    updatedDbCustomField = {
-      ...dbCustomField,
-      createdAt: DateTime.fromJSDate(dbCustomField?.createdAt as Date)
-        .toFormat("MM/dd/yy hh:mm:ss a")
-        .toString(),
-      updatedAt: DateTime.fromJSDate(dbCustomField?.updatedAt)
-        .toFormat("MM/dd/yy hh:mm:ss a")
-        .toString(),
-    };
-  }
   const dbCustomOptionsRecord = await prisma.options.findFirst({
     where: {
       userId: token.sub,
@@ -551,9 +539,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  const dbCustomOptions = dbCustomOptionsRecord
-    ? dbCustomOptionsRecord.options
-    : null;
+  const dbCustomOptions = dbCustomOptionsRecord?.options;
 
   const environmentId = process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID as string;
 
@@ -572,10 +558,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // const spaceId = currentSpace?.id as string;
 
-  // const getWorkbooks = await listWorkbooks({
-  //   flowName: FlowTypes.Dynamic,
-  //   spaceId,
-  // });
+  const getWorkbooks = await listWorkbooks({
+    flowName: FlowTypes.Dynamic,
+    spaceId,
+  });
 
   // console.log("getWorkbooks", getWorkbooks);
 
@@ -606,16 +592,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // console.log("existingSpace", existingSpace);
 
   const workbookConfig = {
-    name: workbook?.name || "HCM.show Embedded Portal",
-    sheets:
-      workbook?.sheets?.map((s) => {
-        return {
-          name: s.name,
-          slug: s.config?.slug,
-          fields: s.config?.fields,
-        };
-      }) || null,
-    actions: workbook?.actions || null,
+    name: workbook.name || "HCM.show Embedded Portal",
+    sheets: workbook.sheets?.map((s) => {
+      return {
+        name: s.name,
+        slug: s.config?.slug,
+        fields: s.config?.fields,
+      };
+    }),
+    actions: workbook.actions,
   };
 
   console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
@@ -624,7 +609,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       environmentId,
       workbookConfig,
       workbookName: process.env.DYNAMIC_TEMPLATES_WORKBOOK_NAME,
-      updatedDbCustomField,
+      dbCustomField,
       dbCustomOptions,
       initialCustomFieldLastSavedAt: dbCustomField
         ? DateTime.fromJSDate(dbCustomField.updatedAt).toFormat(
