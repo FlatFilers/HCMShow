@@ -5,7 +5,7 @@ import { getToken } from "next-auth/jwt";
 import { DateTime } from "luxon";
 
 interface Props {
-  jobs: Job[];
+  jobs: any[];
 }
 
 const Jobs: NextPage<Props> = ({ jobs }) => {
