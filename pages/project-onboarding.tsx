@@ -135,7 +135,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   const prisma = new PrismaClient();
-  const space = await prisma.space.findUnique({
+  const dbSpace = await prisma.space.findUnique({
     where: {
       userId_type: {
         userId: token.sub as string,
@@ -143,6 +143,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     },
   });
+
+  let space;
+  if (dbSpace) {
+    space = {
+      ...dbSpace,
+      createdAt: DateTime.fromJSDate(dbSpace.createdAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
+      updatedAt: DateTime.fromJSDate(dbSpace.updatedAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
+    };
+  }
 
   if (!space) {
     return {
@@ -159,7 +172,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  let lastSyncedAt;
+  let lastSyncedAt = null;
 
   if (lastSyncAction) {
     lastSyncedAt = DateTime.fromJSDate(lastSyncAction.createdAt).toFormat(

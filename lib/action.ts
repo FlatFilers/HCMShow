@@ -62,7 +62,7 @@ export const createAction = async (
   });
 };
 
-export const fileFeedEventFromAction = (action: Action): FileFeedEvent => {
+export const fileFeedEventFromAction = (action: any): FileFeedEvent => {
   const metadata = action.metadata as {
     topic: string;
   };

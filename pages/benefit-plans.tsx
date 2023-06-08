@@ -2,6 +2,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { BenefitPlan, PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { getToken } from "next-auth/jwt";
+import { DateTime } from "luxon";
 
 interface Props {
   benefitPlans: BenefitPlan[];
@@ -74,11 +75,26 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const prisma = new PrismaClient();
 
-  const benefitPlans: BenefitPlan[] = await prisma.benefitPlan.findMany({
+  const dbBenefitPlans: BenefitPlan[] = await prisma.benefitPlan.findMany({
     where: {
       organizationId: token.organizationId,
     },
   });
+
+  let benefitPlans = null;
+  if (dbBenefitPlans) {
+    benefitPlans = dbBenefitPlans.map((benefitPlan) => {
+      return {
+        ...benefitPlan,
+        createdAt: DateTime.fromJSDate(benefitPlan.createdAt).toFormat(
+          "MM/dd/yy hh:mm:ss a"
+        ),
+        updatedAt: DateTime.fromJSDate(benefitPlan.updatedAt).toFormat(
+          "MM/dd/yy hh:mm:ss a"
+        ),
+      };
+    });
+  }
 
   return {
     props: {
