@@ -3,7 +3,7 @@ import { Job, Prisma, PrismaClient } from "@prisma/client";
 import { DateTime } from "luxon";
 
 interface Props {
-  job: Job;
+  job: any;
 }
 
 const Jobs: NextPage<Props> = ({ job }) => {
@@ -29,7 +29,7 @@ const Jobs: NextPage<Props> = ({ job }) => {
                 Effective Date
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {DateTime.fromJSDate(job.effectiveDate).toFormat("MM/dd/yyyy")}
+                {job.effectiveDate}
               </dd>
             </div>
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
@@ -64,11 +64,27 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const jobId: string = context.params?.id as string;
   const prisma = new PrismaClient();
 
-  const job: Job | null = await prisma.job.findFirst({
+  const dbJob: Job | null = await prisma.job.findFirst({
     where: {
       id: jobId,
     },
   });
+
+  let job = null;
+  if (dbJob) {
+    job = {
+      ...dbJob,
+      createdAt: DateTime.fromJSDate(dbJob.createdAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
+      updatedAt: DateTime.fromJSDate(dbJob.updatedAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
+      effectiveDate: DateTime.fromJSDate(dbJob.effectiveDate).toFormat(
+        "MM/dd/yyyy"
+      ),
+    };
+  }
 
   if (!job) {
     return {
