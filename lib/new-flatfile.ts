@@ -1,5 +1,4 @@
 import { FlatfileClient } from "@flatfile/api";
-import fs from "fs";
 
 // TODO: Need to take in per-workflow API key here
 const flatfileClient = () => {
