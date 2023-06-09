@@ -8,7 +8,7 @@ import {
   Blueprint,
 } from "@flatfile/api";
 import { PrismaClient, Space, User } from "@prisma/client";
-import { SpaceType } from "./space";
+import { SpaceType, getSpaceForFlatfileSpaceId } from "./space";
 import { theme } from "./theme";
 
 export interface Field {
@@ -165,9 +165,16 @@ const getWorkbookIdAndSheetIds = async ({
   const workbookObj = result.data.find((workbookObj: WorkbookObject) => {
     return workbookObj.name === workbookName;
   });
-  const sheetId = workbookObj.sheets.find(
-    (s: { id: string; name: string; config: any }) => s.name === sheetName
-  )!.id;
+
+  console.log("workbookName", workbookName);
+  console.log("workbookObj", workbookObj);
+
+  let sheetId = "";
+  if (sheetName !== "") {
+    const sheetId = workbookObj.sheets.find(
+      (s: { id: string; name: string; config: any }) => s.name === sheetName
+    )!.id;
+  }
 
   return {
     workbookId: workbookObj.id,
@@ -232,6 +239,7 @@ export const createSpace = async ({
     metadata: {
       userId,
       theme: theme(focusBgColor, backgroundColor),
+      showGuestInvite: true,
     },
     actions: [],
     guestAuthentication: ["shared_link", "magic_link"],
@@ -247,7 +255,7 @@ export const createSpace = async ({
   });
   // const spaceResponse = await client.addSpace(spaceRequestParameters, options);
 
-  // console.log("spaceResponse", spaceResponse);
+  console.log("spaceResponse", spaceResponse);
 
   if (!spaceResponse.ok) {
     console.log("spaceResponse", await spaceResponse.json());
@@ -255,6 +263,50 @@ export const createSpace = async ({
   }
 
   const spaceResult = await spaceResponse.json();
+
+  const flatfileSpaceId = spaceResult.data.id;
+  console.log("flatfileSpaceId", flatfileSpaceId);
+
+  const workbookName = "HCM Workbook";
+
+  const sheetName = "";
+
+  const { workbookId, sheetId } = await getWorkbookIdAndSheetIds({
+    flatfileSpaceId,
+    accessToken,
+    workbookName,
+    sheetName,
+  });
+
+  console.log("workbookId", workbookId);
+
+  const updatePayload = {
+    spaceConfigId,
+    environmentId,
+    name: "HCM.show",
+    primaryWorkbookId: workbookId,
+    metadata: {
+      showSidebar: false,
+      showGuestInvite: true,
+    },
+    actions: [],
+  };
+
+  const updateResponse = await fetch(
+    `${BASE_PATH}/spaces/${spaceResult.data.id}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify(updatePayload),
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  const updateResult = await updateResponse.json();
+
+  console.log("updateResult", updateResult);
 
   // console.log("spaceResult body", spaceResult);
 
