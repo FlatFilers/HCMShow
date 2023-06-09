@@ -6,7 +6,7 @@ import {
   GetAccessTokenRequest,
   AccessTokenResponse,
   Blueprint,
-} from "@flatfile/api";
+} from "flatfile-api-legacy";
 import { PrismaClient, Space, User } from "@prisma/client";
 import { SpaceType } from "./space";
 import { theme } from "./theme";
