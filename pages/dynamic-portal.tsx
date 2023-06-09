@@ -20,9 +20,9 @@ import {
   SpaceConfigWithBlueprints,
   getAccessToken,
   getSpaceConfig,
-} from "../lib/flatfile";
+} from "../lib/flatfile-legacy";
 import { OptionBuilder } from "../components/dynamic-templates/option-builder";
-import { Property, SheetConfig } from "@flatfile/api";
+import { Property, SheetConfig } from "flatfile-api-legacy";
 import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";
 import toast from "react-hot-toast";
 import { prismaClient } from "../lib/prisma-client";

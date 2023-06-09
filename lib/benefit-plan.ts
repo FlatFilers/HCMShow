@@ -1,4 +1,4 @@
-import { Record } from "./flatfile";
+import { Record } from "./flatfile-legacy";
 import { prismaClient } from "./prisma-client";
 
 const benefitPlanSheetMapping = {

@@ -98,7 +98,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
               handleSubmit={handleSubmit}
               isSubmitting={isSubmitting}
               buttonText={buttonText}
-              actionHref="/api/flatfile/create-space"
+              actionHref="/api/flatfile/create-onboarding-space"
               type="project-onboarding"
             />
           )}

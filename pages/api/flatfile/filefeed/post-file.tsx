@@ -5,7 +5,7 @@ import {
   FlatfileSpaceData,
   getAccessToken,
   postFile,
-} from "../../../../lib/flatfile";
+} from "../../../../lib/flatfile-legacy";
 import { prismaClient } from "../../../../lib/prisma-client";
 import { SpaceType } from "../../../../lib/space";
 import { Space } from "@prisma/client";

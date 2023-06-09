@@ -1,4 +1,4 @@
-import { Record } from "./flatfile";
+import { Record } from "./flatfile-legacy";
 import { prismaClient } from "./prisma-client";
 
 // TODO: Temp solution until we get more of the fields in the config
