@@ -56,11 +56,11 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
 
   if (!publishableKey) {
     console.error("Missing NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY env var");
-    throw "Missing NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY env var";
+    // throw "Missing NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY env var";
   }
 
   if (!workbookConfig) {
-    throw "Missing workbook";
+    // throw "Missing workbook";
   }
 
   const flatfleSpace =
@@ -70,7 +70,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     publishableKey,
     workbook: workbookConfig,
     environmentId: environmentToken as string,
-    spaceId: flatfleSpace?.id as string,
     themeConfig: theme("#4DCA94", "#32A673") as IThemeConfig,
     name: "Embedded Portal",
     // TODO: These metadata properties are setup in an odd way.
@@ -118,7 +117,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
 
           res.actions.forEach((a) => {
             toast.success(a.description, {
-              id: DateTime.now().toISO(),
+              id: DateTime.now().toISO() as string,
               duration: 4000,
             });
           });
@@ -277,13 +276,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log("spaceData", spaceData);
 
   if (!spaceData) {
-    throw "todo";
+    // throw "todo";
   }
 
   const workbook = await getWorkbook(spaceData?.primaryWorkbookId as string);
 
   if (!workbook) {
-    throw "todo";
+    // throw "todo";
   }
 
   console.log("workbook", JSON.stringify(workbook, null, 2));
@@ -292,15 +291,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // console.log("existingSpace", existingSpace);
 
   const workbookConfig = {
-    name: workbook.name || "HCM.show Embedded Portal",
-    sheets: workbook.sheets?.map((s) => {
-      return {
-        name: s.name,
-        slug: s.config?.slug,
-        fields: s.config?.fields,
-      };
-    }),
-    actions: workbook.actions,
+    name: workbook?.name || "HCM.show Embedded Portal",
+    sheets:
+      workbook?.sheets?.map((s) => {
+        return {
+          name: s.name,
+          slug: s.config?.slug,
+          fields: s.config?.fields,
+        };
+      }) || null,
+
+    actions: workbook?.actions,
   };
 
   console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
