@@ -47,6 +47,12 @@ const Employees: NextPage<Props> = ({ employees }) => {
                       scope="col"
                       className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                     >
+                      Employee ID
+                    </th>
+                    <th
+                      scope="col"
+                      className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                    >
                       Name
                     </th>
                     <th
@@ -84,6 +90,11 @@ const Employees: NextPage<Props> = ({ employees }) => {
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {employees.map((employee) => (
                     <tr key={employee.id}>
+                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                        <Link href={`/employees/${employee.id}`}>
+                          {employee.employeeId}
+                        </Link>
+                      </td>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                         <Link href={`/employees/${employee.id}`}>
                           {employee.firstName} {employee.lastName}
