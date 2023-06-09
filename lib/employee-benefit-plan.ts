@@ -1,5 +1,5 @@
 import { EmployeeBenefitPlan } from "@prisma/client";
-import { Record } from "./flatfile";
+import { Record } from "./flatfile-legacy";
 import { prismaClient } from "./prisma-client";
 import { DateTime } from "luxon";
 import { upsertBenefitPlan } from "./benefit-plan";

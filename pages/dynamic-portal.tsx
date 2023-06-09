@@ -20,7 +20,7 @@ import {
   SpaceConfigWithBlueprints,
   getAccessToken,
   getSpaceConfig,
-} from "../lib/flatfile";
+} from "../lib/flatfile-legacy";
 import { OptionBuilder } from "../components/dynamic-templates/option-builder";
 import { Property, SheetConfig } from "@flatfile/api";
 import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";

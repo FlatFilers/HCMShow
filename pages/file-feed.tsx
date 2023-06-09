@@ -15,7 +15,7 @@ import {
   fileFeedEventFromAction,
   getActions,
 } from "../lib/action";
-import { FlatfileSpaceData } from "../lib/flatfile";
+import { FlatfileSpaceData } from "../lib/flatfile-legacy";
 import { DateTime } from "luxon";
 import { workflowItems } from "../components/sidebar-layout";
 import { useFlashMessages } from "../lib/hooks/usehooks";

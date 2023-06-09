@@ -12,12 +12,12 @@ import {
   SparklesIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import { getAccessToken } from "../lib/flatfile";
+import { getAccessToken } from "../lib/flatfile-legacy";
 import { Action, PrismaClient, Space } from "@prisma/client";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
 import { SpaceType } from "../lib/space";
-import { FlatfileSpaceData } from "../lib/flatfile";
+import { FlatfileSpaceData } from "../lib/flatfile-legacy";
 import { useRouter } from "next/router";
 import { workflowItems } from "../components/sidebar-layout";
 import DownloadFile from "../components/shared/download-file";

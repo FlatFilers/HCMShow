@@ -9,7 +9,7 @@ import {
   getAccessToken,
   getSpace,
   inviteGuestToSpace,
-} from "../../../lib/flatfile";
+} from "../../../lib/flatfile-legacy";
 import { SpaceType } from "../../../lib/space";
 
 export default async function handler(

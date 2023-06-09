@@ -10,7 +10,7 @@ import {
   getAccessToken,
   getSpace,
   postFile,
-} from "../../../lib/flatfile";
+} from "../../../lib/flatfile-legacy";
 import { SpaceType } from "../../../lib/space";
 import { fetchFileFromDrive } from "../../../lib/google-drive";
 

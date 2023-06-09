@@ -1,6 +1,6 @@
 import { EmployeeType, Prisma } from "@prisma/client";
 import { upsertEmployee, validEmployeeRecords } from "./employee";
-import { getAccessToken, getRecordsByName } from "./flatfile";
+import { getAccessToken, getRecordsByName } from "./flatfile-legacy";
 import { prismaClient } from "./prisma-client";
 import { SpaceType } from "./space";
 import { DateTime } from "luxon";
