@@ -1,6 +1,6 @@
 import { NextPageWithLayout } from "./_app";
 import { useState, useCallback, useEffect, useRef } from "react";
-import { IThemeConfig, useSpace } from "@flatfile/react";
+import { ISpace, IThemeConfig, useSpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import {
@@ -26,20 +26,23 @@ import StepList, { Step } from "../components/shared/step-list";
 import Workspace from "../components/embedded-portal/workspace";
 import { theme } from "../lib/theme";
 import { useFlashMessages, useOnClickOutside } from "../lib/hooks/usehooks";
+import { Flatfile } from "@flatfile/api";
+import { getSpace, getWorkbook } from "../lib/new-flatfile";
 
 interface Props {
   accessToken: string;
   environmentToken: string;
   lastSyncedAt?: string;
   existingSpace: Space;
+  workbookConfig?: Flatfile.CreateWorkbookConfig;
   userId: string;
 }
 
 const EmbeddedPortal: NextPageWithLayout<Props> = ({
-  accessToken,
   environmentToken,
   lastSyncedAt,
   existingSpace,
+  workbookConfig,
   userId,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -49,17 +52,20 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     setButtonText("Setting up Flatfile...");
   };
 
-  const flatfleSpace =
-    existingSpace?.flatfileData as unknown as FlatfileSpaceData;
+  const publishableKey = process.env.NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY;
+
+  if (!publishableKey) {
+    console.error("Missing NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY env var");
+    throw "Missing NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY env var";
+  }
+
   const [showSpace, setShowSpace] = useState(false);
   const spaceProps = {
-    accessToken: accessToken as string,
+    publishableKey,
     environmentId: environmentToken as string,
-    spaceId: flatfleSpace?.id as string,
     themeConfig: theme("#4DCA94", "#32A673") as IThemeConfig,
     name: "Embedded Portal",
-    // TODO: This may change in the future as the SDK evolves.
-    // These metadata properties are setup in an odd way.
+    workbook: workbookConfig,
     spaceInfo: {
       userId,
     },
@@ -67,15 +73,8 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       showDataChecklist: false,
       showSidebar: false,
     },
-  };
-  const { error, data } = useSpace({ ...spaceProps });
-
-  useCallback(() => {
-    if (error) {
-      setShowSpace(false);
-    }
-  }, [error]);
-
+  } as ISpace;
+  const { component } = useSpace({ ...spaceProps });
   const [downloaded, setDownloaded] = useState(false);
   const storageKey = "embedded-has-downloaded-sample-data";
   const sampleDataFileName = "/HCM.show benefits sample data.csv";
@@ -110,7 +109,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
 
           res.actions.forEach((a) => {
             toast.success(a.description, {
-              id: DateTime.now().toISO(),
+              id: DateTime.now().toISO() as string,
               duration: 4000,
             });
           });
@@ -206,8 +205,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
         </div>
       </div>
 
-      {error && <div>{error}</div>}
-      {!error && showSpace && (
+      {showSpace && (
         <div className="absolute top-0 right-0 h-full w-full bg-black/60">
           <div className="relative mt-16 mx-auto max-w-7xl">
             <XCircleIcon
@@ -216,7 +214,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
             >
               X
             </XCircleIcon>
-            <div ref={modalRef}>{data?.component}</div>
+            <div ref={modalRef}>{component}</div>
           </div>
         </div>
       )}
@@ -253,7 +251,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // console.log("existingSpace", existingSpace);
 
-  const accessToken = await getAccessToken();
   const environmentToken = process.env.EMBEDDED_ENVIRONMENT_ID;
   const lastSync = await prisma.action.findFirst({
     where: {
@@ -264,9 +261,49 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
+  if (!existingSpace) {
+    console.log("No space");
+    return {
+      props: {
+        environmentToken,
+        lastSyncedAt: lastSync
+          ? DateTime.fromJSDate(lastSync.createdAt).toFormat(
+              "MM/dd/yy hh:mm:ss a"
+            )
+          : "",
+        existingSpace,
+        userId: token.sub,
+      },
+    };
+  }
+
+  const spaceData = await getSpace(
+    (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id
+  );
+
+  console.log("spaceData", spaceData);
+
+  const workbook = await getWorkbook(spaceData?.primaryWorkbookId as string);
+
+  console.log("workbook", JSON.stringify(workbook, null, 2));
+
+  const workbookConfig = {
+    name: workbook?.name || "HCM.show Embedded Portal",
+    sheets:
+      workbook?.sheets?.map((s) => {
+        return {
+          name: s.name,
+          slug: s.config?.slug,
+          fields: s.config?.fields,
+        };
+      }) || null,
+    actions: workbook?.actions,
+  };
+
+  console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
+
   return {
     props: {
-      accessToken,
       environmentToken,
       lastSyncedAt: lastSync
         ? DateTime.fromJSDate(lastSync.createdAt).toFormat(
@@ -274,6 +311,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           )
         : "",
       existingSpace,
+      workbookConfig,
       userId: token.sub,
     },
   };
