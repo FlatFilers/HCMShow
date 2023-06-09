@@ -40,38 +40,6 @@ export const createSpace = async ({
     return null;
   }
 };
-//   environmentId,
-//   email,
-//   name,
-//   spaceId,
-// }: {
-//   environmentId: string;
-//   email: string;
-//   name: string;
-//   spaceId: string;
-// }) => {
-//   try {
-//     const flatfile = flatfileClient();
-
-//     const result = await flatfile.guests.create([
-//       {
-//         environmentId,
-//         email,
-//         name,
-//         spaces: [
-//           {
-//             id: spaceId,
-//           },
-//         ],
-//       },
-//     ]);
-
-//     return result.data;
-//   } catch (e) {
-//     console.log("error", JSON.stringify(e, null, 2));
-//     return null;
-//   }
-// };
 
 export const addDocumentToSpace = async ({
   title,
