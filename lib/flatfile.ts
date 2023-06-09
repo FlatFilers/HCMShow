@@ -52,7 +52,7 @@ export const createSpace = async ({
 
     return result.data;
   } catch (e) {
-    console.log("error", JSON.stringify(e, null, 2));
+    console.log("createSpace() error", JSON.stringify(e, null, 2));
     return null;
   }
 };
@@ -88,7 +88,7 @@ export const addGuestToSpace = async ({
 
     return result.data;
   } catch (e) {
-    console.log("error", JSON.stringify(e, null, 2));
+    console.log("addGuestToSpace() error", JSON.stringify(e, null, 2));
     return null;
   }
 };
@@ -214,28 +214,28 @@ export const getRecords = async ({
   }
 };
 
-export const postFile = async ({
-  workflow,
-  spaceId,
-  environmentId,
-  file,
-}: {
-  workflow: WorkflowType;
-  spaceId: string;
-  environmentId: string;
-  file: string;
-}) => {
-  try {
-    const flatfile = flatfileClient(workflow);
-    const response = await flatfile.files.upload({
-      spaceId,
-      environmentId,
-      file,
-    });
+// export const postFile = async ({
+//   workflow,
+//   spaceId,
+//   environmentId,
+//   file,
+// }: {
+//   workflow: WorkflowType;
+//   spaceId: string;
+//   environmentId: string;
+//   file: string;
+// }) => {
+//   try {
+//     const flatfile = flatfileClient(workflow);
+//     const response = await flatfile.files.upload({
+//       spaceId,
+//       environmentId,
+//       file,
+//     });
 
-    return response.data;
-  } catch (e) {
-    console.log("error", JSON.stringify(e, null, 2));
-    return null;
-  }
-};
+//     return response.data;
+//   } catch (e) {
+//     console.log("error", JSON.stringify(e, null, 2));
+//     return null;
+//   }
+// };
