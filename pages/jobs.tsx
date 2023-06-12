@@ -60,7 +60,7 @@ const Jobs: NextPage<Props> = ({ jobs }) => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white w-full">
-              {jobs.map((job: any) => (
+              {jobs.map((job) => (
                 <tr key={job.id}>
                   <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">
                     <Link href={`/jobs/${job.id}`}>{job.name}</Link>

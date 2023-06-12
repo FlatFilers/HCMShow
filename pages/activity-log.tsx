@@ -169,23 +169,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const dbActions = await getActions(token.organizationId);
 
-  let actions = null;
-  if (dbActions) {
-    actions = dbActions.map((action) => {
-      return {
-        id: action.id,
-        type: action.type,
-        createdAt: DateTime.fromJSDate(action.createdAt).toFormat(
-          "MM/dd/yy hh:mm:ss a"
-        ),
-        description: action.description,
-        metadata: action.metadata,
-        user: {
-          email: action.user.email,
-        },
-      };
-    });
-  }
+  const actions = dbActions.map((action) => {
+    return {
+      id: action.id,
+      type: action.type,
+      createdAt: DateTime.fromJSDate(action.createdAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
+      description: action.description,
+      metadata: action.metadata,
+      user: {
+        email: action.user.email,
+      },
+    };
+  });
 
   return {
     props: {
