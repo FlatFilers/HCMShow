@@ -56,13 +56,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let benefitPlan = null;
   if (dbBbenefitPlan) {
     benefitPlan = {
-      ...dbBbenefitPlan,
-      createdAt: DateTime.fromJSDate(dbBbenefitPlan.createdAt).toFormat(
-        "MM/dd/yy hh:mm:ss a"
-      ),
-      updatedAt: DateTime.fromJSDate(dbBbenefitPlan.updatedAt).toFormat(
-        "MM/dd/yy hh:mm:ss a"
-      ),
+      id: dbBbenefitPlan.id,
+      name: dbBbenefitPlan.name,
+      slug: dbBbenefitPlan.slug,
     };
   }
 

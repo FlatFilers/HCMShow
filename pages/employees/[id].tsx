@@ -1,6 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { DateTime } from "luxon";
+import { SerializeableEmployee } from "../employees";
 
 const employeeWithRelations = Prisma.validator<Prisma.EmployeeArgs>()({
   include: {
@@ -13,7 +14,7 @@ type EmployeeWithRelations = Prisma.EmployeeGetPayload<
 >;
 
 interface Props {
-  employee: any;
+  employee: SerializeableEmployee;
 }
 
 const Employees: NextPage<Props> = ({ employee }) => {
@@ -102,38 +103,22 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let employee = null;
   if (dbEmployee) {
     employee = {
-      ...dbEmployee,
-      createdAt: DateTime.fromJSDate(dbEmployee.createdAt).toFormat(
-        "MM/dd/yy hh:mm:ss a"
-      ),
-      updatedAt: DateTime.fromJSDate(dbEmployee.updatedAt).toFormat(
-        "MM/dd/yy hh:mm:ss a"
-      ),
+      id: dbEmployee.id,
+      firstName: dbEmployee.firstName,
+      lastName: dbEmployee.lastName,
       hireDate: DateTime.fromJSDate(dbEmployee.hireDate).toFormat("MM/dd/yyyy"),
       endEmploymentDate: dbEmployee.endEmploymentDate
         ? DateTime.fromJSDate(dbEmployee.endEmploymentDate).toFormat(
             "MM/dd/yyyy"
           )
         : null,
+      positionTitle: dbEmployee.positionTitle,
+      scheduledWeeklyHours: dbEmployee.scheduledWeeklyHours,
       manager: {
-        ...dbEmployee.manager,
-        createdAt: dbEmployee.manager
-          ? DateTime.fromJSDate(dbEmployee.manager.createdAt).toFormat(
-              "MM/dd/yy hh:mm:ss a"
-            )
-          : null,
-        updatedAt: dbEmployee.manager
-          ? DateTime.fromJSDate(dbEmployee.manager.updatedAt).toFormat(
-              "MM/dd/yy hh:mm:ss a"
-            )
-          : null,
-        hireDate: dbEmployee.manager?.hireDate
+        firstName: dbEmployee.manager ? dbEmployee.manager.firstName : null,
+        lastName: dbEmployee.manager ? dbEmployee.manager.lastName : null,
+        hireDate: dbEmployee.manager
           ? DateTime.fromJSDate(dbEmployee.manager.hireDate).toFormat(
-              "MM/dd/yyyy"
-            )
-          : null,
-        endEmploymentDate: dbEmployee.manager?.endEmploymentDate
-          ? DateTime.fromJSDate(dbEmployee.manager.endEmploymentDate).toFormat(
               "MM/dd/yyyy"
             )
           : null,

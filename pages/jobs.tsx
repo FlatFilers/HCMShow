@@ -4,8 +4,16 @@ import Link from "next/link";
 import { getToken } from "next-auth/jwt";
 import { DateTime } from "luxon";
 
+type SerializeableJob = {
+  id: string;
+  name: string;
+  department: string;
+  effectiveDate: string;
+  isInactive: boolean;
+};
+
 interface Props {
-  jobs: any[];
+  jobs: SerializeableJob[];
 }
 
 const Jobs: NextPage<Props> = ({ jobs }) => {
@@ -104,23 +112,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  let jobs = null;
-  if (dbJobs) {
-    jobs = dbJobs.map((job) => {
-      return {
-        ...job,
-        createdAt: DateTime.fromJSDate(job.createdAt).toFormat(
-          "MM/dd/yy hh:mm:ss a"
-        ),
-        updatedAt: DateTime.fromJSDate(job.updatedAt).toFormat(
-          "MM/dd/yy hh:mm:ss a"
-        ),
-        effectiveDate: DateTime.fromJSDate(job.effectiveDate).toFormat(
-          "MM/dd/yyyy"
-        ),
-      };
-    });
-  }
+  const jobs = dbJobs.map((job) => {
+    return {
+      id: job.id,
+      name: job.name,
+      department: job.department,
+      effectiveDate: DateTime.fromJSDate(job.effectiveDate).toFormat(
+        "MM/dd/yyyy"
+      ),
+      isInactive: job.isInactive,
+    };
+  });
 
   return {
     props: {

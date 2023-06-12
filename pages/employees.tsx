@@ -12,12 +12,26 @@ const employeeWithRelations = Prisma.validator<Prisma.EmployeeArgs>()({
   },
 });
 
+export type SerializeableEmployee = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  hireDate: string;
+  endEmploymentDate: string | null;
+  positionTitle: string;
+  scheduledWeeklyHours: number;
+  manager: {
+    firstName: string;
+    lastName: string;
+  };
+};
+
 type EmployeeWithRelations = Prisma.EmployeeGetPayload<
   typeof employeeWithRelations
 >;
 
 interface Props {
-  employees: any[];
+  employees: SerializeableEmployee[];
 }
 
 const Employees: NextPage<Props> = ({ employees }) => {
@@ -159,44 +173,28 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  let employees = null;
-  if (dbEmployees) {
-    employees = dbEmployees.map((employee) => {
-      return {
-        ...employee,
-        createdAt: DateTime.fromJSDate(employee.createdAt).toFormat(
-          "MM/dd/yy hh:mm:ss a"
-        ),
-        updatedAt: DateTime.fromJSDate(employee.updatedAt).toFormat(
-          "MM/dd/yy hh:mm:ss a"
-        ),
-        hireDate: DateTime.fromJSDate(employee.hireDate).toFormat("MM/dd/yyyy"),
-        endEmploymentDate: employee.endEmploymentDate
-          ? DateTime.fromJSDate(employee.endEmploymentDate).toFormat(
+  const employees = dbEmployees.map((employee) => {
+    return {
+      id: employee.id,
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      hireDate: DateTime.fromJSDate(employee.hireDate).toFormat("MM/dd/yyyy"),
+      endEmploymentDate: employee.endEmploymentDate
+        ? DateTime.fromJSDate(employee.endEmploymentDate).toFormat("MM/dd/yyyy")
+        : null,
+      positionTitle: employee.positionTitle,
+      scheduledWeeklyHours: employee.scheduledWeeklyHours,
+      manager: {
+        firstName: employee.manager ? employee.manager.firstName : null,
+        lastName: employee.manager ? employee.manager.lastName : null,
+        hireDate: employee.manager
+          ? DateTime.fromJSDate(employee.manager.hireDate).toFormat(
               "MM/dd/yyyy"
             )
           : null,
-        manager: {
-          ...employee.manager,
-          createdAt: employee.manager
-            ? DateTime.fromJSDate(employee.manager.createdAt).toFormat(
-                "MM/dd/yy hh:mm:ss a"
-              )
-            : null,
-          updatedAt: employee.manager
-            ? DateTime.fromJSDate(employee.manager.updatedAt).toFormat(
-                "MM/dd/yy hh:mm:ss a"
-              )
-            : null,
-          hireDate: employee.manager
-            ? DateTime.fromJSDate(employee.manager.hireDate).toFormat(
-                "MM/dd/yyyy"
-              )
-            : null,
-        },
-      };
-    });
-  }
+      },
+    };
+  });
 
   return {
     props: {

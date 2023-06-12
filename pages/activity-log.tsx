@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
 import React, { FormEvent, useEffect, useState, useRef } from "react";
 import { getToken } from "next-auth/jwt";
-import { ActionType, getActions } from "../lib/action";
+import { ActionType, getActions, SerializeableAction } from "../lib/action";
 import { Action, User } from "@prisma/client";
 import { DateTime } from "luxon";
 import { useRouter } from "next/router";
@@ -20,7 +20,7 @@ const mapActionTypeToLabel = (type: string) => {
 };
 
 interface Props {
-  actions: (Action & { user: User })[];
+  actions: SerializeableAction[];
 }
 
 const ActivityLog: NextPage<Props> = ({ actions }) => {
@@ -124,9 +124,7 @@ const ActivityLog: NextPage<Props> = ({ actions }) => {
                             {a.user.email}
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {DateTime.fromJSDate(a.createdAt).toFormat(
-                              "MM/dd/yy hh:mm:ss a"
-                            )}
+                            {a.createdAt}
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                             {a.type === ActionType.SyncRecords && a.description}
@@ -169,32 +167,29 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const actions = await getActions(token.organizationId);
+  const dbActions = await getActions(token.organizationId);
 
-  const updatedActions = actions.map((action) => {
-    return {
-      ...action,
-      createdAt: DateTime.fromJSDate(action.createdAt).toFormat(
-        "MM/dd/yy hh:mm:ss a"
-      ),
-      updatedAt: DateTime.fromJSDate(action.updatedAt).toFormat(
-        "MM/dd/yy hh:mm:ss a"
-      ),
-      user: {
-        ...action.user,
-        createdAt: DateTime.fromJSDate(action.user.createdAt).toFormat(
+  let actions = null;
+  if (dbActions) {
+    actions = dbActions.map((action) => {
+      return {
+        id: action.id,
+        type: action.type,
+        createdAt: DateTime.fromJSDate(action.createdAt).toFormat(
           "MM/dd/yy hh:mm:ss a"
         ),
-        updatedAt: DateTime.fromJSDate(action.user.updatedAt).toFormat(
-          "MM/dd/yy hh:mm:ss a"
-        ),
-      },
-    };
-  });
+        description: action.description,
+        metadata: action.metadata,
+        user: {
+          email: action.user.email,
+        },
+      };
+    });
+  }
 
   return {
     props: {
-      updatedActions,
+      actions,
     },
   };
 };

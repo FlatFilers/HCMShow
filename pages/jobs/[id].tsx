@@ -73,16 +73,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let job = null;
   if (dbJob) {
     job = {
-      ...dbJob,
-      createdAt: DateTime.fromJSDate(dbJob.createdAt).toFormat(
-        "MM/dd/yy hh:mm:ss a"
-      ),
-      updatedAt: DateTime.fromJSDate(dbJob.updatedAt).toFormat(
-        "MM/dd/yy hh:mm:ss a"
-      ),
+      id: dbJob.id,
+      name: dbJob.name,
+      department: dbJob.department,
       effectiveDate: DateTime.fromJSDate(dbJob.effectiveDate).toFormat(
         "MM/dd/yyyy"
       ),
+      isInactive: dbJob.isInactive,
     };
   }
 
