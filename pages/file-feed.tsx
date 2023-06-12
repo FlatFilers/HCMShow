@@ -22,7 +22,7 @@ import { useFlashMessages } from "../lib/hooks/usehooks";
 
 interface Props {
   urlToSpace: string;
-  events: any[];
+  events: FileFeedEvent[];
 }
 
 const FileFeed: NextPage<Props> = ({ urlToSpace, events }) => {

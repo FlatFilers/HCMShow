@@ -1,9 +1,17 @@
 import { GetServerSideProps, NextPage } from "next";
 import { Job, Prisma, PrismaClient } from "@prisma/client";
 import { DateTime } from "luxon";
+import { type } from "os";
+
+type SerializeableJob = {
+  name: string;
+  department: string;
+  effectiveDate: string;
+  isInactive: boolean;
+};
 
 interface Props {
-  job: any;
+  job: SerializeableJob;
 }
 
 const Jobs: NextPage<Props> = ({ job }) => {
