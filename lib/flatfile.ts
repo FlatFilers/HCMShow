@@ -1,4 +1,5 @@
 import { FlatfileClient } from "@flatfile/api";
+import { ReadStream } from "fs";
 // import { ListWorkbooksRequest } from "@flatfile/api/api";
 // import { getSpaceConfig } from "./flatfile";
 
@@ -15,6 +16,9 @@ const flatfileClient = (workflow: WorkflowType) => {
   switch (workflow) {
     case WorkflowType.Onboarding:
       token = process.env.ONBOARDING_FLATFILE_API_KEY;
+      break;
+    case WorkflowType.FileFeed:
+      token = process.env.FILEFEED_API_KEY;
       break;
   }
 
@@ -133,7 +137,7 @@ export const listWorkbooks = async ({
 
     return result;
   } catch (e) {
-    console.log("error", JSON.stringify(e, null, 2));
+    console.log("listWorkbooks() error", JSON.stringify(e, null, 2));
     return null;
   }
 };
@@ -209,33 +213,32 @@ export const getRecords = async ({
 
     return response.data.records;
   } catch (e) {
-    console.log("error", JSON.stringify(e, null, 2));
+    console.log("getRecords() error", JSON.stringify(e, null, 2));
     return null;
   }
 };
 
-// export const postFile = async ({
-//   workflow,
-//   spaceId,
-//   environmentId,
-//   file,
-// }: {
-//   workflow: WorkflowType;
-//   spaceId: string;
-//   environmentId: string;
-//   file: string;
-// }) => {
-//   try {
-//     const flatfile = flatfileClient(workflow);
-//     const response = await flatfile.files.upload({
-//       spaceId,
-//       environmentId,
-//       file,
-//     });
+export const postFile = async ({
+  workflow,
+  spaceId,
+  environmentId,
+  file,
+}: {
+  workflow: WorkflowType;
+  spaceId: string;
+  environmentId: string;
+  file: ReadStream;
+}) => {
+  try {
+    const flatfile = flatfileClient(workflow);
+    const response = await flatfile.files.upload(file, {
+      spaceId,
+      environmentId,
+    });
 
-//     return response.data;
-//   } catch (e) {
-//     console.log("error", JSON.stringify(e, null, 2));
-//     return null;
-//   }
-// };
+    return response.data;
+  } catch (e) {
+    console.log("postFile() error", JSON.stringify(e, null, 2));
+    return null;
+  }
+};
