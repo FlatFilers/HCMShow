@@ -100,41 +100,34 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     });
 
-  let employee = null;
-  if (dbEmployee) {
-    employee = {
-      id: dbEmployee.id,
-      firstName: dbEmployee.firstName,
-      lastName: dbEmployee.lastName,
-      hireDate: DateTime.fromJSDate(dbEmployee.hireDate).toFormat("MM/dd/yyyy"),
-      endEmploymentDate: dbEmployee.endEmploymentDate
-        ? DateTime.fromJSDate(dbEmployee.endEmploymentDate).toFormat(
-            "MM/dd/yyyy"
-          )
-        : null,
-      positionTitle: dbEmployee.positionTitle,
-      scheduledWeeklyHours: dbEmployee.scheduledWeeklyHours,
-      manager: {
-        firstName: dbEmployee.manager ? dbEmployee.manager.firstName : null,
-        lastName: dbEmployee.manager ? dbEmployee.manager.lastName : null,
-        hireDate: dbEmployee.manager
-          ? DateTime.fromJSDate(dbEmployee.manager.hireDate).toFormat(
-              "MM/dd/yyyy"
-            )
-          : null,
-      },
-    };
-  }
-
-  if (!employee) {
+  if (!dbEmployee) {
     return {
       notFound: true,
     };
   }
 
+  const employee: SerializeableEmployee = {
+    id: dbEmployee.id,
+    employeeId: dbEmployee.employeeId,
+    firstName: dbEmployee.firstName,
+    lastName: dbEmployee.lastName,
+    hireDate: DateTime.fromJSDate(dbEmployee.hireDate).toFormat("MM/dd/yyyy"),
+    endEmploymentDate: dbEmployee.endEmploymentDate
+      ? DateTime.fromJSDate(dbEmployee.endEmploymentDate).toFormat("MM/dd/yyyy")
+      : null,
+    positionTitle: dbEmployee.positionTitle,
+    scheduledWeeklyHours: dbEmployee.scheduledWeeklyHours,
+    manager: dbEmployee.manager
+      ? {
+          firstName: dbEmployee.manager.firstName,
+          lastName: dbEmployee.manager.lastName,
+        }
+      : null,
+  };
+
   return {
     props: {
-      employee: employee,
+      employee,
     },
   };
 };

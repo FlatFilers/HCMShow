@@ -14,6 +14,7 @@ const employeeWithRelations = Prisma.validator<Prisma.EmployeeArgs>()({
 
 export type SerializeableEmployee = {
   id: string;
+  employeeId: string;
   firstName: string;
   lastName: string;
   hireDate: string;
@@ -23,7 +24,7 @@ export type SerializeableEmployee = {
   manager: {
     firstName: string;
     lastName: string;
-  };
+  } | null;
 };
 
 type EmployeeWithRelations = Prisma.EmployeeGetPayload<
@@ -173,9 +174,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  const employees = dbEmployees.map((employee) => {
+  const employees: SerializeableEmployee[] = dbEmployees.map((employee) => {
     return {
       id: employee.id,
+      employeeId: employee.employeeId,
       firstName: employee.firstName,
       lastName: employee.lastName,
       hireDate: DateTime.fromJSDate(employee.hireDate).toFormat("MM/dd/yyyy"),
@@ -184,15 +186,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         : null,
       positionTitle: employee.positionTitle,
       scheduledWeeklyHours: employee.scheduledWeeklyHours,
-      manager: {
-        firstName: employee.manager ? employee.manager.firstName : null,
-        lastName: employee.manager ? employee.manager.lastName : null,
-        hireDate: employee.manager
-          ? DateTime.fromJSDate(employee.manager.hireDate).toFormat(
-              "MM/dd/yyyy"
-            )
-          : null,
-      },
+      manager: employee.manager
+        ? {
+            firstName: employee.manager.firstName,
+            lastName: employee.manager.lastName,
+          }
+        : null,
     };
   });
 
