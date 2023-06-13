@@ -112,7 +112,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  const jobs = dbJobs.map((job) => {
+  const jobs: SerializeableJob[] = dbJobs.map((job) => {
     return {
       id: job.id,
       name: job.name,

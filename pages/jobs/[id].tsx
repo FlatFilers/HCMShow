@@ -78,28 +78,25 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  let job = null;
-  if (dbJob) {
-    job = {
-      id: dbJob.id,
-      name: dbJob.name,
-      department: dbJob.department,
-      effectiveDate: DateTime.fromJSDate(dbJob.effectiveDate).toFormat(
-        "MM/dd/yyyy"
-      ),
-      isInactive: dbJob.isInactive,
-    };
-  }
-
-  if (!job) {
+  if (!dbJob) {
     return {
       notFound: true,
     };
   }
 
+  const job = {
+    id: dbJob.id,
+    name: dbJob.name,
+    department: dbJob.department,
+    effectiveDate: DateTime.fromJSDate(dbJob.effectiveDate).toFormat(
+      "MM/dd/yyyy"
+    ),
+    isInactive: dbJob.isInactive,
+  };
+
   return {
     props: {
-      job: job,
+      job,
     },
   };
 };

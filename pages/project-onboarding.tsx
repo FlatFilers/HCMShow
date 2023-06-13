@@ -144,24 +144,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  let space;
-  if (dbSpace) {
-    space = {
-      ...dbSpace,
-      createdAt: DateTime.fromJSDate(dbSpace.createdAt).toFormat(
-        "MM/dd/yy hh:mm:ss a"
-      ),
-      updatedAt: DateTime.fromJSDate(dbSpace.updatedAt).toFormat(
-        "MM/dd/yy hh:mm:ss a"
-      ),
-    };
-  }
-
-  if (!space) {
+  if (!dbSpace) {
     return {
       props: {},
     };
   }
+
+  const space = {
+    ...dbSpace,
+    createdAt: DateTime.fromJSDate(dbSpace.createdAt).toFormat(
+      "MM/dd/yy hh:mm:ss a"
+    ),
+    updatedAt: DateTime.fromJSDate(dbSpace.updatedAt).toFormat(
+      "MM/dd/yy hh:mm:ss a"
+    ),
+  };
 
   const lastSyncAction = await prisma.action.findFirst({
     where: {
