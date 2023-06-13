@@ -27,7 +27,7 @@ import Workspace from "../components/embedded-portal/workspace";
 import { theme } from "../lib/theme";
 import { useFlashMessages, useOnClickOutside } from "../lib/hooks/usehooks";
 import { Flatfile } from "@flatfile/api";
-import { getSpace, getWorkbook } from "../lib/new-flatfile";
+import { WorkflowType, getSpace, getWorkbook } from "../lib/flatfile";
 
 interface Props {
   accessToken: string;
@@ -63,7 +63,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   const spaceProps = {
     publishableKey,
     environmentId: environmentToken as string,
-    themeConfig: theme("#4DCA94", "#32A673") as IThemeConfig,
     name: "Embedded Portal",
     workbook: workbookConfig,
     spaceInfo: {
@@ -109,7 +108,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
 
           res.actions.forEach((a) => {
             toast.success(a.description, {
-              id: DateTime.now().toISO() as string,
+              id: DateTime.now().toISO()!,
               duration: 4000,
             });
           });
@@ -208,12 +207,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       {showSpace && (
         <div className="absolute top-0 right-0 h-full w-full bg-black/60">
           <div className="relative mt-16 mx-auto max-w-7xl">
-            <XCircleIcon
-              className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
-              onClick={() => setShowSpace(false)}
-            >
-              X
-            </XCircleIcon>
             <div ref={modalRef}>{component}</div>
           </div>
         </div>
@@ -277,13 +270,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const spaceData = await getSpace(
-    (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id
-  );
+  const spaceData = await getSpace({
+    workflow: WorkflowType.Embedded,
+    spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
+  });
 
   console.log("spaceData", spaceData);
 
-  const workbook = await getWorkbook(spaceData?.primaryWorkbookId as string);
+  const workbook = await getWorkbook({
+    workflow: WorkflowType.Embedded,
+    workbookId: spaceData?.primaryWorkbookId as string,
+  });
 
   console.log("workbook", JSON.stringify(workbook, null, 2));
 
@@ -296,7 +293,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           slug: s.config?.slug,
           fields: s.config?.fields,
         };
-      }) || null,
+      }) || [],
     actions: workbook?.actions,
   };
 
