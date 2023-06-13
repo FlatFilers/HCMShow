@@ -20,7 +20,7 @@ interface Props {
   lastSyncedAt?: string;
 }
 
-const sampleDataFileName = "/hcm-show-project-onboarding-data.xlsx";
+const sampleDataFileName = "/jobs_employees.xlsx";
 
 const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
