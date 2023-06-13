@@ -4,8 +4,16 @@ import Link from "next/link";
 import { getToken } from "next-auth/jwt";
 import { DateTime } from "luxon";
 
+type SerializeableJob = {
+  id: string;
+  name: string;
+  department: string;
+  effectiveDate: string;
+  isInactive: boolean;
+};
+
 interface Props {
-  jobs: Job[];
+  jobs: SerializeableJob[];
 }
 
 const Jobs: NextPage<Props> = ({ jobs }) => {
@@ -58,13 +66,7 @@ const Jobs: NextPage<Props> = ({ jobs }) => {
                     <Link href={`/jobs/${job.id}`}>{job.name}</Link>
                   </td>
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {
-                      <div>
-                        {DateTime.fromJSDate(job.effectiveDate).toFormat(
-                          "MM/dd/yyyy"
-                        )}
-                      </div>
-                    }
+                    {<div>{job.effectiveDate}</div>}
                   </td>
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     {job.department}
@@ -104,10 +106,22 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const prisma = new PrismaClient();
 
-  const jobs: Job[] = await prisma.job.findMany({
+  const dbJobs: Job[] = await prisma.job.findMany({
     where: {
       organizationId: token.organizationId,
     },
+  });
+
+  const jobs: SerializeableJob[] = dbJobs.map((job) => {
+    return {
+      id: job.id,
+      name: job.name,
+      department: job.department,
+      effectiveDate: DateTime.fromJSDate(job.effectiveDate).toFormat(
+        "MM/dd/yyyy"
+      ),
+      isInactive: job.isInactive,
+    };
   });
 
   return {

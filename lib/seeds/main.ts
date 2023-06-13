@@ -762,7 +762,9 @@ export const upsertEmployees = async (organizationId: string) => {
 
   const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,
-    employeeId: crypto.randomBytes(16).toString("hex"),
+    // Want a realistic employee ID without taking one that is in the sample data.
+    // Sample data starts at 21000
+    employeeId: "20005",
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     hireDate,

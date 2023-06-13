@@ -1,9 +1,17 @@
 import { GetServerSideProps, NextPage } from "next";
 import { Job, Prisma, PrismaClient } from "@prisma/client";
 import { DateTime } from "luxon";
+import { type } from "os";
+
+type SerializeableJob = {
+  name: string;
+  department: string;
+  effectiveDate: string;
+  isInactive: boolean;
+};
 
 interface Props {
-  job: Job;
+  job: SerializeableJob;
 }
 
 const Jobs: NextPage<Props> = ({ job }) => {
@@ -29,7 +37,7 @@ const Jobs: NextPage<Props> = ({ job }) => {
                 Effective Date
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {DateTime.fromJSDate(job.effectiveDate).toFormat("MM/dd/yyyy")}
+                {job.effectiveDate}
               </dd>
             </div>
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
@@ -64,21 +72,31 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const jobId: string = context.params?.id as string;
   const prisma = new PrismaClient();
 
-  const job: Job | null = await prisma.job.findFirst({
+  const dbJob: Job | null = await prisma.job.findFirst({
     where: {
       id: jobId,
     },
   });
 
-  if (!job) {
+  if (!dbJob) {
     return {
       notFound: true,
     };
   }
 
+  const job = {
+    id: dbJob.id,
+    name: dbJob.name,
+    department: dbJob.department,
+    effectiveDate: DateTime.fromJSDate(dbJob.effectiveDate).toFormat(
+      "MM/dd/yyyy"
+    ),
+    isInactive: dbJob.isInactive,
+  };
+
   return {
     props: {
-      job: job,
+      job,
     },
   };
 };

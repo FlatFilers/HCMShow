@@ -11,10 +11,10 @@ const BenefitPlans: NextPage<Props> = ({ benefitPlan }) => {
       <div className="w-[50%] mr-8 mb-16 bg-white shadow sm:rounded-lg border border-gray-200">
         <div className="px-4 py-5 sm:px-6 bg-white border-b border-gray-200 rounded-lg">
           <h3 className="text-lg font-medium leading-6 text-gray-900">
-            BenefitPlan Information
+            Benefit Plan Information
           </h3>
           <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            BenefitPlan details
+            Benefit plan details
           </p>
         </div>
         <div className="px-4 py-5 sm:p-0 h-fit">
@@ -44,11 +44,22 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const benefitPlanId: string = context.params?.id as string;
   const prisma = new PrismaClient();
 
-  const benefitPlan: BenefitPlan | null = await prisma.benefitPlan.findFirst({
-    where: {
-      id: benefitPlanId,
-    },
-  });
+  const dbBbenefitPlan: BenefitPlan | null = await prisma.benefitPlan.findFirst(
+    {
+      where: {
+        id: benefitPlanId,
+      },
+    }
+  );
+
+  let benefitPlan = null;
+  if (dbBbenefitPlan) {
+    benefitPlan = {
+      id: dbBbenefitPlan.id,
+      name: dbBbenefitPlan.name,
+      slug: dbBbenefitPlan.slug,
+    };
+  }
 
   if (!benefitPlan) {
     return {

@@ -1,6 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { DateTime } from "luxon";
+import { SerializeableEmployee } from "../employees";
 
 const employeeWithRelations = Prisma.validator<Prisma.EmployeeArgs>()({
   include: {
@@ -13,7 +14,7 @@ type EmployeeWithRelations = Prisma.EmployeeGetPayload<
 >;
 
 interface Props {
-  employee: EmployeeWithRelations;
+  employee: SerializeableEmployee;
 }
 
 const Employees: NextPage<Props> = ({ employee }) => {
@@ -61,17 +62,13 @@ const Employees: NextPage<Props> = ({ employee }) => {
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Hire Date</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {DateTime.fromJSDate(employee.hireDate).toFormat("MM/dd/yyyy")}
+                {employee.hireDate}
               </dd>
             </div>
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">End Date</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {employee.endEmploymentDate
-                  ? DateTime.fromJSDate(employee.endEmploymentDate).toFormat(
-                      "MM/dd/yyyy"
-                    )
-                  : "-"}
+                {employee.endEmploymentDate ? employee.endEmploymentDate : "-"}
               </dd>
             </div>
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
@@ -93,7 +90,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const employeeId: string = context.params?.id as string;
   const prisma = new PrismaClient();
 
-  const employee: EmployeeWithRelations | null =
+  const dbEmployee: EmployeeWithRelations | null =
     await prisma.employee.findUnique({
       where: {
         id: employeeId,
@@ -103,15 +100,34 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     });
 
-  if (!employee) {
+  if (!dbEmployee) {
     return {
       notFound: true,
     };
   }
 
+  const employee: SerializeableEmployee = {
+    id: dbEmployee.id,
+    employeeId: dbEmployee.employeeId,
+    firstName: dbEmployee.firstName,
+    lastName: dbEmployee.lastName,
+    hireDate: DateTime.fromJSDate(dbEmployee.hireDate).toFormat("MM/dd/yyyy"),
+    endEmploymentDate: dbEmployee.endEmploymentDate
+      ? DateTime.fromJSDate(dbEmployee.endEmploymentDate).toFormat("MM/dd/yyyy")
+      : null,
+    positionTitle: dbEmployee.positionTitle,
+    scheduledWeeklyHours: dbEmployee.scheduledWeeklyHours,
+    manager: dbEmployee.manager
+      ? {
+          firstName: dbEmployee.manager.firstName,
+          lastName: dbEmployee.manager.lastName,
+        }
+      : null,
+  };
+
   return {
     props: {
-      employee: employee,
+      employee,
     },
   };
 };

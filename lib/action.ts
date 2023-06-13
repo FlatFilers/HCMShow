@@ -1,4 +1,4 @@
-import { Action, PrismaClient } from "@prisma/client";
+import { Action, Prisma, PrismaClient } from "@prisma/client";
 import { DateTime } from "luxon";
 
 export enum ActionType {
@@ -23,6 +23,17 @@ export type FileFeedEvent = {
   topic: FileFeedEventType;
   description: string;
   when: string;
+};
+
+export type SerializeableAction = {
+  id: string;
+  createdAt: string;
+  type: string;
+  description: string;
+  metadata: Prisma.JsonValue;
+  user: {
+    email: string;
+  };
 };
 
 export const getActions = async (organizationId: string, type?: ActionType) => {
@@ -62,7 +73,9 @@ export const createAction = async (
   });
 };
 
-export const fileFeedEventFromAction = (action: Action): FileFeedEvent => {
+export const fileFeedEventFromAction = (
+  action: SerializeableAction
+): FileFeedEvent => {
   const metadata = action.metadata as {
     topic: string;
   };

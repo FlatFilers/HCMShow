@@ -88,7 +88,29 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     token.organizationId,
     ActionType.FileFeedEvent
   );
-  const events = actions.map((a) => fileFeedEventFromAction(a));
+
+  const updatedActions = actions.map((action) => {
+    return {
+      ...action,
+      createdAt: DateTime.fromJSDate(action.createdAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
+      updatedAt: DateTime.fromJSDate(action.updatedAt).toFormat(
+        "MM/dd/yy hh:mm:ss a"
+      ),
+      user: {
+        ...action.user,
+        createdAt: DateTime.fromJSDate(action.user.createdAt).toFormat(
+          "MM/dd/yy hh:mm:ss a"
+        ),
+        updatedAt: DateTime.fromJSDate(action.user.updatedAt).toFormat(
+          "MM/dd/yy hh:mm:ss a"
+        ),
+      },
+    };
+  });
+
+  const events = updatedActions.map((a) => fileFeedEventFromAction(a));
 
   const urlToSpace = (space.flatfileData as unknown as FlatfileSpaceData)
     .guestLink;

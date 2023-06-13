@@ -12,12 +12,27 @@ const employeeWithRelations = Prisma.validator<Prisma.EmployeeArgs>()({
   },
 });
 
+export type SerializeableEmployee = {
+  id: string;
+  employeeId: string;
+  firstName: string;
+  lastName: string;
+  hireDate: string;
+  endEmploymentDate: string | null;
+  positionTitle: string;
+  scheduledWeeklyHours: number;
+  manager: {
+    firstName: string;
+    lastName: string;
+  } | null;
+};
+
 type EmployeeWithRelations = Prisma.EmployeeGetPayload<
   typeof employeeWithRelations
 >;
 
 interface Props {
-  employees: EmployeeWithRelations[];
+  employees: SerializeableEmployee[];
 }
 
 const Employees: NextPage<Props> = ({ employees }) => {
@@ -112,15 +127,11 @@ const Employees: NextPage<Props> = ({ employees }) => {
                         {employee.positionTitle}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {DateTime.fromJSDate(employee.hireDate).toFormat(
-                          "MM/dd/yyyy"
-                        )}
+                        {employee.hireDate}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         {employee.endEmploymentDate
-                          ? DateTime.fromJSDate(
-                              employee.endEmploymentDate
-                            ).toFormat("MM/dd/yyyy")
+                          ? employee.endEmploymentDate
                           : "-"}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -154,13 +165,34 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const prisma = new PrismaClient();
 
-  const employees: EmployeeWithRelations[] = await prisma.employee.findMany({
+  const dbEmployees: EmployeeWithRelations[] = await prisma.employee.findMany({
     where: {
       organizationId: token.organizationId,
     },
     include: {
       manager: true,
     },
+  });
+
+  const employees: SerializeableEmployee[] = dbEmployees.map((employee) => {
+    return {
+      id: employee.id,
+      employeeId: employee.employeeId,
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      hireDate: DateTime.fromJSDate(employee.hireDate).toFormat("MM/dd/yyyy"),
+      endEmploymentDate: employee.endEmploymentDate
+        ? DateTime.fromJSDate(employee.endEmploymentDate).toFormat("MM/dd/yyyy")
+        : null,
+      positionTitle: employee.positionTitle,
+      scheduledWeeklyHours: employee.scheduledWeeklyHours,
+      manager: employee.manager
+        ? {
+            firstName: employee.manager.firstName,
+            lastName: employee.manager.lastName,
+          }
+        : null,
+    };
   });
 
   return {

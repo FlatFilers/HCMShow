@@ -74,10 +74,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const prisma = new PrismaClient();
 
-  const benefitPlans: BenefitPlan[] = await prisma.benefitPlan.findMany({
+  const dbBenefitPlans: BenefitPlan[] = await prisma.benefitPlan.findMany({
     where: {
       organizationId: token.organizationId,
     },
+  });
+
+  const benefitPlans = dbBenefitPlans.map((benefitPlan) => {
+    return {
+      id: benefitPlan.id,
+      name: benefitPlan.name,
+      slug: benefitPlan.slug,
+    };
   });
 
   return {
