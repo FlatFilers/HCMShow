@@ -60,9 +60,13 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   }
 
   const [showSpace, setShowSpace] = useState(false);
+  const error = (error: string) => (
+    <div className="text-white text-lg font-semibold">{error}</div>
+  );
   const spaceProps = {
+    error,
     publishableKey,
-    environmentId: environmentToken as string,
+    environmentId: environmentToken,
     name: "Embedded Portal",
     workbook: workbookConfig,
     spaceInfo: {
@@ -72,7 +76,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       showDataChecklist: false,
       showSidebar: false,
     },
-  } as ISpace;
+  };
   const { component } = useSpace({ ...spaceProps });
   const [downloaded, setDownloaded] = useState(false);
   const storageKey = "embedded-has-downloaded-sample-data";
@@ -207,6 +211,12 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       {showSpace && (
         <div className="absolute top-0 right-0 h-full w-full bg-black/60">
           <div className="relative mt-16 mx-auto max-w-7xl">
+            <XCircleIcon
+              className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
+              onClick={() => setShowSpace(false)}
+            >
+              X
+            </XCircleIcon>
             <div ref={modalRef}>{component}</div>
           </div>
         </div>
@@ -270,19 +280,39 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const spaceData = await getSpace({
+  let spaceData = await getSpace({
     workflow: WorkflowType.Embedded,
     spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
   });
 
   console.log("spaceData", spaceData);
 
-  const workbook = await getWorkbook({
+  let workbook = await getWorkbook({
     workflow: WorkflowType.Embedded,
-    workbookId: spaceData?.primaryWorkbookId as string,
+    workbookId: spaceData?.primaryWorkbookId!,
   });
 
-  console.log("workbook", JSON.stringify(workbook, null, 2));
+  console.log("workbook", workbook);
+
+  const timeInFive = new Date();
+  timeInFive.setSeconds(timeInFive.getSeconds() + 5);
+
+  while (!workbook || new Date() > timeInFive) {
+    spaceData = await getSpace({
+      workflow: WorkflowType.Embedded,
+      spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
+    });
+
+    workbook = await getWorkbook({
+      workflow: WorkflowType.Embedded,
+      workbookId: spaceData?.primaryWorkbookId!,
+    });
+  }
+
+  if (!workbook) {
+    console.log("Unable to get workbook");
+    throw "Unable to get workbook";
+  }
 
   const workbookConfig = {
     name: workbook?.name || "HCM.show Embedded Portal",
@@ -294,8 +324,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           fields: s.config?.fields,
         };
       }) || [],
-    actions: workbook?.actions,
+    actions: workbook?.actions || [],
   };
+
+  console.log("workbook", JSON.stringify(workbook, null, 2));
 
   console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
 
