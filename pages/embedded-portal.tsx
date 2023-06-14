@@ -29,21 +29,12 @@ import { useFlashMessages, useOnClickOutside } from "../lib/hooks/usehooks";
 import { Flatfile } from "@flatfile/api";
 import { WorkflowType, getSpace, getWorkbook } from "../lib/flatfile";
 
-type WorkbookConfig = {
-  name: string;
-  labels?: string[];
-  spaceId: Flatfile.SpaceId;
-  environmentId: Flatfile.EnvironmentId;
-  sheets?: Flatfile.SheetConfig[];
-  actions?: Flatfile.Action[];
-};
-
 interface Props {
   accessToken: string;
   environmentToken: string;
   lastSyncedAt?: string;
   existingSpace: Space;
-  workbookConfig: Pick<WorkbookConfig, "name" | "sheets" | "actions">;
+  workbookConfig: Flatfile.CreateWorkbookConfig;
   userId: string;
 }
 
@@ -69,9 +60,14 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   }
 
   const [showSpace, setShowSpace] = useState(false);
-  const error = (error: string) => (
-    <div className="text-white text-lg font-semibold">{error}</div>
-  );
+  const error = (error: string) => {
+    console.log("error", error);
+    return (
+      <div className="text-black bg-white text-lg font-semibold p-8">
+        Error: An error occurred opening the portal
+      </div>
+    );
+  };
   const spaceProps = {
     error,
     publishableKey,
@@ -305,7 +301,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const timeInFive = DateTime.now().plus({ seconds: 5 });
 
-  while (!(DateTime.now().diff(timeInFive).toMillis() > 0 || workbook)) {
+  while (!(workbook || DateTime.now() > timeInFive)) {
     spaceData = await getSpace({
       workflow: WorkflowType.Embedded,
       spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
@@ -322,7 +318,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       redirect: {
         // TODO: add a flash message on the home page
-        destination: "/home",
+        destination: "/embedded-portal",
         permanent: false,
       },
     };
