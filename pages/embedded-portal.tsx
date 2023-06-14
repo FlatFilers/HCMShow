@@ -318,7 +318,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       redirect: {
         // TODO: add a flash message on the home page
-        destination: "/embedded-portal",
+        destination: "/home?error=Unable to get workbook",
         permanent: false,
       },
     };
