@@ -34,7 +34,6 @@ type WorkbookConfig = {
   labels?: string[];
   spaceId: Flatfile.SpaceId;
   environmentId: Flatfile.EnvironmentId;
-  /** Sheets must be <= 50 */
   sheets?: Flatfile.SheetConfig[];
   actions?: Flatfile.Action[];
 };
@@ -304,10 +303,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   console.log("workbook", workbook);
 
-  const timeInFive = new Date();
-  timeInFive.setSeconds(timeInFive.getSeconds() + 5);
+  const timeInFive = DateTime.now().plus({ seconds: 5 });
 
-  while (!workbook || new Date() > timeInFive) {
+  while (!(DateTime.now().diff(timeInFive).toMillis() > 0 || workbook)) {
     spaceData = await getSpace({
       workflow: WorkflowType.Embedded,
       spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
@@ -321,20 +319,25 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (!workbook) {
     console.log("Unable to get workbook");
-    throw "Unable to get workbook";
+    return {
+      redirect: {
+        // TODO: add a flash message on the home page
+        destination: "/home",
+        permanent: false,
+      },
+    };
   }
 
   const workbookConfig = {
-    name: workbook?.name || "HCM.show Embedded Portal",
-    sheets:
-      workbook?.sheets?.map((s) => {
-        return {
-          name: s.name,
-          slug: s.config?.slug,
-          fields: s.config?.fields,
-        };
-      }) || [],
-    actions: workbook?.actions || [],
+    name: workbook.name || "HCM.show Embedded Portal",
+    sheets: workbook.sheets?.map((s) => {
+      return {
+        name: s.name,
+        slug: s.config?.slug,
+        fields: s.config?.fields,
+      };
+    }),
+    actions: workbook.actions,
   };
 
   console.log("workbook", JSON.stringify(workbook, null, 2));
