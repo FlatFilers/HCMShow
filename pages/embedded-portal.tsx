@@ -29,12 +29,22 @@ import { useFlashMessages, useOnClickOutside } from "../lib/hooks/usehooks";
 import { Flatfile } from "@flatfile/api";
 import { WorkflowType, getSpace, getWorkbook } from "../lib/flatfile";
 
+type WorkbookConfig = {
+  name: string;
+  labels?: string[];
+  spaceId: Flatfile.SpaceId;
+  environmentId: Flatfile.EnvironmentId;
+  /** Sheets must be <= 50 */
+  sheets?: Flatfile.SheetConfig[];
+  actions?: Flatfile.Action[];
+};
+
 interface Props {
   accessToken: string;
   environmentToken: string;
   lastSyncedAt?: string;
   existingSpace: Space;
-  workbookConfig?: Flatfile.CreateWorkbookConfig;
+  workbookConfig: Pick<WorkbookConfig, "name" | "sheets" | "actions">;
   userId: string;
 }
 
@@ -76,7 +86,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       showDataChecklist: false,
       showSidebar: false,
     },
-  };
+  } as ISpace;
   const { component } = useSpace({ ...spaceProps });
   const [downloaded, setDownloaded] = useState(false);
   const storageKey = "embedded-has-downloaded-sample-data";
