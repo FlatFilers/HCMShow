@@ -73,7 +73,7 @@ export const Events = ({ urlToSpace, initialEvents }: Props) => {
           href={urlToSpace}
           className="inline-flex flex-row items-center justify-between mb-8 rounded-md border text-file-feed border-file-feed px-4 py-2 text-sm font-semibold hover:bg-file-feed hover:text-white"
         >
-          Visit Workspace
+          Visit Flatfile Space
           <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
         </a>
         <div className="border-1 border border-gray-100 my-6"></div>

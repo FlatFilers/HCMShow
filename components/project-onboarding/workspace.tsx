@@ -43,7 +43,7 @@ const Workspace = ({
 }: Props) => {
   return (
     <>
-      <p className="text-2xl mb-8">Your Flatfile workspace is configured. 🎉</p>
+      <p className="text-2xl mb-8">Your Flatfile space is configured. 🎉</p>
 
       <div className="flex flex-row justify-between">
         <div>
@@ -69,7 +69,7 @@ const Workspace = ({
               }
               className="inline-flex flex-row items-center justify-between rounded-md border border-transparent bg-project-onboarding px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-project-onboarding focus:outline-none focus:ring-2 focus:ring-project-onboarding focus:ring-offset-2 mr-4"
             >
-              Visit Workspace
+              Visit Flatfile Space
               <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
             </a>
 
