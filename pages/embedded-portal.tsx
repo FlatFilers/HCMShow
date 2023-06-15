@@ -292,37 +292,44 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   console.log("spaceData", spaceData);
 
+  console.log("getWorkbook race condition error occuring below. Resolving...");
   let workbook = await getWorkbook({
     workflow: WorkflowType.Embedded,
     workbookId: spaceData?.primaryWorkbookId!,
   });
 
-  console.log("workbook", workbook);
-
   const timeInFive = DateTime.now().plus({ seconds: 5 });
 
   while (!(workbook || DateTime.now() > timeInFive)) {
-    spaceData = await getSpace({
-      workflow: WorkflowType.Embedded,
-      spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
-    });
+    // This prevents the spamming of the console logs
+    async () => {
+      console.log = function () {};
+      spaceData = await getSpace({
+        workflow: WorkflowType.Embedded,
+        spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData)
+          .id,
+      });
 
-    workbook = await getWorkbook({
-      workflow: WorkflowType.Embedded,
-      workbookId: spaceData?.primaryWorkbookId!,
-    });
+      workbook = await getWorkbook({
+        workflow: WorkflowType.Embedded,
+        workbookId: spaceData?.primaryWorkbookId!,
+      });
+    };
   }
 
   if (!workbook) {
     console.log("Unable to get workbook");
     return {
       redirect: {
-        // TODO: add a flash message on the home page
-        destination: "/home?error=Unable to get workbook",
-        permanent: false,
+        destination: `/activity-log?flash=error&message=Unable to get workbook&createdSpaceId=${
+          spaceData!.id
+        }`,
+        permanent: true,
       },
     };
   }
+
+  console.log("getWorkbook race condition resolved.");
 
   const workbookConfig = {
     name: workbook.name || "HCM.show Embedded Portal",
