@@ -20,6 +20,9 @@ const flatfileClient = (workflow: WorkflowType) => {
     case WorkflowType.FileFeed:
       token = process.env.FILEFEED_API_KEY;
       break;
+    case WorkflowType.Embedded:
+      token = process.env.EMBEDDED_FLATFILE_API_KEY;
+      break;
   }
 
   if (!token) {
