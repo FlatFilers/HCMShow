@@ -46,6 +46,9 @@ export function useFlashMessages(
   replaceUrl: string
 ) {
   useEffect(() => {
+    // console.log("routerQuery", routerQuery);
+    // console.log("replaceUrl", replaceUrl);
+
     if (routerQuery.flash === "success") {
       window.history.replaceState(null, "", replaceUrl);
       toast.success(routerQuery.message as string, {
@@ -54,7 +57,9 @@ export function useFlashMessages(
       });
     } else if (routerQuery.flash === "error") {
       window.history.replaceState(null, "", replaceUrl);
-      toast.error(routerQuery.message as string);
+      toast.error(routerQuery.message as string, {
+        id: routerQuery.message as string,
+      });
     } else if (routerQuery.message === "No Records Found") {
       window.history.replaceState(null, "", replaceUrl);
       toast.error("No Records Found", { id: "No Records Found" });

@@ -297,8 +297,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     workbookId: spaceData?.primaryWorkbookId!,
   });
 
-  console.log("workbook", workbook);
-
   const timeInFive = DateTime.now().plus({ seconds: 5 });
 
   while (!(workbook || DateTime.now() > timeInFive)) {
@@ -317,8 +315,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     console.log("Unable to get workbook");
     return {
       redirect: {
-        // TODO: add a flash message on the home page
-        destination: "/home?error=Unable to get workbook",
+        destination: "/activity-log?flash=error&message=Unable to get workbook",
         permanent: false,
       },
     };
