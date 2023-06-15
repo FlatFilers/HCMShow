@@ -46,8 +46,8 @@ export function useFlashMessages(
   replaceUrl: string
 ) {
   useEffect(() => {
-    console.log("routerQuery", routerQuery);
-    console.log("replaceUrl", replaceUrl);
+    // console.log("routerQuery", routerQuery);
+    // console.log("replaceUrl", replaceUrl);
 
     if (routerQuery.flash === "success") {
       window.history.replaceState(null, "", replaceUrl);

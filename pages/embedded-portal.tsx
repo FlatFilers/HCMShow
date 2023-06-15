@@ -292,7 +292,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   console.log("spaceData", spaceData);
 
-  console.log("getWorkbook race condition error occuring below. Resolving...");
   let workbook = await getWorkbook({
     workflow: WorkflowType.Embedded,
     workbookId: spaceData?.primaryWorkbookId!,
@@ -302,19 +301,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   while (!(workbook || DateTime.now() > timeInFive)) {
     // This prevents the spamming of the console logs
-    async () => {
-      console.log = function () {};
-      spaceData = await getSpace({
-        workflow: WorkflowType.Embedded,
-        spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData)
-          .id,
-      });
+    spaceData = await getSpace({
+      workflow: WorkflowType.Embedded,
+      spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
+    });
 
-      workbook = await getWorkbook({
-        workflow: WorkflowType.Embedded,
-        workbookId: spaceData?.primaryWorkbookId!,
-      });
-    };
+    workbook = await getWorkbook({
+      workflow: WorkflowType.Embedded,
+      workbookId: spaceData?.primaryWorkbookId!,
+    });
   }
 
   if (!workbook) {
@@ -326,8 +321,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-
-  console.log("getWorkbook race condition resolved.");
 
   const workbookConfig = {
     name: workbook.name || "HCM.show Embedded Portal",
