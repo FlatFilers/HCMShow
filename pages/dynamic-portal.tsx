@@ -1,6 +1,6 @@
 import { NextPageWithLayout } from "./_app";
 import { FormEvent, useCallback, useState, useRef } from "react";
-import { IThemeConfig, useSpace } from "@flatfile/react";
+import { IThemeConfig, useSpace } from "flatfile-react-legacy";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import {
