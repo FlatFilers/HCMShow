@@ -50,18 +50,15 @@ export function useFlashMessages(
     console.log("replaceUrl", replaceUrl);
 
     if (routerQuery.flash === "success") {
-      console.log("routerQuery.flash success", routerQuery.message);
       window.history.replaceState(null, "", replaceUrl);
       toast.success(routerQuery.message as string, {
         id: routerQuery.message as string,
         duration: 4000,
       });
     } else if (routerQuery.flash === "error") {
-      console.log("routerQuery.message", routerQuery.message);
-
       window.history.replaceState(null, "", replaceUrl);
       toast.error(routerQuery.message as string, {
-        id: routerQuery.createdSpaceId as string,
+        id: routerQuery.message as string,
       });
     } else if (routerQuery.message === "No Records Found") {
       window.history.replaceState(null, "", replaceUrl);

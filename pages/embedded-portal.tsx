@@ -321,9 +321,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     console.log("Unable to get workbook");
     return {
       redirect: {
-        destination: `/activity-log?flash=error&message=Unable to get workbook&createdSpaceId=${
-          spaceData!.id
-        }`,
+        destination: "/activity-log?flash=error&message=Unable to get workbook",
         permanent: true,
       },
     };
