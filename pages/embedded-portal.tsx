@@ -322,7 +322,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       redirect: {
         destination: "/activity-log?flash=error&message=Unable to get workbook",
-        permanent: true,
+        permanent: false,
       },
     };
   }
