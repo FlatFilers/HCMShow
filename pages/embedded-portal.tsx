@@ -300,7 +300,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const timeInFive = DateTime.now().plus({ seconds: 5 });
 
   while (!(workbook || DateTime.now() > timeInFive)) {
-    // This prevents the spamming of the console logs
     spaceData = await getSpace({
       workflow: WorkflowType.Embedded,
       spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
