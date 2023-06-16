@@ -176,6 +176,7 @@ model EmployeeBenefitPlan {
   currentlyEnrolled Boolean @default(false)
   coverageBeginDate DateTime @default(now())
   employeerContribution Float @default(0)
+  benefitCoverageType String
 
   @@id([employeeId, benefitPlanId])
 }

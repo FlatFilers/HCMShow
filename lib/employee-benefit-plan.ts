@@ -67,6 +67,7 @@ export const upsertEmployeeBenefitPlanRecords = async (
           r.values.coverageStartDate.value as string
         ).toJSDate(),
         employeerContribution: r.values.employerContribution.value as number,
+        benefitCoverageType: r.values.benefitCoverageType.value as string,
       };
 
       return await upsertEmployeeBenefitPlan(data);
