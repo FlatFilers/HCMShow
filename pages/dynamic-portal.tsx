@@ -22,7 +22,7 @@ import { workflowItems } from "../components/sidebar-layout";
 import FeaturesList from "../components/shared/features-list";
 import { DateTime } from "luxon";
 import { useOnClickOutside } from "../lib/hooks/usehooks";
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { SpaceType } from "../lib/space";
 import {
   WorkflowType,
@@ -33,6 +33,7 @@ import {
 import { Flatfile } from "@flatfile/api";
 import { ISpace, useSpace } from "@flatfile/react";
 import { FlatfileSpaceData } from "../lib/flatfile-legacy";
+import { prismaClient } from "../lib/prisma-client";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -508,7 +509,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const prisma = new PrismaClient();
+  const prisma = prismaClient;
   const environmentToken = process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID;
   const userId = token.sub as string;
   const space = await createSpace({
