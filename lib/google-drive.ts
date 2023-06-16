@@ -18,7 +18,10 @@ export const fetchFileFromDrive = async (): Promise<fs.ReadStream> => {
     });
 
     // Create a temporary file and write the data into it
-    const tmpFile = await tmp.file({ prefix: "filefeed-", postfix: ".csv" });
+    const tmpFile = await tmp.file({
+      prefix: "benefits-sample-data-",
+      postfix: ".csv",
+    });
     fs.writeFileSync(tmpFile.path, response.data);
 
     // Create a fs.ReadStream from the temporary file
