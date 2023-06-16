@@ -137,11 +137,18 @@ const filterConfig = ({
 }) => {
   const dynamicFieldType = "benefitCoverageType";
   const { name, sheets, actions } = workbookConfig;
-  const { name: sheetName, slug, fields } = sheets![0];
-  const otherFields = sheets![0].fields.filter((f) => {
+
+  if (!sheets) {
+    console.log("The workbook has no sheets. Unable to filter config.");
+
+    return workbookConfig;
+  }
+
+  const { name: sheetName, slug } = sheets[0];
+  const otherFields = sheets[0].fields.filter((f) => {
     return f.key !== dynamicFieldType;
   }) as Property[];
-  const field = sheets![0].fields.find((f) => f.key === dynamicFieldType);
+  const field = sheets[0].fields.find((f) => f.key === dynamicFieldType);
   const filteredConfig = {
     name,
     sheets: [
@@ -224,8 +231,16 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   const error = (error: string) => {
     console.log("error", error);
     return (
-      <div className="text-black bg-white text-lg font-semibold p-8">
-        Error: An error occurred opening the portal
+      <div>
+        <XCircleIcon
+          className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
+          onClick={() => setShowSpace(false)}
+        >
+          Close
+        </XCircleIcon>
+        <div className="text-black bg-white text-lg font-semibold p-8">
+          Error: An error occurred opening the portal
+        </div>
       </div>
     );
   };
@@ -480,12 +495,6 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
           {showSpace && (
             <div className="absolute top-0 right-0 w-full h-full bg-black/60">
               <div className="relative mt-16 mx-auto max-w-7xl">
-                <XCircleIcon
-                  className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
-                  onClick={() => setShowSpace(false)}
-                >
-                  X
-                </XCircleIcon>
                 <div ref={modalRef}>{component}</div>
               </div>
             </div>
@@ -501,7 +510,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     req: context.req,
   });
 
-  if (!token) {
+  if (!token?.sub) {
     console.log("No session token found");
 
     return {
@@ -511,11 +520,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const prisma = prismaClient;
   const environmentToken = process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID;
-  const userId = token.sub as string;
+  const userId = token.sub;
+
+  if (!environmentToken) {
+    console.error("Missing DYNAMIC_TEMPLATES_ENVIRONMENT_ID env var");
+    throw "Missing DYNAMIC_TEMPLATES_ENVIRONMENT_ID env var";
+  }
   const space = await createSpace({
     workflow: WorkflowType.Dynamic,
     userId,
-    environmentId: environmentToken!,
+    environmentId: environmentToken,
     spaceName: "HCM.show Dynamic",
   });
 
@@ -524,7 +538,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   let existingSpace = await prisma.space.findUnique({
     where: {
       userId_type: {
-        userId: token.sub as string,
+        userId: token.sub,
         type: SpaceType.Dynamic,
       },
     },
