@@ -745,6 +745,21 @@ const createOtherData = async () => {
     });
 };
 
+// These are used to seed the account with valid employee IDs
+// so the employees exist when we sync data from the filefeed flow.
+const employeeIdsForBenefitsSchema = [
+  21255, 21306, 21302, 21077, 21126, 21263, 21347, 21346, 21345, 21131, 21129,
+  21266, 21332, 21168, 21299, 21244, 21254, 21239, 21305, 21173, 21229, 21298,
+  21359, 21358, 21357, 21356, 21355, 21354, 21353, 21352, 21205, 21351, 21350,
+  21349, 21348, 21135, 21134, 21133, 21326, 21198, 21132, 21387, 21276, 21275,
+  21274, 21381, 21312, 21311, 21310, 21242, 21386, 21385, 21384, 21383, 21382,
+  21079, 21296, 21295, 21293, 21292, 21291, 21238, 21140, 21139, 21231, 21390,
+  21391, 21416, 21376, 21185, 21125, 21122, 21279, 21378, 21428, 21429, 21432,
+  21433, 21284, 21127, 21180, 21435, 21444, 21169, 21167, 21227, 21473, 21474,
+  21475, 21476, 21477, 21252, 21202, 21245, 21224, 21236, 21228, 21183, 21203,
+  21160, 21380, 21393, 21392, 21374, 21373, 21372, 21322, 21307, 21303,
+];
+
 export const upsertEmployees = async (organizationId: string) => {
   const employeeTypeId = (
     (await prismaClient.employeeType.findFirst()) as EmployeeType
@@ -791,6 +806,20 @@ export const upsertEmployees = async (organizationId: string) => {
   );
 
   await Promise.all(directReports);
+
+  const benefitEmployees = employeeIdsForBenefitsSchema.map(
+    async (employeeId) => {
+      await upsertEmployee({
+        ...data,
+        employeeId: employeeId.toString(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        managerId: manager.id,
+      });
+    }
+  );
+
+  await Promise.all(benefitEmployees);
 };
 
 const upsertUser = async () => {
