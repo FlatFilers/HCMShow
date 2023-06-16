@@ -5,6 +5,7 @@ export enum SpaceType {
   WorkbookUpload = "workbook-upload",
   FileFeed = "file-feed",
   Embed = "embed",
+  Dynamic = "dynamic",
 }
 
 export const findSpace = async ({

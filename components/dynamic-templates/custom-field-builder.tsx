@@ -27,7 +27,7 @@ export const CustomFieldBuilder = ({
 }: Props) => {
   const options = customField.enumOptions || initialOptions;
 
-  console.log("options", options);
+  // console.log("options", options);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

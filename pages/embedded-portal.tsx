@@ -30,7 +30,6 @@ import { Flatfile } from "@flatfile/api";
 import { WorkflowType, getSpace, getWorkbook } from "../lib/flatfile";
 
 interface Props {
-  accessToken: string;
   environmentToken: string;
   lastSyncedAt?: string;
   existingSpace: Space;
