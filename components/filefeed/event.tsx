@@ -60,7 +60,9 @@ export const Event = ({ event }: Props) => {
       </td>
 
       <td className="whitespace-nowrap py-4 pl-6 pr-3 text-sm">
-        <span className="">{event.when}</span>
+        <span className="">
+          {event.when === "Invalid DateTime" ? "Loading..." : event.when}
+        </span>
       </td>
     </>
   );
