@@ -35,7 +35,11 @@ export default async function handler(
       spaceType: space.type as SpaceType,
     });
   } else if (space.type === SpaceType.FileFeed) {
-    // TODO
+    syncBenefitPlanRecords({
+      userId: user.id,
+      organizationId: user.organizationId,
+      spaceType: space.type,
+    });
   } else if (space.type === SpaceType.Embed) {
     syncBenefitPlanRecords({
       userId: user.id,
