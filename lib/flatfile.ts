@@ -49,11 +49,6 @@ export const createSpace = async ({
   spaceName: string;
 }) => {
   const flatfile = flatfileClient(workflow);
-  console.log("flatfile", flatfile);
-  console.log("workflow", workflow);
-  console.log("userId", userId);
-  console.log("environmentId", environmentId);
-  console.log("spaceName", spaceName);
 
   try {
     const result = await flatfile.spaces.create({
@@ -64,8 +59,6 @@ export const createSpace = async ({
         userId,
       },
     });
-
-    console.log("result", result);
 
     return result.data;
   } catch (e) {
