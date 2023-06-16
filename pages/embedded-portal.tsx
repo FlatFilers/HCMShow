@@ -85,7 +85,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   const { component } = useSpace({ ...spaceProps });
   const [downloaded, setDownloaded] = useState(false);
   const storageKey = "embedded-has-downloaded-sample-data";
-  const sampleDataFileName = "/HCM.show benefits sample data.csv";
+  const sampleDataFileName = "/benefits-sample-data.csv";
 
   const router = useRouter();
 
