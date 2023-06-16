@@ -30,7 +30,6 @@ import { Flatfile } from "@flatfile/api";
 import { WorkflowType, getSpace, getWorkbook } from "../lib/flatfile";
 
 interface Props {
-  accessToken: string;
   environmentToken: string;
   lastSyncedAt?: string;
   existingSpace: Space;
@@ -63,8 +62,16 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   const error = (error: string) => {
     console.log("error", error);
     return (
-      <div className="text-black bg-white text-lg font-semibold p-8">
-        Error: An error occurred opening the portal
+      <div>
+        <XCircleIcon
+          className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
+          onClick={() => setShowSpace(false)}
+        >
+          Close
+        </XCircleIcon>
+        <div className="text-black bg-white text-lg font-semibold p-8">
+          Error: An error occurred opening the portal
+        </div>
       </div>
     );
   };
@@ -216,12 +223,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       {showSpace && (
         <div className="absolute top-0 right-0 h-full w-full bg-black/60">
           <div className="relative mt-16 mx-auto max-w-7xl">
-            <XCircleIcon
-              className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
-              onClick={() => setShowSpace(false)}
-            >
-              X
-            </XCircleIcon>
             <div ref={modalRef}>{component}</div>
           </div>
         </div>

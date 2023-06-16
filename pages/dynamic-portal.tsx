@@ -1,6 +1,5 @@
 import { NextPageWithLayout } from "./_app";
-import { FormEvent, useCallback, useState, useRef } from "react";
-import { IThemeConfig, useSpace } from "flatfile-react-legacy";
+import { FormEvent, useState, useRef } from "react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import {
@@ -15,22 +14,26 @@ import {
   VariableIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import {
-  BlueprintWithId,
-  SpaceConfigWithBlueprints,
-  getAccessToken,
-  getSpaceConfig,
-} from "../lib/flatfile-legacy";
 import { OptionBuilder } from "../components/dynamic-templates/option-builder";
-import { Property, SheetConfig } from "flatfile-api-legacy";
+import { Property } from "flatfile-api-legacy";
 import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";
 import toast from "react-hot-toast";
-import { prismaClient } from "../lib/prisma-client";
 import { workflowItems } from "../components/sidebar-layout";
 import FeaturesList from "../components/shared/features-list";
-import { theme } from "../lib/theme";
 import { DateTime } from "luxon";
 import { useOnClickOutside } from "../lib/hooks/usehooks";
+import { Prisma } from "@prisma/client";
+import { SpaceType } from "../lib/space";
+import {
+  WorkflowType,
+  createSpace,
+  getSpace,
+  getWorkbook,
+} from "../lib/flatfile";
+import { Flatfile } from "@flatfile/api";
+import { ISpace, useSpace } from "@flatfile/react";
+import { FlatfileSpaceData } from "../lib/flatfile-legacy";
+import { prismaClient } from "../lib/prisma-client";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -43,10 +46,9 @@ const features = {
 };
 
 interface Props {
-  accessToken: string;
-  environmentId: string;
-  workbookName: string;
-  baseConfig: SpaceConfigWithBlueprints;
+  environmentToken: string;
+  workbookConfig: Flatfile.CreateWorkbookConfig;
+  userId: string;
   dbCustomField: CustomField;
   dbCustomOptions: Option[];
   initialCustomFieldLastSavedAt: string;
@@ -125,93 +127,57 @@ const customOptionsConfig = (options: Option[]) => {
 };
 
 const filterConfig = ({
-  baseConfig,
-  workbookName,
+  workbookConfig,
   forEmbedOptions,
   customFieldConfig,
 }: {
-  baseConfig: SpaceConfigWithBlueprints;
-  workbookName: string;
+  workbookConfig: Flatfile.CreateWorkbookConfig;
   forEmbedOptions: Option[];
   customFieldConfig: any;
 }) => {
-  const sheetName = "Benefit Elections";
   const dynamicFieldType = "benefitCoverageType";
+  const { name, sheets, actions } = workbookConfig;
 
-  // TODO: We should look up blueprint by ID or slug not name
-  const blueprint = baseConfig.blueprints.find(
-    (b) => b.name === workbookName
-  ) as BlueprintWithId;
-  const sheet = blueprint?.sheets.find((s) => s.name === sheetName);
-  const field = sheet?.fields.find((f) => f.key === dynamicFieldType);
+  if (!sheets) {
+    console.log("The workbook has no sheets. Unable to filter config.");
 
-  const otherBlueprints = baseConfig.blueprints.filter((b) => {
-    return b.name !== workbookName;
-  });
-  const otherSheets = blueprint?.sheets.filter((s) => {
-    return s.name !== sheetName;
-  }) as SheetConfig[];
-  const otherFields = sheet?.fields.filter((f) => {
+    return workbookConfig;
+  }
+
+  const { name: sheetName, slug } = sheets[0];
+  const otherFields = sheets[0].fields.filter((f) => {
     return f.key !== dynamicFieldType;
   }) as Property[];
-
-  const { id: _baseConfigId, ...baseConfigWithoutId } = baseConfig;
-  const { id: _blueprintId, ...blueprintWithoutId } = blueprint;
-
+  const field = sheets[0].fields.find((f) => f.key === dynamicFieldType);
   const filteredConfig = {
-    ...baseConfigWithoutId,
-    name: "HCM Show - Dynamic Templates",
-    slug: `${baseConfig.slug}-${Date.now()}`,
-    blueprints: [
-      ...otherBlueprints,
+    name,
+    sheets: [
       {
-        ...blueprintWithoutId,
-        slug: `${blueprint.slug}-${Date.now()}`,
-        sheets: [
-          ...otherSheets,
+        name: sheetName,
+        slug,
+        fields: [
+          ...otherFields,
           {
-            ...sheet,
-            fields: [
-              ...otherFields,
-              {
-                ...field,
-                ...(customFieldConfig.type === "enum" &&
-                  forEmbedOptions &&
-                  customOptionsConfig(forEmbedOptions)),
-                slug: `${field?.key}-${Date.now()}`,
-              },
-            ],
+            ...field,
+            ...(forEmbedOptions && customOptionsConfig(forEmbedOptions)),
+            slug: `${field?.key}-${Date.now()}`,
           },
+          ...(customFieldConfig.forEmbed === true ? [customFieldConfig] : []),
         ],
       },
     ],
+    actions,
   };
-
-  if (customFieldConfig.forEmbed) {
-    filteredConfig.blueprints
-      .at(-1)
-      ?.sheets.at(-1)
-      ?.fields.push(customFieldConfig);
-  }
-
   // console.log("filteredConfig", filteredConfig);
-  // console.log("field", field);
-  // console.log("otherFields", otherFields);
-  // console.log("mappedOptions", mappedOptions);
-  // console.log("sheets", filteredConfig.blueprints[0].sheets[1]);
-  // console.log(
-  //   "single field",
-  //   filteredConfig.blueprints[0].sheets[1].fields[13]
-  // );
+  // console.log("sheets", filteredConfig.sheets[0].fields);
 
   return filteredConfig;
 };
 
 const DynamicTemplates: NextPageWithLayout<Props> = ({
-  accessToken,
-  environmentId,
-  workbookName,
-  baseConfig,
+  environmentToken,
+  workbookConfig,
+  userId,
   dbCustomField,
   dbCustomOptions,
   initialCustomFieldLastSavedAt,
@@ -242,6 +208,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   const [forEmbedOptions, setForEmbedOptions] = useState<Option[]>(
     dbCustomOptions ?? initialOptions
   );
+
   const customFieldConfig = {
     key: customField.name?.replace(/\s/, ""),
     type: customField.type,
@@ -254,30 +221,49 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     forEmbed: forEmbedCustomField ? true : false,
   };
 
+  const publishableKey = process.env.NEXT_PUBLIC_DYNAMIC_PUBLISHABLE_KEY;
+
+  if (!publishableKey) {
+    console.error("Missing NEXT_PUBLIC_DYNAMIC_PUBLISHABLE_KEY env var");
+    throw "Missing NEXT_PUBLIC_DYNAMIC_PUBLISHABLE_KEY env var";
+  }
+
+  const error = (error: string) => {
+    console.log("error", error);
+    return (
+      <div>
+        <XCircleIcon
+          className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
+          onClick={() => setShowSpace(false)}
+        >
+          Close
+        </XCircleIcon>
+        <div className="text-black bg-white text-lg font-semibold p-8">
+          Error: An error occurred opening the portal
+        </div>
+      </div>
+    );
+  };
   const spaceProps = {
-    accessToken,
-    environmentId,
+    error,
+    publishableKey,
+    environmentId: environmentToken,
     name: "Dynamic Portal",
-    themeConfig: theme("#E28170", "#D64B32") as IThemeConfig,
-    spaceConfig: filterConfig({
-      baseConfig,
-      workbookName,
+    workbook: filterConfig({
+      workbookConfig,
       forEmbedOptions,
       customFieldConfig,
     }),
+    spaceInfo: {
+      userId,
+    },
     sidebarConfig: {
       showDataChecklist: false,
       showSidebar: false,
     },
-  };
+  } as ISpace;
 
-  const { error, data } = useSpace({ ...spaceProps });
-
-  useCallback(() => {
-    if (error) {
-      setShowSpace(false);
-    }
-  }, [error]);
+  const { component } = useSpace({ ...spaceProps });
 
   const handleOptionsSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -505,24 +491,16 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
             githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/src/workflows/dynamic-templates/index.ts"
             features={features}
           />
+          {/* TODO: Add spinner while embed is loading */}
+          {showSpace && (
+            <div className="absolute top-0 right-0 w-full h-full bg-black/60">
+              <div className="relative mt-16 mx-auto max-w-7xl">
+                <div ref={modalRef}>{component}</div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
-
-      {error && <div>{error}</div>}
-      {/* TODO: Add spinner while embed is loading */}
-      {!error && showSpace && (
-        <div className="absolute top-0 right-0 w-full h-full bg-black/60">
-          <div className="relative mt-16 mx-auto max-w-7xl">
-            <XCircleIcon
-              className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
-              onClick={() => setShowSpace(false)}
-            >
-              X
-            </XCircleIcon>
-            <div ref={modalRef}>{data?.component}</div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
@@ -540,10 +518,135 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const accessToken = await getAccessToken();
-  const baseConfig = await getSpaceConfig(accessToken);
-
   const prisma = prismaClient;
+  const environmentToken = process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID;
+  const userId = token.sub;
+
+  if (!environmentToken) {
+    console.error("Missing DYNAMIC_TEMPLATES_ENVIRONMENT_ID env var");
+    throw "Missing DYNAMIC_TEMPLATES_ENVIRONMENT_ID env var";
+  }
+  const space = await createSpace({
+    workflow: WorkflowType.Dynamic,
+    userId,
+    environmentId: environmentToken,
+    spaceName: "HCM.show Dynamic",
+  });
+
+  console.log("space", space);
+
+  let existingSpace = await prisma.space.findUnique({
+    where: {
+      userId_type: {
+        userId: token.sub,
+        type: SpaceType.Dynamic,
+      },
+    },
+    select: {
+      flatfileData: true,
+    },
+  });
+
+  console.log("existingSpace", existingSpace);
+
+  if (!existingSpace) {
+    existingSpace = await prisma.space.create({
+      data: {
+        userId,
+        flatfileData: space as unknown as Prisma.InputJsonValue,
+        type: SpaceType.Dynamic,
+      },
+      select: {
+        flatfileData: true,
+      },
+    });
+  }
+
+  const lastSync = await prisma.action.findFirst({
+    where: {
+      organizationId: token.organizationId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  if (!space) {
+    console.log("No space");
+    return {
+      props: {
+        environmentToken,
+        lastSyncedAt: lastSync
+          ? DateTime.fromJSDate(lastSync.createdAt).toFormat(
+              "MM/dd/yy hh:mm:ss a"
+            )
+          : "",
+        existingSpace,
+        userId: token.sub,
+      },
+    };
+  }
+
+  let spaceData = await getSpace({
+    workflow: WorkflowType.Dynamic,
+    spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
+  });
+
+  console.log("spaceData", spaceData);
+
+  let workbook = await getWorkbook({
+    workflow: WorkflowType.Dynamic,
+    workbookId: spaceData?.primaryWorkbookId!,
+  });
+
+  const timeInFive = DateTime.now().plus({ seconds: 5 });
+
+  while (!(workbook || DateTime.now() > timeInFive)) {
+    spaceData = await getSpace({
+      workflow: WorkflowType.Dynamic,
+      spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
+    });
+
+    workbook = await getWorkbook({
+      workflow: WorkflowType.Dynamic,
+      workbookId: spaceData?.primaryWorkbookId!,
+    });
+  }
+
+  if (!workbook) {
+    console.log("Unable to get workbook");
+    return {
+      redirect: {
+        destination: "/activity-log?flash=error&message=Unable to get workbook",
+        permanent: false,
+      },
+    };
+  }
+
+  const workbookConfig = {
+    name: workbook.name || "HCM.show Dynamic Portal",
+    sheets: workbook.sheets?.map((s) => {
+      return {
+        name: s.name,
+        slug: s.config?.slug,
+        fields: s.config?.fields,
+      };
+    }),
+    actions: workbook.actions,
+  };
+
+  console.log("workbook", JSON.stringify(workbook, null, 2));
+
+  console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
+
+  const dbFullCustomField = await prisma.customField.findFirst({
+    where: {
+      userId: token.sub,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
   const dbCustomField = await prisma.customField.findFirst({
     where: {
@@ -551,6 +654,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
     orderBy: {
       createdAt: "desc",
+    },
+    select: {
+      name: true,
+      type: true,
+      required: true,
+      dateFormat: true,
+      decimals: true,
+      enumOptions: true,
     },
   });
 
@@ -563,18 +674,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  const dbCustomOptions = dbCustomOptionsRecord?.options;
+  const dbCustomOptions = dbCustomOptionsRecord?.options || null;
 
   return {
     props: {
-      accessToken,
-      environmentId: process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID,
-      workbookName: process.env.DYNAMIC_TEMPLATES_WORKBOOK_NAME,
-      baseConfig,
+      environmentToken,
+      workbookConfig,
+      userId: token.sub,
       dbCustomField,
       dbCustomOptions,
-      initialCustomFieldLastSavedAt: dbCustomField
-        ? DateTime.fromJSDate(dbCustomField.updatedAt).toFormat(
+      initialCustomFieldLastSavedAt: dbFullCustomField
+        ? DateTime.fromJSDate(dbFullCustomField.updatedAt).toFormat(
             "MM/dd/yyyy h:mm a"
           )
         : "",
