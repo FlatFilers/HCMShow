@@ -28,6 +28,7 @@ import { theme } from "../lib/theme";
 import { useFlashMessages, useOnClickOutside } from "../lib/hooks/usehooks";
 import { Flatfile } from "@flatfile/api";
 import { WorkflowType, getSpace, getWorkbook } from "../lib/flatfile";
+import { document } from "../components/embedded-portal/document";
 
 interface Props {
   environmentToken: string;
@@ -80,6 +81,8 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     publishableKey,
     environmentId: environmentToken,
     name: "Embedded Portal",
+    themeConfig: theme("#4DCA94", "#32A673"),
+    document: document,
     workbook: workbookConfig,
     spaceInfo: {
       userId,

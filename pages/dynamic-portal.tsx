@@ -34,6 +34,8 @@ import { Flatfile } from "@flatfile/api";
 import { ISpace, useSpace } from "@flatfile/react";
 import { FlatfileSpaceData } from "../lib/flatfile-legacy";
 import { prismaClient } from "../lib/prisma-client";
+import { theme } from "../lib/theme";
+import { document } from "../components/dynamic-templates/document";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -249,6 +251,8 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     publishableKey,
     environmentId: environmentToken,
     name: "Dynamic Portal",
+    themeConfig: theme("#E28170", "#D64B32"),
+    document: document,
     workbook: filterConfig({
       workbookConfig,
       forEmbedOptions,
