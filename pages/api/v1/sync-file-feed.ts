@@ -2,12 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { prismaClient } from "../../../lib/prisma-client";
 import { syncWorkbookRecords } from "../../../lib/sync-records";
 import { SpaceType, getSpaceForFlatfileSpaceId } from "../../../lib/space";
-import {
-  ActionState,
-  ActionType,
-  FileFeedEventType,
-  createAction,
-} from "../../../lib/action";
+import { ActionState, ActionType, createAction } from "../../../lib/action";
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,16 +11,6 @@ export default async function handler(
   console.log("/sync-file-feed", req.body);
 
   const { spaceId, topic } = req.body;
-
-  if (
-    ![
-      FileFeedEventType.RecordsCreated,
-      FileFeedEventType.RecordsUpdated,
-      FileFeedEventType.RecordsDeleted,
-    ].includes(topic as FileFeedEventType)
-  ) {
-    throw new Error("/sync-file-feed: invalid topic", topic);
-  }
 
   console.log("spaceId", spaceId);
   console.log("topic", topic);

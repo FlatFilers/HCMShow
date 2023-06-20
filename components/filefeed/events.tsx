@@ -76,25 +76,19 @@ export const Events = ({ urlToSpace, initialEvents }: Props) => {
           Visit Flatfile Space
           <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
         </a>
-        <div className="border-1 border border-gray-100 my-6"></div>
+        <div className="border-1 border border-gray-100 mt-6"></div>
         <table className="min-w-full divide-y divide-gray-300">
           <thead className="bg-gray-50">
             <tr>
               <th
                 scope="col"
-                className="w-20 py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900"
+                className="w-64 py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900"
               >
                 Event
               </th>
               <th
                 scope="col"
-                className="w-48 px-6 py-3.5 text-left text-sm font-semibold text-gray-900"
-              >
-                Description
-              </th>
-              <th
-                scope="col"
-                className="w-48 px-6 py-3.5 text-left text-sm font-semibold text-gray-900"
+                className="w-64 px-6 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
                 When
               </th>
