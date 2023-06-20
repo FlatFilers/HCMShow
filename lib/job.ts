@@ -48,32 +48,6 @@ export const upsertJob = async ({
   return job;
 };
 
-export const validJobRecords = async (records: Record[]) => {
-  // Find required fields
-  const result: { column_name: string }[] = await prismaClient.$queryRaw`
-    SELECT column_name 
-    FROM information_schema.columns
-    WHERE table_name = 'Job'
-      AND is_nullable = 'NO'
-      AND column_name NOT IN ('createdAt', 'updatedAt')
-      AND column_name NOT ILIKE '%id'
-  `;
-
-  const requiredFields = result.map((r) => r.column_name);
-
-  // console.log("requiredFields", requiredFields);
-
-  // Record is valid if every required field is valid
-  return records.filter((r) => {
-    // console.log("r", r);
-    return requiredFields.every((f) => {
-      const field = jobSheetMapping[f as keyof typeof jobSheetMapping];
-
-      return r.values[field]?.valid;
-    });
-  });
-};
-
 export const upsertJobRecords = async (
   validJobs: RecordsWithLinks,
   { userId, organizationId }: { userId: string; organizationId: string }

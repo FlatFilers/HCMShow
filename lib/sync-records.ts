@@ -1,10 +1,10 @@
 import { EmployeeType, Prisma } from "@prisma/client";
-import { upsertEmployee, validEmployeeRecords } from "./employee";
+import { upsertEmployee } from "./employee";
 import { prismaClient } from "./prisma-client";
 import { SpaceType } from "./space";
 import { DateTime } from "luxon";
 import { createAction, ActionType } from "./action";
-import { validJobRecords, upsertJobRecords } from "./job";
+import { upsertJobRecords } from "./job";
 import { upsertBenefitPlan, upsertBenefitPlanRecords } from "./benefit-plan";
 import { upsertEmployeeBenefitPlanRecords } from "./employee-benefit-plan";
 import { WorkflowType, getRecordsByName } from "./flatfile";
@@ -35,10 +35,8 @@ export const syncWorkbookRecords = async ({
     spaceType,
   });
 
-  const numEmployeeRecords = employeeRecords?.length
-    ? employeeRecords.length
-    : 0;
-  const numJobRecords = jobRecords?.length ? jobRecords.length : 0;
+  const numEmployeeRecords = employeeRecords?.length ?? 0;
+  const numJobRecords = jobRecords?.length ?? 0;
 
   const totalRecords = numEmployeeRecords + numJobRecords;
 
@@ -63,8 +61,10 @@ export const syncWorkbookRecords = async ({
     return a.values.managerId.value ? 1 : -1;
   });
 
-  if (validsManagersFirst) {
-    const upsertEmployees = validsManagersFirst?.map(async (r) => {
+  if (!validsManagersFirst) {
+    console.log("no employee records to upsert");
+  } else {
+    const upsertEmployees = validsManagersFirst.map(async (r) => {
       try {
         const values = r.values;
         const employeeTypeId = (
@@ -220,9 +220,7 @@ export const syncBenefitPlanRecords = async ({
     return;
   }
 
-  const numEmployeeBenefitRecords = employeeBenefitRecords?.length
-    ? employeeBenefitRecords.length
-    : 0;
+  const numEmployeeBenefitRecords = employeeBenefitRecords?.length ?? 0;
 
   if (!employeeBenefitRecords) {
     return {
