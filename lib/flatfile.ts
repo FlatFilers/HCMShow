@@ -1,5 +1,9 @@
 import { FlatfileClient } from "@flatfile/api";
 import { ReadStream } from "fs";
+import { prismaClient } from "./prisma-client";
+import { SpaceType } from "./space";
+import { FlatfileSpaceData } from "./flatfile-legacy";
+import { Workbook } from "@flatfile/api/api";
 // import { ListWorkbooksRequest } from "@flatfile/api/api";
 // import { getSpaceConfig } from "./flatfile";
 
@@ -247,4 +251,86 @@ export const postFile = async ({
     console.log("postFile() error", JSON.stringify(e, null, 2));
     return null;
   }
+};
+
+export const getRecordsByName = async ({
+  workflow,
+  userId,
+  workbookName,
+  sheetName,
+  spaceType,
+}: {
+  workflow: WorkflowType;
+  userId: string;
+  workbookName: string;
+  sheetName: string;
+  spaceType: SpaceType;
+}) => {
+  const prisma = prismaClient;
+
+  const space = await prisma.space.findUnique({
+    where: {
+      userId_type: {
+        userId,
+        type: spaceType,
+      },
+    },
+  });
+
+  if (!space) {
+    throw new Error(`No space for user ${userId}`);
+  }
+
+  console.log("space", space);
+
+  const { sheetId } = await getWorkbookIdAndSheetIds({
+    workflow,
+    flatfileSpaceId: (space.flatfileData as unknown as FlatfileSpaceData).id,
+    workbookName,
+    sheetName,
+  });
+
+  // console.log("w, s", workbookId, sheetIds);
+
+  const records = await getRecords({ workflow, sheetId });
+
+  return records;
+};
+
+const getWorkbookIdAndSheetIds = async ({
+  workflow,
+  flatfileSpaceId,
+  workbookName,
+  sheetName,
+}: {
+  workflow: WorkflowType;
+  flatfileSpaceId: string;
+  workbookName: string;
+  sheetName: string;
+}): Promise<{ workbookId: string; sheetId: string }> => {
+  const response = await listWorkbooks({
+    workflow,
+    spaceId: flatfileSpaceId,
+  });
+
+  console.log("getWorkbooks response", response);
+
+  const workbookObj = response?.data.find((workbookObj: Workbook) => {
+    return workbookObj.name === workbookName;
+  });
+
+  if (!workbookObj) {
+    throw "Could not find workbook";
+  }
+
+  const sheets = workbookObj.sheets?.find((s) => s.name === sheetName);
+
+  if (!sheets) {
+    throw "Could not find sheets";
+  }
+
+  return {
+    workbookId: workbookObj?.id,
+    sheetId: sheets.id,
+  };
 };

@@ -5,6 +5,7 @@ import {
   syncWorkbookRecords,
 } from "../../../lib/sync-records";
 import { SpaceType, findSpace } from "../../../lib/space";
+import { WorkflowType } from "../../../lib/flatfile";
 
 export default async function handler(
   req: NextApiRequest,
@@ -30,18 +31,21 @@ export default async function handler(
   // Not awaiting for early response back to Flatfile server
   if (space.type === SpaceType.WorkbookUpload) {
     syncWorkbookRecords({
+      workflow: WorkflowType.Onboarding,
       userId: user.id,
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,
     });
   } else if (space.type === SpaceType.FileFeed) {
     syncBenefitPlanRecords({
+      workflow: WorkflowType.FileFeed,
       userId: user.id,
       organizationId: user.organizationId,
       spaceType: space.type,
     });
   } else if (space.type === SpaceType.Embed) {
     syncBenefitPlanRecords({
+      workflow: WorkflowType.Embedded,
       userId: user.id,
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,
