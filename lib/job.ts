@@ -1,3 +1,4 @@
+import { RecordsWithLinks } from "@flatfile/api/api";
 import { Record } from "./flatfile-legacy";
 import { prismaClient } from "./prisma-client";
 import { JobFamily } from "@prisma/client";
@@ -74,7 +75,7 @@ export const validJobRecords = async (records: Record[]) => {
 };
 
 export const upsertJobRecords = async (
-  validJobs: Record[],
+  validJobs: RecordsWithLinks,
   { userId, organizationId }: { userId: string; organizationId: string }
 ) => {
   const upserts = validJobs.map(async (r) => {

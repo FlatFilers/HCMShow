@@ -1,48 +1,46 @@
 import { EmployeeType, Prisma } from "@prisma/client";
 import { upsertEmployee, validEmployeeRecords } from "./employee";
-import { getAccessToken, getRecordsByName } from "./flatfile-legacy";
 import { prismaClient } from "./prisma-client";
 import { SpaceType } from "./space";
 import { DateTime } from "luxon";
 import { createAction, ActionType } from "./action";
 import { validJobRecords, upsertJobRecords } from "./job";
-import {
-  upsertBenefitPlan,
-  upsertBenefitPlanRecords,
-  validBenefitPlanRecords,
-} from "./benefit-plan";
-import {
-  upsertEmployeeBenefitPlanRecords,
-  validEmployeeBenefitPlanRecords,
-} from "./employee-benefit-plan";
+import { upsertBenefitPlan, upsertBenefitPlanRecords } from "./benefit-plan";
+import { upsertEmployeeBenefitPlanRecords } from "./employee-benefit-plan";
+import { WorkflowType, getRecordsByName } from "./flatfile";
 
 export const syncWorkbookRecords = async ({
+  workflow,
   userId,
   organizationId,
   spaceType,
 }: {
+  workflow: WorkflowType;
   userId: string;
   organizationId: string;
   spaceType: SpaceType;
 }) => {
-  const accessToken = await getAccessToken();
-
   const employeeRecords = await getRecordsByName({
+    workflow,
     userId,
-    accessToken,
     workbookName: process.env.ONBOARDING_WORKBOOK_NAME as string,
     sheetName: "Employees",
     spaceType,
   });
   const jobRecords = await getRecordsByName({
+    workflow,
     userId,
-    accessToken,
     workbookName: process.env.ONBOARDING_WORKBOOK_NAME as string,
     sheetName: "Jobs",
     spaceType,
   });
 
-  const totalRecords = employeeRecords.length + jobRecords.length;
+  const numEmployeeRecords = employeeRecords?.length
+    ? employeeRecords.length
+    : 0;
+  const numJobRecords = jobRecords?.length ? jobRecords.length : 0;
+
+  const totalRecords = numEmployeeRecords + numJobRecords;
 
   if (totalRecords === 0) {
     return {
@@ -51,129 +49,127 @@ export const syncWorkbookRecords = async ({
     };
   }
 
-  const validJobs = await validJobRecords(jobRecords);
+  console.log("Valid job records to sync", numJobRecords);
 
-  console.log("Valid job records to sync", validJobs.length);
-
-  const upsertJobs = await upsertJobRecords(validJobs, {
-    userId,
-    organizationId,
-  });
-
-  const validEmployees = await validEmployeeRecords(employeeRecords);
-
-  console.log("Valid records to sync", validEmployees.length);
+  if (jobRecords) {
+    const upsertJobs = await upsertJobRecords(jobRecords, {
+      userId,
+      organizationId,
+    });
+  }
 
   // TODO: Refactor employee logic to its lib file
-  const validsManagersFirst = validEmployees.sort((a, b) => {
+  const validsManagersFirst = employeeRecords?.sort((a, b) => {
     return a.values.managerId.value ? 1 : -1;
   });
 
-  const upsertEmployees = validsManagersFirst.map(async (r) => {
-    try {
-      const values = r.values;
-      const employeeTypeId = (
-        (await prismaClient.employeeType.findUnique({
-          where: { slug: values.employeeType.value as string },
-        })) as EmployeeType
-      ).id;
+  if (validsManagersFirst) {
+    const upsertEmployees = validsManagersFirst?.map(async (r) => {
+      try {
+        const values = r.values;
+        const employeeTypeId = (
+          (await prismaClient.employeeType.findUnique({
+            where: { slug: values.employeeType.value as string },
+          })) as EmployeeType
+        ).id;
 
-      let recordJobCode = () => {
-        if (values.jobCode && values.jobCode.value) {
-          return values.jobCode.value as string;
-        } else {
-          let jobName = values.jobName.value as string;
+        let recordJobCode = () => {
+          if (values.jobCode && values.jobCode.value) {
+            return values.jobCode.value as string;
+          } else {
+            let jobName = values.jobName.value as string;
 
-          return jobName.replaceAll(" ", "_");
-        }
-      };
+            return jobName.replaceAll(" ", "_");
+          }
+        };
 
-      let job = await prismaClient.job.upsert({
-        where: {
-          organizationId_slug: {
-            organizationId,
-            slug: recordJobCode(),
-          },
-        },
-        create: {
-          slug: recordJobCode(),
-          name: values.jobName.value as string,
-          department: "Test Department",
-          effectiveDate: DateTime.now().toJSDate(),
-          isInactive: false,
-          organization: {
-            connect: {
-              id: organizationId,
+        let job = await prismaClient.job.upsert({
+          where: {
+            organizationId_slug: {
+              organizationId,
+              slug: recordJobCode(),
             },
           },
-        },
-        update: {},
-      });
-
-      const jobId = job.id;
-
-      let data: Parameters<typeof upsertEmployee>[0] = {
-        organizationId,
-        employeeId: r.values.employeeId.value as string,
-        firstName: r.values.firstName.value as string,
-        lastName: r.values.lastName.value as string,
-        hireDate: DateTime.fromFormat(
-          r.values.hireDate.value as string,
-          "yyyy-MM-dd"
-        ).toJSDate(),
-        endEmploymentDate: r.values.endEmploymentDate.value
-          ? DateTime.fromFormat(
-              r.values.endEmploymentDate.value as string,
-              "yyyy-MM-dd"
-            ).toJSDate()
-          : null,
-        positionTitle: r.values.positionTitle.value as string,
-        employeeTypeId,
-        defaultWeeklyHours: r.values.defaultWeeklyHours.value as number,
-        scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
-        flatfileRecordId: r.id,
-        jobId: jobId,
-      };
-
-      if (
-        r.values.managerId.value &&
-        (r.values.managerId.value as string).length > 0
-      ) {
-        try {
-          // Does the manager record already exist?
-          let manager = await prismaClient.employee.findUnique({
-            where: {
-              organizationId_employeeId: {
-                organizationId,
-                employeeId: r.values.managerId.value as string,
+          create: {
+            slug: recordJobCode(),
+            name: values.jobName.value as string,
+            department: "Test Department",
+            effectiveDate: DateTime.now().toJSDate(),
+            isInactive: false,
+            organization: {
+              connect: {
+                id: organizationId,
               },
             },
-          });
+          },
+          update: {},
+        });
 
-          if (manager) {
-            data = { ...data, managerId: manager.id };
+        const jobId = job.id;
+
+        let data: Parameters<typeof upsertEmployee>[0] = {
+          organizationId,
+          employeeId: r.values.employeeId.value as string,
+          firstName: r.values.firstName.value as string,
+          lastName: r.values.lastName.value as string,
+          hireDate: DateTime.fromFormat(
+            r.values.hireDate.value as string,
+            "yyyy-MM-dd"
+          ).toJSDate(),
+          endEmploymentDate: r.values.endEmploymentDate.value
+            ? DateTime.fromFormat(
+                r.values.endEmploymentDate.value as string,
+                "yyyy-MM-dd"
+              ).toJSDate()
+            : null,
+          positionTitle: r.values.positionTitle.value as string,
+          employeeTypeId,
+          defaultWeeklyHours: r.values.defaultWeeklyHours.value as number,
+          scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
+          flatfileRecordId: r.id,
+          jobId: jobId,
+        };
+
+        if (
+          r.values.managerId.value &&
+          (r.values.managerId.value as string).length > 0
+        ) {
+          try {
+            // Does the manager record already exist?
+            let manager = await prismaClient.employee.findUnique({
+              where: {
+                organizationId_employeeId: {
+                  organizationId,
+                  employeeId: r.values.managerId.value as string,
+                },
+              },
+            });
+
+            if (manager) {
+              data = { ...data, managerId: manager.id };
+            }
+          } catch (error) {
+            console.error(
+              "Error - managerId not found:",
+              r.values.managerId.value
+            );
           }
-        } catch (error) {
-          console.error(
-            "Error - managerId not found:",
-            r.values.managerId.value
-          );
         }
+
+        await upsertEmployee(data);
+      } catch (error) {
+        // throw error;
+        console.error(
+          `Error: syncing employee record for user ${userId}, record ${r.id}`,
+          error
+        );
       }
+    });
 
-      await upsertEmployee(data);
-    } catch (error) {
-      // throw error;
-      console.error(
-        `Error: syncing employee record for user ${userId}, record ${r.id}`,
-        error
-      );
-    }
-  });
+    await Promise.all(upsertEmployees);
+  }
 
-  await Promise.all(upsertEmployees);
-
-  const message = `Found ${totalRecords} total records. Synced ${validEmployees.length} Employee records.  Synced ${validJobs.length} Job records.`;
+  const message = `Found ${totalRecords} total records. Synced ${numEmployeeRecords} Employee records.  Synced ${numJobRecords} Job records.`;
 
   await createAction({
     userId,
@@ -190,25 +186,25 @@ export const syncWorkbookRecords = async ({
 };
 
 export const syncBenefitPlanRecords = async ({
+  workflow,
   userId,
   organizationId,
   spaceType,
 }: {
+  workflow: WorkflowType;
   userId: string;
   organizationId: string;
   spaceType: SpaceType;
 }) => {
-  const accessToken = await getAccessToken();
-
   const employeeBenefitRecords = await getRecordsByName({
+    workflow,
     userId,
-    accessToken,
     workbookName: process.env.EMBEDDED_WORKBOOK_NAME as string,
     sheetName: "Benefit Elections",
     spaceType,
   });
 
-  const totalRecords = employeeBenefitRecords.length;
+  const totalRecords = employeeBenefitRecords?.length;
 
   if (totalRecords === 0) {
     await createAction({
@@ -224,18 +220,22 @@ export const syncBenefitPlanRecords = async ({
     return;
   }
 
-  const validPlans = await validEmployeeBenefitPlanRecords(
-    employeeBenefitRecords
-  );
+  const numEmployeeBenefitRecords = employeeBenefitRecords?.length
+    ? employeeBenefitRecords.length
+    : 0;
 
-  console.log("Valid records to sync", validPlans.length);
-
+  if (!employeeBenefitRecords) {
+    return {
+      success: false,
+      message: "There are no employee benefit records to sync.",
+    };
+  }
   const count = await upsertEmployeeBenefitPlanRecords(employeeBenefitRecords, {
     userId,
     organizationId,
   });
 
-  const message = `Synced ${count}/${validPlans.length} employee benefit plans.`;
+  const message = `Synced ${count}/${numEmployeeBenefitRecords} employee benefit plans.`;
 
   await createAction({
     userId,

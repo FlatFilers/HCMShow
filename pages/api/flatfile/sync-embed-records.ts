@@ -5,6 +5,7 @@ import { syncWorkbookRecords } from "../../../lib/sync-records";
 import { SpaceType } from "../../../lib/space";
 import { useRouter } from "next/router";
 import { workflowItems } from "../../../components/sidebar-layout";
+import { WorkflowType } from "../../../lib/flatfile";
 
 type Data = {
   message?: string;
@@ -24,6 +25,7 @@ export default async function handler(
   }
 
   const { success, message } = await syncWorkbookRecords({
+    workflow: WorkflowType.Embedded,
     userId: token.sub,
     organizationId: token.organizationId,
     spaceType: SpaceType.Embed,
