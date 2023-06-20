@@ -48,7 +48,11 @@ const SetupSpace = ({
         Click the button below and we'll configure the upload space and invite
         you to it. 👇
       </p>
-      <form action={actionHref} onSubmit={() => handleSubmit} className="mb-8">
+      <form
+        action={actionHref}
+        onSubmit={() => handleSubmit()}
+        className="mb-8"
+      >
         <button
           onClick={() => toast.loading("Setting up Flatfile")}
           disabled={isSubmitting}
