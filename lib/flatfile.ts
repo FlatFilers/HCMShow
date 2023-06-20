@@ -283,15 +283,21 @@ export const getRecordsByName = async ({
 
   console.log("space", space);
 
-  const { sheetId } = await getWorkbookIdAndSheetIds({
+  const workbookIdAndSheetIds = await getWorkbookIdAndSheetIds({
     workflow,
     flatfileSpaceId: (space.flatfileData as unknown as FlatfileSpaceData).id,
     workbookName,
     sheetName,
   });
 
-  // console.log("w, s", workbookId, sheetIds);
+  const sheetId = workbookIdAndSheetIds?.sheetId;
 
+  if (!sheetId) {
+    console.log("no sheetId found. Unable to getRecords");
+    return null;
+  }
+
+  // console.log("w, s", workbookId, sheetIds);
   const records = await getRecords({ workflow, sheetId });
 
   return records;
@@ -307,30 +313,29 @@ const getWorkbookIdAndSheetIds = async ({
   flatfileSpaceId: string;
   workbookName: string;
   sheetName: string;
-}): Promise<{ workbookId: string; sheetId: string }> => {
-  const response = await listWorkbooks({
-    workflow,
-    spaceId: flatfileSpaceId,
-  });
+}) => {
+  try {
+    const response = await listWorkbooks({
+      workflow,
+      spaceId: flatfileSpaceId,
+    });
 
-  console.log("getWorkbooks response", response);
+    console.log("getWorkbooks response", response);
 
-  const workbookObj = response?.data.find((workbookObj: Workbook) => {
-    return workbookObj.name === workbookName;
-  });
+    const workbookObj = response?.data.find((workbookObj: Workbook) => {
+      return workbookObj.name === workbookName;
+    });
 
-  if (!workbookObj) {
-    throw "Could not find workbook";
+    const sheets = workbookObj?.sheets?.find((s) => s.name === sheetName);
+
+    return {
+      workbookId: workbookObj?.id,
+      sheetId: sheets?.id,
+    };
+  } catch (error) {
+    console.error(
+      `Error: getting workbookId and sheetIds for workbook ${workbookName} and sheet ${sheetName}`,
+      error
+    );
   }
-
-  const sheets = workbookObj.sheets?.find((s) => s.name === sheetName);
-
-  if (!sheets) {
-    throw "Could not find sheets";
-  }
-
-  return {
-    workbookId: workbookObj?.id,
-    sheetId: sheets.id,
-  };
 };
