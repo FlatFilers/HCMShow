@@ -128,7 +128,7 @@ export const Events = ({ urlToSpace, initialEvents }: Props) => {
 
       <FeaturesList
         type="file-feed"
-        githubUrl="https://github.com/FlatFilers/hcm-show-config/tree/main/src/workflows/filefeed-workflow"
+        githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/workflows/filefeed/index.ts"
         features={features}
       />
     </div>

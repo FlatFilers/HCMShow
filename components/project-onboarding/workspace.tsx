@@ -106,7 +106,7 @@ const Workspace = ({
 
         <FeaturesList
           type="project-onboarding"
-          githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/src/workflows/project-workflow/index.ts"
+          githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/workflows/project/index.ts"
           features={features}
         />
       </div>
