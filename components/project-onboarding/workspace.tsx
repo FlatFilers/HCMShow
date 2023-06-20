@@ -76,7 +76,7 @@ const Workspace = ({
             <form
               action="/api/flatfile/sync-records"
               method="post"
-              onSubmit={() => handleSubmit}
+              onSubmit={() => handleSubmit()}
             >
               <button
                 onClick={() => toast.loading("Syncing...")}
