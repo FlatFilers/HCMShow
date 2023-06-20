@@ -492,7 +492,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 
           <FeaturesList
             type="dynamic-portal"
-            githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/src/workflows/dynamic-templates/index.ts"
+            githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/workflows/dynamic/index.ts"
             features={features}
           />
           {/* TODO: Add spinner while embed is loading */}

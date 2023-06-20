@@ -84,7 +84,7 @@ const Workspace = ({ fileName, onClick, showSpace }: Props) => {
 
         <FeaturesList
           type="embedded-portal"
-          githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/src/workflows/embedded-workflow/index.ts"
+          githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/workflows/embedded/index.ts"
           features={features}
         />
       </div>
