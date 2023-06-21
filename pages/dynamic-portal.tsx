@@ -523,21 +523,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   const prisma = prismaClient;
-  const environmentToken = process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID;
-  const userId = token.sub;
 
+  const environmentToken = process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID;
   if (!environmentToken) {
     console.error("Missing DYNAMIC_TEMPLATES_ENVIRONMENT_ID env var");
     throw "Missing DYNAMIC_TEMPLATES_ENVIRONMENT_ID env var";
   }
-  const space = await createSpace({
-    workflow: WorkflowType.Dynamic,
-    userId,
-    environmentId: environmentToken,
-    spaceName: "HCM.show Dynamic",
-  });
 
-  console.log("space", space);
+  const userId = token.sub;
 
   let existingSpace = await prisma.space.findUnique({
     where: {
@@ -551,9 +544,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  console.log("existingSpace", existingSpace);
+  // console.log("existingSpace", existingSpace);
 
   if (!existingSpace) {
+    const space = await createSpace({
+      workflow: WorkflowType.Dynamic,
+      userId,
+      environmentId: environmentToken,
+      spaceName: "HCM.show Dynamic",
+    });
+
+    if (!space) {
+      throw new Error("Failed to create dynamic space");
+    }
+
     existingSpace = await prisma.space.create({
       data: {
         userId,
@@ -566,43 +570,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     });
   }
 
-  const lastSync = await prisma.action.findFirst({
-    where: {
-      organizationId: token.organizationId,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
-  if (!space) {
-    console.log("No space");
-    return {
-      props: {
-        environmentToken,
-        lastSyncedAt: lastSync
-          ? DateTime.fromJSDate(lastSync.createdAt).toFormat(
-              "MM/dd/yy hh:mm:ss a"
-            )
-          : "",
-        existingSpace,
-        userId: token.sub,
-      },
-    };
-  }
-
   let spaceData = await getSpace({
     workflow: WorkflowType.Dynamic,
     spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
   });
 
-  console.log("spaceData", spaceData);
+  // console.log("spaceData", spaceData);
 
   let workbook = await getWorkbook({
     workflow: WorkflowType.Dynamic,
     workbookId: spaceData?.primaryWorkbookId!,
   });
 
+  // Hack to wait for workbook to be ready. Should move to frontend and poll.
+  // Duplicated among embed and dynamic flows
   const timeInFive = DateTime.now().plus({ seconds: 5 });
 
   while (!(workbook || DateTime.now() > timeInFive)) {
@@ -618,7 +599,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   if (!workbook) {
-    console.log("Unable to get workbook");
+    // console.log("Unable to get workbook");
     return {
       redirect: {
         destination: "/activity-log?flash=error&message=Unable to get workbook",
@@ -639,9 +620,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     actions: workbook.actions,
   };
 
-  console.log("workbook", JSON.stringify(workbook, null, 2));
-
-  console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
+  // console.log("workbook", JSON.stringify(workbook, null, 2));
+  // console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
 
   const dbFullCustomField = await prisma.customField.findFirst({
     where: {

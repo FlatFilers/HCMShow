@@ -37,11 +37,19 @@ export const findSpace = async ({
 };
 
 // TODO: This is a hack for /api/v1/sync-space
-export const findSpaceForEmbed = async ({ userId }: { userId: string }) => {
-  return await prismaClient.space.findFirst({
+export const findSpaceForType = async ({
+  userId,
+  type,
+}: {
+  userId: string;
+  type: SpaceType;
+}) => {
+  return await prismaClient.space.findUnique({
     where: {
-      userId,
-      type: SpaceType.Embed,
+      userId_type: {
+        userId,
+        type: SpaceType.Dynamic,
+      },
     },
   });
 };
