@@ -36,7 +36,6 @@ export const findSpace = async ({
   return spaces[0];
 };
 
-// TODO: This is a hack for /api/v1/sync-space
 export const findSpaceForType = async ({
   userId,
   type,
