@@ -13,8 +13,15 @@ export enum ActionState {
   Error = "error",
 }
 
+export enum FileFeedEventType {
+  RecordsCreated = "records:created",
+  RecordsUpdated = "records:updated",
+  RecordsDeleted = "records:deleted",
+}
+
 export type FileFeedEvent = {
-  topic: string;
+  topic: FileFeedEventType;
+  description: string;
   when: string;
 };
 
@@ -79,7 +86,21 @@ export const fileFeedEventFromAction = (
       : DateTime.fromJSDate(action.createdAt);
 
   return {
-    topic: metadata.topic,
+    topic: metadata.topic as FileFeedEventType,
+    description: descriptionForEventType(metadata.topic),
     when: date.toFormat("MM/dd/yyyy hh:mm:ssa"),
   };
+};
+
+const descriptionForEventType = (eventType: string) => {
+  switch (eventType) {
+    case FileFeedEventType.RecordsCreated:
+      return "New records were created in Flatfile.";
+    case FileFeedEventType.RecordsUpdated:
+      return "Records were updated in Flatfile.";
+    case FileFeedEventType.RecordsDeleted:
+      return "Records were deleted in Flatfile.";
+    default:
+      return "An unknown event occurred.";
+  }
 };
