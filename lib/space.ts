@@ -36,6 +36,16 @@ export const findSpace = async ({
   return spaces[0];
 };
 
+// TODO: This is a hack for /api/v1/sync-space
+export const findSpaceForEmbed = async ({ userId }: { userId: string }) => {
+  return await prismaClient.space.findFirst({
+    where: {
+      userId,
+      type: SpaceType.Embed,
+    },
+  });
+};
+
 export const getSpaceForFlatfileSpaceId = async (
   flatfileSpaceId: string
 ): Promise<Space> => {

@@ -4,7 +4,7 @@ import {
   syncBenefitPlanRecords,
   syncWorkbookRecords,
 } from "../../../lib/sync-records";
-import { SpaceType, findSpace } from "../../../lib/space";
+import { SpaceType, findSpace, findSpaceForEmbed } from "../../../lib/space";
 import { WorkflowType } from "../../../lib/flatfile";
 
 export default async function handler(
@@ -13,7 +13,7 @@ export default async function handler(
 ) {
   console.log("/sync-space", req.body);
 
-  const { userId, spaceId } = req.body;
+  const { userId, spaceId, workflowType } = req.body;
 
   const user = await prismaClient.user.findUnique({
     where: {
@@ -25,8 +25,20 @@ export default async function handler(
     throw new Error("No user found for userId", userId);
   }
 
-  // TODO: This and the sync code does redunandant user/space look up work
-  const space = await findSpace({ userId, flatfileSpaceId: spaceId });
+  let space;
+
+  // TODO: React package can't re-use a space, so the spaceId we get here is different every time.
+  // So we have to look up the space in a hacky way.
+  if (workflowType && workflowType === "embed") {
+    space = await findSpaceForEmbed({ userId });
+
+    if (!space) {
+      throw new Error("No embed space found for userId", userId);
+    }
+  } else {
+    // TODO: This and the sync code does redunandant user/space look up work
+    space = await findSpace({ userId, flatfileSpaceId: spaceId });
+  }
 
   // Not awaiting for early response back to Flatfile server
   if (space.type === SpaceType.WorkbookUpload) {
