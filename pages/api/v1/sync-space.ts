@@ -39,7 +39,7 @@ export default async function handler(
     space = await findSpaceForType({ userId, type: SpaceType.Dynamic });
 
     if (!space) {
-      throw new Error("No embed space found for userId", userId);
+      throw new Error("No dynamic space found for userId", userId);
     }
   } else {
     // TODO: This and the sync code does redunandant user/space look up work
