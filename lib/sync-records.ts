@@ -47,7 +47,7 @@ export const syncWorkbookRecords = async ({
     };
   }
 
-  console.log("Valid job records to sync", numJobRecords);
+  // console.log("Valid job records to sync", numJobRecords);
 
   if (jobRecords) {
     const upsertJobs = await upsertJobRecords(jobRecords, {
@@ -61,111 +61,109 @@ export const syncWorkbookRecords = async ({
     return a.values.managerId.value ? 1 : -1;
   });
 
-  if (!validsManagersFirst) {
-    console.log("no employee records to upsert");
-  } else {
-    const upsertEmployees = validsManagersFirst.map(async (r) => {
-      try {
-        const values = r.values;
-        const employeeTypeId = (
-          (await prismaClient.employeeType.findUnique({
-            where: { slug: values.employeeType.value as string },
-          })) as EmployeeType
-        ).id;
+  const upsertEmployees = validsManagersFirst?.map(async (r) => {
+    try {
+      const values = r.values;
+      const employeeTypeId = (
+        (await prismaClient.employeeType.findUnique({
+          where: { slug: values.employeeType.value as string },
+        })) as EmployeeType
+      ).id;
 
-        let recordJobCode = () => {
-          if (values.jobCode && values.jobCode.value) {
-            return values.jobCode.value as string;
-          } else {
-            let jobName = values.jobName.value as string;
+      let recordJobCode = () => {
+        if (values.jobCode && values.jobCode.value) {
+          return values.jobCode.value as string;
+        } else {
+          let jobName = values.jobName.value as string;
 
-            return jobName.replaceAll(" ", "_");
-          }
-        };
-
-        let job = await prismaClient.job.upsert({
-          where: {
-            organizationId_slug: {
-              organizationId,
-              slug: recordJobCode(),
-            },
-          },
-          create: {
-            slug: recordJobCode(),
-            name: values.jobName.value as string,
-            department: "Test Department",
-            effectiveDate: DateTime.now().toJSDate(),
-            isInactive: false,
-            organization: {
-              connect: {
-                id: organizationId,
-              },
-            },
-          },
-          update: {},
-        });
-
-        const jobId = job.id;
-
-        let data: Parameters<typeof upsertEmployee>[0] = {
-          organizationId,
-          employeeId: r.values.employeeId.value as string,
-          firstName: r.values.firstName.value as string,
-          lastName: r.values.lastName.value as string,
-          hireDate: DateTime.fromFormat(
-            r.values.hireDate.value as string,
-            "yyyy-MM-dd"
-          ).toJSDate(),
-          endEmploymentDate: r.values.endEmploymentDate.value
-            ? DateTime.fromFormat(
-                r.values.endEmploymentDate.value as string,
-                "yyyy-MM-dd"
-              ).toJSDate()
-            : null,
-          positionTitle: r.values.positionTitle.value as string,
-          employeeTypeId,
-          defaultWeeklyHours: r.values.defaultWeeklyHours.value as number,
-          scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
-          flatfileRecordId: r.id,
-          jobId: jobId,
-        };
-
-        if (
-          r.values.managerId.value &&
-          (r.values.managerId.value as string).length > 0
-        ) {
-          try {
-            // Does the manager record already exist?
-            let manager = await prismaClient.employee.findUnique({
-              where: {
-                organizationId_employeeId: {
-                  organizationId,
-                  employeeId: r.values.managerId.value as string,
-                },
-              },
-            });
-
-            if (manager) {
-              data = { ...data, managerId: manager.id };
-            }
-          } catch (error) {
-            console.error(
-              "Error - managerId not found:",
-              r.values.managerId.value
-            );
-          }
+          return jobName.replaceAll(" ", "_");
         }
+      };
 
-        await upsertEmployee(data);
-      } catch (error) {
-        // throw error;
-        console.error(
-          `Error: syncing employee record for user ${userId}, record ${r.id}`,
-          error
-        );
+      let job = await prismaClient.job.upsert({
+        where: {
+          organizationId_slug: {
+            organizationId,
+            slug: recordJobCode(),
+          },
+        },
+        create: {
+          slug: recordJobCode(),
+          name: values.jobName.value as string,
+          department: "Test Department",
+          effectiveDate: DateTime.now().toJSDate(),
+          isInactive: false,
+          organization: {
+            connect: {
+              id: organizationId,
+            },
+          },
+        },
+        update: {},
+      });
+
+      const jobId = job.id;
+
+      let data: Parameters<typeof upsertEmployee>[0] = {
+        organizationId,
+        employeeId: r.values.employeeId.value as string,
+        firstName: r.values.firstName.value as string,
+        lastName: r.values.lastName.value as string,
+        hireDate: DateTime.fromFormat(
+          r.values.hireDate.value as string,
+          "yyyy-MM-dd"
+        ).toJSDate(),
+        endEmploymentDate: r.values.endEmploymentDate.value
+          ? DateTime.fromFormat(
+              r.values.endEmploymentDate.value as string,
+              "yyyy-MM-dd"
+            ).toJSDate()
+          : null,
+        positionTitle: r.values.positionTitle.value as string,
+        employeeTypeId,
+        defaultWeeklyHours: r.values.defaultWeeklyHours.value as number,
+        scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
+        flatfileRecordId: r.id,
+        jobId: jobId,
+      };
+
+      if (
+        r.values.managerId.value &&
+        (r.values.managerId.value as string).length > 0
+      ) {
+        try {
+          // Does the manager record already exist?
+          let manager = await prismaClient.employee.findUnique({
+            where: {
+              organizationId_employeeId: {
+                organizationId,
+                employeeId: r.values.managerId.value as string,
+              },
+            },
+          });
+
+          if (manager) {
+            data = { ...data, managerId: manager.id };
+          }
+        } catch (error) {
+          console.error(
+            "Error - managerId not found:",
+            r.values.managerId.value
+          );
+        }
       }
-    });
 
+      await upsertEmployee(data);
+    } catch (error) {
+      // throw error;
+      console.error(
+        `Error: syncing employee record for user ${userId}, record ${r.id}`,
+        error
+      );
+    }
+  });
+
+  if (upsertEmployees) {
     await Promise.all(upsertEmployees);
   }
 
