@@ -3,25 +3,7 @@ import { Record } from "./flatfile-legacy";
 import { prismaClient } from "./prisma-client";
 import { DateTime } from "luxon";
 import { upsertBenefitPlan } from "./benefit-plan";
-
-export const validEmployeeBenefitPlanRecords = async (records: Record[]) => {
-  const requiredFields = [
-    "employeeId",
-    "benefitPlan",
-    "currentlyEnrolled",
-    "employerContribution",
-  ];
-
-  console.log("requiredFields", requiredFields);
-
-  // Record is valid if every required field is valid
-  return records.filter((r) => {
-    console.log("r", r);
-    return requiredFields.every((f) => {
-      return r.values[f]?.valid;
-    });
-  });
-};
+import { RecordsWithLinks } from "@flatfile/api/api";
 
 const stringToSlug = (s: string) => {
   return s
@@ -32,10 +14,10 @@ const stringToSlug = (s: string) => {
 };
 
 export const upsertEmployeeBenefitPlanRecords = async (
-  validBenefitPlans: Record[],
+  benefitPlans: RecordsWithLinks,
   { userId, organizationId }: { userId: string; organizationId: string }
 ) => {
-  const upserts = validBenefitPlans.map(async (r) => {
+  const upserts = benefitPlans.map(async (r) => {
     try {
       // Upsert benefit plan
       const benefitPlan = await upsertBenefitPlan({
