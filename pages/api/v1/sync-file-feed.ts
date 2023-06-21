@@ -39,6 +39,8 @@ export default async function handler(
     },
   });
 
+  console.log("action", action);
+
   // Not awaiting for early response back to Flatfile server
   // TODO: Make sync work for filefeed ENV vars
   // syncWorkbookRecords({

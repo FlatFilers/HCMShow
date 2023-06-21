@@ -281,7 +281,7 @@ export const getRecordsByName = async ({
     throw new Error(`No space for user ${userId}`);
   }
 
-  console.log("space", space);
+  // console.log("space", space);
 
   const workbookIdAndSheetIds = await getWorkbookIdAndSheetIds({
     workflow,
@@ -320,7 +320,7 @@ const getWorkbookIdAndSheetIds = async ({
       spaceId: flatfileSpaceId,
     });
 
-    console.log("getWorkbooks response", response);
+    // console.log("getWorkbooks response", response);
 
     const workbookObj = response?.data.find((workbookObj: Workbook) => {
       return workbookObj.name === workbookName;
