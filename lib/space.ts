@@ -47,7 +47,7 @@ export const findSpaceForType = async ({
     where: {
       userId_type: {
         userId,
-        type: SpaceType.Dynamic,
+        type,
       },
     },
   });
