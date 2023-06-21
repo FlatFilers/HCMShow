@@ -274,7 +274,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
 
   if (!existingSpace) {
-    console.log("No space");
+    // console.log("No space");
     return {
       props: {
         environmentToken,
@@ -294,13 +294,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
   });
 
-  console.log("spaceData", spaceData);
+  // console.log("spaceData", spaceData);
 
   let workbook = await getWorkbook({
     workflow: WorkflowType.Embedded,
     workbookId: spaceData?.primaryWorkbookId!,
   });
 
+  // Hack to wait for workbook to be ready. Should move to frontend and poll.
+  // Duplicated among embed and dynamic flows
   const timeInFive = DateTime.now().plus({ seconds: 5 });
 
   while (!(workbook || DateTime.now() > timeInFive)) {
@@ -316,7 +318,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   if (!workbook) {
-    console.log("Unable to get workbook");
+    // console.log("Unable to get workbook");
     return {
       redirect: {
         destination: "/activity-log?flash=error&message=Unable to get workbook",
@@ -337,9 +339,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     actions: workbook.actions,
   };
 
-  console.log("workbook", JSON.stringify(workbook, null, 2));
-
-  console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
+  // console.log("workbook", JSON.stringify(workbook, null, 2));
+  // console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
 
   return {
     props: {

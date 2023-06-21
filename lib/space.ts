@@ -36,6 +36,23 @@ export const findSpace = async ({
   return spaces[0];
 };
 
+export const findSpaceForType = async ({
+  userId,
+  type,
+}: {
+  userId: string;
+  type: SpaceType;
+}) => {
+  return await prismaClient.space.findUnique({
+    where: {
+      userId_type: {
+        userId,
+        type: SpaceType.Dynamic,
+      },
+    },
+  });
+};
+
 export const getSpaceForFlatfileSpaceId = async (
   flatfileSpaceId: string
 ): Promise<Space> => {
