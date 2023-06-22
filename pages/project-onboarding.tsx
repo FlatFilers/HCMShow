@@ -1,9 +1,6 @@
-import { PrismaClient, Space } from "@prisma/client";
 import { GetServerSideProps } from "next";
 import { FormEvent, useState } from "react";
 import { getToken } from "next-auth/jwt";
-import { DateTime } from "luxon";
-import toast from "react-hot-toast";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { NextPageWithLayout } from "./_app";
@@ -14,21 +11,22 @@ import DownloadFile from "../components/shared/download-file";
 import SetupSpace from "../components/shared/setup-space";
 import Workspace from "../components/project-onboarding/workspace";
 import { useFlashMessages } from "../lib/hooks/usehooks";
+import { prismaClient } from "../lib/prisma-client";
+import { FlatfileSpaceData } from "../lib/flatfile-legacy";
 
 interface Props {
-  space?: Space;
-  lastSyncedAt?: string;
+  flatfileSpaceId?: string;
 }
 
 const sampleDataFileName = "/jobs_employees.xlsx";
 
-const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
+const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  let defaultText = space ? "Sync Records" : "Setup Flatfile";
+  let defaultText = flatfileSpaceId ? "Sync Records" : "Setup Flatfile";
   const [buttonText, setButtonText] = useState<string>(defaultText);
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);
-    space
+    flatfileSpaceId
       ? setButtonText("Syncing records...")
       : setButtonText("Setting up Flatfile...");
   };
@@ -57,7 +55,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
   const storageKey = "project-onboarding-has-downloaded-sample-data";
 
   useEffect(() => {
-    if (!space && localStorage.getItem(storageKey) === "true") {
+    if (!flatfileSpaceId && localStorage.getItem(storageKey) === "true") {
       setSteps([
         { ...steps[0], status: "complete" },
         { ...steps[1], status: "current" },
@@ -74,7 +72,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
         <p className="text-sm font-semibold">{projectOnboardingItem.name}</p>
       </div>
 
-      {!space && (
+      {!flatfileSpaceId && (
         <div className="flex flex-row justify-between">
           {steps[0].status === "current" && (
             <DownloadFile
@@ -107,9 +105,9 @@ const Onboarding: NextPageWithLayout<Props> = ({ space, lastSyncedAt }) => {
         </div>
       )}
 
-      {space && (
+      {flatfileSpaceId && (
         <Workspace
-          space={space}
+          flatfileSpaceId={flatfileSpaceId}
           fileName={sampleDataFileName}
           handleSubmit={handleSubmit}
           isSubmitting={isSubmitting}
@@ -134,8 +132,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const prisma = new PrismaClient();
-  const dbSpace = await prisma.space.findUnique({
+  const dbSpace = await prismaClient.space.findUnique({
     where: {
       userId_type: {
         userId: token.sub as string,
@@ -150,35 +147,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const space = {
-    ...dbSpace,
-    createdAt: DateTime.fromJSDate(dbSpace.createdAt).toFormat(
-      "MM/dd/yy hh:mm:ss a"
-    ),
-    updatedAt: DateTime.fromJSDate(dbSpace.updatedAt).toFormat(
-      "MM/dd/yy hh:mm:ss a"
-    ),
-  };
-
-  const lastSyncAction = await prisma.action.findFirst({
-    where: {
-      organizationId: token.organizationId,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
-  let lastSyncedAt = null;
-
-  if (lastSyncAction) {
-    lastSyncedAt = DateTime.fromJSDate(lastSyncAction.createdAt).toFormat(
-      "MM/dd/yy hh:mm:ss a"
-    );
-  }
-
   return {
-    props: { space, lastSyncedAt },
+    props: {
+      flatfileSpaceId: (dbSpace.flatfileData as unknown as FlatfileSpaceData)
+        .id,
+    },
   };
 };
 

@@ -10,6 +10,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { FileFeedEvent, fileFeedEventFromAction } from "../../lib/action";
 import FeaturesList from "../shared/features-list";
+import GoToSpace from "../shared/go-to-space";
+import { SpaceType } from "../../lib/space-type";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -21,11 +23,11 @@ const features = {
 };
 
 type Props = {
-  urlToSpace: string;
+  flatfileSpaceId: string;
   initialEvents: FileFeedEvent[];
 };
 
-export const Events = ({ urlToSpace, initialEvents }: Props) => {
+export const Events = ({ flatfileSpaceId, initialEvents }: Props) => {
   const [events, setEvents] = useState<FileFeedEvent[]>(initialEvents);
 
   useEffect(() => {
@@ -68,14 +70,14 @@ export const Events = ({ urlToSpace, initialEvents }: Props) => {
             here.
           </a>
         </p>
-        <a
-          target="_blank"
-          href={urlToSpace}
-          className="inline-flex flex-row items-center justify-between mb-8 rounded-md border text-file-feed border-file-feed px-4 py-2 text-sm font-semibold hover:bg-file-feed hover:text-white"
-        >
-          Visit Flatfile Space
-          <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
-        </a>
+
+        <GoToSpace workflow="filefeed" flatfileSpaceId={flatfileSpaceId}>
+          <button className="inline-flex flex-row items-center justify-between mb-8 rounded-md border text-file-feed border-file-feed px-4 py-2 text-sm font-semibold hover:bg-file-feed hover:text-white">
+            Visit Flatfile Space
+            <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
+          </button>
+        </GoToSpace>
+
         <div className="border-1 border border-gray-100 mt-6"></div>
         <table className="min-w-full divide-y divide-gray-300">
           <thead className="bg-gray-50">
