@@ -1,30 +1,22 @@
-import { Action, PrismaClient, Space } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { GetServerSideProps, NextPage } from "next";
-import { FormEvent, useState } from "react";
 import { getToken } from "next-auth/jwt";
-import toast from "react-hot-toast";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { SetupSpace } from "../components/filefeed/setup-space";
 import { Events } from "../components/filefeed/events";
 import { SpaceType } from "../lib/space";
-import {
-  ActionType,
-  FileFeedEvent,
-  fileFeedEventFromAction,
-  getActions,
-} from "../lib/action";
+import { ActionType, FileFeedEvent, getActions } from "../lib/action";
 import { FlatfileSpaceData } from "../lib/flatfile-legacy";
 import { DateTime } from "luxon";
 import { workflowItems } from "../components/sidebar-layout";
 import { useFlashMessages } from "../lib/hooks/usehooks";
 
 interface Props {
-  urlToSpace: string;
+  flatfileSpaceId?: string;
   events: FileFeedEvent[];
 }
 
-const FileFeed: NextPage<Props> = ({ urlToSpace, events }) => {
+const FileFeed: NextPage<Props> = ({ flatfileSpaceId, events }) => {
   const router = useRouter();
 
   const fileFeedItem = workflowItems(router).find(
@@ -43,10 +35,10 @@ const FileFeed: NextPage<Props> = ({ urlToSpace, events }) => {
       </div>
 
       <div>
-        {!urlToSpace && <SetupSpace />}
+        {!flatfileSpaceId && <SetupSpace />}
 
-        {urlToSpace && (
-          <Events urlToSpace={urlToSpace} initialEvents={events} />
+        {flatfileSpaceId && (
+          <Events flatfileSpaceId={flatfileSpaceId} initialEvents={events} />
         )}
       </div>
     </div>
@@ -99,11 +91,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   });
 
-  const urlToSpace = (space.flatfileData as unknown as FlatfileSpaceData)
-    .guestLink;
+  const flatfileSpaceId = (space.flatfileData as unknown as FlatfileSpaceData)
+    .id;
 
   return {
-    props: { urlToSpace, events },
+    props: { flatfileSpaceId, events },
   };
 };
 
