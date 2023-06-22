@@ -8,8 +8,6 @@ import {
   VariableIcon,
 } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
-import { FlatfileSpaceData } from "../../lib/flatfile-legacy";
-import { Space } from "@prisma/client";
 import FeaturesList from "../shared/features-list";
 
 export interface Step {
@@ -31,7 +29,7 @@ type Props = {
   isSubmitting: boolean;
   handleSubmit: Function;
   buttonText: string;
-  space: Space;
+  flatfileSpaceId: string;
 };
 
 const Workspace = ({
@@ -39,7 +37,7 @@ const Workspace = ({
   isSubmitting,
   handleSubmit,
   buttonText,
-  space,
+  flatfileSpaceId,
 }: Props) => {
   return (
     <>
@@ -62,20 +60,32 @@ const Workspace = ({
           </p>
 
           <div className="flex flex-row items-center mb-8">
-            <a
-              target="_blank"
-              href={
-                (space.flatfileData as unknown as FlatfileSpaceData).guestLink
-              }
-              className="inline-flex flex-row items-center justify-between rounded-md border border-transparent bg-project-onboarding px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-project-onboarding focus:outline-none focus:ring-2 focus:ring-project-onboarding focus:ring-offset-2 mr-4"
+            <form
+              action={`/api/flatfile/go-to-space?flatfileSpaceId=${flatfileSpaceId}`}
+              onSubmit={async (e) => {
+                e.preventDefault();
+
+                const response = await fetch(
+                  `/api/flatfile/go-to-space?workflow=onboarding&flatfileSpaceId=${flatfileSpaceId}`
+                );
+
+                if (response.ok) {
+                  const json = await response.json();
+                  const guestLink = json.guestLink;
+                  window.open(guestLink, "_blank");
+                } else {
+                  toast.error("An error occurred opening the Flatfile Space.");
+                }
+              }}
             >
-              Visit Flatfile Space
-              <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
-            </a>
+              <button className="inline-flex flex-row items-center justify-between rounded-md border border-transparent bg-project-onboarding px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-project-onboarding focus:outline-none focus:ring-2 focus:ring-project-onboarding focus:ring-offset-2 mr-4">
+                Visit Flatfile Space
+                <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
+              </button>
+            </form>
 
             <form
               action="/api/flatfile/sync-records"
-              method="post"
               onSubmit={() => handleSubmit()}
             >
               <button
