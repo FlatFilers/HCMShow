@@ -12,7 +12,6 @@ import SetupSpace from "../components/shared/setup-space";
 import Workspace from "../components/project-onboarding/workspace";
 import { useFlashMessages } from "../lib/hooks/usehooks";
 import { prismaClient } from "../lib/prisma-client";
-import { WorkflowType, getSpace } from "../lib/flatfile";
 import { FlatfileSpaceData } from "../lib/flatfile-legacy";
 
 interface Props {

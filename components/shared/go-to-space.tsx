@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 
 type Props = {
+  // TODO: Refactor WorkflowType and pass it in here
   workflow: string;
   flatfileSpaceId: string;
   children: React.ReactNode;
