@@ -81,6 +81,8 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     publishableKey,
     environmentId: environmentToken,
     name: "Embedded Portal",
+    // IMPORTANT NOTE: If there are any changes to the theme or document set below,
+    // you must update the theme and document in the adjoining index.ts file in hcm-show-config as well
     themeConfig: theme("#4DCA94", "#32A673"),
     document: document,
     workbook: workbookConfig,
