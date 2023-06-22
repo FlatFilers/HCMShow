@@ -11,7 +11,6 @@ import {
 import { FileFeedEvent, fileFeedEventFromAction } from "../../lib/action";
 import FeaturesList from "../shared/features-list";
 import GoToSpace from "../shared/go-to-space";
-import { SpaceType } from "../../lib/space-type";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
