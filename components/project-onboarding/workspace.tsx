@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
 import FeaturesList from "../shared/features-list";
+import GoToSpace from "../shared/go-to-space";
 
 export interface Step {
   name: string;
@@ -60,29 +61,12 @@ const Workspace = ({
           </p>
 
           <div className="flex flex-row items-center mb-8">
-            <form
-              action={`/api/flatfile/go-to-space?flatfileSpaceId=${flatfileSpaceId}`}
-              onSubmit={async (e) => {
-                e.preventDefault();
-
-                const response = await fetch(
-                  `/api/flatfile/go-to-space?workflow=onboarding&flatfileSpaceId=${flatfileSpaceId}`
-                );
-
-                if (response.ok) {
-                  const json = await response.json();
-                  const guestLink = json.guestLink;
-                  window.open(guestLink, "_blank");
-                } else {
-                  toast.error("An error occurred opening the Flatfile Space.");
-                }
-              }}
-            >
+            <GoToSpace workflow="onboarding" flatfileSpaceId={flatfileSpaceId}>
               <button className="inline-flex flex-row items-center justify-between rounded-md border border-transparent bg-project-onboarding px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-project-onboarding focus:outline-none focus:ring-2 focus:ring-project-onboarding focus:ring-offset-2 mr-4">
                 Visit Flatfile Space
                 <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
               </button>
-            </form>
+            </GoToSpace>
 
             <form
               action="/api/flatfile/sync-records"
