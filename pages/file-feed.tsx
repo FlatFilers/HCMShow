@@ -77,19 +77,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // console.log("space", space);
 
-  const eventActions = await getActions(
-    token.organizationId,
-    ActionType.FileFeedEvent
-  );
-
-  const syncActions = await getActions(
-    token.organizationId,
-    ActionType.SyncFilefeedRecords
-  );
-
-  const actions = [...eventActions, ...syncActions].sort((a, b) => {
-    return a.createdAt > b.createdAt ? -1 : 1;
-  });
+  const actions = await getActions(token.organizationId, [
+    ActionType.FileFeedEvent,
+    ActionType.SyncFilefeedRecords,
+  ]);
 
   const events = actions.map((a) => {
     const metadata = a.metadata as {
@@ -97,7 +88,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
 
     return {
-      topic: metadata.topic || null,
+      topic: metadata.topic,
       when: DateTime.fromJSDate(a.createdAt).toFormat("MM/dd/yyyy hh:mm:ssa"),
     };
   });

@@ -14,7 +14,7 @@ export default async function handler(
 ) {
   console.log("/sync-space", req.body);
 
-  const { userId, spaceId, workflowType, topic } = req.body;
+  const { userId, spaceId, workflowType } = req.body;
 
   const user = await prismaClient.user.findUnique({
     where: {
@@ -55,7 +55,6 @@ export default async function handler(
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,
       actionType: ActionType.SyncOnboardingRecords,
-      topic,
     });
   } else if (space.type === SpaceType.FileFeed) {
     syncBenefitPlanRecords({
@@ -64,7 +63,6 @@ export default async function handler(
       organizationId: user.organizationId,
       spaceType: space.type,
       actionType: ActionType.SyncFilefeedRecords,
-      topic,
     });
   } else if (space.type === SpaceType.Embed) {
     syncBenefitPlanRecords({
@@ -73,7 +71,6 @@ export default async function handler(
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,
       actionType: ActionType.SyncEmbedRecords,
-      topic,
     });
   } else if (space.type === SpaceType.Dynamic) {
     syncBenefitPlanRecords({
@@ -82,7 +79,6 @@ export default async function handler(
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,
       actionType: ActionType.SyncDynamicRecords,
-      topic,
     });
   } else {
     throw new Error(

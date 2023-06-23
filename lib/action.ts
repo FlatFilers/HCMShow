@@ -32,19 +32,20 @@ export type SerializeableAction = {
   };
 };
 
-export const getActions = async (organizationId: string, type?: ActionType) => {
+export const getActions = async (
+  organizationId: string,
+  types?: ActionType[]
+) => {
   const prisma = new PrismaClient();
 
-  let whereParams: { organizationId: string; type?: ActionType } = {
-    organizationId,
-  };
+  const orTypes = types?.map((type) => {
+    return { type: type };
+  });
 
-  if (type) {
-    whereParams = {
-      ...whereParams,
-      type,
-    };
-  }
+  const whereParams = {
+    organizationId,
+    ...(orTypes && { OR: orTypes }),
+  };
 
   return await prisma.action.findMany({
     where: whereParams,

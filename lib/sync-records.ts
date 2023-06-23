@@ -15,14 +15,12 @@ export const syncWorkbookRecords = async ({
   organizationId,
   spaceType,
   actionType,
-  topic,
 }: {
   workflow: WorkflowType;
   userId: string;
   organizationId: string;
   spaceType: SpaceType;
   actionType: ActionType;
-  topic: string;
 }) => {
   const employeeRecords = await getRecordsByName({
     workflow,
@@ -178,9 +176,7 @@ export const syncWorkbookRecords = async ({
     organizationId,
     type: actionType,
     description: message,
-    metadata: {
-      topic,
-    },
+    metadata: { topic: "records:syncedToHCMShow" },
   });
 
   return {
@@ -195,14 +191,12 @@ export const syncBenefitPlanRecords = async ({
   organizationId,
   spaceType,
   actionType,
-  topic,
 }: {
   workflow: WorkflowType;
   userId: string;
   organizationId: string;
   spaceType: SpaceType;
   actionType: ActionType;
-  topic: string;
 }) => {
   const employeeBenefitRecords = await getRecordsByName({
     workflow,
@@ -221,6 +215,7 @@ export const syncBenefitPlanRecords = async ({
       type: actionType,
       description: "Synced employee benefits. No records found.",
       metadata: {
+        topic: "records:syncedToHCMShow",
         seen: false,
       },
     });
@@ -251,7 +246,7 @@ export const syncBenefitPlanRecords = async ({
     type: actionType,
     description: message,
     metadata: {
-      topic,
+      topic: "records:syncedToHCMShow",
       seen: false,
     },
   });
