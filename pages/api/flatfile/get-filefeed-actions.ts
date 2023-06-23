@@ -22,9 +22,10 @@ export default async function handler(
     throw new Error("No session");
   }
 
-  const actions = await getActions(
-    token.organizationId,
-    ActionType.FileFeedEvent
-  );
+  const actions = await getActions(token.organizationId, [
+    ActionType.FileFeedEvent,
+    ActionType.SyncFilefeedRecords,
+  ]);
+
   res.send({ actions });
 }

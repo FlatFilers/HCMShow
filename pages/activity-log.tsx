@@ -13,7 +13,10 @@ const mapActionTypeToLabel = (type: string) => {
   const mappings = {
     [ActionType.SyncRecords]: "Sync Records",
     [ActionType.FileFeedEvent]: "File Feed Event",
+    [ActionType.SyncOnboardingRecords]: "Sync Project Onboarding Records",
     [ActionType.SyncEmbedRecords]: "Sync Embedded Records",
+    [ActionType.SyncFilefeedRecords]: "Sync File Feed Records",
+    [ActionType.SyncDynamicRecords]: "Sync Dynamic Records",
   };
 
   return mappings[type as ActionType];

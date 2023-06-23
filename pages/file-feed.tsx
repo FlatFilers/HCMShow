@@ -75,10 +75,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const actions = await getActions(
-    token.organizationId,
-    ActionType.FileFeedEvent
-  );
+  // console.log("space", space);
+
+  const actions = await getActions(token.organizationId, [
+    ActionType.FileFeedEvent,
+    ActionType.SyncFilefeedRecords,
+  ]);
 
   const events = actions.map((a) => {
     const metadata = a.metadata as {

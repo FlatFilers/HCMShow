@@ -4,7 +4,10 @@ import { DateTime } from "luxon";
 export enum ActionType {
   SyncRecords = "sync-records",
   FileFeedEvent = "file-feed-event",
+  SyncOnboardingRecords = "sync-onboarding-records",
   SyncEmbedRecords = "sync-embed-records",
+  SyncFilefeedRecords = "sync-filefeed-records",
+  SyncDynamicRecords = "sync-dynamic-records",
 }
 
 export enum ActionState {
@@ -29,19 +32,16 @@ export type SerializeableAction = {
   };
 };
 
-export const getActions = async (organizationId: string, type?: ActionType) => {
+export const getActions = async (
+  organizationId: string,
+  types?: ActionType[]
+) => {
   const prisma = new PrismaClient();
 
-  let whereParams: { organizationId: string; type?: ActionType } = {
+  const whereParams = {
     organizationId,
+    ...(types && { type: { in: types } }),
   };
-
-  if (type) {
-    whereParams = {
-      ...whereParams,
-      type,
-    };
-  }
 
   return await prisma.action.findMany({
     where: whereParams,
@@ -58,6 +58,8 @@ export const createAction = async (
   data: Omit<Action, "id" | "createdAt" | "updatedAt">
 ) => {
   const prisma = new PrismaClient();
+  // console.log("createAction data", data);
+
   return await prisma.action.create({
     data: {
       ...data,

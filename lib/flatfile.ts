@@ -64,6 +64,8 @@ export const createSpace = async ({
       },
     });
 
+    // console.log("createSpace() result", result);
+
     return result.data;
   } catch (e) {
     console.log("createSpace() error", JSON.stringify(e, null, 2));

@@ -29,6 +29,8 @@ type Props = {
 export const Events = ({ flatfileSpaceId, initialEvents }: Props) => {
   const [events, setEvents] = useState<FileFeedEvent[]>(initialEvents);
 
+  // console.log("events", events);
+
   useEffect(() => {
     const timer = setInterval(() => {
       fetch("/api/flatfile/get-filefeed-actions").then((res) => {

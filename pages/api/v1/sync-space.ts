@@ -6,6 +6,7 @@ import {
 } from "../../../lib/sync-records";
 import { SpaceType, findSpace, findSpaceForType } from "../../../lib/space";
 import { WorkflowType } from "../../../lib/flatfile";
+import { ActionType } from "../../../lib/action";
 
 export default async function handler(
   req: NextApiRequest,
@@ -53,6 +54,7 @@ export default async function handler(
       userId: user.id,
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,
+      actionType: ActionType.SyncOnboardingRecords,
     });
   } else if (space.type === SpaceType.FileFeed) {
     syncBenefitPlanRecords({
@@ -60,6 +62,7 @@ export default async function handler(
       userId: user.id,
       organizationId: user.organizationId,
       spaceType: space.type,
+      actionType: ActionType.SyncFilefeedRecords,
     });
   } else if (space.type === SpaceType.Embed) {
     syncBenefitPlanRecords({
@@ -67,6 +70,7 @@ export default async function handler(
       userId: user.id,
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,
+      actionType: ActionType.SyncEmbedRecords,
     });
   } else if (space.type === SpaceType.Dynamic) {
     syncBenefitPlanRecords({
@@ -74,6 +78,7 @@ export default async function handler(
       userId: user.id,
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,
+      actionType: ActionType.SyncDynamicRecords,
     });
   } else {
     throw new Error(
