@@ -14,11 +14,15 @@ export const syncWorkbookRecords = async ({
   userId,
   organizationId,
   spaceType,
+  actionType,
+  topic,
 }: {
   workflow: WorkflowType;
   userId: string;
   organizationId: string;
   spaceType: SpaceType;
+  actionType: ActionType;
+  topic: string;
 }) => {
   const employeeRecords = await getRecordsByName({
     workflow,
@@ -172,9 +176,11 @@ export const syncWorkbookRecords = async ({
   await createAction({
     userId,
     organizationId,
-    type: ActionType.SyncRecords,
+    type: actionType,
     description: message,
-    metadata: {},
+    metadata: {
+      topic,
+    },
   });
 
   return {
@@ -188,16 +194,20 @@ export const syncBenefitPlanRecords = async ({
   userId,
   organizationId,
   spaceType,
+  actionType,
+  topic,
 }: {
   workflow: WorkflowType;
   userId: string;
   organizationId: string;
   spaceType: SpaceType;
+  actionType: ActionType;
+  topic: string;
 }) => {
   const employeeBenefitRecords = await getRecordsByName({
     workflow,
     userId,
-    workbookName: process.env.EMBEDDED_WORKBOOK_NAME as string,
+    workbookName: "Benefits Workbook",
     sheetName: "Benefit Elections",
     spaceType,
   });
@@ -208,7 +218,7 @@ export const syncBenefitPlanRecords = async ({
     await createAction({
       userId,
       organizationId,
-      type: ActionType.SyncEmbedRecords,
+      type: actionType,
       description: "Synced employee benefits. No records found.",
       metadata: {
         seen: false,
@@ -233,15 +243,20 @@ export const syncBenefitPlanRecords = async ({
 
   const message = `Synced ${count}/${numEmployeeBenefitRecords} employee benefit plans.`;
 
-  await createAction({
+  // console.log("topic", topic);
+
+  const action = await createAction({
     userId,
     organizationId,
-    type: ActionType.SyncEmbedRecords,
+    type: actionType,
     description: message,
     metadata: {
+      topic,
       seen: false,
     },
   });
+
+  // console.log("action", action);
 
   return {
     success: true,

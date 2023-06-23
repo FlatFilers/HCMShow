@@ -75,10 +75,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const actions = await getActions(
+  // console.log("space", space);
+
+  const eventActions = await getActions(
     token.organizationId,
     ActionType.FileFeedEvent
   );
+
+  const syncActions = await getActions(
+    token.organizationId,
+    ActionType.SyncFilefeedRecords
+  );
+
+  const actions = [...eventActions, ...syncActions].sort((a, b) => {
+    return a.createdAt > b.createdAt ? -1 : 1;
+  });
 
   const events = actions.map((a) => {
     const metadata = a.metadata as {
@@ -86,7 +97,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
 
     return {
-      topic: metadata.topic,
+      topic: metadata.topic || null,
       when: DateTime.fromJSDate(a.createdAt).toFormat("MM/dd/yyyy hh:mm:ssa"),
     };
   });

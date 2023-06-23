@@ -62,7 +62,10 @@ export const createSpace = async ({
       metadata: {
         userId,
       },
+      guestAuthentication: ["shared_link"],
     });
+
+    // console.log("createSpace() result", result);
 
     return result.data;
   } catch (e) {

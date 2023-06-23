@@ -22,9 +22,19 @@ export default async function handler(
     throw new Error("No session");
   }
 
-  const actions = await getActions(
+  const eventActions = await getActions(
     token.organizationId,
     ActionType.FileFeedEvent
   );
+
+  const syncActions = await getActions(
+    token.organizationId,
+    ActionType.SyncFilefeedRecords
+  );
+
+  const actions = [...eventActions, ...syncActions].sort((a, b) => {
+    return a.createdAt > b.createdAt ? -1 : 1;
+  });
+
   res.send({ actions });
 }

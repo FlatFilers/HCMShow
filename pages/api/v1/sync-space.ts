@@ -6,6 +6,7 @@ import {
 } from "../../../lib/sync-records";
 import { SpaceType, findSpace, findSpaceForType } from "../../../lib/space";
 import { WorkflowType } from "../../../lib/flatfile";
+import { ActionType } from "../../../lib/action";
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,7 +14,7 @@ export default async function handler(
 ) {
   console.log("/sync-space", req.body);
 
-  const { userId, spaceId, workflowType } = req.body;
+  const { userId, spaceId, workflowType, topic } = req.body;
 
   const user = await prismaClient.user.findUnique({
     where: {
@@ -53,6 +54,8 @@ export default async function handler(
       userId: user.id,
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,
+      actionType: ActionType.SyncOnboardingRecords,
+      topic,
     });
   } else if (space.type === SpaceType.FileFeed) {
     syncBenefitPlanRecords({
@@ -60,6 +63,8 @@ export default async function handler(
       userId: user.id,
       organizationId: user.organizationId,
       spaceType: space.type,
+      actionType: ActionType.SyncFilefeedRecords,
+      topic,
     });
   } else if (space.type === SpaceType.Embed) {
     syncBenefitPlanRecords({
@@ -67,6 +72,8 @@ export default async function handler(
       userId: user.id,
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,
+      actionType: ActionType.SyncEmbedRecords,
+      topic,
     });
   } else if (space.type === SpaceType.Dynamic) {
     syncBenefitPlanRecords({
@@ -74,6 +81,8 @@ export default async function handler(
       userId: user.id,
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,
+      actionType: ActionType.SyncDynamicRecords,
+      topic,
     });
   } else {
     throw new Error(
