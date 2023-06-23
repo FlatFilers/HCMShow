@@ -215,7 +215,7 @@ export const syncBenefitPlanRecords = async ({
       type: actionType,
       description: "Synced employee benefits. No records found.",
       metadata: {
-        topic: `sync:${workflow} records`,
+        topic: `Sync:${workflow} Records`,
         seen: false,
       },
     });
@@ -246,7 +246,7 @@ export const syncBenefitPlanRecords = async ({
     type: actionType,
     description: message,
     metadata: {
-      topic: `sync:${workflow} records`,
+      topic: `Sync:${workflow} Records`,
       seen: false,
     },
   });
