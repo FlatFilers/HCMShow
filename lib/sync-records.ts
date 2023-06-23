@@ -176,7 +176,7 @@ export const syncWorkbookRecords = async ({
     organizationId,
     type: actionType,
     description: message,
-    metadata: { topic: "records:syncedToHCMShow" },
+    metadata: { topic: `Sync:${workflow} Records` },
   });
 
   return {
@@ -215,7 +215,7 @@ export const syncBenefitPlanRecords = async ({
       type: actionType,
       description: "Synced employee benefits. No records found.",
       metadata: {
-        topic: "records:syncedToHCMShow",
+        topic: `sync:${workflow} records`,
         seen: false,
       },
     });
@@ -246,7 +246,7 @@ export const syncBenefitPlanRecords = async ({
     type: actionType,
     description: message,
     metadata: {
-      topic: "records:syncedToHCMShow",
+      topic: `sync:${workflow} records`,
       seen: false,
     },
   });

@@ -38,13 +38,9 @@ export const getActions = async (
 ) => {
   const prisma = new PrismaClient();
 
-  const orTypes = types?.map((type) => {
-    return { type: type };
-  });
-
   const whereParams = {
     organizationId,
-    ...(orTypes && { OR: orTypes }),
+    ...(types && { type: { in: types } }),
   };
 
   return await prisma.action.findMany({
