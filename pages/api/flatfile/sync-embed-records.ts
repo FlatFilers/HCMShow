@@ -1,10 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
-import {
-  syncBenefitPlanRecords,
-  syncWorkbookRecords,
-} from "../../../lib/sync-records";
+import { syncBenefitPlanRecords } from "../../../lib/sync-records";
 import { SpaceType } from "../../../lib/space";
 import { useRouter } from "next/router";
 import { workflowItems } from "../../../components/sidebar-layout";
