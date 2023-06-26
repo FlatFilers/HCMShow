@@ -1,11 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
-import { syncWorkbookRecords } from "../../../lib/sync-records";
+import { syncBenefitPlanRecords } from "../../../lib/sync-records";
 import { SpaceType } from "../../../lib/space";
 import { useRouter } from "next/router";
 import { workflowItems } from "../../../components/sidebar-layout";
 import { WorkflowType } from "../../../lib/flatfile";
+import { ActionType } from "../../../lib/action";
 
 type Data = {
   message?: string;
@@ -24,11 +25,12 @@ export default async function handler(
     throw new Error("No session");
   }
 
-  const { success, message } = await syncWorkbookRecords({
+  const { success, message } = await syncBenefitPlanRecords({
     workflow: WorkflowType.Embedded,
     userId: token.sub,
     organizationId: token.organizationId,
     spaceType: SpaceType.Embed,
+    actionType: ActionType.SyncEmbedRecords,
   });
   const flash = success ? "success" : "error";
 

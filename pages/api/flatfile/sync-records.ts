@@ -4,6 +4,7 @@ import { getToken } from "next-auth/jwt";
 import { syncWorkbookRecords } from "../../../lib/sync-records";
 import { SpaceType } from "../../../lib/space";
 import { WorkflowType } from "../../../lib/flatfile";
+import { ActionType } from "../../../lib/action";
 
 type Data = {
   message?: string;
@@ -27,6 +28,7 @@ export default async function handler(
     userId: token.sub,
     organizationId: token.organizationId,
     spaceType: SpaceType.WorkbookUpload,
+    actionType: ActionType.SyncOnboardingRecords,
   });
   const flash = success ? "success" : "error";
 

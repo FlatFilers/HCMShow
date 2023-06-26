@@ -43,6 +43,16 @@ export const syncWorkbookRecords = async ({
   const totalRecords = numEmployeeRecords + numJobRecords;
 
   if (totalRecords === 0) {
+    await createAction({
+      userId,
+      organizationId,
+      type: actionType,
+      description: "Synced project onboarding. No records found.",
+      metadata: {
+        topic: `Sync:${workflow} Records`,
+        seen: false,
+      },
+    });
     return {
       success: false,
       message: "No Records Found. Did you upload the sample data in Flatfile?",
@@ -220,7 +230,10 @@ export const syncBenefitPlanRecords = async ({
       },
     });
 
-    return;
+    return {
+      success: false,
+      message: "No Records Found. Did you upload the sample data in Flatfile?",
+    };
   }
 
   const numEmployeeBenefitRecords = employeeBenefitRecords?.length ?? 0;
