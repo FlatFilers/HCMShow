@@ -25,14 +25,14 @@ export default async function handler(
     throw new Error("No session");
   }
 
-  const response = await syncBenefitPlanRecords({
+  const { success, message } = await syncBenefitPlanRecords({
     workflow: WorkflowType.Embedded,
     userId: token.sub,
     organizationId: token.organizationId,
     spaceType: SpaceType.Embed,
     actionType: ActionType.SyncEmbedRecords,
   });
-  const flash = response?.success ? "success" : "error";
+  const flash = success ? "success" : "error";
 
   const router = useRouter();
 
@@ -40,7 +40,5 @@ export default async function handler(
     (i) => i.slug === "embedded-portal"
   )!;
 
-  res.redirect(
-    `${embeddedItem.href}?flash=${flash}&message=${response?.message}`
-  );
+  res.redirect(`${embeddedItem.href}?flash=${flash}&message=${message}`);
 }
