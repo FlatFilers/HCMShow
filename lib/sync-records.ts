@@ -117,17 +117,37 @@ export const syncWorkbookRecords = async ({
 
         const jobId = job.id;
 
+        const isDateInYMDFormat = (dateStr: string) => {
+          const regex = /^\d{4}-\d{2}-\d{2}$/;
+          return regex.test(dateStr);
+        };
+
+        const hireDate = isDateInYMDFormat(r.values.hireDate.value as string)
+          ? DateTime.fromFormat(
+              r.values.hireDate.value as string,
+              "yyyy-MM-dd"
+            ).toJSDate()
+          : DateTime.fromISO(r.values.hireDate.value as string).toJSDate();
+
+        const endEmploymentDate = (dateStr: string) => {
+          if (!dateStr) {
+            return null;
+          }
+
+          return isDateInYMDFormat(dateStr as string)
+            ? DateTime.fromFormat(dateStr as string, "yyyy-MM-dd").toJSDate()
+            : DateTime.fromISO(dateStr as string).toJSDate();
+        };
+
         let data: Parameters<typeof upsertEmployee>[0] = {
           organizationId,
           employeeId: r.values.employeeId.value as string,
           firstName: r.values.firstName.value as string,
           lastName: r.values.lastName.value as string,
-          hireDate: DateTime.fromISO(
-            r.values.hireDate.value as string
-          ).toJSDate(),
-          endEmploymentDate: r.values.endEmploymentDate.value
-            ? DateTime.fromISO(r.values.hireDate.value as string).toJSDate()
-            : null,
+          hireDate: hireDate,
+          endEmploymentDate: endEmploymentDate(
+            r.values.endEmploymentDate.value as string
+          ),
           positionTitle: r.values.positionTitle.value as string,
           employeeTypeId,
           defaultWeeklyHours: r.values.defaultWeeklyHours.value as number,
