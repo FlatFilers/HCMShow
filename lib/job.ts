@@ -2,6 +2,7 @@ import { RecordsWithLinks } from "@flatfile/api/api";
 import { Record } from "./flatfile-legacy";
 import { prismaClient } from "./prisma-client";
 import { JobFamily } from "@prisma/client";
+import { DateTime } from "luxon";
 
 // TODO: Temp solution until we get more of the fields in the config
 const jobSheetMapping = {
@@ -59,13 +60,26 @@ export const upsertJobRecords = async (
   { userId, organizationId }: { userId: string; organizationId: string }
 ) => {
   const upserts = jobs.map(async (r) => {
+    const isDateInYMDFormat = (dateStr: string) => {
+      const regex = /^\d{4}-\d{2}-\d{2}$/;
+      return regex.test(dateStr);
+    };
+
+    const effectiveDate = isDateInYMDFormat(
+      r.values.effectiveDate.value as string
+    )
+      ? DateTime.fromFormat(
+          r.values.effectiveDate.value as string,
+          "yyyy-MM-dd"
+        ).toJSDate()
+      : DateTime.fromISO(r.values.effectiveDate.value as string).toJSDate();
     try {
       let data: Parameters<typeof upsertJob>[0] = {
         organizationId: organizationId,
         slug: r.values.jobCode.value as string,
         name: r.values.jobName.value as string,
         department: r.values.jobDept.value as string,
-        effectiveDate: new Date(r.values.effectiveDate.value as string),
+        effectiveDate: effectiveDate,
         isInactive: r.values.inactive.value === "y",
       };
 
