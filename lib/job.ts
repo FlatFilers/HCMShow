@@ -58,8 +58,6 @@ export const upsertJobRecords = async (
   jobs: RecordsWithLinks,
   { userId, organizationId }: { userId: string; organizationId: string }
 ) => {
-  console.log("upsertJobRecords()", jobs);
-
   const upserts = jobs.map(async (r) => {
     try {
       let data: Parameters<typeof upsertJob>[0] = {
