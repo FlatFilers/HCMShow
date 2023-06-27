@@ -42,17 +42,25 @@ export const upsertJob = async ({
       effectiveDate,
       isInactive,
     },
-    update: {},
+    update: {
+      slug,
+      name,
+      department,
+      effectiveDate,
+      isInactive,
+    },
   });
 
   return job;
 };
 
 export const upsertJobRecords = async (
-  validJobs: RecordsWithLinks,
+  jobs: RecordsWithLinks,
   { userId, organizationId }: { userId: string; organizationId: string }
 ) => {
-  const upserts = validJobs.map(async (r) => {
+  console.log("upsertJobRecords()", jobs);
+
+  const upserts = jobs.map(async (r) => {
     try {
       let data: Parameters<typeof upsertJob>[0] = {
         organizationId: organizationId,
