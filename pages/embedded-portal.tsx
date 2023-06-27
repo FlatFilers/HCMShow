@@ -91,7 +91,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     },
     sidebarConfig: {
       showDataChecklist: false,
-      showSidebar: false,
+      showSidebar: true,
     },
   } as ISpace;
   const { component } = useSpace({ ...spaceProps });

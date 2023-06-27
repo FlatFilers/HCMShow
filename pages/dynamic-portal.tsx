@@ -265,7 +265,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     },
     sidebarConfig: {
       showDataChecklist: false,
-      showSidebar: false,
+      showSidebar: true,
     },
   } as ISpace;
 
