@@ -122,15 +122,11 @@ export const syncWorkbookRecords = async ({
           employeeId: r.values.employeeId.value as string,
           firstName: r.values.firstName.value as string,
           lastName: r.values.lastName.value as string,
-          hireDate: DateTime.fromFormat(
-            r.values.hireDate.value as string,
-            "yyyy-MM-dd"
+          hireDate: DateTime.fromISO(
+            r.values.hireDate.value as string
           ).toJSDate(),
           endEmploymentDate: r.values.endEmploymentDate.value
-            ? DateTime.fromFormat(
-                r.values.endEmploymentDate.value as string,
-                "yyyy-MM-dd"
-              ).toJSDate()
+            ? DateTime.fromISO(r.values.hireDate.value as string).toJSDate()
             : null,
           positionTitle: r.values.positionTitle.value as string,
           employeeTypeId,
