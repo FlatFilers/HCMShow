@@ -42,7 +42,14 @@ export const upsertJob = async ({
       effectiveDate,
       isInactive,
     },
-    update: {},
+    update: {
+      organizationId,
+      slug,
+      name,
+      department,
+      effectiveDate,
+      isInactive,
+    },
   });
 
   return job;

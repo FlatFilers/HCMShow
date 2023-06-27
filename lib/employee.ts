@@ -53,7 +53,21 @@ export const upsertEmployee = async ({
       flatfileRecordId,
       jobId,
     },
-    update: {},
+    update: {
+      organizationId,
+      employeeId,
+      managerId,
+      firstName,
+      lastName,
+      employeeTypeId,
+      hireDate,
+      endEmploymentDate,
+      positionTitle,
+      defaultWeeklyHours,
+      scheduledWeeklyHours,
+      flatfileRecordId,
+      jobId,
+    },
   });
 
   return employee;
