@@ -15,7 +15,6 @@ import {
   XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { OptionBuilder } from "../components/dynamic-templates/option-builder";
-import { Property } from "flatfile-api-legacy";
 import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";
 import toast from "react-hot-toast";
 import { workflowItems } from "../components/sidebar-layout";
@@ -32,10 +31,10 @@ import {
 } from "../lib/flatfile";
 import { Flatfile } from "@flatfile/api";
 import { ISpace, useSpace } from "@flatfile/react";
-import { FlatfileSpaceData } from "../lib/flatfile-legacy";
 import { prismaClient } from "../lib/prisma-client";
 import { theme } from "../lib/theme";
 import { document } from "../components/dynamic-templates/document";
+import { Property } from "@flatfile/api/api";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -574,7 +573,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   let spaceData = await getSpace({
     workflow: WorkflowType.Dynamic,
-    spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
+    spaceId: (existingSpace?.flatfileData).id,
   });
 
   // console.log("spaceData", spaceData);
@@ -591,7 +590,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   while (!(workbook || DateTime.now() > timeInFive)) {
     spaceData = await getSpace({
       workflow: WorkflowType.Dynamic,
-      spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
+      spaceId: (existingSpace?.flatfileData).id,
     });
 
     workbook = await getWorkbook({

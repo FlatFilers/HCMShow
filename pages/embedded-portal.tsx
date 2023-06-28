@@ -12,12 +12,10 @@ import {
   SparklesIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import { getAccessToken } from "../lib/flatfile-legacy";
 import { Action, PrismaClient, Space } from "@prisma/client";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
 import { SpaceType } from "../lib/space";
-import { FlatfileSpaceData } from "../lib/flatfile-legacy";
 import { useRouter } from "next/router";
 import { workflowItems } from "../components/sidebar-layout";
 import DownloadFile from "../components/shared/download-file";
@@ -293,7 +291,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   let spaceData = await getSpace({
     workflow: WorkflowType.Embedded,
-    spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
+    spaceId: (existingSpace?.flatfileData).id,
   });
 
   // console.log("spaceData", spaceData);
@@ -310,7 +308,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   while (!(workbook || DateTime.now() > timeInFive)) {
     spaceData = await getSpace({
       workflow: WorkflowType.Embedded,
-      spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
+      spaceId: (existingSpace?.flatfileData).id,
     });
 
     workbook = await getWorkbook({
