@@ -49,27 +49,6 @@ npx ts-node -O '{"module": "commonjs"}' prisma/seed.ts
 # npx prisma migrate reset --force && npx ts-node -O '{"module": "commonjs"}' prisma/seed.ts
 ```
 
-## Production configs
-
-Currently the production app is running configs in one account (john.mosesman+hcmshow@flatfile.io - credentials in 1pass), with each flow in a different environment:
-
-```
-ONBOARDING_ENVIRONMENT_ID=us_env_zxH9wUWW
-ONBOARDING_SPACE_CONFIG_ID=us_sc_rac9hkch
-ONBOARDING_WORKBOOK_NAME="HCM Workbook"
-
-FILEFEED_ENVIRONMENT_ID=us_env_V9OGQOUo
-FILEFEED_SPACE_CONFIG_ID=us_sc_RhaG8IOT
-
-EMBEDDED_ENVIRONMENT_ID=us_env_GKfWJ5c0
-EMBEDDED_SPACE_CONFIG_ID=us_sc_aGKb2DST
-EMBEDDED_WORKBOOK_NAME="Benefits Workbook"
-
-DYNAMIC_TEMPLATES_ENVIRONMENT_ID=us_env_n0cbQ7IH
-DYNAMIC_TEMPLATES_SPACE_CONFIG_ID=us_sc_MhfblItm
-DYNAMIC_TEMPLATES_WORKBOOK_NAME="Dynamic Templates Workbook"
-```
-
 ## Getting Started
 
 First, run the development server:
