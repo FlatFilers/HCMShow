@@ -12,12 +12,10 @@ import {
   SparklesIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import { getAccessToken } from "../lib/flatfile-legacy";
 import { Action, PrismaClient, Space } from "@prisma/client";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
 import { SpaceType } from "../lib/space";
-import { FlatfileSpaceData } from "../lib/flatfile-legacy";
 import { useRouter } from "next/router";
 import { workflowItems } from "../components/sidebar-layout";
 import DownloadFile from "../components/shared/download-file";
@@ -27,7 +25,12 @@ import Workspace from "../components/embedded-portal/workspace";
 import { theme } from "../lib/theme";
 import { useFlashMessages, useOnClickOutside } from "../lib/hooks/usehooks";
 import { Flatfile } from "@flatfile/api";
-import { WorkflowType, getSpace, getWorkbook } from "../lib/flatfile";
+import {
+  FlatfileSpaceData,
+  WorkflowType,
+  getSpace,
+  getWorkbook,
+} from "../lib/flatfile";
 import { document } from "../components/embedded-portal/document";
 
 interface Props {

@@ -2,7 +2,6 @@ import { FlatfileClient } from "@flatfile/api";
 import { ReadStream } from "fs";
 import { prismaClient } from "./prisma-client";
 import { SpaceType } from "./space";
-import { FlatfileSpaceData } from "./flatfile-legacy";
 import { Workbook } from "@flatfile/api/api";
 // import { ListWorkbooksRequest } from "@flatfile/api/api";
 // import { getSpaceConfig } from "./flatfile";
@@ -12,6 +11,26 @@ export enum WorkflowType {
   Embedded = "embedded",
   FileFeed = "filefeed",
   Dynamic = "dynamic",
+}
+
+export interface FlatfileSpaceData {
+  id: string;
+  workbooksCount: number;
+  filesCount: number;
+  createdByUserId: string;
+  createdByUserName: string;
+  guestLink: string;
+  spaceConfigId: string;
+  environmentId: string;
+  primaryWorkbookId: string;
+  name: string;
+  displayOrder: number;
+  sidebarConfigs: [
+    {
+      type: string;
+      workbookId: string;
+    }
+  ];
 }
 
 const flatfileClient = (workflow: WorkflowType) => {
