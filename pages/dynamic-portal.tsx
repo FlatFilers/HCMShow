@@ -35,6 +35,7 @@ import { prismaClient } from "../lib/prisma-client";
 import { theme } from "../lib/theme";
 import { document } from "../components/dynamic-templates/document";
 import { Property } from "@flatfile/api/api";
+import { FlatfileSpaceData } from "../lib/flatfile";
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -573,7 +574,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   let spaceData = await getSpace({
     workflow: WorkflowType.Dynamic,
-    spaceId: (existingSpace?.flatfileData).id,
+    spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
   });
 
   // console.log("spaceData", spaceData);
@@ -590,7 +591,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   while (!(workbook || DateTime.now() > timeInFive)) {
     spaceData = await getSpace({
       workflow: WorkflowType.Dynamic,
-      spaceId: (existingSpace?.flatfileData).id,
+      spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
     });
 
     workbook = await getWorkbook({

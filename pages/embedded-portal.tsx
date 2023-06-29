@@ -25,7 +25,12 @@ import Workspace from "../components/embedded-portal/workspace";
 import { theme } from "../lib/theme";
 import { useFlashMessages, useOnClickOutside } from "../lib/hooks/usehooks";
 import { Flatfile } from "@flatfile/api";
-import { WorkflowType, getSpace, getWorkbook } from "../lib/flatfile";
+import {
+  FlatfileSpaceData,
+  WorkflowType,
+  getSpace,
+  getWorkbook,
+} from "../lib/flatfile";
 import { document } from "../components/embedded-portal/document";
 
 interface Props {
@@ -291,7 +296,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   let spaceData = await getSpace({
     workflow: WorkflowType.Embedded,
-    spaceId: (existingSpace?.flatfileData).id,
+    spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
   });
 
   // console.log("spaceData", spaceData);
@@ -308,7 +313,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   while (!(workbook || DateTime.now() > timeInFive)) {
     spaceData = await getSpace({
       workflow: WorkflowType.Embedded,
-      spaceId: (existingSpace?.flatfileData).id,
+      spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
     });
 
     workbook = await getWorkbook({
