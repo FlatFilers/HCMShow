@@ -1,5 +1,4 @@
 import { RecordsWithLinks } from "@flatfile/api/api";
-import { Record } from "./flatfile-legacy";
 import { prismaClient } from "./prisma-client";
 import { JobFamily } from "@prisma/client";
 
