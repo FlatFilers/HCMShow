@@ -201,12 +201,14 @@ export const syncBenefitPlanRecords = async ({
   organizationId,
   spaceType,
   actionType,
+  spaceId,
 }: {
   workflow: WorkflowType;
   userId: string;
   organizationId: string;
   spaceType: SpaceType;
   actionType: ActionType;
+  spaceId?: string;
 }) => {
   const employeeBenefitRecords = await getRecordsByName({
     workflow,
@@ -214,6 +216,7 @@ export const syncBenefitPlanRecords = async ({
     workbookName: "Benefits Workbook",
     sheetName: "Benefit Elections",
     spaceType,
+    spaceId,
   });
 
   const totalRecords = employeeBenefitRecords?.length;

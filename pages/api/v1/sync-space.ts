@@ -71,6 +71,7 @@ export default async function handler(
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,
       actionType: ActionType.SyncEmbedRecords,
+      spaceId: spaceId,
     });
   } else if (space.type === SpaceType.Dynamic) {
     syncBenefitPlanRecords({
@@ -79,6 +80,7 @@ export default async function handler(
       organizationId: user.organizationId,
       spaceType: space.type as SpaceType,
       actionType: ActionType.SyncDynamicRecords,
+      spaceId: spaceId,
     });
   } else {
     throw new Error(

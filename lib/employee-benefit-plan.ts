@@ -1,5 +1,4 @@
 import { EmployeeBenefitPlan } from "@prisma/client";
-import { Record } from "./flatfile-legacy";
 import { prismaClient } from "./prisma-client";
 import { DateTime } from "luxon";
 import { upsertBenefitPlan } from "./benefit-plan";
@@ -48,7 +47,9 @@ export const upsertEmployeeBenefitPlanRecords = async (
         coverageBeginDate: DateTime.fromISO(
           r.values.coverageStartDate.value as string
         ).toJSDate(),
-        employeerContribution: r.values.employerContribution.value as number,
+        employeerContribution: parseFloat(
+          r.values.employerContribution.value as string
+        ),
         benefitCoverageType: r.values.benefitCoverageType.value as string,
       };
 
