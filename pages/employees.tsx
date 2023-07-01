@@ -180,9 +180,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       employeeId: employee.employeeId,
       firstName: employee.firstName,
       lastName: employee.lastName,
-      hireDate: DateTime.fromJSDate(employee.hireDate).toFormat("MM/dd/yyyy"),
+      hireDate: DateTime.fromJSDate(employee.hireDate, {
+        zone: "utc",
+      }).toFormat("MM-dd-yyyy"),
       endEmploymentDate: employee.endEmploymentDate
-        ? DateTime.fromJSDate(employee.endEmploymentDate).toFormat("MM/dd/yyyy")
+        ? DateTime.fromJSDate(employee.endEmploymentDate, {
+            zone: "utc",
+          }).toFormat("MM/dd/yyyy")
         : null,
       positionTitle: employee.positionTitle,
       scheduledWeeklyHours: employee.scheduledWeeklyHours,

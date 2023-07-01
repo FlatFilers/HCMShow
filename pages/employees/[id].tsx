@@ -111,9 +111,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     employeeId: dbEmployee.employeeId,
     firstName: dbEmployee.firstName,
     lastName: dbEmployee.lastName,
-    hireDate: DateTime.fromJSDate(dbEmployee.hireDate).toFormat("MM/dd/yyyy"),
+    hireDate: DateTime.fromJSDate(dbEmployee.hireDate, {
+      zone: "utc",
+    }).toFormat("MM/dd/yyyy"),
     endEmploymentDate: dbEmployee.endEmploymentDate
-      ? DateTime.fromJSDate(dbEmployee.endEmploymentDate).toFormat("MM/dd/yyyy")
+      ? DateTime.fromJSDate(dbEmployee.endEmploymentDate, {
+          zone: "utc",
+        }).toFormat("MM/dd/yyyy")
       : null,
     positionTitle: dbEmployee.positionTitle,
     scheduledWeeklyHours: dbEmployee.scheduledWeeklyHours,

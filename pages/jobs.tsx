@@ -117,9 +117,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       id: job.id,
       name: job.name,
       department: job.department,
-      effectiveDate: DateTime.fromJSDate(job.effectiveDate).toFormat(
-        "MM/dd/yyyy"
-      ),
+      effectiveDate: DateTime.fromJSDate(job.effectiveDate, {
+        zone: "utc",
+      }).toFormat("MM-dd-yyyy"),
       isInactive: job.isInactive,
     };
   });

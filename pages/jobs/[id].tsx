@@ -88,9 +88,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     id: dbJob.id,
     name: dbJob.name,
     department: dbJob.department,
-    effectiveDate: DateTime.fromJSDate(dbJob.effectiveDate).toFormat(
-      "MM/dd/yyyy"
-    ),
+    effectiveDate: DateTime.fromJSDate(dbJob.effectiveDate, {
+      zone: "utc",
+    }).toFormat("MM/dd/yyyy"),
     isInactive: dbJob.isInactive,
   };
 

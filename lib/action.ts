@@ -77,8 +77,12 @@ export const fileFeedEventFromAction = (
 
   const date =
     typeof action.createdAt === "string"
-      ? DateTime.fromISO(action.createdAt)
-      : DateTime.fromJSDate(action.createdAt);
+      ? DateTime.fromISO(action.createdAt, {
+          zone: "utc",
+        })
+      : DateTime.fromJSDate(action.createdAt, {
+          zone: "utc",
+        });
 
   return {
     topic: metadata.topic,
