@@ -80,7 +80,7 @@ export const upsertEmployeeBenefitPlan = async (
       },
     },
     create: data,
-    update: {},
+    update: data,
   });
 
   return benefitPlan;

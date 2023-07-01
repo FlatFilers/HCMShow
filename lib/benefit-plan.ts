@@ -1,4 +1,4 @@
-import { Record } from "./flatfile-legacy";
+import { RecordWithLinks } from "@flatfile/api/api";
 import { prismaClient } from "./prisma-client";
 
 const benefitPlanSheetMapping = {
@@ -27,17 +27,17 @@ export const upsertBenefitPlan = async ({
       slug,
       name,
     },
-    update: {},
+    update: { organizationId, slug, name },
   });
 
   return benefitPlan;
 };
 
 export const upsertBenefitPlanRecords = async (
-  validBenefitPlans: Record[],
+  benefitPlans: RecordWithLinks[],
   { userId, organizationId }: { userId: string; organizationId: string }
 ) => {
-  const upserts = validBenefitPlans.map(async (r) => {
+  const upserts = benefitPlans.map(async (r) => {
     try {
       let data: Parameters<typeof upsertBenefitPlan>[0] = {
         organizationId: organizationId,
