@@ -33,7 +33,7 @@ export default async function handler(
     },
   });
 
-  console.log("customField", customField);
+  // console.log("customField", customField);
 
   res.send(customField);
 }

@@ -280,33 +280,39 @@ export const getRecordsByName = async ({
   workbookName,
   sheetName,
   spaceType,
+  spaceId,
 }: {
   workflow: WorkflowType;
   userId: string;
   workbookName: string;
   sheetName: string;
   spaceType: SpaceType;
+  spaceId?: string;
 }) => {
   const prisma = prismaClient;
 
-  const space = await prisma.space.findUnique({
-    where: {
-      userId_type: {
-        userId,
-        type: spaceType,
-      },
-    },
-  });
+  let flatfileSpaceId = (spaceId ||= "");
 
-  if (!space) {
+  if (!spaceId) {
+    const space = await prisma.space.findUnique({
+      where: {
+        userId_type: {
+          userId,
+          type: spaceType,
+        },
+      },
+    });
+
+    flatfileSpaceId = (space?.flatfileData as unknown as FlatfileSpaceData).id;
+  }
+
+  if (!flatfileSpaceId) {
     throw new Error(`No space for user ${userId}`);
   }
 
-  // console.log("space", space);
-
   const workbookIdAndSheetIds = await getWorkbookIdAndSheetIds({
     workflow,
-    flatfileSpaceId: (space.flatfileData as unknown as FlatfileSpaceData).id,
+    flatfileSpaceId: flatfileSpaceId,
     workbookName,
     sheetName,
   });
@@ -340,8 +346,6 @@ const getWorkbookIdAndSheetIds = async ({
       workflow,
       spaceId: flatfileSpaceId,
     });
-
-    // console.log("getWorkbooks response", response);
 
     const workbookObj = response?.data.find((workbookObj: Workbook) => {
       return workbookObj.name === workbookName;
