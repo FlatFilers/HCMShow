@@ -6,10 +6,10 @@ import { SetupSpace } from "../components/filefeed/setup-space";
 import { Events } from "../components/filefeed/events";
 import { SpaceType } from "../lib/space";
 import { ActionType, FileFeedEvent, getActions } from "../lib/action";
-import { FlatfileSpaceData } from "../lib/flatfile-legacy";
 import { DateTime } from "luxon";
 import { workflowItems } from "../components/sidebar-layout";
 import { useFlashMessages } from "../lib/hooks/usehooks";
+import { FlatfileSpaceData } from "../lib/flatfile";
 
 interface Props {
   flatfileSpaceId?: string;

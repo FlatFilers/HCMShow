@@ -2,10 +2,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
-import { FlatfileSpaceData } from "../../../lib/flatfile-legacy";
 import { SpaceType } from "../../../lib/space";
 import { fetchFileFromDrive } from "../../../lib/google-drive";
 import {
+  FlatfileSpaceData,
   WorkflowType,
   addGuestToSpace,
   createSpace,
