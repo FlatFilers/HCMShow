@@ -10,7 +10,6 @@ import {
   VariableIcon,
 } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
-import { FlatfileSpaceData } from "../../lib/flatfile-legacy";
 import { Space } from "@prisma/client";
 import FeaturesList from "../shared/features-list";
 

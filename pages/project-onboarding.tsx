@@ -12,7 +12,7 @@ import SetupSpace from "../components/shared/setup-space";
 import Workspace from "../components/project-onboarding/workspace";
 import { useFlashMessages } from "../lib/hooks/usehooks";
 import { prismaClient } from "../lib/prisma-client";
-import { FlatfileSpaceData } from "../lib/flatfile-legacy";
+import { FlatfileSpaceData } from "../lib/flatfile";
 
 interface Props {
   flatfileSpaceId?: string;
