@@ -1,691 +1,691 @@
 Employee ID,Benefit Plan,Currently Enrolled?,Coverage Start Date,Employer Contribution,Benefit Coverage Type
-21255,Pension - Collectum Supplemental ITP1 (Employee),Yes,1/1/15,3125.69,Health_Care_Coverage_Type_Medical
-21255,Pension - Collectum ITP1 (Employee),Yes,1/1/15,1884.41,
-21306,Pension - Collectum ITP1 (Employee),Yes,1/1/15,748.8,Health_Care_Coverage_Type_Medical
-21302,Pension - Collectum ITP1 (Employee),Yes,1/1/15,764.4,Health_Care_Coverage_Type_Medical
-21077,Pension - Collectum Supplemental ITP1 (Employee),Yes,1/1/15,15624.15,Health_Care_Coverage_Type_Medical
-21077,Pension - Collectum ITP1 (Employee),Yes,1/1/15,4037.77,Health_Care_Coverage_Type_Medical
-21126,Pension - Collectum Supplemental ITP1 (Employee),Yes,1/1/15,1215.71,Health_Care_Coverage_Type_Medical
-21126,Pension - Collectum ITP1 (Employee),Yes,1/1/15,1407.21,Health_Care_Coverage_Type_Medical
-21263,Pension - Collectum ITP1 (Employee),Yes,1/1/15,1151,Health_Care_Coverage_Type_Medical
-21347,Basic Group Life - AXA UK (Employee),Yes,1/1/15,261.3,Health_Care_Coverage_Type_Medical
-21346,Basic Group Life - AXA UK (Employee),Yes,1/1/15,331.5,Health_Care_Coverage_Type_Medical
-21345,Basic Group Life - AXA UK (Employee),Yes,1/1/15,159.9,Health_Care_Coverage_Type_Medical
-21131,Basic Group Life - AXA UK (Employee),Yes,1/1/00,109.2,Health_Care_Coverage_Type_Medical
-21129,Basic Group Life - AXA UK (Employee),Yes,1/1/00,159.9,Health_Care_Coverage_Type_Medical
-21266,Basic Group Life - AXA UK (Employee),Yes,7/1/14,292.5,Health_Care_Coverage_Type_Medical
-21332,Basic Group Life - AXA UK (Employee),Yes,7/23/14,288.6,Health_Care_Coverage_Type_Medical
-21168,Basic Group Life - AXA UK (Employee),Yes,1/1/00,269.1,Health_Care_Coverage_Type_Medical
-21299,Basic Group Life - AXA UK (Employee),Yes,3/7/11,124.8,Health_Care_Coverage_Type_Medical
-21244,Basic Group Life - AXA UK (Employee),Yes,11/8/11,300.3,Health_Care_Coverage_Type_Medical
-21254,Basic Group Life - AXA UK (Employee),Yes,3/1/10,269.1,Health_Care_Coverage_Type_Medical
-21239,Basic Group Life - AXA UK (Employee),Yes,11/15/10,105.3,Health_Care_Coverage_Type_Medical
-21305,Basic Group Life - AXA UK (Employee),Yes,5/2/11,163.8,Health_Care_Coverage_Type_Medical
-21173,Basic Group Life - AXA UK (Employee),Yes,1/1/15,210.6,Health_Care_Coverage_Type_Medical
-21229,Basic Group Life - AXA UK (Employee),Yes,10/4/10,167.7,Health_Care_Coverage_Type_Medical
-21298,Basic Group Life - AXA UK (Employee),Yes,1/1/11,315.9,Health_Care_Coverage_Type_Medical
-21359,Basic Group Life - AXA UK (Employee),Yes,1/1/15,257.4,Health_Care_Coverage_Type_Medical
-21358,Basic Group Life - AXA UK (Employee),Yes,1/1/15,315.9,Health_Care_Coverage_Type_Medical
-21357,Basic Group Life - AXA UK (Employee),Yes,1/1/15,292.5,Health_Care_Coverage_Type_Medical
-21356,Basic Group Life - AXA UK (Employee),Yes,1/1/15,276.9,Health_Care_Coverage_Type_Medical
-21355,Basic Group Life - AXA UK (Employee),Yes,1/1/15,304.2,Health_Care_Coverage_Type_Medical
-21354,Basic Group Life - AXA UK (Employee),Yes,1/1/15,354.9,Health_Care_Coverage_Type_Medical
-21353,Basic Group Life - AXA UK (Employee),Yes,1/1/15,214.5,Health_Care_Coverage_Type_Medical
-21352,Basic Group Life - AXA UK (Employee),Yes,1/1/15,351,Health_Care_Coverage_Type_Medical
-21205,Basic Group Life - AXA UK (Employee),Yes,1/1/00,296.4,Health_Care_Coverage_Type_Medical
-21351,Basic Group Life - AXA UK (Employee),Yes,1/1/15,304.2,Health_Care_Coverage_Type_Medical
-21350,Basic Group Life - AXA UK (Employee),Yes,1/1/15,191.1,Health_Care_Coverage_Type_Medical
-21349,Basic Group Life - AXA UK (Employee),Yes,1/1/15,288.6,Health_Care_Coverage_Type_Medical
-21348,Basic Group Life - AXA UK (Employee),Yes,1/1/15,292.5,Health_Care_Coverage_Type_Medical
-21135,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,22.95,Health_Care_Coverage_Type_Medical
-21135,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/07,11.8,Health_Care_Coverage_Type_Medical
-21135,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
-21135,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,1.2,Health_Care_Coverage_Type_Medical
-21134,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,25.2,Health_Care_Coverage_Type_Medical
-21134,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/07,11.8,Health_Care_Coverage_Type_Medical
-21134,Short Term Disability - Standard Life  (Employee),Yes,1/1/08,7.8,Health_Care_Coverage_Type_Medical
-21134,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,0.6,Health_Care_Coverage_Type_Medical
-21134,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/10,0,Health_Care_Coverage_Type_Medical
-21133,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,23.85,Health_Care_Coverage_Type_Medical
-21133,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
-21133,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,1.8,Health_Care_Coverage_Type_Medical
-21133,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-21326,Basic Group Life - Standard Life  (Employee),Yes,6/1/12,34.2,Health_Care_Coverage_Type_Medical
-21326,Short Term Disability - Standard Life  (Employee),Yes,6/1/12,7.8,Health_Care_Coverage_Type_Medical
-21326,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-21198,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/07,11.8,Health_Care_Coverage_Type_Medical
-21198,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
-21198,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,1.8,Health_Care_Coverage_Type_Medical
-21198,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-21198,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,40.95,Health_Care_Coverage_Type_Medical
-21132,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,48.6,Health_Care_Coverage_Type_Medical
-21132,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
-21132,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
-21132,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,1.2,Health_Care_Coverage_Type_Medical
-21132,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21387,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21387,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,15.3,Health_Care_Coverage_Type_Medical
-21387,Long Term Disability - Standard Life Enhanced (Employee),Yes,1/1/15,13.5,Health_Care_Coverage_Type_Medical
-21276,Basic Group Life - Standard Life  (Employee),Yes,1/9/12,13.05,Health_Care_Coverage_Type_Medical
-21276,Short Term Disability - Standard Life  (Employee),Yes,1/9/12,7.8,Health_Care_Coverage_Type_Medical
-21275,Basic Group Life - Standard Life  (Employee),Yes,3/14/11,13.95,Health_Care_Coverage_Type_Medical
-21275,Short Term Disability - Standard Life  (Employee),Yes,3/14/11,7.8,Health_Care_Coverage_Type_Medical
-21275,Voluntary AD&D - Standard Life  (Employee),Yes,3/14/11,0.6,Health_Care_Coverage_Type_Medical
-21275,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/12,0,Health_Care_Coverage_Type_Medical
-21274,Basic Group Life - Standard Life  (Employee),Yes,5/9/11,14.85,Health_Care_Coverage_Type_Medical
-21274,Long Term Disability - Standard Life Basic (Employee),Yes,5/9/11,11.8,Health_Care_Coverage_Type_Medical
-21274,Short Term Disability - Standard Life  (Employee),Yes,5/9/11,7.8,Health_Care_Coverage_Type_Medical
-21274,Voluntary AD&D - Standard Life  (Employee),Yes,5/9/11,0.6,Health_Care_Coverage_Type_Medical
-21274,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-21381,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,38.25,Health_Care_Coverage_Type_Medical
-21381,Long Term Disability - Standard Life Enhanced (Employee),Yes,1/1/15,13.5,Health_Care_Coverage_Type_Medical
-21381,Short Term Disability - Standard Life  (Employee),Yes,1/1/15,7.8,Health_Care_Coverage_Type_Medical
-21312,Basic Group Life - Standard Life  (Employee),Yes,6/4/12,17.1,Health_Care_Coverage_Type_Medical
-21311,Basic Group Life - Standard Life  (Employee),Yes,3/5/12,15.3,Health_Care_Coverage_Type_Medical
-21310,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-21310,Basic Group Life - Standard Life  (Employee),Yes,1/10/05,24.75,Health_Care_Coverage_Type_Medical
-21242,Basic Group Life - Standard Life  (Employee),Yes,8/22/11,32.85,Health_Care_Coverage_Type_Medical
-21242,Long Term Disability - Standard Life Basic (Employee),Yes,8/22/11,11.8,Health_Care_Coverage_Type_Medical
-21242,Short Term Disability - Standard Life  (Employee),Yes,8/22/11,7.8,Health_Care_Coverage_Type_Medical
-21242,Voluntary Supplemental Life - Standard Life  (Employee),Yes,8/22/11,0,Health_Care_Coverage_Type_Medical
-21386,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21386,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,17.1,Health_Care_Coverage_Type_Medical
-21385,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,18,Health_Care_Coverage_Type_Medical
-21385,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21384,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,17.1,Health_Care_Coverage_Type_Medical
-21384,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21383,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,49.05,Health_Care_Coverage_Type_Medical
-21383,Short Term Disability - Standard Life  (Employee),Yes,1/1/15,7.8,Health_Care_Coverage_Type_Medical
-21383,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21382,Basic Group Life - Standard Life  (Employee),Yes,1/1/16,49.5,Health_Care_Coverage_Type_Medical
-21079,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
-21079,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
-21079,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/08,1.2,Health_Care_Coverage_Type_Medical
-21079,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/10,0,Health_Care_Coverage_Type_Medical
-21079,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,71.55,Health_Care_Coverage_Type_Medical
-21296,Basic Group Life - Standard Life  (Employee),Yes,1/16/12,38.7,Health_Care_Coverage_Type_Medical
-21295,Basic Group Life - Standard Life  (Employee),Yes,2/15/12,31.95,Health_Care_Coverage_Type_Medical
-21293,Basic Group Life - Standard Life  (Employee),Yes,3/14/11,18.9,Health_Care_Coverage_Type_Medical
-21293,Short Term Disability - Standard Life  (Employee),Yes,3/14/11,7.8,Health_Care_Coverage_Type_Medical
-21293,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/12,0,Health_Care_Coverage_Type_Medical
-21292,Basic Group Life - Standard Life  (Employee),Yes,3/14/11,19.8,Health_Care_Coverage_Type_Medical
-21292,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
-21292,Short Term Disability - Standard Life  (Employee),Yes,3/14/11,7.8,Health_Care_Coverage_Type_Medical
-21291,Basic Group Life - Standard Life  (Employee),Yes,2/7/11,18.45,Health_Care_Coverage_Type_Medical
-21291,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
-21291,Short Term Disability - Standard Life  (Employee),Yes,2/7/11,7.8,Health_Care_Coverage_Type_Medical
-21238,Basic Group Life - Standard Life  (Employee),Yes,2/22/11,31.5,Health_Care_Coverage_Type_Medical
-21238,Long Term Disability - Standard Life Basic (Employee),Yes,2/22/11,11.8,Health_Care_Coverage_Type_Medical
-21238,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/12,0.6,Health_Care_Coverage_Type_Medical
-21238,Voluntary Supplemental Life - Standard Life  (Employee),Yes,2/22/11,0,Health_Care_Coverage_Type_Medical
-21238,Spouse Life - Standard Life  (Spouse),Yes,1/2/14,0,Health_Care_Coverage_Type_Medical
-21140,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
-21140,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
-21140,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,2.4,Health_Care_Coverage_Type_Medical
-21140,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-21140,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,49.5,Health_Care_Coverage_Type_Medical
-21139,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,47.7,Health_Care_Coverage_Type_Medical
-21139,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/07,11.8,Health_Care_Coverage_Type_Medical
-21139,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
-21139,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,2.4,Health_Care_Coverage_Type_Medical
-21139,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-21231,Short Term Disability - Standard Life  (Employee),Yes,6/6/11,7.8,Health_Care_Coverage_Type_Medical
-21231,Voluntary Supplemental Life - Standard Life  (Employee),Yes,6/6/11,0,Health_Care_Coverage_Type_Medical
-21231,Basic Group Life - Standard Life  (Employee),Yes,6/6/11,64.8,Health_Care_Coverage_Type_Medical
-21231,Long Term Disability - Standard Life Basic (Employee),Yes,6/6/11,11.8,Health_Care_Coverage_Type_Medical
-21390,Pension - Collectum ITP1 (Employee),Yes,1/1/15,2699.28,Health_Care_Coverage_Type_Medical
-21391,Pension - Collectum ITP1 (Employee),Yes,1/1/15,2819.07,Health_Care_Coverage_Type_Medical
-21416,Pension - Collectum Supplemental ITP1 (Employee),Yes,1/1/16,12500,Health_Care_Coverage_Type_Medical
-21416,Pension - Collectum ITP1 (Employee),Yes,1/1/16,2250,Health_Care_Coverage_Type_Medical
-21376,Basic Group Life - NN Life  (Employee),Yes,10/1/14,0,Health_Care_Coverage_Type_Medical
-21185,Basic Group Life - NN Life  (Employee),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21125,Basic Group Life - NN Life  (Employee),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21122,Basic Group Life - NN Life  (Employee),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21279,Basic Group Life - NN Life  (Employee),Yes,4/9/12,0,Health_Care_Coverage_Type_Medical
-21378,Basic Group Life - NN Life  (Employee),Yes,3/3/15,0,Health_Care_Coverage_Type_Medical
-21428,Basic Group Life - AXA UK (Employee),Yes,1/1/16,210.6,Health_Care_Coverage_Type_Medical
-21429,Basic Group Life - AXA UK (Employee),Yes,2/1/16,230.1,Health_Care_Coverage_Type_Medical
-21432,Pension - Collectum Supplemental ITP1 (Employee),Yes,10/31/16,12794.17,Health_Care_Coverage_Type_Medical
-21433,Basic Group Life - NN Life  (Employee),Yes,11/1/16,0,Health_Care_Coverage_Type_Medical
-21284,Basic Group Life - AXA UK (Employee),Yes,12/6/10,409.5,Health_Care_Coverage_Type_Medical
-21127,Basic Group Life - AXA UK (Employee),Yes,1/1/00,171.6,Health_Care_Coverage_Type_Medical
-21180,Basic Group Life - AXA UK (Employee),Yes,1/1/00,167.7,Health_Care_Coverage_Type_Medical
-21435,Pension - Collectum ITP1 (Employee),Yes,2/1/16,1069.84,Health_Care_Coverage_Type_Medical
-21444,Basic Group Life - AXA Ireland (Employee),Yes,1/1/16,554.4,Health_Care_Coverage_Type_Medical
-21169,Basic Group Life - AXA UK (Employee),Yes,1/1/00,210.6,Health_Care_Coverage_Type_Medical
-21167,Basic Group Life - AXA UK (Employee),Yes,1/1/00,249.6,Health_Care_Coverage_Type_Medical
-21227,Basic Group Life - AXA UK (Employee),Yes,6/14/10,198.9,Health_Care_Coverage_Type_Medical
-21473,Basic Group Life - NN Life  (Employee),Yes,2/1/16,0,Health_Care_Coverage_Type_Medical
-21474,Basic Group Life - NN Life  (Employee),Yes,6/15/17,0,Health_Care_Coverage_Type_Medical
-21475,Basic Group Life - NN Life  (Employee),Yes,3/18/18,0,Health_Care_Coverage_Type_Medical
-21476,Basic Group Life - NN Life  (Employee),Yes,1/1/16,0,Health_Care_Coverage_Type_Medical
-21477,Basic Group Life - NN Life  (Employee),Yes,1/1/17,0,Health_Care_Coverage_Type_Medical
-21252,Medical - Aviva  PMI,Yes,1/16/10,540,Health_Care_Coverage_Type_Medical
-21202,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,1/1/00,86.25,Health_Care_Coverage_Type_Medical
-21245,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,10/3/11,86.25,Health_Care_Coverage_Type_Medical
-21224,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,5/16/10,86.25,Health_Care_Coverage_Type_Medical
-21236,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,9/6/10,86.25,Health_Care_Coverage_Type_Medical
-21228,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,8/2/10,86.25,Health_Care_Coverage_Type_Medical
-21183,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,1/1/00,86.25,Health_Care_Coverage_Type_Medical
-21203,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,1/1/00,86.25,Health_Care_Coverage_Type_Medical
-21160,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,1/1/00,86.25,Health_Care_Coverage_Type_Medical
-21380,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,3/3/15,86.25,Health_Care_Coverage_Type_Medical
-21131,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
-21129,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
-21266,Medical - Bupa  Private Health Care,Yes,7/1/14,49.17,Health_Care_Coverage_Type_Medical
-21332,Medical - Bupa  Private Health Care,Yes,7/23/14,49.17,Health_Care_Coverage_Type_Medical
-21168,Medical - Bupa  Private Health Care,Yes,1/1/00,83.33,Health_Care_Coverage_Type_Medical
-21299,Medical - Bupa  Private Health Care,Yes,3/7/11,49.17,Health_Care_Coverage_Type_Medical
-21244,Medical - Bupa  Private Health Care,Yes,11/8/11,83.33,Health_Care_Coverage_Type_Medical
-21254,Medical - Bupa  Private Health Care,Yes,3/1/10,49.17,Health_Care_Coverage_Type_Medical
-21239,Medical - Bupa  Private Health Care,Yes,11/15/10,49.17,Health_Care_Coverage_Type_Medical
-21305,Medical - Bupa  Private Health Care,Yes,5/2/11,49.17,Health_Care_Coverage_Type_Medical
-21173,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
-21229,Medical - Bupa  Private Health Care,Yes,10/4/10,49.17,Health_Care_Coverage_Type_Medical
-21298,Medical - Bupa  Private Health Care,Yes,1/1/11,49.17,Health_Care_Coverage_Type_Medical
-21205,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
-21135,Dental - Sun Life  Basic,Yes,1/1/07,13,Health_Care_Coverage_Type_Medical
-21135,Medical - Sun Life  Basic,Yes,1/1/12,40,Health_Care_Coverage_Type_Medical
-21134,Medical - Sun Life  Basic,Yes,1/1/07,40,Health_Care_Coverage_Type_Medical
-21133,Medical - Sun Life  Basic,Yes,1/1/07,48,Health_Care_Coverage_Type_Medical
-21133,Dental - Sun Life  Basic,Yes,1/1/07,20,Health_Care_Coverage_Type_Medical
-21326,Dental - Sun Life  Basic,Yes,6/1/12,13,Health_Care_Coverage_Type_Medical
-21326,Medical - Sun Life  Basic,Yes,6/1/12,40,Health_Care_Coverage_Type_Medical
-21198,Dental - Sun Life  Enhanced,Yes,1/1/10,28,Health_Care_Coverage_Type_Medical
-21198,Medical - Sun Life  Basic,Yes,1/1/07,60,Health_Care_Coverage_Type_Medical
-21132,Dental - Sun Life  Basic,Yes,1/1/12,35,Health_Care_Coverage_Type_Medical
-21132,Medical - Sun Life  Basic,Yes,1/1/07,60,Health_Care_Coverage_Type_Medical
-21387,Dental - Sun Life  Enhanced,Yes,1/1/15,21,Health_Care_Coverage_Type_Medical
-21387,Medical - Sun Life  Enhanced,Yes,1/1/15,8,Health_Care_Coverage_Type_Medical
-21276,Dental - Sun Life  Basic,Yes,1/1/13,13,Health_Care_Coverage_Type_Medical
-21276,Medical - Sun Life  Basic,Yes,1/9/12,40,Health_Care_Coverage_Type_Medical
-21275,Dental - Sun Life  Enhanced,Yes,1/1/12,21,Health_Care_Coverage_Type_Medical
-21275,Medical - Sun Life  Basic,Yes,3/14/11,40,Health_Care_Coverage_Type_Medical
-21274,Dental - Sun Life  Enhanced,Yes,1/1/12,21,Health_Care_Coverage_Type_Medical
-21381,Dental - Sun Life  Basic,Yes,1/1/15,13,Health_Care_Coverage_Type_Medical
-21381,Medical - Sun Life  Basic,Yes,1/1/15,40,Health_Care_Coverage_Type_Medical
-21312,Medical - Sun Life  Basic,Yes,6/4/12,40,Health_Care_Coverage_Type_Medical
-21312,Dental - Sun Life  Enhanced,Yes,1/1/14,21,Health_Care_Coverage_Type_Medical
-21311,Dental - Sun Life  Basic,Yes,3/5/12,13,Health_Care_Coverage_Type_Medical
-21311,Medical - Sun Life  Basic,Yes,3/5/12,40,Health_Care_Coverage_Type_Medical
-21310,Dental - Sun Life  Basic,Yes,1/10/05,13,Health_Care_Coverage_Type_Medical
-21310,Medical - Sun Life  Basic,Yes,1/10/05,40,Health_Care_Coverage_Type_Medical
-21242,Dental - Sun Life  Basic,Yes,8/22/11,13,Health_Care_Coverage_Type_Medical
-21386,Dental - Sun Life  Basic,Yes,1/1/15,13,Health_Care_Coverage_Type_Medical
-21386,Medical - Sun Life  Basic,Yes,1/1/15,40,Health_Care_Coverage_Type_Medical
-21385,Medical - Sun Life  Basic,Yes,1/1/15,40,Health_Care_Coverage_Type_Medical
-21384,Dental - Sun Life  Enhanced,Yes,1/1/15,21,Health_Care_Coverage_Type_Medical
-21384,Medical - Sun Life  Enhanced,Yes,1/1/15,8,Health_Care_Coverage_Type_Medical
-21383,Medical - Sun Life  Basic,Yes,1/1/15,40,Health_Care_Coverage_Type_Medical
-21383,Dental - Sun Life  Basic,Yes,1/1/15,13,Health_Care_Coverage_Type_Medical
-21079,Dental - Sun Life  Basic,Yes,1/1/07,35,Health_Care_Coverage_Type_Medical
-21079,Medical - Sun Life  Basic,Yes,1/1/11,60,Health_Care_Coverage_Type_Medical
-21296,Medical - Sun Life  Basic,Yes,1/16/12,40,Health_Care_Coverage_Type_Medical
-21295,Dental - Sun Life  Basic,Yes,2/15/12,13,Health_Care_Coverage_Type_Medical
-21295,Medical - Sun Life  Basic,Yes,2/15/12,40,Health_Care_Coverage_Type_Medical
-21293,Medical - Sun Life  Basic,Yes,3/14/11,48,Health_Care_Coverage_Type_Medical
-21292,Dental - Sun Life  Basic,Yes,3/14/11,20,Health_Care_Coverage_Type_Medical
-21292,Medical - Sun Life  Basic,Yes,3/14/11,48,Health_Care_Coverage_Type_Medical
-21291,Dental - Sun Life  Enhanced,Yes,2/7/11,28,Health_Care_Coverage_Type_Medical
-21291,Medical - Sun Life  Basic,Yes,2/7/11,60,Health_Care_Coverage_Type_Medical
-21238,Dental - Sun Life  Enhanced,Yes,2/22/11,25,Health_Care_Coverage_Type_Medical
-21238,Medical - Sun Life  Basic,Yes,1/1/14,48,Health_Care_Coverage_Type_Medical
-21140,Medical - Sun Life  Basic,Yes,1/1/07,48,Health_Care_Coverage_Type_Medical
-21140,Dental - Sun Life  Basic,Yes,1/1/07,13,Health_Care_Coverage_Type_Medical
-21139,Dental - Sun Life  Basic,Yes,1/1/12,20,Health_Care_Coverage_Type_Medical
-21139,Medical - Sun Life  Basic,Yes,1/1/12,60,Health_Care_Coverage_Type_Medical
-21231,Medical - Sun Life  Enhanced,Yes,6/6/11,68,Health_Care_Coverage_Type_Medical
-21393,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21393,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21392,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21392,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21392,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21374,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21374,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21373,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21373,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21372,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21372,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21322,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21322,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21307,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21307,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21303,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21303,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21301,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21301,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21300,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21300,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21409,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21409,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21408,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21408,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21407,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21407,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21407,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21406,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21406,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21403,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21403,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21403,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21402,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21402,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21401,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21401,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21400,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21400,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21399,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21399,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21398,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21398,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21397,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21397,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21395,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21395,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21394,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21394,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21396,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21396,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21297,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21297,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21297,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21206,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21206,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21130,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21130,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21178,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21178,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21178,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21405,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21405,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21404,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21429,Medical - Bupa  Private Health Care,Yes,2/1/16,49.17,Health_Care_Coverage_Type_Medical
-21404,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21404,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21284,Medical - Bupa  Private Health Care,Yes,12/6/10,83.33,Health_Care_Coverage_Type_Medical
-21127,Medical - Bupa  Private Health Care,Yes,1/1/00,83.33,Health_Care_Coverage_Type_Medical
-21180,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
-21444,Medical - Aviva  PMI,Yes,1/1/16,540,Health_Care_Coverage_Type_Medical
-21169,Medical - Bupa  Private Health Care,Yes,1/1/00,125,Health_Care_Coverage_Type_Medical
-21167,Medical - Bupa  Private Health Care,Yes,1/1/00,125,Health_Care_Coverage_Type_Medical
-21227,Medical - Bupa  Private Health Care,Yes,6/14/10,125,Health_Care_Coverage_Type_Medical
-21287,Medical - Bupa  Health Fund,Yes,11/7/11,450,Health_Care_Coverage_Type_Medical
-21121,Medical - Bupa  Health Fund,Yes,1/1/00,450,Health_Care_Coverage_Type_Medical
-21184,Medical - Bupa  Health Fund,Yes,1/1/00,450,Health_Care_Coverage_Type_Medical
-21286,Medical - Bupa  Health Fund,Yes,10/31/11,450,Health_Care_Coverage_Type_Medical
-21315,Medical - Bupa  Health Fund,Yes,2/11/13,450,Health_Care_Coverage_Type_Medical
-21278,Medical - Bupa  Health Fund,Yes,4/16/12,450,Health_Care_Coverage_Type_Medical
-21285,Medical - Bupa  Health Fund,Yes,10/17/11,450,Health_Care_Coverage_Type_Medical
-21186,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
-21189,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
-21196,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
-21138,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
-21208,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
-21187,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
-21136,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
-21076,Health - MetLife Insurance  IMSS,Yes,1/1/00,11.89,Health_Care_Coverage_Type_Medical
-21137,Health - MetLife Insurance  IMSS,Yes,1/1/00,14.7,Health_Care_Coverage_Type_Medical
-21489,Medical - Bupa  Health Fund,Yes,4/1/20,450,Health_Care_Coverage_Type_Medical
-21491,Medical - Bupa,Yes,2/4/18,120,Health_Care_Coverage_Type_Medical
-21492,Medical - Bupa,Yes,4/2/20,120,Health_Care_Coverage_Type_Medical
-21288,Medical - Bupa,Yes,5/28/12,120,Health_Care_Coverage_Type_Medical
-21316,Medical - Bupa,Yes,2/25/13,120,Health_Care_Coverage_Type_Medical
-21494,Medical - Bupa,Yes,4/1/20,120,Health_Care_Coverage_Type_Medical
-21495,Medical - Bupa  Health Fund,Yes,6/6/17,450,Health_Care_Coverage_Type_Medical
-21496,Medical - Bupa  Health Fund,Yes,10/16/17,900,Health_Care_Coverage_Type_Medical
-21490,Medical - Bupa,Yes,6/15/16,250,Health_Care_Coverage_Type_Medical
-21497,Medical - Bupa,Yes,4/20/20,120,Health_Care_Coverage_Type_Medical
-21498,Medical - Bupa,Yes,4/1/20,120,Health_Care_Coverage_Type_Medical
-21499,Medical - Bupa,Yes,5/1/20,120,Health_Care_Coverage_Type_Medical
-21169,Childcare Vouchers - Computershare Voucher Services,Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21167,Childcare Vouchers - Computershare Voucher Services,Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21227,Childcare Vouchers - Computershare Voucher Services,Yes,6/14/10,0,Health_Care_Coverage_Type_Medical
-21019,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21020,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21038,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21021,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21041,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21008,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21050,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21016,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21035,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21013,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21063,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21068,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21030,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21054,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21066,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21065,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21024,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21011,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21023,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21080,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21007,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21014,401(k) - Charles Schwab,Yes,1/10/08,0,Health_Care_Coverage_Type_Medical
-21046,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21026,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21025,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21018,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21056,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21036,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21039,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21051,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21074,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21034,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21047,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21029,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21073,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21010,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21001,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21049,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21022,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21070,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21006,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21043,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21055,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21064,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21058,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21048,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21045,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21071,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21027,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21012,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21059,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21031,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21062,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21044,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21033,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21037,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21052,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21103,401(k) - Charles Schwab Roth,Yes,1/4/10,0,Health_Care_Coverage_Type_Medical
-21103,401(k) - Charles Schwab,Yes,1/4/10,0,Health_Care_Coverage_Type_Medical
-21032,401(k) - Charles Schwab Catch-up,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21032,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21075,401(k) - Charles Schwab Catch-up,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21075,401(k) - Charles Schwab Roth,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21075,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21140,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-21133,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-21198,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-21134,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-21142,401(k) - Charles Schwab,Yes,1/1/11,0,Health_Care_Coverage_Type_Medical
-21225,401(k) - Charles Schwab,Yes,10/4/10,0,Health_Care_Coverage_Type_Medical
-21237,401(k) - Charles Schwab,Yes,6/14/11,0,Health_Care_Coverage_Type_Medical
-21242,RRSP - Sun Life,Yes,8/25/11,0,Health_Care_Coverage_Type_Medical
-21243,401(k) - Charles Schwab,Yes,1/5/11,0,Health_Care_Coverage_Type_Medical
-21241,401(k) - Charles Schwab,Yes,3/3/10,0,Health_Care_Coverage_Type_Medical
-21002,401(k) - Charles Schwab Catch-up,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21002,401(k) - Charles Schwab Roth,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21002,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21072,401(k) - Charles Schwab Roth,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21072,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21238,RRSP - Sun Life,Yes,2/24/11,0,Health_Care_Coverage_Type_Medical
-21250,401(k) - Charles Schwab,Yes,10/1/11,0,Health_Care_Coverage_Type_Medical
-21276,RRSP - Sun Life,Yes,1/10/12,0,Health_Care_Coverage_Type_Medical
-21275,RRSP - Sun Life,Yes,3/15/12,0,Health_Care_Coverage_Type_Medical
-21274,RRSP - Sun Life,Yes,5/11/11,0,Health_Care_Coverage_Type_Medical
-21271,401(k) - Charles Schwab Roth,Yes,6/7/11,0,Health_Care_Coverage_Type_Medical
-21271,401(k) - Charles Schwab,Yes,6/7/11,0,Health_Care_Coverage_Type_Medical
-21277,401(k) - Charles Schwab Roth,Yes,10/5/10,0,Health_Care_Coverage_Type_Medical
-21277,401(k) - Charles Schwab,Yes,10/5/10,0,Health_Care_Coverage_Type_Medical
-21257,401(k) - Charles Schwab Catch-up,Yes,1/5/10,0,Health_Care_Coverage_Type_Medical
-21257,401(k) - Charles Schwab,Yes,1/5/10,0,Health_Care_Coverage_Type_Medical
-21104,401(k) - Charles Schwab Roth,Yes,2/3/12,0,Health_Care_Coverage_Type_Medical
-21104,401(k) - Charles Schwab,Yes,2/3/12,0,Health_Care_Coverage_Type_Medical
-21247,401(k) - Charles Schwab Roth,Yes,4/13/11,0,Health_Care_Coverage_Type_Medical
-21247,401(k) - Charles Schwab,Yes,4/13/11,0,Health_Care_Coverage_Type_Medical
-21248,401(k) - Charles Schwab Roth,Yes,4/5/11,0,Health_Care_Coverage_Type_Medical
-21248,401(k) - Charles Schwab,Yes,4/5/11,0,Health_Care_Coverage_Type_Medical
-21249,401(k) - Charles Schwab,Yes,6/8/11,0,Health_Care_Coverage_Type_Medical
-21003,NQDC - Charles Schwab Deferred Compensation - Regular,Yes,1/1/10,0,Health_Care_Coverage_Type_Medical
-21003,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21004,NQDC - Charles Schwab Deferred Compensation - Regular,Yes,2/1/11,0,Health_Care_Coverage_Type_Medical
-21004,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21086,401(k) - Charles Schwab Catch-up,Yes,8/18/09,0,Health_Care_Coverage_Type_Medical
-21086,401(k) - Charles Schwab,Yes,8/18/09,0,Health_Care_Coverage_Type_Medical
-21069,401(k) - Charles Schwab Catch-up,Yes,12/3/09,0,Health_Care_Coverage_Type_Medical
-21069,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21017,401(k) - Charles Schwab Catch-up,Yes,3/6/08,0,Health_Care_Coverage_Type_Medical
-21017,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21042,401(k) - Charles Schwab Catch-up,Yes,1/31/11,0,Health_Care_Coverage_Type_Medical
-21042,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21060,401(k) - Charles Schwab Catch-up,Yes,9/22/10,0,Health_Care_Coverage_Type_Medical
-21060,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21009,401(k) - Charles Schwab Catch-up,Yes,3/2/10,0,Health_Care_Coverage_Type_Medical
-21009,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21040,401(k) - Charles Schwab Catch-up,Yes,10/12/09,0,Health_Care_Coverage_Type_Medical
-21040,401(k) - Charles Schwab Roth,Yes,6/21/12,0,Health_Care_Coverage_Type_Medical
-21040,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21028,401(k) - Charles Schwab Catch-up,Yes,4/18/12,0,Health_Care_Coverage_Type_Medical
-21028,401(k) - Charles Schwab Roth,Yes,6/21/12,0,Health_Care_Coverage_Type_Medical
-21028,401(k) - Charles Schwab,Yes,5/19/06,0,Health_Care_Coverage_Type_Medical
-21061,401(k) - Charles Schwab Catch-up,Yes,9/2/09,0,Health_Care_Coverage_Type_Medical
-21061,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21194,401(k) - Charles Schwab Catch-up,Yes,1/12/12,0,Health_Care_Coverage_Type_Medical
-21194,401(k) - Charles Schwab Roth,Yes,1/12/12,0,Health_Care_Coverage_Type_Medical
-21194,401(k) - Charles Schwab,Yes,1/12/12,0,Health_Care_Coverage_Type_Medical
-21098,401(k) - Charles Schwab Catch-up,Yes,4/11/08,0,Health_Care_Coverage_Type_Medical
-21098,401(k) - Charles Schwab,Yes,4/11/08,0,Health_Care_Coverage_Type_Medical
-21252,Pension - New Ireland PRSA,Yes,1/16/10,0,Health_Care_Coverage_Type_Medical
-21087,401(k) - Charles Schwab,Yes,10/10/11,0,Health_Care_Coverage_Type_Medical
-21090,401(k) - Charles Schwab,Yes,10/4/11,0,Health_Care_Coverage_Type_Medical
-21053,NQDC - Charles Schwab Deferred Compensation - Bonus,Yes,4/1/12,0,Health_Care_Coverage_Type_Medical
-21053,NQDC - Charles Schwab Deferred Compensation - Regular,Yes,3/1/12,0,Health_Care_Coverage_Type_Medical
-21053,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21005,NQDC - Charles Schwab Deferred Compensation - Bonus,Yes,4/1/12,0,Health_Care_Coverage_Type_Medical
-21005,401(k) - Charles Schwab Catch-up,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21005,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21290,401(k) - Charles Schwab,Yes,4/7/11,0,Health_Care_Coverage_Type_Medical
-21157,401(k) - Charles Schwab,Yes,7/11/11,0,Health_Care_Coverage_Type_Medical
-21082,401(k) - Charles Schwab,Yes,3/19/12,0,Health_Care_Coverage_Type_Medical
-21084,401(k) - Charles Schwab,Yes,3/20/12,0,Health_Care_Coverage_Type_Medical
-21092,401(k) - Charles Schwab Roth,Yes,3/19/12,0,Health_Care_Coverage_Type_Medical
-21092,401(k) - Charles Schwab,Yes,3/19/12,0,Health_Care_Coverage_Type_Medical
-21293,RRSP - Sun Life,Yes,3/15/11,0,Health_Care_Coverage_Type_Medical
-21289,401(k) - Charles Schwab,Yes,4/4/12,0,Health_Care_Coverage_Type_Medical
-21015,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-21246,401(k) - Charles Schwab Roth,Yes,5/4/11,0,Health_Care_Coverage_Type_Medical
-21246,401(k) - Charles Schwab,Yes,5/4/11,0,Health_Care_Coverage_Type_Medical
-21219,Pension - Employees’ Provident Fund Organisation Provident Fund,Yes,1/4/10,0,Health_Care_Coverage_Type_Medical
-21220,Pension - Employees’ Provident Fund Organisation Provident Fund,Yes,1/4/10,0,Health_Care_Coverage_Type_Medical
-21182,Pension - Employees’ Provident Fund Organisation Provident Fund,Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21164,Pension - Employees’ Provident Fund Organisation Provident Fund,Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21304,Pension - ABN Amro Fund,Yes,7/11/11,0,Health_Care_Coverage_Type_Medical
-21253,Pension - ABN Amro Fund,Yes,2/8/10,0,Health_Care_Coverage_Type_Medical
-21270,Pension - ABN Amro Fund,Yes,1/23/12,0,Health_Care_Coverage_Type_Medical
-21260,Pension - ABN Amro Fund,Yes,2/6/12,0,Health_Care_Coverage_Type_Medical
-21139,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-21132,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-21295,RRSP - Sun Life,Yes,2/18/13,0,Health_Care_Coverage_Type_Medical
-21311,RRSP - Sun Life,Yes,3/11/13,0,Health_Care_Coverage_Type_Medical
-21310,RRSP - Sun Life,Yes,1/9/12,0,Health_Care_Coverage_Type_Medical
-21135,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-21292,RRSP - Sun Life,Yes,3/15/11,0,Health_Care_Coverage_Type_Medical
-21291,RRSP - Sun Life,Yes,2/8/11,0,Health_Care_Coverage_Type_Medical
-21079,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-21231,RRSP - Sun Life,Yes,6/10/11,0,Health_Care_Coverage_Type_Medical
-21326,RRSP - Sun Life,Yes,6/4/12,0,Health_Care_Coverage_Type_Medical
-21239,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-21127,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-21129,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-21305,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-21131,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-21296,RRSP - Sun Life,Yes,1/18/13,0,Health_Care_Coverage_Type_Medical
-21347,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21346,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21345,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21131,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21129,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21266,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,7/1/14,0,Health_Care_Coverage_Type_Medical
-21332,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,7/23/14,0,Health_Care_Coverage_Type_Medical
-21168,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21299,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,3/7/11,0,Health_Care_Coverage_Type_Medical
-21244,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21254,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
-21239,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,11/15/10,0,Health_Care_Coverage_Type_Medical
-21305,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,5/2/11,0,Health_Care_Coverage_Type_Medical
-21173,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21229,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,10/4/10,0,Health_Care_Coverage_Type_Medical
-21298,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/11,0,Health_Care_Coverage_Type_Medical
-21359,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21358,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21357,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21356,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21355,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21354,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21353,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21352,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21205,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21351,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21350,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21349,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21348,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21153,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-21147,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-21152,401(k) - Charles Schwab Roth,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-21152,401(k) - Charles Schwab,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-21155,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-21151,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-21156,401(k) - Charles Schwab Roth,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-21156,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-21150,401(k) - Charles Schwab Roth,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21150,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-21154,401(k) - Charles Schwab Catch-up,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-21154,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-21148,401(k) - Charles Schwab Catch-up,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-21148,401(k) - Charles Schwab,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-21106,Defined Contribution - Charles Schwab Puerto Rico,Yes,1/1/16,0,Health_Care_Coverage_Type_Medical
-21376,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,10/10/14,0,Health_Care_Coverage_Type_Medical
-21185,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,1/10/00,0,Health_Care_Coverage_Type_Medical
-21125,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,1/10/00,0,Health_Care_Coverage_Type_Medical
-21122,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,1/10/00,0,Health_Care_Coverage_Type_Medical
-21279,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,4/19/12,0,Health_Care_Coverage_Type_Medical
-21378,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,3/13/15,0,Health_Care_Coverage_Type_Medical
-21284,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,12/6/10,0,Health_Care_Coverage_Type_Medical
-21127,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21180,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21077,Swedish - Löneväxling Base Salary,Yes,1/1/17,0,Health_Care_Coverage_Type_Medical
-21444,Pension - New Ireland PRSA,Yes,1/1/16,0,Health_Care_Coverage_Type_Medical
-21169,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21167,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-21227,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,6/14/10,0,Health_Care_Coverage_Type_Medical
-21476,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,1/1/16,0,Health_Care_Coverage_Type_Medical
-21481,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
-21482,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
-21483,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
-21485,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
-21486,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
-21491,New Zealand Pension - NZL Government Kiwi Saver,Yes,2/4/18,0,Health_Care_Coverage_Type_Medical
-21492,New Zealand Pension - NZL Government Kiwi Saver,Yes,4/2/20,0,Health_Care_Coverage_Type_Medical
-21493,New Zealand Pension - NZL Government Kiwi Saver,Yes,4/20/20,0,Health_Care_Coverage_Type_Medical
-21288,New Zealand Pension - NZL Government Kiwi Saver,Yes,5/28/12,0,Health_Care_Coverage_Type_Medical
-21316,New Zealand Pension - NZL Government Kiwi Saver,Yes,2/25/13,0,Health_Care_Coverage_Type_Medical
-21494,New Zealand Pension - NZL Government Kiwi Saver,Yes,8/1/20,0,Health_Care_Coverage_Type_Medical
-21490,New Zealand Pension - NZL Government Kiwi Saver,Yes,6/15/16,0,Health_Care_Coverage_Type_Medical
-21497,New Zealand Pension - NZL Government Kiwi Saver,Yes,4/20/20,0,Health_Care_Coverage_Type_Medical
-21498,New Zealand Pension - NZL Government Kiwi Saver,Yes,4/1/20,0,Health_Care_Coverage_Type_Medical
-21499,New Zealand Pension - NZL Government Kiwi Saver,Yes,5/1/20,0,Health_Care_Coverage_Type_Medical
-21387,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21386,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21385,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21384,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21383,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-21296,Health Savings Account - Sun Life,Yes,1/16/15,0,Health_Care_Coverage_Type_Medical
-21020,Gym Membership - Club One,Yes,1/1/10,20,Health_Care_Coverage_Type_Medical
-21117,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
-21002,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
-21111,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
-21191,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
-21012,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21008,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21008,Commuter Spending - SHPS Parking Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21001,Commuter Spending - SHPS Parking Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21117,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21109,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21103,Commuter Spending - SHPS Parking Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
-21073,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21072,Commuter Spending - SHPS Parking Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-21075,Commuter Spending - SHPS Parking Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
-21020,Commuter Spending - SHPS Transit Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
-21119,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
-21119,Commuter Spending - SHPS Parking Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
-21030,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
-21108,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
-21017,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
-21112,Commuter Spending - SHPS Transit Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
-21112,Commuter Spending - SHPS Parking Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
-21118,Commuter Spending - SHPS Transit Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
-21037,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
-21042,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
-21042,Commuter Spending - SHPS Transit Account,Yes,7/1/10,0,Health_Care_Coverage_Type_Medical
-21015,Gym Membership - Club One,Yes,10/1/10,20,Health_Care_Coverage_Type_Medical
-21046,Commuter Spending - SHPS Transit Account,Yes,6/1/10,0,Health_Care_Coverage_Type_Medical
-21105,Gym Membership - Club One,Yes,3/1/10,20,Health_Care_Coverage_Type_Medical
-21105,Commuter Spending - SHPS Transit Account,Yes,9/1/10,0,Health_Care_Coverage_Type_Medical
-21001,Gym Membership - Club One,Yes,4/1/10,20,Health_Care_Coverage_Type_Medical
-21255,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-21255,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-21306,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-21306,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-21302,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-21302,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-21077,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-21077,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-21126,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-21126,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-21263,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-21263,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-21390,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-21390,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-21391,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-21391,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-21416,Commuter Spending - Swebus Bus Pass,Yes,1/1/16,25,Health_Care_Coverage_Type_Medical
-21419,Commuter Spending - SHPS Transit Account,Yes,4/1/15,0,Health_Care_Coverage_Type_Medical
-21430,Commuter Spending - SHPS Parking Account,Yes,2/1/14,0,Health_Care_Coverage_Type_Medical
-21430,Gym Membership - Club One,Yes,2/1/14,20,Health_Care_Coverage_Type_Medical
-21431,Commuter Spending - SHPS Parking Account,Yes,6/1/16,0,Health_Care_Coverage_Type_Medical
-21431,Gym Membership - Club One,Yes,6/1/16,20,Health_Care_Coverage_Type_Medical
-21432,Commuter Spending - Swebus Bus Pass,Yes,10/31/16,25,Health_Care_Coverage_Type_Medical
-21284,Charitable Giving - Pennies from Heaven,Yes,4/1/16,0,Health_Care_Coverage_Type_Medical
-21127,Charitable Giving - Pennies from Heaven,Yes,4/1/16,0,Health_Care_Coverage_Type_Medical
-21180,Charitable Giving - Pennies from Heaven,Yes,4/1/16,0,Health_Care_Coverage_Type_Medical
-21303,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21403,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21405,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21404,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21297,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21407,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21178,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21396,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21401,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21374,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21301,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21307,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21408,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21409,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21398,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21393,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21397,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21402,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21395,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21300,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21400,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21392,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21394,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-21435,Commuter Spending - Swebus Bus Pass,Yes,2/1/16,25,Health_Care_Coverage_Type_Medical
-21427,Meal Vouchers - Sodexo Meal Tickets,Yes,3/1/17,2178,Health_Care_Coverage_Type_Medical
-21167,Charitable Giving - Pennies from Heaven,Yes,4/1/16,0,Health_Care_Coverage_Type_Medical
-21333,Fringe Benefits - Global Modern Services betriebliche Altersversorung (bAV),Yes,7/21/14,0,Health_Care_Coverage_Type_Medical
-21333,Fringe Benefits - Global Modern Services Unfallversicherung,Yes,7/21/14,0,Health_Care_Coverage_Type_Medical
-21448,Fringe Benefits - Global Modern Services Fitness-Club Mitgliedschaft,Yes,5/1/17,0,Health_Care_Coverage_Type_Medical
-21448,Fringe Benefits - Global Modern Services betriebliche Altersversorung (bAV),Yes,5/1/17,0,Health_Care_Coverage_Type_Medical
-21448,Fringe Benefits - Global Modern Services Unfallversicherung,Yes,5/1/17,0,Health_Care_Coverage_Type_Medical
-21452,Fringe Benefits - Global Modern Services Unfallversicherung,Yes,6/1/17,0,Health_Care_Coverage_Type_Medical
-21334,Fringe Benefits - Global Modern Services Fitness-Club Mitgliedschaft,Yes,7/21/14,0,Health_Care_Coverage_Type_Medical
-21334,Fringe Benefits - Global Modern Services Unfallversicherung,Yes,7/21/14,0,Health_Care_Coverage_Type_Medical
-21186,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
-21138,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
-21137,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
-21208,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
-21187,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
-21136,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
+19255,Pension - Collectum Supplemental ITP1 (Employee),Yes,1/1/15,3125.69,Health_Care_Coverage_Type_Medical
+19255,Pension - Collectum ITP1 (Employee),Yes,1/1/15,1884.41,
+19306,Pension - Collectum ITP1 (Employee),Yes,1/1/15,748.8,Health_Care_Coverage_Type_Medical
+19302,Pension - Collectum ITP1 (Employee),Yes,1/1/15,764.4,Health_Care_Coverage_Type_Medical
+19077,Pension - Collectum Supplemental ITP1 (Employee),Yes,1/1/15,15624.15,Health_Care_Coverage_Type_Medical
+19077,Pension - Collectum ITP1 (Employee),Yes,1/1/15,4037.77,Health_Care_Coverage_Type_Medical
+19126,Pension - Collectum Supplemental ITP1 (Employee),Yes,1/1/15,1215.71,Health_Care_Coverage_Type_Medical
+19126,Pension - Collectum ITP1 (Employee),Yes,1/1/15,1407.21,Health_Care_Coverage_Type_Medical
+19263,Pension - Collectum ITP1 (Employee),Yes,1/1/15,1151,Health_Care_Coverage_Type_Medical
+19347,Basic Group Life - AXA UK (Employee),Yes,1/1/15,261.3,Health_Care_Coverage_Type_Medical
+19346,Basic Group Life - AXA UK (Employee),Yes,1/1/15,331.5,Health_Care_Coverage_Type_Medical
+19345,Basic Group Life - AXA UK (Employee),Yes,1/1/15,159.9,Health_Care_Coverage_Type_Medical
+19131,Basic Group Life - AXA UK (Employee),Yes,1/1/00,109.2,Health_Care_Coverage_Type_Medical
+19129,Basic Group Life - AXA UK (Employee),Yes,1/1/00,159.9,Health_Care_Coverage_Type_Medical
+19266,Basic Group Life - AXA UK (Employee),Yes,7/1/14,292.5,Health_Care_Coverage_Type_Medical
+19332,Basic Group Life - AXA UK (Employee),Yes,7/23/14,288.6,Health_Care_Coverage_Type_Medical
+19168,Basic Group Life - AXA UK (Employee),Yes,1/1/00,269.1,Health_Care_Coverage_Type_Medical
+19299,Basic Group Life - AXA UK (Employee),Yes,3/7/11,124.8,Health_Care_Coverage_Type_Medical
+19244,Basic Group Life - AXA UK (Employee),Yes,11/8/11,300.3,Health_Care_Coverage_Type_Medical
+19254,Basic Group Life - AXA UK (Employee),Yes,3/1/10,269.1,Health_Care_Coverage_Type_Medical
+19239,Basic Group Life - AXA UK (Employee),Yes,11/15/10,105.3,Health_Care_Coverage_Type_Medical
+19305,Basic Group Life - AXA UK (Employee),Yes,5/2/11,163.8,Health_Care_Coverage_Type_Medical
+19173,Basic Group Life - AXA UK (Employee),Yes,1/1/15,210.6,Health_Care_Coverage_Type_Medical
+19229,Basic Group Life - AXA UK (Employee),Yes,10/4/10,167.7,Health_Care_Coverage_Type_Medical
+19298,Basic Group Life - AXA UK (Employee),Yes,1/1/11,315.9,Health_Care_Coverage_Type_Medical
+19359,Basic Group Life - AXA UK (Employee),Yes,1/1/15,257.4,Health_Care_Coverage_Type_Medical
+19358,Basic Group Life - AXA UK (Employee),Yes,1/1/15,315.9,Health_Care_Coverage_Type_Medical
+19357,Basic Group Life - AXA UK (Employee),Yes,1/1/15,292.5,Health_Care_Coverage_Type_Medical
+19356,Basic Group Life - AXA UK (Employee),Yes,1/1/15,276.9,Health_Care_Coverage_Type_Medical
+19355,Basic Group Life - AXA UK (Employee),Yes,1/1/15,304.2,Health_Care_Coverage_Type_Medical
+19354,Basic Group Life - AXA UK (Employee),Yes,1/1/15,354.9,Health_Care_Coverage_Type_Medical
+19353,Basic Group Life - AXA UK (Employee),Yes,1/1/15,214.5,Health_Care_Coverage_Type_Medical
+19352,Basic Group Life - AXA UK (Employee),Yes,1/1/15,351,Health_Care_Coverage_Type_Medical
+19205,Basic Group Life - AXA UK (Employee),Yes,1/1/00,296.4,Health_Care_Coverage_Type_Medical
+19351,Basic Group Life - AXA UK (Employee),Yes,1/1/15,304.2,Health_Care_Coverage_Type_Medical
+19350,Basic Group Life - AXA UK (Employee),Yes,1/1/15,191.1,Health_Care_Coverage_Type_Medical
+19349,Basic Group Life - AXA UK (Employee),Yes,1/1/15,288.6,Health_Care_Coverage_Type_Medical
+19348,Basic Group Life - AXA UK (Employee),Yes,1/1/15,292.5,Health_Care_Coverage_Type_Medical
+19135,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,22.95,Health_Care_Coverage_Type_Medical
+19135,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/07,11.8,Health_Care_Coverage_Type_Medical
+19135,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
+19135,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,1.2,Health_Care_Coverage_Type_Medical
+19134,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,25.2,Health_Care_Coverage_Type_Medical
+19134,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/07,11.8,Health_Care_Coverage_Type_Medical
+19134,Short Term Disability - Standard Life  (Employee),Yes,1/1/08,7.8,Health_Care_Coverage_Type_Medical
+19134,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,0.6,Health_Care_Coverage_Type_Medical
+19134,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/10,0,Health_Care_Coverage_Type_Medical
+19133,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,23.85,Health_Care_Coverage_Type_Medical
+19133,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
+19133,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,1.8,Health_Care_Coverage_Type_Medical
+19133,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
+19326,Basic Group Life - Standard Life  (Employee),Yes,6/1/12,34.2,Health_Care_Coverage_Type_Medical
+19326,Short Term Disability - Standard Life  (Employee),Yes,6/1/12,7.8,Health_Care_Coverage_Type_Medical
+19326,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
+19198,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/07,11.8,Health_Care_Coverage_Type_Medical
+19198,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
+19198,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,1.8,Health_Care_Coverage_Type_Medical
+19198,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
+19198,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,40.95,Health_Care_Coverage_Type_Medical
+19132,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,48.6,Health_Care_Coverage_Type_Medical
+19132,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
+19132,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
+19132,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,1.2,Health_Care_Coverage_Type_Medical
+19132,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19387,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19387,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,15.3,Health_Care_Coverage_Type_Medical
+19387,Long Term Disability - Standard Life Enhanced (Employee),Yes,1/1/15,13.5,Health_Care_Coverage_Type_Medical
+19276,Basic Group Life - Standard Life  (Employee),Yes,1/9/12,13.05,Health_Care_Coverage_Type_Medical
+19276,Short Term Disability - Standard Life  (Employee),Yes,1/9/12,7.8,Health_Care_Coverage_Type_Medical
+19275,Basic Group Life - Standard Life  (Employee),Yes,3/14/11,13.95,Health_Care_Coverage_Type_Medical
+19275,Short Term Disability - Standard Life  (Employee),Yes,3/14/11,7.8,Health_Care_Coverage_Type_Medical
+19275,Voluntary AD&D - Standard Life  (Employee),Yes,3/14/11,0.6,Health_Care_Coverage_Type_Medical
+19275,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/12,0,Health_Care_Coverage_Type_Medical
+19274,Basic Group Life - Standard Life  (Employee),Yes,5/9/11,14.85,Health_Care_Coverage_Type_Medical
+19274,Long Term Disability - Standard Life Basic (Employee),Yes,5/9/11,11.8,Health_Care_Coverage_Type_Medical
+19274,Short Term Disability - Standard Life  (Employee),Yes,5/9/11,7.8,Health_Care_Coverage_Type_Medical
+19274,Voluntary AD&D - Standard Life  (Employee),Yes,5/9/11,0.6,Health_Care_Coverage_Type_Medical
+19274,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
+19381,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,38.25,Health_Care_Coverage_Type_Medical
+19381,Long Term Disability - Standard Life Enhanced (Employee),Yes,1/1/15,13.5,Health_Care_Coverage_Type_Medical
+19381,Short Term Disability - Standard Life  (Employee),Yes,1/1/15,7.8,Health_Care_Coverage_Type_Medical
+19312,Basic Group Life - Standard Life  (Employee),Yes,6/4/12,17.1,Health_Care_Coverage_Type_Medical
+19311,Basic Group Life - Standard Life  (Employee),Yes,3/5/12,15.3,Health_Care_Coverage_Type_Medical
+19310,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
+19310,Basic Group Life - Standard Life  (Employee),Yes,1/10/05,24.75,Health_Care_Coverage_Type_Medical
+19242,Basic Group Life - Standard Life  (Employee),Yes,8/22/11,32.85,Health_Care_Coverage_Type_Medical
+19242,Long Term Disability - Standard Life Basic (Employee),Yes,8/22/11,11.8,Health_Care_Coverage_Type_Medical
+19242,Short Term Disability - Standard Life  (Employee),Yes,8/22/11,7.8,Health_Care_Coverage_Type_Medical
+19242,Voluntary Supplemental Life - Standard Life  (Employee),Yes,8/22/11,0,Health_Care_Coverage_Type_Medical
+19386,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19386,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,17.1,Health_Care_Coverage_Type_Medical
+19385,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,18,Health_Care_Coverage_Type_Medical
+19385,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19384,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,17.1,Health_Care_Coverage_Type_Medical
+19384,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19383,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,49.05,Health_Care_Coverage_Type_Medical
+19383,Short Term Disability - Standard Life  (Employee),Yes,1/1/15,7.8,Health_Care_Coverage_Type_Medical
+19383,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19382,Basic Group Life - Standard Life  (Employee),Yes,1/1/16,49.5,Health_Care_Coverage_Type_Medical
+19079,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
+19079,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
+19079,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/08,1.2,Health_Care_Coverage_Type_Medical
+19079,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/10,0,Health_Care_Coverage_Type_Medical
+19079,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,71.55,Health_Care_Coverage_Type_Medical
+19296,Basic Group Life - Standard Life  (Employee),Yes,1/16/12,38.7,Health_Care_Coverage_Type_Medical
+19295,Basic Group Life - Standard Life  (Employee),Yes,2/15/12,31.95,Health_Care_Coverage_Type_Medical
+19293,Basic Group Life - Standard Life  (Employee),Yes,3/14/11,18.9,Health_Care_Coverage_Type_Medical
+19293,Short Term Disability - Standard Life  (Employee),Yes,3/14/11,7.8,Health_Care_Coverage_Type_Medical
+19293,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/12,0,Health_Care_Coverage_Type_Medical
+19292,Basic Group Life - Standard Life  (Employee),Yes,3/14/11,19.8,Health_Care_Coverage_Type_Medical
+19292,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
+19292,Short Term Disability - Standard Life  (Employee),Yes,3/14/11,7.8,Health_Care_Coverage_Type_Medical
+19291,Basic Group Life - Standard Life  (Employee),Yes,2/7/11,18.45,Health_Care_Coverage_Type_Medical
+19291,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
+19291,Short Term Disability - Standard Life  (Employee),Yes,2/7/11,7.8,Health_Care_Coverage_Type_Medical
+19238,Basic Group Life - Standard Life  (Employee),Yes,2/22/11,31.5,Health_Care_Coverage_Type_Medical
+19238,Long Term Disability - Standard Life Basic (Employee),Yes,2/22/11,11.8,Health_Care_Coverage_Type_Medical
+19238,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/12,0.6,Health_Care_Coverage_Type_Medical
+19238,Voluntary Supplemental Life - Standard Life  (Employee),Yes,2/22/11,0,Health_Care_Coverage_Type_Medical
+19238,Spouse Life - Standard Life  (Spouse),Yes,1/2/14,0,Health_Care_Coverage_Type_Medical
+19140,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
+19140,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
+19140,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,2.4,Health_Care_Coverage_Type_Medical
+19140,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
+19140,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,49.5,Health_Care_Coverage_Type_Medical
+19139,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,47.7,Health_Care_Coverage_Type_Medical
+19139,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/07,11.8,Health_Care_Coverage_Type_Medical
+19139,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
+19139,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,2.4,Health_Care_Coverage_Type_Medical
+19139,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
+19231,Short Term Disability - Standard Life  (Employee),Yes,6/6/11,7.8,Health_Care_Coverage_Type_Medical
+19231,Voluntary Supplemental Life - Standard Life  (Employee),Yes,6/6/11,0,Health_Care_Coverage_Type_Medical
+19231,Basic Group Life - Standard Life  (Employee),Yes,6/6/11,64.8,Health_Care_Coverage_Type_Medical
+19231,Long Term Disability - Standard Life Basic (Employee),Yes,6/6/11,11.8,Health_Care_Coverage_Type_Medical
+19390,Pension - Collectum ITP1 (Employee),Yes,1/1/15,2699.28,Health_Care_Coverage_Type_Medical
+19391,Pension - Collectum ITP1 (Employee),Yes,1/1/15,2819.07,Health_Care_Coverage_Type_Medical
+19416,Pension - Collectum Supplemental ITP1 (Employee),Yes,1/1/16,12500,Health_Care_Coverage_Type_Medical
+19416,Pension - Collectum ITP1 (Employee),Yes,1/1/16,2250,Health_Care_Coverage_Type_Medical
+19376,Basic Group Life - NN Life  (Employee),Yes,10/1/14,0,Health_Care_Coverage_Type_Medical
+19185,Basic Group Life - NN Life  (Employee),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19125,Basic Group Life - NN Life  (Employee),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19122,Basic Group Life - NN Life  (Employee),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19279,Basic Group Life - NN Life  (Employee),Yes,4/9/12,0,Health_Care_Coverage_Type_Medical
+19378,Basic Group Life - NN Life  (Employee),Yes,3/3/15,0,Health_Care_Coverage_Type_Medical
+19428,Basic Group Life - AXA UK (Employee),Yes,1/1/16,210.6,Health_Care_Coverage_Type_Medical
+19429,Basic Group Life - AXA UK (Employee),Yes,2/1/16,230.1,Health_Care_Coverage_Type_Medical
+19432,Pension - Collectum Supplemental ITP1 (Employee),Yes,10/31/16,12794.17,Health_Care_Coverage_Type_Medical
+19433,Basic Group Life - NN Life  (Employee),Yes,11/1/16,0,Health_Care_Coverage_Type_Medical
+19284,Basic Group Life - AXA UK (Employee),Yes,12/6/10,409.5,Health_Care_Coverage_Type_Medical
+19127,Basic Group Life - AXA UK (Employee),Yes,1/1/00,171.6,Health_Care_Coverage_Type_Medical
+19180,Basic Group Life - AXA UK (Employee),Yes,1/1/00,167.7,Health_Care_Coverage_Type_Medical
+19435,Pension - Collectum ITP1 (Employee),Yes,2/1/16,1069.84,Health_Care_Coverage_Type_Medical
+19444,Basic Group Life - AXA Ireland (Employee),Yes,1/1/16,554.4,Health_Care_Coverage_Type_Medical
+19169,Basic Group Life - AXA UK (Employee),Yes,1/1/00,210.6,Health_Care_Coverage_Type_Medical
+19167,Basic Group Life - AXA UK (Employee),Yes,1/1/00,249.6,Health_Care_Coverage_Type_Medical
+19227,Basic Group Life - AXA UK (Employee),Yes,6/14/10,198.9,Health_Care_Coverage_Type_Medical
+19473,Basic Group Life - NN Life  (Employee),Yes,2/1/16,0,Health_Care_Coverage_Type_Medical
+19474,Basic Group Life - NN Life  (Employee),Yes,6/15/17,0,Health_Care_Coverage_Type_Medical
+19475,Basic Group Life - NN Life  (Employee),Yes,3/18/18,0,Health_Care_Coverage_Type_Medical
+19476,Basic Group Life - NN Life  (Employee),Yes,1/1/16,0,Health_Care_Coverage_Type_Medical
+19477,Basic Group Life - NN Life  (Employee),Yes,1/1/17,0,Health_Care_Coverage_Type_Medical
+19252,Medical - Aviva  PMI,Yes,1/16/10,540,Health_Care_Coverage_Type_Medical
+19202,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,1/1/00,86.25,Health_Care_Coverage_Type_Medical
+19245,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,10/3/11,86.25,Health_Care_Coverage_Type_Medical
+19224,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,5/16/10,86.25,Health_Care_Coverage_Type_Medical
+19236,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,9/6/10,86.25,Health_Care_Coverage_Type_Medical
+19228,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,8/2/10,86.25,Health_Care_Coverage_Type_Medical
+19183,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,1/1/00,86.25,Health_Care_Coverage_Type_Medical
+19203,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,1/1/00,86.25,Health_Care_Coverage_Type_Medical
+19160,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,1/1/00,86.25,Health_Care_Coverage_Type_Medical
+19380,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,3/3/15,86.25,Health_Care_Coverage_Type_Medical
+19131,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
+19129,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
+19266,Medical - Bupa  Private Health Care,Yes,7/1/14,49.17,Health_Care_Coverage_Type_Medical
+19332,Medical - Bupa  Private Health Care,Yes,7/23/14,49.17,Health_Care_Coverage_Type_Medical
+19168,Medical - Bupa  Private Health Care,Yes,1/1/00,83.33,Health_Care_Coverage_Type_Medical
+19299,Medical - Bupa  Private Health Care,Yes,3/7/11,49.17,Health_Care_Coverage_Type_Medical
+19244,Medical - Bupa  Private Health Care,Yes,11/8/11,83.33,Health_Care_Coverage_Type_Medical
+19254,Medical - Bupa  Private Health Care,Yes,3/1/10,49.17,Health_Care_Coverage_Type_Medical
+19239,Medical - Bupa  Private Health Care,Yes,11/15/10,49.17,Health_Care_Coverage_Type_Medical
+19305,Medical - Bupa  Private Health Care,Yes,5/2/11,49.17,Health_Care_Coverage_Type_Medical
+19173,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
+19229,Medical - Bupa  Private Health Care,Yes,10/4/10,49.17,Health_Care_Coverage_Type_Medical
+19298,Medical - Bupa  Private Health Care,Yes,1/1/11,49.17,Health_Care_Coverage_Type_Medical
+19205,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
+19135,Dental - Sun Life  Basic,Yes,1/1/07,13,Health_Care_Coverage_Type_Medical
+19135,Medical - Sun Life  Basic,Yes,1/1/12,40,Health_Care_Coverage_Type_Medical
+19134,Medical - Sun Life  Basic,Yes,1/1/07,40,Health_Care_Coverage_Type_Medical
+19133,Medical - Sun Life  Basic,Yes,1/1/07,48,Health_Care_Coverage_Type_Medical
+19133,Dental - Sun Life  Basic,Yes,1/1/07,20,Health_Care_Coverage_Type_Medical
+19326,Dental - Sun Life  Basic,Yes,6/1/12,13,Health_Care_Coverage_Type_Medical
+19326,Medical - Sun Life  Basic,Yes,6/1/12,40,Health_Care_Coverage_Type_Medical
+19198,Dental - Sun Life  Enhanced,Yes,1/1/10,28,Health_Care_Coverage_Type_Medical
+19198,Medical - Sun Life  Basic,Yes,1/1/07,60,Health_Care_Coverage_Type_Medical
+19132,Dental - Sun Life  Basic,Yes,1/1/12,35,Health_Care_Coverage_Type_Medical
+19132,Medical - Sun Life  Basic,Yes,1/1/07,60,Health_Care_Coverage_Type_Medical
+19387,Dental - Sun Life  Enhanced,Yes,1/1/15,21,Health_Care_Coverage_Type_Medical
+19387,Medical - Sun Life  Enhanced,Yes,1/1/15,8,Health_Care_Coverage_Type_Medical
+19276,Dental - Sun Life  Basic,Yes,1/1/13,13,Health_Care_Coverage_Type_Medical
+19276,Medical - Sun Life  Basic,Yes,1/9/12,40,Health_Care_Coverage_Type_Medical
+19275,Dental - Sun Life  Enhanced,Yes,1/1/12,21,Health_Care_Coverage_Type_Medical
+19275,Medical - Sun Life  Basic,Yes,3/14/11,40,Health_Care_Coverage_Type_Medical
+19274,Dental - Sun Life  Enhanced,Yes,1/1/12,21,Health_Care_Coverage_Type_Medical
+19381,Dental - Sun Life  Basic,Yes,1/1/15,13,Health_Care_Coverage_Type_Medical
+19381,Medical - Sun Life  Basic,Yes,1/1/15,40,Health_Care_Coverage_Type_Medical
+19312,Medical - Sun Life  Basic,Yes,6/4/12,40,Health_Care_Coverage_Type_Medical
+19312,Dental - Sun Life  Enhanced,Yes,1/1/14,21,Health_Care_Coverage_Type_Medical
+19311,Dental - Sun Life  Basic,Yes,3/5/12,13,Health_Care_Coverage_Type_Medical
+19311,Medical - Sun Life  Basic,Yes,3/5/12,40,Health_Care_Coverage_Type_Medical
+19310,Dental - Sun Life  Basic,Yes,1/10/05,13,Health_Care_Coverage_Type_Medical
+19310,Medical - Sun Life  Basic,Yes,1/10/05,40,Health_Care_Coverage_Type_Medical
+19242,Dental - Sun Life  Basic,Yes,8/22/11,13,Health_Care_Coverage_Type_Medical
+19386,Dental - Sun Life  Basic,Yes,1/1/15,13,Health_Care_Coverage_Type_Medical
+19386,Medical - Sun Life  Basic,Yes,1/1/15,40,Health_Care_Coverage_Type_Medical
+19385,Medical - Sun Life  Basic,Yes,1/1/15,40,Health_Care_Coverage_Type_Medical
+19384,Dental - Sun Life  Enhanced,Yes,1/1/15,21,Health_Care_Coverage_Type_Medical
+19384,Medical - Sun Life  Enhanced,Yes,1/1/15,8,Health_Care_Coverage_Type_Medical
+19383,Medical - Sun Life  Basic,Yes,1/1/15,40,Health_Care_Coverage_Type_Medical
+19383,Dental - Sun Life  Basic,Yes,1/1/15,13,Health_Care_Coverage_Type_Medical
+19079,Dental - Sun Life  Basic,Yes,1/1/07,35,Health_Care_Coverage_Type_Medical
+19079,Medical - Sun Life  Basic,Yes,1/1/11,60,Health_Care_Coverage_Type_Medical
+19296,Medical - Sun Life  Basic,Yes,1/16/12,40,Health_Care_Coverage_Type_Medical
+19295,Dental - Sun Life  Basic,Yes,2/15/12,13,Health_Care_Coverage_Type_Medical
+19295,Medical - Sun Life  Basic,Yes,2/15/12,40,Health_Care_Coverage_Type_Medical
+19293,Medical - Sun Life  Basic,Yes,3/14/11,48,Health_Care_Coverage_Type_Medical
+19292,Dental - Sun Life  Basic,Yes,3/14/11,20,Health_Care_Coverage_Type_Medical
+19292,Medical - Sun Life  Basic,Yes,3/14/11,48,Health_Care_Coverage_Type_Medical
+19291,Dental - Sun Life  Enhanced,Yes,2/7/11,28,Health_Care_Coverage_Type_Medical
+19291,Medical - Sun Life  Basic,Yes,2/7/11,60,Health_Care_Coverage_Type_Medical
+19238,Dental - Sun Life  Enhanced,Yes,2/22/11,25,Health_Care_Coverage_Type_Medical
+19238,Medical - Sun Life  Basic,Yes,1/1/14,48,Health_Care_Coverage_Type_Medical
+19140,Medical - Sun Life  Basic,Yes,1/1/07,48,Health_Care_Coverage_Type_Medical
+19140,Dental - Sun Life  Basic,Yes,1/1/07,13,Health_Care_Coverage_Type_Medical
+19139,Dental - Sun Life  Basic,Yes,1/1/12,20,Health_Care_Coverage_Type_Medical
+19139,Medical - Sun Life  Basic,Yes,1/1/12,60,Health_Care_Coverage_Type_Medical
+19231,Medical - Sun Life  Enhanced,Yes,6/6/11,68,Health_Care_Coverage_Type_Medical
+19393,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19393,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19392,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19392,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19392,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19374,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19374,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19373,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19373,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19372,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19372,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19322,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19322,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19307,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19307,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19303,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19303,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19301,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19301,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19300,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19300,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19409,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19409,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19408,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19408,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19407,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19407,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19407,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19406,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19406,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19403,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19403,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19403,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19402,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19402,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19401,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19401,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19400,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19400,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19399,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19399,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19398,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19398,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19397,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19397,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19395,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19395,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19394,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19394,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19396,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19396,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19297,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19297,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19297,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19206,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19206,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19130,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19130,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19178,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19178,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19178,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19405,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19405,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19404,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19429,Medical - Bupa  Private Health Care,Yes,2/1/16,49.17,Health_Care_Coverage_Type_Medical
+19404,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19404,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19284,Medical - Bupa  Private Health Care,Yes,12/6/10,83.33,Health_Care_Coverage_Type_Medical
+19127,Medical - Bupa  Private Health Care,Yes,1/1/00,83.33,Health_Care_Coverage_Type_Medical
+19180,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
+19444,Medical - Aviva  PMI,Yes,1/1/16,540,Health_Care_Coverage_Type_Medical
+19169,Medical - Bupa  Private Health Care,Yes,1/1/00,125,Health_Care_Coverage_Type_Medical
+19167,Medical - Bupa  Private Health Care,Yes,1/1/00,125,Health_Care_Coverage_Type_Medical
+19227,Medical - Bupa  Private Health Care,Yes,6/14/10,125,Health_Care_Coverage_Type_Medical
+19287,Medical - Bupa  Health Fund,Yes,11/7/11,450,Health_Care_Coverage_Type_Medical
+19121,Medical - Bupa  Health Fund,Yes,1/1/00,450,Health_Care_Coverage_Type_Medical
+19184,Medical - Bupa  Health Fund,Yes,1/1/00,450,Health_Care_Coverage_Type_Medical
+19286,Medical - Bupa  Health Fund,Yes,10/31/11,450,Health_Care_Coverage_Type_Medical
+19315,Medical - Bupa  Health Fund,Yes,2/11/13,450,Health_Care_Coverage_Type_Medical
+19278,Medical - Bupa  Health Fund,Yes,4/16/12,450,Health_Care_Coverage_Type_Medical
+19285,Medical - Bupa  Health Fund,Yes,10/17/11,450,Health_Care_Coverage_Type_Medical
+19186,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
+19189,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
+19196,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
+19138,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
+19208,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
+19187,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
+19136,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
+19076,Health - MetLife Insurance  IMSS,Yes,1/1/00,11.89,Health_Care_Coverage_Type_Medical
+19137,Health - MetLife Insurance  IMSS,Yes,1/1/00,14.7,Health_Care_Coverage_Type_Medical
+19489,Medical - Bupa  Health Fund,Yes,4/1/20,450,Health_Care_Coverage_Type_Medical
+19491,Medical - Bupa,Yes,2/4/18,120,Health_Care_Coverage_Type_Medical
+19492,Medical - Bupa,Yes,4/2/20,120,Health_Care_Coverage_Type_Medical
+19288,Medical - Bupa,Yes,5/28/12,120,Health_Care_Coverage_Type_Medical
+19316,Medical - Bupa,Yes,2/25/13,120,Health_Care_Coverage_Type_Medical
+19494,Medical - Bupa,Yes,4/1/20,120,Health_Care_Coverage_Type_Medical
+19495,Medical - Bupa  Health Fund,Yes,6/6/17,450,Health_Care_Coverage_Type_Medical
+19496,Medical - Bupa  Health Fund,Yes,10/16/17,900,Health_Care_Coverage_Type_Medical
+19490,Medical - Bupa,Yes,6/15/16,250,Health_Care_Coverage_Type_Medical
+19497,Medical - Bupa,Yes,4/20/20,120,Health_Care_Coverage_Type_Medical
+19498,Medical - Bupa,Yes,4/1/20,120,Health_Care_Coverage_Type_Medical
+19499,Medical - Bupa,Yes,5/1/20,120,Health_Care_Coverage_Type_Medical
+19169,Childcare Vouchers - Computershare Voucher Services,Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19167,Childcare Vouchers - Computershare Voucher Services,Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19227,Childcare Vouchers - Computershare Voucher Services,Yes,6/14/10,0,Health_Care_Coverage_Type_Medical
+19019,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19020,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19038,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19021,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19041,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19008,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19050,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19016,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19035,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19013,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19063,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19068,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19030,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19054,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19066,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19065,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19024,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19011,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19023,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19080,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19007,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19014,401(k) - Charles Schwab,Yes,1/10/08,0,Health_Care_Coverage_Type_Medical
+19046,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19026,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19025,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19018,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19056,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19036,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19039,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19051,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19074,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19034,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19047,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19029,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19073,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19010,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19001,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19049,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19022,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19070,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19006,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19043,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19055,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19064,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19058,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19048,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19045,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19071,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19027,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19012,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19059,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19031,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19062,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19044,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19033,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19037,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19052,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19103,401(k) - Charles Schwab Roth,Yes,1/4/10,0,Health_Care_Coverage_Type_Medical
+19103,401(k) - Charles Schwab,Yes,1/4/10,0,Health_Care_Coverage_Type_Medical
+19032,401(k) - Charles Schwab Catch-up,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19032,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19075,401(k) - Charles Schwab Catch-up,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19075,401(k) - Charles Schwab Roth,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19075,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19140,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
+19133,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
+19198,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
+19134,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
+19142,401(k) - Charles Schwab,Yes,1/1/11,0,Health_Care_Coverage_Type_Medical
+19225,401(k) - Charles Schwab,Yes,10/4/10,0,Health_Care_Coverage_Type_Medical
+19237,401(k) - Charles Schwab,Yes,6/14/11,0,Health_Care_Coverage_Type_Medical
+19242,RRSP - Sun Life,Yes,8/25/11,0,Health_Care_Coverage_Type_Medical
+19243,401(k) - Charles Schwab,Yes,1/5/11,0,Health_Care_Coverage_Type_Medical
+19241,401(k) - Charles Schwab,Yes,3/3/10,0,Health_Care_Coverage_Type_Medical
+19002,401(k) - Charles Schwab Catch-up,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19002,401(k) - Charles Schwab Roth,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19002,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19072,401(k) - Charles Schwab Roth,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19072,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19238,RRSP - Sun Life,Yes,2/24/11,0,Health_Care_Coverage_Type_Medical
+19250,401(k) - Charles Schwab,Yes,10/1/11,0,Health_Care_Coverage_Type_Medical
+19276,RRSP - Sun Life,Yes,1/10/12,0,Health_Care_Coverage_Type_Medical
+19275,RRSP - Sun Life,Yes,3/15/12,0,Health_Care_Coverage_Type_Medical
+19274,RRSP - Sun Life,Yes,5/11/11,0,Health_Care_Coverage_Type_Medical
+19271,401(k) - Charles Schwab Roth,Yes,6/7/11,0,Health_Care_Coverage_Type_Medical
+19271,401(k) - Charles Schwab,Yes,6/7/11,0,Health_Care_Coverage_Type_Medical
+19277,401(k) - Charles Schwab Roth,Yes,10/5/10,0,Health_Care_Coverage_Type_Medical
+19277,401(k) - Charles Schwab,Yes,10/5/10,0,Health_Care_Coverage_Type_Medical
+19257,401(k) - Charles Schwab Catch-up,Yes,1/5/10,0,Health_Care_Coverage_Type_Medical
+19257,401(k) - Charles Schwab,Yes,1/5/10,0,Health_Care_Coverage_Type_Medical
+19104,401(k) - Charles Schwab Roth,Yes,2/3/12,0,Health_Care_Coverage_Type_Medical
+19104,401(k) - Charles Schwab,Yes,2/3/12,0,Health_Care_Coverage_Type_Medical
+19247,401(k) - Charles Schwab Roth,Yes,4/13/11,0,Health_Care_Coverage_Type_Medical
+19247,401(k) - Charles Schwab,Yes,4/13/11,0,Health_Care_Coverage_Type_Medical
+19248,401(k) - Charles Schwab Roth,Yes,4/5/11,0,Health_Care_Coverage_Type_Medical
+19248,401(k) - Charles Schwab,Yes,4/5/11,0,Health_Care_Coverage_Type_Medical
+19249,401(k) - Charles Schwab,Yes,6/8/11,0,Health_Care_Coverage_Type_Medical
+19003,NQDC - Charles Schwab Deferred Compensation - Regular,Yes,1/1/10,0,Health_Care_Coverage_Type_Medical
+19003,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19004,NQDC - Charles Schwab Deferred Compensation - Regular,Yes,2/1/11,0,Health_Care_Coverage_Type_Medical
+19004,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19086,401(k) - Charles Schwab Catch-up,Yes,8/18/09,0,Health_Care_Coverage_Type_Medical
+19086,401(k) - Charles Schwab,Yes,8/18/09,0,Health_Care_Coverage_Type_Medical
+19069,401(k) - Charles Schwab Catch-up,Yes,12/3/09,0,Health_Care_Coverage_Type_Medical
+19069,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19017,401(k) - Charles Schwab Catch-up,Yes,3/6/08,0,Health_Care_Coverage_Type_Medical
+19017,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19042,401(k) - Charles Schwab Catch-up,Yes,1/31/11,0,Health_Care_Coverage_Type_Medical
+19042,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19060,401(k) - Charles Schwab Catch-up,Yes,9/22/10,0,Health_Care_Coverage_Type_Medical
+19060,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19009,401(k) - Charles Schwab Catch-up,Yes,3/2/10,0,Health_Care_Coverage_Type_Medical
+19009,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19040,401(k) - Charles Schwab Catch-up,Yes,10/12/09,0,Health_Care_Coverage_Type_Medical
+19040,401(k) - Charles Schwab Roth,Yes,6/21/12,0,Health_Care_Coverage_Type_Medical
+19040,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19028,401(k) - Charles Schwab Catch-up,Yes,4/18/12,0,Health_Care_Coverage_Type_Medical
+19028,401(k) - Charles Schwab Roth,Yes,6/21/12,0,Health_Care_Coverage_Type_Medical
+19028,401(k) - Charles Schwab,Yes,5/19/06,0,Health_Care_Coverage_Type_Medical
+19061,401(k) - Charles Schwab Catch-up,Yes,9/2/09,0,Health_Care_Coverage_Type_Medical
+19061,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19194,401(k) - Charles Schwab Catch-up,Yes,1/12/12,0,Health_Care_Coverage_Type_Medical
+19194,401(k) - Charles Schwab Roth,Yes,1/12/12,0,Health_Care_Coverage_Type_Medical
+19194,401(k) - Charles Schwab,Yes,1/12/12,0,Health_Care_Coverage_Type_Medical
+19098,401(k) - Charles Schwab Catch-up,Yes,4/11/08,0,Health_Care_Coverage_Type_Medical
+19098,401(k) - Charles Schwab,Yes,4/11/08,0,Health_Care_Coverage_Type_Medical
+19252,Pension - New Ireland PRSA,Yes,1/16/10,0,Health_Care_Coverage_Type_Medical
+19087,401(k) - Charles Schwab,Yes,10/10/11,0,Health_Care_Coverage_Type_Medical
+19090,401(k) - Charles Schwab,Yes,10/4/11,0,Health_Care_Coverage_Type_Medical
+19053,NQDC - Charles Schwab Deferred Compensation - Bonus,Yes,4/1/12,0,Health_Care_Coverage_Type_Medical
+19053,NQDC - Charles Schwab Deferred Compensation - Regular,Yes,3/1/12,0,Health_Care_Coverage_Type_Medical
+19053,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19005,NQDC - Charles Schwab Deferred Compensation - Bonus,Yes,4/1/12,0,Health_Care_Coverage_Type_Medical
+19005,401(k) - Charles Schwab Catch-up,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19005,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19290,401(k) - Charles Schwab,Yes,4/7/11,0,Health_Care_Coverage_Type_Medical
+19157,401(k) - Charles Schwab,Yes,7/11/11,0,Health_Care_Coverage_Type_Medical
+19082,401(k) - Charles Schwab,Yes,3/19/12,0,Health_Care_Coverage_Type_Medical
+19084,401(k) - Charles Schwab,Yes,3/20/12,0,Health_Care_Coverage_Type_Medical
+19092,401(k) - Charles Schwab Roth,Yes,3/19/12,0,Health_Care_Coverage_Type_Medical
+19092,401(k) - Charles Schwab,Yes,3/19/12,0,Health_Care_Coverage_Type_Medical
+19293,RRSP - Sun Life,Yes,3/15/11,0,Health_Care_Coverage_Type_Medical
+19289,401(k) - Charles Schwab,Yes,4/4/12,0,Health_Care_Coverage_Type_Medical
+19015,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
+19246,401(k) - Charles Schwab Roth,Yes,5/4/11,0,Health_Care_Coverage_Type_Medical
+19246,401(k) - Charles Schwab,Yes,5/4/11,0,Health_Care_Coverage_Type_Medical
+19219,Pension - Employees’ Provident Fund Organisation Provident Fund,Yes,1/4/10,0,Health_Care_Coverage_Type_Medical
+19220,Pension - Employees’ Provident Fund Organisation Provident Fund,Yes,1/4/10,0,Health_Care_Coverage_Type_Medical
+19182,Pension - Employees’ Provident Fund Organisation Provident Fund,Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19164,Pension - Employees’ Provident Fund Organisation Provident Fund,Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19304,Pension - ABN Amro Fund,Yes,7/11/11,0,Health_Care_Coverage_Type_Medical
+19253,Pension - ABN Amro Fund,Yes,2/8/10,0,Health_Care_Coverage_Type_Medical
+19270,Pension - ABN Amro Fund,Yes,1/23/12,0,Health_Care_Coverage_Type_Medical
+19260,Pension - ABN Amro Fund,Yes,2/6/12,0,Health_Care_Coverage_Type_Medical
+19139,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
+19132,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
+19295,RRSP - Sun Life,Yes,2/18/13,0,Health_Care_Coverage_Type_Medical
+19311,RRSP - Sun Life,Yes,3/11/13,0,Health_Care_Coverage_Type_Medical
+19310,RRSP - Sun Life,Yes,1/9/12,0,Health_Care_Coverage_Type_Medical
+19135,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
+19292,RRSP - Sun Life,Yes,3/15/11,0,Health_Care_Coverage_Type_Medical
+19291,RRSP - Sun Life,Yes,2/8/11,0,Health_Care_Coverage_Type_Medical
+19079,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
+19231,RRSP - Sun Life,Yes,6/10/11,0,Health_Care_Coverage_Type_Medical
+19326,RRSP - Sun Life,Yes,6/4/12,0,Health_Care_Coverage_Type_Medical
+19239,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
+19127,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
+19129,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
+19305,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
+19131,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
+19296,RRSP - Sun Life,Yes,1/18/13,0,Health_Care_Coverage_Type_Medical
+19347,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19346,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19345,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19131,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19129,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19266,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,7/1/14,0,Health_Care_Coverage_Type_Medical
+19332,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,7/23/14,0,Health_Care_Coverage_Type_Medical
+19168,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19299,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,3/7/11,0,Health_Care_Coverage_Type_Medical
+19244,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19254,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
+19239,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,11/15/10,0,Health_Care_Coverage_Type_Medical
+19305,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,5/2/11,0,Health_Care_Coverage_Type_Medical
+19173,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19229,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,10/4/10,0,Health_Care_Coverage_Type_Medical
+19298,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/11,0,Health_Care_Coverage_Type_Medical
+19359,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19358,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19357,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19356,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19355,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19354,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19353,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19352,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19205,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19351,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19350,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19349,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19348,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19153,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
+19147,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
+19152,401(k) - Charles Schwab Roth,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
+19152,401(k) - Charles Schwab,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
+19155,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
+19151,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
+19156,401(k) - Charles Schwab Roth,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
+19156,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
+19150,401(k) - Charles Schwab Roth,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19150,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
+19154,401(k) - Charles Schwab Catch-up,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
+19154,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
+19148,401(k) - Charles Schwab Catch-up,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
+19148,401(k) - Charles Schwab,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
+19106,Defined Contribution - Charles Schwab Puerto Rico,Yes,1/1/16,0,Health_Care_Coverage_Type_Medical
+19376,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,10/10/14,0,Health_Care_Coverage_Type_Medical
+19185,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,1/10/00,0,Health_Care_Coverage_Type_Medical
+19125,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,1/10/00,0,Health_Care_Coverage_Type_Medical
+19122,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,1/10/00,0,Health_Care_Coverage_Type_Medical
+19279,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,4/19/12,0,Health_Care_Coverage_Type_Medical
+19378,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,3/13/15,0,Health_Care_Coverage_Type_Medical
+19284,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,12/6/10,0,Health_Care_Coverage_Type_Medical
+19127,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19180,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19077,Swedish - Löneväxling Base Salary,Yes,1/1/17,0,Health_Care_Coverage_Type_Medical
+19444,Pension - New Ireland PRSA,Yes,1/1/16,0,Health_Care_Coverage_Type_Medical
+19169,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19167,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
+19227,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,6/14/10,0,Health_Care_Coverage_Type_Medical
+19476,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,1/1/16,0,Health_Care_Coverage_Type_Medical
+19481,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
+19482,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
+19483,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
+19485,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
+19486,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
+19491,New Zealand Pension - NZL Government Kiwi Saver,Yes,2/4/18,0,Health_Care_Coverage_Type_Medical
+19492,New Zealand Pension - NZL Government Kiwi Saver,Yes,4/2/20,0,Health_Care_Coverage_Type_Medical
+19493,New Zealand Pension - NZL Government Kiwi Saver,Yes,4/20/20,0,Health_Care_Coverage_Type_Medical
+19288,New Zealand Pension - NZL Government Kiwi Saver,Yes,5/28/12,0,Health_Care_Coverage_Type_Medical
+19316,New Zealand Pension - NZL Government Kiwi Saver,Yes,2/25/13,0,Health_Care_Coverage_Type_Medical
+19494,New Zealand Pension - NZL Government Kiwi Saver,Yes,8/1/20,0,Health_Care_Coverage_Type_Medical
+19490,New Zealand Pension - NZL Government Kiwi Saver,Yes,6/15/16,0,Health_Care_Coverage_Type_Medical
+19497,New Zealand Pension - NZL Government Kiwi Saver,Yes,4/20/20,0,Health_Care_Coverage_Type_Medical
+19498,New Zealand Pension - NZL Government Kiwi Saver,Yes,4/1/20,0,Health_Care_Coverage_Type_Medical
+19499,New Zealand Pension - NZL Government Kiwi Saver,Yes,5/1/20,0,Health_Care_Coverage_Type_Medical
+19387,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19386,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19385,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19384,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19383,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
+19296,Health Savings Account - Sun Life,Yes,1/16/15,0,Health_Care_Coverage_Type_Medical
+19020,Gym Membership - Club One,Yes,1/1/10,20,Health_Care_Coverage_Type_Medical
+19117,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
+19002,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
+19111,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
+19191,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
+19012,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19008,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19008,Commuter Spending - SHPS Parking Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19001,Commuter Spending - SHPS Parking Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19117,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19109,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19103,Commuter Spending - SHPS Parking Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
+19073,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19072,Commuter Spending - SHPS Parking Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
+19075,Commuter Spending - SHPS Parking Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
+19020,Commuter Spending - SHPS Transit Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
+19119,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
+19119,Commuter Spending - SHPS Parking Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
+19030,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
+19108,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
+19017,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
+19112,Commuter Spending - SHPS Transit Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
+19112,Commuter Spending - SHPS Parking Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
+19118,Commuter Spending - SHPS Transit Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
+19037,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
+19042,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
+19042,Commuter Spending - SHPS Transit Account,Yes,7/1/10,0,Health_Care_Coverage_Type_Medical
+19015,Gym Membership - Club One,Yes,10/1/10,20,Health_Care_Coverage_Type_Medical
+19046,Commuter Spending - SHPS Transit Account,Yes,6/1/10,0,Health_Care_Coverage_Type_Medical
+19105,Gym Membership - Club One,Yes,3/1/10,20,Health_Care_Coverage_Type_Medical
+19105,Commuter Spending - SHPS Transit Account,Yes,9/1/10,0,Health_Care_Coverage_Type_Medical
+19001,Gym Membership - Club One,Yes,4/1/10,20,Health_Care_Coverage_Type_Medical
+19255,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
+19255,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
+19306,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
+19306,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
+19302,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
+19302,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
+19077,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
+19077,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
+19126,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
+19126,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
+19263,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
+19263,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
+19390,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
+19390,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
+19391,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
+19391,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
+19416,Commuter Spending - Swebus Bus Pass,Yes,1/1/16,25,Health_Care_Coverage_Type_Medical
+19419,Commuter Spending - SHPS Transit Account,Yes,4/1/15,0,Health_Care_Coverage_Type_Medical
+19430,Commuter Spending - SHPS Parking Account,Yes,2/1/14,0,Health_Care_Coverage_Type_Medical
+19430,Gym Membership - Club One,Yes,2/1/14,20,Health_Care_Coverage_Type_Medical
+19431,Commuter Spending - SHPS Parking Account,Yes,6/1/16,0,Health_Care_Coverage_Type_Medical
+19431,Gym Membership - Club One,Yes,6/1/16,20,Health_Care_Coverage_Type_Medical
+19432,Commuter Spending - Swebus Bus Pass,Yes,10/31/16,25,Health_Care_Coverage_Type_Medical
+19284,Charitable Giving - Pennies from Heaven,Yes,4/1/16,0,Health_Care_Coverage_Type_Medical
+19127,Charitable Giving - Pennies from Heaven,Yes,4/1/16,0,Health_Care_Coverage_Type_Medical
+19180,Charitable Giving - Pennies from Heaven,Yes,4/1/16,0,Health_Care_Coverage_Type_Medical
+19303,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19403,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19405,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19404,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19297,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19407,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19178,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19396,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19401,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19374,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19301,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19307,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19408,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19409,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19398,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19393,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19397,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19402,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19395,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19300,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19400,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19392,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19394,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
+19435,Commuter Spending - Swebus Bus Pass,Yes,2/1/16,25,Health_Care_Coverage_Type_Medical
+19427,Meal Vouchers - Sodexo Meal Tickets,Yes,3/1/17,2178,Health_Care_Coverage_Type_Medical
+19167,Charitable Giving - Pennies from Heaven,Yes,4/1/16,0,Health_Care_Coverage_Type_Medical
+19333,Fringe Benefits - Global Modern Services betriebliche Altersversorung (bAV),Yes,7/21/14,0,Health_Care_Coverage_Type_Medical
+19333,Fringe Benefits - Global Modern Services Unfallversicherung,Yes,7/21/14,0,Health_Care_Coverage_Type_Medical
+19448,Fringe Benefits - Global Modern Services Fitness-Club Mitgliedschaft,Yes,5/1/17,0,Health_Care_Coverage_Type_Medical
+19448,Fringe Benefits - Global Modern Services betriebliche Altersversorung (bAV),Yes,5/1/17,0,Health_Care_Coverage_Type_Medical
+19448,Fringe Benefits - Global Modern Services Unfallversicherung,Yes,5/1/17,0,Health_Care_Coverage_Type_Medical
+19452,Fringe Benefits - Global Modern Services Unfallversicherung,Yes,6/1/17,0,Health_Care_Coverage_Type_Medical
+19334,Fringe Benefits - Global Modern Services Fitness-Club Mitgliedschaft,Yes,7/21/14,0,Health_Care_Coverage_Type_Medical
+19334,Fringe Benefits - Global Modern Services Unfallversicherung,Yes,7/21/14,0,Health_Care_Coverage_Type_Medical
+19186,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
+19138,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
+19137,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
+19208,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
+19187,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
+19136,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
