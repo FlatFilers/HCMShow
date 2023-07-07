@@ -169,6 +169,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     where: {
       organizationId: token.organizationId,
     },
+    orderBy: {
+      employeeId: "asc",
+    },
     include: {
       manager: true,
     },

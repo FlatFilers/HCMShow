@@ -748,16 +748,16 @@ const createOtherData = async () => {
 // These are used to seed the account with valid employee IDs
 // so the employees exist when we sync data from the filefeed flow.
 const employeeIdsForBenefitsSchema = [
-  21255, 21306, 21302, 21077, 21126, 21263, 21347, 21346, 21345, 21131, 21129,
-  21266, 21332, 21168, 21299, 21244, 21254, 21239, 21305, 21173, 21229, 21298,
-  21359, 21358, 21357, 21356, 21355, 21354, 21353, 21352, 21205, 21351, 21350,
-  21349, 21348, 21135, 21134, 21133, 21326, 21198, 21132, 21387, 21276, 21275,
-  21274, 21381, 21312, 21311, 21310, 21242, 21386, 21385, 21384, 21383, 21382,
-  21079, 21296, 21295, 21293, 21292, 21291, 21238, 21140, 21139, 21231, 21390,
-  21391, 21416, 21376, 21185, 21125, 21122, 21279, 21378, 21428, 21429, 21432,
-  21433, 21284, 21127, 21180, 21435, 21444, 21169, 21167, 21227, 21473, 21474,
-  21475, 21476, 21477, 21252, 21202, 21245, 21224, 21236, 21228, 21183, 21203,
-  21160, 21380, 21393, 21392, 21374, 21373, 21372, 21322, 21307, 21303,
+  19255, 19306, 19302, 19077, 19126, 19263, 19347, 19346, 19345, 19131, 19129,
+  19266, 19332, 19168, 19299, 19244, 19254, 19239, 19305, 19173, 19229, 19298,
+  19359, 19358, 19357, 19356, 19355, 19354, 19353, 19352, 19205, 19351, 19350,
+  19349, 19348, 19135, 19134, 19133, 19326, 19198, 19132, 19387, 19276, 19275,
+  19274, 19381, 19312, 19311, 19310, 19242, 19386, 19385, 19384, 19383, 19382,
+  19079, 19296, 19295, 19293, 19292, 19291, 19238, 19140, 19139, 19231, 19390,
+  19391, 19416, 19376, 19185, 19125, 19122, 19279, 19378, 19428, 19429, 19432,
+  19433, 19284, 19127, 19180, 19435, 19444, 19169, 19167, 19227, 19473, 19474,
+  19475, 19476, 19477, 19252, 19202, 19245, 19224, 19236, 19228, 19183, 19203,
+  19160, 19380, 19393, 19392, 19374, 19373, 19372, 19322, 19307, 19303,
 ];
 
 export const upsertEmployees = async (organizationId: string) => {
@@ -775,11 +775,14 @@ export const upsertEmployees = async (organizationId: string) => {
     },
   }))!.id;
 
+  const managerEmployeeId = "20000";
+  const startingEmployeeId = 20001;
+
   const data: Parameters<typeof upsertEmployee>[0] = {
     organizationId,
     // Want a realistic employee ID without taking one that is in the sample data.
     // Sample data starts at 21000
-    employeeId: "20005",
+    employeeId: managerEmployeeId,
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     hireDate,
@@ -797,7 +800,7 @@ export const upsertEmployees = async (organizationId: string) => {
       // Pre-seed a couple employees with employeeIDs we can validate against in the config.
       await upsertEmployee({
         ...data,
-        employeeId: (21001 + index).toString(),
+        employeeId: (startingEmployeeId + index).toString(),
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         managerId: manager.id,
