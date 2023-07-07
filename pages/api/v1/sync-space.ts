@@ -49,7 +49,7 @@ export default async function handler(
 
   // Not awaiting for early response back to Flatfile server
   if (space.type === SpaceType.WorkbookUpload) {
-    syncWorkbookRecords({
+    await syncWorkbookRecords({
       workflow: WorkflowType.Onboarding,
       userId: user.id,
       organizationId: user.organizationId,
@@ -57,7 +57,7 @@ export default async function handler(
       actionType: ActionType.SyncOnboardingRecords,
     });
   } else if (space.type === SpaceType.FileFeed) {
-    syncBenefitPlanRecords({
+    await syncBenefitPlanRecords({
       workflow: WorkflowType.FileFeed,
       userId: user.id,
       organizationId: user.organizationId,
@@ -65,7 +65,7 @@ export default async function handler(
       actionType: ActionType.SyncFilefeedRecords,
     });
   } else if (space.type === SpaceType.Embed) {
-    syncBenefitPlanRecords({
+    await syncBenefitPlanRecords({
       workflow: WorkflowType.Embedded,
       userId: user.id,
       organizationId: user.organizationId,
@@ -74,7 +74,7 @@ export default async function handler(
       spaceId: spaceId,
     });
   } else if (space.type === SpaceType.Dynamic) {
-    syncBenefitPlanRecords({
+    await syncBenefitPlanRecords({
       workflow: WorkflowType.Dynamic,
       userId: user.id,
       organizationId: user.organizationId,
