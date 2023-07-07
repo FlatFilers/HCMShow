@@ -66,7 +66,7 @@ export const upsertJobRecords = async (
         name: r.values.jobName.value as string,
         department: r.values.jobDept.value as string,
         effectiveDate: new Date(r.values.effectiveDate.value as string),
-        isInactive: r.values.inactive.value === "y",
+        isInactive: !!r.values.inactive.value,
       };
 
       await upsertJob(data);

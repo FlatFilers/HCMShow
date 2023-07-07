@@ -240,6 +240,7 @@ export const getRecords = async ({
   try {
     const flatfile = flatfileClient(workflow);
 
+    // TODO: The Flatfile SDK is throwing validation errors on valid records for Jobs?
     const response = await flatfile.records.get(sheetId);
 
     return response.data.records;
