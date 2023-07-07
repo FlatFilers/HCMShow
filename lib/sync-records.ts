@@ -1,13 +1,12 @@
-import { EmployeeType, Prisma } from "@prisma/client";
+import { EmployeeType } from "@prisma/client";
 import { upsertEmployee } from "./employee";
 import { prismaClient } from "./prisma-client";
 import { SpaceType } from "./space";
-import { DateTime } from "luxon";
 import { createAction, ActionType } from "./action";
 import { upsertJobRecords } from "./job";
-import { upsertBenefitPlan, upsertBenefitPlanRecords } from "./benefit-plan";
 import { upsertEmployeeBenefitPlanRecords } from "./employee-benefit-plan";
 import { WorkflowType, getRecordsByName } from "./flatfile";
+import { parseDate } from "./utils";
 
 export const syncWorkbookRecords = async ({
   workflow,
@@ -83,61 +82,47 @@ export const syncWorkbookRecords = async ({
           })) as EmployeeType
         ).id;
 
-        let recordJobCode = () => {
-          if (values.jobCode && values.jobCode.value) {
-            return values.jobCode.value as string;
-          } else {
-            let jobName = values.jobName.value as string;
-
-            return jobName.replaceAll(" ", "_");
-          }
-        };
-
-        let job = await prismaClient.job.upsert({
+        // TODO: We should be looking up with findUnique and slug (jobCode),
+        // but the hooks in Flatfile aren't always populating that value.
+        // .findFirst could bite us here.
+        const job = await prismaClient.job.findFirst({
           where: {
-            organizationId_slug: {
-              organizationId,
-              slug: recordJobCode(),
-            },
-          },
-          create: {
-            slug: recordJobCode(),
+            organizationId,
             name: values.jobName.value as string,
-            department: "Test Department",
-            effectiveDate: DateTime.now().toJSDate(),
-            isInactive: false,
-            organization: {
-              connect: {
-                id: organizationId,
-              },
-            },
           },
-          update: {},
         });
 
-        const jobId = job.id;
+        if (!job) {
+          throw new Error(
+            `Error: job not found for employeeId ${
+              r.values.employee.value
+            }, jobName: ${values.jobName.value as string}`
+          );
+        }
+
+        const hireDate = parseDate({
+          fieldName: "hireDate",
+          value: values.hireDate.value as string,
+        });
 
         let data: Parameters<typeof upsertEmployee>[0] = {
           organizationId,
           employeeId: r.values.employeeId.value as string,
           firstName: r.values.firstName.value as string,
           lastName: r.values.lastName.value as string,
-          hireDate: DateTime.fromFormat(
-            r.values.hireDate.value as string,
-            "yyyy-MM-dd"
-          ).toJSDate(),
+          hireDate: hireDate.toJSDate(),
           endEmploymentDate: r.values.endEmploymentDate.value
-            ? DateTime.fromFormat(
-                r.values.endEmploymentDate.value as string,
-                "yyyy-MM-dd"
-              ).toJSDate()
+            ? parseDate({
+                fieldName: "endEmploymentDate",
+                value: values.endEmploymentDate.value as string,
+              }).toJSDate()
             : null,
           positionTitle: r.values.positionTitle.value as string,
           employeeTypeId,
           defaultWeeklyHours: r.values.defaultWeeklyHours.value as number,
           scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
           flatfileRecordId: r.id,
-          jobId: jobId,
+          jobId: job.id,
         };
 
         if (
