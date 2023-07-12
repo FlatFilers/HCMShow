@@ -73,6 +73,9 @@ export const syncWorkbookRecords = async ({
       return a.values.managerId.value ? 1 : -1;
     });
 
+    let employeesWithoutMangersInDB: Parameters<typeof upsertEmployee>[0][] =
+      [];
+
     const upsertEmployees = validsManagersFirst?.map(async (r) => {
       try {
         const values = r.values;
@@ -125,10 +128,6 @@ export const syncWorkbookRecords = async ({
           jobId: job.id,
         };
 
-        let employeesWithoutMangersInDB: Parameters<
-          typeof upsertEmployee
-        >[0][] = [];
-
         if (
           r.values.managerId.value &&
           (r.values.managerId.value as string).length > 0
@@ -160,9 +159,6 @@ export const syncWorkbookRecords = async ({
         await upsertEmployee(data);
 
         // Retry employee upsert on employees without managers in DB
-        employeesWithoutMangersInDB.forEach(async (data) => {
-          await upsertEmployee(data);
-        });
       } catch (error) {
         // throw error;
         console.error(
@@ -173,6 +169,19 @@ export const syncWorkbookRecords = async ({
     });
 
     await Promise.all(upsertEmployees);
+
+    const retryUpsert = employeesWithoutMangersInDB.map(async (data) => {
+      try {
+        await upsertEmployee(data);
+      } catch (error) {
+        console.error(
+          `Error: syncing employee record for user ${userId}, record ${r.id}`,
+          error
+        );
+      }
+    });
+
+    await Promise.all(retryUpsert);
   }
 
   const message = `Found ${totalRecords} total records. Synced ${numEmployeeRecords} Employee records.  Synced ${numJobRecords} Job records.`;
