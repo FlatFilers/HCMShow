@@ -73,8 +73,21 @@ export const syncWorkbookRecords = async ({
       return a.values.managerId.value ? 1 : -1;
     });
 
-    let employeesWithoutMangersInDB: Parameters<typeof upsertEmployee>[0][] =
-      [];
+    let employeesWithoutMangersInDB: {
+      managerId: string | number | true;
+      organizationId: string;
+      employeeId: string;
+      employeeTypeId: string;
+      firstName: string;
+      lastName: string;
+      hireDate: Date;
+      endEmploymentDate: Date | null;
+      positionTitle: string;
+      defaultWeeklyHours: number;
+      scheduledWeeklyHours: number;
+      flatfileRecordId?: string | undefined;
+      jobId: string;
+    }[] = [];
 
     const upsertEmployees = validsManagersFirst?.map(async (r) => {
       try {
@@ -146,7 +159,11 @@ export const syncWorkbookRecords = async ({
             if (manager) {
               data = { ...data, managerId: manager.id };
             } else {
-              employeesWithoutMangersInDB.push(data);
+              const retrydata = {
+                ...data,
+                managerId: r.values.managerId.value,
+              };
+              employeesWithoutMangersInDB.push(retrydata);
             }
           } catch (error) {
             console.error(
@@ -172,10 +189,22 @@ export const syncWorkbookRecords = async ({
 
     const retryUpsert = employeesWithoutMangersInDB.map(async (data) => {
       try {
+        let manager = await prismaClient.employee.findUnique({
+          where: {
+            organizationId_employeeId: {
+              organizationId,
+              employeeId: data.managerId as string,
+            },
+          },
+        });
+
+        if (manager) {
+          data = { ...data, managerId: manager.id };
+        }
         await upsertEmployee(data);
       } catch (error) {
         console.error(
-          `Error: syncing employee record for user ${userId}, record ${r.id}`,
+          `Error: syncing employee record for user ${userId}`,
           error
         );
       }
