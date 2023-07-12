@@ -125,6 +125,10 @@ export const syncWorkbookRecords = async ({
           jobId: job.id,
         };
 
+        let employeesWithoutMangersInDB: Parameters<
+          typeof upsertEmployee
+        >[0][] = [];
+
         if (
           r.values.managerId.value &&
           (r.values.managerId.value as string).length > 0
@@ -142,6 +146,8 @@ export const syncWorkbookRecords = async ({
 
             if (manager) {
               data = { ...data, managerId: manager.id };
+            } else {
+              employeesWithoutMangersInDB.push(data);
             }
           } catch (error) {
             console.error(
@@ -152,6 +158,11 @@ export const syncWorkbookRecords = async ({
         }
 
         await upsertEmployee(data);
+
+        // Retry employee upsert on employees without managers in DB
+        employeesWithoutMangersInDB.forEach(async (data) => {
+          await upsertEmployee(data);
+        });
       } catch (error) {
         // throw error;
         console.error(
