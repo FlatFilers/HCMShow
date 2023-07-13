@@ -71,18 +71,20 @@ export const syncWorkbookRecords = async ({
     {
       organizationId: string;
       employeeId: string;
+      employeeTypeId: string;
       firstName: string;
       lastName: string;
       hireDate: Date;
       endEmploymentDate: Date | null;
       positionTitle: string;
-      employeeTypeId: string;
       defaultWeeklyHours: number;
       scheduledWeeklyHours: number;
       flatfileRecordId?: string | undefined;
       jobId: string;
     },
-    string | number | true
+    {
+      recordManagerId: string;
+    }
   ];
 
   if (employeeRecords) {
@@ -163,7 +165,8 @@ export const syncWorkbookRecords = async ({
             if (manager) {
               data = { ...data, managerId: manager.id };
             } else {
-              const retrydata: RetryData = [data, r.values.managerId.value];
+              const recordManagerId = r.values.managerId.value.toString()
+              const retrydata: RetryData = [data, {recordManagerId: recordManagerId}];
 
               employeesWithoutMangersInDB.push(retrydata);
             }
@@ -190,7 +193,7 @@ export const syncWorkbookRecords = async ({
           where: {
             organizationId_employeeId: {
               organizationId,
-              employeeId: employeeData[1] as string,
+              employeeId: employeeData[1].recordManagerId,
             },
           },
         });
