@@ -73,7 +73,7 @@ export const syncWorkbookRecords = async ({
       return a.values.managerId.value ? 1 : -1;
     });
 
-    const upsertEmployees = validsManagersFirst?.map(async (r) => {
+    for (const r of validsManagersFirst) {
       try {
         const values = r.values;
         const employeeTypeId = (
@@ -153,15 +153,12 @@ export const syncWorkbookRecords = async ({
 
         await upsertEmployee(data);
       } catch (error) {
-        // throw error;
         console.error(
           `Error: syncing employee record for user ${userId}, record ${r.id}`,
           error
         );
       }
-    });
-
-    await Promise.all(upsertEmployees);
+    }
   }
 
   const message = `Found ${totalRecords} total records. Synced ${numEmployeeRecords} Employee records.  Synced ${numJobRecords} Job records.`;
