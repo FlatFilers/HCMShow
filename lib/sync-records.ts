@@ -67,11 +67,32 @@ export const syncWorkbookRecords = async ({
     });
   }
 
+  type RetryData = [
+    {
+      organizationId: string;
+      employeeId: string;
+      firstName: string;
+      lastName: string;
+      hireDate: Date;
+      endEmploymentDate: Date | null;
+      positionTitle: string;
+      employeeTypeId: string;
+      defaultWeeklyHours: number;
+      scheduledWeeklyHours: number;
+      flatfileRecordId?: string | undefined;
+      jobId: string;
+      // Add other properties if needed
+    },
+    string | number | true
+  ];
+
   if (employeeRecords) {
     // TODO: Refactor employee logic to its lib file
     const validsManagersFirst = employeeRecords?.sort((a, b) => {
       return a.values.managerId.value ? 1 : -1;
     });
+
+    let employeesWithoutMangersInDB: Array<RetryData> = [];
 
     for (const r of validsManagersFirst) {
       try {
@@ -142,6 +163,10 @@ export const syncWorkbookRecords = async ({
 
             if (manager) {
               data = { ...data, managerId: manager.id };
+            } else {
+              const retrydata: RetryData = [data, r.values.managerId.value];
+
+              employeesWithoutMangersInDB.push(retrydata);
             }
           } catch (error) {
             console.error(
@@ -157,6 +182,29 @@ export const syncWorkbookRecords = async ({
           `Error: syncing employee record for user ${userId}, record ${r.id}`,
           error
         );
+      }
+    }
+
+    for (const employeeData of employeesWithoutMangersInDB) {
+      try {
+        try {
+          let manager = await prismaClient.employee.findUnique({
+            where: {
+              organizationId_employeeId: {
+                organizationId,
+                employeeId: employeeData[1] as string,
+              },
+            },
+          });
+
+          const employee = { ...employeeData[0], managerId: manager?.id };
+
+          await upsertEmployee(employee);
+        } catch (error) {
+          console.error("Error - managerId not found");
+        }
+      } catch (error) {
+        console.error(`Error: Retry sync failed for ${userId}`, error);
       }
     }
   }
