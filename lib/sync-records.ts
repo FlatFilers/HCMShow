@@ -81,7 +81,6 @@ export const syncWorkbookRecords = async ({
       scheduledWeeklyHours: number;
       flatfileRecordId?: string | undefined;
       jobId: string;
-      // Add other properties if needed
     },
     string | number | true
   ];
@@ -187,24 +186,20 @@ export const syncWorkbookRecords = async ({
 
     for (const employeeData of employeesWithoutMangersInDB) {
       try {
-        try {
-          let manager = await prismaClient.employee.findUnique({
-            where: {
-              organizationId_employeeId: {
-                organizationId,
-                employeeId: employeeData[1] as string,
-              },
+        let manager = await prismaClient.employee.findUnique({
+          where: {
+            organizationId_employeeId: {
+              organizationId,
+              employeeId: employeeData[1] as string,
             },
-          });
+          },
+        });
 
-          const employee = { ...employeeData[0], managerId: manager?.id };
+        const employee = { ...employeeData[0], managerId: manager?.id };
 
-          await upsertEmployee(employee);
-        } catch (error) {
-          console.error("Error - managerId not found");
-        }
+        await upsertEmployee(employee);
       } catch (error) {
-        console.error(`Error: Retry sync failed for ${userId}`, error);
+        console.error("Error - managerId not found");
       }
     }
   }
