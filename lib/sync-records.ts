@@ -82,17 +82,17 @@ export const syncWorkbookRecords = async ({
     jobId: string;
   };
 
-  type RetryData = [
-    RetryEmployeedata,
+  type UpsertEmployeeRetryData = [
+    Parameters<typeof upsertEmployee>[0],
     {
       recordManagerId: string;
     }
   ];
 
-  let employeesWithoutMangersInDB: Array<RetryData> = [];
+  let employeesWithoutMangersInDB: UpsertEmployeeRetryData[] = [];
 
   const upsertEmployeeAddingManager = async (
-    data: Parameters<typeof upsertEmployee>[0] | RetryEmployeedata,
+    data: Parameters<typeof upsertEmployee>[0],
     flatfileManagerId: string
   ) => {
     try {
@@ -108,7 +108,7 @@ export const syncWorkbookRecords = async ({
 
       if (manager === null) {
         const recordManagerId = flatfileManagerId.toString();
-        const retrydata: RetryData = [
+        const retrydata: UpsertEmployeeRetryData = [
           data,
           { recordManagerId: recordManagerId },
         ];
