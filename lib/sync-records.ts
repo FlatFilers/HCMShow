@@ -67,21 +67,6 @@ export const syncWorkbookRecords = async ({
     });
   }
 
-  type RetryEmployeedata = {
-    organizationId: string;
-    employeeId: string;
-    employeeTypeId: string;
-    firstName: string;
-    lastName: string;
-    hireDate: Date;
-    endEmploymentDate: Date | null;
-    positionTitle: string;
-    defaultWeeklyHours: number;
-    scheduledWeeklyHours: number;
-    flatfileRecordId?: string | undefined;
-    jobId: string;
-  };
-
   type UpsertEmployeeRetryData = [
     Parameters<typeof upsertEmployee>[0],
     {
