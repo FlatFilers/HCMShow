@@ -129,18 +129,8 @@ const ActivityLog: NextPage<Props> = ({ actions }) => {
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                             {a.createdAt}
                           </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {a.type === ActionType.SyncOnboardingRecords &&
-                              a.description}
-                            {a.type === ActionType.SyncEmbedRecords &&
-                              a.description}
-                            {a.type === ActionType.FileFeedEvent &&
-                              a.description.charAt(0).toUpperCase() +
-                                a.description.slice(1)}
-                            {a.type === ActionType.SyncFileFeedRecords &&
-                              a.description}
-                            {a.type === ActionType.SyncDynamicRecords &&
-                              a.description}
+                          <td className="capitalize whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            {a.description}
                           </td>
                         </tr>
                       );
