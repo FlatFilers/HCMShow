@@ -33,7 +33,7 @@ export default async function handler(
     userId: user.id,
     organizationId: user.organizationId,
     type: ActionType.FileFeedEvent,
-    description: "",
+    description: topic,
     metadata: {
       topic,
     },

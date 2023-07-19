@@ -129,13 +129,8 @@ const ActivityLog: NextPage<Props> = ({ actions }) => {
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                             {a.createdAt}
                           </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {a.type === ActionType.SyncRecords && a.description}
-                            {a.type === ActionType.FileFeedEvent &&
-                              (a.metadata as { description: string })
-                                .description}
-                            {a.type === ActionType.SyncEmbedRecords &&
-                              a.description}
+                          <td className="capitalize whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                            {a.description}
                           </td>
                         </tr>
                       );

@@ -4,6 +4,7 @@ import { DateTime } from "luxon";
 export enum ActionType {
   SyncRecords = "sync-records",
   FileFeedEvent = "file-feed-event",
+  SyncFileFeedRecords = "sync-filefeed-records",
   SyncOnboardingRecords = "sync-onboarding-records",
   SyncEmbedRecords = "sync-embed-records",
   SyncFilefeedRecords = "sync-filefeed-records",
