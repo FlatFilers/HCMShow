@@ -130,11 +130,16 @@ const ActivityLog: NextPage<Props> = ({ actions }) => {
                             {a.createdAt}
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {a.type === ActionType.SyncRecords && a.description}
-                            {a.type === ActionType.FileFeedEvent &&
-                              (a.metadata as { description: string })
-                                .description}
+                            {a.type === ActionType.SyncOnboardingRecords &&
+                              a.description}
                             {a.type === ActionType.SyncEmbedRecords &&
+                              a.description}
+                            {a.type === ActionType.FileFeedEvent &&
+                              a.description.charAt(0).toUpperCase() +
+                                a.description.slice(1)}
+                            {a.type === ActionType.SyncFileFeedRecords &&
+                              a.description}
+                            {a.type === ActionType.SyncDynamicRecords &&
                               a.description}
                           </td>
                         </tr>
