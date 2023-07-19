@@ -234,6 +234,8 @@ export const syncBenefitPlanRecords = async ({
     organizationId,
   });
 
+  console.log("count", count);
+
   const message = `Synced ${count}/${numEmployeeBenefitRecords} employee benefit plans.`;
 
   // console.log("topic", topic);
@@ -249,7 +251,7 @@ export const syncBenefitPlanRecords = async ({
     },
   });
 
-  // console.log("action", action);
+  console.log("action", action);
 
   return {
     success: true,
