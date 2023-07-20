@@ -7,6 +7,7 @@ import {
   UsersIcon,
   XMarkIcon,
   ArrowLeftOnRectangleIcon,
+  UserGroupIcon,
   BriefcaseIcon,
   ClipboardIcon,
   WindowIcon,
@@ -107,6 +108,12 @@ const SidebarLayout = ({ children }: Props) => {
       href: "/employees",
       icon: UsersIcon,
       current: router.pathname === "/employees",
+    },
+    {
+      name: "Departments",
+      href: "/departments",
+      icon: UserGroupIcon,
+      current: router.pathname === "/departments",
     },
     {
       name: "Jobs",
