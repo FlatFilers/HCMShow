@@ -22,13 +22,10 @@ const sampleDataFileName = "/jobs_employees.xlsx";
 
 const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  let defaultText = flatfileSpaceId ? "Sync Records" : "Setup Flatfile";
-  const [buttonText, setButtonText] = useState<string>(defaultText);
+  const [buttonText, setButtonText] = useState<string>("Setup Flatfile");
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);
-    flatfileSpaceId
-      ? setButtonText("Syncing records...")
-      : setButtonText("Setting up Flatfile...");
+    setButtonText("Setting up Flatfile...");
   };
 
   const router = useRouter();
@@ -109,9 +106,6 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
         <Workspace
           flatfileSpaceId={flatfileSpaceId}
           fileName={sampleDataFileName}
-          handleSubmit={handleSubmit}
-          isSubmitting={isSubmitting}
-          buttonText={buttonText}
         />
       )}
     </div>

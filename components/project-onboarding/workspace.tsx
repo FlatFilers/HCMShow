@@ -7,7 +7,6 @@ import {
   UserGroupIcon,
   VariableIcon,
 } from "@heroicons/react/24/outline";
-import toast from "react-hot-toast";
 import FeaturesList from "../shared/features-list";
 import GoToSpace from "../shared/go-to-space";
 
@@ -27,19 +26,10 @@ const features = {
 
 type Props = {
   fileName: string;
-  isSubmitting: boolean;
-  handleSubmit: Function;
-  buttonText: string;
   flatfileSpaceId: string;
 };
 
-const Workspace = ({
-  fileName,
-  isSubmitting,
-  handleSubmit,
-  buttonText,
-  flatfileSpaceId,
-}: Props) => {
+const Workspace = ({ fileName, flatfileSpaceId }: Props) => {
   return (
     <>
       <p className="text-2xl mb-8">Your Flatfile space is configured. 🎉</p>
@@ -67,24 +57,6 @@ const Workspace = ({
                 <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
               </button>
             </GoToSpace>
-
-            <form
-              action="/api/flatfile/sync-records"
-              method="post"
-              onSubmit={() => handleSubmit()}
-            >
-              <button
-                onClick={() => toast.loading("Syncing...")}
-                disabled={isSubmitting}
-                type="submit"
-                className={`${
-                  isSubmitting ? "hover:cursor-not-allowed" : ""
-                } border border-project-onboarding inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-project-onboarding hover:bg-project-onboarding hover:text-white`}
-              >
-                {buttonText}
-                <ArrowPathIcon className="w-4 h-4 ml-1" />
-              </button>
-            </form>
           </div>
 
           <p className="text-xs block text-gray-600">
