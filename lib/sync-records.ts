@@ -185,8 +185,8 @@ export const syncWorkbookRecords = async ({
     let retriesAttempted = 0;
     const MAX_RETRY_ATTEMPTS = 2;
 
-    const retryUpsert = async (MAX_RETRY_ATTEMPTS: number) => {
-      while (retriesAttempted < MAX_RETRY_ATTEMPTS) {
+    const retryUpsert = async (max_retry_attempts: number) => {
+      while (retriesAttempted < max_retry_attempts) {
         retriesAttempted++;
 
         for (const employeeArrayData of employeesWithoutMangersInDB) {
