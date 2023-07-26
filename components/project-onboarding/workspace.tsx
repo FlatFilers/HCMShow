@@ -7,7 +7,6 @@ import {
   UserGroupIcon,
   VariableIcon,
 } from "@heroicons/react/24/outline";
-import toast from "react-hot-toast";
 import FeaturesList from "../shared/features-list";
 import GoToSpace from "../shared/go-to-space";
 
@@ -27,19 +26,10 @@ const features = {
 
 type Props = {
   fileName: string;
-  isSubmitting: boolean;
-  handleSubmit: Function;
-  buttonText: string;
   flatfileSpaceId: string;
 };
 
-const Workspace = ({
-  fileName,
-  isSubmitting,
-  handleSubmit,
-  buttonText,
-  flatfileSpaceId,
-}: Props) => {
+const Workspace = ({ fileName, flatfileSpaceId }: Props) => {
   return (
     <>
       <p className="text-2xl mb-8">Your Flatfile space is configured. 🎉</p>
