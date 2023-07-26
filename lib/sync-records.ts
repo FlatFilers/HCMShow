@@ -183,8 +183,10 @@ export const syncWorkbookRecords = async ({
     await upsertEmployeesWithManager();
 
     let retriesAttempted = 0;
-    const retryUpsert = async (retriesScheduled: number) => {
-      while (retriesAttempted < retriesScheduled) {
+    const MAX_RETRY_ATTEMPTS = 2;
+
+    const retryUpsert = async (max_retry_attempts: number) => {
+      while (retriesAttempted < max_retry_attempts) {
         retriesAttempted++;
 
         for (const employeeArrayData of employeesWithoutMangersInDB) {
@@ -196,7 +198,7 @@ export const syncWorkbookRecords = async ({
       }
     };
 
-    await retryUpsert(1);
+    await retryUpsert(MAX_RETRY_ATTEMPTS);
   }
 
   const message = `Found ${totalRecords} total records. Synced ${numEmployeeRecords} Employee records.  Synced ${numJobRecords} Job records.`;
