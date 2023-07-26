@@ -22,8 +22,7 @@ const sampleDataFileName = "/jobs_employees.xlsx";
 
 const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  let defaultText = "Setup Flatfile";
-  const [buttonText, setButtonText] = useState<string>(defaultText);
+  const [buttonText, setButtonText] = useState<string>("Setup Flatfile");
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);
     setButtonText("Setting up Flatfile...");
