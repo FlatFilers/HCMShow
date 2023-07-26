@@ -32,7 +32,7 @@ const DownloadFile = ({ fileName, onClick, type }: Props) => {
       </p>
       <div className="mt-4 flex">
         <a
-          className={`${buttonClasses} mb-12 inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-semibold shadow-sm`}
+          className={`${buttonClasses} mb-8 inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-semibold shadow-sm`}
           download={fileName}
           href={fileName}
           onClick={() => onClick()}
@@ -40,6 +40,15 @@ const DownloadFile = ({ fileName, onClick, type }: Props) => {
           Download sample data
           <ArrowDownTrayIcon className="w-4 h-4 ml-2" />
         </a>
+      </div>
+      <div className="flex text-xs text-gray-600 w-fit">
+        <div className="block mr-1">Already have example data?</div>
+        <div
+          className="block underline text-xs text-blue-600 hover:cursor-pointer"
+          onClick={() => onClick()}
+        >
+          Click here.
+        </div>
       </div>
     </div>
   );
