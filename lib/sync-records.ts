@@ -78,7 +78,8 @@ export const syncWorkbookRecords = async ({
 
   const upsertEmployeeAddingManager = async (
     data: Parameters<typeof upsertEmployee>[0],
-    flatfileManagerId: string
+    flatfileManagerId: string,
+    inRetryLoop: boolean = false
   ) => {
     try {
       // Does the manager record already exist?
@@ -91,7 +92,7 @@ export const syncWorkbookRecords = async ({
         },
       });
 
-      if (manager === null) {
+      if (manager === null && !inRetryLoop) {
         const recordManagerId = flatfileManagerId.toString();
         const retrydata: UpsertEmployeeRetryData = [
           data,
@@ -100,7 +101,7 @@ export const syncWorkbookRecords = async ({
 
         employeesWithoutMangersInDB.push(retrydata);
       } else {
-        data = { ...data, managerId: manager.id };
+        data = { ...data, managerId: manager?.id };
       }
     } catch (error) {
       console.error("Error - managerId not found:", flatfileManagerId);
@@ -186,6 +187,7 @@ export const syncWorkbookRecords = async ({
     const MAX_RETRY_ATTEMPTS = 2;
 
     const retryUpsert = async (max_retry_attempts: number) => {
+      const inRetryLoop = true;
       while (retriesAttempted < max_retry_attempts) {
         retriesAttempted++;
 
@@ -193,7 +195,11 @@ export const syncWorkbookRecords = async ({
           const employeeData = employeeArrayData[0];
           const recordManagerId = employeeArrayData[1].recordManagerId;
 
-          await upsertEmployeeAddingManager(employeeData, recordManagerId);
+          await upsertEmployeeAddingManager(
+            employeeData,
+            recordManagerId,
+            inRetryLoop
+          );
         }
       }
     };
