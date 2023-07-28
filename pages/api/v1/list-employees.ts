@@ -5,7 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (typeof req.query.userId !== "string") {
+  if (!req.query.userId || Array.isArray(req.query.userId)) {
     res.status(400).send("Invalid or missing userId");
     return;
   }
