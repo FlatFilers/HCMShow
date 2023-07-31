@@ -23,6 +23,7 @@ import { hashPassword } from "../user";
 import crypto, { randomUUID } from "crypto";
 import { upsertEmployee } from "../employee";
 import { faker } from "@faker-js/faker";
+import { SeedDepartments } from "./data/seed_departments";
 
 export const main = async () => {
   console.log("Seeding...");
@@ -31,6 +32,7 @@ export const main = async () => {
   // await upsertLocations();
   await upsertEmployeeTypes();
   await upsertJobFamilies();
+  await upsertDepartments();
   // await upsertHireReasons();
   // await upsertTitleTypes();
   // await upsertTitles();
@@ -84,6 +86,23 @@ export const seedNewAccount = async (user: User) => {
     // into the specific organization
     await upsertEmployees(user.organizationId);
   }
+};
+
+const upsertDepartments = async () => {
+  let promises = SeedDepartments.map(async (department) => {
+    await prismaClient.department.upsert({
+      where: {
+        departmentCode: department.departmentCode,
+      },
+      create: {
+        departmentCode: department.departmentCode,
+        departmentName: department.departmentName,
+      },
+      update: {},
+    });
+  });
+
+  await Promise.all(promises);
 };
 
 export const upsertJobFamilies = async () => {
