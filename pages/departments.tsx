@@ -47,12 +47,6 @@ const Departments: NextPage<Props> = ({ departments }) => {
                       scope="col"
                       className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                     >
-                      Department ID
-                    </th>
-                    <th
-                      scope="col"
-                      className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                    >
                       Department Name
                     </th>
                     <th
@@ -66,9 +60,6 @@ const Departments: NextPage<Props> = ({ departments }) => {
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {departments.map((department) => (
                     <tr key={department.id}>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                        {department.id}
-                      </td>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                         {department.departmentName}
                       </td>
