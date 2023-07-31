@@ -7,7 +7,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // TODO: Do we scope to organization?
+  const serverAuthToken = req.headers["x-server-auth"];
+
+  if (!serverAuthToken || serverAuthToken !== process.env.SERVER_AUTH_TOKEN) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
   const dbDepartment: Department[] = await prismaClient.department.findMany();
 
   const departments: SerializeableDepartment[] = dbDepartment.map(
