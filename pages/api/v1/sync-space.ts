@@ -10,7 +10,7 @@ import { ActionType } from "../../../lib/action";
 
 /**
  * @swagger
- * /api/v1/sync-space:
+ * /sync-space:
  *   post:
  *     tags: [/api/v1/]
  *     summary: Syncs records from a space for a given workflow. Used in the primary "Submit" action for the workbook.

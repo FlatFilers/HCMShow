@@ -6,7 +6,7 @@ import { ActionState, ActionType, createAction } from "../../../lib/action";
 
 /**
  * @swagger
- * /api/v1/sync-file-feed:
+ * /sync-file-feed:
  *   post:
  *     tags: [/api/v1/]
  *     summary: Stores the event that occurred in the Flatfile space for the filefeed workflow.

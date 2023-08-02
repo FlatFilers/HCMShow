@@ -4,7 +4,7 @@ import { getSpaceForFlatfileSpaceId } from "../../../lib/space";
 
 /**
  * @swagger
- * /api/v1/employees:
+ * /employees:
  *   get:
  *     tags: [/api/v1/]
  *     summary: Returns a list of employee IDs for a space. Used to validate employee IDs in the Flatfile config.

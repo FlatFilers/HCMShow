@@ -5,7 +5,7 @@ import { SerializeableDepartment } from "../../departments";
 
 /**
  * @swagger
- * departments:
+ * /departments:
  *   get:
  *     tags: [/api/v1/]
  *     summary: Returns a list of departments. Used to pre-seed departments data in the Project Onboarding flow.
