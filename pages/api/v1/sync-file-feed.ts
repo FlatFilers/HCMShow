@@ -4,6 +4,50 @@ import { syncWorkbookRecords } from "../../../lib/sync-records";
 import { SpaceType, getSpaceForFlatfileSpaceId } from "../../../lib/space";
 import { ActionState, ActionType, createAction } from "../../../lib/action";
 
+/**
+ * @swagger
+ * /api/v1/sync-file-feed:
+ *   post:
+ *     tags: [/api/v1/]
+ *     summary: Stores the event that occurred in the Flatfile space for the filefeed workflow.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               spaceId:
+ *                 type: string
+ *                 description: Space identifier
+ *               topic:
+ *                 type: string
+ *                 description: Topic
+ *             required:
+ *               - spaceId
+ *               - topic
+ *     responses:
+ *       200:
+ *         description: Sync completed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Response message
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message
+ */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

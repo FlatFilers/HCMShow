@@ -1,6 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import {
   ArrowLeftOnRectangleIcon,
+  CodeBracketSquareIcon,
   InboxIcon,
   ListBulletIcon,
   XMarkIcon,
@@ -152,7 +153,7 @@ const MobileSidebar = ({
                     </div>
 
                     <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2">
-                      Resources
+                      Data Tables
                     </p>
 
                     {itemsNavigation.map((item) => (
@@ -201,6 +202,32 @@ const MobileSidebar = ({
                       />
                       Activity Log
                     </a>
+
+                    <a
+                      key="api-docs"
+                      href="/api-docs"
+                      target="_blank"
+                      className={`
+                    ${
+                      pathname === "/activity-log"
+                        ? "bg-slate-200 text-gray-900"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    }
+                    group flex items-center px-2 py-2 text-sm font-medium rounded-md`}
+                    >
+                      <CodeBracketSquareIcon
+                        className={`
+                      ${
+                        pathname === "/api-docs"
+                          ? "text-gray-800"
+                          : "text-gray-400 group-hover:text-gray-500"
+                      }
+                      mr-3 flex-shrink-0 h-6 w-6`}
+                        aria-hidden="true"
+                      />
+                      API Documentation
+                    </a>
+
                     <div className="flex flex-row w-full border-t-2 border-gray-200 pt-2 mt-2">
                       <a
                         href="#"
