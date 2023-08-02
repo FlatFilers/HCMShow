@@ -2,6 +2,39 @@ import { prismaClient } from "../../../lib/prisma-client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSpaceForFlatfileSpaceId } from "../../../lib/space";
 
+/**
+ * @swagger
+ * /api/v1/employees:
+ *   get:
+ *     tags: [/api/v1/]
+ *     summary: Returns a list of employee IDs for a space. Used to validate employee IDs in the Flatfile config.
+ *     parameters:
+ *       - name: spaceId
+ *         in: query
+ *         required: true
+ *         schema:
+ *           type: string
+ *           description: Identifier of the space
+ *     responses:
+ *       200:
+ *         description: List of employee IDs
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: string
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message
+ */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

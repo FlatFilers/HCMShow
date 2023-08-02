@@ -10,24 +10,26 @@ const ApiDoc = ({ spec }: InferGetStaticPropsType<typeof getStaticProps>) => {
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
+  const title = "HCM.show API Documentation";
+
   const spec: Record<string, any> = createSwaggerSpec({
-    title: "HCM.show Swagger API",
+    title,
     apiFolder: "pages/api",
     version: "0.1.0",
     definition: {
       openapi: "3.0.0",
       info: {
-        title: "HCM.show Swagger API",
+        title,
         version: "1.0",
       },
       components: {
-        securitySchemes: {
-          BearerAuth: {
-            type: "http",
-            scheme: "bearer",
-            bearerFormat: "JWT",
-          },
-        },
+        // securitySchemes: {
+        //   BearerAuth: {
+        //     type: "http",
+        //     scheme: "bearer",
+        //     bearerFormat: "JWT",
+        //   },
+        // },
       },
       security: [],
     },

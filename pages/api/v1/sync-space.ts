@@ -8,6 +8,53 @@ import { SpaceType, findSpace, findSpaceForType } from "../../../lib/space";
 import { WorkflowType } from "../../../lib/flatfile";
 import { ActionType } from "../../../lib/action";
 
+/**
+ * @swagger
+ * /api/v1/sync-space:
+ *   post:
+ *     tags: [/api/v1/]
+ *     summary: Syncs records from a space for a given workflow. Used in the primary "Submit" action for the workbook.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userId:
+ *                 type: string
+ *                 description: User identifier
+ *               spaceId:
+ *                 type: string
+ *                 description: Space identifier
+ *               workflowType:
+ *                 type: string
+ *                 description: Workflow type (onboarding, embedded, filefeed, dynamic)
+ *             required:
+ *               - userId
+ *     responses:
+ *       200:
+ *         description: Sync completed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Sync success status
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message
+ */
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
