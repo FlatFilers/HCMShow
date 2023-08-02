@@ -302,7 +302,7 @@ const SidebarLayout = ({ children }: Props) => {
                       mr-3 flex-shrink-0 h-6 w-6`}
                     aria-hidden="true"
                   />
-                  API Documentation
+                  HCM.Show API Documentation
                 </a>
 
                 <div className="flex flex-col w-full border-t-2 border-gray-200 pt-2 mt-2">
