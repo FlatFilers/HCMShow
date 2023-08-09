@@ -223,6 +223,12 @@ export const syncWorkbookRecords = async ({
   };
 };
 
+type SyncResult = {
+  success: boolean;
+  message: string;
+  successfullySyncedFlatfileRecordIds: string[];
+};
+
 export const syncBenefitPlanRecords = async ({
   workflow,
   userId,
@@ -237,7 +243,7 @@ export const syncBenefitPlanRecords = async ({
   spaceType: SpaceType;
   actionType: ActionType;
   spaceId?: string;
-}) => {
+}): Promise<SyncResult> => {
   const employeeBenefitRecords = await getRecordsByName({
     workflow,
     userId,
@@ -264,6 +270,7 @@ export const syncBenefitPlanRecords = async ({
     return {
       success: false,
       message: "No Records Found. Did you upload the sample data in Flatfile?",
+      successfullySyncedFlatfileRecordIds: [],
     };
   }
 
@@ -273,18 +280,18 @@ export const syncBenefitPlanRecords = async ({
     return {
       success: false,
       message: "There are no employee benefit records to sync.",
+      successfullySyncedFlatfileRecordIds: [],
     };
   }
-  const count = await upsertEmployeeBenefitPlanRecords(employeeBenefitRecords, {
-    userId,
-    organizationId,
-  });
+  const successfullySyncedFlatfileRecordIds =
+    await upsertEmployeeBenefitPlanRecords(employeeBenefitRecords, {
+      userId,
+      organizationId,
+    });
 
-  const message = `Synced ${count}/${numEmployeeBenefitRecords} employee benefit plans.`;
+  const message = `Synced ${successfullySyncedFlatfileRecordIds.length}/${numEmployeeBenefitRecords} employee benefit plans.`;
 
-  // console.log("topic", topic);
-
-  const action = await createAction({
+  await createAction({
     userId,
     organizationId,
     type: actionType,
@@ -295,10 +302,9 @@ export const syncBenefitPlanRecords = async ({
     },
   });
 
-  // console.log("action", action);
-
   return {
     success: true,
     message,
+    successfullySyncedFlatfileRecordIds,
   };
 };

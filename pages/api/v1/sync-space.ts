@@ -94,7 +94,6 @@ export default async function handler(
     space = await findSpace({ userId, flatfileSpaceId: spaceId });
   }
 
-  // Not awaiting for early response back to Flatfile server
   if (space.type === SpaceType.WorkbookUpload) {
     await syncWorkbookRecords({
       workflow: WorkflowType.Onboarding,
@@ -104,13 +103,25 @@ export default async function handler(
       actionType: ActionType.SyncOnboardingRecords,
     });
   } else if (space.type === SpaceType.FileFeed) {
-    await syncBenefitPlanRecords({
-      workflow: WorkflowType.FileFeed,
-      userId: user.id,
-      organizationId: user.organizationId,
-      spaceType: space.type,
-      actionType: ActionType.SyncFilefeedRecords,
+    const { successfullySyncedFlatfileRecordIds } =
+      await syncBenefitPlanRecords({
+        workflow: WorkflowType.FileFeed,
+        userId: user.id,
+        organizationId: user.organizationId,
+        spaceType: space.type,
+        actionType: ActionType.SyncFilefeedRecords,
+      });
+
+    console.log(
+      "successfullySyncedFlatfileRecordIds",
+      successfullySyncedFlatfileRecordIds
+    );
+
+    res.status(200).json({
+      success: true,
+      successfullySyncedFlatfileRecordIds,
     });
+    return;
   } else if (space.type === SpaceType.Embed) {
     await syncBenefitPlanRecords({
       workflow: WorkflowType.Embedded,
