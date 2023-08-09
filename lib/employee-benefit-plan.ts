@@ -15,7 +15,9 @@ const stringToSlug = (s: string) => {
 export const upsertEmployeeBenefitPlanRecords = async (
   benefitPlans: RecordsWithLinks,
   { userId, organizationId }: { userId: string; organizationId: string }
-) => {
+): Promise<string[]> => {
+  const successfulFlatfileRecordIds: string[] = [];
+
   const upserts = benefitPlans.map(async (r) => {
     try {
       // Upsert benefit plan
@@ -53,7 +55,9 @@ export const upsertEmployeeBenefitPlanRecords = async (
         benefitCoverageType: r.values.benefitCoverageType.value as string,
       };
 
-      return await upsertEmployeeBenefitPlan(data);
+      await upsertEmployeeBenefitPlan(data);
+
+      successfulFlatfileRecordIds.push(r.id);
     } catch (error) {
       console.error(
         `Error syncing employee benefit plan for user ${userId}, record ${r.id}: `,
@@ -62,9 +66,9 @@ export const upsertEmployeeBenefitPlanRecords = async (
     }
   });
 
-  const result = await Promise.all(upserts);
+  await Promise.all(upserts);
 
-  return result.filter((r) => r !== undefined).length;
+  return successfulFlatfileRecordIds;
 };
 
 export const upsertEmployeeBenefitPlan = async (
