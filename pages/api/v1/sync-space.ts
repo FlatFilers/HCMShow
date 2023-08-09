@@ -112,11 +112,6 @@ export default async function handler(
         actionType: ActionType.SyncFilefeedRecords,
       });
 
-    console.log(
-      "successfullySyncedFlatfileRecordIds",
-      successfullySyncedFlatfileRecordIds
-    );
-
     res.status(200).json({
       success: true,
       successfullySyncedFlatfileRecordIds,
