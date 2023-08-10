@@ -1,6 +1,6 @@
 import { NextPageWithLayout } from "./_app";
 import { useState, useCallback, useEffect, useRef } from "react";
-import { ISpace, IThemeConfig, useSpace } from "@flatfile/react";
+import { type ISpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import {
@@ -33,6 +33,16 @@ import {
 } from "../lib/flatfile";
 import { document } from "../components/embedded-portal/document";
 
+import dynamic from "next/dynamic";
+
+const DynamicEmbeddedSpace = dynamic(
+  () => import("../components/shared/embedded-space"),
+  {
+    loading: () => <div></div>,
+    ssr: false,
+  }
+);
+
 interface Props {
   environmentToken: string;
   lastSyncedAt?: string;
@@ -64,7 +74,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
 
   const [showSpace, setShowSpace] = useState(false);
   const error = (error: string) => {
-    console.log("error", error);
     return (
       <div>
         <XCircleIcon
@@ -97,7 +106,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       showSidebar: true,
     },
   } as ISpace;
-  const { component } = useSpace({ ...spaceProps });
   const [downloaded, setDownloaded] = useState(false);
   const storageKey = "embedded-has-downloaded-sample-data";
   const sampleDataFileName = "/benefits-sample-data.csv";
@@ -164,7 +172,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   }, []);
 
   const modalRef = useRef<HTMLDivElement | null>(null);
-
   useOnClickOutside(modalRef, () => setShowSpace(false));
 
   return (
@@ -229,9 +236,9 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       </div>
 
       {showSpace && (
-        <div className="absolute top-0 right-0 h-full w-full bg-black/60">
-          <div className="relative mt-16 mx-auto max-w-7xl">
-            <div ref={modalRef}>{component}</div>
+        <div className="absolute top-0 right-0 h-full w-full">
+          <div ref={modalRef}>
+            <DynamicEmbeddedSpace spaceProps={spaceProps} />
           </div>
         </div>
       )}
