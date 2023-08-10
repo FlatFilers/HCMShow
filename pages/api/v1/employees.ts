@@ -39,6 +39,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const serverAuthToken = req.headers["x-server-auth"];
+
+  if (!serverAuthToken || serverAuthToken !== process.env.SERVER_AUTH_TOKEN) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
   const spaceId = req.query.spaceId as string;
 
   const space = await getSpaceForFlatfileSpaceId(spaceId);
