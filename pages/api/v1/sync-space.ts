@@ -7,6 +7,7 @@ import {
 import { SpaceType, findSpace, findSpaceForType } from "../../../lib/space";
 import { WorkflowType } from "../../../lib/flatfile";
 import { ActionType } from "../../../lib/action";
+import { isAuthorized } from "../../../lib/api-utils";
 
 /**
  * @swagger
@@ -59,6 +60,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  if (!isAuthorized({ req })) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
   console.log("/sync-space", req.body);
 
   const { userId, spaceId, workflowType } = req.body;

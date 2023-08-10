@@ -3,6 +3,7 @@ import { prismaClient } from "../../../lib/prisma-client";
 import { syncWorkbookRecords } from "../../../lib/sync-records";
 import { SpaceType, getSpaceForFlatfileSpaceId } from "../../../lib/space";
 import { ActionState, ActionType, createAction } from "../../../lib/action";
+import { isAuthorized } from "../../../lib/api-utils";
 
 /**
  * @swagger
@@ -52,6 +53,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  if (!isAuthorized({ req })) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
   console.log("/sync-file-feed", req.body);
 
   const { spaceId, topic } = req.body;

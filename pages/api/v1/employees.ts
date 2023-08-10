@@ -1,6 +1,7 @@
 import { prismaClient } from "../../../lib/prisma-client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSpaceForFlatfileSpaceId } from "../../../lib/space";
+import { isAuthorized } from "../../../lib/api-utils";
 
 /**
  * @swagger
@@ -39,9 +40,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const serverAuthToken = req.headers["x-server-auth"];
-
-  if (!serverAuthToken || serverAuthToken !== process.env.SERVER_AUTH_TOKEN) {
+  if (!isAuthorized({ req })) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
