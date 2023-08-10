@@ -66,6 +66,7 @@ export const Events = ({ flatfileSpaceId, initialEvents }: Props) => {
           You can view the file uploaded to your space from Google Drive{" "}
           <a
             className="underline text-file-feed"
+            target="_blank"
             href="https://drive.google.com/file/d/1Y9-rnoDuqxrvV9JIpDYoXq-nt3cdAJQ3/view?usp=sharing"
           >
             here.
