@@ -30,12 +30,22 @@ import {
   getWorkbook,
 } from "../lib/flatfile";
 import { Flatfile } from "@flatfile/api";
-import { ISpace, useSpace } from "@flatfile/react";
+import { type ISpace } from "@flatfile/react";
 import { prismaClient } from "../lib/prisma-client";
 import { theme } from "../lib/theme";
 import { document } from "../components/dynamic-templates/document";
 import { Property } from "@flatfile/api/api";
 import { FlatfileSpaceData } from "../lib/flatfile";
+
+import dynamic from "next/dynamic";
+
+const DynamicEmbeddedSpace = dynamic(
+  () => import("../components/shared/embedded-space"),
+  {
+    loading: () => <div></div>,
+    ssr: false,
+  }
+);
 
 const features = {
   "Event-based workflow": ExclamationCircleIcon,
@@ -267,9 +277,11 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
       showDataChecklist: false,
       showSidebar: true,
     },
+    closeSpace: {
+      operation: "contacts:submit", // todo: what do we put here?
+      onClose: () => setShowSpace(false),
+    },
   } as ISpace;
-
-  const { component } = useSpace({ ...spaceProps });
 
   const handleOptionsSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -497,14 +509,8 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
             githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/workflows/dynamic/index.ts"
             features={features}
           />
-          {/* TODO: Add spinner while embed is loading */}
-          {showSpace && (
-            <div className="absolute top-0 right-0 w-full h-full bg-black/60">
-              <div className="relative mt-16 mx-auto max-w-7xl">
-                <div ref={modalRef}>{component}</div>
-              </div>
-            </div>
-          )}
+
+          {showSpace && <DynamicEmbeddedSpace spaceProps={spaceProps} />}
         </div>
       </div>
     </div>

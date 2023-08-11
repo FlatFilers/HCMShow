@@ -1,18 +1,10 @@
 import { NextPageWithLayout } from "./_app";
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { type ISpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
-import {
-  ArrowPathIcon,
-  ArrowDownTrayIcon,
-  ArrowsPointingOutIcon,
-  ArrowsPointingInIcon,
-  PencilIcon,
-  SparklesIcon,
-  XCircleIcon,
-} from "@heroicons/react/24/outline";
-import { Action, PrismaClient, Space } from "@prisma/client";
+import { XCircleIcon } from "@heroicons/react/24/outline";
+import { PrismaClient, Space } from "@prisma/client";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
 import { SpaceType } from "../lib/space";
@@ -23,7 +15,7 @@ import SetupSpace from "../components/shared/setup-space";
 import StepList, { Step } from "../components/shared/step-list";
 import Workspace from "../components/embedded-portal/workspace";
 import { theme } from "../lib/theme";
-import { useFlashMessages, useOnClickOutside } from "../lib/hooks/usehooks";
+import { useFlashMessages } from "../lib/hooks/usehooks";
 import { Flatfile } from "@flatfile/api";
 import {
   FlatfileSpaceData,
@@ -174,9 +166,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       ]);
     }
   }, []);
-
-  const modalRef = useRef<HTMLDivElement | null>(null);
-  useOnClickOutside(modalRef, () => setShowSpace(false));
 
   return (
     <div className="mx-12 mt-16 self-center">
