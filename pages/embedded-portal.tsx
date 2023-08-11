@@ -105,6 +105,10 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       showDataChecklist: false,
       showSidebar: true,
     },
+    closeSpace: {
+      operation: "contacts:submit", // todo: what do we put here?
+      onClose: () => setShowSpace(false),
+    },
   } as ISpace;
   const [downloaded, setDownloaded] = useState(false);
   const storageKey = "embedded-has-downloaded-sample-data";
@@ -235,13 +239,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
         </div>
       </div>
 
-      {showSpace && (
-        <div className="absolute top-0 right-0 h-full w-full">
-          <div ref={modalRef}>
-            <DynamicEmbeddedSpace spaceProps={spaceProps} />
-          </div>
-        </div>
-      )}
+      {showSpace && <DynamicEmbeddedSpace spaceProps={spaceProps} />}
     </div>
   );
 };

@@ -43,3 +43,8 @@ div[data-testid="space-contents"] {
   left: 50% !important;
   transform: translateX(-50%);
 }
+
+.flatfile-close-button {
+  display: block;
+  background-color: red;
+}
