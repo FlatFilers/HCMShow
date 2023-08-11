@@ -286,7 +286,7 @@ const SidebarLayout = ({ children }: Props) => {
                   target="_blank"
                   className={`
                     ${
-                      router.pathname === "/activity-log"
+                      router.pathname === "/api-docs"
                         ? "bg-slate-200 text-gray-900"
                         : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                     }

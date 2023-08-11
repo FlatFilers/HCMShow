@@ -35,3 +35,33 @@
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   }
 }
+
+/* TODO: Hack to make embedded space expand to full screen. */
+div[data-testid="space-contents"] {
+  width: 100% !important;
+  height: 100% !important;
+  left: 50% !important;
+  transform: translateX(-50%);
+}
+
+.flatfile-close-button {
+  display: block;
+  background-color: red;
+}
+
+/* Both buttons */
+[data-testid="close-confirm-modal"] > div > div > div:nth-child(3) > div > div {
+  height: 40px;
+  padding: 8px 16px;
+  border-radius: 3px;
+}
+
+/* The "yes exit" button */
+[data-testid="close-confirm-modal"]
+  > div
+  > div
+  > div:nth-child(3)
+  > div:nth-child(2)
+  > div {
+  background-color: #090b2b;
+}

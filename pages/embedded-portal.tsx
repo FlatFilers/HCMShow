@@ -1,18 +1,10 @@
 import { NextPageWithLayout } from "./_app";
-import { useState, useCallback, useEffect, useRef } from "react";
-import { ISpace, IThemeConfig, useSpace } from "@flatfile/react";
+import { useState, useEffect } from "react";
+import { type ISpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
-import {
-  ArrowPathIcon,
-  ArrowDownTrayIcon,
-  ArrowsPointingOutIcon,
-  ArrowsPointingInIcon,
-  PencilIcon,
-  SparklesIcon,
-  XCircleIcon,
-} from "@heroicons/react/24/outline";
-import { Action, PrismaClient, Space } from "@prisma/client";
+import { XCircleIcon } from "@heroicons/react/24/outline";
+import { PrismaClient, Space } from "@prisma/client";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
 import { SpaceType } from "../lib/space";
@@ -23,7 +15,7 @@ import SetupSpace from "../components/shared/setup-space";
 import StepList, { Step } from "../components/shared/step-list";
 import Workspace from "../components/embedded-portal/workspace";
 import { theme } from "../lib/theme";
-import { useFlashMessages, useOnClickOutside } from "../lib/hooks/usehooks";
+import { useFlashMessages } from "../lib/hooks/usehooks";
 import { Flatfile } from "@flatfile/api";
 import {
   FlatfileSpaceData,
@@ -32,6 +24,16 @@ import {
   getWorkbook,
 } from "../lib/flatfile";
 import { document } from "../components/embedded-portal/document";
+
+import dynamic from "next/dynamic";
+
+const DynamicEmbeddedSpace = dynamic(
+  () => import("../components/shared/embedded-space"),
+  {
+    loading: () => <div></div>,
+    ssr: false,
+  }
+);
 
 interface Props {
   environmentToken: string;
@@ -64,7 +66,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
 
   const [showSpace, setShowSpace] = useState(false);
   const error = (error: string) => {
-    console.log("error", error);
     return (
       <div>
         <XCircleIcon
@@ -96,8 +97,11 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       showDataChecklist: false,
       showSidebar: true,
     },
+    closeSpace: {
+      operation: "contacts:submit", // todo: what do we put here?
+      onClose: () => setShowSpace(false),
+    },
   } as ISpace;
-  const { component } = useSpace({ ...spaceProps });
   const [downloaded, setDownloaded] = useState(false);
   const storageKey = "embedded-has-downloaded-sample-data";
   const sampleDataFileName = "/benefits-sample-data.csv";
@@ -163,10 +167,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     }
   }, []);
 
-  const modalRef = useRef<HTMLDivElement | null>(null);
-
-  useOnClickOutside(modalRef, () => setShowSpace(false));
-
   return (
     <div className="mx-12 mt-16 self-center">
       <div className="max-w-5xl">
@@ -228,13 +228,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
         </div>
       </div>
 
-      {showSpace && (
-        <div className="absolute top-0 right-0 h-full w-full bg-black/60">
-          <div className="relative mt-16 mx-auto max-w-7xl">
-            <div ref={modalRef}>{component}</div>
-          </div>
-        </div>
-      )}
+      {showSpace && <DynamicEmbeddedSpace spaceProps={spaceProps} />}
     </div>
   );
 };
