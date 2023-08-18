@@ -1,7 +1,7 @@
 import { prismaClient } from "../../../lib/prisma-client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSpaceForFlatfileSpaceId } from "../../../lib/space";
-import { isAuthorized } from "../../../lib/api-utils";
+import { isNotAuthorized } from "../../../lib/api-utils";
 
 /**
  * @swagger
@@ -10,6 +10,12 @@ import { isAuthorized } from "../../../lib/api-utils";
  *     tags: [/api/v1/]
  *     summary: Returns a list of employee IDs for a space. Used to validate employee IDs in the Flatfile config.
  *     parameters:
+ *       - name: x-server-auth
+ *         in: header
+ *         required: true
+ *         schema:
+ *           type: string
+ *           description: Server authentication token
  *       - name: spaceId
  *         in: query
  *         required: true
@@ -40,7 +46,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (!isAuthorized({ req })) {
+  if (isNotAuthorized({ req })) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
