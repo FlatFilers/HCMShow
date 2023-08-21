@@ -3,6 +3,7 @@ import { prismaClient } from "../../../lib/prisma-client";
 import { syncWorkbookRecords } from "../../../lib/sync-records";
 import { SpaceType, getSpaceForFlatfileSpaceId } from "../../../lib/space";
 import { ActionState, ActionType, createAction } from "../../../lib/action";
+import { isNotAuthorized } from "../../../lib/api-utils";
 
 /**
  * @swagger
@@ -10,6 +11,13 @@ import { ActionState, ActionType, createAction } from "../../../lib/action";
  *   post:
  *     tags: [/api/v1/]
  *     summary: Stores the event that occurred in the Flatfile space for the filefeed workflow.
+ *     parameters:
+ *       - name: x-server-auth
+ *         in: header
+ *         required: true
+ *         schema:
+ *           type: string
+ *           description: Server authentication token
  *     requestBody:
  *       required: true
  *       content:
@@ -52,6 +60,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  if (isNotAuthorized({ req })) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
   console.log("/sync-file-feed", req.body);
 
   const { spaceId, topic } = req.body;

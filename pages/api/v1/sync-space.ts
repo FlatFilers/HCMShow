@@ -7,6 +7,7 @@ import {
 import { SpaceType, findSpace, findSpaceForType } from "../../../lib/space";
 import { WorkflowType } from "../../../lib/flatfile";
 import { ActionType } from "../../../lib/action";
+import { isNotAuthorized } from "../../../lib/api-utils";
 
 /**
  * @swagger
@@ -14,6 +15,13 @@ import { ActionType } from "../../../lib/action";
  *   post:
  *     tags: [/api/v1/]
  *     summary: Syncs records from a space for a given workflow. Used in the primary "Submit" action for the workbook.
+ *     parameters:
+ *       - name: x-server-auth
+ *         in: header
+ *         required: true
+ *         schema:
+ *           type: string
+ *           description: Server authentication token
  *     requestBody:
  *       required: true
  *       content:
@@ -59,6 +67,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  if (isNotAuthorized({ req })) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
   console.log("/sync-space", req.body);
 
   const { userId, spaceId, workflowType } = req.body;
