@@ -274,8 +274,6 @@ export const syncBenefitPlanRecords = async ({
     };
   }
 
-  const numEmployeeBenefitRecords = employeeBenefitRecords?.length ?? 0;
-
   if (!employeeBenefitRecords) {
     return {
       success: false,
@@ -289,7 +287,7 @@ export const syncBenefitPlanRecords = async ({
       organizationId,
     });
 
-  const message = `Synced ${successfullySyncedFlatfileRecordIds.length}/${numEmployeeBenefitRecords} employee benefit plans.`;
+  const message = `Synced ${successfullySyncedFlatfileRecordIds.length} valid employee benefit plans.`;
 
   await createAction({
     userId,
