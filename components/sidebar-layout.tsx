@@ -16,6 +16,7 @@ import {
   VariableIcon,
   HomeIcon,
   CodeBracketSquareIcon,
+  ClipboardDocumentIcon,
 } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 import { NextRouter, useRouter } from "next/router";
@@ -127,6 +128,12 @@ const SidebarLayout = ({ children }: Props) => {
       href: "/benefit-plans",
       icon: ClipboardIcon,
       current: router.pathname === "/benefit-plans",
+    },
+    {
+      name: "Employee Benefit Plans",
+      href: "/employee-benefit-plans",
+      icon: ClipboardDocumentIcon,
+      current: router.pathname === "/employee-benefit-plans",
     },
   ];
   const userNavigation: { name: string; href: string }[] = [
