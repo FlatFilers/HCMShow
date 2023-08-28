@@ -1,691 +1,691 @@
-Employee ID,Benefit Plan,Currently Enrolled?,Coverage Start Date,Employer Contribution,Benefit Coverage Type
-19255,Pension - Collectum Supplemental ITP1 (Employee),Yes,1/1/15,3125.69,Health_Care_Coverage_Type_Medical
-19255,Pension - Collectum ITP1 (Employee),Yes,1/1/15,1884.41,
-19306,Pension - Collectum ITP1 (Employee),Yes,1/1/15,748.8,Health_Care_Coverage_Type_Medical
-19302,Pension - Collectum ITP1 (Employee),Yes,1/1/15,764.4,Health_Care_Coverage_Type_Medical
-19077,Pension - Collectum Supplemental ITP1 (Employee),Yes,1/1/15,15624.15,Health_Care_Coverage_Type_Medical
-19077,Pension - Collectum ITP1 (Employee),Yes,1/1/15,4037.77,Health_Care_Coverage_Type_Medical
-19126,Pension - Collectum Supplemental ITP1 (Employee),Yes,1/1/15,1215.71,Health_Care_Coverage_Type_Medical
-19126,Pension - Collectum ITP1 (Employee),Yes,1/1/15,1407.21,Health_Care_Coverage_Type_Medical
-19263,Pension - Collectum ITP1 (Employee),Yes,1/1/15,1151,Health_Care_Coverage_Type_Medical
-19347,Basic Group Life - AXA UK (Employee),Yes,1/1/15,261.3,Health_Care_Coverage_Type_Medical
-19346,Basic Group Life - AXA UK (Employee),Yes,1/1/15,331.5,Health_Care_Coverage_Type_Medical
-19345,Basic Group Life - AXA UK (Employee),Yes,1/1/15,159.9,Health_Care_Coverage_Type_Medical
-19131,Basic Group Life - AXA UK (Employee),Yes,1/1/00,109.2,Health_Care_Coverage_Type_Medical
-19129,Basic Group Life - AXA UK (Employee),Yes,1/1/00,159.9,Health_Care_Coverage_Type_Medical
-19266,Basic Group Life - AXA UK (Employee),Yes,7/1/14,292.5,Health_Care_Coverage_Type_Medical
-19332,Basic Group Life - AXA UK (Employee),Yes,7/23/14,288.6,Health_Care_Coverage_Type_Medical
-19168,Basic Group Life - AXA UK (Employee),Yes,1/1/00,269.1,Health_Care_Coverage_Type_Medical
-19299,Basic Group Life - AXA UK (Employee),Yes,3/7/11,124.8,Health_Care_Coverage_Type_Medical
-19244,Basic Group Life - AXA UK (Employee),Yes,11/8/11,300.3,Health_Care_Coverage_Type_Medical
-19254,Basic Group Life - AXA UK (Employee),Yes,3/1/10,269.1,Health_Care_Coverage_Type_Medical
-19239,Basic Group Life - AXA UK (Employee),Yes,11/15/10,105.3,Health_Care_Coverage_Type_Medical
-19305,Basic Group Life - AXA UK (Employee),Yes,5/2/11,163.8,Health_Care_Coverage_Type_Medical
-19173,Basic Group Life - AXA UK (Employee),Yes,1/1/15,210.6,Health_Care_Coverage_Type_Medical
-19229,Basic Group Life - AXA UK (Employee),Yes,10/4/10,167.7,Health_Care_Coverage_Type_Medical
-19298,Basic Group Life - AXA UK (Employee),Yes,1/1/11,315.9,Health_Care_Coverage_Type_Medical
-19359,Basic Group Life - AXA UK (Employee),Yes,1/1/15,257.4,Health_Care_Coverage_Type_Medical
-19358,Basic Group Life - AXA UK (Employee),Yes,1/1/15,315.9,Health_Care_Coverage_Type_Medical
-19357,Basic Group Life - AXA UK (Employee),Yes,1/1/15,292.5,Health_Care_Coverage_Type_Medical
-19356,Basic Group Life - AXA UK (Employee),Yes,1/1/15,276.9,Health_Care_Coverage_Type_Medical
-19355,Basic Group Life - AXA UK (Employee),Yes,1/1/15,304.2,Health_Care_Coverage_Type_Medical
-19354,Basic Group Life - AXA UK (Employee),Yes,1/1/15,354.9,Health_Care_Coverage_Type_Medical
-19353,Basic Group Life - AXA UK (Employee),Yes,1/1/15,214.5,Health_Care_Coverage_Type_Medical
-19352,Basic Group Life - AXA UK (Employee),Yes,1/1/15,351,Health_Care_Coverage_Type_Medical
-19205,Basic Group Life - AXA UK (Employee),Yes,1/1/00,296.4,Health_Care_Coverage_Type_Medical
-19351,Basic Group Life - AXA UK (Employee),Yes,1/1/15,304.2,Health_Care_Coverage_Type_Medical
-19350,Basic Group Life - AXA UK (Employee),Yes,1/1/15,191.1,Health_Care_Coverage_Type_Medical
-19349,Basic Group Life - AXA UK (Employee),Yes,1/1/15,288.6,Health_Care_Coverage_Type_Medical
-19348,Basic Group Life - AXA UK (Employee),Yes,1/1/15,292.5,Health_Care_Coverage_Type_Medical
-19135,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,22.95,Health_Care_Coverage_Type_Medical
-19135,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/07,11.8,Health_Care_Coverage_Type_Medical
-19135,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
-19135,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,1.2,Health_Care_Coverage_Type_Medical
-19134,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,25.2,Health_Care_Coverage_Type_Medical
-19134,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/07,11.8,Health_Care_Coverage_Type_Medical
-19134,Short Term Disability - Standard Life  (Employee),Yes,1/1/08,7.8,Health_Care_Coverage_Type_Medical
-19134,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,0.6,Health_Care_Coverage_Type_Medical
-19134,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/10,0,Health_Care_Coverage_Type_Medical
-19133,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,23.85,Health_Care_Coverage_Type_Medical
-19133,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
-19133,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,1.8,Health_Care_Coverage_Type_Medical
-19133,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-19326,Basic Group Life - Standard Life  (Employee),Yes,6/1/12,34.2,Health_Care_Coverage_Type_Medical
-19326,Short Term Disability - Standard Life  (Employee),Yes,6/1/12,7.8,Health_Care_Coverage_Type_Medical
-19326,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-19198,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/07,11.8,Health_Care_Coverage_Type_Medical
-19198,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
-19198,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,1.8,Health_Care_Coverage_Type_Medical
-19198,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-19198,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,40.95,Health_Care_Coverage_Type_Medical
-19132,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,48.6,Health_Care_Coverage_Type_Medical
-19132,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
-19132,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
-19132,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,1.2,Health_Care_Coverage_Type_Medical
-19132,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19387,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19387,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,15.3,Health_Care_Coverage_Type_Medical
-19387,Long Term Disability - Standard Life Enhanced (Employee),Yes,1/1/15,13.5,Health_Care_Coverage_Type_Medical
-19276,Basic Group Life - Standard Life  (Employee),Yes,1/9/12,13.05,Health_Care_Coverage_Type_Medical
-19276,Short Term Disability - Standard Life  (Employee),Yes,1/9/12,7.8,Health_Care_Coverage_Type_Medical
-19275,Basic Group Life - Standard Life  (Employee),Yes,3/14/11,13.95,Health_Care_Coverage_Type_Medical
-19275,Short Term Disability - Standard Life  (Employee),Yes,3/14/11,7.8,Health_Care_Coverage_Type_Medical
-19275,Voluntary AD&D - Standard Life  (Employee),Yes,3/14/11,0.6,Health_Care_Coverage_Type_Medical
-19275,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/12,0,Health_Care_Coverage_Type_Medical
-19274,Basic Group Life - Standard Life  (Employee),Yes,5/9/11,14.85,Health_Care_Coverage_Type_Medical
-19274,Long Term Disability - Standard Life Basic (Employee),Yes,5/9/11,11.8,Health_Care_Coverage_Type_Medical
-19274,Short Term Disability - Standard Life  (Employee),Yes,5/9/11,7.8,Health_Care_Coverage_Type_Medical
-19274,Voluntary AD&D - Standard Life  (Employee),Yes,5/9/11,0.6,Health_Care_Coverage_Type_Medical
-19274,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-19381,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,38.25,Health_Care_Coverage_Type_Medical
-19381,Long Term Disability - Standard Life Enhanced (Employee),Yes,1/1/15,13.5,Health_Care_Coverage_Type_Medical
-19381,Short Term Disability - Standard Life  (Employee),Yes,1/1/15,7.8,Health_Care_Coverage_Type_Medical
-19312,Basic Group Life - Standard Life  (Employee),Yes,6/4/12,17.1,Health_Care_Coverage_Type_Medical
-19311,Basic Group Life - Standard Life  (Employee),Yes,3/5/12,15.3,Health_Care_Coverage_Type_Medical
-19310,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-19310,Basic Group Life - Standard Life  (Employee),Yes,1/10/05,24.75,Health_Care_Coverage_Type_Medical
-19242,Basic Group Life - Standard Life  (Employee),Yes,8/22/11,32.85,Health_Care_Coverage_Type_Medical
-19242,Long Term Disability - Standard Life Basic (Employee),Yes,8/22/11,11.8,Health_Care_Coverage_Type_Medical
-19242,Short Term Disability - Standard Life  (Employee),Yes,8/22/11,7.8,Health_Care_Coverage_Type_Medical
-19242,Voluntary Supplemental Life - Standard Life  (Employee),Yes,8/22/11,0,Health_Care_Coverage_Type_Medical
-19386,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19386,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,17.1,Health_Care_Coverage_Type_Medical
-19385,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,18,Health_Care_Coverage_Type_Medical
-19385,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19384,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,17.1,Health_Care_Coverage_Type_Medical
-19384,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19383,Basic Group Life - Standard Life  (Employee),Yes,1/1/15,49.05,Health_Care_Coverage_Type_Medical
-19383,Short Term Disability - Standard Life  (Employee),Yes,1/1/15,7.8,Health_Care_Coverage_Type_Medical
-19383,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19382,Basic Group Life - Standard Life  (Employee),Yes,1/1/16,49.5,Health_Care_Coverage_Type_Medical
-19079,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
-19079,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
-19079,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/08,1.2,Health_Care_Coverage_Type_Medical
-19079,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/10,0,Health_Care_Coverage_Type_Medical
-19079,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,71.55,Health_Care_Coverage_Type_Medical
-19296,Basic Group Life - Standard Life  (Employee),Yes,1/16/12,38.7,Health_Care_Coverage_Type_Medical
-19295,Basic Group Life - Standard Life  (Employee),Yes,2/15/12,31.95,Health_Care_Coverage_Type_Medical
-19293,Basic Group Life - Standard Life  (Employee),Yes,3/14/11,18.9,Health_Care_Coverage_Type_Medical
-19293,Short Term Disability - Standard Life  (Employee),Yes,3/14/11,7.8,Health_Care_Coverage_Type_Medical
-19293,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/12,0,Health_Care_Coverage_Type_Medical
-19292,Basic Group Life - Standard Life  (Employee),Yes,3/14/11,19.8,Health_Care_Coverage_Type_Medical
-19292,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
-19292,Short Term Disability - Standard Life  (Employee),Yes,3/14/11,7.8,Health_Care_Coverage_Type_Medical
-19291,Basic Group Life - Standard Life  (Employee),Yes,2/7/11,18.45,Health_Care_Coverage_Type_Medical
-19291,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
-19291,Short Term Disability - Standard Life  (Employee),Yes,2/7/11,7.8,Health_Care_Coverage_Type_Medical
-19238,Basic Group Life - Standard Life  (Employee),Yes,2/22/11,31.5,Health_Care_Coverage_Type_Medical
-19238,Long Term Disability - Standard Life Basic (Employee),Yes,2/22/11,11.8,Health_Care_Coverage_Type_Medical
-19238,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/12,0.6,Health_Care_Coverage_Type_Medical
-19238,Voluntary Supplemental Life - Standard Life  (Employee),Yes,2/22/11,0,Health_Care_Coverage_Type_Medical
-19238,Spouse Life - Standard Life  (Spouse),Yes,1/2/14,0,Health_Care_Coverage_Type_Medical
-19140,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/12,11.8,Health_Care_Coverage_Type_Medical
-19140,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
-19140,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,2.4,Health_Care_Coverage_Type_Medical
-19140,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-19140,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,49.5,Health_Care_Coverage_Type_Medical
-19139,Basic Group Life - Standard Life  (Employee),Yes,1/1/07,47.7,Health_Care_Coverage_Type_Medical
-19139,Long Term Disability - Standard Life Basic (Employee),Yes,1/1/07,11.8,Health_Care_Coverage_Type_Medical
-19139,Short Term Disability - Standard Life  (Employee),Yes,1/1/07,7.8,Health_Care_Coverage_Type_Medical
-19139,Voluntary AD&D - Standard Life  (Employee),Yes,1/1/07,2.4,Health_Care_Coverage_Type_Medical
-19139,Voluntary Supplemental Life - Standard Life  (Employee),Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-19231,Short Term Disability - Standard Life  (Employee),Yes,6/6/11,7.8,Health_Care_Coverage_Type_Medical
-19231,Voluntary Supplemental Life - Standard Life  (Employee),Yes,6/6/11,0,Health_Care_Coverage_Type_Medical
-19231,Basic Group Life - Standard Life  (Employee),Yes,6/6/11,64.8,Health_Care_Coverage_Type_Medical
-19231,Long Term Disability - Standard Life Basic (Employee),Yes,6/6/11,11.8,Health_Care_Coverage_Type_Medical
-19390,Pension - Collectum ITP1 (Employee),Yes,1/1/15,2699.28,Health_Care_Coverage_Type_Medical
-19391,Pension - Collectum ITP1 (Employee),Yes,1/1/15,2819.07,Health_Care_Coverage_Type_Medical
-19416,Pension - Collectum Supplemental ITP1 (Employee),Yes,1/1/16,12500,Health_Care_Coverage_Type_Medical
-19416,Pension - Collectum ITP1 (Employee),Yes,1/1/16,2250,Health_Care_Coverage_Type_Medical
-19376,Basic Group Life - NN Life  (Employee),Yes,10/1/14,0,Health_Care_Coverage_Type_Medical
-19185,Basic Group Life - NN Life  (Employee),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19125,Basic Group Life - NN Life  (Employee),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19122,Basic Group Life - NN Life  (Employee),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19279,Basic Group Life - NN Life  (Employee),Yes,4/9/12,0,Health_Care_Coverage_Type_Medical
-19378,Basic Group Life - NN Life  (Employee),Yes,3/3/15,0,Health_Care_Coverage_Type_Medical
-19428,Basic Group Life - AXA UK (Employee),Yes,1/1/16,210.6,Health_Care_Coverage_Type_Medical
-19429,Basic Group Life - AXA UK (Employee),Yes,2/1/16,230.1,Health_Care_Coverage_Type_Medical
-19432,Pension - Collectum Supplemental ITP1 (Employee),Yes,10/31/16,12794.17,Health_Care_Coverage_Type_Medical
-19433,Basic Group Life - NN Life  (Employee),Yes,11/1/16,0,Health_Care_Coverage_Type_Medical
-19284,Basic Group Life - AXA UK (Employee),Yes,12/6/10,409.5,Health_Care_Coverage_Type_Medical
-19127,Basic Group Life - AXA UK (Employee),Yes,1/1/00,171.6,Health_Care_Coverage_Type_Medical
-19180,Basic Group Life - AXA UK (Employee),Yes,1/1/00,167.7,Health_Care_Coverage_Type_Medical
-19435,Pension - Collectum ITP1 (Employee),Yes,2/1/16,1069.84,Health_Care_Coverage_Type_Medical
-19444,Basic Group Life - AXA Ireland (Employee),Yes,1/1/16,554.4,Health_Care_Coverage_Type_Medical
-19169,Basic Group Life - AXA UK (Employee),Yes,1/1/00,210.6,Health_Care_Coverage_Type_Medical
-19167,Basic Group Life - AXA UK (Employee),Yes,1/1/00,249.6,Health_Care_Coverage_Type_Medical
-19227,Basic Group Life - AXA UK (Employee),Yes,6/14/10,198.9,Health_Care_Coverage_Type_Medical
-19473,Basic Group Life - NN Life  (Employee),Yes,2/1/16,0,Health_Care_Coverage_Type_Medical
-19474,Basic Group Life - NN Life  (Employee),Yes,6/15/17,0,Health_Care_Coverage_Type_Medical
-19475,Basic Group Life - NN Life  (Employee),Yes,3/18/18,0,Health_Care_Coverage_Type_Medical
-19476,Basic Group Life - NN Life  (Employee),Yes,1/1/16,0,Health_Care_Coverage_Type_Medical
-19477,Basic Group Life - NN Life  (Employee),Yes,1/1/17,0,Health_Care_Coverage_Type_Medical
-19252,Medical - Aviva  PMI,Yes,1/16/10,540,Health_Care_Coverage_Type_Medical
-19202,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,1/1/00,86.25,Health_Care_Coverage_Type_Medical
-19245,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,10/3/11,86.25,Health_Care_Coverage_Type_Medical
-19224,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,5/16/10,86.25,Health_Care_Coverage_Type_Medical
-19236,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,9/6/10,86.25,Health_Care_Coverage_Type_Medical
-19228,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,8/2/10,86.25,Health_Care_Coverage_Type_Medical
-19183,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,1/1/00,86.25,Health_Care_Coverage_Type_Medical
-19203,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,1/1/00,86.25,Health_Care_Coverage_Type_Medical
-19160,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,1/1/00,86.25,Health_Care_Coverage_Type_Medical
-19380,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,Yes,3/3/15,86.25,Health_Care_Coverage_Type_Medical
-19131,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
-19129,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
-19266,Medical - Bupa  Private Health Care,Yes,7/1/14,49.17,Health_Care_Coverage_Type_Medical
-19332,Medical - Bupa  Private Health Care,Yes,7/23/14,49.17,Health_Care_Coverage_Type_Medical
-19168,Medical - Bupa  Private Health Care,Yes,1/1/00,83.33,Health_Care_Coverage_Type_Medical
-19299,Medical - Bupa  Private Health Care,Yes,3/7/11,49.17,Health_Care_Coverage_Type_Medical
-19244,Medical - Bupa  Private Health Care,Yes,11/8/11,83.33,Health_Care_Coverage_Type_Medical
-19254,Medical - Bupa  Private Health Care,Yes,3/1/10,49.17,Health_Care_Coverage_Type_Medical
-19239,Medical - Bupa  Private Health Care,Yes,11/15/10,49.17,Health_Care_Coverage_Type_Medical
-19305,Medical - Bupa  Private Health Care,Yes,5/2/11,49.17,Health_Care_Coverage_Type_Medical
-19173,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
-19229,Medical - Bupa  Private Health Care,Yes,10/4/10,49.17,Health_Care_Coverage_Type_Medical
-19298,Medical - Bupa  Private Health Care,Yes,1/1/11,49.17,Health_Care_Coverage_Type_Medical
-19205,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
-19135,Dental - Sun Life  Basic,Yes,1/1/07,13,Health_Care_Coverage_Type_Medical
-19135,Medical - Sun Life  Basic,Yes,1/1/12,40,Health_Care_Coverage_Type_Medical
-19134,Medical - Sun Life  Basic,Yes,1/1/07,40,Health_Care_Coverage_Type_Medical
-19133,Medical - Sun Life  Basic,Yes,1/1/07,48,Health_Care_Coverage_Type_Medical
-19133,Dental - Sun Life  Basic,Yes,1/1/07,20,Health_Care_Coverage_Type_Medical
-19326,Dental - Sun Life  Basic,Yes,6/1/12,13,Health_Care_Coverage_Type_Medical
-19326,Medical - Sun Life  Basic,Yes,6/1/12,40,Health_Care_Coverage_Type_Medical
-19198,Dental - Sun Life  Enhanced,Yes,1/1/10,28,Health_Care_Coverage_Type_Medical
-19198,Medical - Sun Life  Basic,Yes,1/1/07,60,Health_Care_Coverage_Type_Medical
-19132,Dental - Sun Life  Basic,Yes,1/1/12,35,Health_Care_Coverage_Type_Medical
-19132,Medical - Sun Life  Basic,Yes,1/1/07,60,Health_Care_Coverage_Type_Medical
-19387,Dental - Sun Life  Enhanced,Yes,1/1/15,21,Health_Care_Coverage_Type_Medical
-19387,Medical - Sun Life  Enhanced,Yes,1/1/15,8,Health_Care_Coverage_Type_Medical
-19276,Dental - Sun Life  Basic,Yes,1/1/13,13,Health_Care_Coverage_Type_Medical
-19276,Medical - Sun Life  Basic,Yes,1/9/12,40,Health_Care_Coverage_Type_Medical
-19275,Dental - Sun Life  Enhanced,Yes,1/1/12,21,Health_Care_Coverage_Type_Medical
-19275,Medical - Sun Life  Basic,Yes,3/14/11,40,Health_Care_Coverage_Type_Medical
-19274,Dental - Sun Life  Enhanced,Yes,1/1/12,21,Health_Care_Coverage_Type_Medical
-19381,Dental - Sun Life  Basic,Yes,1/1/15,13,Health_Care_Coverage_Type_Medical
-19381,Medical - Sun Life  Basic,Yes,1/1/15,40,Health_Care_Coverage_Type_Medical
-19312,Medical - Sun Life  Basic,Yes,6/4/12,40,Health_Care_Coverage_Type_Medical
-19312,Dental - Sun Life  Enhanced,Yes,1/1/14,21,Health_Care_Coverage_Type_Medical
-19311,Dental - Sun Life  Basic,Yes,3/5/12,13,Health_Care_Coverage_Type_Medical
-19311,Medical - Sun Life  Basic,Yes,3/5/12,40,Health_Care_Coverage_Type_Medical
-19310,Dental - Sun Life  Basic,Yes,1/10/05,13,Health_Care_Coverage_Type_Medical
-19310,Medical - Sun Life  Basic,Yes,1/10/05,40,Health_Care_Coverage_Type_Medical
-19242,Dental - Sun Life  Basic,Yes,8/22/11,13,Health_Care_Coverage_Type_Medical
-19386,Dental - Sun Life  Basic,Yes,1/1/15,13,Health_Care_Coverage_Type_Medical
-19386,Medical - Sun Life  Basic,Yes,1/1/15,40,Health_Care_Coverage_Type_Medical
-19385,Medical - Sun Life  Basic,Yes,1/1/15,40,Health_Care_Coverage_Type_Medical
-19384,Dental - Sun Life  Enhanced,Yes,1/1/15,21,Health_Care_Coverage_Type_Medical
-19384,Medical - Sun Life  Enhanced,Yes,1/1/15,8,Health_Care_Coverage_Type_Medical
-19383,Medical - Sun Life  Basic,Yes,1/1/15,40,Health_Care_Coverage_Type_Medical
-19383,Dental - Sun Life  Basic,Yes,1/1/15,13,Health_Care_Coverage_Type_Medical
-19079,Dental - Sun Life  Basic,Yes,1/1/07,35,Health_Care_Coverage_Type_Medical
-19079,Medical - Sun Life  Basic,Yes,1/1/11,60,Health_Care_Coverage_Type_Medical
-19296,Medical - Sun Life  Basic,Yes,1/16/12,40,Health_Care_Coverage_Type_Medical
-19295,Dental - Sun Life  Basic,Yes,2/15/12,13,Health_Care_Coverage_Type_Medical
-19295,Medical - Sun Life  Basic,Yes,2/15/12,40,Health_Care_Coverage_Type_Medical
-19293,Medical - Sun Life  Basic,Yes,3/14/11,48,Health_Care_Coverage_Type_Medical
-19292,Dental - Sun Life  Basic,Yes,3/14/11,20,Health_Care_Coverage_Type_Medical
-19292,Medical - Sun Life  Basic,Yes,3/14/11,48,Health_Care_Coverage_Type_Medical
-19291,Dental - Sun Life  Enhanced,Yes,2/7/11,28,Health_Care_Coverage_Type_Medical
-19291,Medical - Sun Life  Basic,Yes,2/7/11,60,Health_Care_Coverage_Type_Medical
-19238,Dental - Sun Life  Enhanced,Yes,2/22/11,25,Health_Care_Coverage_Type_Medical
-19238,Medical - Sun Life  Basic,Yes,1/1/14,48,Health_Care_Coverage_Type_Medical
-19140,Medical - Sun Life  Basic,Yes,1/1/07,48,Health_Care_Coverage_Type_Medical
-19140,Dental - Sun Life  Basic,Yes,1/1/07,13,Health_Care_Coverage_Type_Medical
-19139,Dental - Sun Life  Basic,Yes,1/1/12,20,Health_Care_Coverage_Type_Medical
-19139,Medical - Sun Life  Basic,Yes,1/1/12,60,Health_Care_Coverage_Type_Medical
-19231,Medical - Sun Life  Enhanced,Yes,6/6/11,68,Health_Care_Coverage_Type_Medical
-19393,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19393,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19392,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19392,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19392,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19374,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19374,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19373,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19373,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19372,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19372,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19322,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19322,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19307,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19307,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19303,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19303,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19301,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19301,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19300,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19300,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19409,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19409,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19408,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19408,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19407,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19407,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19407,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19406,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19406,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19403,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19403,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19403,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19402,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19402,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19401,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19401,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19400,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19400,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19399,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19399,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19398,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19398,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19397,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19397,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19395,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19395,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19394,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19394,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19396,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19396,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19297,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19297,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19297,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19206,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19206,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19130,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19130,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19178,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19178,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19178,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19405,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19405,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19404,Health - La Mutuelle Générale  Mutuelle Groupe,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19429,Medical - Bupa  Private Health Care,Yes,2/1/16,49.17,Health_Care_Coverage_Type_Medical
-19404,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19404,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19284,Medical - Bupa  Private Health Care,Yes,12/6/10,83.33,Health_Care_Coverage_Type_Medical
-19127,Medical - Bupa  Private Health Care,Yes,1/1/00,83.33,Health_Care_Coverage_Type_Medical
-19180,Medical - Bupa  Private Health Care,Yes,1/1/00,49.17,Health_Care_Coverage_Type_Medical
-19444,Medical - Aviva  PMI,Yes,1/1/16,540,Health_Care_Coverage_Type_Medical
-19169,Medical - Bupa  Private Health Care,Yes,1/1/00,125,Health_Care_Coverage_Type_Medical
-19167,Medical - Bupa  Private Health Care,Yes,1/1/00,125,Health_Care_Coverage_Type_Medical
-19227,Medical - Bupa  Private Health Care,Yes,6/14/10,125,Health_Care_Coverage_Type_Medical
-19287,Medical - Bupa  Health Fund,Yes,11/7/11,450,Health_Care_Coverage_Type_Medical
-19121,Medical - Bupa  Health Fund,Yes,1/1/00,450,Health_Care_Coverage_Type_Medical
-19184,Medical - Bupa  Health Fund,Yes,1/1/00,450,Health_Care_Coverage_Type_Medical
-19286,Medical - Bupa  Health Fund,Yes,10/31/11,450,Health_Care_Coverage_Type_Medical
-19315,Medical - Bupa  Health Fund,Yes,2/11/13,450,Health_Care_Coverage_Type_Medical
-19278,Medical - Bupa  Health Fund,Yes,4/16/12,450,Health_Care_Coverage_Type_Medical
-19285,Medical - Bupa  Health Fund,Yes,10/17/11,450,Health_Care_Coverage_Type_Medical
-19186,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
-19189,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
-19196,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
-19138,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
-19208,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
-19187,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
-19136,Health - MetLife Insurance  IMSS,Yes,1/1/00,7.58,Health_Care_Coverage_Type_Medical
-19076,Health - MetLife Insurance  IMSS,Yes,1/1/00,11.89,Health_Care_Coverage_Type_Medical
-19137,Health - MetLife Insurance  IMSS,Yes,1/1/00,14.7,Health_Care_Coverage_Type_Medical
-19489,Medical - Bupa  Health Fund,Yes,4/1/20,450,Health_Care_Coverage_Type_Medical
-19491,Medical - Bupa,Yes,2/4/18,120,Health_Care_Coverage_Type_Medical
-19492,Medical - Bupa,Yes,4/2/20,120,Health_Care_Coverage_Type_Medical
-19288,Medical - Bupa,Yes,5/28/12,120,Health_Care_Coverage_Type_Medical
-19316,Medical - Bupa,Yes,2/25/13,120,Health_Care_Coverage_Type_Medical
-19494,Medical - Bupa,Yes,4/1/20,120,Health_Care_Coverage_Type_Medical
-19495,Medical - Bupa  Health Fund,Yes,6/6/17,450,Health_Care_Coverage_Type_Medical
-19496,Medical - Bupa  Health Fund,Yes,10/16/17,900,Health_Care_Coverage_Type_Medical
-19490,Medical - Bupa,Yes,6/15/16,250,Health_Care_Coverage_Type_Medical
-19497,Medical - Bupa,Yes,4/20/20,120,Health_Care_Coverage_Type_Medical
-19498,Medical - Bupa,Yes,4/1/20,120,Health_Care_Coverage_Type_Medical
-19499,Medical - Bupa,Yes,5/1/20,120,Health_Care_Coverage_Type_Medical
-19169,Childcare Vouchers - Computershare Voucher Services,Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19167,Childcare Vouchers - Computershare Voucher Services,Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19227,Childcare Vouchers - Computershare Voucher Services,Yes,6/14/10,0,Health_Care_Coverage_Type_Medical
-19019,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19020,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19038,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19021,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19041,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19008,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19050,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19016,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19035,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19013,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19063,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19068,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19030,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19054,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19066,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19065,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19024,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19011,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19023,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19080,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19007,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19014,401(k) - Charles Schwab,Yes,1/10/08,0,Health_Care_Coverage_Type_Medical
-19046,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19026,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19025,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19018,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19056,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19036,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19039,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19051,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19074,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19034,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19047,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19029,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19073,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19010,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19001,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19049,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19022,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19070,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19006,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19043,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19055,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19064,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19058,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19048,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19045,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19071,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19027,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19012,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19059,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19031,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19062,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19044,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19033,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19037,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19052,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19103,401(k) - Charles Schwab Roth,Yes,1/4/10,0,Health_Care_Coverage_Type_Medical
-19103,401(k) - Charles Schwab,Yes,1/4/10,0,Health_Care_Coverage_Type_Medical
-19032,401(k) - Charles Schwab Catch-up,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19032,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19075,401(k) - Charles Schwab Catch-up,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19075,401(k) - Charles Schwab Roth,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19075,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19140,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-19133,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-19198,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-19134,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-19142,401(k) - Charles Schwab,Yes,1/1/11,0,Health_Care_Coverage_Type_Medical
-19225,401(k) - Charles Schwab,Yes,10/4/10,0,Health_Care_Coverage_Type_Medical
-19237,401(k) - Charles Schwab,Yes,6/14/11,0,Health_Care_Coverage_Type_Medical
-19242,RRSP - Sun Life,Yes,8/25/11,0,Health_Care_Coverage_Type_Medical
-19243,401(k) - Charles Schwab,Yes,1/5/11,0,Health_Care_Coverage_Type_Medical
-19241,401(k) - Charles Schwab,Yes,3/3/10,0,Health_Care_Coverage_Type_Medical
-19002,401(k) - Charles Schwab Catch-up,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19002,401(k) - Charles Schwab Roth,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19002,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19072,401(k) - Charles Schwab Roth,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19072,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19238,RRSP - Sun Life,Yes,2/24/11,0,Health_Care_Coverage_Type_Medical
-19250,401(k) - Charles Schwab,Yes,10/1/11,0,Health_Care_Coverage_Type_Medical
-19276,RRSP - Sun Life,Yes,1/10/12,0,Health_Care_Coverage_Type_Medical
-19275,RRSP - Sun Life,Yes,3/15/12,0,Health_Care_Coverage_Type_Medical
-19274,RRSP - Sun Life,Yes,5/11/11,0,Health_Care_Coverage_Type_Medical
-19271,401(k) - Charles Schwab Roth,Yes,6/7/11,0,Health_Care_Coverage_Type_Medical
-19271,401(k) - Charles Schwab,Yes,6/7/11,0,Health_Care_Coverage_Type_Medical
-19277,401(k) - Charles Schwab Roth,Yes,10/5/10,0,Health_Care_Coverage_Type_Medical
-19277,401(k) - Charles Schwab,Yes,10/5/10,0,Health_Care_Coverage_Type_Medical
-19257,401(k) - Charles Schwab Catch-up,Yes,1/5/10,0,Health_Care_Coverage_Type_Medical
-19257,401(k) - Charles Schwab,Yes,1/5/10,0,Health_Care_Coverage_Type_Medical
-19104,401(k) - Charles Schwab Roth,Yes,2/3/12,0,Health_Care_Coverage_Type_Medical
-19104,401(k) - Charles Schwab,Yes,2/3/12,0,Health_Care_Coverage_Type_Medical
-19247,401(k) - Charles Schwab Roth,Yes,4/13/11,0,Health_Care_Coverage_Type_Medical
-19247,401(k) - Charles Schwab,Yes,4/13/11,0,Health_Care_Coverage_Type_Medical
-19248,401(k) - Charles Schwab Roth,Yes,4/5/11,0,Health_Care_Coverage_Type_Medical
-19248,401(k) - Charles Schwab,Yes,4/5/11,0,Health_Care_Coverage_Type_Medical
-19249,401(k) - Charles Schwab,Yes,6/8/11,0,Health_Care_Coverage_Type_Medical
-19003,NQDC - Charles Schwab Deferred Compensation - Regular,Yes,1/1/10,0,Health_Care_Coverage_Type_Medical
-19003,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19004,NQDC - Charles Schwab Deferred Compensation - Regular,Yes,2/1/11,0,Health_Care_Coverage_Type_Medical
-19004,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19086,401(k) - Charles Schwab Catch-up,Yes,8/18/09,0,Health_Care_Coverage_Type_Medical
-19086,401(k) - Charles Schwab,Yes,8/18/09,0,Health_Care_Coverage_Type_Medical
-19069,401(k) - Charles Schwab Catch-up,Yes,12/3/09,0,Health_Care_Coverage_Type_Medical
-19069,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19017,401(k) - Charles Schwab Catch-up,Yes,3/6/08,0,Health_Care_Coverage_Type_Medical
-19017,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19042,401(k) - Charles Schwab Catch-up,Yes,1/31/11,0,Health_Care_Coverage_Type_Medical
-19042,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19060,401(k) - Charles Schwab Catch-up,Yes,9/22/10,0,Health_Care_Coverage_Type_Medical
-19060,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19009,401(k) - Charles Schwab Catch-up,Yes,3/2/10,0,Health_Care_Coverage_Type_Medical
-19009,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19040,401(k) - Charles Schwab Catch-up,Yes,10/12/09,0,Health_Care_Coverage_Type_Medical
-19040,401(k) - Charles Schwab Roth,Yes,6/21/12,0,Health_Care_Coverage_Type_Medical
-19040,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19028,401(k) - Charles Schwab Catch-up,Yes,4/18/12,0,Health_Care_Coverage_Type_Medical
-19028,401(k) - Charles Schwab Roth,Yes,6/21/12,0,Health_Care_Coverage_Type_Medical
-19028,401(k) - Charles Schwab,Yes,5/19/06,0,Health_Care_Coverage_Type_Medical
-19061,401(k) - Charles Schwab Catch-up,Yes,9/2/09,0,Health_Care_Coverage_Type_Medical
-19061,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19194,401(k) - Charles Schwab Catch-up,Yes,1/12/12,0,Health_Care_Coverage_Type_Medical
-19194,401(k) - Charles Schwab Roth,Yes,1/12/12,0,Health_Care_Coverage_Type_Medical
-19194,401(k) - Charles Schwab,Yes,1/12/12,0,Health_Care_Coverage_Type_Medical
-19098,401(k) - Charles Schwab Catch-up,Yes,4/11/08,0,Health_Care_Coverage_Type_Medical
-19098,401(k) - Charles Schwab,Yes,4/11/08,0,Health_Care_Coverage_Type_Medical
-19252,Pension - New Ireland PRSA,Yes,1/16/10,0,Health_Care_Coverage_Type_Medical
-19087,401(k) - Charles Schwab,Yes,10/10/11,0,Health_Care_Coverage_Type_Medical
-19090,401(k) - Charles Schwab,Yes,10/4/11,0,Health_Care_Coverage_Type_Medical
-19053,NQDC - Charles Schwab Deferred Compensation - Bonus,Yes,4/1/12,0,Health_Care_Coverage_Type_Medical
-19053,NQDC - Charles Schwab Deferred Compensation - Regular,Yes,3/1/12,0,Health_Care_Coverage_Type_Medical
-19053,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19005,NQDC - Charles Schwab Deferred Compensation - Bonus,Yes,4/1/12,0,Health_Care_Coverage_Type_Medical
-19005,401(k) - Charles Schwab Catch-up,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19005,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19290,401(k) - Charles Schwab,Yes,4/7/11,0,Health_Care_Coverage_Type_Medical
-19157,401(k) - Charles Schwab,Yes,7/11/11,0,Health_Care_Coverage_Type_Medical
-19082,401(k) - Charles Schwab,Yes,3/19/12,0,Health_Care_Coverage_Type_Medical
-19084,401(k) - Charles Schwab,Yes,3/20/12,0,Health_Care_Coverage_Type_Medical
-19092,401(k) - Charles Schwab Roth,Yes,3/19/12,0,Health_Care_Coverage_Type_Medical
-19092,401(k) - Charles Schwab,Yes,3/19/12,0,Health_Care_Coverage_Type_Medical
-19293,RRSP - Sun Life,Yes,3/15/11,0,Health_Care_Coverage_Type_Medical
-19289,401(k) - Charles Schwab,Yes,4/4/12,0,Health_Care_Coverage_Type_Medical
-19015,401(k) - Charles Schwab,Yes,1/1/08,0,Health_Care_Coverage_Type_Medical
-19246,401(k) - Charles Schwab Roth,Yes,5/4/11,0,Health_Care_Coverage_Type_Medical
-19246,401(k) - Charles Schwab,Yes,5/4/11,0,Health_Care_Coverage_Type_Medical
-19219,Pension - Employees’ Provident Fund Organisation Provident Fund,Yes,1/4/10,0,Health_Care_Coverage_Type_Medical
-19220,Pension - Employees’ Provident Fund Organisation Provident Fund,Yes,1/4/10,0,Health_Care_Coverage_Type_Medical
-19182,Pension - Employees’ Provident Fund Organisation Provident Fund,Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19164,Pension - Employees’ Provident Fund Organisation Provident Fund,Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19304,Pension - ABN Amro Fund,Yes,7/11/11,0,Health_Care_Coverage_Type_Medical
-19253,Pension - ABN Amro Fund,Yes,2/8/10,0,Health_Care_Coverage_Type_Medical
-19270,Pension - ABN Amro Fund,Yes,1/23/12,0,Health_Care_Coverage_Type_Medical
-19260,Pension - ABN Amro Fund,Yes,2/6/12,0,Health_Care_Coverage_Type_Medical
-19139,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-19132,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-19295,RRSP - Sun Life,Yes,2/18/13,0,Health_Care_Coverage_Type_Medical
-19311,RRSP - Sun Life,Yes,3/11/13,0,Health_Care_Coverage_Type_Medical
-19310,RRSP - Sun Life,Yes,1/9/12,0,Health_Care_Coverage_Type_Medical
-19135,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-19292,RRSP - Sun Life,Yes,3/15/11,0,Health_Care_Coverage_Type_Medical
-19291,RRSP - Sun Life,Yes,2/8/11,0,Health_Care_Coverage_Type_Medical
-19079,RRSP - Sun Life,Yes,1/1/07,0,Health_Care_Coverage_Type_Medical
-19231,RRSP - Sun Life,Yes,6/10/11,0,Health_Care_Coverage_Type_Medical
-19326,RRSP - Sun Life,Yes,6/4/12,0,Health_Care_Coverage_Type_Medical
-19239,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-19127,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-19129,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-19305,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-19131,Deferred Stock - Standard Life,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-19296,RRSP - Sun Life,Yes,1/18/13,0,Health_Care_Coverage_Type_Medical
-19347,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19346,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19345,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19131,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19129,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19266,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,7/1/14,0,Health_Care_Coverage_Type_Medical
-19332,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,7/23/14,0,Health_Care_Coverage_Type_Medical
-19168,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19299,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,3/7/11,0,Health_Care_Coverage_Type_Medical
-19244,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19254,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
-19239,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,11/15/10,0,Health_Care_Coverage_Type_Medical
-19305,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,5/2/11,0,Health_Care_Coverage_Type_Medical
-19173,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19229,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,10/4/10,0,Health_Care_Coverage_Type_Medical
-19298,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/11,0,Health_Care_Coverage_Type_Medical
-19359,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19358,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19357,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19356,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19355,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19354,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19353,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19352,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19205,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19351,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19350,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19349,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19348,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19153,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-19147,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-19152,401(k) - Charles Schwab Roth,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-19152,401(k) - Charles Schwab,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-19155,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-19151,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-19156,401(k) - Charles Schwab Roth,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-19156,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-19150,401(k) - Charles Schwab Roth,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19150,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-19154,401(k) - Charles Schwab Catch-up,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-19154,401(k) - Charles Schwab,Yes,1/1/13,0,Health_Care_Coverage_Type_Medical
-19148,401(k) - Charles Schwab Catch-up,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-19148,401(k) - Charles Schwab,Yes,1/1/14,0,Health_Care_Coverage_Type_Medical
-19106,Defined Contribution - Charles Schwab Puerto Rico,Yes,1/1/16,0,Health_Care_Coverage_Type_Medical
-19376,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,10/10/14,0,Health_Care_Coverage_Type_Medical
-19185,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,1/10/00,0,Health_Care_Coverage_Type_Medical
-19125,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,1/10/00,0,Health_Care_Coverage_Type_Medical
-19122,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,1/10/00,0,Health_Care_Coverage_Type_Medical
-19279,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,4/19/12,0,Health_Care_Coverage_Type_Medical
-19378,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,3/13/15,0,Health_Care_Coverage_Type_Medical
-19284,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,12/6/10,0,Health_Care_Coverage_Type_Medical
-19127,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19180,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19077,Swedish - Löneväxling Base Salary,Yes,1/1/17,0,Health_Care_Coverage_Type_Medical
-19444,Pension - New Ireland PRSA,Yes,1/1/16,0,Health_Care_Coverage_Type_Medical
-19169,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19167,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,1/1/00,0,Health_Care_Coverage_Type_Medical
-19227,Pension - Standard Life Auto Enrolment (Eligible Worker),Yes,6/14/10,0,Health_Care_Coverage_Type_Medical
-19476,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,Yes,1/1/16,0,Health_Care_Coverage_Type_Medical
-19481,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
-19482,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
-19483,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
-19485,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
-19486,Pension - ABN Amro Fund,Yes,7/6/20,0,Health_Care_Coverage_Type_Medical
-19491,New Zealand Pension - NZL Government Kiwi Saver,Yes,2/4/18,0,Health_Care_Coverage_Type_Medical
-19492,New Zealand Pension - NZL Government Kiwi Saver,Yes,4/2/20,0,Health_Care_Coverage_Type_Medical
-19493,New Zealand Pension - NZL Government Kiwi Saver,Yes,4/20/20,0,Health_Care_Coverage_Type_Medical
-19288,New Zealand Pension - NZL Government Kiwi Saver,Yes,5/28/12,0,Health_Care_Coverage_Type_Medical
-19316,New Zealand Pension - NZL Government Kiwi Saver,Yes,2/25/13,0,Health_Care_Coverage_Type_Medical
-19494,New Zealand Pension - NZL Government Kiwi Saver,Yes,8/1/20,0,Health_Care_Coverage_Type_Medical
-19490,New Zealand Pension - NZL Government Kiwi Saver,Yes,6/15/16,0,Health_Care_Coverage_Type_Medical
-19497,New Zealand Pension - NZL Government Kiwi Saver,Yes,4/20/20,0,Health_Care_Coverage_Type_Medical
-19498,New Zealand Pension - NZL Government Kiwi Saver,Yes,4/1/20,0,Health_Care_Coverage_Type_Medical
-19499,New Zealand Pension - NZL Government Kiwi Saver,Yes,5/1/20,0,Health_Care_Coverage_Type_Medical
-19387,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19386,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19385,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19384,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19383,Health Savings Account - Sun Life,Yes,1/1/15,0,Health_Care_Coverage_Type_Medical
-19296,Health Savings Account - Sun Life,Yes,1/16/15,0,Health_Care_Coverage_Type_Medical
-19020,Gym Membership - Club One,Yes,1/1/10,20,Health_Care_Coverage_Type_Medical
-19117,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
-19002,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
-19111,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
-19191,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
-19012,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19008,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19008,Commuter Spending - SHPS Parking Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19001,Commuter Spending - SHPS Parking Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19117,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19109,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19103,Commuter Spending - SHPS Parking Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
-19073,Commuter Spending - SHPS Transit Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19072,Commuter Spending - SHPS Parking Account,Yes,2/1/10,0,Health_Care_Coverage_Type_Medical
-19075,Commuter Spending - SHPS Parking Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
-19020,Commuter Spending - SHPS Transit Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
-19119,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
-19119,Commuter Spending - SHPS Parking Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
-19030,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
-19108,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
-19017,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
-19112,Commuter Spending - SHPS Transit Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
-19112,Commuter Spending - SHPS Parking Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
-19118,Commuter Spending - SHPS Transit Account,Yes,3/1/10,0,Health_Care_Coverage_Type_Medical
-19037,Commuter Spending - SHPS Transit Account,Yes,4/1/10,0,Health_Care_Coverage_Type_Medical
-19042,Gym Membership - Club One,Yes,2/1/10,20,Health_Care_Coverage_Type_Medical
-19042,Commuter Spending - SHPS Transit Account,Yes,7/1/10,0,Health_Care_Coverage_Type_Medical
-19015,Gym Membership - Club One,Yes,10/1/10,20,Health_Care_Coverage_Type_Medical
-19046,Commuter Spending - SHPS Transit Account,Yes,6/1/10,0,Health_Care_Coverage_Type_Medical
-19105,Gym Membership - Club One,Yes,3/1/10,20,Health_Care_Coverage_Type_Medical
-19105,Commuter Spending - SHPS Transit Account,Yes,9/1/10,0,Health_Care_Coverage_Type_Medical
-19001,Gym Membership - Club One,Yes,4/1/10,20,Health_Care_Coverage_Type_Medical
-19255,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-19255,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-19306,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-19306,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-19302,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-19302,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-19077,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-19077,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-19126,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-19126,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-19263,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-19263,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-19390,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-19390,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-19391,Commuter Spending - Swebus Bus Pass,Yes,1/1/15,25,Health_Care_Coverage_Type_Medical
-19391,Gym Membership - World Class Fitness,Yes,1/1/15,350,Health_Care_Coverage_Type_Medical
-19416,Commuter Spending - Swebus Bus Pass,Yes,1/1/16,25,Health_Care_Coverage_Type_Medical
-19419,Commuter Spending - SHPS Transit Account,Yes,4/1/15,0,Health_Care_Coverage_Type_Medical
-19430,Commuter Spending - SHPS Parking Account,Yes,2/1/14,0,Health_Care_Coverage_Type_Medical
-19430,Gym Membership - Club One,Yes,2/1/14,20,Health_Care_Coverage_Type_Medical
-19431,Commuter Spending - SHPS Parking Account,Yes,6/1/16,0,Health_Care_Coverage_Type_Medical
-19431,Gym Membership - Club One,Yes,6/1/16,20,Health_Care_Coverage_Type_Medical
-19432,Commuter Spending - Swebus Bus Pass,Yes,10/31/16,25,Health_Care_Coverage_Type_Medical
-19284,Charitable Giving - Pennies from Heaven,Yes,4/1/16,0,Health_Care_Coverage_Type_Medical
-19127,Charitable Giving - Pennies from Heaven,Yes,4/1/16,0,Health_Care_Coverage_Type_Medical
-19180,Charitable Giving - Pennies from Heaven,Yes,4/1/16,0,Health_Care_Coverage_Type_Medical
-19303,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19403,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19405,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19404,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19297,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19407,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19178,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19396,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19401,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19374,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19301,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19307,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19408,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19409,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19398,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19393,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19397,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19402,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19395,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19300,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19400,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19392,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19394,Meal Vouchers - Edenred Ticket Restaurant,Yes,1/1/16,1232.8,Health_Care_Coverage_Type_Medical
-19435,Commuter Spending - Swebus Bus Pass,Yes,2/1/16,25,Health_Care_Coverage_Type_Medical
-19427,Meal Vouchers - Sodexo Meal Tickets,Yes,3/1/17,2178,Health_Care_Coverage_Type_Medical
-19167,Charitable Giving - Pennies from Heaven,Yes,4/1/16,0,Health_Care_Coverage_Type_Medical
-19333,Fringe Benefits - Global Modern Services betriebliche Altersversorung (bAV),Yes,7/21/14,0,Health_Care_Coverage_Type_Medical
-19333,Fringe Benefits - Global Modern Services Unfallversicherung,Yes,7/21/14,0,Health_Care_Coverage_Type_Medical
-19448,Fringe Benefits - Global Modern Services Fitness-Club Mitgliedschaft,Yes,5/1/17,0,Health_Care_Coverage_Type_Medical
-19448,Fringe Benefits - Global Modern Services betriebliche Altersversorung (bAV),Yes,5/1/17,0,Health_Care_Coverage_Type_Medical
-19448,Fringe Benefits - Global Modern Services Unfallversicherung,Yes,5/1/17,0,Health_Care_Coverage_Type_Medical
-19452,Fringe Benefits - Global Modern Services Unfallversicherung,Yes,6/1/17,0,Health_Care_Coverage_Type_Medical
-19334,Fringe Benefits - Global Modern Services Fitness-Club Mitgliedschaft,Yes,7/21/14,0,Health_Care_Coverage_Type_Medical
-19334,Fringe Benefits - Global Modern Services Unfallversicherung,Yes,7/21/14,0,Health_Care_Coverage_Type_Medical
-19186,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
-19138,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
-19137,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
-19208,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
-19187,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
-19136,Meal Vouchers - Edenred Meal Coupons,Yes,1/1/00,2641.15,Health_Care_Coverage_Type_Medical
+EEID,Plan,Enrollment Status,Started,Employer Amount Paid,Type,Email
+19255,Pension - Collectum Supplemental ITP1 (Employee),TRUE,1-Jan-15,88417.821,Pension,amargrem0@webmd.com
+19255,Pension - Collectum ITP1 (Employee),FALSE,5/9/20,21611.8463,,nkingwell1@un.org
+19306,Pension - Collectum ITP1 (Employee),TRUE,11/27/13,22144.1309,,gcook2@senate.gov
+19302,Pension - Collectum ITP1 (Employee),FALSE,3/28/20,"953,067,128",,kkemmis3@icio.us
+19077,Pension - Collectum Supplemental ITP1 (Employee),TRUE,5/24/14,-86939.0901,,msorrell4@unicef.org
+19077,Pension - Collectum ITP1 (Employee),TRUE,,37484.7159,Pension,kskeggs5@dyndns.org
+19126,Pension - Collectum Supplemental ITP1 (Employee),N,1/26/21,33262.7032,Other,nwindmill6@hibu.com
+19126,Pension - Collectum ITP1 (Employee),Y,9/23/19,0,Other,bbyllam7@pen.io
+19263,Pension - Collectum ITP1 (Employee),FALSE,5/20/21,0,Other,thawes8@oakley.com
+19347,Basic Group Life - AXA UK (Employee),Nope,9/8/12,0,Insurance,edumberrill9@fema.gov
+19346,Basic Group Life - AXA UK (Employee),FALSE,7/11/18,0,Insurance,walibonea@privacy.gov.au
+19345,Basic Group Life - AXA UK (Employee),FALSE,6/4/14,,Insurance,hwalshb@wikia.com
+19131,Basic Group Life - AXA UK (Employee),TRUE,3/11/20,,Insurance,jcowserc@w3.org
+19129,Basic Group Life - AXA UK (Employee),TRUE,3/27/16,,Insurance,sjuszczykd@sogou.com
+19266,Basic Group Life - AXA UK (Employee),No,3/19/22,,Insurance,
+19332,Basic Group Life - AXA UK (Employee),yes,8/7/22,77002.4423,Insurance,wbattlestonef@icio.us
+19168,Basic Group Life - AXA UK (Employee),TRUE,3/10/17,13661.6607,Insurance,atammadgeg@jimdo.com
+19299,Basic Group Life - AXA UK (Employee),FALSE,9/26/14,60828.0619,Insurance,igoodbarneh@w3.org
+19244,Basic Group Life - AXA UK (Employee),TRUE,4/17/13,1641.087,Insurance,mschankelborgi@ucoz.com
+19254,Basic Group Life - AXA UK (Employee),FALSE,4/30/17,16221.6339,Insurance,imckanej@yandex.ru
+19239,Basic Group Life - AXA UK (Employee),FALSE,,4117.8323,Insurance,dchinnickk@umich.edu
+19305,Basic Group Life - AXA UK (Employee),FALSE,9/4/12,90002.5776,Insurance,mfarnfieldl@amazonaws.com
+19173,Basic Group Life - AXA UK (Employee),TRUE,9/23/16,18568.1797,Insurance,mkegleym@gov.uk
+19229,Basic Group Life - AXA UK (Employee),,1/11/13,28863.5323,Insurance,mkondratenyan@opensource.org
+19298,Basic Group Life - AXA UK (Employee),,12/20/17,44036.9749,Insurance,bpaddemoreo@dropbox.com
+19359,Basic Group Life - AXA UK (Employee),,3/9/17,40325.7239,Insurance,fplacstonep@weebly.com
+19358,Basic Group Life - AXA UK (Employee),FALSE,9/18/13,46394.4154,Insurance,docarrolq@yellowpages.com
+19357,Basic Group Life - AXA UK (Employee),TRUE,9/17/18,40099.6365,Insurance,csudddardr@bluehost.com
+19356,Basic Group Life - AXA UK (Employee),TRUE,11/5/15,39272.6875,Insurance,shuffers@angelfire.com
+19355,Basic Group Life - AXA UK (Employee),TRUE,6/17/19,24658.5944,Insurance,wschimont@nasa.gov
+19354,Basic Group Life - AXA UK (Employee),FALSE,2/9/18,99431.7646,Insurance,burridgeu@dropbox.com
+19353,Basic Group Life - AXA UK (Employee),TRUE,3/30/21,71368.949,Insurance,wgodferyv@ycombinator.com
+19352,Basic Group Life - AXA UK (Employee),TRUE,4/1/21,74289.4809,Insurance,czutew@drupal.org
+19205,Basic Group Life - AXA UK (Employee),FALSE,2/21/16,53203.352,Insurance,dhurdedgex@abc.net.au
+19351,Basic Group Life - AXA UK (Employee),FALSE,,88733.9817,Insurance,scotteey@archive.org
+19350,Basic Group Life - AXA UK (Employee),FALSE,1/25/17,89367.3412,Insurance,pclemittz@zdnet.com
+19349,Basic Group Life - AXA UK (Employee),FALSE,1/20/17,626.4524,Insurance,gleftly10@loc.gov
+19348,Basic Group Life - AXA UK (Employee),FALSE,6/21/17,84387.3868,Insurance,vcotelard11@nifty.com
+19135,Basic Group Life - Standard Life  (Employee),TRUE,3/20/14,90122.5858,Insurance,jbarlee12@sourceforge.net
+19135,Long Term Disability - Standard Life Basic (Employee),FALSE,4/2/17,36792.1674,Insurance,nbampfield13@sina.com.cn
+19135,Short Term Disability - Standard Life  (Employee),TRUE,11/13/15,79329.5737,Insurance,atansill14@marketwatch.com
+19135,Voluntary AD&D - Standard Life  (Employee),TRUE,4/12/13,34811.3007,Insurance,fmccaskill15@paypal.com
+19134,Basic Group Life - Standard Life  (Employee),FALSE,4/14/17,47684.234,Insurance,satteridge16@squidoo.com
+19134,Long Term Disability - Standard Life Basic (Employee),FALSE,7/26/17,81316.7362,Insurance,bvido17@apache.org
+19134,Short Term Disability - Standard Life  (Employee),TRUE,5/22/14,11398.9291,Insurance,sdaud18@networksolutions.com
+19134,Voluntary AD&D - Standard Life  (Employee),TRUE,7/26/20,77012.5269,Insurance,shannaway19@archive.org
+19134,Voluntary Supplemental Life - Standard Life  (Employee),FALSE,4/7/14,53305.2527,Insurance,dbernth1a@sitemeter.com
+19133,Basic Group Life - Standard Life  (Employee),TRUE,11/20/18,41761.5615,Insurance,gshinefield1b@biglobe.ne.jp
+19133,Short Term Disability - Standard Life  (Employee),TRUE,9/30/17,46859.7588,Insurance,jashworth1c@paypal.com
+19133,Voluntary AD&D - Standard Life  (Employee),TRUE,8/4/14,44078.3135,Insurance,gsisland1d@google.co.uk
+19133,Voluntary Supplemental Life - Standard Life  (Employee),FALSE,1/18/16,46006.4021,Insurance,
+19326,Basic Group Life - Standard Life  (Employee),TRUE,4/4/17,64275.3823,Insurance,bbarrus1f@fda.gov
+19326,Short Term Disability - Standard Life  (Employee),TRUE,6/17/12,1943.3801,Insurance,vrean1g@adobe.com
+19326,Voluntary Supplemental Life - Standard Life  (Employee),FALSE,3/15/15,6676.4346,Insurance,mmacsherry1h@mozilla.org
+19198,Long Term Disability - Standard Life Basic (Employee),TRUE,3/25/18,57528.5182,Insurance,nplester1i@yandex.ru
+19198,Short Term Disability - Standard Life  (Employee),TRUE,3/19/21,31590.9889,Insurance,pwalenta1j@fastcompany.com
+19198,Voluntary AD&D - Standard Life  (Employee),FALSE,8/22/22,32060.2307,Insurance,ftebb1k@facebook.com
+19198,Voluntary Supplemental Life - Standard Life  (Employee),TRUE,6/17/22,89444.2796,Insurance,cnansom1l@un.org
+19198,Basic Group Life - Standard Life  (Employee),TRUE,8/17/21,24119.8827,Insurance,lmordey1m@nasa.gov
+19132,Basic Group Life - Standard Life  (Employee),FALSE,7/15/22,31771.4946,Insurance,gshory1n@storify.com
+19132,Long Term Disability - Standard Life Basic (Employee),FALSE,6/29/18,47193.5001,Insurance,nclunie1o@multiply.com
+19132,Short Term Disability - Standard Life  (Employee),TRUE,7/28/17,9776.6251,Insurance,jheinemann1p@msu.edu
+19132,Voluntary AD&D - Standard Life  (Employee),TRUE,7/22/12,34762.1878,Insurance,cmoutrayread1q@foxnews.com
+19132,Voluntary Supplemental Life - Standard Life  (Employee),TRUE,10/27/21,26813.5562,Insurance,asudlow1r@meetup.com
+19387,Voluntary Supplemental Life - Standard Life  (Employee),FALSE,4/6/20,78973.4409,Insurance,pfranzoli1s@sakura.ne.jp
+19387,Basic Group Life - Standard Life  (Employee),FALSE,,41466.0563,Insurance,srouch1t@jiathis.com
+19387,Long Term Disability - Standard Life Enhanced (Employee),FALSE,5/3/15,74672.6718,Insurance,mcurner1u@soup.io
+19276,Basic Group Life - Standard Life  (Employee),FALSE,5/20/16,59156.2973,Insurance,rpiercey1v@addtoany.com
+19276,Short Term Disability - Standard Life  (Employee),TRUE,1/15/14,49285.1696,Insurance,tbeswick1w@marriott.com
+19275,Basic Group Life - Standard Life  (Employee),FALSE,11/28/15,66474.6809,Insurance,mgilhoolie1x@unesco.org
+19275,Short Term Disability - Standard Life  (Employee),TRUE,8/9/19,56435.2609,Insurance,fdavenhall1y@craigslist.org
+19275,Voluntary AD&D - Standard Life  (Employee),FALSE,11/17/15,6006.1611,Insurance,gcoolican1z@wordpress.org
+19275,Voluntary Supplemental Life - Standard Life  (Employee),TRUE,7/26/15,50734.975,Insurance,bstoke20@sbwire.com
+19274,Basic Group Life - Standard Life  (Employee),TRUE,3/13/13,52825.7682,Insurance,dczaple21@comsenz.com
+19274,Long Term Disability - Standard Life Basic (Employee),TRUE,7/9/16,84058.1783,Insurance,bweedenburg22@constantcontact.com
+19274,Short Term Disability - Standard Life  (Employee),TRUE,2/20/14,3621.1847,Insurance,zbanes23@weather.com
+19274,Voluntary AD&D - Standard Life  (Employee),TRUE,6/15/19,65059.6354,Insurance,ldoog24@answers.com
+19274,Voluntary Supplemental Life - Standard Life  (Employee),TRUE,,25250.2776,Insurance,aacedo25@nymag.com
+19381,Basic Group Life - Standard Life  (Employee),TRUE,12/31/14,27282.8046,Insurance,crozec26@howstuffworks.com
+19381,Long Term Disability - Standard Life Enhanced (Employee),TRUE,4/15/16,18813.4882,Insurance,cosuaird27@theglobeandmail.com
+19381,Short Term Disability - Standard Life  (Employee),TRUE,,58617.3934,Insurance,edowley28@devhub.com
+19312,Basic Group Life - Standard Life  (Employee),TRUE,7/22/22,45875.3743,Insurance,zvelareal29@arizona.edu
+19311,Basic Group Life - Standard Life  (Employee),FALSE,9/23/22,43792.9122,Insurance,ithurston2a@google.com
+19310,Voluntary Supplemental Life - Standard Life  (Employee),TRUE,3/16/22,45437.7683,Insurance,hkloss2b@eventbrite.com
+19310,Basic Group Life - Standard Life  (Employee),FALSE,3/12/13,65759.2242,Insurance,eyerby2c@wikipedia.org
+19242,Basic Group Life - Standard Life  (Employee),FALSE,,45388.3219,Insurance,dhinsche2d@jugem.jp
+19242,Long Term Disability - Standard Life Basic (Employee),FALSE,,86189.528,Insurance,ncarslaw2e@gravatar.com
+19242,Short Term Disability - Standard Life  (Employee),TRUE,2/12/22,67843.3791,Insurance,msouthwick2f@gmpg.org
+19242,Voluntary Supplemental Life - Standard Life  (Employee),TRUE,4/6/18,72348.6035,Insurance,skun2g@theatlantic.com
+19386,Voluntary Supplemental Life - Standard Life  (Employee),FALSE,11/9/12,95819.8549,Insurance,rdevries2h@etsy.com
+19386,Basic Group Life - Standard Life  (Employee),TRUE,6/17/18,66595.1239,Insurance,ykolis2i@drupal.org
+19385,Basic Group Life - Standard Life  (Employee),FALSE,12/24/21,52903.573,Insurance,adebanke2j@msn.com
+19385,Voluntary Supplemental Life - Standard Life  (Employee),TRUE,4/14/14,88417.821,Insurance,mmarzellano2k@loc.gov
+19384,Basic Group Life - Standard Life  (Employee),TRUE,11/9/16,21611.8463,Insurance,bstonefewings2l@berkeley.edu
+19384,Voluntary Supplemental Life - Standard Life  (Employee),TRUE,2/17/16,22144.1309,Insurance,amotion2m@ox.ac.uk
+19383,Basic Group Life - Standard Life  (Employee),TRUE,10/5/22,95306.7128,Insurance,sisles2n@godaddy.com
+19383,Short Term Disability - Standard Life  (Employee),FALSE,,86939.0901,Insurance,ifaint2o@census.gov
+19383,Voluntary Supplemental Life - Standard Life  (Employee),TRUE,11/19/12,37484.7159,Insurance,btassaker2p@csmonitor.com
+19382,Basic Group Life - Standard Life  (Employee),FALSE,6/6/13,33262.7032,Insurance,adauncey2q@skyrock.com
+19079,Long Term Disability - Standard Life Basic (Employee),TRUE,3/26/14,88509.9265,Insurance,mrawes2r@washingtonpost.com
+19079,Short Term Disability - Standard Life  (Employee),TRUE,5/9/20,60465.4559,Insurance,amargrem0@webmd.com
+19079,Voluntary AD&D - Standard Life  (Employee),FALSE,11/27/13,58606.469,Insurance,nkingwell1@un.org
+19079,Voluntary Supplemental Life - Standard Life  (Employee),TRUE,3/28/20,52761.068,Insurance,gcook2@senate.gov
+19079,Basic Group Life - Standard Life  (Employee),FALSE,5/24/14,88726.9984,Insurance,kkemmis3@icio.us
+19296,Basic Group Life - Standard Life  (Employee),TRUE,,14599.7533,Insurance,msorrell4@unicef.org
+19295,Basic Group Life - Standard Life  (Employee),TRUE,1/26/21,12307.1154,Insurance,kskeggs5@dyndns.org
+19293,Basic Group Life - Standard Life  (Employee),FALSE,9/23/19,55074.0135,Insurance,nwindmill6@hibu.com
+19293,Short Term Disability - Standard Life  (Employee),FALSE,5/20/21,77002.4423,Insurance,bbyllam7@pen.io
+19293,Voluntary Supplemental Life - Standard Life  (Employee),FALSE,9/8/12,13661.6607,Insurance,thawes8@oakley.com
+19292,Basic Group Life - Standard Life  (Employee),FALSE,7/11/18,60828.0619,Insurance,edumberrill9@fema.gov
+19292,Long Term Disability - Standard Life Basic (Employee),FALSE,6/4/14,1641.087,Insurance,walibonea@privacy.gov.au
+19292,Short Term Disability - Standard Life  (Employee),FALSE,3/11/20,16221.6339,Insurance,hwalshb@wikia.com
+19291,Basic Group Life - Standard Life  (Employee),TRUE,3/27/16,4117.8323,Insurance,jcowserc@w3.org
+19291,Long Term Disability - Standard Life Basic (Employee),TRUE,3/19/22,90002.5776,Insurance,sjuszczykd@sogou.com
+19291,Short Term Disability - Standard Life  (Employee),TRUE,8/7/22,18568.1797,Insurance,
+19238,Basic Group Life - Standard Life  (Employee),TRUE,3/10/17,28863.5323,Insurance,wbattlestonef@icio.us
+19238,Long Term Disability - Standard Life Basic (Employee),TRUE,9/26/14,44036.9749,Insurance,atammadgeg@jimdo.com
+19238,Voluntary AD&D - Standard Life  (Employee),FALSE,4/17/13,40325.7239,Insurance,igoodbarneh@w3.org
+19238,Voluntary Supplemental Life - Standard Life  (Employee),TRUE,4/30/17,46394.4154,Insurance,mschankelborgi@ucoz.com
+19238,Spouse Life - Standard Life  (Spouse),FALSE,,40099.6365,Insurance,imckanej@yandex.ru
+19140,Long Term Disability - Standard Life Basic (Employee),FALSE,9/4/12,39272.6875,Insurance,dchinnickk@umich.edu
+19140,Short Term Disability - Standard Life  (Employee),FALSE,9/23/16,24658.5944,Insurance,mfarnfieldl@amazonaws.com
+19140,Voluntary AD&D - Standard Life  (Employee),TRUE,1/11/13,99431.7646,Insurance,mkegleym@gov.uk
+19140,Voluntary Supplemental Life - Standard Life  (Employee),FALSE,12/20/17,71368.949,Insurance,mkondratenyan@opensource.org
+19140,Basic Group Life - Standard Life  (Employee),FALSE,3/9/17,74289.4809,Insurance,bpaddemoreo@dropbox.com
+19139,Basic Group Life - Standard Life  (Employee),FALSE,9/18/13,53203.352,Insurance,fplacstonep@weebly.com
+19139,Long Term Disability - Standard Life Basic (Employee),FALSE,9/17/18,88733.9817,Insurance,docarrolq@yellowpages.com
+19139,Short Term Disability - Standard Life  (Employee),TRUE,11/5/15,89367.3412,Insurance,csudddardr@bluehost.com
+19139,Voluntary AD&D - Standard Life  (Employee),TRUE,6/17/19,626.4524,Insurance,shuffers@angelfire.com
+19139,Voluntary Supplemental Life - Standard Life  (Employee),TRUE,2/9/18,84387.3868,Insurance,wschimont@nasa.gov
+19231,Short Term Disability - Standard Life  (Employee),FALSE,3/30/21,90122.5858,Insurance,burridgeu@dropbox.com
+19231,Voluntary Supplemental Life - Standard Life  (Employee),TRUE,4/1/21,36792.1674,Insurance,wgodferyv@ycombinator.com
+19231,Basic Group Life - Standard Life  (Employee),TRUE,2/21/16,79329.5737,Insurance,czutew@drupal.org
+19231,Long Term Disability - Standard Life Basic (Employee),FALSE,,34811.3007,Insurance,dhurdedgex@abc.net.au
+19390,Pension - Collectum ITP1 (Employee),FALSE,1/25/17,47684.234,Other,scotteey@archive.org
+19391,Pension - Collectum ITP1 (Employee),FALSE,1/20/17,81316.7362,Other,pclemittz@zdnet.com
+19416,Pension - Collectum Supplemental ITP1 (Employee),FALSE,6/21/17,11398.9291,Other,gleftly10@loc.gov
+19416,Pension - Collectum ITP1 (Employee),FALSE,3/20/14,77012.5269,Other,vcotelard11@nifty.com
+19376,Basic Group Life - NN Life  (Employee),TRUE,4/2/17,53305.2527,Insurance,jbarlee12@sourceforge.net
+19185,Basic Group Life - NN Life  (Employee),FALSE,11/13/15,41761.5615,Insurance,nbampfield13@sina.com.cn
+19125,Basic Group Life - NN Life  (Employee),TRUE,4/12/13,46859.7588,Insurance,atansill14@marketwatch.com
+19122,Basic Group Life - NN Life  (Employee),TRUE,4/14/17,44078.3135,Insurance,fmccaskill15@paypal.com
+19279,Basic Group Life - NN Life  (Employee),FALSE,7/26/17,46006.4021,Insurance,satteridge16@squidoo.com
+19378,Basic Group Life - NN Life  (Employee),FALSE,5/22/14,64275.3823,Insurance,bvido17@apache.org
+19428,Basic Group Life - AXA UK (Employee),TRUE,7/26/20,1943.3801,Insurance,sdaud18@networksolutions.com
+19429,Basic Group Life - AXA UK (Employee),TRUE,4/7/14,6676.4346,Insurance,shannaway19@archive.org
+19432,Pension - Collectum Supplemental ITP1 (Employee),FALSE,11/20/18,57528.5182,Other,dbernth1a@sitemeter.com
+19433,Basic Group Life - NN Life  (Employee),TRUE,9/30/17,31590.9889,Insurance,gshinefield1b@biglobe.ne.jp
+19284,Basic Group Life - AXA UK (Employee),TRUE,8/4/14,32060.2307,Insurance,jashworth1c@paypal.com
+19127,Basic Group Life - AXA UK (Employee),TRUE,1/18/16,89444.2796,Insurance,gsisland1d@google.co.uk
+19180,Basic Group Life - AXA UK (Employee),FALSE,4/4/17,24119.8827,Insurance,
+19435,Pension - Collectum ITP1 (Employee),TRUE,6/17/12,31771.4946,Other,bbarrus1f@fda.gov
+19444,Basic Group Life - AXA Ireland (Employee),TRUE,3/15/15,47193.5001,Insurance,vrean1g@adobe.com
+19169,Basic Group Life - AXA UK (Employee),FALSE,3/25/18,9776.6251,Insurance,mmacsherry1h@mozilla.org
+19167,Basic Group Life - AXA UK (Employee),TRUE,3/19/21,34762.1878,Insurance,nplester1i@yandex.ru
+19227,Basic Group Life - AXA UK (Employee),TRUE,8/22/22,26813.5562,Insurance,pwalenta1j@fastcompany.com
+19473,Basic Group Life - NN Life  (Employee),FALSE,6/17/22,78973.4409,Insurance,ftebb1k@facebook.com
+19474,Basic Group Life - NN Life  (Employee),TRUE,8/17/21,41466.0563,Insurance,cnansom1l@un.org
+19475,Basic Group Life - NN Life  (Employee),TRUE,7/15/22,74672.6718,Insurance,lmordey1m@nasa.gov
+19476,Basic Group Life - NN Life  (Employee),FALSE,6/29/18,59156.2973,Insurance,gshory1n@storify.com
+19477,Basic Group Life - NN Life  (Employee),FALSE,7/28/17,49285.1696,Insurance,nclunie1o@multiply.com
+19252,Medical - Aviva  PMI,TRUE,7/22/12,66474.6809,Medical,jheinemann1p@msu.edu
+19202,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,TRUE,10/27/21,56435.2609,Medical,cmoutrayread1q@foxnews.com
+19245,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,TRUE,4/6/20,6006.1611,Medical,asudlow1r@meetup.com
+19224,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,FALSE,,50734.975,Medical,pfranzoli1s@sakura.ne.jp
+19236,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,FALSE,5/3/15,52825.7682,Medical,srouch1t@jiathis.com
+19228,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,FALSE,5/20/16,84058.1783,Medical,mcurner1u@soup.io
+19183,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,FALSE,1/15/14,3621.1847,Medical,rpiercey1v@addtoany.com
+19203,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,TRUE,11/28/15,65059.6354,Medical,tbeswick1w@marriott.com
+19160,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,FALSE,8/9/19,25250.2776,Medical,mgilhoolie1x@unesco.org
+19380,Medical - Chindex United Family Healthcare  Supplemental Health Insurance,TRUE,11/17/15,27282.8046,Medical,fdavenhall1y@craigslist.org
+19131,Medical - Bupa  Private Health Care,FALSE,7/26/15,18813.4882,Medical,gcoolican1z@wordpress.org
+19129,Medical - Bupa  Private Health Care,TRUE,3/13/13,58617.3934,Medical,bstoke20@sbwire.com
+19266,Medical - Bupa  Private Health Care,TRUE,7/9/16,45875.3743,Medical,dczaple21@comsenz.com
+19332,Medical - Bupa  Private Health Care,TRUE,2/20/14,43792.9122,Medical,bweedenburg22@constantcontact.com
+19168,Medical - Bupa  Private Health Care,TRUE,6/15/19,45437.7683,Medical,zbanes23@weather.com
+19299,Medical - Bupa  Private Health Care,TRUE,,65759.2242,Medical,ldoog24@answers.com
+19244,Medical - Bupa  Private Health Care,TRUE,12/31/14,45388.3219,Medical,aacedo25@nymag.com
+19254,Medical - Bupa  Private Health Care,TRUE,4/15/16,86189.528,Medical,crozec26@howstuffworks.com
+19239,Medical - Bupa  Private Health Care,TRUE,,67843.3791,Medical,cosuaird27@theglobeandmail.com
+19305,Medical - Bupa  Private Health Care,TRUE,7/22/22,72348.6035,Medical,edowley28@devhub.com
+19173,Medical - Bupa  Private Health Care,TRUE,9/23/22,95819.8549,Medical,zvelareal29@arizona.edu
+19229,Medical - Bupa  Private Health Care,FALSE,3/16/22,66595.1239,Medical,ithurston2a@google.com
+19298,Medical - Bupa  Private Health Care,TRUE,3/12/13,52903.573,Medical,hkloss2b@eventbrite.com
+19205,Medical - Bupa  Private Health Care,FALSE,,88417.821,Medical,eyerby2c@wikipedia.org
+19135,Dental - Sun Life  Basic,FALSE,,21611.8463,Dental,dhinsche2d@jugem.jp
+19135,Medical - Sun Life  Basic,FALSE,2/12/22,22144.1309,Medical,ncarslaw2e@gravatar.com
+19134,Medical - Sun Life  Basic,TRUE,4/6/18,95306.7128,Medical,msouthwick2f@gmpg.org
+19133,Medical - Sun Life  Basic,TRUE,11/9/12,86939.0901,Medical,skun2g@theatlantic.com
+19133,Dental - Sun Life  Basic,FALSE,6/17/18,37484.7159,Dental,rdevries2h@etsy.com
+19326,Dental - Sun Life  Basic,TRUE,12/24/21,33262.7032,Dental,ykolis2i@drupal.org
+19326,Medical - Sun Life  Basic,FALSE,4/14/14,88509.9265,Medical,adebanke2j@msn.com
+19198,Dental - Sun Life  Enhanced,TRUE,11/9/16,60465.4559,Dental,mmarzellano2k@loc.gov
+19198,Medical - Sun Life  Basic,TRUE,2/17/16,58606.469,Medical,bstonefewings2l@berkeley.edu
+19132,Dental - Sun Life  Basic,TRUE,10/5/22,52761.068,Dental,amotion2m@ox.ac.uk
+19132,Medical - Sun Life  Basic,TRUE,,88726.9984,Medical,sisles2n@godaddy.com
+19387,Dental - Sun Life  Enhanced,FALSE,11/19/12,14599.7533,Dental,ifaint2o@census.gov
+19387,Medical - Sun Life  Enhanced,TRUE,6/6/13,12307.1154,Medical,btassaker2p@csmonitor.com
+19276,Dental - Sun Life  Basic,FALSE,3/26/14,55074.0135,Dental,adauncey2q@skyrock.com
+19276,Medical - Sun Life  Basic,TRUE,5/9/20,77002.4423,Medical,mrawes2r@washingtonpost.com
+19275,Dental - Sun Life  Enhanced,TRUE,11/27/13,13661.6607,Dental,amargrem0@webmd.com
+19275,Medical - Sun Life  Basic,FALSE,3/28/20,60828.0619,Medical,nkingwell1@un.org
+19274,Dental - Sun Life  Enhanced,TRUE,5/24/14,1641.087,Dental,gcook2@senate.gov
+19381,Dental - Sun Life  Basic,FALSE,,16221.6339,Dental,kkemmis3@icio.us
+19381,Medical - Sun Life  Basic,TRUE,1/26/21,4117.8323,Medical,msorrell4@unicef.org
+19312,Medical - Sun Life  Basic,TRUE,9/23/19,90002.5776,Medical,kskeggs5@dyndns.org
+19312,Dental - Sun Life  Enhanced,FALSE,5/20/21,18568.1797,Dental,nwindmill6@hibu.com
+19311,Dental - Sun Life  Basic,FALSE,9/8/12,28863.5323,Dental,bbyllam7@pen.io
+19311,Medical - Sun Life  Basic,FALSE,7/11/18,44036.9749,Medical,thawes8@oakley.com
+19310,Dental - Sun Life  Basic,FALSE,6/4/14,40325.7239,Dental,edumberrill9@fema.gov
+19310,Medical - Sun Life  Basic,FALSE,3/11/20,46394.4154,Medical,walibonea@privacy.gov.au
+19242,Dental - Sun Life  Basic,FALSE,3/27/16,40099.6365,Dental,hwalshb@wikia.com
+19386,Dental - Sun Life  Basic,TRUE,3/19/22,39272.6875,Dental,jcowserc@w3.org
+19386,Medical - Sun Life  Basic,TRUE,8/7/22,24658.5944,Medical,sjuszczykd@sogou.com
+19385,Medical - Sun Life  Basic,TRUE,3/10/17,99431.7646,Medical,
+19384,Dental - Sun Life  Enhanced,TRUE,9/26/14,71368.949,Dental,wbattlestonef@icio.us
+19384,Medical - Sun Life  Enhanced,TRUE,4/17/13,74289.4809,Medical,atammadgeg@jimdo.com
+19383,Medical - Sun Life  Basic,FALSE,4/30/17,53203.352,Medical,igoodbarneh@w3.org
+19383,Dental - Sun Life  Basic,TRUE,,88733.9817,Dental,mschankelborgi@ucoz.com
+19079,Dental - Sun Life  Basic,FALSE,9/4/12,89367.3412,Dental,imckanej@yandex.ru
+19079,Medical - Sun Life  Basic,FALSE,9/23/16,626.4524,Medical,dchinnickk@umich.edu
+19296,Medical - Sun Life  Basic,FALSE,1/11/13,84387.3868,Medical,mfarnfieldl@amazonaws.com
+19295,Dental - Sun Life  Basic,TRUE,12/20/17,90122.5858,Dental,mkegleym@gov.uk
+19295,Medical - Sun Life  Basic,FALSE,3/9/17,36792.1674,Medical,mkondratenyan@opensource.org
+19293,Medical - Sun Life  Basic,FALSE,9/18/13,79329.5737,Medical,bpaddemoreo@dropbox.com
+19292,Dental - Sun Life  Basic,FALSE,9/17/18,34811.3007,Dental,fplacstonep@weebly.com
+19292,Medical - Sun Life  Basic,FALSE,11/5/15,47684.234,Medical,docarrolq@yellowpages.com
+19291,Dental - Sun Life  Enhanced,TRUE,6/17/19,81316.7362,Dental,csudddardr@bluehost.com
+19291,Medical - Sun Life  Basic,TRUE,2/9/18,11398.9291,Medical,shuffers@angelfire.com
+19238,Dental - Sun Life  Enhanced,TRUE,3/30/21,77012.5269,Dental,wschimont@nasa.gov
+19238,Medical - Sun Life  Basic,FALSE,4/1/21,53305.2527,Medical,burridgeu@dropbox.com
+19140,Medical - Sun Life  Basic,TRUE,2/21/16,41761.5615,Medical,wgodferyv@ycombinator.com
+19140,Dental - Sun Life  Basic,TRUE,,46859.7588,Dental,czutew@drupal.org
+19139,Dental - Sun Life  Basic,FALSE,1/25/17,44078.3135,Dental,dhurdedgex@abc.net.au
+19139,Medical - Sun Life  Basic,FALSE,1/20/17,46006.4021,Medical,scotteey@archive.org
+19231,Medical - Sun Life  Enhanced,FALSE,6/21/17,64275.3823,Medical,pclemittz@zdnet.com
+19393,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,FALSE,3/20/14,1943.3801,Other,gleftly10@loc.gov
+19393,Health - La Mutuelle Générale  Mutuelle Groupe,FALSE,4/2/17,6676.4346,Medical,vcotelard11@nifty.com
+19392,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),TRUE,11/13/15,57528.5182,Retirement,jbarlee12@sourceforge.net
+19392,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,FALSE,4/12/13,31590.9889,Other,nbampfield13@sina.com.cn
+19392,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,4/14/17,32060.2307,Medical,atansill14@marketwatch.com
+19374,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,TRUE,7/26/17,89444.2796,Other,fmccaskill15@paypal.com
+19374,Health - La Mutuelle Générale  Mutuelle Groupe,FALSE,5/22/14,24119.8827,Medical,satteridge16@squidoo.com
+19373,Health - La Mutuelle Générale  Mutuelle Groupe,FALSE,7/26/20,31771.4946,Medical,bvido17@apache.org
+19373,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,TRUE,4/7/14,47193.5001,Other,sdaud18@networksolutions.com
+19372,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,TRUE,11/20/18,9776.6251,Other,shannaway19@archive.org
+19372,Health - La Mutuelle Générale  Mutuelle Groupe,FALSE,9/30/17,34762.1878,Medical,dbernth1a@sitemeter.com
+19322,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,TRUE,8/4/14,26813.5562,Other,gshinefield1b@biglobe.ne.jp
+19322,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,1/18/16,78973.4409,Medical,jashworth1c@paypal.com
+19307,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,TRUE,4/4/17,41466.0563,Other,gsisland1d@google.co.uk
+19307,Health - La Mutuelle Générale  Mutuelle Groupe,FALSE,6/17/12,74672.6718,Medical,
+19303,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,TRUE,3/15/15,59156.2973,Other,bbarrus1f@fda.gov
+19303,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,3/25/18,49285.1696,Medical,vrean1g@adobe.com
+19301,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,FALSE,3/19/21,66474.6809,Other,mmacsherry1h@mozilla.org
+19301,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,8/22/22,56435.2609,Medical,nplester1i@yandex.ru
+19300,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,6/17/22,6006.1611,Medical,pwalenta1j@fastcompany.com
+19300,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,FALSE,8/17/21,50734.975,Other,ftebb1k@facebook.com
+19409,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,TRUE,7/15/22,52825.7682,Other,cnansom1l@un.org
+19409,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,6/29/18,84058.1783,Medical,lmordey1m@nasa.gov
+19408,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,FALSE,7/28/17,3621.1847,Other,gshory1n@storify.com
+19408,Health - La Mutuelle Générale  Mutuelle Groupe,FALSE,7/22/12,65059.6354,Medical,nclunie1o@multiply.com
+19407,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),TRUE,10/27/21,25250.2776,Retirement,jheinemann1p@msu.edu
+19407,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,TRUE,4/6/20,27282.8046,Other,cmoutrayread1q@foxnews.com
+19407,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,,18813.4882,Medical,asudlow1r@meetup.com
+19406,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,FALSE,5/3/15,58617.3934,Other,pfranzoli1s@sakura.ne.jp
+19406,Health - La Mutuelle Générale  Mutuelle Groupe,FALSE,5/20/16,45875.3743,Medical,srouch1t@jiathis.com
+19403,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),FALSE,1/15/14,43792.9122,Retirement,mcurner1u@soup.io
+19403,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,FALSE,11/28/15,45437.7683,Other,rpiercey1v@addtoany.com
+19403,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,8/9/19,65759.2242,Medical,tbeswick1w@marriott.com
+19402,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,FALSE,11/17/15,45388.3219,Other,mgilhoolie1x@unesco.org
+19402,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,7/26/15,86189.528,Medical,fdavenhall1y@craigslist.org
+19401,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,FALSE,3/13/13,67843.3791,Other,gcoolican1z@wordpress.org
+19401,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,7/9/16,72348.6035,Medical,bstoke20@sbwire.com
+19400,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,TRUE,2/20/14,95819.8549,Other,dczaple21@comsenz.com
+19400,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,6/15/19,66595.1239,Medical,bweedenburg22@constantcontact.com
+19399,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,TRUE,,52903.573,Other,zbanes23@weather.com
+19399,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,12/31/14,88417.821,Medical,ldoog24@answers.com
+19398,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,TRUE,4/15/16,21611.8463,Other,aacedo25@nymag.com
+19398,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,,22144.1309,Medical,crozec26@howstuffworks.com
+19397,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,TRUE,7/22/22,95306.7128,Other,cosuaird27@theglobeandmail.com
+19397,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,9/23/22,86939.0901,Medical,edowley28@devhub.com
+19395,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,TRUE,3/16/22,37484.7159,Other,zvelareal29@arizona.edu
+19395,Health - La Mutuelle Générale  Mutuelle Groupe,FALSE,3/12/13,33262.7032,Medical,ithurston2a@google.com
+19394,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,TRUE,,88509.9265,Other,hkloss2b@eventbrite.com
+19394,Health - La Mutuelle Générale  Mutuelle Groupe,FALSE,,60465.4559,Medical,eyerby2c@wikipedia.org
+19396,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,FALSE,2/12/22,58606.469,Other,dhinsche2d@jugem.jp
+19396,Health - La Mutuelle Générale  Mutuelle Groupe,FALSE,4/6/18,,Medical,ncarslaw2e@gravatar.com
+19297,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),TRUE,11/9/12,88726.9984,Retirement,msouthwick2f@gmpg.org
+19297,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,TRUE,6/17/18,14599.7533,Other,skun2g@theatlantic.com
+19297,Health - La Mutuelle Générale  Mutuelle Groupe,FALSE,12/24/21,12307.1154,Medical,rdevries2h@etsy.com
+19206,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,4/14/14,55074.0135,Medical,ykolis2i@drupal.org
+19206,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,FALSE,11/9/16,77002.4423,Other,adebanke2j@msn.com
+19130,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,2/17/16,13661.6607,Medical,mmarzellano2k@loc.gov
+19130,Contingency Fund - Malakoff Médéric  Prévoyance Non Cadres,TRUE,10/5/22,60828.0619,Other,bstonefewings2l@berkeley.edu
+19178,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),TRUE,,1641.087,Retirement,amotion2m@ox.ac.uk
+19178,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,TRUE,11/19/12,16221.6339,Other,sisles2n@godaddy.com
+19178,Health - La Mutuelle Générale  Mutuelle Groupe,FALSE,6/6/13,4117.8323,Medical,ifaint2o@census.gov
+19405,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,TRUE,3/26/14,90002.5776,Other,btassaker2p@csmonitor.com
+19405,Health - La Mutuelle Générale  Mutuelle Groupe,FALSE,5/9/20,,Medical,adauncey2q@skyrock.com
+19404,Health - La Mutuelle Générale  Mutuelle Groupe,TRUE,11/27/13,28863.5323,Medical,mrawes2r@washingtonpost.com
+19429,Medical - Bupa  Private Health Care,TRUE,3/28/20,44036.9749,Medical,amargrem0@webmd.com
+19404,Supplementary Retirement - AG2R La Mondiale  Plan Epargne Retraite (Article 83),FALSE,5/24/14,40325.7239,Retirement,nkingwell1@un.org
+19404,Contingency Fund - Malakoff Médéric  Prévoyance Cadres,TRUE,,46394.4154,Other,gcook2@senate.gov
+19284,Medical - Bupa  Private Health Care,FALSE,1/26/21,40099.6365,Medical,kkemmis3@icio.us
+19127,Medical - Bupa  Private Health Care,TRUE,9/23/19,39272.6875,Medical,msorrell4@unicef.org
+19180,Medical - Bupa  Private Health Care,TRUE,5/20/21,24658.5944,Medical,kskeggs5@dyndns.org
+19444,Medical - Aviva  PMI,FALSE,9/8/12,99431.7646,Medical,nwindmill6@hibu.com
+19169,Medical - Bupa  Private Health Care,FALSE,7/11/18,71368.949,Medical,bbyllam7@pen.io
+19167,Medical - Bupa  Private Health Care,FALSE,6/4/14,74289.4809,Medical,thawes8@oakley.com
+19227,Medical - Bupa  Private Health Care,FALSE,3/11/20,53203.352,Medical,edumberrill9@fema.gov
+19287,Medical - Bupa  Health Fund,FALSE,3/27/16,88733.9817,Medical,walibonea@privacy.gov.au
+19121,Medical - Bupa  Health Fund,FALSE,3/19/22,89367.3412,Medical,hwalshb@wikia.com
+19184,Medical - Bupa  Health Fund,TRUE,8/7/22,626.4524,Medical,jcowserc@w3.org
+19286,Medical - Bupa  Health Fund,TRUE,3/10/17,84387.3868,Medical,sjuszczykd@sogou.com
+19315,Medical - Bupa  Health Fund,TRUE,9/26/14,90122.5858,Medical,
+19278,Medical - Bupa  Health Fund,TRUE,4/17/13,36792.1674,Medical,wbattlestonef@icio.us
+19285,Medical - Bupa  Health Fund,TRUE,4/30/17,79329.5737,Medical,atammadgeg@jimdo.com
+19186,Health - MetLife Insurance  IMSS,FALSE,,34811.3007,Medical,igoodbarneh@w3.org
+19189,Health - MetLife Insurance  IMSS,TRUE,9/4/12,47684.234,Medical,mschankelborgi@ucoz.com
+19196,Health - MetLife Insurance  IMSS,FALSE,9/23/16,81316.7362,Medical,imckanej@yandex.ru
+19138,Health - MetLife Insurance  IMSS,FALSE,1/11/13,11398.9291,Medical,dchinnickk@umich.edu
+19208,Health - MetLife Insurance  IMSS,FALSE,12/20/17,77012.5269,Medical,mfarnfieldl@amazonaws.com
+19187,Health - MetLife Insurance  IMSS,TRUE,3/9/17,53305.2527,Medical,mkegleym@gov.uk
+19136,Health - MetLife Insurance  IMSS,FALSE,9/18/13,41761.5615,Medical,mkondratenyan@opensource.org
+19076,Health - MetLife Insurance  IMSS,FALSE,9/17/18,,Medical,bpaddemoreo@dropbox.com
+19137,Health - MetLife Insurance  IMSS,FALSE,11/5/15,44078.3135,Medical,fplacstonep@weebly.com
+19489,Medical - Bupa  Health Fund,FALSE,6/17/19,46006.4021,Medical,docarrolq@yellowpages.com
+19491,Medical - Bupa,TRUE,2/9/18,64275.3823,Medical,csudddardr@bluehost.com
+19492,Medical - Bupa,TRUE,3/30/21,,Medical,shuffers@angelfire.com
+19288,Medical - Bupa,TRUE,4/1/21,6676.4346,Medical,wschimont@nasa.gov
+19316,Medical - Bupa,FALSE,2/21/16,57528.5182,Medical,burridgeu@dropbox.com
+19494,Medical - Bupa,TRUE,,31590.9889,Medical,wgodferyv@ycombinator.com
+19495,Medical - Bupa  Health Fund,TRUE,1/25/17,32060.2307,Medical,czutew@drupal.org
+19496,Medical - Bupa  Health Fund,FALSE,1/20/17,89444.2796,Medical,dhurdedgex@abc.net.au
+19490,Medical - Bupa,FALSE,6/21/17,24119.8827,Medical,scotteey@archive.org
+19497,Medical - Bupa,FALSE,3/20/14,31771.4946,Medical,pclemittz@zdnet.com
+19498,Medical - Bupa,FALSE,4/2/17,47193.5001,Medical,gleftly10@loc.gov
+19499,Medical - Bupa,FALSE,11/13/15,9776.6251,Medical,vcotelard11@nifty.com
+19169,Childcare Vouchers - Computershare Voucher Services,TRUE,4/12/13,34762.1878,Other,jbarlee12@sourceforge.net
+19167,Childcare Vouchers - Computershare Voucher Services,FALSE,4/14/17,26813.5562,Other,nbampfield13@sina.com.cn
+19227,Childcare Vouchers - Computershare Voucher Services,TRUE,7/26/17,78973.4409,Other,atansill14@marketwatch.com
+19019,401(k) - Charles Schwab,TRUE,5/22/14,41466.0563,Retirement,fmccaskill15@paypal.com
+19020,401(k) - Charles Schwab,FALSE,7/26/20,74672.6718,Retirement,satteridge16@squidoo.com
+19038,401(k) - Charles Schwab,FALSE,4/7/14,59156.2973,Retirement,bvido17@apache.org
+19021,401(k) - Charles Schwab,TRUE,11/20/18,49285.1696,Retirement,sdaud18@networksolutions.com
+19041,401(k) - Charles Schwab,TRUE,9/30/17,66474.6809,Retirement,shannaway19@archive.org
+19008,401(k) - Charles Schwab,FALSE,8/4/14,56435.2609,Retirement,dbernth1a@sitemeter.com
+19050,401(k) - Charles Schwab,TRUE,1/18/16,6006.1611,Retirement,gshinefield1b@biglobe.ne.jp
+19016,401(k) - Charles Schwab,TRUE,4/4/17,50734.975,Retirement,jashworth1c@paypal.com
+19035,401(k) - Charles Schwab,TRUE,6/17/12,52825.7682,Retirement,gsisland1d@google.co.uk
+19013,401(k) - Charles Schwab,FALSE,3/15/15,84058.1783,Retirement,
+19063,401(k) - Charles Schwab,TRUE,3/25/18,3621.1847,Retirement,bbarrus1f@fda.gov
+19068,401(k) - Charles Schwab,TRUE,3/19/21,65059.6354,Retirement,vrean1g@adobe.com
+19030,401(k) - Charles Schwab,FALSE,8/22/22,25250.2776,Retirement,mmacsherry1h@mozilla.org
+19054,401(k) - Charles Schwab,TRUE,6/17/22,27282.8046,Retirement,nplester1i@yandex.ru
+19066,401(k) - Charles Schwab,TRUE,8/17/21,,Retirement,pwalenta1j@fastcompany.com
+19065,401(k) - Charles Schwab,FALSE,7/15/22,58617.3934,Retirement,ftebb1k@facebook.com
+19024,401(k) - Charles Schwab,TRUE,6/29/18,45875.3743,Retirement,cnansom1l@un.org
+19011,401(k) - Charles Schwab,TRUE,7/28/17,43792.9122,Retirement,lmordey1m@nasa.gov
+19023,401(k) - Charles Schwab,FALSE,7/22/12,45437.7683,Retirement,gshory1n@storify.com
+19080,401(k) - Charles Schwab,FALSE,10/27/21,65759.2242,Retirement,nclunie1o@multiply.com
+19007,401(k) - Charles Schwab,TRUE,4/6/20,45388.3219,Retirement,jheinemann1p@msu.edu
+19014,401(k) - Charles Schwab,TRUE,,86189.528,Retirement,cmoutrayread1q@foxnews.com
+19046,401(k) - Charles Schwab,TRUE,5/3/15,67843.3791,Retirement,asudlow1r@meetup.com
+19026,401(k) - Charles Schwab,FALSE,5/20/16,72348.6035,Retirement,pfranzoli1s@sakura.ne.jp
+19025,401(k) - Charles Schwab,FALSE,1/15/14,95819.8549,Retirement,srouch1t@jiathis.com
+19018,401(k) - Charles Schwab,FALSE,11/28/15,66595.1239,Retirement,mcurner1u@soup.io
+19056,401(k) - Charles Schwab,FALSE,8/9/19,52903.573,Retirement,rpiercey1v@addtoany.com
+19036,401(k) - Charles Schwab,TRUE,11/17/15,88417.821,Retirement,tbeswick1w@marriott.com
+19039,401(k) - Charles Schwab,FALSE,7/26/15,21611.8463,Retirement,mgilhoolie1x@unesco.org
+19051,401(k) - Charles Schwab,TRUE,3/13/13,22144.1309,Retirement,fdavenhall1y@craigslist.org
+19074,401(k) - Charles Schwab,FALSE,7/9/16,95306.7128,Retirement,gcoolican1z@wordpress.org
+19034,401(k) - Charles Schwab,TRUE,2/20/14,86939.0901,Retirement,bstoke20@sbwire.com
+19047,401(k) - Charles Schwab,TRUE,6/15/19,37484.7159,Retirement,dczaple21@comsenz.com
+19029,401(k) - Charles Schwab,TRUE,,33262.7032,Retirement,bweedenburg22@constantcontact.com
+19073,401(k) - Charles Schwab,TRUE,12/31/14,88509.9265,Retirement,zbanes23@weather.com
+19010,401(k) - Charles Schwab,TRUE,4/15/16,60465.4559,Retirement,ldoog24@answers.com
+19001,401(k) - Charles Schwab,TRUE,,58606.469,Retirement,aacedo25@nymag.com
+19049,401(k) - Charles Schwab,TRUE,7/22/22,52761.068,Retirement,crozec26@howstuffworks.com
+19022,401(k) - Charles Schwab,TRUE,9/23/22,88726.9984,Retirement,cosuaird27@theglobeandmail.com
+19070,401(k) - Charles Schwab,TRUE,3/16/22,14599.7533,Retirement,edowley28@devhub.com
+19006,401(k) - Charles Schwab,TRUE,3/12/13,12307.1154,Retirement,zvelareal29@arizona.edu
+19043,401(k) - Charles Schwab,FALSE,,55074.0135,Retirement,ithurston2a@google.com
+19055,401(k) - Charles Schwab,TRUE,,77002.4423,Retirement,hkloss2b@eventbrite.com
+19064,401(k) - Charles Schwab,FALSE,2/12/22,13661.6607,Retirement,eyerby2c@wikipedia.org
+19058,401(k) - Charles Schwab,FALSE,4/6/18,60828.0619,Retirement,dhinsche2d@jugem.jp
+19048,401(k) - Charles Schwab,FALSE,11/9/12,1641.087,Retirement,ncarslaw2e@gravatar.com
+19045,401(k) - Charles Schwab,TRUE,6/17/18,16221.6339,Retirement,msouthwick2f@gmpg.org
+19071,401(k) - Charles Schwab,TRUE,12/24/21,4117.8323,Retirement,skun2g@theatlantic.com
+19027,401(k) - Charles Schwab,FALSE,4/14/14,90002.5776,Retirement,rdevries2h@etsy.com
+19012,401(k) - Charles Schwab,TRUE,11/9/16,18568.1797,Retirement,ykolis2i@drupal.org
+19059,401(k) - Charles Schwab,FALSE,2/17/16,28863.5323,Retirement,adebanke2j@msn.com
+19031,401(k) - Charles Schwab,TRUE,10/5/22,44036.9749,Retirement,mmarzellano2k@loc.gov
+19062,401(k) - Charles Schwab,TRUE,,40325.7239,Retirement,bstonefewings2l@berkeley.edu
+19044,401(k) - Charles Schwab,TRUE,11/19/12,46394.4154,Retirement,amotion2m@ox.ac.uk
+19033,401(k) - Charles Schwab,TRUE,6/6/13,40099.6365,Retirement,sisles2n@godaddy.com
+19037,401(k) - Charles Schwab,FALSE,3/26/14,39272.6875,Retirement,ifaint2o@census.gov
+19052,401(k) - Charles Schwab,TRUE,5/9/20,24658.5944,Retirement,btassaker2p@csmonitor.com
+19103,401(k) - Charles Schwab Roth,FALSE,11/27/13,99431.7646,Retirement,adauncey2q@skyrock.com
+19103,401(k) - Charles Schwab,TRUE,3/28/20,71368.949,Retirement,mrawes2r@washingtonpost.com
+19032,401(k) - Charles Schwab Catch-up,TRUE,5/24/14,,Retirement,amargrem0@webmd.com
+19032,401(k) - Charles Schwab,FALSE,,53203.352,Retirement,nkingwell1@un.org
+19075,401(k) - Charles Schwab Catch-up,TRUE,1/26/21,88733.9817,Retirement,gcook2@senate.gov
+19075,401(k) - Charles Schwab Roth,FALSE,9/23/19,89367.3412,Retirement,kkemmis3@icio.us
+19075,401(k) - Charles Schwab,TRUE,5/20/21,626.4524,Retirement,msorrell4@unicef.org
+19140,RRSP - Sun Life,TRUE,9/8/12,84387.3868,Retirement,kskeggs5@dyndns.org
+19133,RRSP - Sun Life,FALSE,7/11/18,90122.5858,Retirement,nwindmill6@hibu.com
+19198,RRSP - Sun Life,FALSE,6/4/14,36792.1674,Retirement,bbyllam7@pen.io
+19134,RRSP - Sun Life,FALSE,3/11/20,79329.5737,Retirement,thawes8@oakley.com
+19142,401(k) - Charles Schwab,FALSE,3/27/16,34811.3007,Retirement,edumberrill9@fema.gov
+19225,401(k) - Charles Schwab,FALSE,3/19/22,47684.234,Retirement,walibonea@privacy.gov.au
+19237,401(k) - Charles Schwab,FALSE,8/7/22,81316.7362,Retirement,hwalshb@wikia.com
+19242,RRSP - Sun Life,TRUE,3/10/17,11398.9291,Retirement,jcowserc@w3.org
+19243,401(k) - Charles Schwab,TRUE,9/26/14,77012.5269,Retirement,sjuszczykd@sogou.com
+19241,401(k) - Charles Schwab,TRUE,4/17/13,53305.2527,Retirement,
+19002,401(k) - Charles Schwab Catch-up,TRUE,4/30/17,41761.5615,Retirement,wbattlestonef@icio.us
+19002,401(k) - Charles Schwab Roth,TRUE,,46859.7588,Retirement,atammadgeg@jimdo.com
+19002,401(k) - Charles Schwab,FALSE,9/4/12,44078.3135,Retirement,igoodbarneh@w3.org
+19072,401(k) - Charles Schwab Roth,TRUE,9/23/16,46006.4021,Retirement,mschankelborgi@ucoz.com
+19072,401(k) - Charles Schwab,FALSE,1/11/13,64275.3823,Retirement,imckanej@yandex.ru
+19238,RRSP - Sun Life,FALSE,12/20/17,1943.3801,Retirement,dchinnickk@umich.edu
+19250,401(k) - Charles Schwab,FALSE,3/9/17,6676.4346,Retirement,mfarnfieldl@amazonaws.com
+19276,RRSP - Sun Life,TRUE,9/18/13,57528.5182,Retirement,mkegleym@gov.uk
+19275,RRSP - Sun Life,FALSE,9/17/18,31590.9889,Retirement,mkondratenyan@opensource.org
+19274,RRSP - Sun Life,FALSE,11/5/15,32060.2307,Retirement,bpaddemoreo@dropbox.com
+19271,401(k) - Charles Schwab Roth,FALSE,6/17/19,89444.2796,Retirement,fplacstonep@weebly.com
+19271,401(k) - Charles Schwab,FALSE,2/9/18,24119.8827,Retirement,docarrolq@yellowpages.com
+19277,401(k) - Charles Schwab Roth,TRUE,3/30/21,31771.4946,Retirement,csudddardr@bluehost.com
+19277,401(k) - Charles Schwab,TRUE,4/1/21,47193.5001,Retirement,shuffers@angelfire.com
+19257,401(k) - Charles Schwab Catch-up,TRUE,2/21/16,9776.6251,Retirement,wschimont@nasa.gov
+19257,401(k) - Charles Schwab,FALSE,,34762.1878,Retirement,burridgeu@dropbox.com
+19104,401(k) - Charles Schwab Roth,TRUE,1/25/17,26813.5562,Retirement,wgodferyv@ycombinator.com
+19104,401(k) - Charles Schwab,TRUE,1/20/17,78973.4409,Retirement,czutew@drupal.org
+19247,401(k) - Charles Schwab Roth,FALSE,6/21/17,41466.0563,Retirement,dhurdedgex@abc.net.au
+19247,401(k) - Charles Schwab,FALSE,3/20/14,74672.6718,Retirement,scotteey@archive.org
+19248,401(k) - Charles Schwab Roth,FALSE,4/2/17,59156.2973,Retirement,pclemittz@zdnet.com
+19248,401(k) - Charles Schwab,FALSE,11/13/15,49285.1696,Retirement,gleftly10@loc.gov
+19249,401(k) - Charles Schwab,FALSE,4/12/13,66474.6809,Retirement,vcotelard11@nifty.com
+19003,NQDC - Charles Schwab Deferred Compensation - Regular,TRUE,4/14/17,56435.2609,Other,jbarlee12@sourceforge.net
+19003,401(k) - Charles Schwab,FALSE,7/26/17,6006.1611,Retirement,nbampfield13@sina.com.cn
+19004,NQDC - Charles Schwab Deferred Compensation - Regular,TRUE,5/22/14,50734.975,Other,atansill14@marketwatch.com
+19004,401(k) - Charles Schwab,TRUE,7/26/20,52825.7682,Retirement,fmccaskill15@paypal.com
+19086,401(k) - Charles Schwab Catch-up,FALSE,4/7/14,84058.1783,Retirement,satteridge16@squidoo.com
+19086,401(k) - Charles Schwab,FALSE,11/20/18,3621.1847,Retirement,bvido17@apache.org
+19069,401(k) - Charles Schwab Catch-up,TRUE,9/30/17,65059.6354,Retirement,sdaud18@networksolutions.com
+19069,401(k) - Charles Schwab,TRUE,8/4/14,25250.2776,Retirement,shannaway19@archive.org
+19017,401(k) - Charles Schwab Catch-up,FALSE,1/18/16,27282.8046,Retirement,dbernth1a@sitemeter.com
+19017,401(k) - Charles Schwab,TRUE,4/4/17,18813.4882,Retirement,gshinefield1b@biglobe.ne.jp
+19042,401(k) - Charles Schwab Catch-up,TRUE,6/17/12,58617.3934,Retirement,jashworth1c@paypal.com
+19042,401(k) - Charles Schwab,TRUE,3/15/15,45875.3743,Retirement,gsisland1d@google.co.uk
+19060,401(k) - Charles Schwab Catch-up,FALSE,3/25/18,43792.9122,Retirement,
+19060,401(k) - Charles Schwab,TRUE,3/19/21,45437.7683,Retirement,bbarrus1f@fda.gov
+19009,401(k) - Charles Schwab Catch-up,TRUE,8/22/22,65759.2242,Retirement,vrean1g@adobe.com
+19009,401(k) - Charles Schwab,FALSE,6/17/22,45388.3219,Retirement,mmacsherry1h@mozilla.org
+19040,401(k) - Charles Schwab Catch-up,TRUE,8/17/21,86189.528,Retirement,nplester1i@yandex.ru
+19040,401(k) - Charles Schwab Roth,TRUE,7/15/22,67843.3791,Retirement,pwalenta1j@fastcompany.com
+19040,401(k) - Charles Schwab,FALSE,6/29/18,72348.6035,Retirement,ftebb1k@facebook.com
+19028,401(k) - Charles Schwab Catch-up,TRUE,7/28/17,95819.8549,Retirement,cnansom1l@un.org
+19028,401(k) - Charles Schwab Roth,TRUE,7/22/12,66595.1239,Retirement,lmordey1m@nasa.gov
+19028,401(k) - Charles Schwab,FALSE,10/27/21,52903.573,Retirement,gshory1n@storify.com
+19061,401(k) - Charles Schwab Catch-up,FALSE,4/6/20,88417.821,Retirement,nclunie1o@multiply.com
+19061,401(k) - Charles Schwab,TRUE,,21611.8463,Retirement,jheinemann1p@msu.edu
+19194,401(k) - Charles Schwab Catch-up,TRUE,5/3/15,22144.1309,Retirement,cmoutrayread1q@foxnews.com
+19194,401(k) - Charles Schwab Roth,TRUE,5/20/16,95306.7128,Retirement,asudlow1r@meetup.com
+19194,401(k) - Charles Schwab,FALSE,1/15/14,86939.0901,Retirement,pfranzoli1s@sakura.ne.jp
+19098,401(k) - Charles Schwab Catch-up,FALSE,11/28/15,37484.7159,Retirement,srouch1t@jiathis.com
+19098,401(k) - Charles Schwab,FALSE,8/9/19,33262.7032,Retirement,mcurner1u@soup.io
+19252,Pension - New Ireland PRSA,FALSE,11/17/15,88509.9265,Other,rpiercey1v@addtoany.com
+19087,401(k) - Charles Schwab,TRUE,7/26/15,60465.4559,Retirement,tbeswick1w@marriott.com
+19090,401(k) - Charles Schwab,FALSE,3/13/13,58606.469,Retirement,mgilhoolie1x@unesco.org
+19053,NQDC - Charles Schwab Deferred Compensation - Bonus,TRUE,7/9/16,52761.068,Other,fdavenhall1y@craigslist.org
+19053,NQDC - Charles Schwab Deferred Compensation - Regular,FALSE,2/20/14,88726.9984,Other,gcoolican1z@wordpress.org
+19053,401(k) - Charles Schwab,TRUE,6/15/19,14599.7533,Retirement,bstoke20@sbwire.com
+19005,NQDC - Charles Schwab Deferred Compensation - Bonus,TRUE,,12307.1154,Other,dczaple21@comsenz.com
+19005,401(k) - Charles Schwab Catch-up,TRUE,12/31/14,55074.0135,Retirement,bweedenburg22@constantcontact.com
+19005,401(k) - Charles Schwab,TRUE,4/15/16,77002.4423,Retirement,zbanes23@weather.com
+19290,401(k) - Charles Schwab,TRUE,,13661.6607,Retirement,ldoog24@answers.com
+19157,401(k) - Charles Schwab,TRUE,7/22/22,60828.0619,Retirement,aacedo25@nymag.com
+19082,401(k) - Charles Schwab,TRUE,9/23/22,1641.087,Retirement,crozec26@howstuffworks.com
+19084,401(k) - Charles Schwab,TRUE,3/16/22,16221.6339,Retirement,cosuaird27@theglobeandmail.com
+19092,401(k) - Charles Schwab Roth,TRUE,3/12/13,4117.8323,Retirement,edowley28@devhub.com
+19092,401(k) - Charles Schwab,TRUE,,90002.5776,Retirement,zvelareal29@arizona.edu
+19293,RRSP - Sun Life,FALSE,,18568.1797,Retirement,ithurston2a@google.com
+19289,401(k) - Charles Schwab,TRUE,2/12/22,28863.5323,Retirement,hkloss2b@eventbrite.com
+19015,401(k) - Charles Schwab,FALSE,4/6/18,44036.9749,Retirement,eyerby2c@wikipedia.org
+19246,401(k) - Charles Schwab Roth,FALSE,11/9/12,40325.7239,Retirement,dhinsche2d@jugem.jp
+19246,401(k) - Charles Schwab,FALSE,6/17/18,46394.4154,Retirement,ncarslaw2e@gravatar.com
+19219,Pension - Employees’ Provident Fund Organisation Provident Fund,TRUE,12/24/21,40099.6365,Other,msouthwick2f@gmpg.org
+19220,Pension - Employees’ Provident Fund Organisation Provident Fund,TRUE,4/14/14,39272.6875,Other,skun2g@theatlantic.com
+19182,Pension - Employees’ Provident Fund Organisation Provident Fund,FALSE,11/9/16,24658.5944,Other,rdevries2h@etsy.com
+19164,Pension - Employees’ Provident Fund Organisation Provident Fund,TRUE,2/17/16,99431.7646,Other,ykolis2i@drupal.org
+19304,Pension - ABN Amro Fund,FALSE,10/5/22,71368.949,Other,adebanke2j@msn.com
+19253,Pension - ABN Amro Fund,TRUE,,74289.4809,Other,mmarzellano2k@loc.gov
+19270,Pension - ABN Amro Fund,TRUE,11/19/12,53203.352,Other,bstonefewings2l@berkeley.edu
+19260,Pension - ABN Amro Fund,TRUE,6/6/13,88733.9817,Other,amotion2m@ox.ac.uk
+19139,RRSP - Sun Life,TRUE,3/26/14,89367.3412,Retirement,sisles2n@godaddy.com
+19132,RRSP - Sun Life,FALSE,5/9/20,626.4524,Retirement,ifaint2o@census.gov
+19295,RRSP - Sun Life,TRUE,11/27/13,84387.3868,Retirement,btassaker2p@csmonitor.com
+19311,RRSP - Sun Life,FALSE,3/28/20,90122.5858,Retirement,adauncey2q@skyrock.com
+19310,RRSP - Sun Life,TRUE,5/24/14,36792.1674,Retirement,mrawes2r@washingtonpost.com
+19135,RRSP - Sun Life,TRUE,,79329.5737,Retirement,amargrem0@webmd.com
+19292,RRSP - Sun Life,FALSE,1/26/21,34811.3007,Retirement,nkingwell1@un.org
+19291,RRSP - Sun Life,TRUE,9/23/19,47684.234,Retirement,gcook2@senate.gov
+19079,RRSP - Sun Life,FALSE,5/20/21,81316.7362,Retirement,kkemmis3@icio.us
+19231,RRSP - Sun Life,TRUE,9/8/12,11398.9291,Retirement,msorrell4@unicef.org
+19326,RRSP - Sun Life,TRUE,7/11/18,77012.5269,Retirement,kskeggs5@dyndns.org
+19239,Deferred Stock - Standard Life,FALSE,6/4/14,53305.2527,Other,nwindmill6@hibu.com
+19127,Deferred Stock - Standard Life,FALSE,3/11/20,41761.5615,Other,bbyllam7@pen.io
+19129,Deferred Stock - Standard Life,FALSE,3/27/16,46859.7588,Other,thawes8@oakley.com
+19305,Deferred Stock - Standard Life,FALSE,3/19/22,44078.3135,Other,edumberrill9@fema.gov
+19131,Deferred Stock - Standard Life,FALSE,8/7/22,46006.4021,Other,walibonea@privacy.gov.au
+19296,RRSP - Sun Life,FALSE,3/10/17,64275.3823,Retirement,hwalshb@wikia.com
+19347,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,9/26/14,1943.3801,Other,jcowserc@w3.org
+19346,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,4/17/13,6676.4346,Other,sjuszczykd@sogou.com
+19345,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,4/30/17,57528.5182,Other,
+19131,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,,31590.9889,Other,wbattlestonef@icio.us
+19129,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,9/4/12,32060.2307,Other,atammadgeg@jimdo.com
+19266,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,9/23/16,89444.2796,Other,igoodbarneh@w3.org
+19332,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,1/11/13,24119.8827,Other,mschankelborgi@ucoz.com
+19168,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,12/20/17,31771.4946,Other,imckanej@yandex.ru
+19299,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,3/9/17,47193.5001,Other,dchinnickk@umich.edu
+19244,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,9/18/13,9776.6251,Other,mfarnfieldl@amazonaws.com
+19254,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,9/17/18,34762.1878,Other,mkegleym@gov.uk
+19239,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,11/5/15,26813.5562,Other,mkondratenyan@opensource.org
+19305,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,6/17/19,78973.4409,Other,bpaddemoreo@dropbox.com
+19173,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,2/9/18,41466.0563,Other,fplacstonep@weebly.com
+19229,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,3/30/21,74672.6718,Other,docarrolq@yellowpages.com
+19298,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,4/1/21,59156.2973,Other,csudddardr@bluehost.com
+19359,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,2/21/16,49285.1696,Other,shuffers@angelfire.com
+19358,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,,66474.6809,Other,wschimont@nasa.gov
+19357,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,1/25/17,56435.2609,Other,burridgeu@dropbox.com
+19356,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,1/20/17,6006.1611,Other,wgodferyv@ycombinator.com
+19355,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,6/21/17,50734.975,Other,czutew@drupal.org
+19354,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,3/20/14,52825.7682,Other,dhurdedgex@abc.net.au
+19353,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,4/2/17,84058.1783,Other,scotteey@archive.org
+19352,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,11/13/15,3621.1847,Other,pclemittz@zdnet.com
+19205,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,4/12/13,65059.6354,Other,gleftly10@loc.gov
+19351,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,4/14/17,25250.2776,Other,vcotelard11@nifty.com
+19350,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,7/26/17,27282.8046,Other,jbarlee12@sourceforge.net
+19349,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,5/22/14,18813.4882,Other,nbampfield13@sina.com.cn
+19348,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,7/26/20,58617.3934,Other,atansill14@marketwatch.com
+19153,401(k) - Charles Schwab,TRUE,4/7/14,45875.3743,Retirement,fmccaskill15@paypal.com
+19147,401(k) - Charles Schwab,FALSE,11/20/18,43792.9122,Retirement,satteridge16@squidoo.com
+19152,401(k) - Charles Schwab Roth,FALSE,9/30/17,45437.7683,Retirement,bvido17@apache.org
+19152,401(k) - Charles Schwab,TRUE,8/4/14,65759.2242,Retirement,sdaud18@networksolutions.com
+19155,401(k) - Charles Schwab,TRUE,1/18/16,45388.3219,Retirement,shannaway19@archive.org
+19151,401(k) - Charles Schwab,FALSE,4/4/17,86189.528,Retirement,dbernth1a@sitemeter.com
+19156,401(k) - Charles Schwab Roth,TRUE,6/17/12,67843.3791,Retirement,gshinefield1b@biglobe.ne.jp
+19156,401(k) - Charles Schwab,TRUE,3/15/15,72348.6035,Retirement,jashworth1c@paypal.com
+19150,401(k) - Charles Schwab Roth,TRUE,3/25/18,95819.8549,Retirement,gsisland1d@google.co.uk
+19150,401(k) - Charles Schwab,FALSE,3/19/21,66595.1239,Retirement,
+19154,401(k) - Charles Schwab Catch-up,TRUE,8/22/22,52903.573,Retirement,bbarrus1f@fda.gov
+19154,401(k) - Charles Schwab,TRUE,6/17/22,88417.821,Retirement,vrean1g@adobe.com
+19148,401(k) - Charles Schwab Catch-up,FALSE,8/17/21,21611.8463,Retirement,mmacsherry1h@mozilla.org
+19148,401(k) - Charles Schwab,TRUE,7/15/22,22144.1309,Retirement,nplester1i@yandex.ru
+19106,Defined Contribution - Charles Schwab Puerto Rico,TRUE,6/29/18,95306.7128,Other,pwalenta1j@fastcompany.com
+19376,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,FALSE,7/28/17,86939.0901,Other,ftebb1k@facebook.com
+19185,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,TRUE,7/22/12,37484.7159,Other,cnansom1l@un.org
+19125,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,TRUE,10/27/21,33262.7032,Other,lmordey1m@nasa.gov
+19122,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,FALSE,4/6/20,88509.9265,Other,gshory1n@storify.com
+19279,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,FALSE,,60465.4559,Other,nclunie1o@multiply.com
+19378,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,TRUE,5/3/15,58606.469,Other,jheinemann1p@msu.edu
+19284,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,5/20/16,52761.068,Other,cmoutrayread1q@foxnews.com
+19127,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,1/15/14,88726.9984,Other,asudlow1r@meetup.com
+19180,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,11/28/15,14599.7533,Other,pfranzoli1s@sakura.ne.jp
+19077,Swedish - Löneväxling Base Salary,FALSE,8/9/19,12307.1154,Other,srouch1t@jiathis.com
+19444,Pension - New Ireland PRSA,FALSE,11/17/15,55074.0135,Other,mcurner1u@soup.io
+19169,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,7/26/15,77002.4423,Other,rpiercey1v@addtoany.com
+19167,Pension - Standard Life Auto Enrolment (Eligible Worker),TRUE,3/13/13,13661.6607,Other,tbeswick1w@marriott.com
+19227,Pension - Standard Life Auto Enrolment (Eligible Worker),FALSE,7/9/16,60828.0619,Other,mgilhoolie1x@unesco.org
+19476,Defined Contribution - Bank of Tokyo Mitsubishi UFJ,TRUE,2/20/14,1641.087,Other,fdavenhall1y@craigslist.org
+19481,Pension - ABN Amro Fund,FALSE,6/15/19,16221.6339,Other,gcoolican1z@wordpress.org
+19482,Pension - ABN Amro Fund,TRUE,,4117.8323,Other,bstoke20@sbwire.com
+19483,Pension - ABN Amro Fund,TRUE,12/31/14,90002.5776,Other,dczaple21@comsenz.com
+19485,Pension - ABN Amro Fund,TRUE,4/15/16,18568.1797,Other,bweedenburg22@constantcontact.com
+19486,Pension - ABN Amro Fund,TRUE,,28863.5323,Other,zbanes23@weather.com
+19491,New Zealand Pension - NZL Government Kiwi Saver,TRUE,7/22/22,44036.9749,Other,ldoog24@answers.com
+19492,New Zealand Pension - NZL Government Kiwi Saver,TRUE,9/23/22,40325.7239,Other,aacedo25@nymag.com
+19493,New Zealand Pension - NZL Government Kiwi Saver,TRUE,3/16/22,46394.4154,Other,crozec26@howstuffworks.com
+19288,New Zealand Pension - NZL Government Kiwi Saver,TRUE,3/12/13,40099.6365,Other,cosuaird27@theglobeandmail.com
+19316,New Zealand Pension - NZL Government Kiwi Saver,TRUE,,39272.6875,Other,edowley28@devhub.com
+19494,New Zealand Pension - NZL Government Kiwi Saver,TRUE,,24658.5944,Other,zvelareal29@arizona.edu
+19490,New Zealand Pension - NZL Government Kiwi Saver,FALSE,2/12/22,99431.7646,Other,ithurston2a@google.com
+19497,New Zealand Pension - NZL Government Kiwi Saver,TRUE,4/6/18,71368.949,Other,hkloss2b@eventbrite.com
+19498,New Zealand Pension - NZL Government Kiwi Saver,FALSE,11/9/12,74289.4809,Other,eyerby2c@wikipedia.org
+19499,New Zealand Pension - NZL Government Kiwi Saver,FALSE,6/17/18,53203.352,Other,dhinsche2d@jugem.jp
+19387,Health Savings Account - Sun Life,FALSE,12/24/21,88733.9817,Medical,ncarslaw2e@gravatar.com
+19386,Health Savings Account - Sun Life,TRUE,4/14/14,89367.3412,Medical,msouthwick2f@gmpg.org
+19385,Health Savings Account - Sun Life,TRUE,11/9/16,626.4524,Medical,skun2g@theatlantic.com
+19384,Health Savings Account - Sun Life,FALSE,2/17/16,84387.3868,Medical,rdevries2h@etsy.com
+19383,Health Savings Account - Sun Life,TRUE,10/5/22,90122.5858,Medical,ykolis2i@drupal.org
+19296,Health Savings Account - Sun Life,FALSE,,36792.1674,Medical,adebanke2j@msn.com
+19020,Gym Membership - Club One,TRUE,11/19/12,79329.5737,Other,mmarzellano2k@loc.gov
+19117,Gym Membership - Club One,TRUE,6/6/13,34811.3007,Other,bstonefewings2l@berkeley.edu
+19002,Gym Membership - Club One,TRUE,3/26/14,47684.234,Other,amotion2m@ox.ac.uk
+19111,Gym Membership - Club One,TRUE,5/9/20,81316.7362,Other,sisles2n@godaddy.com
+19191,Gym Membership - Club One,FALSE,11/27/13,11398.9291,Other,ifaint2o@census.gov
+19012,Commuter Spending - SHPS Transit Account,TRUE,3/28/20,77012.5269,Other,btassaker2p@csmonitor.com
+19008,Commuter Spending - SHPS Transit Account,FALSE,5/24/14,53305.2527,Other,adauncey2q@skyrock.com
+19008,Commuter Spending - SHPS Parking Account,TRUE,,41761.5615,Other,mrawes2r@washingtonpost.com
+19001,Commuter Spending - SHPS Parking Account,TRUE,1/26/21,46859.7588,Other,amargrem0@webmd.com
+19117,Commuter Spending - SHPS Transit Account,FALSE,9/23/19,44078.3135,Other,nkingwell1@un.org
+19109,Commuter Spending - SHPS Transit Account,TRUE,5/20/21,46006.4021,Other,gcook2@senate.gov
+19103,Commuter Spending - SHPS Parking Account,FALSE,9/8/12,64275.3823,Other,kkemmis3@icio.us
+19073,Commuter Spending - SHPS Transit Account,TRUE,7/11/18,1943.3801,Other,msorrell4@unicef.org
+19072,Commuter Spending - SHPS Parking Account,TRUE,6/4/14,6676.4346,Other,kskeggs5@dyndns.org
+19075,Commuter Spending - SHPS Parking Account,FALSE,3/11/20,57528.5182,Other,nwindmill6@hibu.com
+19020,Commuter Spending - SHPS Transit Account,FALSE,3/27/16,31590.9889,Other,bbyllam7@pen.io
+19119,Commuter Spending - SHPS Transit Account,FALSE,3/19/22,32060.2307,Other,thawes8@oakley.com
+19119,Commuter Spending - SHPS Parking Account,FALSE,8/7/22,89444.2796,Other,edumberrill9@fema.gov
+19030,Commuter Spending - SHPS Transit Account,FALSE,3/10/17,24119.8827,Other,walibonea@privacy.gov.au
+19108,Commuter Spending - SHPS Transit Account,FALSE,9/26/14,31771.4946,Other,hwalshb@wikia.com
+19017,Commuter Spending - SHPS Transit Account,TRUE,4/17/13,47193.5001,Other,jcowserc@w3.org
+19112,Commuter Spending - SHPS Transit Account,TRUE,4/30/17,9776.6251,Other,sjuszczykd@sogou.com
+19112,Commuter Spending - SHPS Parking Account,TRUE,,34762.1878,Other,
+19118,Commuter Spending - SHPS Transit Account,TRUE,9/4/12,26813.5562,Other,wbattlestonef@icio.us
+19037,Commuter Spending - SHPS Transit Account,TRUE,9/23/16,78973.4409,Other,atammadgeg@jimdo.com
+19042,Gym Membership - Club One,FALSE,1/11/13,41466.0563,Other,igoodbarneh@w3.org
+19042,Commuter Spending - SHPS Transit Account,TRUE,12/20/17,74672.6718,Other,mschankelborgi@ucoz.com
+19015,Gym Membership - Club One,FALSE,3/9/17,59156.2973,Other,imckanej@yandex.ru
+19046,Commuter Spending - SHPS Transit Account,FALSE,9/18/13,49285.1696,Other,dchinnickk@umich.edu
+19105,Gym Membership - Club One,FALSE,9/17/18,66474.6809,Other,mfarnfieldl@amazonaws.com
+19105,Commuter Spending - SHPS Transit Account,TRUE,11/5/15,56435.2609,Other,mkegleym@gov.uk
+19001,Gym Membership - Club One,FALSE,6/17/19,6006.1611,Other,mkondratenyan@opensource.org
+19255,Commuter Spending - Swebus Bus Pass,FALSE,2/9/18,50734.975,Other,bpaddemoreo@dropbox.com
+19255,Gym Membership - World Class Fitness,FALSE,3/30/21,52825.7682,Other,fplacstonep@weebly.com
+19306,Commuter Spending - Swebus Bus Pass,FALSE,4/1/21,84058.1783,Other,docarrolq@yellowpages.com
+19306,Gym Membership - World Class Fitness,TRUE,2/21/16,3621.1847,Other,csudddardr@bluehost.com
+19302,Commuter Spending - Swebus Bus Pass,TRUE,,65059.6354,Other,shuffers@angelfire.com
+19302,Gym Membership - World Class Fitness,TRUE,1/25/17,25250.2776,Other,wschimont@nasa.gov
+19077,Commuter Spending - Swebus Bus Pass,FALSE,1/20/17,27282.8046,Other,burridgeu@dropbox.com
+19077,Gym Membership - World Class Fitness,TRUE,6/21/17,18813.4882,Other,wgodferyv@ycombinator.com
+19126,Commuter Spending - Swebus Bus Pass,TRUE,3/20/14,58617.3934,Other,czutew@drupal.org
+19126,Gym Membership - World Class Fitness,FALSE,4/2/17,45875.3743,Other,dhurdedgex@abc.net.au
+19263,Commuter Spending - Swebus Bus Pass,FALSE,11/13/15,43792.9122,Other,scotteey@archive.org
+19263,Gym Membership - World Class Fitness,FALSE,4/12/13,45437.7683,Other,pclemittz@zdnet.com
+19390,Commuter Spending - Swebus Bus Pass,FALSE,4/14/17,65759.2242,Other,gleftly10@loc.gov
+19390,Gym Membership - World Class Fitness,FALSE,7/26/17,45388.3219,Other,vcotelard11@nifty.com
+19391,Commuter Spending - Swebus Bus Pass,TRUE,5/22/14,86189.528,Other,jbarlee12@sourceforge.net
+19391,Gym Membership - World Class Fitness,FALSE,7/26/20,67843.3791,Other,nbampfield13@sina.com.cn
+19416,Commuter Spending - Swebus Bus Pass,TRUE,4/7/14,72348.6035,Other,atansill14@marketwatch.com
+19419,Commuter Spending - SHPS Transit Account,TRUE,11/20/18,95819.8549,Other,fmccaskill15@paypal.com
+19430,Commuter Spending - SHPS Parking Account,FALSE,9/30/17,66595.1239,Other,satteridge16@squidoo.com
+19430,Gym Membership - Club One,FALSE,8/4/14,52903.573,Other,bvido17@apache.org
+19431,Commuter Spending - SHPS Parking Account,TRUE,1/18/16,88417.821,Other,sdaud18@networksolutions.com
+19431,Gym Membership - Club One,TRUE,4/4/17,21611.8463,Other,shannaway19@archive.org
+19432,Commuter Spending - Swebus Bus Pass,FALSE,6/17/12,22144.1309,Other,dbernth1a@sitemeter.com
+19284,Charitable Giving - Pennies from Heaven,TRUE,3/15/15,95306.7128,Other,gshinefield1b@biglobe.ne.jp
+19127,Charitable Giving - Pennies from Heaven,TRUE,3/25/18,86939.0901,Other,jashworth1c@paypal.com
+19180,Charitable Giving - Pennies from Heaven,TRUE,3/19/21,37484.7159,Other,gsisland1d@google.co.uk
+19303,Meal Vouchers - Edenred Ticket Restaurant,FALSE,8/22/22,33262.7032,Other,
+19403,Meal Vouchers - Edenred Ticket Restaurant,TRUE,6/17/22,88509.9265,Other,bbarrus1f@fda.gov
+19405,Meal Vouchers - Edenred Ticket Restaurant,TRUE,8/17/21,60465.4559,Other,vrean1g@adobe.com
+19404,Meal Vouchers - Edenred Ticket Restaurant,FALSE,7/15/22,58606.469,Other,mmacsherry1h@mozilla.org
+19297,Meal Vouchers - Edenred Ticket Restaurant,TRUE,6/29/18,52761.068,Other,nplester1i@yandex.ru
+19407,Meal Vouchers - Edenred Ticket Restaurant,TRUE,7/28/17,88726.9984,Other,pwalenta1j@fastcompany.com
+19178,Meal Vouchers - Edenred Ticket Restaurant,FALSE,7/22/12,14599.7533,Other,ftebb1k@facebook.com
+19396,Meal Vouchers - Edenred Ticket Restaurant,TRUE,10/27/21,12307.1154,Other,cnansom1l@un.org
+19401,Meal Vouchers - Edenred Ticket Restaurant,TRUE,4/6/20,55074.0135,Other,lmordey1m@nasa.gov
+19374,Meal Vouchers - Edenred Ticket Restaurant,FALSE,,77002.4423,Other,gshory1n@storify.com
+19301,Meal Vouchers - Edenred Ticket Restaurant,FALSE,5/3/15,13661.6607,Other,nclunie1o@multiply.com
+19307,Meal Vouchers - Edenred Ticket Restaurant,TRUE,5/20/16,60828.0619,Other,jheinemann1p@msu.edu
+19408,Meal Vouchers - Edenred Ticket Restaurant,TRUE,1/15/14,1641.087,Other,cmoutrayread1q@foxnews.com
+19409,Meal Vouchers - Edenred Ticket Restaurant,TRUE,11/28/15,16221.6339,Other,asudlow1r@meetup.com
+19398,Meal Vouchers - Edenred Ticket Restaurant,FALSE,8/9/19,4117.8323,Other,pfranzoli1s@sakura.ne.jp
+19393,Meal Vouchers - Edenred Ticket Restaurant,FALSE,11/17/15,90002.5776,Other,srouch1t@jiathis.com
+19397,Meal Vouchers - Edenred Ticket Restaurant,FALSE,7/26/15,18568.1797,Other,mcurner1u@soup.io
+19402,Meal Vouchers - Edenred Ticket Restaurant,FALSE,3/13/13,28863.5323,Other,rpiercey1v@addtoany.com
+19395,Meal Vouchers - Edenred Ticket Restaurant,TRUE,7/9/16,44036.9749,Other,tbeswick1w@marriott.com
+19300,Meal Vouchers - Edenred Ticket Restaurant,FALSE,2/20/14,40325.7239,Other,mgilhoolie1x@unesco.org
+19400,Meal Vouchers - Edenred Ticket Restaurant,TRUE,6/15/19,46394.4154,Other,fdavenhall1y@craigslist.org
+19392,Meal Vouchers - Edenred Ticket Restaurant,FALSE,,40099.6365,Other,gcoolican1z@wordpress.org
+19394,Meal Vouchers - Edenred Ticket Restaurant,TRUE,12/31/14,39272.6875,Other,bstoke20@sbwire.com
+19435,Commuter Spending - Swebus Bus Pass,TRUE,4/15/16,24658.5944,Other,dczaple21@comsenz.com
+19427,Meal Vouchers - Sodexo Meal Tickets,TRUE,,99431.7646,Other,bweedenburg22@constantcontact.com
+19167,Charitable Giving - Pennies from Heaven,TRUE,7/22/22,71368.949,Other,zbanes23@weather.com
+19333,Fringe Benefits - Global Modern Services betriebliche Altersversorung (bAV),TRUE,9/23/22,74289.4809,Other,ldoog24@answers.com
+19333,Fringe Benefits - Global Modern Services Unfallversicherung,TRUE,3/16/22,53203.352,Other,aacedo25@nymag.com
+19448,Fringe Benefits - Global Modern Services Fitness-Club Mitgliedschaft,TRUE,3/12/13,88733.9817,Other,crozec26@howstuffworks.com
+19448,Fringe Benefits - Global Modern Services betriebliche Altersversorung (bAV),TRUE,,89367.3412,Other,cosuaird27@theglobeandmail.com
+19448,Fringe Benefits - Global Modern Services Unfallversicherung,TRUE,,626.4524,Other,edowley28@devhub.com
+19452,Fringe Benefits - Global Modern Services Unfallversicherung,TRUE,2/12/22,84387.3868,Other,zvelareal29@arizona.edu
+19334,Fringe Benefits - Global Modern Services Fitness-Club Mitgliedschaft,FALSE,4/6/18,90122.5858,Other,ithurston2a@google.com
+19334,Fringe Benefits - Global Modern Services Unfallversicherung,TRUE,11/9/12,36792.1674,Other,hkloss2b@eventbrite.com
+19186,Meal Vouchers - Edenred Meal Coupons,FALSE,6/17/18,79329.5737,Other,eyerby2c@wikipedia.org
+19138,Meal Vouchers - Edenred Meal Coupons,FALSE,12/24/21,34811.3007,Other,dhinsche2d@jugem.jp
+19137,Meal Vouchers - Edenred Meal Coupons,FALSE,4/14/14,47684.234,Other,ncarslaw2e@gravatar.com
+19208,Meal Vouchers - Edenred Meal Coupons,TRUE,11/9/16,81316.7362,Other,msouthwick2f@gmpg.org
+19187,Meal Vouchers - Edenred Meal Coupons,TRUE,2/17/16,11398.9291,Other,skun2g@theatlantic.com
+19136,Meal Vouchers - Edenred Meal Coupons,FALSE,10/5/22,77012.5269,Other,rdevries2h@etsy.com
