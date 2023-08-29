@@ -916,7 +916,7 @@ const upsertUser = async () => {
     firstName: "First Name",
     lastName: "Last Name",
     email: "email@email.com",
-    password: await hashPassword("badpassword"),
+    password: await hashPassword("asdfasdf"),
     organization: {
       connect: {
         id: organization.id,

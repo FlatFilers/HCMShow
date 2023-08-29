@@ -134,12 +134,16 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
         res.json().then((res: { actions: any[] }) => {
           console.log("data", res);
 
-          res.actions.forEach((a) => {
-            toast.success(a.description, {
-              id: DateTime.now().toISO()!,
-              duration: 4000,
+          if (res.actions && res.actions.length > 0) {
+            res.actions.forEach((a) => {
+              toast.success(a.description, {
+                id: DateTime.now().toISO()!,
+                duration: 4000,
+              });
             });
-          });
+
+            router.replace("/employee-benefit-plans");
+          }
         });
       });
     }, 3000);
