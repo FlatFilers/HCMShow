@@ -47,7 +47,7 @@ const Employees: NextPage<Props> = ({ employees }) => {
           <h1 className="text-xl font-semibold text-gray-900">Employees</h1>
           <p className="mt-2 text-sm text-gray-700">
             A list of all the employees in your account including their name,
-            manager, title, and location.
+            manager, title, and employment information.
           </p>
         </div>
       </div>

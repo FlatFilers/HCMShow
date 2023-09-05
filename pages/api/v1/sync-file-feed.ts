@@ -85,7 +85,7 @@ export default async function handler(
     throw new Error("No user found for space", spaceId);
   }
 
-  const action = await createAction({
+  await createAction({
     userId: user.id,
     organizationId: user.organizationId,
     type: ActionType.FileFeedEvent,
@@ -94,28 +94,6 @@ export default async function handler(
       topic,
     },
   });
-
-  // Not awaiting for early response back to Flatfile server
-  // TODO: Make sync work for filefeed ENV vars
-  // syncWorkbookRecords({
-  //   userId: user.id,
-  //   organizationId: user.organizationId,
-  //   spaceType: space.type as SpaceType,
-  // }).then(() => {
-  //   console.log("Filefeed: syncWorkbookRecords complete");
-
-  // prismaClient.action.update({
-  //   where: {
-  //     id: action.id,
-  //   },
-  //   data: {
-  //     metadata: {
-  //       state: "complete",
-  //       description: "Synced X Records",
-  //     },
-  //   },
-  // });
-  // });
 
   res.status(200).json({ message: "success" });
 }
