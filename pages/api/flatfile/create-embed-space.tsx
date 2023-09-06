@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
-import { SpaceType } from "../../../lib/space";
+import { SpaceRepo, SpaceType } from "../../../lib/space";
 import { WorkflowType, createSpace } from "../../../lib/flatfile";
 
 export default async function handler(
@@ -41,16 +41,15 @@ export default async function handler(
 
   console.log("flatfileSpaceData", flatfileSpaceData);
 
-  const space: Space = await prisma.space.create({
-    data: {
-      userId,
-      flatfileData: flatfileSpaceData as unknown as Prisma.InputJsonValue,
-      type: SpaceType.Embed,
-    },
-  });
+  if (!flatfileSpaceData) {
+    throw new Error("Failed to create space");
+  }
 
-  // console.log("space", space);
-  // console.log("space data", flatfileSpaceData);
+  await SpaceRepo.createSpace({
+    userId,
+    flatfileData: flatfileSpaceData,
+    type: SpaceType.Embed,
+  });
 
   res.redirect(
     `/embedded-portal?flash=success&message=Space Created!&createdSpaceId=${

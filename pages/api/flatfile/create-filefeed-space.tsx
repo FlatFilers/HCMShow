@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
-import { SpaceType } from "../../../lib/space";
+import { SpaceRepo, SpaceType } from "../../../lib/space";
 import { fetchFileFromDrive } from "../../../lib/google-drive";
 import {
   FlatfileSpaceData,
@@ -67,18 +67,16 @@ export default async function handler(
   if (!guestResult) {
     res.redirect("/file-feed?flash=error&message=Error setting up Flatfile");
   }
-
-  const space: Space = await prismaClient.space.create({
-    data: {
-      userId: user.id,
-      type: SpaceType.FileFeed,
-      flatfileData: spaceResult as unknown as Prisma.InputJsonValue,
-    },
+  const space = await SpaceRepo.createSpace({
+    userId: user.id,
+    type: SpaceType.FileFeed,
+    flatfileData: spaceResult,
   });
 
   const file = await fetchFileFromDrive();
 
-  const spaceId = (space.flatfileData as unknown as FlatfileSpaceData).id;
+  const spaceId = space.flatfileSpaceId;
+
   await postFile({
     workflow,
     environmentId,

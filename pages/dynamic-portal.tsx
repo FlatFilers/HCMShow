@@ -22,7 +22,7 @@ import FeaturesList from "../components/shared/features-list";
 import { DateTime } from "luxon";
 import { useOnClickOutside } from "../lib/hooks/usehooks";
 import { Prisma } from "@prisma/client";
-import { SpaceType } from "../lib/space";
+import { SpaceRepo, SpaceType } from "../lib/space";
 import {
   WorkflowType,
   createSpace,
@@ -547,12 +547,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         type: SpaceType.Dynamic,
       },
     },
-    select: {
-      flatfileData: true,
-    },
   });
-
-  // console.log("existingSpace", existingSpace);
 
   if (!existingSpace) {
     const space = await createSpace({
@@ -566,24 +561,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       throw new Error("Failed to create dynamic space");
     }
 
-    existingSpace = await prisma.space.create({
-      data: {
-        userId,
-        flatfileData: space as unknown as Prisma.InputJsonValue,
-        type: SpaceType.Dynamic,
-      },
-      select: {
-        flatfileData: true,
-      },
+    existingSpace = await SpaceRepo.createSpace({
+      userId,
+      flatfileData: space,
+      type: SpaceType.Dynamic,
     });
   }
 
   let spaceData = await getSpace({
     workflow: WorkflowType.Dynamic,
-    spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
+    spaceId: existingSpace.flatfileSpaceId,
   });
-
-  // console.log("spaceData", spaceData);
 
   let workbook = await getWorkbook({
     workflow: WorkflowType.Dynamic,
@@ -597,7 +585,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   while (!(workbook || DateTime.now() > timeInFive)) {
     spaceData = await getSpace({
       workflow: WorkflowType.Dynamic,
-      spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
+      spaceId: existingSpace.flatfileSpaceId,
     });
 
     workbook = await getWorkbook({

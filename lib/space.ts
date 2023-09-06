@@ -1,4 +1,4 @@
-import { Space } from "@prisma/client";
+import { Prisma, Space } from "@prisma/client";
 import { prismaClient } from "../lib/prisma-client";
 
 export enum SpaceType {
@@ -15,25 +15,12 @@ export const findSpace = async ({
   userId: string;
   flatfileSpaceId: string;
 }) => {
-  const spaces = await prismaClient.space.findMany({
+  return await prismaClient.space.findUniqueOrThrow({
     where: {
       userId,
-      flatfileData: {
-        path: ["id"],
-        equals: flatfileSpaceId,
-      },
+      flatfileSpaceId,
     },
   });
-
-  if (spaces.length > 1) {
-    throw new Error(
-      `More than one space found for flatfileSpaceId ${flatfileSpaceId}}`
-    );
-  } else if (spaces.length === 0) {
-    throw new Error(`No space found for flatfileSpaceId ${flatfileSpaceId}`);
-  }
-
-  return spaces[0];
 };
 
 export const findSpaceForType = async ({
@@ -56,22 +43,30 @@ export const findSpaceForType = async ({
 export const getSpaceForFlatfileSpaceId = async (
   flatfileSpaceId: string
 ): Promise<Space> => {
-  const spaces = await prismaClient.space.findMany({
+  return await prismaClient.space.findUniqueOrThrow({
     where: {
-      flatfileData: {
-        path: ["id"],
-        equals: flatfileSpaceId,
-      },
+      flatfileSpaceId,
     },
   });
-
-  if (spaces.length > 1) {
-    throw new Error(
-      `More than one space found for flatfileSpaceId ${flatfileSpaceId}}`
-    );
-  } else if (spaces.length === 0) {
-    throw new Error(`No space found for flatfileSpaceId ${flatfileSpaceId}`);
-  }
-
-  return spaces[0];
 };
+
+export class SpaceRepo {
+  static createSpace = async ({
+    userId,
+    flatfileData,
+    type,
+  }: {
+    userId: string;
+    flatfileData: any;
+    type: SpaceType;
+  }) => {
+    return await prismaClient.space.create({
+      data: {
+        userId,
+        flatfileSpaceId: flatfileData.id,
+        flatfileData: flatfileData as unknown as Prisma.InputJsonValue,
+        type,
+      },
+    });
+  };
+}
