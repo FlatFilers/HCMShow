@@ -71,13 +71,13 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   };
 
   const spaceProps: ISpace = {
-    error,
     space,
     environmentId,
     closeSpace: {
       operation: "contacts:submit", // todo: what do we put here?
       onClose: () => setShowSpace(false),
     },
+    error,
   };
 
   const [downloaded, setDownloaded] = useState(false);
@@ -241,7 +241,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const existingSpaceId = existingSpace.flatfileSpaceId;
 
   const environmentId = process.env.EMBEDDED_ENVIRONMENT_ID;
-
   if (!environmentId) {
     throw new Error("Missing EMBEDDED_ENVIRONMENT_ID env var");
   }
@@ -258,8 +257,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const props: Props = {
     environmentId,
     space: {
-      id: spaceData?.id,
-      accessToken: spaceData?.accessToken,
+      id: spaceData.id,
+      accessToken: spaceData.accessToken,
     },
   };
 
