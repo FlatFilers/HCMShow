@@ -143,8 +143,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      flatfileSpaceId: (dbSpace.flatfileData as unknown as FlatfileSpaceData)
-        .id,
+      flatfileSpaceId: dbSpace.flatfileSpaceId,
     },
   };
 };

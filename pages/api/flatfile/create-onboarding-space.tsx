@@ -74,7 +74,6 @@ export default async function handler(
 
   await SpaceRepo.createSpace({
     userId: user.id,
-    flatfileSpaceId: spaceResult.id,
     flatfileData: spaceResult,
     type: SpaceType.WorkbookUpload,
   });

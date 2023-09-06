@@ -47,7 +47,6 @@ export default async function handler(
 
   await SpaceRepo.createSpace({
     userId,
-    flatfileSpaceId: flatfileSpaceData.id,
     flatfileData: flatfileSpaceData,
     type: SpaceType.Embed,
   });

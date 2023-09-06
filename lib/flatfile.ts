@@ -302,7 +302,11 @@ export const getRecordsByName = async ({
       },
     });
 
-    flatfileSpaceId = (space?.flatfileData as unknown as FlatfileSpaceData).id;
+    if (!space) {
+      throw new Error(`No space for user ${userId} and type ${spaceType}`);
+    }
+
+    flatfileSpaceId = space.flatfileSpaceId;
   }
 
   if (!flatfileSpaceId) {

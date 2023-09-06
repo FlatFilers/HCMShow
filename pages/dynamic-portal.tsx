@@ -547,12 +547,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         type: SpaceType.Dynamic,
       },
     },
-    select: {
-      flatfileData: true,
-    },
   });
-
-  // console.log("existingSpace", existingSpace);
 
   if (!existingSpace) {
     const space = await createSpace({
@@ -568,7 +563,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     existingSpace = await SpaceRepo.createSpace({
       userId,
-      flatfileSpaceId: space.id,
       flatfileData: space,
       type: SpaceType.Dynamic,
     });
@@ -576,10 +570,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   let spaceData = await getSpace({
     workflow: WorkflowType.Dynamic,
-    spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
+    spaceId: existingSpace.flatfileSpaceId,
   });
-
-  // console.log("spaceData", spaceData);
 
   let workbook = await getWorkbook({
     workflow: WorkflowType.Dynamic,
@@ -593,7 +585,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   while (!(workbook || DateTime.now() > timeInFive)) {
     spaceData = await getSpace({
       workflow: WorkflowType.Dynamic,
-      spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
+      spaceId: existingSpace.flatfileSpaceId,
     });
 
     workbook = await getWorkbook({

@@ -70,13 +70,13 @@ export default async function handler(
   const space = await SpaceRepo.createSpace({
     userId: user.id,
     type: SpaceType.FileFeed,
-    flatfileSpaceId: spaceResult.id,
     flatfileData: spaceResult,
   });
 
   const file = await fetchFileFromDrive();
 
-  const spaceId = (space.flatfileData as unknown as FlatfileSpaceData).id;
+  const spaceId = space.flatfileSpaceId;
+
   await postFile({
     workflow,
     environmentId,

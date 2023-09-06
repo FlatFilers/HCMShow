@@ -230,9 +230,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         type: SpaceType.Embed,
       },
     },
-    select: {
-      flatfileData: true,
-    },
   });
 
   if (!existingSpace) {
@@ -241,9 +238,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const existingSpaceId = (
-    existingSpace?.flatfileData as unknown as FlatfileSpaceData
-  ).id;
+  const existingSpaceId = existingSpace.flatfileSpaceId;
 
   const environmentId = process.env.EMBEDDED_ENVIRONMENT_ID;
 
