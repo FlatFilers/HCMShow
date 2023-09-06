@@ -3,8 +3,6 @@ import { ReadStream } from "fs";
 import { prismaClient } from "./prisma-client";
 import { SpaceType } from "./space";
 import { Workbook } from "@flatfile/api/api";
-// import { ListWorkbooksRequest } from "@flatfile/api/api";
-// import { getSpaceConfig } from "./flatfile";
 
 export enum WorkflowType {
   Onboarding = "onboarding",
