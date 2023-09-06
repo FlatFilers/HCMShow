@@ -4,7 +4,7 @@ import { type ISpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import { XCircleIcon } from "@heroicons/react/24/outline";
-import { PrismaClient, Space } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
 import { SpaceType } from "../lib/space";
@@ -14,18 +14,12 @@ import DownloadFile from "../components/shared/download-file";
 import SetupSpace from "../components/shared/setup-space";
 import StepList, { Step } from "../components/shared/step-list";
 import Workspace from "../components/embedded-portal/workspace";
-import { theme } from "../lib/theme";
 import { useFlashMessages } from "../lib/hooks/usehooks";
-import { Flatfile } from "@flatfile/api";
-import {
-  FlatfileSpaceData,
-  WorkflowType,
-  getSpace,
-  getWorkbook,
-} from "../lib/flatfile";
-import { document } from "../components/embedded-portal/document";
+import { FlatfileSpaceData, WorkflowType, getSpace } from "../lib/flatfile";
 
 import dynamic from "next/dynamic";
+import { ReusedSpaceWithAccessToken } from "@flatfile/react/dist/src/types/ISpace";
+import { prismaClient } from "../lib/prisma-client";
 
 const DynamicEmbeddedSpace = dynamic(
   () => import("../components/shared/embedded-space"),
@@ -35,21 +29,20 @@ const DynamicEmbeddedSpace = dynamic(
   }
 );
 
-interface Props {
-  environmentToken: string;
-  lastSyncedAt?: string;
-  existingSpace: Space;
-  workbookConfig: Flatfile.CreateWorkbookConfig;
-  userId: string;
+interface ExistingSpaceProps {
+  environmentId: string;
+  space: ReusedSpaceWithAccessToken["space"];
 }
+interface NoExistingSpaceProps {
+  environmentId: never;
+  space: never;
+}
+type Props = ExistingSpaceProps | NoExistingSpaceProps;
 
 const EmbeddedPortal: NextPageWithLayout<Props> = ({
-  environmentToken,
-  lastSyncedAt,
-  existingSpace,
-  workbookConfig,
-  userId,
-}) => {
+  space,
+  environmentId,
+}: Props) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [buttonText, setButtonText] = useState<string>("Setup Flatfile");
   const handleSubmit = () => {
@@ -57,15 +50,8 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     setButtonText("Setting up Flatfile...");
   };
 
-  const publishableKey = process.env.NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY;
-
-  if (!publishableKey) {
-    console.error("Missing NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY env var");
-    throw "Missing NEXT_PUBLIC_EMBEDDED_PUBLISHABLE_KEY env var";
-  }
-
   const [showSpace, setShowSpace] = useState(false);
-  const error = (error: string) => {
+  const error = (error: Error | string) => {
     return (
       <div>
         <XCircleIcon
@@ -80,28 +66,16 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       </div>
     );
   };
-  const spaceProps = {
+
+  const spaceProps: ISpace = {
     error,
-    publishableKey,
-    environmentId: environmentToken,
-    name: "Embedded Portal",
-    // IMPORTANT NOTE: If there are any changes to the theme or document set below,
-    // you must update the theme and document in the adjoining index.ts file in hcm-show-config as well
-    themeConfig: theme("#4DCA94", "#32A673"),
-    document: document,
-    workbook: workbookConfig,
-    spaceInfo: {
-      userId,
-    },
-    sidebarConfig: {
-      showDataChecklist: false,
-      showSidebar: true,
-    },
+    space,
+    environmentId,
     closeSpace: {
       operation: "contacts:submit", // todo: what do we put here?
       onClose: () => setShowSpace(false),
     },
-  } as ISpace;
+  };
   const [downloaded, setDownloaded] = useState(false);
   const storageKey = "embedded-has-downloaded-sample-data";
   const sampleDataFileName = "/benefits-sample-data.csv";
@@ -163,7 +137,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   const [steps, setSteps] = useState<Step[]>(initialSteps);
 
   useEffect(() => {
-    if (!existingSpace && localStorage.getItem(storageKey) === "true") {
+    if (!space && localStorage.getItem(storageKey) === "true") {
       setSteps([
         { ...steps[0], status: "complete" },
         { ...steps[1], status: "current" },
@@ -181,7 +155,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
           <p className="text-sm font-semibold">{embeddedItem.name}</p>
         </div>
 
-        {!existingSpace && (
+        {!space && (
           <div className="flex flex-row justify-between">
             {steps[0].status === "current" && (
               <DownloadFile
@@ -215,24 +189,26 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
         )}
 
         <div className="flex flex-col justify-between">
-          {downloaded && existingSpace && (
-            <Workspace
-              fileName={sampleDataFileName}
-              onClick={() => {
-                // When the space is opened, save the time we started listening for events
-                if (showSpace === false) {
-                  setCurrentTime(DateTime.now().toUTC());
-                }
+          {downloaded && space && (
+            <>
+              <Workspace
+                fileName={sampleDataFileName}
+                onClick={() => {
+                  // When the space is opened, save the time we started listening for events
+                  if (showSpace === false) {
+                    setCurrentTime(DateTime.now().toUTC());
+                  }
 
-                setShowSpace(!showSpace);
-              }}
-              showSpace={showSpace}
-            />
+                  setShowSpace(!showSpace);
+                }}
+                showSpace={showSpace}
+              />
+
+              {showSpace && <DynamicEmbeddedSpace spaceProps={spaceProps} />}
+            </>
           )}
         </div>
       </div>
-
-      {showSpace && <DynamicEmbeddedSpace spaceProps={spaceProps} />}
     </div>
   );
 };
@@ -243,16 +219,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
 
   if (!token) {
-    console.log("No session token found");
-
     return {
       notFound: true,
     };
   }
 
-  const prisma = new PrismaClient();
-
-  const existingSpace = await prisma.space.findUnique({
+  const existingSpace = await prismaClient.space.findUnique({
     where: {
       userId_type: {
         userId: token.sub as string,
@@ -264,99 +236,41 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  // console.log("existingSpace", existingSpace);
-
-  const environmentToken = process.env.EMBEDDED_ENVIRONMENT_ID;
-  const lastSync = await prisma.action.findFirst({
-    where: {
-      organizationId: token.organizationId,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
   if (!existingSpace) {
-    // console.log("No space");
     return {
-      props: {
-        environmentToken,
-        lastSyncedAt: lastSync
-          ? DateTime.fromJSDate(lastSync.createdAt).toFormat(
-              "MM/dd/yy hh:mm:ss a"
-            )
-          : "",
-        existingSpace,
-        userId: token.sub,
-      },
+      props: {},
     };
+  }
+
+  const existingSpaceId = (
+    existingSpace?.flatfileData as unknown as FlatfileSpaceData
+  ).id;
+
+  const environmentId = process.env.EMBEDDED_ENVIRONMENT_ID;
+
+  if (!environmentId) {
+    throw new Error("Missing EMBEDDED_ENVIRONMENT_ID env var");
   }
 
   let spaceData = await getSpace({
     workflow: WorkflowType.Embedded,
-    spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
+    spaceId: existingSpaceId,
   });
 
-  // console.log("spaceData", spaceData);
-
-  let workbook = await getWorkbook({
-    workflow: WorkflowType.Embedded,
-    workbookId: spaceData?.primaryWorkbookId!,
-  });
-
-  // Hack to wait for workbook to be ready. Should move to frontend and poll.
-  // Duplicated among embed and dynamic flows
-  const timeInFive = DateTime.now().plus({ seconds: 5 });
-
-  while (!(workbook || DateTime.now() > timeInFive)) {
-    spaceData = await getSpace({
-      workflow: WorkflowType.Embedded,
-      spaceId: (existingSpace?.flatfileData as unknown as FlatfileSpaceData).id,
-    });
-
-    workbook = await getWorkbook({
-      workflow: WorkflowType.Embedded,
-      workbookId: spaceData?.primaryWorkbookId!,
-    });
+  if (!spaceData || !spaceData?.id || !spaceData?.accessToken) {
+    throw new Error(`Unable to get space data for space ${existingSpaceId}`);
   }
 
-  if (!workbook) {
-    // console.log("Unable to get workbook");
-    return {
-      redirect: {
-        destination: "/activity-log?flash=error&message=Unable to get workbook",
-        permanent: false,
-      },
-    };
-  }
-
-  const workbookConfig = {
-    name: workbook.name || "HCM.show Embedded Portal",
-    sheets: workbook.sheets?.map((s) => {
-      return {
-        name: s.name,
-        slug: s.config?.slug,
-        fields: s.config?.fields,
-      };
-    }),
-    actions: workbook.actions,
+  const props: Props = {
+    environmentId,
+    space: {
+      id: spaceData?.id,
+      accessToken: spaceData?.accessToken,
+    },
   };
 
-  // console.log("workbook", JSON.stringify(workbook, null, 2));
-  // console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
-
   return {
-    props: {
-      environmentToken,
-      lastSyncedAt: lastSync
-        ? DateTime.fromJSDate(lastSync.createdAt).toFormat(
-            "MM/dd/yy hh:mm:ss a"
-          )
-        : "",
-      existingSpace,
-      workbookConfig,
-      userId: token.sub,
-    },
+    props,
   };
 };
 
