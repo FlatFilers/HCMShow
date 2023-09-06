@@ -29,6 +29,9 @@ const DynamicEmbeddedSpace = dynamic(
   }
 );
 
+const STORAGE_KEY = "embedded-has-downloaded-sample-data";
+const SAMPLE_DATA_FILENAME = "/benefits-sample-data.csv";
+
 interface ExistingSpaceProps {
   environmentId: string;
   space: ReusedSpaceWithAccessToken["space"];
@@ -76,22 +79,18 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       onClose: () => setShowSpace(false),
     },
   };
+
   const [downloaded, setDownloaded] = useState(false);
-  const storageKey = "embedded-has-downloaded-sample-data";
-  const sampleDataFileName = "/benefits-sample-data.csv";
-
-  const router = useRouter();
-
-  const embeddedItem = workflowItems(router).find(
-    (i) => i.slug === "embedded-portal"
-  )!;
-
   useEffect(() => {
-    if (localStorage.getItem(storageKey) === "true") {
+    if (localStorage.getItem(STORAGE_KEY) === "true") {
       setDownloaded(true);
     }
   }, []);
 
+  const router = useRouter();
+  const embeddedItem = workflowItems(router).find(
+    (i) => i.slug === "embedded-portal"
+  )!;
   useFlashMessages(router.query, embeddedItem.href);
 
   const [currentTime, setCurrentTime] = useState<DateTime>();
@@ -137,7 +136,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   const [steps, setSteps] = useState<Step[]>(initialSteps);
 
   useEffect(() => {
-    if (!space && localStorage.getItem(storageKey) === "true") {
+    if (!space && localStorage.getItem(STORAGE_KEY) === "true") {
       setSteps([
         { ...steps[0], status: "complete" },
         { ...steps[1], status: "current" },
@@ -160,9 +159,9 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
             {steps[0].status === "current" && (
               <DownloadFile
                 type="embedded-portal"
-                fileName={sampleDataFileName}
+                fileName={SAMPLE_DATA_FILENAME}
                 onClick={() => {
-                  localStorage.setItem(storageKey, "true");
+                  localStorage.setItem(STORAGE_KEY, "true");
 
                   // set steps but change the status of the current step
                   setSteps([
@@ -175,7 +174,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
 
             {steps[1].status === "current" && (
               <SetupSpace
-                fileName={sampleDataFileName}
+                fileName={SAMPLE_DATA_FILENAME}
                 handleSubmit={handleSubmit}
                 isSubmitting={isSubmitting}
                 buttonText={buttonText}
@@ -192,7 +191,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
           {downloaded && space && (
             <>
               <Workspace
-                fileName={sampleDataFileName}
+                fileName={SAMPLE_DATA_FILENAME}
                 onClick={() => {
                   // When the space is opened, save the time we started listening for events
                   if (showSpace === false) {
