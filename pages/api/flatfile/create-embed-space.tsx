@@ -9,11 +9,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // TODO: This is duplicated logic
   const token = await getToken({
     req: req,
   });
-  // console.log("gSSP token", token);
 
   if (!token || !token.sub) {
     console.log("No session");
@@ -21,8 +19,6 @@ export default async function handler(
       notFound: true,
     };
   }
-
-  const prisma = new PrismaClient();
 
   const userId = token.sub;
 
@@ -39,7 +35,7 @@ export default async function handler(
     spaceName: "HCM.show Embedded",
   });
 
-  console.log("flatfileSpaceData", flatfileSpaceData);
+  // console.log("flatfileSpaceData", flatfileSpaceData);
 
   if (!flatfileSpaceData) {
     throw new Error("Failed to create space");
