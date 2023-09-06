@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
-import { SpaceType } from "../../../lib/space";
+import { SpaceRepo, SpaceType } from "../../../lib/space";
 import {
   WorkflowType,
   addGuestToSpace,
@@ -72,12 +72,11 @@ export default async function handler(
     );
   }
 
-  await prisma.space.create({
-    data: {
-      userId: user.id,
-      flatfileData: spaceResult as unknown as Prisma.InputJsonValue,
-      type: SpaceType.WorkbookUpload,
-    },
+  await SpaceRepo.createSpace({
+    userId: user.id,
+    flatfileSpaceId: spaceResult.id,
+    flatfileData: spaceResult,
+    type: SpaceType.WorkbookUpload,
   });
 
   res.redirect("/project-onboarding?flash=success&message=Setup Flatfile!");

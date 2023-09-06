@@ -1,4 +1,4 @@
-import { Space } from "@prisma/client";
+import { Prisma, Space } from "@prisma/client";
 import { prismaClient } from "../lib/prisma-client";
 
 export enum SpaceType {
@@ -75,3 +75,26 @@ export const getSpaceForFlatfileSpaceId = async (
 
   return spaces[0];
 };
+
+export class SpaceRepo {
+  static createSpace = async ({
+    userId,
+    flatfileSpaceId,
+    flatfileData,
+    type,
+  }: {
+    userId: string;
+    flatfileSpaceId: string;
+    flatfileData: any;
+    type: SpaceType;
+  }) => {
+    return await prismaClient.space.create({
+      data: {
+        userId,
+        flatfileSpaceId,
+        flatfileData: flatfileData as unknown as Prisma.InputJsonValue,
+        type,
+      },
+    });
+  };
+}

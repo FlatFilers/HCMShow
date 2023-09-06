@@ -22,7 +22,7 @@ import FeaturesList from "../components/shared/features-list";
 import { DateTime } from "luxon";
 import { useOnClickOutside } from "../lib/hooks/usehooks";
 import { Prisma } from "@prisma/client";
-import { SpaceType } from "../lib/space";
+import { SpaceRepo, SpaceType } from "../lib/space";
 import {
   WorkflowType,
   createSpace,
@@ -566,15 +566,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       throw new Error("Failed to create dynamic space");
     }
 
-    existingSpace = await prisma.space.create({
-      data: {
-        userId,
-        flatfileData: space as unknown as Prisma.InputJsonValue,
-        type: SpaceType.Dynamic,
-      },
-      select: {
-        flatfileData: true,
-      },
+    existingSpace = await SpaceRepo.createSpace({
+      userId,
+      flatfileSpaceId: space.id,
+      flatfileData: space,
+      type: SpaceType.Dynamic,
     });
   }
 
