@@ -9,11 +9,11 @@ const Home: NextPage<Props> = ({}) => {
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="my-8">
-        <div className="card-bg mb-6 text-white flex flex-row items-center justify-between">
-          <div className="mr-8">
+        <div className="card-bg mb-6 text-white flex flex-col-reverse md:flex-row items-center justify-between">
+          <div className="md:mr-8">
             <h1 className="text-4xl font-semibold mb-8">HCM.show</h1>
 
-            <div className="max-w-4xl space-y-8 font-light leading-7">
+            <div className="md:max-w-4xl space-y-8 font-light leading-7">
               <p>
                 During the search for HCM solutions, our HR Director discovered
                 HCM.show, a sleek and fully-functional HCM SaaS product that
@@ -48,10 +48,13 @@ const Home: NextPage<Props> = ({}) => {
             </div>
           </div>
 
-          <img src="/images/hcm-home.svg" />
+          <img
+            src="/images/hcm-home.svg"
+            className="mb-4 scale-75 md:mb-0 md:scale-100"
+          />
         </div>
 
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {sections.map((s) => {
             return (
               <a
