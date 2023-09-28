@@ -144,7 +144,7 @@ const SidebarLayout = ({ children }: Props) => {
   const workflowsNavigation = workflowItems(router);
 
   return (
-    <div className="h-screen w-screen bg-white overflow-auto">
+    <div className="h-screen w-screen overflow-auto bg-[#1E2535]">
       <Toaster />
 
       <MobileSidebar
@@ -158,9 +158,15 @@ const SidebarLayout = ({ children }: Props) => {
       />
 
       {/* Static sidebar for desktop */}
-      <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
+      <div
+        className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col"
+        style={{
+          background:
+            "linear-gradient(0deg, #161A23, #161A23), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
+        }}
+      >
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 pt-5">
+        <div className="flex flex-grow flex-col overflow-y-auto pt-5">
           <div className="flex flex-shrink-0 items-center px-4 relative ml-4 h-7 w-40">
             <Image
               className=""
@@ -330,7 +336,7 @@ const SidebarLayout = ({ children }: Props) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-1 flex-col md:pl-72 pt-4 bg-white">
+      <div className="flex flex-1 flex-col md:pl-72 pt-4 ">
         <button
           type="button"
           className="md:hidden border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary mt-4"

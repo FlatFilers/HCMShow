@@ -7,6 +7,10 @@ import { Session } from "next-auth";
 import { useRouter } from "next/router";
 import SidebarLayout from "../components/sidebar-layout";
 
+import { Raleway } from "@next/font/google";
+
+const raleway = Raleway({ subsets: ["latin"] });
+
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
@@ -25,7 +29,9 @@ export default function MyApp(props: AppPropsWithLayout) {
 
   return getLayout(
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <div className={raleway.className}>
+        <Component {...pageProps} />
+      </div>
     </SessionProvider>
   );
 }

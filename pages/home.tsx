@@ -8,44 +8,61 @@ const Home: NextPage<Props> = ({}) => {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
-      <div className="my-8 w-10/12 h-5/6 mx-auto">
-        <div className="mb-12">
-          <h2 className="text-3xl font-semibold text-center mt-8 mb-8">
-            HCM.show
-          </h2>
+      <div className="my-8">
+        <div
+          className="mb-12 text-white flex flex-row items-center justify-between"
+          style={{
+            boxShadow: "0px 48px 48px 0px #00000033",
+            background: "#2E323C99",
+            borderRadius: "20px",
+            padding: "40px",
+          }}
+        >
+          <div className="mr-8">
+            <h1 className="text-4xl font-semibold mb-8">HCM.show</h1>
 
-          <div className="max-w-4xl mx-auto">
-            <p className="mb-2 text-gray-700">
-              During the search for HCM solutions, our HR Director discovered
-              HCM.show, a sleek and fully-functional HCM SaaS product that made
-              all other options seem like clunky relics from the past.
-            </p>
+            <div className="max-w-4xl space-y-8 font-light">
+              <p>
+                During the search for HCM solutions, our HR Director discovered
+                HCM.show, a sleek and fully-functional HCM SaaS product that
+                made all other options seem like clunky relics from the past.
+              </p>
 
-            <p className="mb-2 text-gray-700">
-              As they delved deeper into the capabilities of HCM.show, they
-              realized they needed a reliable method for capturing, validating,
-              and loading job information, employee data, and benefit elections
-              into the system.
-            </p>
+              <p>
+                As they delved deeper into the capabilities of HCM.show, they
+                realized they needed a reliable method for capturing,
+                validating, and loading job information, employee data, and
+                benefit elections into the system.
+              </p>
 
-            <p className="mb-2 text-gray-700">
-              With Flatfile, the team had the ability to configure a variety of
-              data onboarding options, from a long-term onboarding projects to
-              an ongoing file feeds from a vendor. Thanks to Flatfile, the HR
-              Director was able to streamline their various data onboarding
-              workflows and elevate their HR game.
-            </p>
+              <p>
+                With Flatfile, the team had the ability to configure a variety
+                of data onboarding options, from a long-term onboarding projects
+                to an ongoing file feeds from a vendor. Thanks to Flatfile, the
+                HR Director was able to streamline their various data onboarding
+                workflows and elevate their HR game.
+              </p>
 
-            <p className="mb-2 text-gray-700">
-              You can view the code for this app{" "}
+              <p>You can view the code for this app on Github.</p>
+
               <a
-                className="underline"
+                style={{
+                  background:
+                    "linear-gradient(93.58deg, #363E52 -2%, #2B3242 117.56%)",
+                  boxShadow:
+                    "8.74046516418457px 9.711627960205078px 18.45209312438965px 0px #3D49644D inset",
+                }}
+                className="inline-flex flex-row justfy-center items-center px-8 py-4 font-semibold rounded-xl cursor-pointer hover:brightness-95"
                 href="https://github.com/FlatFilers/HCMShow"
+                target="_blank"
               >
-                on Github.
+                <span className="mr-4">View on Github</span>
+                <img src="/images/github-white.svg" />
               </a>
-            </p>
+            </div>
           </div>
+
+          <img src="/images/hcm-home.svg" />
         </div>
 
         <div className="grid grid-cols-2 gap-8">
