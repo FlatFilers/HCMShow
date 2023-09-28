@@ -9,19 +9,11 @@ const Home: NextPage<Props> = ({}) => {
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="my-8">
-        <div
-          className="mb-12 text-white flex flex-row items-center justify-between"
-          style={{
-            boxShadow: "0px 48px 48px 0px #00000033",
-            background: "#2E323C99",
-            borderRadius: "20px",
-            padding: "40px",
-          }}
-        >
+        <div className="card-bg mb-6 text-white flex flex-row items-center justify-between">
           <div className="mr-8">
             <h1 className="text-4xl font-semibold mb-8">HCM.show</h1>
 
-            <div className="max-w-4xl space-y-8 font-light">
+            <div className="max-w-4xl space-y-8 font-light leading-7">
               <p>
                 During the search for HCM solutions, our HR Director discovered
                 HCM.show, a sleek and fully-functional HCM SaaS product that
@@ -46,13 +38,7 @@ const Home: NextPage<Props> = ({}) => {
               <p>You can view the code for this app on Github.</p>
 
               <a
-                style={{
-                  background:
-                    "linear-gradient(93.58deg, #363E52 -2%, #2B3242 117.56%)",
-                  boxShadow:
-                    "8.74046516418457px 9.711627960205078px 18.45209312438965px 0px #3D49644D inset",
-                }}
-                className="inline-flex flex-row justfy-center items-center px-8 py-4 font-semibold rounded-xl cursor-pointer hover:brightness-95"
+                className="button-bg"
                 href="https://github.com/FlatFilers/HCMShow"
                 target="_blank"
               >
@@ -65,17 +51,30 @@ const Home: NextPage<Props> = ({}) => {
           <img src="/images/hcm-home.svg" />
         </div>
 
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 gap-6">
           {sections.map((s) => {
             return (
               <a
                 key={s.slug}
                 href={s.href}
-                className={`border-2 border-gray-100 ${s.highlightColor} rounded-xl p-6 transform hover:scale-[101%] transition duration-200`}
+                className={`card-bg flex flex-col justify-between space-y-6 text-white border-2 border-transparent ${s.highlightColor} rounded-xl p-6 transform hover:scale-[101%] transition duration-200`}
               >
-                <div className={`border-t-[6px] w-12 mb-4 ${s.color}`}></div>
-                <p className="mb-4 font-semibold">{s.name}</p>
-                <p className="text-gray-700">{s.description}</p>
+                <div className="">
+                  <div className="flex flex-row items-center mb-2">
+                    <img src={s.imageUri} className="mr-3" />
+                    <p className="text-xl font-semibold">{s.name}</p>
+                  </div>
+
+                  <div
+                    className={`mb-6 border-t-[2px] w-[20px] ${s.color}`}
+                  ></div>
+
+                  <p className="leading-8">{s.description}</p>
+                </div>
+
+                <div>
+                  <button className="button-bg">Open {s.name}</button>
+                </div>
               </a>
             );
           })}

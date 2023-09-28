@@ -43,7 +43,7 @@ export const workflowItems = (router?: NextRouter) => {
       slug: "project-onboarding",
       name: "Project Onboarding",
       href: "/project-onboarding",
-      icon: FolderIcon,
+      imageUri: "/images/project-onboarding.svg",
       current: router?.pathname === "/project-onboarding",
       color: "border-project-onboarding text-project-onboarding",
       hoverColor:
@@ -56,7 +56,7 @@ export const workflowItems = (router?: NextRouter) => {
       slug: "embedded-portal",
       name: "Embedded Portal",
       href: "/embedded-portal",
-      icon: WindowIcon,
+      imageUri: "/images/embedded-portal.svg",
       current: router?.pathname === "/embedded-portal",
       color: "border-embedded-portal text-embedded-portal",
       hoverColor:
@@ -69,7 +69,7 @@ export const workflowItems = (router?: NextRouter) => {
       slug: "file-feed",
       name: "File Feed",
       href: "/file-feed",
-      icon: FolderArrowDownIcon,
+      imageUri: "/images/file-feed.svg",
       current: router?.pathname === "/file-feed",
       color: "border-file-feed text-file-feed",
       hoverColor: "group-hover:border-file-feed group-hover:text-file-feed",
@@ -81,7 +81,7 @@ export const workflowItems = (router?: NextRouter) => {
       slug: "dynamic-portal",
       name: "Dynamic Portal",
       href: "/dynamic-portal",
-      icon: VariableIcon,
+      imageUri: "/images/dynamic-portal.svg",
       current: router?.pathname === "/dynamic-portal",
       color: "border-dynamic-portal text-dynamic-portal",
       hoverColor:
@@ -96,7 +96,7 @@ export const workflowItems = (router?: NextRouter) => {
 export interface NavigationItem {
   name: string;
   href: string;
-  icon: any;
+  imageUri: string;
   current: boolean;
 }
 
@@ -220,17 +220,9 @@ const SidebarLayout = ({ children }: Props) => {
                       <div
                         className={`${
                           item.current ? item.color : "border-transparent"
-                        } ${
-                          item.hoverColor
-                        } border-l-4 flex flex-row items-center pl-3`}
+                        } ${item.hoverColor} flex flex-row items-center`}
                       >
-                        <item.icon
-                          className={`${
-                            item.current ? item.color : "text-gray-400"
-                          }
-                            ${item.hoverColor} mr-2 flex-shrink-0 h-6 w-6`}
-                          aria-hidden="true"
-                        />
+                        <img src={item.imageUri} className="mr-4" />
                         {item.name}
                       </div>
                     </a>
