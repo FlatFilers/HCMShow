@@ -23,6 +23,13 @@
   @apply inline-flex flex-row justify-center items-center px-8 py-4 font-semibold rounded-xl cursor-pointer hover:brightness-90;
 }
 
+.nav-item {
+  @apply hover:bg-[#2E323C] text-[#FFFFFF50] hover:text-white;
+}
+.nav-item.active {
+  @apply bg-[#2E323C] text-[#FFFFFFCC];
+}
+
 .blob {
   width: 10px;
   height: 10px;

@@ -19,6 +19,11 @@ module.exports = {
         "dynamic-portal-highlight": "#e28170",
       },
     },
+    variants: {
+      extend: {
+        fill: ["group-hover"],
+      },
+    },
   },
   plugins: [],
 };

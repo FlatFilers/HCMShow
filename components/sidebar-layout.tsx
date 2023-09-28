@@ -14,7 +14,7 @@ import {
   FolderArrowDownIcon,
   ListBulletIcon,
   VariableIcon,
-  HomeIcon,
+  // HomeIcon,
   CodeBracketSquareIcon,
   ClipboardDocumentIcon,
 } from "@heroicons/react/24/outline";
@@ -23,6 +23,7 @@ import { NextRouter, useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
 import MobileSidebar from "./mobile-sidebar";
 import Image from "next/image";
+import { HomeIcon } from "./svgs/home-icon";
 
 type Props = {
   children: React.ReactNode;
@@ -32,7 +33,7 @@ export const homeNavItem = (router?: NextRouter) => {
   return {
     name: "Home",
     href: "/home",
-    icon: HomeIcon,
+    imageUri: "/images/home.svg",
     current: router?.pathname === "/home",
   };
 };
@@ -108,31 +109,31 @@ const SidebarLayout = ({ children }: Props) => {
     {
       name: "Employees",
       href: "/employees",
-      icon: UsersIcon,
+      imageUri: "/images/employees.svg",
       current: router.pathname === "/employees",
     },
     {
       name: "Departments",
       href: "/departments",
-      icon: UserGroupIcon,
+      imageUri: "/images/departments.svg",
       current: router.pathname === "/departments",
     },
     {
       name: "Jobs",
       href: "/jobs",
-      icon: BriefcaseIcon,
+      imageUri: "/images/jobs.svg",
       current: router.pathname === "/jobs",
     },
     {
       name: "Benefit Plans",
       href: "/benefit-plans",
-      icon: ClipboardIcon,
+      imageUri: "/images/benefit-plans.svg",
       current: router.pathname === "/benefit-plans",
     },
     {
       name: "Employee Benefit Plans",
       href: "/employee-benefit-plans",
-      icon: ClipboardDocumentIcon,
+      imageUri: "/images/employee-benefit-plans.svg",
       current: router.pathname === "/employee-benefit-plans",
     },
   ];
@@ -144,7 +145,12 @@ const SidebarLayout = ({ children }: Props) => {
   const workflowsNavigation = workflowItems(router);
 
   return (
-    <div className="h-screen w-screen overflow-auto bg-[#1E2535]">
+    <div
+      className="h-screen w-screen overflow-auto bg-[#1E2535]"
+      style={{
+        borderRadius: "20px",
+      }}
+    >
       <Toaster />
 
       <MobileSidebar
@@ -180,24 +186,17 @@ const SidebarLayout = ({ children }: Props) => {
             />
           </div>
           <div className="mt-6 flex flex-grow flex-col">
-            <nav className="flex flex-col px-2 pb-4 h-full justify-between mt-4">
+            <nav className="flex flex-col px-4 pb-4 h-full justify-between mt-4">
               <div>
                 <a
                   href={homeItem.href}
-                  className={`${
-                    homeItem.current
-                      ? "bg-slate-200 text-gray-900"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                  }
-                    group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-6`}
+                  className={`${homeItem.current ? "active" : ""}
+                    nav-item group group/base flex items-center px-3 py-2 text-sm font-light rounded-md mb-6`}
                 >
-                  <homeItem.icon
-                    className={`
-                      ${homeItem.current}
-                        ? "text-gray-800"
-                        : "text-gray-400 group-hover:text-gray-500"
-                      mr-3 flex-shrink-0 h-6 w-6`}
-                    aria-hidden="true"
+                  <HomeIcon
+                    className={`${
+                      homeItem.current ? "fill-[#FFFFFFCC]" : "fill-[#FFFFFF80]"
+                    } group-hover:fill-white w-[20px] h-[20px] mr-3`}
                   />
                   {homeItem.name}
                 </a>
@@ -215,14 +214,14 @@ const SidebarLayout = ({ children }: Props) => {
                         item.current ? `${item.color} ` : "text-gray-600 "
                       } ${
                         item.hoverColor
-                      } group flex items-center px-2 py-2 text-sm font-medium rounded-md`}
+                      } group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
                     >
                       <div
                         className={`${
                           item.current ? item.color : "border-transparent"
                         } ${item.hoverColor} flex flex-row items-center`}
                       >
-                        <img src={item.imageUri} className="mr-4" />
+                        <img src={item.imageUri} className="mr-3" />
                         {item.name}
                       </div>
                     </a>
@@ -245,16 +244,7 @@ const SidebarLayout = ({ children }: Props) => {
                       }
                       group flex items-center px-2 py-2 text-sm font-medium rounded-md`}
                   >
-                    <item.icon
-                      className={`
-                        ${
-                          item.current
-                            ? "text-gray-800"
-                            : "text-gray-400 group-hover:text-gray-500"
-                        }
-                        mr-3 flex-shrink-0 h-6 w-6`}
-                      aria-hidden="true"
-                    />
+                    <img src={item.imageUri} className="mr-3" />
                     {item.name}
                   </a>
                 ))}
