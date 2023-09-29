@@ -191,11 +191,11 @@ const SidebarLayout = ({ children }: Props) => {
                 <a
                   href={homeItem.href}
                   className={`${homeItem.current ? "active" : ""}
-                    nav-item group group/base flex items-center px-3 py-2 text-sm font-light rounded-md mb-6`}
+                    nav-item group flex items-center px-3 py-2 text-sm font-light rounded-md mb-6`}
                 >
                   <HomeIcon
                     className={`${
-                      homeItem.current ? "fill-[#FFFFFFCC]" : "fill-[#FFFFFF80]"
+                      homeItem.current ? "" : ""
                     } group-hover:fill-white w-[20px] h-[20px] mr-3`}
                   />
                   {homeItem.name}

@@ -24,10 +24,17 @@
 }
 
 .nav-item {
-  @apply hover:bg-[#2E323C] text-[#FFFFFF50] hover:text-white;
+  @apply hover:bg-[#2E323C] text-[#FFFFFF50] hover:text-[#FFFFFFCC];
 }
 .nav-item.active {
   @apply bg-[#2E323C] text-[#FFFFFFCC];
+}
+
+.nav-item svg {
+  @apply fill-[#FFFFFF80];
+}
+.nav-item.active svg {
+  @apply fill-[#FFFFFF];
 }
 
 .blob {
