@@ -23,8 +23,12 @@
   @apply inline-flex flex-row justify-center items-center px-8 py-4 font-semibold rounded-xl cursor-pointer hover:brightness-90;
 }
 
+.nav-separator {
+  @apply text-[10px] uppercase font-light mb-2 pl-2 text-[#FFFFFF50];
+}
+
 .nav-item {
-  @apply hover:bg-[#2E323C] text-[#FFFFFF50] hover:text-[#FFFFFFCC];
+  @apply hover:bg-[#2E323C] text-[#FFFFFF50] hover:text-[#FFFFFFCC] flex items-center px-3 py-2 text-sm font-light rounded-md;
 }
 .nav-item.active {
   @apply bg-[#2E323C] text-[#FFFFFFCC];

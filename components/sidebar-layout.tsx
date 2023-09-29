@@ -23,7 +23,7 @@ import { NextRouter, useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
 import MobileSidebar from "./mobile-sidebar";
 import Image from "next/image";
-import { HomeIcon } from "./svgs/home-icon";
+import SVG from "react-inlinesvg";
 
 type Props = {
   children: React.ReactNode;
@@ -97,6 +97,7 @@ export const workflowItems = (router?: NextRouter) => {
 export interface NavigationItem {
   name: string;
   href: string;
+  // icon: React.ReactNode;
   imageUri: string;
   current: boolean;
 }
@@ -164,113 +165,89 @@ const SidebarLayout = ({ children }: Props) => {
       />
 
       {/* Static sidebar for desktop */}
-      <div
-        className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col"
-        style={{
-          background:
-            "linear-gradient(0deg, #161A23, #161A23), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
-        }}
-      >
+      <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex flex-grow flex-col overflow-y-auto pt-5">
-          <div className="flex flex-shrink-0 items-center px-4 relative ml-4 h-7 w-40">
-            <Image
-              className=""
-              src={"/images/hcm_logo_LR.png"}
-              alt="HCM.show"
-              fill={true}
-              sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-              priority
-            />
+        <div className="flex flex-grow flex-col overflow-y-auto pt-5 bg-[#292D36]">
+          <div className="flex justify-center items-center">
+            <SVG src="/images/hcm-logo.svg" className="px-4" />
           </div>
-          <div className="mt-6 flex flex-grow flex-col">
+
+          <div
+            className="mt-6 flex flex-grow flex-col"
+            style={{
+              background:
+                "linear-gradient(0deg, #161A23, #161A23), linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1))",
+            }}
+          >
             <nav className="flex flex-col px-4 pb-4 h-full justify-between mt-4">
               <div>
                 <a
                   href={homeItem.href}
-                  className={`${homeItem.current ? "active" : ""}
-                    nav-item group flex items-center px-3 py-2 text-sm font-light rounded-md mb-6`}
+                  className={`${
+                    homeItem.current ? "active" : ""
+                  } nav-item group mb-6`}
                 >
-                  <HomeIcon
-                    className={`${
-                      homeItem.current ? "" : ""
-                    } group-hover:fill-white w-[20px] h-[20px] mr-3`}
+                  <SVG
+                    src="/images/home.svg"
+                    className="group-hover:fill-white w-[20px] h-[20px] mr-3"
                   />
                   {homeItem.name}
                 </a>
 
-                <div className="mb-6">
-                  <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2">
-                    Workflows
-                  </p>
+                <div className="mb-8">
+                  <p className="nav-separator">Workflows</p>
 
-                  {workflowsNavigation.map((item) => (
+                  <div className="space-y-3">
+                    {workflowsNavigation.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className={`${
+                          item.current ? "active" : ""
+                        } nav-item group`}
+                      >
+                        <SVG
+                          src={item.imageUri}
+                          className="group-hover:fill-white w-[20px] h-[20px] mr-3"
+                        />
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                <p className="nav-separator">Data Tables</p>
+
+                <div className="space-y-3">
+                  {itemsNavigation.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
-                      className={`${
-                        item.current ? `${item.color} ` : "text-gray-600 "
-                      } ${
-                        item.hoverColor
-                      } group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
+                      className={`
+                      ${item.current ? "active" : ""} nav-item group`}
                     >
-                      <div
-                        className={`${
-                          item.current ? item.color : "border-transparent"
-                        } ${item.hoverColor} flex flex-row items-center`}
-                      >
-                        <img src={item.imageUri} className="mr-3" />
-                        {item.name}
-                      </div>
+                      <SVG
+                        src={item.imageUri}
+                        className="group-hover:fill-white w-[20px] h-[20px] mr-3"
+                      />
+                      {item.name}
                     </a>
                   ))}
                 </div>
-
-                <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2">
-                  Data Tables
-                </p>
-
-                {itemsNavigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className={`
-                      ${
-                        item.current
-                          ? "bg-slate-200 text-gray-900"
-                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                      }
-                      group flex items-center px-2 py-2 text-sm font-medium rounded-md`}
-                  >
-                    <img src={item.imageUri} className="mr-3" />
-                    {item.name}
-                  </a>
-                ))}
               </div>
 
-              <div className="flex flex-col">
+              <div className="flex flex-col space-y-3">
                 <a
                   key="Activity Log"
                   href="/activity-log"
                   className={`
                     ${
-                      router.pathname === "/activity-log"
-                        ? "bg-slate-200 text-gray-900"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                    }
-                    group flex items-center px-2 py-2 text-sm font-medium rounded-md`}
+                      router.pathname === "/activity-log" ? "active" : ""
+                    } nav-item group`}
                 >
-                  <ListBulletIcon
-                    className={`
-                      ${
-                        router.pathname === "/activity-log"
-                          ? "text-gray-800"
-                          : "text-gray-400 group-hover:text-gray-500"
-                      }
-                      mr-3 flex-shrink-0 h-6 w-6`}
-                    aria-hidden="true"
+                  <SVG
+                    src={"/images/activity-log.svg"}
+                    className="group-hover:fill-white w-[20px] h-[20px] mr-3"
                   />
                   Activity Log
                 </a>
@@ -281,34 +258,25 @@ const SidebarLayout = ({ children }: Props) => {
                   target="_blank"
                   className={`
                     ${
-                      router.pathname === "/api-docs"
-                        ? "bg-slate-200 text-gray-900"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                    }
-                    group flex items-center px-2 py-2 text-sm font-medium rounded-md`}
+                      router.pathname === "/api-docs" ? "active" : ""
+                    } nav-item group`}
                 >
-                  <CodeBracketSquareIcon
-                    className={`
-                      ${
-                        router.pathname === "/api-docs"
-                          ? "text-gray-800"
-                          : "text-gray-400 group-hover:text-gray-500"
-                      }
-                      mr-3 flex-shrink-0 h-6 w-6`}
-                    aria-hidden="true"
+                  <SVG
+                    src={"/images/api-doc.svg"}
+                    className="group-hover:fill-white w-[20px] h-[20px] mr-3"
                   />
-                  HCM.Show API Documentation
+                  HCM.Show API Docs
                 </a>
 
-                <div className="flex flex-col w-full border-t-2 border-gray-200 pt-2 mt-2">
+                <div className="flex flex-col w-full border-t-2 border-[#FFFFFF25] pt-2 mt-2">
                   <a
                     href="#"
                     onClick={() => signOut()}
-                    className="text-gray-600 hover:bg-gray-50 hover:text-gray-900 w-full group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-1"
+                    className="nav-item group"
                   >
-                    <ArrowLeftOnRectangleIcon
-                      className="text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6"
-                      aria-hidden="true"
+                    <SVG
+                      src={"/images/logout.svg"}
+                      className="group-hover:fill-white w-[20px] h-[20px] mr-3"
                     />
                     Sign Out
                   </a>
