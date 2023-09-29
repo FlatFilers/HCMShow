@@ -23,18 +23,17 @@ export default function MyApp(props: AppPropsWithLayout) {
 
   // Use the layout defined at the page level, if available
   const getLayout =
-    Component.getLayout ??
-    ((page) => (
-      <div className={raleway.className}>
-        <SidebarLayout>{page}</SidebarLayout>
-      </div>
-    ));
+    Component.getLayout !== undefined
+      ? (page: ReactElement) => <div className={raleway.className}>{page}</div>
+      : (page: ReactElement) => (
+          <div className={raleway.className}>
+            <SidebarLayout>{page}</SidebarLayout>
+          </div>
+        );
 
   return getLayout(
     <SessionProvider session={session}>
-      <div className={raleway.className}>
-        <Component {...pageProps} />
-      </div>
+      <Component {...pageProps} />
     </SessionProvider>
   );
 }
