@@ -171,7 +171,7 @@ const SidebarLayout = ({ children }: Props) => {
       <div className="flex flex-1 flex-col md:pl-72 pt-4 ">
         <button
           type="button"
-          className="md:hidden border-r border-gray-200 px-6 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary mt-4"
+          className="md:hidden border-r border-gray-200 px-6 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-400 mt-4"
           onClick={() => setSidebarOpen(true)}
         >
           <span className="sr-only">Open sidebar</span>
