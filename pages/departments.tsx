@@ -20,15 +20,15 @@ const Departments: NextPage<Props> = ({ departments }) => {
   useFlashMessages(router.query, "/departments");
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="px-4 sm:px-6 lg:px-8 text-white">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-xl font-semibold text-gray-900">Departments</h1>
-          <p className="mt-2 text-sm text-gray-700">
+          <h1 className="text-xl font-semibold">Departments</h1>
+          <p className="mt-2 text-sm text-gray-400">
             A list of all the deparments in your account
           </p>
 
-          <p className="mt-2 text-sm text-gray-700">
+          <p className="mt-2 text-sm text-gray-400">
             These are accessible via the API at{" "}
             <a href="/api/v1/departments">`/api/v1/departments`</a> provided the
             correct secret key. See <a href="#">the api docs</a> for more

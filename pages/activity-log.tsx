@@ -49,14 +49,12 @@ const ActivityLog: NextPage<Props> = ({ actions }) => {
   useFlashMessages(router.query, "/activity-log");
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="px-4 sm:px-6 lg:px-8 text-white">
       <div className="sm:flex sm:items-center">
         <div className="w-full flex flex-row justify-between mb-8">
           <div className="sm:flex-auto">
-            <h1 className="text-xl font-semibold text-gray-900">
-              Activity Log
-            </h1>
-            <p className="mt-2 text-sm text-gray-700">
+            <h1 className="text-xl font-semibold">Activity Log</h1>
+            <p className="mt-2 text-sm text-gray-400">
               Your activity history from Flatfile will show here.
             </p>
           </div>
@@ -69,11 +67,7 @@ const ActivityLog: NextPage<Props> = ({ actions }) => {
             <button
               disabled={isSubmitting}
               type="submit"
-              className={`${
-                isSubmitting
-                  ? "hover:cursor-not-allowed"
-                  : "hover:bg-red-600 hover:text-white"
-              } bg-white inline-flex items-center justify-center rounded-xl border border-red-600 px-12 py-2 text-base text0 font-medium text-red-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 sm:w-auto}`}
+              className={`button-bg inline-flex items-center justify-center rounded-xl px-12 py-2 text-base text0 focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 sm:w-auto}`}
             >
               {buttonText}
               <ArrowPathRoundedSquareIcon className="w-5 h-5 ml-2" />

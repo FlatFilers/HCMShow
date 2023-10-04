@@ -29,13 +29,11 @@ const EmployeeBenefitPlans: NextPage<Props> = ({ employeeBenefitPlans }) => {
   useFlashMessages(router.query, "/employees");
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="px-4 sm:px-6 lg:px-8 text-white">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-xl font-semibold text-gray-900">
-            Employee Benefit Plans
-          </h1>
-          <p className="mt-2 text-sm text-gray-700">
+          <h1 className="text-xl font-semibold ">Employee Benefit Plans</h1>
+          <p className="mt-2 text-sm text-gray-400">
             A list of all the employees in your account and the benefit plans
             they are subscribed to.{" "}
           </p>

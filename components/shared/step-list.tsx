@@ -5,9 +5,9 @@ export interface Step {
   status: "current" | "upcoming" | "complete";
 }
 
-type Props = { type: string; steps: Step[] };
+type Props = { steps: Step[] };
 
-const StepList = ({ type, steps }: Props) => {
+const StepList = ({ steps }: Props) => {
   return (
     <div className="">
       <nav className="flex justify-center" aria-label="Progress">

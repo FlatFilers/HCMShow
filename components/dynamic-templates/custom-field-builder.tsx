@@ -75,7 +75,7 @@ export const CustomFieldBuilder = ({
     <div className="">
       <p className="font-semibold mb-1">Customize Fields</p>
 
-      <p className="text-xs text-gray-600 mb-4">
+      <p className="text-xs text-gray-400 mb-4">
         Create a custom field in HCM Show that captures the organization's
         specific requirements beyond the standard fields and ensure that it is
         reflected in the Flatfile.
@@ -261,7 +261,7 @@ export const CustomFieldBuilder = ({
             onClick={() => {
               toast.success("Saved Custom Field");
             }}
-            className="px-4 py-1 inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
+            className="button-bg px-4 py-1 inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm"
           >
             Save Custom Field
           </button>
