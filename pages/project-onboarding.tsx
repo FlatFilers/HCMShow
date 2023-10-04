@@ -95,7 +95,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
             />
           )}
 
-          <StepList type="project-onboarding" steps={steps} />
+          <StepList steps={steps} />
         </div>
       )}
 

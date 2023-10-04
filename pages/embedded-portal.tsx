@@ -181,7 +181,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
               />
             )}
 
-            <StepList type="embedded-portal" steps={steps} />
+            <StepList steps={steps} />
           </div>
         )}
 
