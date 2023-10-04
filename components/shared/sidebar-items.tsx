@@ -1,16 +1,15 @@
 import { useRouter } from "next/router";
 import { NavigationItem } from "../sidebar-layout";
 import SVG from "react-inlinesvg";
+import { signOut } from "next-auth/react";
 
 type Props = {
-  signOut: Function;
   homeItem: NavigationItem;
   itemsNavigation: NavigationItem[];
   workflowsNavigation: NavigationItem[];
 };
 
 export function SidebarItems({
-  signOut,
   homeItem,
   itemsNavigation,
   workflowsNavigation,
