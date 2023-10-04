@@ -2,10 +2,12 @@ import "../styles/globals.css";
 import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
-import { SessionProvider, useSession } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import { Session } from "next-auth";
-import { useRouter } from "next/router";
 import SidebarLayout from "../components/sidebar-layout";
+
+import { Raleway } from "@next/font/google";
+const raleway = Raleway({ subsets: ["latin"] });
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -21,7 +23,13 @@ export default function MyApp(props: AppPropsWithLayout) {
 
   // Use the layout defined at the page level, if available
   const getLayout =
-    Component.getLayout ?? ((page) => <SidebarLayout>{page}</SidebarLayout>);
+    Component.getLayout !== undefined
+      ? (page: ReactElement) => <div className={raleway.className}>{page}</div>
+      : (page: ReactElement) => (
+          <div className={raleway.className}>
+            <SidebarLayout>{page}</SidebarLayout>
+          </div>
+        );
 
   return getLayout(
     <SessionProvider session={session}>

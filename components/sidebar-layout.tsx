@@ -14,7 +14,7 @@ import {
   FolderArrowDownIcon,
   ListBulletIcon,
   VariableIcon,
-  HomeIcon,
+  // HomeIcon,
   CodeBracketSquareIcon,
   ClipboardDocumentIcon,
 } from "@heroicons/react/24/outline";
@@ -23,6 +23,8 @@ import { NextRouter, useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
 import MobileSidebar from "./mobile-sidebar";
 import Image from "next/image";
+import SVG from "react-inlinesvg";
+import { SidebarItems } from "./shared/sidebar-items";
 
 type Props = {
   children: React.ReactNode;
@@ -32,7 +34,7 @@ export const homeNavItem = (router?: NextRouter) => {
   return {
     name: "Home",
     href: "/home",
-    icon: HomeIcon,
+    imageUri: "/images/home.svg",
     current: router?.pathname === "/home",
   };
 };
@@ -43,7 +45,7 @@ export const workflowItems = (router?: NextRouter) => {
       slug: "project-onboarding",
       name: "Project Onboarding",
       href: "/project-onboarding",
-      icon: FolderIcon,
+      imageUri: "/images/project-onboarding.svg",
       current: router?.pathname === "/project-onboarding",
       color: "border-project-onboarding text-project-onboarding",
       hoverColor:
@@ -56,7 +58,7 @@ export const workflowItems = (router?: NextRouter) => {
       slug: "embedded-portal",
       name: "Embedded Portal",
       href: "/embedded-portal",
-      icon: WindowIcon,
+      imageUri: "/images/embedded-portal.svg",
       current: router?.pathname === "/embedded-portal",
       color: "border-embedded-portal text-embedded-portal",
       hoverColor:
@@ -69,7 +71,7 @@ export const workflowItems = (router?: NextRouter) => {
       slug: "file-feed",
       name: "File Feed",
       href: "/file-feed",
-      icon: FolderArrowDownIcon,
+      imageUri: "/images/file-feed.svg",
       current: router?.pathname === "/file-feed",
       color: "border-file-feed text-file-feed",
       hoverColor: "group-hover:border-file-feed group-hover:text-file-feed",
@@ -81,7 +83,7 @@ export const workflowItems = (router?: NextRouter) => {
       slug: "dynamic-portal",
       name: "Dynamic Portal",
       href: "/dynamic-portal",
-      icon: VariableIcon,
+      imageUri: "/images/dynamic-portal.svg",
       current: router?.pathname === "/dynamic-portal",
       color: "border-dynamic-portal text-dynamic-portal",
       hoverColor:
@@ -96,7 +98,8 @@ export const workflowItems = (router?: NextRouter) => {
 export interface NavigationItem {
   name: string;
   href: string;
-  icon: any;
+  // icon: React.ReactNode;
+  imageUri: string;
   current: boolean;
 }
 
@@ -108,31 +111,31 @@ const SidebarLayout = ({ children }: Props) => {
     {
       name: "Employees",
       href: "/employees",
-      icon: UsersIcon,
+      imageUri: "/images/employees.svg",
       current: router.pathname === "/employees",
     },
     {
       name: "Departments",
       href: "/departments",
-      icon: UserGroupIcon,
+      imageUri: "/images/departments.svg",
       current: router.pathname === "/departments",
     },
     {
       name: "Jobs",
       href: "/jobs",
-      icon: BriefcaseIcon,
+      imageUri: "/images/jobs.svg",
       current: router.pathname === "/jobs",
     },
     {
       name: "Benefit Plans",
       href: "/benefit-plans",
-      icon: ClipboardIcon,
+      imageUri: "/images/benefit-plans.svg",
       current: router.pathname === "/benefit-plans",
     },
     {
       name: "Employee Benefit Plans",
       href: "/employee-benefit-plans",
-      icon: ClipboardDocumentIcon,
+      imageUri: "/images/employee-benefit-plans.svg",
       current: router.pathname === "/employee-benefit-plans",
     },
   ];
@@ -144,7 +147,7 @@ const SidebarLayout = ({ children }: Props) => {
   const workflowsNavigation = workflowItems(router);
 
   return (
-    <div className="h-screen w-screen bg-white overflow-auto">
+    <div className="h-screen w-screen overflow-auto bg-[#1E2535]">
       <Toaster />
 
       <MobileSidebar
@@ -157,183 +160,18 @@ const SidebarLayout = ({ children }: Props) => {
         workflowsNavigation={workflowsNavigation}
       />
 
-      {/* Static sidebar for desktop */}
+      {/* Desktop nav */}
       <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
-        {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 pt-5">
-          <div className="flex flex-shrink-0 items-center px-4 relative ml-4 h-7 w-40">
-            <Image
-              className=""
-              src={"/images/hcm_logo_LR.png"}
-              alt="HCM.show"
-              fill={true}
-              sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-              priority
-            />
-          </div>
-          <div className="mt-6 flex flex-grow flex-col">
-            <nav className="flex flex-col px-2 pb-4 h-full justify-between mt-4">
-              <div>
-                <a
-                  href={homeItem.href}
-                  className={`${
-                    homeItem.current
-                      ? "bg-slate-200 text-gray-900"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                  }
-                    group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-6`}
-                >
-                  <homeItem.icon
-                    className={`
-                      ${homeItem.current}
-                        ? "text-gray-800"
-                        : "text-gray-400 group-hover:text-gray-500"
-                      mr-3 flex-shrink-0 h-6 w-6`}
-                    aria-hidden="true"
-                  />
-                  {homeItem.name}
-                </a>
-
-                <div className="mb-6">
-                  <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2">
-                    Workflows
-                  </p>
-
-                  {workflowsNavigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className={`${
-                        item.current ? `${item.color} ` : "text-gray-600 "
-                      } ${
-                        item.hoverColor
-                      } group flex items-center px-2 py-2 text-sm font-medium rounded-md`}
-                    >
-                      <div
-                        className={`${
-                          item.current ? item.color : "border-transparent"
-                        } ${
-                          item.hoverColor
-                        } border-l-4 flex flex-row items-center pl-3`}
-                      >
-                        <item.icon
-                          className={`${
-                            item.current ? item.color : "text-gray-400"
-                          }
-                            ${item.hoverColor} mr-2 flex-shrink-0 h-6 w-6`}
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </div>
-                    </a>
-                  ))}
-                </div>
-
-                <p className="text-xs uppercase font-semibold text-gray-600 mb-2 pl-2">
-                  Data Tables
-                </p>
-
-                {itemsNavigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className={`
-                      ${
-                        item.current
-                          ? "bg-slate-200 text-gray-900"
-                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                      }
-                      group flex items-center px-2 py-2 text-sm font-medium rounded-md`}
-                  >
-                    <item.icon
-                      className={`
-                        ${
-                          item.current
-                            ? "text-gray-800"
-                            : "text-gray-400 group-hover:text-gray-500"
-                        }
-                        mr-3 flex-shrink-0 h-6 w-6`}
-                      aria-hidden="true"
-                    />
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-
-              <div className="flex flex-col">
-                <a
-                  key="Activity Log"
-                  href="/activity-log"
-                  className={`
-                    ${
-                      router.pathname === "/activity-log"
-                        ? "bg-slate-200 text-gray-900"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                    }
-                    group flex items-center px-2 py-2 text-sm font-medium rounded-md`}
-                >
-                  <ListBulletIcon
-                    className={`
-                      ${
-                        router.pathname === "/activity-log"
-                          ? "text-gray-800"
-                          : "text-gray-400 group-hover:text-gray-500"
-                      }
-                      mr-3 flex-shrink-0 h-6 w-6`}
-                    aria-hidden="true"
-                  />
-                  Activity Log
-                </a>
-
-                <a
-                  key="api-docs"
-                  href="/api-docs"
-                  target="_blank"
-                  className={`
-                    ${
-                      router.pathname === "/api-docs"
-                        ? "bg-slate-200 text-gray-900"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                    }
-                    group flex items-center px-2 py-2 text-sm font-medium rounded-md`}
-                >
-                  <CodeBracketSquareIcon
-                    className={`
-                      ${
-                        router.pathname === "/api-docs"
-                          ? "text-gray-800"
-                          : "text-gray-400 group-hover:text-gray-500"
-                      }
-                      mr-3 flex-shrink-0 h-6 w-6`}
-                    aria-hidden="true"
-                  />
-                  HCM.Show API Documentation
-                </a>
-
-                <div className="flex flex-col w-full border-t-2 border-gray-200 pt-2 mt-2">
-                  <a
-                    href="#"
-                    onClick={() => signOut()}
-                    className="text-gray-600 hover:bg-gray-50 hover:text-gray-900 w-full group flex items-center px-2 py-2 text-sm font-medium rounded-md mb-1"
-                  >
-                    <ArrowLeftOnRectangleIcon
-                      className="text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6"
-                      aria-hidden="true"
-                    />
-                    Sign Out
-                  </a>
-                </div>
-              </div>
-            </nav>
-          </div>
-        </div>
+        <SidebarItems
+          homeItem={homeItem}
+          itemsNavigation={itemsNavigation}
+          workflowsNavigation={workflowsNavigation}
+        />
       </div>
-      <div className="flex flex-1 flex-col md:pl-72 pt-4 bg-white">
+      <div className="flex flex-1 flex-col md:pl-72 pt-4 ">
         <button
           type="button"
-          className="md:hidden border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary mt-4"
+          className="md:hidden border-r border-gray-200 px-6 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-400 mt-4"
           onClick={() => setSidebarOpen(true)}
         >
           <span className="sr-only">Open sidebar</span>

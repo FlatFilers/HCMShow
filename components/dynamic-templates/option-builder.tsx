@@ -18,8 +18,8 @@ export const OptionBuilder = ({
   return (
     <div className="max-w-lg">
       <div className="flex flex-row justify-between items-center mb-2">
-        <p className="text-xs w-1/2 text-gray-600">Input value in sheet</p>
-        <p className="text-xs w-1/2 text-gray-600">Output value on record</p>
+        <p className="text-xs w-1/2 text-gray-400">Input value in sheet</p>
+        <p className="text-xs w-1/2 text-gray-400">Output value on record</p>
       </div>
 
       {options.map((option) => {

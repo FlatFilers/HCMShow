@@ -35,7 +35,6 @@ import { prismaClient } from "../lib/prisma-client";
 import { theme } from "../lib/theme";
 import { document } from "../components/dynamic-templates/document";
 import { Property } from "@flatfile/api/api";
-import { FlatfileSpaceData } from "../lib/flatfile";
 
 import dynamic from "next/dynamic";
 
@@ -350,7 +349,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   useOnClickOutside(modalRef, () => setShowSpace(false));
 
   return (
-    <div className="ml-12 mt-16">
+    <div className="ml-12 mt-16 text-white">
       <div className="max-w-5xl">
         <div className="mb-12">
           <div
@@ -361,7 +360,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
         <div className="flex flex-row justify-between">
           <div>
             <p className="text-2xl mb-2">Customize your workspace</p>
-            <p className="mb-8 text-gray-600 max-w-xl text-sm">
+            <p className="mb-8 text-gray-400 max-w-xl text-sm">
               Adjust the field options below. Save each as you complete them and
               then click Open Portal to add your data.
             </p>
@@ -384,7 +383,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 
                 <div className="flex flex-col mb-8">
                   <p className="font-semibold mb-1">Adjust category values</p>
-                  <p className="text-xs text-gray-600 mb-4">
+                  <p className="text-xs text-gray-400 mb-4">
                     Make sure to adjust the category values in HCM Show as per
                     the evolving specific offerings of the organization and
                     ensure that these updates are also reflected in the
@@ -447,7 +446,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
                         onClick={() => {
                           toast.success("Saved Options");
                         }}
-                        className="px-4 py-1 inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm border border-dynamic-portal text-dynamic-portal hover:bg-dynamic-portal hover:text-white"
+                        className="button-bg px-4 py-1 inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm border"
                       >
                         Save Options
                       </button>
@@ -479,17 +478,13 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
                     <p className="text-xl font-semibold mb-1">
                       Generate your workspace
                     </p>
-                    <p className="text-xs text-gray-600 mb-4">
+                    <p className="text-xs text-gray-400 mb-4">
                       Click below to generate your workspace, then scroll down
                       to add your data.
                     </p>
                     <button
                       onClick={() => setShowSpace(!showSpace)}
-                      className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm ${
-                        showSpace
-                          ? "bg-white text-dynamic-portal border-2 border-dynamic-portal"
-                          : "bg-dynamic-portal text-white border-transparent"
-                      }`}
+                      className={`px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm button-bg`}
                     >
                       {showSpace ? "Close Portal" : "Open Portal"}
                       {showSpace ? (

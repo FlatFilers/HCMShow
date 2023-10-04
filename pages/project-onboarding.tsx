@@ -12,7 +12,6 @@ import SetupSpace from "../components/shared/setup-space";
 import Workspace from "../components/project-onboarding/workspace";
 import { useFlashMessages } from "../lib/hooks/usehooks";
 import { prismaClient } from "../lib/prisma-client";
-import { FlatfileSpaceData } from "../lib/flatfile";
 
 interface Props {
   flatfileSpaceId?: string;
@@ -61,7 +60,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
   }, []);
 
   return (
-    <div className="ml-12 max-w-5xl mt-16">
+    <div className="ml-12 max-w-5xl mt-16 text-white">
       <div className="mb-12">
         <div
           className={`border-t-[6px] w-12 mb-2 ${projectOnboardingItem.color}`}
@@ -73,7 +72,6 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
         <div className="flex flex-row justify-between">
           {steps[0].status === "current" && (
             <DownloadFile
-              type="project-onboarding"
               fileName={sampleDataFileName}
               onClick={() => {
                 localStorage.setItem(storageKey, "true");
@@ -94,11 +92,10 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
               isSubmitting={isSubmitting}
               buttonText={buttonText}
               actionHref="/api/flatfile/create-onboarding-space"
-              type="project-onboarding"
             />
           )}
 
-          <StepList type="project-onboarding" steps={steps} />
+          <StepList steps={steps} />
         </div>
       )}
 

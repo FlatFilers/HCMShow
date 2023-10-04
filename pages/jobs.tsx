@@ -18,11 +18,11 @@ interface Props {
 
 const Jobs: NextPage<Props> = ({ jobs }) => {
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="px-4 sm:px-6 lg:px-8 text-white">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-xl font-semibold text-gray-900">Jobs</h1>
-          <p className="mt-2 text-sm text-gray-700">
+          <h1 className="text-xl font-semibold">Jobs</h1>
+          <p className="mt-2 text-sm text-gray-400">
             A list of all the jobs in your account including its name, effective
             date, a summary, and its current status.
           </p>
@@ -62,7 +62,7 @@ const Jobs: NextPage<Props> = ({ jobs }) => {
             <tbody className="divide-y divide-gray-200 bg-white w-full">
               {jobs.map((job) => (
                 <tr key={job.id}>
-                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">
+                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-gray-500">
                     <Link href={`/jobs/${job.id}`}>{job.name}</Link>
                   </td>
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

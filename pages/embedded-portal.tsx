@@ -145,7 +145,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   }, []);
 
   return (
-    <div className="mx-12 mt-16 self-center">
+    <div className="mx-12 mt-16 self-center text-white">
       <div className="max-w-5xl">
         <div className="mb-12">
           <div
@@ -158,7 +158,6 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
           <div className="flex flex-row justify-between">
             {steps[0].status === "current" && (
               <DownloadFile
-                type="embedded-portal"
                 fileName={SAMPLE_DATA_FILENAME}
                 onClick={() => {
                   localStorage.setItem(STORAGE_KEY, "true");
@@ -179,11 +178,10 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
                 isSubmitting={isSubmitting}
                 buttonText={buttonText}
                 actionHref="/api/flatfile/create-embed-space"
-                type="embedded-portal"
               />
             )}
 
-            <StepList type="embedded-portal" steps={steps} />
+            <StepList steps={steps} />
           </div>
         )}
 

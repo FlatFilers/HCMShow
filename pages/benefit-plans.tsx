@@ -9,11 +9,11 @@ interface Props {
 
 const Jobs: NextPage<Props> = ({ benefitPlans }) => {
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="px-4 sm:px-6 lg:px-8 text-white">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-xl font-semibold text-gray-900">Benefit Plans</h1>
-          <p className="mt-2 text-sm text-gray-700">
+          <h1 className="text-xl font-semibold">Benefit Plans</h1>
+          <p className="mt-2 text-sm text-gray-400">
             A list of all the benefitPlans in your account including its name
             and its ID.
           </p>
@@ -41,7 +41,7 @@ const Jobs: NextPage<Props> = ({ benefitPlans }) => {
             <tbody className="divide-y divide-gray-200 bg-white w-full">
               {benefitPlans.map((benefitPlan) => (
                 <tr key={benefitPlan.id}>
-                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">
+                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-gray-500">
                     <Link href={`/benefit-plans/${benefitPlan.id}`}>
                       {benefitPlan.name}
                     </Link>

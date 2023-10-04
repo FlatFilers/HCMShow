@@ -22,7 +22,7 @@ const eventColors = (topic: string) => {
   ) {
     return "bg-red-800";
   } else {
-    return "bg-primary";
+    return "bg-file-feed";
   }
 };
 

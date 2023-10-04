@@ -2,8 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+.flex-r {
+  @apply flex flex-row justify-between items-center;
+}
+
 .primary-btn {
   @apply flex rounded-md border border-transparent py-2 px-4 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 bg-primary;
+}
+
+.card-bg {
+  box-shadow: 0px 48px 48px 0px #00000033;
+  background: #2e323c99;
+  @apply p-6 md:p-10 rounded-xl;
+}
+
+.button-bg {
+  background: linear-gradient(93.58deg, #363e52 -2%, #2b3242 117.56%);
+  box-shadow: 8.74046516418457px 9.711627960205078px 18.45209312438965px 0px
+    #3d49644d inset;
+  @apply inline-flex flex-row justify-center items-center px-8 py-4 font-semibold rounded-xl cursor-pointer hover:brightness-90;
+}
+
+.nav-separator {
+  @apply text-[10px] uppercase font-light mb-2 pl-2 text-[#FFFFFF50];
+}
+
+.nav-item {
+  @apply hover:bg-[#2E323C] text-[#FFFFFF50] hover:text-[#FFFFFFCC] flex items-center px-3 py-2 text-sm font-light rounded-md;
+}
+.nav-item.active {
+  @apply bg-[#2E323C] text-[#FFFFFFCC];
+}
+
+.nav-item svg {
+  @apply fill-[#FFFFFF80];
+}
+.nav-item.active svg {
+  @apply fill-[#FFFFFF];
 }
 
 .blob {
