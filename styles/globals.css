@@ -28,7 +28,7 @@
 }
 
 .nav-item {
-  @apply hover:bg-[#2E323C] text-[#FFFFFF50] hover:text-[#FFFFFFCC] flex items-center px-3 py-2 text-sm font-light rounded-md;
+  @apply hover:bg-[#2E323C] text-[#FFFFFF60] hover:text-[#FFFFFFCC] flex items-center px-3 py-2 text-sm font-light rounded-md;
 }
 .nav-item.active {
   @apply bg-[#2E323C] text-[#FFFFFFCC];
@@ -99,6 +99,10 @@ div[data-testid="space-contents"] {
   > div:nth-child(2)
   > div {
   background-color: #090b2b;
+}
+
+[data-testid="close-confirm-modal"] > * {
+  color: #000;
 }
 
 .swagger-ui * {
