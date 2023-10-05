@@ -100,3 +100,23 @@ div[data-testid="space-contents"] {
   > div {
   background-color: #090b2b;
 }
+
+.swagger-ui * {
+  color: white !important;
+}
+
+.swagger-ui select {
+  background-color: #1f1f1f !important;
+}
+
+.swagger-ui .opblock .opblock-section-header {
+  background-color: #1f1f1f !important;
+}
+
+.swagger-ui button {
+  background: linear-gradient(
+    93.58deg,
+    #363e52 -2%,
+    #2b3242 117.56%
+  ) !important;
+}
