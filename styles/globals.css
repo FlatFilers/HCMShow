@@ -101,6 +101,10 @@ div[data-testid="space-contents"] {
   background-color: #090b2b;
 }
 
+[data-testid="close-confirm-modal"] > * {
+  color: #000;
+}
+
 .swagger-ui * {
   color: white !important;
 }

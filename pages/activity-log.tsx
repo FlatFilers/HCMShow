@@ -132,7 +132,10 @@ const ActivityLog: NextPage<Props> = ({ actions }) => {
 
                   {(!actions || actions.length === 0) && (
                     <tr>
-                      <td className="py-4 pl-4 pr-3 text-sm text-gray-400 sm:pl-6">
+                      <td
+                        colSpan={4}
+                        className="py-4 pl-4 pr-3 text-sm text-gray-400 sm:pl-6"
+                      >
                         No actions taken yet
                       </td>
                     </tr>
