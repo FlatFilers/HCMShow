@@ -7,6 +7,7 @@ import { Session } from "next-auth";
 import SidebarLayout from "../components/sidebar-layout";
 
 import { Raleway } from "@next/font/google";
+import { LanguageProvider } from "../components/language-context";
 const raleway = Raleway({ subsets: ["latin"] });
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -27,7 +28,9 @@ export default function MyApp(props: AppPropsWithLayout) {
       ? (page: ReactElement) => <div className={raleway.className}>{page}</div>
       : (page: ReactElement) => (
           <div className={raleway.className}>
-            <SidebarLayout>{page}</SidebarLayout>
+            <LanguageProvider>
+              <SidebarLayout>{page}</SidebarLayout>
+            </LanguageProvider>
           </div>
         );
 

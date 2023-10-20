@@ -38,7 +38,7 @@ const MobileSidebar = ({
     <Transition.Root show={sidebarOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="relative z-40 md:hidden"
+        className="relative z-40 lg:hidden"
         onClose={setSidebarOpen}
       >
         <Transition.Child
@@ -63,7 +63,7 @@ const MobileSidebar = ({
             leaveFrom="translate-x-0"
             leaveTo="-translate-x-full"
           >
-            <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col pb-4">
+            <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col">
               <Transition.Child
                 as={Fragment}
                 enter="ease-in-out duration-300"

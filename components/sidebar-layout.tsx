@@ -1,30 +1,11 @@
-import { Fragment, ReactElement, useState } from "react";
-import { Dialog, Menu, Transition } from "@headlessui/react";
-import {
-  Bars3BottomLeftIcon,
-  FolderIcon,
-  InboxIcon,
-  UsersIcon,
-  XMarkIcon,
-  ArrowLeftOnRectangleIcon,
-  UserGroupIcon,
-  BriefcaseIcon,
-  ClipboardIcon,
-  WindowIcon,
-  FolderArrowDownIcon,
-  ListBulletIcon,
-  VariableIcon,
-  // HomeIcon,
-  CodeBracketSquareIcon,
-  ClipboardDocumentIcon,
-} from "@heroicons/react/24/outline";
+import { useState } from "react";
+import { Bars3BottomLeftIcon } from "@heroicons/react/24/outline";
 import { signOut } from "next-auth/react";
 import { NextRouter, useRouter } from "next/router";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import MobileSidebar from "./mobile-sidebar";
-import Image from "next/image";
-import SVG from "react-inlinesvg";
 import { SidebarItems } from "./shared/sidebar-items";
+import LanguageSwitcher from "./language-switcher";
 
 type Props = {
   children: React.ReactNode;
@@ -161,22 +142,26 @@ const SidebarLayout = ({ children }: Props) => {
       />
 
       {/* Desktop nav */}
-      <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
+      <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
         <SidebarItems
           homeItem={homeItem}
           itemsNavigation={itemsNavigation}
           workflowsNavigation={workflowsNavigation}
         />
       </div>
-      <div className="flex flex-1 flex-col md:pl-72 pt-4 ">
-        <button
-          type="button"
-          className="md:hidden border-r border-gray-200 px-6 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-400 mt-4"
-          onClick={() => setSidebarOpen(true)}
-        >
-          <span className="sr-only">Open sidebar</span>
-          <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
-        </button>
+      <div className="flex flex-1 flex-col lg:pl-72 pt-4 ">
+        <div className="flex flex-row items-center justify-between lg:justify-end px-6 lg:px-8">
+          <button
+            type="button"
+            className="lg:hidden text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-400"
+            onClick={() => setSidebarOpen(true)}
+          >
+            <span className="sr-only">Open sidebar</span>
+            <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
+          </button>
+
+          <LanguageSwitcher />
+        </div>
 
         <main className="flex-1 py-6">{children}</main>
       </div>
