@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+select {
+  @apply px-2 py-2 rounded bg-transparent focus-visible:ring-transparent focus-visible:ring-0 focus-visible:outline-none;
+}
+
 .flex-r {
   @apply flex flex-row justify-between items-center;
 }
