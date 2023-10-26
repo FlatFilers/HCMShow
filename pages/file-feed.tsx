@@ -9,7 +9,6 @@ import { ActionType, FileFeedEvent, getActions } from "../lib/action";
 import { DateTime } from "luxon";
 import { workflowItems } from "../components/sidebar-layout";
 import { useFlashMessages } from "../lib/hooks/usehooks";
-import { FlatfileSpaceData } from "../lib/flatfile";
 import StepList from "../components/shared/step-list";
 import SVG from "react-inlinesvg";
 

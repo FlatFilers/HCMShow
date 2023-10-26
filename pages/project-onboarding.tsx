@@ -7,15 +7,12 @@ import { NextPageWithLayout } from "./_app";
 import { SpaceType } from "../lib/space";
 import { workflowItems } from "../components/sidebar-layout";
 import StepList, { Step } from "../components/shared/step-list";
-import DownloadFile from "../components/shared/download-file";
 import SetupSpace from "../components/shared/setup-space";
 import Workspace from "../components/project-onboarding/workspace";
 import { useFlashMessages } from "../lib/hooks/usehooks";
 import { prismaClient } from "../lib/prisma-client";
 import SVG from "react-inlinesvg";
-import DownloadFileNew from "../components/shared/download-file";
-import StepList from "../components/shared/step-list";
-import SetupSpace from "../components/shared/setup-space";
+import DownloadFile from "../components/shared/download-file";
 
 interface Props {
   flatfileSpaceId?: string;
@@ -80,7 +77,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
       {!flatfileSpaceId && (
         <div>
           {steps[0].status === "current" && (
-            <DownloadFileNew
+            <DownloadFile
               fileName={sampleDataFileName}
               onClick={() => {
                 localStorage.setItem(storageKey, "true");
