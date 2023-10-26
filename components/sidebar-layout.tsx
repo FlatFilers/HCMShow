@@ -32,7 +32,7 @@ export const workflowItems = (router?: NextRouter) => {
       color: "border-project-onboarding text-project-onboarding",
       hoverColor:
         "group-hover:border-project-onboarding group-hover:text-project-onboarding",
-      highlightColor: "hover:border-project-onboarding-highlight",
+      highlightColor: "hover:border-project-onboarding",
       description:
         "Flatfile enables multiple team members to collaborate over the course of a project in real-time, validating, transforming, and loading data into HCM.Show while ensuring everyone is on the same page.",
     },
@@ -46,7 +46,7 @@ export const workflowItems = (router?: NextRouter) => {
       color: "border-embedded-portal text-embedded-portal",
       hoverColor:
         "group-hover:border-embedded-portal group-hover:text-embedded-portal",
-      highlightColor: "hover:border-embedded-portal-highlight",
+      highlightColor: "hover:border-embedded-portal",
       description:
         "Flatfile's deeply configurable import experience is available right inside HCM Show. See how Flatfile simplifies the data onboarding process, eliminating the need for manual data mapping and significantly reducing errors.",
     },
@@ -59,7 +59,7 @@ export const workflowItems = (router?: NextRouter) => {
       current: router?.pathname === "/file-feed",
       color: "border-file-feed text-file-feed",
       hoverColor: "group-hover:border-file-feed group-hover:text-file-feed",
-      highlightColor: "hover:border-file-feed-highlight",
+      highlightColor: "hover:border-file-feed",
       description:
         "Flatfile automatically picks up a file from an external source and initiates data onboarding on behalf of users. After the file is retrieved, users can take advantage of Flatfile's mapping engine and data table to provide them with a streamlined import experience.",
     },
@@ -73,7 +73,7 @@ export const workflowItems = (router?: NextRouter) => {
       color: "border-dynamic-portal text-dynamic-portal",
       hoverColor:
         "group-hover:border-dynamic-portal group-hover:text-dynamic-portal",
-      highlightColor: "hover:border-dynamic-portal-highlight",
+      highlightColor: "hover:border-dynamic-portal",
       description:
         "Flatfile’s configuration can be updated based on the settings from within the HCM Show application, allowing for fields to be added and picklist values to be updated. These changes are then reflected in an embedded iFrame modal.",
     },

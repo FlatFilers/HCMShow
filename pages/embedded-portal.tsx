@@ -161,14 +161,13 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       </div>
 
       {!space && (
-        <div className="flex flex-row justify-between">
+        <div>
           {steps[0].status === "current" && (
             <DownloadFile
               fileName={SAMPLE_DATA_FILENAME}
               onClick={() => {
                 localStorage.setItem(STORAGE_KEY, "true");
 
-                // set steps but change the status of the current step
                 setSteps([
                   { ...steps[0], status: "complete" },
                   { ...steps[1], status: "current" },

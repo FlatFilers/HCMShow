@@ -27,7 +27,7 @@ export const SetupSpace = () => {
           disabled={isSubmitting}
           className={`${
             isSubmitting ? "hover:cursor-not-allowed" : ""
-          } bg-file-feed inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-file-feed focus:ring-offset-2 sm:w-auto}`}
+          } button-bg inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-file-feed focus:ring-offset-2 sm:w-auto}`}
           type="submit"
         >
           {buttonText}
