@@ -27,6 +27,7 @@ export const workflowItems = (router?: NextRouter) => {
       name: "Project Onboarding",
       href: "/project-onboarding",
       imageUri: "/images/project-onboarding.svg",
+      heroUri: "/images/project-onboarding-hero.svg",
       current: router?.pathname === "/project-onboarding",
       color: "border-project-onboarding text-project-onboarding",
       hoverColor:
@@ -40,6 +41,7 @@ export const workflowItems = (router?: NextRouter) => {
       name: "Embedded Portal",
       href: "/embedded-portal",
       imageUri: "/images/embedded-portal.svg",
+      heroUri: "/images/embedded-portal-hero.svg",
       current: router?.pathname === "/embedded-portal",
       color: "border-embedded-portal text-embedded-portal",
       hoverColor:
@@ -53,6 +55,7 @@ export const workflowItems = (router?: NextRouter) => {
       name: "File Feed",
       href: "/file-feed",
       imageUri: "/images/file-feed.svg",
+      heroUri: "/images/file-feed-hero.svg",
       current: router?.pathname === "/file-feed",
       color: "border-file-feed text-file-feed",
       hoverColor: "group-hover:border-file-feed group-hover:text-file-feed",
@@ -65,6 +68,7 @@ export const workflowItems = (router?: NextRouter) => {
       name: "Dynamic Portal",
       href: "/dynamic-portal",
       imageUri: "/images/dynamic-portal.svg",
+      heroUri: "/images/dynamic-portal-hero.svg",
       current: router?.pathname === "/dynamic-portal",
       color: "border-dynamic-portal text-dynamic-portal",
       hoverColor:
@@ -163,7 +167,7 @@ const SidebarLayout = ({ children }: Props) => {
           <LanguageSwitcher />
         </div>
 
-        <main className="flex-1 py-6">{children}</main>
+        <main className="flex-1 p-6 lg:p-24">{children}</main>
       </div>
     </div>
   );

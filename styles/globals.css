@@ -128,3 +128,7 @@ div[data-testid="space-contents"] {
     #2b3242 117.56%
   ) !important;
 }
+
+.icon-project-onboarding path {
+  @apply fill-project-onboarding opacity-100;
+}

@@ -8,9 +8,9 @@ type Props = {
 const DownloadFile = ({ fileName, onClick }: Props) => {
   return (
     <div className="text-white">
-      <h2 className="text-2xl font-semibold mb-2">
+      <p className="text-2xl font-semibold mb-2">
         Let's get ready to upload data into Flatfile.
-      </h2>
+      </p>
       <p className="text-gray-400">
         First, download the sample data we'll import into Flatfile. 👇
       </p>

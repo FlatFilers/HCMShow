@@ -9,7 +9,7 @@ module.exports = {
       colors: {
         primary: "#0875e1",
         "primary-dark": "#005cbf",
-        "project-onboarding": "#3b2fc9",
+        "project-onboarding": "#17B9A7",
         "project-onboarding-highlight": "#6673ff",
         "embedded-portal": "#32a673",
         "embedded-portal-highlight": "#4dca94",
