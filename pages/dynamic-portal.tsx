@@ -259,9 +259,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     publishableKey,
     environmentId: environmentToken,
     name: "Dynamic Portal",
-    // IMPORTANT NOTE: If there are any changes to the theme or document set below,
-    // you must update the theme and document in the adjoining index.ts file in hcm-show-config as well
-    themeConfig: theme("#E28170", "#D64B32"),
+    themeConfig: theme("#71a3d2", "#3A7CB9"),
     document: document,
     workbook: filterConfig({
       workbookConfig,
