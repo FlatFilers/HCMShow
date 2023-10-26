@@ -1,9 +1,11 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
-import { SpaceType, findSpace } from "../../../lib/space";
-import { WorkflowType, createSpace, getSpace } from "../../../lib/flatfile";
+import { findSpace } from "../../../lib/space";
+import { WorkflowType, getSpace } from "../../../lib/flatfile";
+import {
+  LANGUAGE_SHORT_CODE_MAP,
+  LanguageType,
+} from "../../../components/language-context";
 
 export default async function handler(
   req: NextApiRequest,
@@ -23,12 +25,12 @@ export default async function handler(
   }
 
   // get the space id from the query params
-  const { workflow, flatfileSpaceId } = req.query;
+  const { workflow, flatfileSpaceId, language } = req.query;
 
-  if (!workflow || !flatfileSpaceId) {
-    console.error("Missing workflow or flatfileSpaceId");
+  if (!workflow || !flatfileSpaceId || !language) {
+    console.error("Missing workflow or flatfileSpaceId or language");
     return res.status(400).json({
-      error: "Missing workflow or flatfileSpaceId",
+      error: "Missing workflow or flatfileSpaceId or language",
     });
   }
 
@@ -62,5 +64,8 @@ export default async function handler(
     });
   }
 
-  res.status(200).json({ guestLink: space.guestLink });
+  const languageShortCode = LANGUAGE_SHORT_CODE_MAP[language as LanguageType];
+  const guestLinkWithLanguage = `${space.guestLink}&lng=${languageShortCode}`;
+
+  res.status(200).json({ guestLink: guestLinkWithLanguage });
 }
