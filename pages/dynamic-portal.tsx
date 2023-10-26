@@ -21,7 +21,6 @@ import { workflowItems } from "../components/sidebar-layout";
 import FeaturesList from "../components/shared/features-list";
 import { DateTime } from "luxon";
 import { useOnClickOutside } from "../lib/hooks/usehooks";
-import { Prisma } from "@prisma/client";
 import { SpaceRepo, SpaceType } from "../lib/space";
 import {
   WorkflowType,

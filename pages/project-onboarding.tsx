@@ -13,9 +13,9 @@ import Workspace from "../components/project-onboarding/workspace";
 import { useFlashMessages } from "../lib/hooks/usehooks";
 import { prismaClient } from "../lib/prisma-client";
 import SVG from "react-inlinesvg";
-import DownloadFileNew from "../components/shared/download-file-new";
-import StepListNew from "../components/shared/step-list-new";
-import SetupSpaceNew from "../components/shared/setup-space-new";
+import DownloadFileNew from "../components/shared/download-file";
+import StepList from "../components/shared/step-list";
+import SetupSpace from "../components/shared/setup-space";
 
 interface Props {
   flatfileSpaceId?: string;
@@ -65,7 +65,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
 
   return (
     <div className="text-white space-y-8 md:relative">
-      {!flatfileSpaceId && <StepListNew steps={steps} />}
+      {!flatfileSpaceId && <StepList steps={steps} />}
 
       <div className="space-y-4">
         <SVG src={item.imageUri} className={`icon-${item.slug} w-16 h-16`} />
@@ -94,7 +94,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
           )}
 
           {steps[1].status === "current" && (
-            <SetupSpaceNew
+            <SetupSpace
               fileName={sampleDataFileName}
               handleSubmit={handleSubmit}
               isSubmitting={isSubmitting}

@@ -4,26 +4,22 @@ import { type ISpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import { XCircleIcon } from "@heroicons/react/24/outline";
-import { PrismaClient } from "@prisma/client";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
 import { SpaceType } from "../lib/space";
 import { useRouter } from "next/router";
 import { workflowItems } from "../components/sidebar-layout";
-import DownloadFile from "../components/shared/download-file";
-import SetupSpace from "../components/shared/setup-space";
-import StepList, { Step } from "../components/shared/step-list";
 import Workspace from "../components/embedded-portal/workspace";
 import { useFlashMessages } from "../lib/hooks/usehooks";
-import { FlatfileSpaceData, WorkflowType, getSpace } from "../lib/flatfile";
+import { WorkflowType, getSpace } from "../lib/flatfile";
 
 import SVG from "react-inlinesvg";
 import dynamic from "next/dynamic";
 import { ReusedSpaceWithAccessToken } from "@flatfile/react/dist/src/types/ISpace";
 import { prismaClient } from "../lib/prisma-client";
-import StepListNew from "../components/shared/step-list-new";
-import DownloadFileNew from "../components/shared/download-file-new";
-import SetupSpaceNew from "../components/shared/setup-space-new";
+import StepList, { Step } from "../components/shared/step-list";
+import DownloadFile from "../components/shared/download-file";
+import SetupSpace from "../components/shared/setup-space";
 
 const DynamicEmbeddedSpace = dynamic(
   () => import("../components/shared/embedded-space"),
@@ -152,7 +148,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
 
   return (
     <div className="text-white space-y-8 md:relative">
-      {!space && <StepListNew steps={steps} />}
+      {!space && <StepList steps={steps} />}
 
       <div className="space-y-4">
         <SVG src={item.imageUri} className={`icon-${item.slug} w-16 h-16`} />
@@ -167,7 +163,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       {!space && (
         <div className="flex flex-row justify-between">
           {steps[0].status === "current" && (
-            <DownloadFileNew
+            <DownloadFile
               fileName={SAMPLE_DATA_FILENAME}
               onClick={() => {
                 localStorage.setItem(STORAGE_KEY, "true");
@@ -182,7 +178,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
           )}
 
           {steps[1].status === "current" && (
-            <SetupSpaceNew
+            <SetupSpace
               fileName={SAMPLE_DATA_FILENAME}
               handleSubmit={handleSubmit}
               isSubmitting={isSubmitting}

@@ -10,7 +10,7 @@ import { DateTime } from "luxon";
 import { workflowItems } from "../components/sidebar-layout";
 import { useFlashMessages } from "../lib/hooks/usehooks";
 import { FlatfileSpaceData } from "../lib/flatfile";
-import StepListNew from "../components/shared/step-list-new";
+import StepList from "../components/shared/step-list";
 import SVG from "react-inlinesvg";
 
 interface Step {
@@ -43,7 +43,7 @@ const FileFeed: NextPage<Props> = ({ flatfileSpaceId, events }) => {
 
   return (
     <div className="text-white space-y-8 md:relative">
-      {!flatfileSpaceId && <StepListNew steps={steps} />}
+      {!flatfileSpaceId && <StepList steps={steps} />}
 
       <div className="space-y-4">
         <SVG src={item.imageUri} className={`icon-${item.slug} w-16 h-16`} />

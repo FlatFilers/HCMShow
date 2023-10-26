@@ -1,7 +1,5 @@
-import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
-import StepList from "../shared/step-list";
 
 export const SetupSpace = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -11,22 +9,6 @@ export const SetupSpace = () => {
     setIsSubmitting(true);
     setButtonText("Setting up Flatfile...");
   };
-
-  interface Step {
-    name: string;
-    status: "current" | "upcoming" | "complete";
-  }
-
-  const initialSteps: Step[] = [
-    {
-      name: "Setup Flatfile",
-      status: "current",
-    },
-    {
-      name: "Listen for File Uploads",
-      status: "upcoming",
-    },
-  ];
 
   return (
     <div className="text-white space-y-4 md:max-w-lg">
