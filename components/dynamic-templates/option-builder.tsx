@@ -34,7 +34,7 @@ export const OptionBuilder = ({
               onChange={(e) => {
                 updateInput(option, e.target.value);
               }}
-              className="border border-gray-200 rounded px-4 py-2 mr-2 w-1/2"
+              className="text-gray-900 border border-gray-200 rounded px-4 py-2 mr-2 w-1/2"
             />
 
             <input
@@ -43,7 +43,7 @@ export const OptionBuilder = ({
               onChange={(e) => {
                 updateOutput(option, e.target.value);
               }}
-              className="border border-gray-200 rounded px-4 py-2 w-1/2"
+              className="text-gray-900 border border-gray-200 rounded px-4 py-2 w-1/2"
             />
 
             <svg
