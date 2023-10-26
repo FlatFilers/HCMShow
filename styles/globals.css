@@ -130,5 +130,6 @@ div[data-testid="space-contents"] {
 }
 
 .icon-project-onboarding path {
-  @apply fill-project-onboarding opacity-100;
+  @apply fill-project-onboarding;
+  fill-opacity: 1;
 }

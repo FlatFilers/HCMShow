@@ -16,19 +16,15 @@ const SetupSpaceNew = ({
   buttonText,
 }: Props) => {
   return (
-    <div className="text-white">
-      <h2 className="text-2xl font-semibold mb-2">
+    <div className="text-white space-y-4 md:max-w-lg">
+      <h2 className="text-2xl font-semibold">
         🎉 Great! Now let's setup Flatfile to import those records.
       </h2>
-      <p className="text-gray-400 mb-4">
+      <p className="">
         Click the button below and we'll configure the upload space and invite
         you to it. 👇
       </p>
-      <form
-        action={actionHref}
-        onSubmit={() => handleSubmit()}
-        className="mb-8"
-      >
+      <form action={actionHref} onSubmit={() => handleSubmit()} className="">
         <button
           onClick={() => toast.loading("Setting up Flatfile")}
           disabled={isSubmitting}
