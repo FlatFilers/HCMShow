@@ -21,7 +21,6 @@ import { workflowItems } from "../components/sidebar-layout";
 import FeaturesList from "../components/shared/features-list";
 import { DateTime } from "luxon";
 import { useOnClickOutside } from "../lib/hooks/usehooks";
-import { Prisma } from "@prisma/client";
 import { SpaceRepo, SpaceType } from "../lib/space";
 import {
   WorkflowType,
@@ -260,9 +259,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     publishableKey,
     environmentId: environmentToken,
     name: "Dynamic Portal",
-    // IMPORTANT NOTE: If there are any changes to the theme or document set below,
-    // you must update the theme and document in the adjoining index.ts file in hcm-show-config as well
-    themeConfig: theme("#E28170", "#D64B32"),
+    themeConfig: theme("#71a3d2", "#3A7CB9"),
     document: document,
     workbook: filterConfig({
       workbookConfig,

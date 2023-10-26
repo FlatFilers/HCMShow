@@ -7,11 +7,12 @@ import { NextPageWithLayout } from "./_app";
 import { SpaceType } from "../lib/space";
 import { workflowItems } from "../components/sidebar-layout";
 import StepList, { Step } from "../components/shared/step-list";
-import DownloadFile from "../components/shared/download-file";
 import SetupSpace from "../components/shared/setup-space";
 import Workspace from "../components/project-onboarding/workspace";
 import { useFlashMessages } from "../lib/hooks/usehooks";
 import { prismaClient } from "../lib/prisma-client";
+import SVG from "react-inlinesvg";
+import DownloadFile from "../components/shared/download-file";
 
 interface Props {
   flatfileSpaceId?: string;
@@ -29,11 +30,11 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
 
   const router = useRouter();
 
-  const projectOnboardingItem = workflowItems(router).find(
+  const item = workflowItems(router).find(
     (i) => i.slug === "project-onboarding"
   )!;
 
-  useFlashMessages(router.query, projectOnboardingItem.href);
+  useFlashMessages(router.query, item.href);
 
   const initialSteps: Step[] = [
     {
@@ -60,23 +61,27 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
   }, []);
 
   return (
-    <div className="ml-12 max-w-5xl mt-16 text-white">
-      <div className="mb-12">
-        <div
-          className={`border-t-[6px] w-12 mb-2 ${projectOnboardingItem.color}`}
-        ></div>
-        <p className="text-sm font-semibold">{projectOnboardingItem.name}</p>
+    <div className="text-white space-y-8 md:relative">
+      {!flatfileSpaceId && <StepList steps={steps} />}
+
+      <div className="space-y-4">
+        <SVG src={item.imageUri} className={`icon-${item.slug} w-16 h-16`} />
+        <h1
+          className={`text-4xl font-bold border-b border-${item.slug} pb-4 inline-block`}
+        >
+          {item.name}
+        </h1>
+        <p className="md:max-w-lg">{item.description}</p>
       </div>
 
       {!flatfileSpaceId && (
-        <div className="flex flex-row justify-between">
+        <div>
           {steps[0].status === "current" && (
             <DownloadFile
               fileName={sampleDataFileName}
               onClick={() => {
                 localStorage.setItem(storageKey, "true");
 
-                // set steps but change the status of the current step
                 setSteps([
                   { ...steps[0], status: "complete" },
                   { ...steps[1], status: "current" },
@@ -94,8 +99,6 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
               actionHref="/api/flatfile/create-onboarding-space"
             />
           )}
-
-          <StepList steps={steps} />
         </div>
       )}
 
@@ -105,6 +108,11 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
           fileName={sampleDataFileName}
         />
       )}
+
+      <SVG
+        src={item.heroUri}
+        className="w-full md:w-2/3 lg:w-1/2 md:mx-auto md:absolute md:left-[45%] md:top-[100%] lg:left-[30%] lg:top-[85%]"
+      />
     </div>
   );
 };

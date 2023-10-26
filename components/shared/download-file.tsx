@@ -7,26 +7,22 @@ type Props = {
 
 const DownloadFile = ({ fileName, onClick }: Props) => {
   return (
-    <div className="text-white">
-      <h2 className="text-2xl font-semibold mb-2">
+    <div className="text-white space-y-4">
+      <h2 className="text-xl font-semibold">
         Let's get ready to upload data into Flatfile.
       </h2>
-      <p className="text-gray-400">
-        First, download the sample data we'll import into Flatfile. 👇
-      </p>
-      <div className="mt-4 flex">
-        <a
-          className={`button-bg mb-8 inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-semibold shadow-sm`}
-          download={fileName}
-          href={fileName}
-          onClick={() => onClick()}
-        >
-          Download sample data
-          <ArrowDownTrayIcon className="w-4 h-4 ml-2" />
-        </a>
-      </div>
-      <div className="flex text-xs text-gray-400 w-fit">
-        <div className="block mr-1">Already have example data?</div>
+      <p className="">First, download the sample data. 👇</p>
+      <a
+        className={`button-bg space-x-2 w-full md:w-1/2 lg:w-1/4 inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-semibold shadow-sm`}
+        download={fileName}
+        href={fileName}
+        onClick={() => onClick()}
+      >
+        <span>Download sample data</span>
+        <ArrowDownTrayIcon className="w-4 h-4" />
+      </a>
+      <div className="flex text-xs text-gray-400 w-fit space-x-1">
+        <div className="block">Already have example data?</div>
         <div
           className="block underline text-xs text-gray-400 hover:cursor-pointer"
           onClick={() => onClick()}

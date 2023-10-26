@@ -87,7 +87,7 @@ export const CustomFieldBuilder = ({
           <input
             name="custom-field-name"
             type="text"
-            className="border border-gray-200 text-sm rounded px-2 py-2 w-full mb-4"
+            className="text-gray-900 border border-gray-200 text-sm rounded px-2 py-2 w-full mb-4"
             placeholder="Employee Birthdate"
             value={customField.name}
             onChange={(e) => {

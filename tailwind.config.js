@@ -9,14 +9,10 @@ module.exports = {
       colors: {
         primary: "#0875e1",
         "primary-dark": "#005cbf",
-        "project-onboarding": "#3b2fc9",
-        "project-onboarding-highlight": "#6673ff",
-        "embedded-portal": "#32a673",
-        "embedded-portal-highlight": "#4dca94",
-        "file-feed": "#3A7CB9",
-        "file-feed-highlight": "#3A7CB9",
-        "dynamic-portal": "#d64b32",
-        "dynamic-portal-highlight": "#e28170",
+        "project-onboarding": "#17B9A7",
+        "embedded-portal": "#EFBC73",
+        "file-feed": "#CD2659",
+        "dynamic-portal": "#3A7CB9",
       },
     },
     variants: {

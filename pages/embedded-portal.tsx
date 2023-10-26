@@ -4,22 +4,22 @@ import { type ISpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 import { XCircleIcon } from "@heroicons/react/24/outline";
-import { PrismaClient } from "@prisma/client";
 import { DateTime } from "luxon";
 import toast from "react-hot-toast";
 import { SpaceType } from "../lib/space";
 import { useRouter } from "next/router";
 import { workflowItems } from "../components/sidebar-layout";
-import DownloadFile from "../components/shared/download-file";
-import SetupSpace from "../components/shared/setup-space";
-import StepList, { Step } from "../components/shared/step-list";
 import Workspace from "../components/embedded-portal/workspace";
 import { useFlashMessages } from "../lib/hooks/usehooks";
-import { FlatfileSpaceData, WorkflowType, getSpace } from "../lib/flatfile";
+import { WorkflowType, getSpace } from "../lib/flatfile";
 
+import SVG from "react-inlinesvg";
 import dynamic from "next/dynamic";
 import { ReusedSpaceWithAccessToken } from "@flatfile/react/dist/src/types/ISpace";
 import { prismaClient } from "../lib/prisma-client";
+import StepList, { Step } from "../components/shared/step-list";
+import DownloadFile from "../components/shared/download-file";
+import SetupSpace from "../components/shared/setup-space";
 
 const DynamicEmbeddedSpace = dynamic(
   () => import("../components/shared/embedded-space"),
@@ -135,6 +135,8 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   ];
   const [steps, setSteps] = useState<Step[]>(initialSteps);
 
+  const item = workflowItems(router).find((i) => i.slug === "embedded-portal")!;
+
   useEffect(() => {
     if (!space && localStorage.getItem(STORAGE_KEY) === "true") {
       setSteps([
@@ -145,67 +147,72 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   }, []);
 
   return (
-    <div className="mx-12 mt-16 self-center text-white">
-      <div className="max-w-5xl">
-        <div className="mb-12">
-          <div
-            className={`border-t-[6px] w-12 mb-2 ${embeddedItem.color}`}
-          ></div>
-          <p className="text-sm font-semibold">{embeddedItem.name}</p>
-        </div>
+    <div className="text-white space-y-8 md:relative">
+      {!space && <StepList steps={steps} />}
 
-        {!space && (
-          <div className="flex flex-row justify-between">
-            {steps[0].status === "current" && (
-              <DownloadFile
-                fileName={SAMPLE_DATA_FILENAME}
-                onClick={() => {
-                  localStorage.setItem(STORAGE_KEY, "true");
+      <div className="space-y-4">
+        <SVG src={item.imageUri} className={`icon-${item.slug} w-16 h-16`} />
+        <h1
+          className={`text-4xl font-bold border-b border-${item.slug} pb-4 inline-block`}
+        >
+          {item.name}
+        </h1>
+        <p className="md:max-w-lg">{item.description}</p>
+      </div>
 
-                  // set steps but change the status of the current step
-                  setSteps([
-                    { ...steps[0], status: "complete" },
-                    { ...steps[1], status: "current" },
-                  ]);
-                }}
-              />
-            )}
+      {!space && (
+        <div>
+          {steps[0].status === "current" && (
+            <DownloadFile
+              fileName={SAMPLE_DATA_FILENAME}
+              onClick={() => {
+                localStorage.setItem(STORAGE_KEY, "true");
 
-            {steps[1].status === "current" && (
-              <SetupSpace
-                fileName={SAMPLE_DATA_FILENAME}
-                handleSubmit={handleSubmit}
-                isSubmitting={isSubmitting}
-                buttonText={buttonText}
-                actionHref="/api/flatfile/create-embed-space"
-              />
-            )}
+                setSteps([
+                  { ...steps[0], status: "complete" },
+                  { ...steps[1], status: "current" },
+                ]);
+              }}
+            />
+          )}
 
-            <StepList steps={steps} />
-          </div>
-        )}
-
-        <div className="flex flex-col justify-between">
-          {downloaded && space && (
-            <>
-              <Workspace
-                fileName={SAMPLE_DATA_FILENAME}
-                onClick={() => {
-                  // When the space is opened, save the time we started listening for events
-                  if (showSpace === false) {
-                    setCurrentTime(DateTime.now().toUTC());
-                  }
-
-                  setShowSpace(!showSpace);
-                }}
-                showSpace={showSpace}
-              />
-
-              {showSpace && <DynamicEmbeddedSpace spaceProps={spaceProps} />}
-            </>
+          {steps[1].status === "current" && (
+            <SetupSpace
+              fileName={SAMPLE_DATA_FILENAME}
+              handleSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
+              buttonText={buttonText}
+              actionHref="/api/flatfile/create-embed-space"
+            />
           )}
         </div>
+      )}
+
+      <div className="flex flex-col justify-between">
+        {downloaded && space && (
+          <>
+            <Workspace
+              fileName={SAMPLE_DATA_FILENAME}
+              onClick={() => {
+                // When the space is opened, save the time we started listening for events
+                if (showSpace === false) {
+                  setCurrentTime(DateTime.now().toUTC());
+                }
+
+                setShowSpace(!showSpace);
+              }}
+              showSpace={showSpace}
+            />
+
+            {showSpace && <DynamicEmbeddedSpace spaceProps={spaceProps} />}
+          </>
+        )}
       </div>
+
+      <SVG
+        src={item.heroUri}
+        className="w-full md:w-2/3 lg:w-1/2 md:mx-auto md:absolute md:left-[35%] md:top-[100%] lg:left-[30%] lg:top-[100%]"
+      />
     </div>
   );
 };

@@ -9,7 +9,24 @@ import { ActionType, FileFeedEvent, getActions } from "../lib/action";
 import { DateTime } from "luxon";
 import { workflowItems } from "../components/sidebar-layout";
 import { useFlashMessages } from "../lib/hooks/usehooks";
-import { FlatfileSpaceData } from "../lib/flatfile";
+import StepList from "../components/shared/step-list";
+import SVG from "react-inlinesvg";
+
+interface Step {
+  name: string;
+  status: "current" | "upcoming" | "complete";
+}
+
+const steps: Step[] = [
+  {
+    name: "Setup Flatfile",
+    status: "current",
+  },
+  {
+    name: "Listen for File Uploads",
+    status: "upcoming",
+  },
+];
 
 interface Props {
   flatfileSpaceId?: string;
@@ -19,19 +36,22 @@ interface Props {
 const FileFeed: NextPage<Props> = ({ flatfileSpaceId, events }) => {
   const router = useRouter();
 
-  const fileFeedItem = workflowItems(router).find(
-    (i) => i.slug === "file-feed"
-  )!;
+  const item = workflowItems(router).find((i) => i.slug === "file-feed")!;
 
-  useFlashMessages(router.query, fileFeedItem.href);
-
-  // TODO: remove the hardcoded stuff here and use the actual events
+  useFlashMessages(router.query, item.href);
 
   return (
-    <div className="ml-12 max-w-5xl mt-16 text-white">
-      <div className="mb-12">
-        <div className={`border-t-[6px] w-12 mb-2 ${fileFeedItem.color}`}></div>
-        <p className="text-sm font-semibold">{fileFeedItem.name}</p>
+    <div className="text-white space-y-8 md:relative">
+      {!flatfileSpaceId && <StepList steps={steps} />}
+
+      <div className="space-y-4">
+        <SVG src={item.imageUri} className={`icon-${item.slug} w-16 h-16`} />
+        <h1
+          className={`text-4xl font-bold border-b border-${item.slug} pb-4 inline-block`}
+        >
+          {item.name}
+        </h1>
+        <p className="md:max-w-lg">{item.description}</p>
       </div>
 
       <div>
@@ -41,6 +61,11 @@ const FileFeed: NextPage<Props> = ({ flatfileSpaceId, events }) => {
           <Events flatfileSpaceId={flatfileSpaceId} initialEvents={events} />
         )}
       </div>
+
+      <SVG
+        src={item.heroUri}
+        className="w-full md:w-2/3 lg:w-1/2 md:mx-auto md:absolute md:left-[35%] md:top-[100%] lg:left-[40%] lg:top-[60%]"
+      />
     </div>
   );
 };
