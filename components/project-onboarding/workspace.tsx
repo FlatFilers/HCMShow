@@ -34,8 +34,8 @@ const Workspace = ({ fileName, flatfileSpaceId }: Props) => {
     <div className="text-white">
       <p className="text-2xl mb-8">Your Flatfile space is configured. 🎉</p>
 
-      <div className="flex flex-row justify-between">
-        <div>
+      <div className="flex flex-col md:flex-row justify-between lg:justify-start lg:space-x-12 space-y-12 md:space-y-0">
+        <div className="md:max-w-md">
           <p className="font-semibold mb-4">Upload Records in Flatfile</p>
           <p className="text-gray-400 mb-2 max-w-lg">
             Click the "Visit Flatfile Space" button below to access your

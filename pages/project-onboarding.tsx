@@ -65,7 +65,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
 
   return (
     <div className="text-white space-y-8 md:relative">
-      <StepListNew steps={steps} />
+      {!flatfileSpaceId && <StepListNew steps={steps} />}
 
       <div className="space-y-4">
         <SVG src={item.imageUri} className={`icon-${item.slug} w-16 h-16`} />
@@ -105,9 +105,16 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
         </div>
       )}
 
+      {flatfileSpaceId && (
+        <Workspace
+          flatfileSpaceId={flatfileSpaceId}
+          fileName={sampleDataFileName}
+        />
+      )}
+
       <SVG
         src={item.heroUri}
-        className="w-full md:w-2/3 lg:w-1/2 md:mx-auto md:absolute md:left-[45%] md:top-[80%] lg:left-[30%] lg:top-[75%]"
+        className="w-full md:w-2/3 lg:w-1/2 md:mx-auto md:absolute md:left-[45%] md:top-[100%] lg:left-[30%] lg:top-[85%]"
       />
     </div>
   );

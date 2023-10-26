@@ -167,7 +167,7 @@ const SidebarLayout = ({ children }: Props) => {
           <LanguageSwitcher />
         </div>
 
-        <main className="flex-1 p-6 lg:p-24">{children}</main>
+        <main className="flex-1 px-6 py-16 lg:p-24">{children}</main>
       </div>
     </div>
   );
