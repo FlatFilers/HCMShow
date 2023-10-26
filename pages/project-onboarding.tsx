@@ -118,53 +118,6 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
       />
     </div>
   );
-
-  return (
-    <div className="ml-12 max-w-5xl mt-16 text-white">
-      <div className="mb-12">
-        <div className={`border-t-[6px] w-12 mb-2 ${item.color}`}></div>
-        <p className="text-sm font-semibold">{item.name}</p>
-      </div>
-
-      {!flatfileSpaceId && (
-        <div className="flex flex-row justify-between">
-          {steps[0].status === "current" && (
-            <DownloadFile
-              fileName={sampleDataFileName}
-              onClick={() => {
-                localStorage.setItem(storageKey, "true");
-
-                // set steps but change the status of the current step
-                setSteps([
-                  { ...steps[0], status: "complete" },
-                  { ...steps[1], status: "current" },
-                ]);
-              }}
-            />
-          )}
-
-          {steps[1].status === "current" && (
-            <SetupSpace
-              fileName={sampleDataFileName}
-              handleSubmit={handleSubmit}
-              isSubmitting={isSubmitting}
-              buttonText={buttonText}
-              actionHref="/api/flatfile/create-onboarding-space"
-            />
-          )}
-
-          <StepList steps={steps} />
-        </div>
-      )}
-
-      {flatfileSpaceId && (
-        <Workspace
-          flatfileSpaceId={flatfileSpaceId}
-          fileName={sampleDataFileName}
-        />
-      )}
-    </div>
-  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

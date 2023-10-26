@@ -13,7 +13,7 @@ module.exports = {
         "project-onboarding-highlight": "#6673ff",
         "embedded-portal": "#32a673",
         "embedded-portal-highlight": "#4dca94",
-        "file-feed": "#3A7CB9",
+        "file-feed": "#CD2659",
         "file-feed-highlight": "#3A7CB9",
         "dynamic-portal": "#d64b32",
         "dynamic-portal-highlight": "#e28170",

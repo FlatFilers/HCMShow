@@ -46,43 +46,58 @@ export const Events = ({ flatfileSpaceId, initialEvents }: Props) => {
   }, []);
 
   return (
-    <div className="flex flex-row justify-between text-white">
-      <div>
-        <p className="text-2xl mb-2">Ready and listening for events. 🎉 </p>
-        <p className="text-gray-400 mb-2 max-w-lg">
-          Congratulations! A Flatfile space has been configured and we’ve been
-          able to pick up a file from a vendor for you!
-        </p>
-        <p className="text-gray-400 mb-2 max-w-lg">
-          Click the "Visit Flatfile Space" button below to access your dedicated
-          space in Flatfile.
-        </p>
-        <p className="text-gray-400 mb-2 max-w-lg">
-          As new records are created or updated in Flatfile, events will appear
-          in real-time on this page. These events will include information such
-          as the event type, description, and when the event occurred.
-        </p>
-        <p className="text-gray-400 mb-6 max-w-lg text-xs">
-          You can view the file uploaded to your space from Google Drive{" "}
-          <a
-            className="underline text-gray-400"
-            target="_blank"
-            href="https://drive.google.com/file/d/1Y9-rnoDuqxrvV9JIpDYoXq-nt3cdAJQ3/view?usp=sharing"
-          >
-            here.
-          </a>
-        </p>
+    <div className="flex flex-col justify-between text-white space-y-8">
+      <div className="flex flex-row justify-between lg:justify-start lg:space-x-12 items-start">
+        <div className="space-y-2 md:max-w-md">
+          <p className="text-2xl">Ready and listening for events.&nbsp;🎉</p>
+          <p>
+            Congratulations! A Flatfile space has been configured and we’ve been
+            able to pick up a file from a vendor for you!
+          </p>
+          <p>
+            Click the "Visit Flatfile Space" button below to access your
+            dedicated space in Flatfile.
+          </p>
+          <p>
+            As new records are created or updated in Flatfile, events will
+            appear in real-time on this page. These events will include
+            information such as the event type, description, and when the event
+            occurred.
+          </p>
 
-        <GoToSpace workflow="filefeed" flatfileSpaceId={flatfileSpaceId}>
-          <button className="button-bg inline-flex flex-row items-center justify-between mb-8 rounded-md border px-4 py-2 text-sm">
-            Visit Flatfile Space
-            <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
-          </button>
-        </GoToSpace>
+          <div className="space-y-4">
+            <p className="text-xs">
+              You can view the file uploaded to your space from Google Drive{" "}
+              <a
+                className="underline text-gray-400"
+                target="_blank"
+                href="https://drive.google.com/file/d/1Y9-rnoDuqxrvV9JIpDYoXq-nt3cdAJQ3/view?usp=sharing"
+              >
+                here.
+              </a>
+            </p>
+            <GoToSpace workflow="filefeed" flatfileSpaceId={flatfileSpaceId}>
+              <button className="button-bg inline-flex flex-row items-center justify-between mb-8 rounded-md border px-4 py-2 text-sm">
+                Visit Flatfile Space
+                <ArrowTopRightOnSquareIcon className="w-4 h-4 ml-1" />
+              </button>
+            </GoToSpace>
+          </div>
+        </div>
 
+        <div className="hidden md:block">
+          <FeaturesList
+            type="file-feed"
+            githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/workflows/filefeed/index.ts"
+            features={features}
+          />
+        </div>
+      </div>
+
+      <div className="md:max-w-lg">
         <div className="border-1 border border-gray-100 mt-6"></div>
         <table className="min-w-full divide-y divide-gray-300 text-white">
-          <thead className="">
+          <thead>
             <tr>
               <th
                 scope="col"
@@ -124,11 +139,13 @@ export const Events = ({ flatfileSpaceId, initialEvents }: Props) => {
         </table>
       </div>
 
-      <FeaturesList
-        type="file-feed"
-        githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/workflows/filefeed/index.ts"
-        features={features}
-      />
+      <div className="md:hidden">
+        <FeaturesList
+          type="file-feed"
+          githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/workflows/filefeed/index.ts"
+          features={features}
+        />
+      </div>
     </div>
   );
 };

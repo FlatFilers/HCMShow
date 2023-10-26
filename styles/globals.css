@@ -133,3 +133,8 @@ div[data-testid="space-contents"] {
   @apply fill-project-onboarding;
   fill-opacity: 1;
 }
+
+.icon-file-feed path {
+  @apply fill-file-feed;
+  fill-opacity: 1;
+}
