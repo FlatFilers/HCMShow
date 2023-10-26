@@ -138,3 +138,13 @@ div[data-testid="space-contents"] {
   @apply fill-file-feed;
   fill-opacity: 1;
 }
+
+.icon-embedded-portal path {
+  @apply fill-embedded-portal;
+  fill-opacity: 1;
+}
+
+.icon-dynamic-portal path {
+  @apply fill-dynamic-portal;
+  fill-opacity: 1;
+}

@@ -11,7 +11,7 @@ module.exports = {
         "primary-dark": "#005cbf",
         "project-onboarding": "#17B9A7",
         "project-onboarding-highlight": "#6673ff",
-        "embedded-portal": "#32a673",
+        "embedded-portal": "#EFBC73",
         "embedded-portal-highlight": "#4dca94",
         "file-feed": "#CD2659",
         "file-feed-highlight": "#3A7CB9",

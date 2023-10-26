@@ -32,18 +32,18 @@ type Props = {
 
 const Workspace = ({ fileName, onClick, showSpace }: Props) => {
   return (
-    <div className="mb-12">
-      <p className="text-2xl mb-8">
+    <div className="text-white">
+      <p className="text-2xl mb-8 md:max-w-lg">
         Your embedded Flatfile space is configured and ready for import. 🎉
       </p>
 
-      <div className="flex flex-row justify-between">
-        <div>
+      <div className="flex flex-col md:flex-row justify-between lg:justify-start lg:space-x-12 space-y-12 md:space-y-0">
+        <div className="md:max-w-md">
           <p className="font-semibold mb-4">Launch Flatfile</p>
-          <p className="text-gray-400 mb-2 max-w-lg">
+          <p>
             Launch Flatfile via the “Import Benefit Elections” button below.
           </p>
-          <p className="text-gray-400 mb-2 max-w-lg">
+          <p>
             Use the Sidebar in the embedded application to guide you through the
             import process!
           </p>

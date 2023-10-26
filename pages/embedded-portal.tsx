@@ -17,9 +17,13 @@ import Workspace from "../components/embedded-portal/workspace";
 import { useFlashMessages } from "../lib/hooks/usehooks";
 import { FlatfileSpaceData, WorkflowType, getSpace } from "../lib/flatfile";
 
+import SVG from "react-inlinesvg";
 import dynamic from "next/dynamic";
 import { ReusedSpaceWithAccessToken } from "@flatfile/react/dist/src/types/ISpace";
 import { prismaClient } from "../lib/prisma-client";
+import StepListNew from "../components/shared/step-list-new";
+import DownloadFileNew from "../components/shared/download-file-new";
+import SetupSpaceNew from "../components/shared/setup-space-new";
 
 const DynamicEmbeddedSpace = dynamic(
   () => import("../components/shared/embedded-space"),
@@ -135,6 +139,8 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
   ];
   const [steps, setSteps] = useState<Step[]>(initialSteps);
 
+  const item = workflowItems(router).find((i) => i.slug === "embedded-portal")!;
+
   useEffect(() => {
     if (!space && localStorage.getItem(STORAGE_KEY) === "true") {
       setSteps([
@@ -143,6 +149,77 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
       ]);
     }
   }, []);
+
+  return (
+    <div className="text-white space-y-8 md:relative">
+      {!space && <StepListNew steps={steps} />}
+
+      <div className="space-y-4">
+        <SVG src={item.imageUri} className={`icon-${item.slug} w-16 h-16`} />
+        <h1
+          className={`text-4xl font-bold border-b border-${item.slug} pb-4 inline-block`}
+        >
+          {item.name}
+        </h1>
+        <p className="md:max-w-lg">{item.description}</p>
+      </div>
+
+      {!space && (
+        <div className="flex flex-row justify-between">
+          {steps[0].status === "current" && (
+            <DownloadFileNew
+              fileName={SAMPLE_DATA_FILENAME}
+              onClick={() => {
+                localStorage.setItem(STORAGE_KEY, "true");
+
+                // set steps but change the status of the current step
+                setSteps([
+                  { ...steps[0], status: "complete" },
+                  { ...steps[1], status: "current" },
+                ]);
+              }}
+            />
+          )}
+
+          {steps[1].status === "current" && (
+            <SetupSpaceNew
+              fileName={SAMPLE_DATA_FILENAME}
+              handleSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
+              buttonText={buttonText}
+              actionHref="/api/flatfile/create-embed-space"
+            />
+          )}
+        </div>
+      )}
+
+      <div className="flex flex-col justify-between">
+        {downloaded && space && (
+          <>
+            <Workspace
+              fileName={SAMPLE_DATA_FILENAME}
+              onClick={() => {
+                // When the space is opened, save the time we started listening for events
+                if (showSpace === false) {
+                  setCurrentTime(DateTime.now().toUTC());
+                }
+
+                setShowSpace(!showSpace);
+              }}
+              showSpace={showSpace}
+            />
+
+            {showSpace && <DynamicEmbeddedSpace spaceProps={spaceProps} />}
+          </>
+        )}
+      </div>
+
+      <SVG
+        src={item.heroUri}
+        className="w-full md:w-2/3 lg:w-1/2 md:mx-auto md:absolute md:left-[35%] md:top-[100%] lg:left-[30%] lg:top-[100%]"
+      />
+    </div>
+  );
 
   return (
     <div className="mx-12 mt-16 self-center text-white">
