@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       colors: {
         primary: "#0875e1",
+        darkest: "#1E2535",
         "primary-dark": "#005cbf",
         "project-onboarding": "#17B9A7",
         "embedded-portal": "#EFBC73",
