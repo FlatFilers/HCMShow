@@ -34,8 +34,10 @@ import { prismaClient } from "../lib/prisma-client";
 import { theme } from "../lib/theme";
 import { document } from "../components/dynamic-templates/document";
 import { Property } from "@flatfile/api/api";
+import SVG from "react-inlinesvg";
 
 import dynamic from "next/dynamic";
+import { LightBulb } from "heroicons-react";
 
 const DynamicEmbeddedSpace = dynamic(
   () => import("../components/shared/embedded-space"),
@@ -198,7 +200,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   const [customField, setCustomField] = useState<CustomField>(
     dbCustomField ??
       ({
-        name: "Employee Birthdate",
+        name: "Birthdate",
         type: "date",
         required: true,
         dateFormat: "yyyy-mm-dd",
@@ -305,9 +307,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     }
   };
 
-  const dynamicPortalItem = workflowItems().find(
-    (i) => i.slug === "dynamic-portal"
-  )!;
+  const item = workflowItems().find((i) => i.slug === "dynamic-portal")!;
 
   const handleResetSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -322,7 +322,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
         });
 
         setCustomField({
-          name: "Employee Birthdate",
+          name: "Birthdate",
           type: "date",
           required: true,
           dateFormat: "yyyy-mm-dd",
@@ -346,13 +346,90 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   useOnClickOutside(modalRef, () => setShowSpace(false));
 
   return (
+    <div className="text-white space-y-8 md:relative">
+      <div className="flex flex-col space-y-4">
+        <div className="space-y-4">
+          <SVG src={item.imageUri} className={`icon-${item.slug} w-16 h-16`} />
+          <h1
+            className={`text-4xl font-bold border-b border-${item.slug} pb-4 inline-block`}
+          >
+            {item.name}
+          </h1>
+        </div>
+
+        <div className="card-bg card-sm space-y-2">
+          <SVG src="/images/lightbulb.svg" className="" />
+          <p className="text-sm font-bold">Customize your workspace</p>
+          <p className="text-xs font-light">
+            Adjust the field options below. Save each as you complete them and
+            then click Open Portal to add your data.
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <p className="text-sm font-semibold">Create Custom Fields</p>
+        <p className="text-xs font-light leading-5">{item.description}</p>
+      </div>
+
+      <div>
+        <div className="grid grid-cols-3 text-xs border-b border-gray-500 pb-4 space-x-2">
+          <div>Field Name</div>
+          <div>Field Type</div>
+          <div>Required?</div>
+        </div>
+
+        <div className="space-y-2 py-4">
+          {workbookConfig.sheets &&
+            workbookConfig.sheets[0].fields.map((f) => {
+              return (
+                <div
+                  key={f.key}
+                  className="grid grid-cols-3 card-bg card-sm space-x-2 text-sm items-center"
+                  style={{
+                    boxShadow:
+                      "8.74046516418457px 9.711627960205078px 18.45209312438965px 0px rgba(61, 73, 100, 0.3) inset",
+                  }}
+                >
+                  <div>{f.label}</div>
+                  <div className="capitalize">{f.type}</div>
+                  <div className="flex flex-row items-center">
+                    <input
+                      type="checkbox"
+                      checked={
+                        f.constraints?.find((c) => c.type === "required") !==
+                        undefined
+                      }
+                      disabled
+                      className="text-dynamic-portal"
+                    />
+                  </div>
+                </div>
+              );
+            })}
+
+          <CustomFieldBuilder
+            customField={customField}
+            setCustomField={setCustomField}
+            setForEmbedCustomField={setForEmbedCustomField}
+            lastSavedAt={customFieldLastSavedAt}
+            setLastSavedAt={() => {
+              setCustomFieldLastSavedAt(
+                DateTime.now().toFormat("MM/dd/yyyy h:mm a")
+              );
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
     <div className="ml-12 mt-16 text-white">
       <div className="max-w-5xl">
         <div className="mb-12">
-          <div
-            className={`border-t-[6px] w-12 mb-2 ${dynamicPortalItem.color}`}
-          ></div>
-          <p className="text-sm font-semibold">{dynamicPortalItem.name}</p>
+          <div className={`border-t-[6px] w-12 mb-2 ${item.color}`}></div>
+          <p className="text-sm font-semibold">{item.name}</p>
         </div>
         <div className="flex flex-row justify-between">
           <div>

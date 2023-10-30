@@ -76,6 +76,86 @@ export const CustomFieldBuilder = ({
   };
 
   return (
+    <div
+      className="grid grid-cols-3 card-bg card-sm space-x-2 text-sm items-center"
+      style={{
+        boxShadow:
+          "8.74046516418457px 9.711627960205078px 18.45209312438965px 0px rgba(61, 73, 100, 0.3) inset",
+      }}
+    >
+      <input
+        name="custom-field-name"
+        type="text"
+        className="text-gray-900 border border-gray-200 text-sm rounded px-2 py-2"
+        placeholder="Birthdate"
+        value={customField.name}
+        onChange={(e) => {
+          setCustomField({ ...customField, name: e.target.value });
+        }}
+      />
+
+      <select
+        name="custom-field-type"
+        className="border border-gray-200 text-sm rounded px-2 py-2"
+        value={customField.type}
+        onChange={(e) => {
+          setCustomField({
+            ...customField,
+            type: e.target.value as keyof typeof fieldTypes,
+          });
+        }}
+      >
+        {Object.keys(fieldTypes).map((key) => {
+          return (
+            <option key={key} value={key}>
+              {fieldTypes[key as keyof typeof fieldTypes]}
+            </option>
+          );
+        })}
+      </select>
+
+      <div className="flex flex-row items-center justify-between">
+        <input
+          id="custom-field-required-validation"
+          name="custom-field-required-validation"
+          className="inline-flex justify-self-start"
+          type="checkbox"
+          checked={customField.required}
+          onChange={(e) => {
+            setCustomField({ ...customField, required: e.target.checked });
+          }}
+        />
+
+        <form className="" onSubmit={handleSubmit}>
+          <input
+            type="hidden"
+            id="customField"
+            name="customField"
+            value={JSON.stringify(customField)}
+          />
+
+          <div className="flex flex-row items-center space-x-2">
+            <button
+              onClick={() => {
+                toast.success("Saved Custom Field");
+              }}
+              className="button-bg button-sm button-dynamic-portal inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm"
+            >
+              Save
+            </button>
+
+            {lastSavedAt && (
+              <p className="text-[10px] text-gray-400 ml-4">
+                Saved {lastSavedAt}
+              </p>
+            )}
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+
+  return (
     <div className="">
       <p className="font-semibold mb-1">Customize Fields</p>
 
