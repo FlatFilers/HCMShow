@@ -16,11 +16,11 @@ export const OptionBuilder = ({
   removeOption,
 }: Props) => {
   return (
-    <div className="max-w-lg space-y-2">
+    <div className="space-y-2">
       <div className="flex flex-row justify-between items-center">
-        <p className="text-xs w-[45%]">Sheet Value</p>
-        <p className="text-xs w-[45%]">Record Output</p>
-        <p className="text-xs w-[10%]"></p>
+        <p className="text-xs w-[45%] md:w-[47.5%]">Sheet Value</p>
+        <p className="text-xs w-[45%] md:w-[47.5%]">Record Output</p>
+        <p className="text-xs w-[10%] md:w-[5%]"></p>
       </div>
 
       <div className="space-y-2">
@@ -36,7 +36,7 @@ export const OptionBuilder = ({
                 onChange={(e) => {
                   updateInput(option, e.target.value);
                 }}
-                className="text-darkest text-xs border border-darkest rounded px-2 py-1 w-[45%]"
+                className="text-darkest text-xs border border-darkest rounded px-2 py-1 w-[45%] md:w-[47.5%]"
               />
 
               <input
@@ -45,10 +45,10 @@ export const OptionBuilder = ({
                 onChange={(e) => {
                   updateOutput(option, e.target.value);
                 }}
-                className="text-darkest text-xs border border-darkest rounded px-2 py-1 w-[45%]"
+                className="text-darkest text-xs border border-darkest rounded px-2 py-1 w-[45%] md:w-[47.5%]"
               />
 
-              <div className="w-[10%]">
+              <div className="w-[10%] md:w-[5%]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
