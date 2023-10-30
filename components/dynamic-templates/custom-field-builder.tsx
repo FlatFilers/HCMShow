@@ -81,12 +81,13 @@ export const CustomFieldBuilder = ({
       style={{
         boxShadow:
           "8.74046516418457px 9.711627960205078px 18.45209312438965px 0px rgba(61, 73, 100, 0.3) inset",
+        backgroundColor: "white",
       }}
     >
       <input
         name="custom-field-name"
         type="text"
-        className="text-gray-900 border border-gray-200 text-sm rounded px-2 py-2"
+        className="text-gray-900 border border-gray-900 text-sm rounded px-2 py-2"
         placeholder="Birthdate"
         value={customField.name}
         onChange={(e) => {
@@ -96,7 +97,7 @@ export const CustomFieldBuilder = ({
 
       <select
         name="custom-field-type"
-        className="border border-gray-200 text-sm rounded px-2 py-2"
+        className="border border-gray-900 text-gray-900 text-sm rounded px-2 py-2"
         value={customField.type}
         onChange={(e) => {
           setCustomField({
@@ -118,7 +119,7 @@ export const CustomFieldBuilder = ({
         <input
           id="custom-field-required-validation"
           name="custom-field-required-validation"
-          className="inline-flex justify-self-start"
+          className="inline-flex justify-self-start border border-gray-900"
           type="checkbox"
           checked={customField.required}
           onChange={(e) => {
@@ -140,6 +141,10 @@ export const CustomFieldBuilder = ({
                 toast.success("Saved Custom Field");
               }}
               className="button-bg button-sm button-dynamic-portal inline-flex items-center justify-center rounded-md text-xs font-medium shadow-sm"
+              style={{
+                boxShadow:
+                  "8.74046516418457px 9.711627960205078px 18.45209312438965px 0px rgba(61, 73, 100, 0.3) inset",
+              }}
             >
               Save
             </button>
