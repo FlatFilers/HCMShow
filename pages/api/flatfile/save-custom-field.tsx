@@ -29,6 +29,7 @@ export default async function handler(
       required: req.body.required,
       dateFormat: req.body.dateFormat,
       decimals: req.body.decimals,
+      enumOptions: req.body.enumOptions,
       user: { connect: { id: token.sub } },
     },
   });

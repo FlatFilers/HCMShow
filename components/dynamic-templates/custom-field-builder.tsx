@@ -25,16 +25,19 @@ export const CustomFieldBuilder = ({
   lastSavedAt,
   setLastSavedAt,
 }: Props) => {
-  const options = customField.enumOptions || initialOptions;
+  if (!customField.enumOptions) {
+    customField.enumOptions = initialOptions;
+  }
+
+  const options = customField.enumOptions;
 
   // console.log("options", options);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
-    const { name, type, required, dateFormat, decimals } = JSON.parse(
-      formData.get("customField") as string
-    );
+    const { name, type, required, dateFormat, decimals, enumOptions } =
+      JSON.parse(formData.get("customField") as string);
 
     try {
       const response = await fetch("/api/flatfile/save-custom-field", {
@@ -48,6 +51,7 @@ export const CustomFieldBuilder = ({
           required,
           dateFormat,
           decimals,
+          enumOptions,
         }),
       });
 

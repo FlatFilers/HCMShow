@@ -15,7 +15,6 @@ import { WorkflowType, getSpace } from "../lib/flatfile";
 
 import SVG from "react-inlinesvg";
 import dynamic from "next/dynamic";
-import { ReusedSpaceWithAccessToken } from "@flatfile/react/dist/src/types/ISpace";
 import { prismaClient } from "../lib/prisma-client";
 import StepList, { Step } from "../components/shared/step-list";
 import DownloadFile from "../components/shared/download-file";
@@ -34,7 +33,7 @@ const SAMPLE_DATA_FILENAME = "/benefits-sample-data.csv";
 
 interface ExistingSpaceProps {
   environmentId: string;
-  space: ReusedSpaceWithAccessToken["space"];
+  space: any;
 }
 interface NoExistingSpaceProps {
   environmentId: never;
