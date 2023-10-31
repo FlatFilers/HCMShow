@@ -111,7 +111,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
 
       <SVG
         src={item.heroUri}
-        className="w-full md:w-2/3 lg:w-1/2 md:mx-auto md:absolute md:left-[45%] md:top-[100%] lg:left-[30%] lg:top-[85%]"
+        className="w-full md:w-2/3 lg:w-1/2 md:mx-auto md:absolute md:left-[45%] md:top-[100%] lg:left-[30%] lg:top-[100%]"
       />
     </div>
   );
