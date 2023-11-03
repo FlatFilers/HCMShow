@@ -2,23 +2,10 @@ import { NextPageWithLayout } from "./_app";
 import { FormEvent, useState, useRef } from "react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
-import {
-  ArrowPathRoundedSquareIcon,
-  ArrowTopRightOnSquareIcon,
-  ArrowsPointingInIcon,
-  BoltIcon,
-  CodeBracketIcon,
-  ExclamationCircleIcon,
-  PuzzlePieceIcon,
-  SparklesIcon,
-  VariableIcon,
-  XCircleIcon,
-} from "@heroicons/react/24/outline";
-import { OptionBuilder } from "../components/dynamic-templates/option-builder";
+import { XCircleIcon } from "@heroicons/react/24/outline";
 import { CustomFieldBuilder } from "../components/dynamic-templates/custom-field-builder";
 import toast from "react-hot-toast";
 import { workflowItems } from "../components/sidebar-layout";
-import FeaturesList from "../components/shared/features-list";
 import { DateTime } from "luxon";
 import { useOnClickOutside } from "../lib/hooks/usehooks";
 import { SpaceRepo, SpaceType } from "../lib/space";
@@ -37,7 +24,6 @@ import { Property } from "@flatfile/api/api";
 import SVG from "react-inlinesvg";
 
 import dynamic from "next/dynamic";
-import { LightBulb } from "heroicons-react";
 
 const DynamicEmbeddedSpace = dynamic(
   () => import("../components/shared/embedded-space"),
@@ -46,16 +32,6 @@ const DynamicEmbeddedSpace = dynamic(
     ssr: false,
   }
 );
-
-const features = {
-  "Event-based workflow": ExclamationCircleIcon,
-  "Dynamically update configuration": CodeBracketIcon,
-  "Plug-in functionality": PuzzlePieceIcon,
-  "Custom actions": BoltIcon,
-  "External API calls": ArrowTopRightOnSquareIcon,
-  "Custom Theming": VariableIcon,
-  "Data Hooks": SparklesIcon,
-};
 
 interface Props {
   environmentToken: string;
@@ -271,45 +247,24 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     },
   } as ISpace;
 
-  const handleOptionsSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target as HTMLFormElement);
-    const options = JSON.parse(formData.get("options") as string);
-
-    try {
-      const response = await fetch("/api/flatfile/save-options", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          options,
-        }),
-      });
-
-      const data = await response.json();
-      setForEmbedOptions(data);
-      setCustomOptionsLastSavedAt(DateTime.now().toFormat("MM/dd/yyyy h:mm a"));
-      console.log("options saved", data);
-    } catch (error) {
-      console.error("Error saving options:", error);
-    }
-  };
-
   const item = workflowItems().find((i) => i.slug === "dynamic-portal")!;
 
-  const handleResetSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleResetSubmit = async (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     try {
-      if (confirm("Reset field and field options?")) {
+      if (confirm("Reset workspace options?")) {
         const response = await fetch("/api/v1/reset-workspace", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
         });
+
+        if (!response.ok) {
+          toast.error("Error resetting workspace");
+          throw new Error("Error resetting workspace");
+        }
 
         setCustomField({
           name: "Birthdate",
@@ -413,13 +368,22 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
           </p>
         </div>
 
-        <button
-          onClick={() => setShowSpace(!showSpace)}
-          className={`space-x-2 px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm button-bg`}
-        >
-          <SVG src="/images/sparkles-icon.svg" className="w-4 h-4 fill-white" />
-          <span>{showSpace ? "Close Portal" : "Open Portal"}</span>
-        </button>
+        <div className="flex flex-row items-center space-x-8">
+          <button
+            onClick={() => setShowSpace(!showSpace)}
+            className={`space-x-2 px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm button-bg`}
+          >
+            <SVG
+              src="/images/sparkles-icon.svg"
+              className="w-4 h-4 fill-white"
+            />
+            <span>{showSpace ? "Close Portal" : "Open Portal"}</span>
+          </button>
+
+          <button onClick={handleResetSubmit} className="underline text-xs">
+            Reset Workspace
+          </button>
+        </div>
       </div>
 
       {showSpace && <DynamicEmbeddedSpace spaceProps={spaceProps} />}
