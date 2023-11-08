@@ -6,18 +6,18 @@ import {
 } from "../../pages/dynamic-portal";
 import { OptionBuilder } from "./option-builder";
 import toast from "react-hot-toast";
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 
 type Props = {
   customField: CustomField;
   setCustomField: (customField: CustomField) => void;
-  setForEmbedCustomField: any;
+  setSavedCustomField: any;
 };
 
 export const CustomFieldBuilder = ({
   customField,
   setCustomField,
-  setForEmbedCustomField,
+  setSavedCustomField,
 }: Props) => {
   if (!customField.enumOptions) {
     customField.enumOptions = initialOptions;
@@ -59,7 +59,7 @@ export const CustomFieldBuilder = ({
         enumOptions: data.enumOptions,
       };
 
-      setForEmbedCustomField(customField);
+      setSavedCustomField(customField);
 
       console.log("custom field saved", customField);
     } catch (error) {

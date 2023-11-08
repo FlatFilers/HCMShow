@@ -37,8 +37,7 @@ interface Props {
   environmentToken: string;
   workbookConfig: Flatfile.CreateWorkbookConfig;
   userId: string;
-  dbCustomField: CustomField;
-  dbCustomOptions: Option[];
+  dbCustomField: CustomField | null;
 }
 
 export interface CustomField {
@@ -114,27 +113,20 @@ const customOptionsConfig = (options: Option[]) => {
 
 const filterConfig = ({
   workbookConfig,
-  forEmbedOptions,
   customFieldConfig,
 }: {
   workbookConfig: Flatfile.CreateWorkbookConfig;
-  forEmbedOptions: Option[];
   customFieldConfig: any;
 }) => {
-  const dynamicFieldType = "benefitCoverageType";
   const { name, sheets, actions } = workbookConfig;
 
   if (!sheets) {
     console.log("The workbook has no sheets. Unable to filter config.");
-
     return workbookConfig;
   }
 
   const { name: sheetName, slug } = sheets[0];
-  const otherFields = sheets[0].fields.filter((f) => {
-    return f.key !== dynamicFieldType;
-  }) as Property[];
-  const field = sheets[0].fields.find((f) => f.key === dynamicFieldType);
+
   const filteredConfig = {
     name,
     sheets: [
@@ -142,20 +134,14 @@ const filterConfig = ({
         name: sheetName,
         slug,
         fields: [
-          ...otherFields,
-          {
-            ...field,
-            ...(forEmbedOptions && customOptionsConfig(forEmbedOptions)),
-            slug: `${field?.key}-${Date.now()}`,
-          },
-          ...(customFieldConfig.forEmbed === true ? [customFieldConfig] : []),
+          ...sheets[0].fields,
+          ...(customFieldConfig.hasSavedCustomField ? [customFieldConfig] : []),
         ],
       },
     ],
     actions,
   };
   // console.log("filteredConfig", filteredConfig);
-  // console.log("sheets", filteredConfig.sheets[0].fields);
 
   return filteredConfig;
 };
@@ -165,10 +151,8 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   workbookConfig,
   userId,
   dbCustomField,
-  dbCustomOptions,
 }) => {
   const [showSpace, setShowSpace] = useState(false);
-  const [options, setOptions] = useState(dbCustomOptions ?? initialOptions);
   const [customField, setCustomField] = useState<CustomField>(
     dbCustomField ??
       ({
@@ -181,10 +165,8 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
       } as CustomField)
   );
 
-  const [forEmbedCustomField, setForEmbedCustomField] =
-    useState<CustomField | null>(dbCustomField ?? null);
-  const [forEmbedOptions, setForEmbedOptions] = useState<Option[]>(
-    dbCustomOptions ?? initialOptions
+  const [savedCustomField, setSavedCustomField] = useState<CustomField | null>(
+    dbCustomField ?? null
   );
 
   const customFieldConfig = {
@@ -196,7 +178,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     ...(customField.type === "enum" &&
       customField.enumOptions &&
       customOptionsConfig(customField.enumOptions)),
-    forEmbed: forEmbedCustomField ? true : false,
+    hasSavedCustomField: savedCustomField ? true : false,
   };
 
   const publishableKey = process.env.NEXT_PUBLIC_DYNAMIC_PUBLISHABLE_KEY;
@@ -231,7 +213,6 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     document: document,
     workbook: filterConfig({
       workbookConfig,
-      forEmbedOptions,
       customFieldConfig,
     }),
     spaceInfo: {
@@ -274,9 +255,9 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
           decimals: 2,
           enumOptions: initialOptions,
         } as CustomField);
-        setOptions(initialOptions);
-        setForEmbedCustomField(null);
-        setForEmbedOptions(initialOptions);
+
+        setSavedCustomField(null);
+
         toast.success("Workspace Reset");
       }
     } catch (error) {
@@ -354,7 +335,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
           <CustomFieldBuilder
             customField={customField}
             setCustomField={setCustomField}
-            setForEmbedCustomField={setForEmbedCustomField}
+            setSavedCustomField={setSavedCustomField}
           />
         </div>
       </div>
@@ -397,14 +378,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
 
   if (!token?.sub) {
-    console.log("No session token found");
-
     return {
       notFound: true,
     };
   }
-
-  const prisma = prismaClient;
 
   const environmentToken = process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID;
   if (!environmentToken) {
@@ -414,7 +391,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const userId = token.sub;
 
-  let existingSpace = await prisma.space.findUnique({
+  let existingSpace = await prismaClient.space.findUnique({
     where: {
       userId_type: {
         userId: token.sub,
@@ -469,7 +446,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   if (!workbook) {
-    // console.log("Unable to get workbook");
     return {
       redirect: {
         destination: "/activity-log?flash=error&message=Unable to get workbook",
@@ -493,16 +469,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // console.log("workbook", JSON.stringify(workbook, null, 2));
   // console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
 
-  const dbFullCustomField = await prisma.customField.findFirst({
-    where: {
-      userId: token.sub,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
-  const dbCustomField = await prisma.customField.findFirst({
+  const dbCustomField = await prismaClient.customField.findFirst({
     where: {
       userId: token.sub,
     },
@@ -519,35 +486,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  const dbCustomOptionsRecord = await prisma.options.findFirst({
-    where: {
-      userId: token.sub,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
-  const dbCustomOptions = dbCustomOptionsRecord?.options || null;
+  const props: Props = {
+    environmentToken,
+    workbookConfig,
+    userId: token.sub,
+    dbCustomField: dbCustomField
+      ? ({
+          name: dbCustomField.name,
+          type: dbCustomField.type,
+          required: dbCustomField.required,
+          dateFormat: dbCustomField.dateFormat,
+          decimals: dbCustomField.decimals || 0,
+          enumOptions: dbCustomField.enumOptions,
+        } as any as CustomField)
+      : null,
+  };
 
   return {
-    props: {
-      environmentToken,
-      workbookConfig,
-      userId: token.sub,
-      dbCustomField,
-      dbCustomOptions,
-      initialCustomFieldLastSavedAt: dbFullCustomField
-        ? DateTime.fromJSDate(dbFullCustomField.updatedAt).toFormat(
-            "MM/dd/yyyy h:mm a"
-          )
-        : "",
-      initialCustomOptionsLastSavedAt: dbCustomOptionsRecord
-        ? DateTime.fromJSDate(dbCustomOptionsRecord.updatedAt).toFormat(
-            "MM/dd/yyyy h:mm a"
-          )
-        : "",
-    },
+    props,
   };
 };
 
