@@ -1,4 +1,4 @@
-import { Option } from "../../pages/dynamic-portal";
+import { Option } from "../../lib/dynamic-portal-options";
 
 type Props = {
   options: Option[];

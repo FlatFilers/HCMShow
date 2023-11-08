@@ -1,3 +1,9 @@
+export interface Option {
+  id: number;
+  input: string;
+  output: string;
+}
+
 export interface CustomField {
   name: string;
   type: keyof typeof FIELD_TYPES;
@@ -20,12 +26,6 @@ export const DATE_FORMATS = {
   "mm-dd-yyyy": "mm-dd-yyyy",
   "dd-mm-yyyy": "dd-mm-yyyy",
 };
-
-export interface Option {
-  id: number;
-  input: string;
-  output: string;
-}
 
 export const INITIAL_OPTIONS: Option[] = [
   {
