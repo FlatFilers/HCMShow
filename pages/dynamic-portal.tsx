@@ -20,10 +20,14 @@ import { type ISpace } from "@flatfile/react";
 import { prismaClient } from "../lib/prisma-client";
 import { theme } from "../lib/theme";
 import { document } from "../components/dynamic-templates/document";
-import { Property } from "@flatfile/api/api";
 import SVG from "react-inlinesvg";
 
 import dynamic from "next/dynamic";
+import {
+  CustomField,
+  DEFAULT_CUSTOM_FIELD,
+  Option,
+} from "../lib/dynamic-portal-options";
 
 const DynamicEmbeddedSpace = dynamic(
   () => import("../components/shared/embedded-space"),
@@ -32,71 +36,6 @@ const DynamicEmbeddedSpace = dynamic(
     ssr: false,
   }
 );
-
-interface Props {
-  environmentToken: string;
-  workbookConfig: Flatfile.CreateWorkbookConfig;
-  userId: string;
-  dbCustomField: CustomField | null;
-}
-
-export interface CustomField {
-  name: string;
-  type: keyof typeof fieldTypes;
-  required: boolean;
-  dateFormat: keyof typeof dateFormats;
-  decimals: number;
-  enumOptions: Option[];
-}
-
-export const fieldTypes = {
-  string: "Text",
-  number: "Number",
-  date: "Date",
-  enum: "Category",
-  boolean: "Checkbox",
-};
-
-export const dateFormats = {
-  "yyyy-mm-dd": "yyyy-mm-dd",
-  "mm-dd-yyyy": "mm-dd-yyyy",
-  "dd-mm-yyyy": "dd-mm-yyyy",
-};
-
-export interface Option {
-  id: number;
-  input: string;
-  output: string;
-}
-
-export const initialOptions: Option[] = [
-  {
-    id: 1,
-    input: "Insurance_Coverage_Type_Insurance",
-    output: "Insurance",
-  },
-
-  {
-    id: 2,
-    input: "Health_Care_Coverage_Type_Medical",
-    output: "Medical",
-  },
-  {
-    id: 3,
-    input: "Health_Care_Coverage_Type_Dental",
-    output: "Dental",
-  },
-  {
-    id: 4,
-    input: "Retirement_Savings_Coverage_Type_Retirement",
-    output: "Retirement",
-  },
-  {
-    id: 5,
-    input: "Additional_Benefits_Coverage_Type_Other",
-    output: "Other",
-  },
-];
 
 const customOptionsConfig = (options: Option[]) => {
   const mappedOptions = options.map((o) => {
@@ -111,7 +50,7 @@ const customOptionsConfig = (options: Option[]) => {
   };
 };
 
-const filterConfig = ({
+const generateConfig = ({
   workbookConfig,
   customFieldConfig,
 }: {
@@ -133,10 +72,7 @@ const filterConfig = ({
       {
         name: sheetName,
         slug,
-        fields: [
-          ...sheets[0].fields,
-          ...(customFieldConfig.hasSavedCustomField ? [customFieldConfig] : []),
-        ],
+        fields: [...sheets[0].fields, ...[customFieldConfig]],
       },
     ],
     actions,
@@ -146,6 +82,13 @@ const filterConfig = ({
   return filteredConfig;
 };
 
+interface Props {
+  environmentToken: string;
+  workbookConfig: Flatfile.CreateWorkbookConfig;
+  userId: string;
+  dbCustomField: CustomField | null;
+}
+
 const DynamicTemplates: NextPageWithLayout<Props> = ({
   environmentToken,
   workbookConfig,
@@ -154,19 +97,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 }) => {
   const [showSpace, setShowSpace] = useState(false);
   const [customField, setCustomField] = useState<CustomField>(
-    dbCustomField ??
-      ({
-        name: "Birthdate",
-        type: "date",
-        required: true,
-        dateFormat: "yyyy-mm-dd",
-        decimals: 2,
-        enumOptions: initialOptions,
-      } as CustomField)
-  );
-
-  const [savedCustomField, setSavedCustomField] = useState<CustomField | null>(
-    dbCustomField ?? null
+    dbCustomField ?? DEFAULT_CUSTOM_FIELD
   );
 
   const customFieldConfig = {
@@ -178,13 +109,10 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     ...(customField.type === "enum" &&
       customField.enumOptions &&
       customOptionsConfig(customField.enumOptions)),
-    hasSavedCustomField: savedCustomField ? true : false,
   };
 
   const publishableKey = process.env.NEXT_PUBLIC_DYNAMIC_PUBLISHABLE_KEY;
-
   if (!publishableKey) {
-    console.error("Missing NEXT_PUBLIC_DYNAMIC_PUBLISHABLE_KEY env var");
     throw "Missing NEXT_PUBLIC_DYNAMIC_PUBLISHABLE_KEY env var";
   }
 
@@ -211,7 +139,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     name: "Dynamic Portal",
     themeConfig: theme("#71a3d2", "#3A7CB9"),
     document: document,
-    workbook: filterConfig({
+    workbook: generateConfig({
       workbookConfig,
       customFieldConfig,
     }),
@@ -247,16 +175,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
           throw new Error("Error resetting workspace");
         }
 
-        setCustomField({
-          name: "Birthdate",
-          type: "date",
-          required: true,
-          dateFormat: "yyyy-mm-dd",
-          decimals: 2,
-          enumOptions: initialOptions,
-        } as CustomField);
-
-        setSavedCustomField(null);
+        setCustomField(DEFAULT_CUSTOM_FIELD);
 
         toast.success("Workspace Reset");
       }
@@ -335,7 +254,6 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
           <CustomFieldBuilder
             customField={customField}
             setCustomField={setCustomField}
-            setSavedCustomField={setSavedCustomField}
           />
         </div>
       </div>

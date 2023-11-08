@@ -1,26 +1,21 @@
-import {
-  CustomField,
-  dateFormats,
-  fieldTypes,
-  initialOptions,
-} from "../../pages/dynamic-portal";
 import { OptionBuilder } from "./option-builder";
 import toast from "react-hot-toast";
 import { FormEvent } from "react";
+import {
+  CustomField,
+  DATE_FORMATS,
+  FIELD_TYPES,
+  INITIAL_OPTIONS,
+} from "../../lib/dynamic-portal-options";
 
 type Props = {
   customField: CustomField;
   setCustomField: (customField: CustomField) => void;
-  setSavedCustomField: any;
 };
 
-export const CustomFieldBuilder = ({
-  customField,
-  setCustomField,
-  setSavedCustomField,
-}: Props) => {
+export const CustomFieldBuilder = ({ customField, setCustomField }: Props) => {
   if (!customField.enumOptions) {
-    customField.enumOptions = initialOptions;
+    customField.enumOptions = INITIAL_OPTIONS;
   }
 
   const options = customField.enumOptions;
@@ -59,8 +54,6 @@ export const CustomFieldBuilder = ({
         enumOptions: data.enumOptions,
       };
 
-      setSavedCustomField(customField);
-
       console.log("custom field saved", customField);
     } catch (error) {
       console.error("Error saving custom field:", error);
@@ -95,14 +88,14 @@ export const CustomFieldBuilder = ({
           onChange={(e) => {
             setCustomField({
               ...customField,
-              type: e.target.value as keyof typeof fieldTypes,
+              type: e.target.value as keyof typeof FIELD_TYPES,
             });
           }}
         >
-          {Object.keys(fieldTypes).map((key) => {
+          {Object.keys(FIELD_TYPES).map((key) => {
             return (
               <option key={key} value={key}>
-                {fieldTypes[key as keyof typeof fieldTypes]}
+                {FIELD_TYPES[key as keyof typeof FIELD_TYPES]}
               </option>
             );
           })}
@@ -158,14 +151,14 @@ export const CustomFieldBuilder = ({
                 onChange={(e) => {
                   setCustomField({
                     ...customField,
-                    dateFormat: e.target.value as keyof typeof dateFormats,
+                    dateFormat: e.target.value as keyof typeof DATE_FORMATS,
                   });
                 }}
               >
-                {Object.keys(dateFormats).map((key) => {
+                {Object.keys(DATE_FORMATS).map((key) => {
                   return (
                     <option key={key} value={key}>
-                      {dateFormats[key as keyof typeof dateFormats]}
+                      {DATE_FORMATS[key as keyof typeof DATE_FORMATS]}
                     </option>
                   );
                 })}
