@@ -1,4 +1,4 @@
-import { Option } from "../../pages/dynamic-portal";
+import { Option } from "../../lib/dynamic-portal-options";
 
 type Props = {
   options: Option[];
@@ -16,60 +16,65 @@ export const OptionBuilder = ({
   removeOption,
 }: Props) => {
   return (
-    <div className="max-w-lg">
-      <div className="flex flex-row justify-between items-center mb-2">
-        <p className="text-xs w-1/2 text-gray-400">Input value in sheet</p>
-        <p className="text-xs w-1/2 text-gray-400">Output value on record</p>
+    <div className="space-y-2">
+      <div className="flex flex-row justify-between items-center">
+        <p className="text-xs w-[45%] md:w-[47.5%]">Sheet Value</p>
+        <p className="text-xs w-[45%] md:w-[47.5%]">Record Output</p>
+        <p className="text-xs w-[10%] md:w-[5%]"></p>
       </div>
 
-      {options.map((option) => {
-        return (
-          <div
-            key={option.id}
-            className="flex flex-row justify-between text-sm items-center mb-2"
-          >
-            <input
-              type="text"
-              defaultValue={option.input}
-              onChange={(e) => {
-                updateInput(option, e.target.value);
-              }}
-              className="text-gray-900 border border-gray-200 rounded px-4 py-2 mr-2 w-1/2"
-            />
-
-            <input
-              type="text"
-              defaultValue={option.output}
-              onChange={(e) => {
-                updateOutput(option, e.target.value);
-              }}
-              className="text-gray-900 border border-gray-200 rounded px-4 py-2 w-1/2"
-            />
-
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 text-gray-300 ml-2 cursor-pointer"
-              onClick={() => {
-                removeOption(option);
-              }}
+      <div className="space-y-2">
+        {options.map((option) => {
+          return (
+            <div
+              key={option.id}
+              className="flex flex-row justify-between text-sm items-center space-x-2"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
+              <input
+                type="text"
+                defaultValue={option.input}
+                onChange={(e) => {
+                  updateInput(option, e.target.value);
+                }}
+                className="text-darkest text-xs border border-darkest rounded px-2 py-1 w-[45%] md:w-[47.5%]"
               />
-            </svg>
-          </div>
-        );
-      })}
+
+              <input
+                type="text"
+                defaultValue={option.output}
+                onChange={(e) => {
+                  updateOutput(option, e.target.value);
+                }}
+                className="text-darkest text-xs border border-darkest rounded px-2 py-1 w-[45%] md:w-[47.5%]"
+              />
+
+              <div className="w-[10%] md:w-[5%]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 text-gray-300 cursor-pointer"
+                  onClick={() => {
+                    removeOption(option);
+                  }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </div>
+            </div>
+          );
+        })}
+      </div>
 
       <div
         onClick={addNewOption}
-        className="flex flex-row items-center justify-start text-gray-400 text-xs cursor-pointer mb-4"
+        className="flex flex-row items-center justify-start text-gray-400 text-xs cursor-pointer"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

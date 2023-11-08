@@ -20,6 +20,10 @@ select {
   @apply p-6 md:p-10 rounded-xl;
 }
 
+.card-sm {
+  @apply px-3 py-4;
+}
+
 .button-bg {
   background: linear-gradient(93.58deg, #363e52 -2%, #2b3242 117.56%);
   box-shadow: 8.74046516418457px 9.711627960205078px 18.45209312438965px 0px
