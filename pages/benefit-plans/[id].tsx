@@ -8,7 +8,7 @@ interface Props {
 const BenefitPlans: NextPage<Props> = ({ benefitPlan }) => {
   return (
     <div className="overflow-auto">
-      <div className="ui-resource w-[50%] mr-8 mb-16">
+      <div className="ui-resource">
         <div>
           <h3>{benefitPlan.name}</h3>
           <p>Benefit plan details</p>

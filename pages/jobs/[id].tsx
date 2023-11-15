@@ -17,7 +17,7 @@ interface Props {
 const Jobs: NextPage<Props> = ({ job }) => {
   return (
     <div className="h-screen overflow-auto">
-      <div className="ui-resource w-1/2 mr-8 mb-16">
+      <div className="ui-resource">
         <div>
           <h3>{job.name}</h3>
           <p>Job details</p>

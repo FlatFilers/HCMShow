@@ -20,7 +20,7 @@ interface Props {
 const Employees: NextPage<Props> = ({ employee }) => {
   return (
     <div className="px-4 sm:px-6 lg:px-8 w-1/2">
-      <div className="ui-resource overflow-hidden">
+      <div className="ui-resource">
         <div>
           <h3>
             {employee.firstName} {employee.lastName}

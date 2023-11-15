@@ -173,7 +173,7 @@ div[data-testid="space-contents"] {
 /** Resource show page */
 
 .ui-resource {
-  @apply text-white shadow;
+  @apply text-white shadow rounded-lg overflow-hidden max-w-2xl;
 }
 
 .ui-resource > div {
