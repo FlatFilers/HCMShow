@@ -79,63 +79,32 @@ const ActivityLog: NextPage<Props> = ({ actions }) => {
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-300">
-                <thead className="bg-gray-50">
+              <table className="ui-table min-w-full">
+                <thead>
                   <tr>
-                    <th
-                      scope="col"
-                      className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                    >
-                      Action
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      User
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Date
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Result
-                    </th>
+                    <th scope="col">Action</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Result</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 bg-white">
+                <tbody>
                   {actions &&
                     actions.length > 0 &&
                     actions.map((a) => {
                       return (
                         <tr key={a.id}>
-                          <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                            {mapActionTypeToLabel(a.type)}
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {a.user.email}
-                          </td>
-                          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {a.createdAt}
-                          </td>
-                          <td className="capitalize whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {a.description}
-                          </td>
+                          <td>{mapActionTypeToLabel(a.type)}</td>
+                          <td className="secondary">{a.user.email}</td>
+                          <td>{a.createdAt}</td>
+                          <td>{a.description}</td>
                         </tr>
                       );
                     })}
 
                   {(!actions || actions.length === 0) && (
                     <tr>
-                      <td
-                        colSpan={4}
-                        className="py-4 pl-4 pr-3 text-sm text-gray-400 sm:pl-6"
-                      >
+                      <td colSpan={4} className="secondary">
                         No actions taken yet
                       </td>
                     </tr>

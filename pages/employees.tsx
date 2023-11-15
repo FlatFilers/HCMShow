@@ -55,67 +55,30 @@ const Employees: NextPage<Props> = ({ employees }) => {
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-300">
-                <thead className="bg-gray-50">
+              <table className="ui-table min-w-full">
+                <thead>
                   <tr>
-                    <th
-                      scope="col"
-                      className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                    >
-                      Employee ID
-                    </th>
-                    <th
-                      scope="col"
-                      className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                    >
-                      Name
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Manager
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Title
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Hire Date
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      End Date
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Weekly Hours
-                    </th>
+                    <th scope="col">Employee ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Manager</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Hire Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Weekly Hours</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 bg-white">
+                <tbody>
                   {employees.map((employee) => (
                     <tr key={employee.id}>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                      <td>
                         <Link href={`/employees/${employee.id}`}>
                           {employee.employeeId}
                         </Link>
                       </td>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                        <Link href={`/employees/${employee.id}`}>
-                          {employee.firstName} {employee.lastName}
-                        </Link>
+                      <td>
+                        {employee.firstName} {employee.lastName}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      <td className="secondary">
                         {employee.manager && (
                           <div>
                             {employee.manager.firstName}{" "}
@@ -123,20 +86,14 @@ const Employees: NextPage<Props> = ({ employees }) => {
                           </div>
                         )}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {employee.positionTitle}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {employee.hireDate}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      <td>{employee.positionTitle}</td>
+                      <td>{employee.hireDate}</td>
+                      <td>
                         {employee.endEmploymentDate
                           ? employee.endEmploymentDate
                           : "-"}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {employee.scheduledWeeklyHours}
-                      </td>
+                      <td>{employee.scheduledWeeklyHours}</td>
                     </tr>
                   ))}
                 </tbody>

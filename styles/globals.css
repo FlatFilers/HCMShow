@@ -130,3 +130,80 @@ div[data-testid="space-contents"] {
   @apply fill-dynamic-portal;
   fill-opacity: 1;
 }
+
+/** Tables */
+
+.ui-table thead th {
+  @apply bg-[#282F3F] text-white p-4 text-left text-sm font-semibold;
+}
+
+.ui-table,
+.ui-table tbody {
+  @apply divide-y divide-[#282F3F];
+}
+
+.ui-table tbody tr td {
+  @apply bg-[#1C2029] text-white whitespace-nowrap p-4 text-sm font-medium;
+}
+
+.ui-table tbody tr td.secondary {
+  @apply text-[#FFFFFFCC];
+}
+
+.ui-table tbody tr td a {
+  @apply underline;
+}
+
+.ui-table {
+  @apply rounded-lg;
+}
+.ui-table tr:first-child th:first-child {
+  @apply rounded-tl-lg;
+}
+.ui-table tr:first-child th:last-child {
+  @apply rounded-tr-lg;
+}
+.ui-table tr:last-child td:first-child {
+  @apply rounded-bl-lg;
+}
+.ui-table tr:last-child td:last-child {
+  @apply rounded-br-lg;
+}
+
+/** Resource show page */
+
+.ui-resource {
+  @apply text-white shadow rounded-lg overflow-hidden max-w-2xl;
+}
+
+.ui-resource > div {
+  @apply space-y-4;
+}
+
+.ui-resource > div:first-child {
+  @apply bg-[#282F3F] text-white p-4 text-left text-sm font-semibold;
+}
+
+.ui-resource > div:last-child {
+  @apply bg-[#1C2029] text-white whitespace-nowrap p-4 text-sm font-medium;
+}
+
+.ui-resource dl {
+  @apply space-y-4;
+}
+
+.ui-resource dl div {
+  @apply flex flex-row justify-between items-center;
+}
+
+.ui-resource dl dt {
+  @apply divide-y divide-[#282F3F] text-[#FFFFFFCC];
+}
+
+.ui-resource h3 {
+  @apply text-xl font-semibold;
+}
+
+.ui-resource p {
+  @apply text-xs text-[#FFFFFFCC];
+}

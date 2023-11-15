@@ -19,6 +19,7 @@ module.exports = {
     variants: {
       extend: {
         fill: ["group-hover"],
+        borderRadius: ["first", "last"],
       },
     },
   },

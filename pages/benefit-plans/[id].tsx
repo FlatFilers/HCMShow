@@ -8,30 +8,16 @@ interface Props {
 const BenefitPlans: NextPage<Props> = ({ benefitPlan }) => {
   return (
     <div className="overflow-auto">
-      <div className="w-[50%] mr-8 mb-16 bg-white shadow sm:rounded-lg border border-gray-200">
-        <div className="px-4 py-5 sm:px-6 bg-white border-b border-gray-200 rounded-lg">
-          <h3 className="text-lg font-medium leading-6 text-gray-900">
-            Benefit Plan Information
-          </h3>
-          <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            Benefit plan details
-          </p>
+      <div className="ui-resource">
+        <div>
+          <h3>{benefitPlan.name}</h3>
+          <p>Benefit plan details</p>
         </div>
-        <div className="px-4 py-5 sm:p-0 h-fit">
-          <dl className="sm:divide-y sm:divide-gray-200">
-            <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">Name</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {benefitPlan.name}
-              </dd>
-            </div>
-            <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">
-                Benefit Plan ID
-              </dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {benefitPlan.slug}
-              </dd>
+        <div>
+          <dl>
+            <div>
+              <dt>Benefit Plan ID</dt>
+              <dd>{benefitPlan.slug}</dd>
             </div>
           </dl>
         </div>
