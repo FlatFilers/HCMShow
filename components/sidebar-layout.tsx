@@ -97,36 +97,32 @@ const SidebarLayout = ({ children }: Props) => {
       name: "Employees",
       href: "/employees",
       imageUri: "/images/employees.svg",
-      current: router.pathname === "/employees",
-    },
-    {
-      name: "Departments",
-      href: "/departments",
-      imageUri: "/images/departments.svg",
-      current: router.pathname === "/departments",
+      current: router.pathname.includes("/employees"),
     },
     {
       name: "Jobs",
       href: "/jobs",
       imageUri: "/images/jobs.svg",
-      current: router.pathname === "/jobs",
+      current: router.pathname.includes("/jobs"),
+    },
+    {
+      name: "Departments",
+      href: "/departments",
+      imageUri: "/images/departments.svg",
+      current: router.pathname.includes("/departments"),
     },
     {
       name: "Benefit Plans",
       href: "/benefit-plans",
       imageUri: "/images/benefit-plans.svg",
-      current: router.pathname === "/benefit-plans",
+      current: router.pathname.includes("/benefit-plans"),
     },
     {
       name: "Employee Benefit Plans",
       href: "/employee-benefit-plans",
       imageUri: "/images/employee-benefit-plans.svg",
-      current: router.pathname === "/employee-benefit-plans",
+      current: router.pathname.includes("/employee-benefit-plans"),
     },
-  ];
-  const userNavigation: { name: string; href: string }[] = [
-    // { name: "Your Profile", href: "#" },
-    // { name: "Settings", href: "#" },
   ];
   const homeItem = homeNavItem(router);
   const workflowsNavigation = workflowItems(router);
