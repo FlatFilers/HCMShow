@@ -28,64 +28,32 @@ const Jobs: NextPage<Props> = ({ jobs }) => {
           </p>
         </div>
       </div>
+
       <div className="my-8 w-10/12 h-5/6">
-        <div className="border border-gray-100 rounded-l-lg">
-          <table className="h-full w-full">
-            <thead className="bg-gray-50 sticky inset-0 w-full h-20">
-              <tr>
-                <th
-                  scope="col"
-                  className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                >
-                  Name
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Effective Date
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Department
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Status
-                </th>
+        <table className="ui-table w-full">
+          <thead className="w-full">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Effective Date</th>
+              <th scope="col">Department</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody className="w-full">
+            {jobs.map((job) => (
+              <tr key={job.id}>
+                <td>
+                  <Link href={`/jobs/${job.id}`}>{job.name}</Link>
+                </td>
+                <td>{job.effectiveDate}</td>
+                <td className="secondary">{job.department}</td>
+                <td>
+                  {job.isInactive ? <div>Inactive</div> : <div>Active</div>}
+                </td>
               </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 bg-white w-full">
-              {jobs.map((job) => (
-                <tr key={job.id}>
-                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-gray-500">
-                    <Link href={`/jobs/${job.id}`}>{job.name}</Link>
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {<div>{job.effectiveDate}</div>}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {job.department}
-                  </td>
-                  <td
-                    className={`whitespace-nowrap py-4 pl-3 pr-4 text-sm font-medium sm:pr-6
-                             ${
-                               job.isInactive
-                                 ? "text-red-500"
-                                 : "text-green-500"
-                             }`}
-                  >
-                    {job.isInactive ? <div>Inactive</div> : <div>Active</div>}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

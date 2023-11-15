@@ -21,34 +21,22 @@ const Jobs: NextPage<Props> = ({ benefitPlans }) => {
       </div>
       <div className="my-8 w-10/12 h-5/6">
         <div className="border border-gray-100 rounded-l-lg">
-          <table className="h-full w-full">
-            <thead className="bg-gray-50 sticky inset-0 w-full h-20">
+          <table className="ui-table w-full">
+            <thead>
               <tr>
-                <th
-                  scope="col"
-                  className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                >
-                  Name
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Benefit Plan ID
-                </th>
+                <th scope="col">Name</th>
+                <th scope="col">Benefit Plan ID</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200 bg-white w-full">
+            <tbody>
               {benefitPlans.map((benefitPlan) => (
                 <tr key={benefitPlan.id}>
-                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 text-gray-500">
+                  <td>
                     <Link href={`/benefit-plans/${benefitPlan.id}`}>
                       {benefitPlan.name}
                     </Link>
                   </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {benefitPlan.slug}
-                  </td>
+                  <td className="secondary">{benefitPlan.slug}</td>
                 </tr>
               ))}
             </tbody>

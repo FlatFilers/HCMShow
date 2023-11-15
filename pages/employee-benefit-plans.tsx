@@ -43,81 +43,43 @@ const EmployeeBenefitPlans: NextPage<Props> = ({ employeeBenefitPlans }) => {
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-300">
-                <thead className="bg-gray-50">
+              <table className="ui-table min-w-full">
+                <thead>
                   <tr>
-                    <th
-                      scope="col"
-                      className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                    >
-                      Employee ID
-                    </th>
-                    <th
-                      scope="col"
-                      className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                    >
-                      Name
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Benefit Plan
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Enrolled
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Coverage Begin Date
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Employer Contribution
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Coverage Type
-                    </th>
+                    <th scope="col">Employee ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Benefit Plan</th>
+                    <th scope="col">Enrolled</th>
+                    <th scope="col">Coverage Begin Date</th>
+                    <th scope="col">Employer Contribution</th>
+                    <th scope="col">Coverage Type</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200 bg-white">
+                <tbody>
+                  {(!employeeBenefitPlans ||
+                    employeeBenefitPlans.length === 0) && (
+                    <tr>
+                      <td colSpan={7} className="secondary">
+                        No records
+                      </td>
+                    </tr>
+                  )}
+
                   {employeeBenefitPlans.map((r) => (
                     <tr key={r.id}>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                      <td>
                         <Link href={`/employees/${r.id}`}>{r.employeeId}</Link>
                       </td>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                        <Link href={`/employees/${r.id}`}>
-                          {r.employeeName}
-                        </Link>
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      <td>{r.employeeName}</td>
+                      <td>
                         <Link href={`/benefit-plans/${r.benefitPlanId}`}>
                           {r.benefitPlanName}
                         </Link>
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {r.currentlyEnrolled ? "Yes" : "No"}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {r.coverageBeginDate}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {r.employeerContribution}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {r.benefitCoverageType}
-                      </td>
+                      <td>{r.currentlyEnrolled ? "Yes" : "No"}</td>
+                      <td>{r.coverageBeginDate}</td>
+                      <td>{r.employeerContribution}</td>
+                      <td>{r.benefitCoverageType}</td>
                     </tr>
                   ))}
                 </tbody>
