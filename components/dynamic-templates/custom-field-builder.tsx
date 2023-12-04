@@ -139,7 +139,7 @@ export const CustomFieldBuilder = ({ customField, setCustomField }: Props) => {
         </div>
       </div>
 
-      {["date", "number", "enum"].includes(customField.type) && (
+      {["enum"].includes(customField.type) && (
         <div className="text-darkest w-full">
           {customField.type === "date" && (
             <div className="flex flex-row items-center justify-start space-x-2">
