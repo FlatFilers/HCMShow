@@ -1,11 +1,6 @@
 import { RecordWithLinks } from "@flatfile/api/api";
 import { prismaClient } from "./prisma-client";
 
-const benefitPlanSheetMapping = {
-  slug: "benefitPlanId",
-  name: "benefitPlanName",
-};
-
 export const upsertBenefitPlan = async ({
   organizationId,
   slug,

@@ -3,6 +3,8 @@ import { ReadStream } from "fs";
 import { prismaClient } from "./prisma-client";
 import { SpaceType } from "./space";
 import { Workbook } from "@flatfile/api/api";
+import { SupportedLanguage } from "../components/language-context";
+import { language } from "googleapis/build/src/apis/language";
 
 export enum WorkflowType {
   Onboarding = "onboarding",
@@ -76,12 +78,13 @@ export const createSpace = async ({
       name: spaceName,
       environmentId,
       autoConfigure: true,
+      languageOverride: "es",
       metadata: {
         userId,
       },
     });
 
-    // console.log("createSpace() result", result);
+    console.log("createSpace() result", result);
 
     return result.data;
   } catch (e) {
@@ -206,6 +209,31 @@ export const getSpace = async ({
   } catch (e) {
     console.log("getSpace() error:", JSON.stringify(e, null, 2));
     return null;
+  }
+};
+
+export const updateSpace = async ({
+  workflow,
+  spaceId,
+  language,
+}: {
+  workflow: WorkflowType;
+  spaceId: string;
+  language: SupportedLanguage;
+}) => {
+  try {
+    const flatfile = flatfileClient(workflow);
+
+    const result = await flatfile.spaces.update(spaceId, {
+      languageOverride: language,
+    });
+
+    console.log("result", result);
+
+    return true;
+  } catch (e) {
+    console.error(`Error updating space language for space ${spaceId}`, e);
+    return false;
   }
 };
 

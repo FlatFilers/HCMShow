@@ -1,20 +1,27 @@
 import toast from "react-hot-toast";
+import { SupportedLanguage } from "../language-context";
 
 type Props = {
   // TODO: Refactor WorkflowType and pass it in here
   workflow: string;
   flatfileSpaceId: string;
+  language: SupportedLanguage;
   children: React.ReactNode;
 };
 
-const GoToSpace = ({ workflow, flatfileSpaceId, children }: Props) => {
+const GoToSpace = ({
+  workflow,
+  flatfileSpaceId,
+  language,
+  children,
+}: Props) => {
   return (
     <form
       onSubmit={async (e) => {
         e.preventDefault();
 
         const response = await fetch(
-          `/api/flatfile/go-to-space?workflow=${workflow}&flatfileSpaceId=${flatfileSpaceId}`
+          `/api/flatfile/go-to-space?workflow=${workflow}&flatfileSpaceId=${flatfileSpaceId}&language=${language}`
         );
 
         if (response.ok) {

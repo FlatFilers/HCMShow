@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { getToken } from "next-auth/jwt";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
@@ -13,6 +13,7 @@ import { useFlashMessages } from "../lib/hooks/usehooks";
 import { prismaClient } from "../lib/prisma-client";
 import SVG from "react-inlinesvg";
 import DownloadFile from "../components/shared/download-file";
+import { LanguageContext } from "../components/language-context";
 
 interface Props {
   flatfileSpaceId?: string;
@@ -60,6 +61,9 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
     }
   }, []);
 
+  const context = useContext(LanguageContext);
+  const { language } = context;
+
   return (
     <div className="text-white space-y-8 md:relative">
       {!flatfileSpaceId && <StepList steps={steps} />}
@@ -106,6 +110,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
         <Workspace
           flatfileSpaceId={flatfileSpaceId}
           fileName={sampleDataFileName}
+          language={language}
         />
       )}
 

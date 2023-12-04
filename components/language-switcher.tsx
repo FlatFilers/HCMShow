@@ -13,15 +13,15 @@ export default function LanguageSwitcher() {
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setLanguage(event.target.value as "english" | "spanish");
+    setLanguage(event.target.value as "en" | "es");
   };
 
   return (
     <div className="flex flex-row items-center text-white bg-[#2e323c99] px-2 rounded-lg">
       <GlobeAltIcon className="h-6 w-6" />
       <select value={language} onChange={handleLanguageChange}>
-        <option value="english">English</option>
-        <option value="spanish">Spanish</option>
+        <option value="en">English</option>
+        <option value="es">Spanish</option>
       </select>
     </div>
   );

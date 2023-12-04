@@ -3,7 +3,13 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { SpaceType, findSpace } from "../../../lib/space";
-import { WorkflowType, createSpace, getSpace } from "../../../lib/flatfile";
+import {
+  WorkflowType,
+  createSpace,
+  getSpace,
+  updateSpace,
+} from "../../../lib/flatfile";
+import { SupportedLanguage } from "../../../components/language-context";
 
 export default async function handler(
   req: NextApiRequest,
@@ -23,12 +29,12 @@ export default async function handler(
   }
 
   // get the space id from the query params
-  const { workflow, flatfileSpaceId } = req.query;
+  const { workflow, flatfileSpaceId, language } = req.query;
 
-  if (!workflow || !flatfileSpaceId) {
-    console.error("Missing workflow or flatfileSpaceId");
+  if (!workflow || !flatfileSpaceId || !language) {
+    console.error("Missing workflow, flatfileSpaceId, or language");
     return res.status(400).json({
-      error: "Missing workflow or flatfileSpaceId",
+      error: "Missing workflow, flatfileSpaceId, or language",
     });
   }
 
@@ -46,6 +52,12 @@ export default async function handler(
       error: `Space not found for user ${token.sub} and flatfileSpaceId ${flatfileSpaceId}`,
     });
   }
+
+  await updateSpace({
+    workflow: workflow as WorkflowType,
+    spaceId: flatfileSpaceId as string,
+    language: language as SupportedLanguage,
+  });
 
   // Query the space for a fresh guestLink
   const space = await getSpace({

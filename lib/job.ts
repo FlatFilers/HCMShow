@@ -1,16 +1,7 @@
 import { RecordsWithLinks } from "@flatfile/api/api";
 import { prismaClient } from "./prisma-client";
-import { JobFamily } from "@prisma/client";
 
 // TODO: Temp solution until we get more of the fields in the config
-const jobSheetMapping = {
-  slug: "jobCode",
-  name: "jobName",
-  department: "jobDept",
-  effectiveDate: "effectiveDate",
-  isInactive: "inactive",
-};
-
 export const upsertJob = async ({
   organizationId,
   slug,

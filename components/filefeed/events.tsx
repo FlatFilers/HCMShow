@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { FileFeedEvent, fileFeedEventFromAction } from "../../lib/action";
 import FeaturesList from "../shared/features-list";
+// todo: add languagehere
 import GoToSpace from "../shared/go-to-space";
 
 const features = {

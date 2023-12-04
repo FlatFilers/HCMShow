@@ -1,5 +1,4 @@
 import {
-  ArrowPathIcon,
   ArrowTopRightOnSquareIcon,
   BoltIcon,
   PuzzlePieceIcon,
@@ -9,6 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import FeaturesList from "../shared/features-list";
 import GoToSpace from "../shared/go-to-space";
+import { SupportedLanguage } from "../language-context";
 
 export interface Step {
   name: string;
@@ -27,9 +27,10 @@ const features = {
 type Props = {
   fileName: string;
   flatfileSpaceId: string;
+  language: SupportedLanguage;
 };
 
-const Workspace = ({ fileName, flatfileSpaceId }: Props) => {
+const Workspace = ({ fileName, flatfileSpaceId, language }: Props) => {
   return (
     <div className="text-white">
       <p className="text-2xl mb-8">Your Flatfile space is configured. 🎉</p>
@@ -55,6 +56,7 @@ const Workspace = ({ fileName, flatfileSpaceId }: Props) => {
               <GoToSpace
                 workflow="onboarding"
                 flatfileSpaceId={flatfileSpaceId}
+                language={language}
               >
                 <button className="button-bg inline-flex flex-row items-center justify-between rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 mr-4">
                   Visit Flatfile Space
