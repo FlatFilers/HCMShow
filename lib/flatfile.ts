@@ -3,6 +3,7 @@ import { ReadStream } from "fs";
 import { prismaClient } from "./prisma-client";
 import { SpaceType } from "./space";
 import { Workbook } from "@flatfile/api/api";
+import { DateTime } from "luxon";
 
 export enum WorkflowType {
   Onboarding = "onboarding",
@@ -106,10 +107,16 @@ export const addGuestToSpace = async ({
   try {
     const flatfile = flatfileClient(workflow);
 
+    // TODO: Temporary fix where a guest has auth errors if added to multiple spaces
+    const timestamp = DateTime.now().toMillis();
+    const newEmail = `${email.split("@")[0]}-${timestamp}@${
+      email.split("@")[1]
+    }`;
+
     const result = await flatfile.guests.create([
       {
         environmentId,
-        email,
+        email: newEmail,
         name,
         spaces: [
           {
