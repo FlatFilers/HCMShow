@@ -33,7 +33,7 @@ interface LanguageProviderProps {
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   children,
 }) => {
-  const [language, setLanguage] = useState<SupportedLanguage>("en"); // Default language
+  const [language, setLanguage] = useState<SupportedLanguage>("en");
 
   useEffect(() => {
     const getStoredLanguage = () => {
@@ -44,7 +44,6 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
       return "en";
     };
 
-    // Set language from local storage without blocking rendering
     const storedLanguage = getStoredLanguage();
     if (storedLanguage !== language) {
       setLanguage(storedLanguage);
