@@ -3,6 +3,7 @@ import React, {
   useState,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from "react";
 
 export const SUPPORTED_LANGUAGES = {
@@ -33,6 +34,27 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   children,
 }) => {
   const [language, setLanguage] = useState<SupportedLanguage>("en");
+
+  useEffect(() => {
+    const getStoredLanguage = () => {
+      if (typeof window !== "undefined") {
+        const savedLanguage = localStorage.getItem("language");
+        return (savedLanguage as SupportedLanguage) || "en";
+      }
+      return "en";
+    };
+
+    const storedLanguage = getStoredLanguage();
+    if (storedLanguage !== language) {
+      setLanguage(storedLanguage);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("language", language);
+    }
+  }, [language]);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>
