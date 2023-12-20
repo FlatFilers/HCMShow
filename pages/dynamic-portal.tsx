@@ -132,6 +132,8 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
       </div>
     );
   };
+
+  // TODO: Adjust space properties here
   const spaceProps = {
     error,
     publishableKey,

@@ -31,13 +31,10 @@ export const authOptions: NextAuthOptions = {
         }
 
         if (credentials?.isSignup === "true") {
-          console.log("signup flow");
-
           const user = await setupNewAccount(credentials);
 
           return user;
         } else {
-          console.log("login flow");
           const user = await findUser(credentials.email);
 
           if (!user) {

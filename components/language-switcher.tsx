@@ -1,6 +1,10 @@
 import { GlobeAltIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
-import { LanguageContext } from "./language-context";
+import {
+  LanguageContext,
+  SUPPORTED_LANGUAGES,
+  SupportedLanguage,
+} from "./language-context";
 
 export default function LanguageSwitcher() {
   const context = useContext(LanguageContext);
@@ -13,15 +17,19 @@ export default function LanguageSwitcher() {
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setLanguage(event.target.value as "english" | "spanish");
+    setLanguage(event.target.value as SupportedLanguage);
   };
 
   return (
     <div className="flex flex-row items-center text-white bg-[#2e323c99] px-2 rounded-lg">
       <GlobeAltIcon className="h-6 w-6" />
+
       <select value={language} onChange={handleLanguageChange}>
-        <option value="english">English</option>
-        <option value="spanish">Spanish</option>
+        {Object.entries(SUPPORTED_LANGUAGES).map(([code, label]) => (
+          <option key={code} value={code}>
+            {label}
+          </option>
+        ))}
       </select>
     </div>
   );

@@ -4,6 +4,7 @@ import { prismaClient } from "./prisma-client";
 import { SpaceType } from "./space";
 import { Workbook } from "@flatfile/api/api";
 import { DateTime } from "luxon";
+import { SupportedLanguage } from "../components/language-context";
 
 export enum WorkflowType {
   Onboarding = "onboarding",
@@ -64,11 +65,13 @@ export const createSpace = async ({
   userId,
   environmentId,
   spaceName,
+  language,
 }: {
   workflow: WorkflowType;
   userId: string;
   environmentId: string;
   spaceName: string;
+  language: SupportedLanguage;
 }) => {
   const flatfile = flatfileClient(workflow);
 
@@ -80,6 +83,7 @@ export const createSpace = async ({
       metadata: {
         userId,
       },
+      languageOverride: language,
     });
 
     // console.log("createSpace() result", result);

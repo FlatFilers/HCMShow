@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Prisma, PrismaClient, Space } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { SpaceRepo, SpaceType } from "../../../lib/space";
 import {
@@ -8,6 +8,7 @@ import {
   addGuestToSpace,
   createSpace,
 } from "../../../lib/flatfile";
+import { SupportedLanguage } from "../../../components/language-context";
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,7 +17,6 @@ export default async function handler(
   const token = await getToken({
     req: req,
   });
-  // console.log("gSSP token", token);
 
   if (!token || !token.sub) {
     console.log("No session");
@@ -45,11 +45,17 @@ export default async function handler(
     throw new Error("Missing ONBOARDING_ENVIRONMENT_ID env var");
   }
 
+  const language = req.body.language as SupportedLanguage;
+  if (!language) {
+    throw new Error("Missing language query param");
+  }
+
   const spaceResult = await createSpace({
     workflow: WorkflowType.Onboarding,
     userId: token.sub,
     environmentId,
     spaceName: "HCM.show Project Onboarding",
+    language,
   });
 
   if (!spaceResult) {

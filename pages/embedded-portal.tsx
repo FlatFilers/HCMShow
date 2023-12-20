@@ -1,5 +1,5 @@
 import { NextPageWithLayout } from "./_app";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { type ISpace } from "@flatfile/react";
 import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
@@ -19,6 +19,7 @@ import { prismaClient } from "../lib/prisma-client";
 import StepList, { Step } from "../components/shared/step-list";
 import DownloadFile from "../components/shared/download-file";
 import SetupSpace from "../components/shared/setup-space";
+import { LanguageContext } from "../components/language-context";
 
 const DynamicEmbeddedSpace = dynamic(
   () => import("../components/shared/embedded-space"),
@@ -145,6 +146,9 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     }
   }, []);
 
+  const context = useContext(LanguageContext);
+  const { language } = context;
+
   return (
     <div className="text-white space-y-8 md:relative">
       {!space && <StepList steps={steps} />}
@@ -182,6 +186,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
               isSubmitting={isSubmitting}
               buttonText={buttonText}
               actionHref="/api/flatfile/create-embed-space"
+              language={language}
             />
           )}
         </div>
