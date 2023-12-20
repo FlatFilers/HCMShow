@@ -1,6 +1,6 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
-import { LanguageContext } from "../language-context";
+import useLanguage from "../../lib/hooks/use-language";
 
 export const SetupSpace = () => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -11,8 +11,7 @@ export const SetupSpace = () => {
     setButtonText("Setting up Flatfile...");
   };
 
-  const context = useContext(LanguageContext);
-  const { language } = context;
+  const language = useLanguage();
 
   return (
     <div className="text-white space-y-4 md:max-w-lg">

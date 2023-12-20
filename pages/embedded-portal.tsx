@@ -20,6 +20,7 @@ import StepList, { Step } from "../components/shared/step-list";
 import DownloadFile from "../components/shared/download-file";
 import SetupSpace from "../components/shared/setup-space";
 import { LanguageContext } from "../components/language-context";
+import useLanguage from "../lib/hooks/use-language";
 
 const DynamicEmbeddedSpace = dynamic(
   () => import("../components/shared/embedded-space"),
@@ -146,8 +147,7 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
     }
   }, []);
 
-  const context = useContext(LanguageContext);
-  const { language } = context;
+  const language = useLanguage();
 
   return (
     <div className="text-white space-y-8 md:relative">

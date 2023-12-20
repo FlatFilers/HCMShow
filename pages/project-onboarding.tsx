@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 import { getToken } from "next-auth/jwt";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
@@ -13,7 +13,7 @@ import { useFlashMessages } from "../lib/hooks/usehooks";
 import { prismaClient } from "../lib/prisma-client";
 import SVG from "react-inlinesvg";
 import DownloadFile from "../components/shared/download-file";
-import { LanguageContext } from "../components/language-context";
+import useLanguage from "../lib/hooks/use-language";
 
 interface Props {
   flatfileSpaceId?: string;
@@ -61,8 +61,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
     }
   }, []);
 
-  const context = useContext(LanguageContext);
-  const { language } = context;
+  const language = useLanguage();
 
   return (
     <div className="text-white space-y-8 md:relative">
