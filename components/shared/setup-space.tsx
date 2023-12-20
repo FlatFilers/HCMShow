@@ -1,4 +1,5 @@
 import toast from "react-hot-toast";
+import { SupportedLanguage } from "../language-context";
 
 type Props = {
   actionHref: string;
@@ -6,6 +7,7 @@ type Props = {
   handleSubmit: Function;
   isSubmitting: boolean;
   buttonText: string;
+  language: SupportedLanguage;
 };
 
 const SetupSpace = ({
@@ -14,6 +16,7 @@ const SetupSpace = ({
   handleSubmit,
   isSubmitting,
   buttonText,
+  language,
 }: Props) => {
   return (
     <div className="text-white space-y-4 md:max-w-lg">
@@ -24,7 +27,10 @@ const SetupSpace = ({
         Click the button below and we'll configure the upload space and invite
         you to it. 👇
       </p>
-      <form action={actionHref} onSubmit={() => handleSubmit()} className="">
+
+      <form action={actionHref} onSubmit={() => handleSubmit()} method="post">
+        <input type="hidden" name="language" value={language} />
+
         <button
           onClick={() => toast.loading("Setting up Flatfile")}
           disabled={isSubmitting}

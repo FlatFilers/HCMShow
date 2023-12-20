@@ -16,7 +16,7 @@
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
     "@fast-csv/parse": "^4.3.6",
-    "@flatfile/api": "^1.5.7",
+    "@flatfile/api": "^1.5.45",
     "@flatfile/react": "^7.2.30",
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",

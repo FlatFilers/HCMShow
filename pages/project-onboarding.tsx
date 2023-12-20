@@ -13,6 +13,7 @@ import { useFlashMessages } from "../lib/hooks/usehooks";
 import { prismaClient } from "../lib/prisma-client";
 import SVG from "react-inlinesvg";
 import DownloadFile from "../components/shared/download-file";
+import useLanguage from "../lib/hooks/use-language";
 
 interface Props {
   flatfileSpaceId?: string;
@@ -60,6 +61,8 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
     }
   }, []);
 
+  const language = useLanguage();
+
   return (
     <div className="text-white space-y-8 md:relative">
       {!flatfileSpaceId && <StepList steps={steps} />}
@@ -97,6 +100,7 @@ const Onboarding: NextPageWithLayout<Props> = ({ flatfileSpaceId }) => {
               isSubmitting={isSubmitting}
               buttonText={buttonText}
               actionHref="/api/flatfile/create-onboarding-space"
+              language={language}
             />
           )}
         </div>

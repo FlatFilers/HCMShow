@@ -12,6 +12,7 @@ import {
   postFile,
 } from "../../../lib/flatfile";
 import { prismaClient } from "../../../lib/prisma-client";
+import { SupportedLanguage } from "../../../components/language-context";
 
 export default async function handler(
   req: NextApiRequest,
@@ -43,11 +44,16 @@ export default async function handler(
   const workflow = WorkflowType.FileFeed;
   const environmentId = process.env.FILEFEED_ENVIRONMENT_ID as string;
 
+  const language = req.body.language as SupportedLanguage;
+  if (!language) {
+    throw new Error("Missing language query param");
+  }
   const spaceResult = await createSpace({
     workflow,
     userId: user.id,
     environmentId,
     spaceName: "Filefeed",
+    language,
   });
 
   if (!spaceResult) {

@@ -132,6 +132,8 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
       </div>
     );
   };
+
+  // TODO: Adjust space properties here
   const spaceProps = {
     error,
     publishableKey,
@@ -324,6 +326,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       userId,
       environmentId: environmentToken,
       spaceName: "HCM.show Dynamic",
+      language: "en",
     });
 
     if (!space) {
