@@ -326,6 +326,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       userId,
       environmentId: environmentToken,
       spaceName: "HCM.show Dynamic",
+      language: "en",
     });
 
     if (!space) {
