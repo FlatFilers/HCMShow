@@ -1,7 +1,4 @@
-export function theme(
-  focusBgColor: string | null,
-  backgroundColor: string | null
-) {
+export function theme(focusBgColor: string, backgroundColor: string) {
   return {
     root: {
       primaryColor: backgroundColor,
@@ -62,9 +59,6 @@ export function theme(
           borderColor: "rgb(8 117 225)",
           spinnerColor: "#808080",
         },
-      },
-      boolean: {
-        toggleChecked: "rgb(240 240 240)",
       },
       loading: {
         color: "rgb(240 240 240)",
