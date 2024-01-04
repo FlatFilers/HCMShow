@@ -7,14 +7,12 @@ export class FlatfileApiService {
     spaceId,
     environmentId,
     blueprint,
-    document,
     theme,
   }: {
     name: string;
     spaceId: string;
     environmentId: string;
     blueprint: SheetConfig[];
-    document?: any;
     theme: any;
   }) {
     // Create a new workbook using the Flatfile API
@@ -50,24 +48,6 @@ export class FlatfileApiService {
       throw new Error(`Error getting userId for spaceId ${spaceId}`);
     }
 
-    let documentId;
-    try {
-      if (document) {
-        const createDoc = await api.documents.create(spaceId, document);
-
-        documentId = createDoc.data.id;
-      }
-    } catch (error) {
-      console.error(
-        `Error creating document for spaceId ${spaceId}: ${JSON.stringify(
-          error,
-          null,
-          2
-        )}`
-      );
-      throw new Error(`Error creating document for spaceId ${spaceId}`);
-    }
-
     // Update the space to set the primary workbook and theme
     try {
       await FlatfileApiService.configureSpace({
@@ -75,7 +55,6 @@ export class FlatfileApiService {
         environmentId,
         workbookId,
         userId,
-        documentId,
         theme,
       });
 
@@ -154,14 +133,12 @@ export class FlatfileApiService {
     environmentId,
     workbookId,
     userId,
-    documentId,
     theme,
   }: {
     spaceId: string;
     environmentId: string;
     workbookId: string;
     userId: string;
-    documentId?: string;
     theme: any;
   }) {
     await api.spaces.update(spaceId, {
@@ -174,9 +151,6 @@ export class FlatfileApiService {
         userId,
         sidebarConfig: {
           showSidebar: true,
-          defaultPage: {
-            documentId,
-          },
         },
         theme,
       },

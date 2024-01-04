@@ -1,7 +1,6 @@
 import { recordHook } from "@flatfile/plugin-record-hook";
 import api from "@flatfile/api";
 import { xlsxExtractorPlugin } from "@flatfile/plugin-xlsx-extractor";
-import { FlatfileEvent } from "@flatfile/listener";
 import { dedupePlugin } from "@flatfile/plugin-dedupe";
 import { JSONExtractor } from "@flatfile/plugin-json-extractor";
 import { XMLExtractor } from "@flatfile/plugin-xml-extractor";
@@ -12,7 +11,6 @@ import { benefitElectionsValidations } from "./validations/benefit-elections";
 import { theme } from "./themes/dynamic";
 import { blueprint } from "./blueprints/benefitsBlueprint";
 import { FlatfileApiService } from "./flatfile-api-service";
-import { HcmShowApiService } from "./hcm-show-api-service";
 
 // Define the main function that sets up the listener
 export const listener = FlatfileListener.create((client: Client) => {
@@ -78,44 +76,6 @@ export const listener = FlatfileListener.create((client: Client) => {
       return record;
     })
   );
-
-  // Listen for the 'submit' action
-  client.filter({ job: "workbook:submitAction" }, (configure) => {
-    configure.on("job:ready", async (event: FlatfileEvent) => {
-      const { jobId, spaceId } = event.context;
-      try {
-        await api.jobs.ack(jobId, {
-          info: "Sending data to HCM.show.",
-          progress: 10,
-        });
-
-        let result;
-        try {
-          // Call the submit function with the event as an argument to push the data to HCM Show
-          result = await HcmShowApiService.syncSpace(event, "dynamic");
-
-          // Log the action as a string to the console
-          console.log("Action: " + JSON.stringify(event?.payload?.operation));
-        } catch (error) {
-          // Handle the error gracefully, log an error message, and potentially take appropriate action
-          console.log("Error occurred during HCM workbook submission:", error);
-          // Perform error handling, such as displaying an error message to the user or triggering a fallback behavior
-        }
-
-        if (result.success) {
-          await api.jobs.complete(jobId, {
-            info: "Data synced to the HCM.show app.",
-          });
-        }
-      } catch (error) {
-        console.error("Error:", error);
-
-        await api.jobs.fail(jobId, {
-          info: "The submit job did not run correctly.",
-        });
-      }
-    });
-  });
 
   client.use(
     dedupePlugin("dedupe-benefit-elections", {
