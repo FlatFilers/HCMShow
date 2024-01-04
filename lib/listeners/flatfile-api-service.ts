@@ -7,13 +7,11 @@ export class FlatfileApiService {
     spaceId,
     environmentId,
     blueprint,
-    theme,
   }: {
     name: string;
     spaceId: string;
     environmentId: string;
     blueprint: SheetConfig[];
-    theme: any;
   }) {
     // Create a new workbook using the Flatfile API
     let workbookId;
@@ -55,7 +53,6 @@ export class FlatfileApiService {
         environmentId,
         workbookId,
         userId,
-        theme,
       });
 
       console.log("Updated Space with ID: " + spaceId);
@@ -133,13 +130,11 @@ export class FlatfileApiService {
     environmentId,
     workbookId,
     userId,
-    theme,
   }: {
     spaceId: string;
     environmentId: string;
     workbookId: string;
     userId: string;
-    theme: any;
   }) {
     await api.spaces.update(spaceId, {
       environmentId,
@@ -152,7 +147,6 @@ export class FlatfileApiService {
         sidebarConfig: {
           showSidebar: true,
         },
-        theme,
       },
     });
   }

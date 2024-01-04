@@ -60,9 +60,6 @@ export function theme(focusBgColor: string, backgroundColor: string) {
           spinnerColor: "#808080",
         },
       },
-      boolean: {
-        toggleChecked: "rgb(240 240 240)",
-      },
       loading: {
         color: "rgb(240 240 240)",
       },

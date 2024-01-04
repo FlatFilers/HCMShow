@@ -20,6 +20,7 @@ import {
 } from "../lib/dynamic-portal-options";
 import { listener } from "../lib/listeners/dynamic";
 import { blueprint } from "../lib/listeners/blueprints/benefitsBlueprint";
+import { theme } from "../lib/theme";
 
 const DynamicEmbeddedSpace = dynamic(
   () => import("../components/shared/embedded-space"),
@@ -118,6 +119,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     publishableKey,
     environmentId: environmentToken,
     name: "Dynamic Portal",
+    themeConfig: theme("#71a3d2", "#3A7CB9"),
     listener,
     document,
     workbook: generateConfig({
