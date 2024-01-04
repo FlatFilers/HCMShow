@@ -19,7 +19,7 @@ import {
   Option,
 } from "../lib/dynamic-portal-options";
 import { listener } from "../lib/listeners/dynamic";
-import { blueprint } from "../lib/listeners/blueprints/benefitsBlueprint";
+import { sheets } from "../lib/listeners/sheets/benefits";
 import { theme } from "../lib/theme";
 
 const DynamicEmbeddedSpace = dynamic(
@@ -107,12 +107,11 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     throw "Missing NEXT_PUBLIC_DYNAMIC_PUBLISHABLE_KEY env var";
   }
 
-  const b = blueprint[0];
-
+  const firstSheet = sheets[0];
   const workbookConfig = {
-    name: b.name,
-    sheets: blueprint,
-    actions: b.actions,
+    name: firstSheet.name,
+    sheets,
+    actions: firstSheet.actions,
   };
 
   const spaceProps: ISpace = {

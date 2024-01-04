@@ -1,6 +1,6 @@
 // Importing necessary modules and objects
 import moment from "moment";
-import { blueprint as benefitsBlueprintSheets } from "../blueprints/benefitsBlueprint";
+import { sheets } from "../sheets/benefits";
 import { FlatfileRecord } from "@flatfile/hooks";
 
 export const momentFormats = [
@@ -54,9 +54,6 @@ export const momentFormats = [
   "YYYY MMM D", // Format: 4-digit year - Abbreviated month name - 1 or 2-digit day e.g., '2023 Aug 26'
 ];
 
-// Combine all the blueprints into one array
-const allBlueprintSheets = [...benefitsBlueprintSheets];
-
 // A helper function to format the given date string
 function formatDate(dateString: string) {
   // Check if the date string is already in 'yyyy-MM-dd' format
@@ -92,7 +89,7 @@ function formatDate(dateString: string) {
 // A function to format all date fields of a record
 function formatRecordDates(record: FlatfileRecord, sheetSlug: string) {
   // Find the sheet with the given slug from the blueprint sheets
-  const sheet = allBlueprintSheets.find((sheet) => sheet.slug === sheetSlug);
+  const sheet = sheets.find((sheet) => sheet.slug === sheetSlug);
 
   if (!sheet) {
     throw new Error(`Sheet with slug ${sheetSlug} not found in blueprints`);

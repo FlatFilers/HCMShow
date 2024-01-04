@@ -1,14 +1,11 @@
 import { FlatfileRecord } from "@flatfile/hooks";
-import { blueprint as benefitsBlueprintSheets } from "../blueprints/benefitsBlueprint";
+import { sheets } from "../sheets/benefits";
 import { isNotNil } from "../helpers";
-
-// Combine both blueprints
-const combinedBlueprints = [...benefitsBlueprintSheets];
 
 // Function to validate boolean fields in a record
 function validateBooleanFields(record: FlatfileRecord, sheetSlug: string) {
   // Find the sheet object with the given slug in the combined blueprints
-  const sheet = combinedBlueprints.find((sheet) => sheet.slug === sheetSlug);
+  const sheet = sheets.find((sheet) => sheet.slug === sheetSlug);
 
   if (!sheet) {
     throw new Error(`Sheet with slug ${sheetSlug} not found in blueprints`);

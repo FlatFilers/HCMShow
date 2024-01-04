@@ -8,7 +8,7 @@ import { XMLExtractor } from "@flatfile/plugin-xml-extractor";
 import { DelimiterExtractor } from "@flatfile/plugin-delimiter-extractor";
 import { FlatfileListener, Client } from "@flatfile/listener";
 import { benefitElectionsValidations } from "./validations/benefit-elections";
-import { blueprint } from "./blueprints/benefitsBlueprint";
+import { sheets } from "./sheets/benefits";
 import { FlatfileApiService } from "./flatfile-api-service";
 
 // Define the main function that sets up the listener
@@ -43,7 +43,7 @@ export const listener = FlatfileListener.create((client: Client) => {
         name: "Benefits Workbook",
         spaceId,
         environmentId,
-        blueprint,
+        sheets,
       });
 
       // Update the job status to 'complete' using the Flatfile API

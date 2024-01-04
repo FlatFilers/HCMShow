@@ -6,12 +6,12 @@ export class FlatfileApiService {
     name,
     spaceId,
     environmentId,
-    blueprint,
+    sheets,
   }: {
     name: string;
     spaceId: string;
     environmentId: string;
-    blueprint: SheetConfig[];
+    sheets: SheetConfig[];
   }) {
     // Create a new workbook using the Flatfile API
     let workbookId;
@@ -20,7 +20,7 @@ export class FlatfileApiService {
         name,
         spaceId,
         environmentId,
-        blueprint,
+        sheets,
       });
 
       console.log("Created Workbook with ID:" + workbookId);
@@ -92,12 +92,12 @@ export class FlatfileApiService {
     name,
     spaceId,
     environmentId,
-    blueprint,
+    sheets,
   }: {
     name: string;
     spaceId: string;
     environmentId: string;
-    blueprint: SheetConfig[];
+    sheets: SheetConfig[];
   }) {
     // Create a new workbook using the Flatfile API
     const workbook = await api.workbooks.create({
@@ -105,7 +105,7 @@ export class FlatfileApiService {
       spaceId: spaceId,
       environmentId: environmentId,
       labels: ["primary"],
-      sheets: blueprint,
+      sheets: sheets,
       actions: [
         {
           operation: "submitAction",

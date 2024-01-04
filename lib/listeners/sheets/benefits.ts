@@ -102,4 +102,4 @@ const sheet: SheetConfig = {
   ],
 };
 
-export const blueprint = [sheet];
+export const sheets = [sheet];
