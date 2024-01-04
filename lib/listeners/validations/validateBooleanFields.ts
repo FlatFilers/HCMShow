@@ -1,19 +1,22 @@
-import { FlatfileRecord } from '@flatfile/hooks';
-import { blueprint as hcmBlueprintSheets } from '../blueprints/jobsBlueprint';
-import { blueprint as benefitsBlueprintSheets } from '../blueprints/benefitsBlueprint';
-import { isNotNil } from './helpers';
+import { FlatfileRecord } from "@flatfile/hooks";
+import { blueprint as benefitsBlueprintSheets } from "../blueprints/benefitsBlueprint";
+import { isNotNil } from "../helpers";
 
 // Combine both blueprints
-const combinedBlueprints = [...hcmBlueprintSheets, ...benefitsBlueprintSheets];
+const combinedBlueprints = [...benefitsBlueprintSheets];
 
 // Function to validate boolean fields in a record
-function validateBooleanFields(record, sheetSlug) {
+function validateBooleanFields(record: FlatfileRecord, sheetSlug: string) {
   // Find the sheet object with the given slug in the combined blueprints
   const sheet = combinedBlueprints.find((sheet) => sheet.slug === sheetSlug);
 
+  if (!sheet) {
+    throw new Error(`Sheet with slug ${sheetSlug} not found in blueprints`);
+  }
+
   // Filter the fields of type 'boolean' and get their keys
   const booleanFields = sheet.fields
-    .filter((field) => field.type === 'boolean')
+    .filter((field) => field.type === "boolean")
     .map((field) => field.key);
 
   // Define the commonly used synonyms for boolean values
@@ -34,16 +37,18 @@ function validateBooleanFields(record, sheetSlug) {
     let value = record.get(booleanField);
 
     // Check if the value is a string and is present in the synonyms object
-    if (typeof value === 'string' && value.toLowerCase() in synonyms) {
+    if (typeof value === "string" && value.toLowerCase() in synonyms) {
       // Map the synonym to its corresponding boolean value
-      const mappedValue = synonyms[value.toLowerCase()];
+      const mappedValue = (synonyms as { [key: string]: boolean })[
+        value.toLowerCase()
+      ];
       // Set the mapped value back to the record
       record.set(booleanField, mappedValue);
       // Add an info message indicating the mapping
       record.addInfo(booleanField, `Value "${value}" mapped to ${mappedValue}`);
-    } else if (isNotNil(value) && typeof value !== 'boolean') {
+    } else if (isNotNil(value) && typeof value !== "boolean") {
       // If the value is not a boolean and not a valid synonym, add an error to the record
-      record.addError(booleanField, 'This field must be a boolean');
+      record.addError(booleanField, "This field must be a boolean");
     }
   });
 }

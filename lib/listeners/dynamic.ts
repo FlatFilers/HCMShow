@@ -5,9 +5,9 @@ import { FlatfileEvent } from "@flatfile/listener";
 import { dedupePlugin } from "@flatfile/plugin-dedupe";
 import { JSONExtractor } from "@flatfile/plugin-json-extractor";
 import { XMLExtractor } from "@flatfile/plugin-xml-extractor";
-import { ZipExtractor } from "@flatfile/plugin-zip-extractor";
+// import { ZipExtractor } from "@flatfile/plugin-zip-extractor";
 import { DelimiterExtractor } from "@flatfile/plugin-delimiter-extractor";
-import { Client } from "@flatfile/listener";
+import { FlatfileListener, Client } from "@flatfile/listener";
 import { benefitElectionsValidations } from "./validations/benefit-elections";
 import { theme } from "./themes/dynamic";
 import { blueprint } from "./blueprints/benefitsBlueprint";
@@ -15,14 +15,14 @@ import { FlatfileApiService } from "./flatfile-api-service";
 import { HcmShowApiService } from "./hcm-show-api-service";
 
 // Define the main function that sets up the listener
-export default function (listener: Client) {
+export const listener = FlatfileListener.create((client: Client) => {
   // Log the event topic for all events
-  listener.on("**", (event) => {
+  client.on("**", (event) => {
     console.log("> event.topic: " + event.topic);
   });
 
   // Add an event listener for the 'job:created' event
-  listener.filter({ job: "space:configure" }, (configure) => {
+  client.filter({ job: "space:configure" }, (configure) => {
     configure.on("job:ready", async (event) => {
       console.log("Reached the job:ready event callback");
 
@@ -68,7 +68,7 @@ export default function (listener: Client) {
   });
 
   // Attach a record hook to the 'benefit-elections-sheet' of the Flatfile importer
-  listener.use(
+  client.use(
     // When a record is processed, invoke the 'jobValidations' function to check for any errors
     recordHook("benefit-elections-sheet", (record) => {
       const results = benefitElectionsValidations(record);
@@ -80,7 +80,7 @@ export default function (listener: Client) {
   );
 
   // Listen for the 'submit' action
-  listener.filter({ job: "workbook:submitAction" }, (configure) => {
+  client.filter({ job: "workbook:submitAction" }, (configure) => {
     configure.on("job:ready", async (event: FlatfileEvent) => {
       const { jobId, spaceId } = event.context;
       try {
@@ -117,7 +117,7 @@ export default function (listener: Client) {
     });
   });
 
-  listener.use(
+  client.use(
     dedupePlugin("dedupe-benefit-elections", {
       on: "employeeId",
       keep: "last",
@@ -127,7 +127,7 @@ export default function (listener: Client) {
   // Add the XLSX extractor plugin to the listener
   // This allows the listener to parse XLSX files
   try {
-    listener.use(xlsxExtractorPlugin({ rawNumbers: true }));
+    client.use(xlsxExtractorPlugin({ rawNumbers: true }));
   } catch (error) {
     console.error("Failed to parse XLSX files:", error);
   }
@@ -135,7 +135,7 @@ export default function (listener: Client) {
   // Add the JSON extractor to the listener
   // This allows the listener to parse JSON files
   try {
-    listener.use(JSONExtractor());
+    client.use(JSONExtractor());
   } catch (error) {
     console.error("Failed to parse JSON files:", error);
   }
@@ -143,24 +143,24 @@ export default function (listener: Client) {
   // Add the XML extractor to the listener
   // This allows the listener to parse XML files
   try {
-    listener.use(XMLExtractor());
+    client.use(XMLExtractor());
   } catch (error) {
     console.error("Failed to parse XML files:", error);
   }
 
   // Add the Zip extractor to the listener
   // This allows the listener to extract files from ZIP archives
-  try {
-    listener.use(ZipExtractor());
-  } catch (error) {
-    console.error("Failed to extract files from ZIP:", error);
-  }
+  // try {
+  //   client.use(ZipExtractor());
+  // } catch (error) {
+  //   console.error("Failed to extract files from ZIP:", error);
+  // }
 
   // Add the delimiter extractor plugin to the listener
   // This allows the listener to parse comma-delimited TXT files
   try {
-    listener.use(DelimiterExtractor(".txt", { delimiter: "," }));
+    client.use(DelimiterExtractor(".txt", { delimiter: "," }));
   } catch (error) {
     console.error("Failed to parse pipe-delimited TXT files:", error);
   }
-}
+});

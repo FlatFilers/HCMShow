@@ -1,6 +1,6 @@
-import { FlatfileEvent } from '@flatfile/listener';
-import { getUserIdFromSpace } from './utils/flatfile-api';
-import { get, post } from './utils/request';
+import { FlatfileEvent } from "@flatfile/listener";
+import { getUserIdFromSpace } from "./flatfile-api";
+import { get, post } from "./request";
 
 type DepartmentResult = {
   id: string;
@@ -14,7 +14,7 @@ export class HcmShowApiService {
     // Temporary solution until react package can open the same space that is saved in HCM.
     workflowType?: string
   ) => {
-    console.log('syncSpace in HCM.show | e: ' + JSON.stringify(event));
+    console.log("syncSpace in HCM.show | e: " + JSON.stringify(event));
 
     // Extracting the spaceId from the event context
     const { spaceId } = event.context;
@@ -32,7 +32,7 @@ export class HcmShowApiService {
   };
 
   static syncFilefeed = async (event: FlatfileEvent) => {
-    console.log('Syncing filefeed in HCM.show.');
+    console.log("Syncing filefeed in HCM.show.");
 
     const { spaceId } = event.context;
     const topic = event.payload.job || event.topic;
@@ -43,7 +43,7 @@ export class HcmShowApiService {
 
     return await post({
       apiBaseUrl: await this.getApiBaseUrl(event),
-      path: '/api/v1/sync-file-feed',
+      path: "/api/v1/sync-file-feed",
       body: { spaceId, topic },
       headers: await this.headers(event),
     });
@@ -52,13 +52,13 @@ export class HcmShowApiService {
   static fetchDepartments = async (
     event: FlatfileEvent
   ): Promise<DepartmentResult[]> => {
-    console.log('Fetching departments from HCM.show');
+    console.log("Fetching departments from HCM.show");
 
     let result;
     try {
       result = await get({
         apiBaseUrl: await this.getApiBaseUrl(event),
-        path: '/api/v1/departments',
+        path: "/api/v1/departments",
         params: {},
         headers: await this.headers(event),
       });
@@ -68,14 +68,14 @@ export class HcmShowApiService {
 
     const departments = result as DepartmentResult[];
 
-    console.log('Departments found: ' + JSON.stringify(departments));
+    console.log("Departments found: " + JSON.stringify(departments));
 
     return departments;
   };
 
   static fetchEmployees = async (event: FlatfileEvent) => {
     // Logging the event for debugging purposes
-    console.log('fetchEmployees | e: ' + JSON.stringify(event));
+    console.log("fetchEmployees | e: " + JSON.stringify(event));
 
     // Extracting the spaceId from the event context
     const { spaceId } = event.context;
@@ -96,8 +96,8 @@ export class HcmShowApiService {
     const serverAuthToken = await this.getServerAuthToken(event);
 
     return {
-      'Content-Type': 'application/json',
-      'x-server-auth': serverAuthToken,
+      "Content-Type": "application/json",
+      "x-server-auth": serverAuthToken,
     };
   };
 
@@ -105,9 +105,9 @@ export class HcmShowApiService {
     let serverAuthToken;
 
     try {
-      serverAuthToken = await event.secrets('SERVER_AUTH_TOKEN');
+      serverAuthToken = await event.secrets("SERVER_AUTH_TOKEN");
     } catch (e) {
-      const message = 'FAILED FETCH SERVER AUTH TOKEN';
+      const message = "FAILED FETCH SERVER AUTH TOKEN";
       console.error(message);
       throw new Error(message);
     }
@@ -121,9 +121,9 @@ export class HcmShowApiService {
 
     try {
       // Prod, try secrets
-      apiBaseUrl = await event.secrets('API_BASE_URL');
+      apiBaseUrl = await event.secrets("API_BASE_URL");
     } catch (e) {
-      const message = 'No API_BASE_URL secret';
+      const message = "No API_BASE_URL secret";
       console.warn(message);
     }
 
@@ -132,6 +132,6 @@ export class HcmShowApiService {
     }
 
     // Dev
-    return 'http://localhost:3000';
+    return "http://localhost:3000";
   };
 }

@@ -1,5 +1,5 @@
-import api from '@flatfile/api';
-import { SheetConfig } from '@flatfile/api/api';
+import api from "@flatfile/api";
+import { SheetConfig } from "@flatfile/api/api";
 
 export class FlatfileApiService {
   static async setupSpace({
@@ -27,9 +27,9 @@ export class FlatfileApiService {
         blueprint,
       });
 
-      console.log('Created Workbook with ID:' + workbookId);
+      console.log("Created Workbook with ID:" + workbookId);
     } catch (error) {
-      console.error('Error creating workbook:', JSON.stringify(error, null, 2));
+      console.error("Error creating workbook:", JSON.stringify(error, null, 2));
       throw new Error(`Error creating workbook for spaceId ${spaceId}`);
     }
 
@@ -79,7 +79,7 @@ export class FlatfileApiService {
         theme,
       });
 
-      console.log('Updated Space with ID: ' + spaceId);
+      console.log("Updated Space with ID: " + spaceId);
     } catch (error) {
       console.error(
         `Error configuring space for spaceId ${spaceId}: ${JSON.stringify(
@@ -128,15 +128,15 @@ export class FlatfileApiService {
       name,
       spaceId: spaceId,
       environmentId: environmentId,
-      labels: ['primary'],
+      labels: ["primary"],
       sheets: blueprint,
       actions: [
         {
-          operation: 'submitAction',
-          mode: 'foreground',
-          label: 'Submit',
-          type: 'string',
-          description: 'Submit Data to HCM Show',
+          operation: "submitAction",
+          mode: "foreground",
+          label: "Submit",
+          type: "string",
+          description: "Submit Data to HCM Show",
           primary: true,
         },
       ],
@@ -161,15 +161,15 @@ export class FlatfileApiService {
     environmentId: string;
     workbookId: string;
     userId: string;
-    documentId: string;
+    documentId?: string;
     theme: any;
   }) {
     await api.spaces.update(spaceId, {
       environmentId,
       primaryWorkbookId: workbookId,
-      guestAuthentication: ['shared_link'],
+      guestAuthentication: ["shared_link"],
       translationsPath:
-        'https://raw.githubusercontent.com/FlatFilers/Platform-Translations/main/locales/en/translation.json',
+        "https://raw.githubusercontent.com/FlatFilers/Platform-Translations/main/locales/en/translation.json",
       metadata: {
         userId,
         sidebarConfig: {

@@ -28,6 +28,8 @@ import {
   DEFAULT_CUSTOM_FIELD,
   Option,
 } from "../lib/dynamic-portal-options";
+import { listener } from "../lib/listeners/dynamic";
+import { blueprint } from "../lib/listeners/blueprints/benefitsBlueprint";
 
 const DynamicEmbeddedSpace = dynamic(
   () => import("../components/shared/embedded-space"),
@@ -84,14 +86,14 @@ const generateConfig = ({
 
 interface Props {
   environmentToken: string;
-  workbookConfig: Flatfile.CreateWorkbookConfig;
+  // workbookConfig: Flatfile.CreateWorkbookConfig;
   userId: string;
   dbCustomField: CustomField | null;
 }
 
 const DynamicTemplates: NextPageWithLayout<Props> = ({
   environmentToken,
-  workbookConfig,
+  // workbookConfig,
   userId,
   dbCustomField,
 }) => {
@@ -116,31 +118,21 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     throw "Missing NEXT_PUBLIC_DYNAMIC_PUBLISHABLE_KEY env var";
   }
 
-  const error = (error: string) => {
-    console.log("error", error);
-    return (
-      <div>
-        <XCircleIcon
-          className="h-7 w-7 absolute top-[-32px] right-[-20px] hover:cursor-pointer text-white"
-          onClick={() => setShowSpace(false)}
-        >
-          Close
-        </XCircleIcon>
-        <div className="text-black bg-white text-lg font-semibold p-8">
-          Error: An error occurred opening the portal
-        </div>
-      </div>
-    );
+  const b = blueprint[0];
+
+  const workbookConfig = {
+    name: b.name,
+    sheets: blueprint,
+    actions: b.actions,
   };
 
-  // TODO: Adjust space properties here
-  const spaceProps = {
-    error,
+  const spaceProps: ISpace = {
     publishableKey,
     environmentId: environmentToken,
     name: "Dynamic Portal",
     themeConfig: theme("#71a3d2", "#3A7CB9"),
-    document: document,
+    listener,
+    document,
     workbook: generateConfig({
       workbookConfig,
       customFieldConfig,
@@ -156,7 +148,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
       operation: "contacts:submit", // todo: what do we put here?
       onClose: () => setShowSpace(false),
     },
-  } as ISpace;
+  };
 
   const item = workflowItems().find((i) => i.slug === "dynamic-portal")!;
 
@@ -309,83 +301,83 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     throw "Missing DYNAMIC_TEMPLATES_ENVIRONMENT_ID env var";
   }
 
-  const userId = token.sub;
+  // const userId = token.sub;
 
-  let existingSpace = await prismaClient.space.findUnique({
-    where: {
-      userId_type: {
-        userId: token.sub,
-        type: SpaceType.Dynamic,
-      },
-    },
-  });
+  // let existingSpace = await prismaClient.space.findUnique({
+  //   where: {
+  //     userId_type: {
+  //       userId: token.sub,
+  //       type: SpaceType.Dynamic,
+  //     },
+  //   },
+  // });
 
-  if (!existingSpace) {
-    const space = await createSpace({
-      workflow: WorkflowType.Dynamic,
-      userId,
-      environmentId: environmentToken,
-      spaceName: "HCM.show Dynamic",
-      language: "en",
-    });
+  // if (!existingSpace) {
+  //   const space = await createSpace({
+  //     workflow: WorkflowType.Dynamic,
+  //     userId,
+  //     environmentId: environmentToken,
+  //     spaceName: "HCM.show Dynamic",
+  //     language: "en",
+  //   });
 
-    if (!space) {
-      throw new Error("Failed to create dynamic space");
-    }
+  //   if (!space) {
+  //     throw new Error("Failed to create dynamic space");
+  //   }
 
-    existingSpace = await SpaceRepo.createSpace({
-      userId,
-      flatfileData: space,
-      type: SpaceType.Dynamic,
-    });
-  }
+  //   existingSpace = await SpaceRepo.createSpace({
+  //     userId,
+  //     flatfileData: space,
+  //     type: SpaceType.Dynamic,
+  //   });
+  // }
 
-  let spaceData = await getSpace({
-    workflow: WorkflowType.Dynamic,
-    spaceId: existingSpace.flatfileSpaceId,
-  });
+  // let spaceData = await getSpace({
+  //   workflow: WorkflowType.Dynamic,
+  //   spaceId: existingSpace.flatfileSpaceId,
+  // });
 
-  let workbook = await getWorkbook({
-    workflow: WorkflowType.Dynamic,
-    workbookId: spaceData?.primaryWorkbookId!,
-  });
+  // let workbook = await getWorkbook({
+  //   workflow: WorkflowType.Dynamic,
+  //   workbookId: spaceData?.primaryWorkbookId!,
+  // });
 
-  // Hack to wait for workbook to be ready. Should move to frontend and poll.
-  // Duplicated among embed and dynamic flows
-  const timeInFive = DateTime.now().plus({ seconds: 5 });
+  // // Hack to wait for workbook to be ready. Should move to frontend and poll.
+  // // Duplicated among embed and dynamic flows
+  // const timeInFive = DateTime.now().plus({ seconds: 5 });
 
-  while (!(workbook || DateTime.now() > timeInFive)) {
-    spaceData = await getSpace({
-      workflow: WorkflowType.Dynamic,
-      spaceId: existingSpace.flatfileSpaceId,
-    });
+  // while (!(workbook || DateTime.now() > timeInFive)) {
+  //   spaceData = await getSpace({
+  //     workflow: WorkflowType.Dynamic,
+  //     spaceId: existingSpace.flatfileSpaceId,
+  //   });
 
-    workbook = await getWorkbook({
-      workflow: WorkflowType.Dynamic,
-      workbookId: spaceData?.primaryWorkbookId!,
-    });
-  }
+  //   workbook = await getWorkbook({
+  //     workflow: WorkflowType.Dynamic,
+  //     workbookId: spaceData?.primaryWorkbookId!,
+  //   });
+  // }
 
-  if (!workbook) {
-    return {
-      redirect: {
-        destination: "/activity-log?flash=error&message=Unable to get workbook",
-        permanent: false,
-      },
-    };
-  }
+  // if (!workbook) {
+  //   return {
+  //     redirect: {
+  //       destination: "/activity-log?flash=error&message=Unable to get workbook",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
-  const workbookConfig = {
-    name: workbook.name || "HCM.show Dynamic Portal",
-    sheets: workbook.sheets?.map((s) => {
-      return {
-        name: s.name,
-        slug: s.config?.slug,
-        fields: s.config?.fields,
-      };
-    }),
-    actions: workbook.actions,
-  };
+  // const workbookConfig = {
+  //   name: workbook.name || "HCM.show Dynamic Portal",
+  //   sheets: workbook.sheets?.map((s) => {
+  //     return {
+  //       name: s.name,
+  //       slug: s.config?.slug,
+  //       fields: s.config?.fields,
+  //     };
+  //   }),
+  //   actions: workbook.actions,
+  // };
 
   // console.log("workbook", JSON.stringify(workbook, null, 2));
   // console.log("workbookConfig", JSON.stringify(workbookConfig, null, 2));
@@ -409,7 +401,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const props: Props = {
     environmentToken,
-    workbookConfig,
+    // workbookConfig,
     userId: token.sub,
     dbCustomField: dbCustomField
       ? ({

@@ -1,7 +1,4 @@
-export function theme(
-  focusBgColor: string | null,
-  backgroundColor: string | null
-) {
+export function theme(focusBgColor: string, backgroundColor: string) {
   return {
     root: {
       primaryColor: backgroundColor,
