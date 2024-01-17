@@ -3,7 +3,13 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Prisma, PrismaClient, Space } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 import { SpaceType, findSpace } from "../../../lib/space";
-import { WorkflowType, createSpace, getSpace } from "../../../lib/flatfile";
+import {
+  WorkflowType,
+  createSpace,
+  getSpace,
+  updateSpaceLanguage,
+} from "../../../lib/flatfile";
+import { SupportedLanguage } from "../../../components/language-context";
 
 export default async function handler(
   req: NextApiRequest,
@@ -46,6 +52,12 @@ export default async function handler(
       error: `Space not found for user ${token.sub} and flatfileSpaceId ${flatfileSpaceId}`,
     });
   }
+
+  await updateSpaceLanguage({
+    workflow: workflow as WorkflowType,
+    flatfileSpaceId: flatfileSpaceId as string,
+    language: req.query.language as SupportedLanguage,
+  });
 
   // Query the space for a fresh guestLink
   const space = await getSpace({

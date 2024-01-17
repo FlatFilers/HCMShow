@@ -163,6 +163,29 @@ export const addDocumentToSpace = async ({
   }
 };
 
+export const updateSpaceLanguage = async ({
+  workflow,
+  flatfileSpaceId,
+  language,
+}: {
+  workflow: WorkflowType;
+  flatfileSpaceId: string;
+  language: SupportedLanguage;
+}) => {
+  const flatfile = flatfileClient(workflow);
+
+  try {
+    const result = await flatfile.spaces.update(flatfileSpaceId, {
+      languageOverride: language,
+    });
+
+    return result.data;
+  } catch (e) {
+    console.log("updateSpaceLanguage() error", JSON.stringify(e, null, 2));
+    return null;
+  }
+};
+
 export const listWorkbooks = async ({
   workflow,
   spaceId,
