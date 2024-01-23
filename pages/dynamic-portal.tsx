@@ -21,6 +21,7 @@ import {
 import { listener } from "../lib/listeners/dynamic";
 import { sheets } from "../lib/listeners/sheets/benefits";
 import { theme } from "../lib/theme";
+import useLanguage from "../lib/hooks/use-language";
 
 const DynamicEmbeddedSpace = dynamic(
   () => import("../components/shared/embedded-space"),
@@ -90,6 +91,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   const [customField, setCustomField] = useState<CustomField>(
     dbCustomField ?? DEFAULT_CUSTOM_FIELD
   );
+  const language = useLanguage();
 
   const customFieldConfig = {
     key: customField.name?.replace(/\s/, ""),
@@ -131,6 +133,9 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     sidebarConfig: {
       showDataChecklist: false,
       showSidebar: true,
+    },
+    spaceBody: {
+      languageOverride: language,
     },
     closeSpace: {
       operation: "contacts:submit", // todo: what do we put here?

@@ -19,7 +19,6 @@ import { prismaClient } from "../lib/prisma-client";
 import StepList, { Step } from "../components/shared/step-list";
 import DownloadFile from "../components/shared/download-file";
 import SetupSpace from "../components/shared/setup-space";
-import { LanguageContext } from "../components/language-context";
 import useLanguage from "../lib/hooks/use-language";
 
 const DynamicEmbeddedSpace = dynamic(
