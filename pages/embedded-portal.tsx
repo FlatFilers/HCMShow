@@ -19,7 +19,6 @@ import { prismaClient } from "../lib/prisma-client";
 import StepList, { Step } from "../components/shared/step-list";
 import DownloadFile from "../components/shared/download-file";
 import SetupSpace from "../components/shared/setup-space";
-import { LanguageContext } from "../components/language-context";
 import useLanguage from "../lib/hooks/use-language";
 
 const DynamicEmbeddedSpace = dynamic(
@@ -197,10 +196,24 @@ const EmbeddedPortal: NextPageWithLayout<Props> = ({
           <>
             <Workspace
               fileName={SAMPLE_DATA_FILENAME}
-              onClick={() => {
+              onClick={async () => {
                 // When the space is opened, save the time we started listening for events
                 if (showSpace === false) {
                   setCurrentTime(DateTime.now().toUTC());
+
+                  // Hack: Update the space lang via API before opening it
+                  const response = await fetch(
+                    `/api/flatfile/update-space?workflow=${WorkflowType.Embedded}&flatfileSpaceId=${space.id}&language=${language}`,
+                    {
+                      method: "PUT",
+                    }
+                  );
+
+                  if (!response.ok) {
+                    toast.error(
+                      "An error occurred updating the Space language."
+                    );
+                  }
                 }
 
                 setShowSpace(!showSpace);
