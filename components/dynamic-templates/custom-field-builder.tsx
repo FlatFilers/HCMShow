@@ -148,7 +148,6 @@ export const CustomFieldBuilder = ({ customField, setCustomField }: Props) => {
               className="border border-darkest text-sm rounded px-2 py-2"
               value={customField.dateFormat}
               onChange={(e) => {
-                console.log("e.target.value", e.target.value);
                 setCustomField({
                   ...customField,
                   dateFormat: e.target.value as keyof typeof DATE_FORMATS,
