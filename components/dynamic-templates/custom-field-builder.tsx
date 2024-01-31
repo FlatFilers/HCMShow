@@ -139,120 +139,118 @@ export const CustomFieldBuilder = ({ customField, setCustomField }: Props) => {
         </div>
       </div>
 
-      {["enum"].includes(customField.type) && (
-        <div className="text-darkest w-full">
-          {customField.type === "date" && (
-            <div className="flex flex-row items-center justify-start space-x-2">
-              <label className="block text-xs font-semibold">Format</label>
-              <select
-                name="custom-field-type"
-                className="border border-darkest text-sm rounded px-2 py-2"
-                value={customField.dateFormat}
-                onChange={(e) => {
-                  setCustomField({
-                    ...customField,
-                    dateFormat: e.target.value as keyof typeof DATE_FORMATS,
-                  });
-                }}
-              >
-                {Object.keys(DATE_FORMATS).map((key) => {
-                  return (
-                    <option key={key} value={key}>
-                      {DATE_FORMATS[key as keyof typeof DATE_FORMATS]}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          )}
+      <div className="text-darkest w-full">
+        {customField.type === "date" && (
+          <div className="flex flex-row items-center justify-start space-x-2">
+            <label className="block text-xs font-semibold">Format</label>
+            <select
+              name="custom-field-type"
+              className="border border-darkest text-sm rounded px-2 py-2"
+              value={customField.dateFormat}
+              onChange={(e) => {
+                setCustomField({
+                  ...customField,
+                  dateFormat: e.target.value as keyof typeof DATE_FORMATS,
+                });
+              }}
+            >
+              {Object.keys(DATE_FORMATS).map((key) => {
+                return (
+                  <option key={key} value={key}>
+                    {DATE_FORMATS[key as keyof typeof DATE_FORMATS]}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        )}
 
-          {customField.type === "number" && (
-            <div className="flex flex-row items-center justify-start space-x-2">
-              <label className="block text-xs font-semibold">
-                Decimal Places
-              </label>
-              <input
-                name="number-decimal-places"
-                type="number"
-                min={0}
-                step={1}
-                className="border border-darkest text-xs rounded px-2 py-2 w-[40px]"
-                placeholder="2"
-                defaultValue={customField.decimals}
-                onChange={(e) => {
-                  setCustomField({
-                    ...customField,
-                    decimals: parseInt(e.target.value),
-                  });
-                }}
-              />
-            </div>
-          )}
+        {customField.type === "number" && (
+          <div className="flex flex-row items-center justify-start space-x-2">
+            <label className="block text-xs font-semibold">
+              Decimal Places
+            </label>
+            <input
+              name="number-decimal-places"
+              type="number"
+              min={0}
+              step={1}
+              className="border border-darkest text-sm rounded px-2 py-2 w-[50px]"
+              placeholder="2"
+              defaultValue={customField.decimals}
+              onChange={(e) => {
+                setCustomField({
+                  ...customField,
+                  decimals: parseInt(e.target.value),
+                });
+              }}
+            />
+          </div>
+        )}
 
-          {customField.type === "enum" && (
-            <div className="space-y-2">
-              <label
-                htmlFor="custom-field-required-validation"
-                className="block text-sm font-semibold cursor-pointer"
-              >
-                Options
-              </label>
-              <OptionBuilder
-                options={options.sort((a, b) => a.id - b.id)}
-                updateInput={(option, value) => {
-                  const filteredOptions = options.filter((o) => {
-                    return o.id !== option.id;
-                  });
+        {customField.type === "enum" && (
+          <div className="space-y-2">
+            <label
+              htmlFor="custom-field-required-validation"
+              className="block text-sm font-semibold cursor-pointer"
+            >
+              Options
+            </label>
+            <OptionBuilder
+              options={options.sort((a, b) => a.id - b.id)}
+              updateInput={(option, value) => {
+                const filteredOptions = options.filter((o) => {
+                  return o.id !== option.id;
+                });
 
-                  setCustomField({
-                    ...customField,
-                    enumOptions: [
-                      ...filteredOptions,
-                      { ...option, input: value },
-                    ],
-                  });
-                }}
-                updateOutput={(option, value) => {
-                  const filteredOptions = options.filter((o) => {
-                    return o.id !== option.id;
-                  });
+                setCustomField({
+                  ...customField,
+                  enumOptions: [
+                    ...filteredOptions,
+                    { ...option, input: value },
+                  ],
+                });
+              }}
+              updateOutput={(option, value) => {
+                const filteredOptions = options.filter((o) => {
+                  return o.id !== option.id;
+                });
 
-                  setCustomField({
-                    ...customField,
-                    enumOptions: [
-                      ...filteredOptions,
-                      { ...option, output: value },
-                    ],
-                  });
-                }}
-                addNewOption={() => {
-                  const maxId = options.reduce((max, option) => {
-                    return Math.max(max, option.id);
-                  }, 0);
+                setCustomField({
+                  ...customField,
+                  enumOptions: [
+                    ...filteredOptions,
+                    { ...option, output: value },
+                  ],
+                });
+              }}
+              addNewOption={() => {
+                const maxId = options.reduce((max, option) => {
+                  return Math.max(max, option.id);
+                }, 0);
 
-                  setCustomField({
-                    ...customField,
-                    enumOptions: [
-                      ...options,
-                      { id: maxId + 1, input: "", output: "" },
-                    ],
-                  });
-                }}
-                removeOption={(option) => {
-                  const filteredObjects = options.filter((o) => {
-                    return o.id !== option.id;
-                  });
+                setCustomField({
+                  ...customField,
+                  enumOptions: [
+                    ...options,
+                    { id: maxId + 1, input: "", output: "" },
+                  ],
+                });
+              }}
+              removeOption={(option) => {
+                const filteredObjects = options.filter((o) => {
+                  return o.id !== option.id;
+                });
 
-                  setCustomField({
-                    ...customField,
-                    enumOptions: filteredObjects,
-                  });
-                }}
-              />
-            </div>
-          )}
-        </div>
-      )}
+                setCustomField({
+                  ...customField,
+                  enumOptions: filteredObjects,
+                });
+              }}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

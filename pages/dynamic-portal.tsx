@@ -16,6 +16,7 @@ import dynamic from "next/dynamic";
 import {
   CustomField,
   DEFAULT_CUSTOM_FIELD,
+  DYNAMIC_FIELD_KEY,
   Option,
 } from "../lib/dynamic-portal-options";
 import { listener } from "../lib/listeners/dynamic";
@@ -94,7 +95,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   const language = useLanguage();
 
   const customFieldConfig = {
-    key: customField.name?.replace(/\s/, ""),
+    key: DYNAMIC_FIELD_KEY,
     type: customField.type,
     label: customField.name,
     description: "Custom field",
@@ -136,6 +137,12 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     },
     spaceBody: {
       languageOverride: language,
+      metadata: {
+        customFieldValidations: {
+          decimals: customField.decimals,
+          dateFormat: customField.dateFormat,
+        },
+      },
     },
     closeSpace: {
       operation: "contacts:submit", // todo: what do we put here?

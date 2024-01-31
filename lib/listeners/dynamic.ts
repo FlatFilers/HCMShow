@@ -8,65 +8,85 @@ import { XMLExtractor } from "@flatfile/plugin-xml-extractor";
 import { DelimiterExtractor } from "@flatfile/plugin-delimiter-extractor";
 import { FlatfileListener, Client } from "@flatfile/listener";
 import { benefitElectionsValidations } from "./validations/benefit-elections";
-import { sheets } from "./sheets/benefits";
-import { FlatfileApiService } from "./flatfile-api-service";
+import { DYNAMIC_FIELD_KEY } from "../dynamic-portal-options";
+import { momentFormats } from "./validations/dateFormatting";
+import moment from "moment";
 
 // Define the main function that sets up the listener
 export const listener = FlatfileListener.create((client: Client) => {
   // Log the event topic for all events
   client.on("**", (event) => {
-    console.log("> event.topic: " + event.topic);
-  });
-
-  // Add an event listener for the 'job:created' event
-  client.filter({ job: "space:configure" }, (configure) => {
-    configure.on("job:ready", async (event) => {
-      console.log("Reached the job:ready event callback");
-
-      // Destructure the 'context' object from the event object to get the necessary IDs
-      const { spaceId, environmentId, jobId } = event.context;
-
-      const updateJob1 = await api.jobs.ack(jobId, {
-        info: "Creating Space",
-        progress: 10,
-      });
-
-      console.log("Updated Job: " + JSON.stringify(updateJob1));
-
-      // Log the environment ID to the console
-      console.log("env: " + environmentId);
-      console.log("spaceId " + spaceId);
-      console.log("jobID: " + jobId);
-
-      // Setup the space
-      await FlatfileApiService.setupSpace({
-        name: "Benefits Workbook",
-        spaceId,
-        environmentId,
-        sheets,
-      });
-
-      // Update the job status to 'complete' using the Flatfile API
-      const updateJob = await api.jobs.update(jobId, {
-        status: "complete",
-      });
-
-      // Log the result of the updateJob function to the console as a string
-      console.log(
-        "Updated Job With ID to Status Complete: " + updateJob.data.id
-      );
-    });
-
-    // Handle the 'job:failed' event
-    configure.on("job:failed", async (event) => {
-      console.log("Job Failed: " + JSON.stringify(event));
-    });
+    console.log("> event.topic: ", event.topic, event);
   });
 
   // Attach a record hook to the 'benefit-elections-sheet' of the Flatfile importer
   client.use(
     // When a record is processed, invoke the 'jobValidations' function to check for any errors
-    recordHook("benefit-elections-sheet", (record) => {
+    recordHook("benefit-elections-sheet", async (record, event) => {
+      if (event) {
+        const workbook = await api.workbooks.get(event.context.workbookId);
+
+        if (!workbook?.data?.sheets) {
+          console.error(
+            `No workbook found for workbookId: ${event.context.workbookId}`
+          );
+          return;
+        }
+
+        const customFieldBlueprint = workbook.data.sheets[0].config.fields.find(
+          (f) => f.key === DYNAMIC_FIELD_KEY
+        );
+
+        if (!customFieldBlueprint) {
+          console.error(`No custom field found for key: ${DYNAMIC_FIELD_KEY}`);
+          return;
+        }
+
+        const space = await api.spaces.get(event.context.spaceId);
+        const value = record.get(customFieldBlueprint.key) as string;
+
+        if (customFieldBlueprint.type === "number") {
+          const decimalPlaces =
+            space.data.metadata.customFieldValidations.decimals;
+
+          if (value && value.trim().length > 0 && !isNaN(parseFloat(value))) {
+            record.set(
+              customFieldBlueprint.key,
+              parseFloat(value).toFixed(decimalPlaces)
+            );
+            record.addComment(
+              customFieldBlueprint.key,
+              `Formatted to ${decimalPlaces} decimals`
+            );
+          }
+        } else if (customFieldBlueprint.type === "date") {
+          if (value.trim().length > 0) {
+            const dateFormat =
+              space.data.metadata.customFieldValidations.dateFormat;
+
+            const parsedDate = moment(value, momentFormats, true);
+
+            if (parsedDate.isValid()) {
+              record.set(
+                customFieldBlueprint.key,
+                parsedDate.format(dateFormat)
+              );
+              record.addComment(
+                customFieldBlueprint.key,
+                `Date has been formatted as ${dateFormat}`
+              );
+            } else {
+              record.addError(
+                customFieldBlueprint.key,
+                `Please check that the date is in ${dateFormat} format.`
+              );
+            }
+          }
+        }
+      } else {
+        console.log("NO EVENT");
+      }
+
       const results = benefitElectionsValidations(record);
       // Log the results of the validations to the console as a JSON string
       console.log("Benefits Hooks: " + JSON.stringify(results));

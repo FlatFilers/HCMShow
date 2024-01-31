@@ -22,9 +22,9 @@ export const FIELD_TYPES = {
 };
 
 export const DATE_FORMATS = {
-  "yyyy-mm-dd": "yyyy-mm-dd",
-  "mm-dd-yyyy": "mm-dd-yyyy",
-  "dd-mm-yyyy": "dd-mm-yyyy",
+  "YYYY-MM-DD": "YYYY-MM-DD",
+  "MM-DD-YYYY": "MM-DD-YYYY",
+  "DD-MM-YYYY": "DD-MM-YYYY",
 };
 
 export const INITIAL_OPTIONS: Option[] = [
@@ -56,11 +56,13 @@ export const INITIAL_OPTIONS: Option[] = [
   },
 ];
 
+export const DYNAMIC_FIELD_KEY = "dynamicCustomField";
+
 export const DEFAULT_CUSTOM_FIELD: CustomField = {
   name: "Birthdate",
   type: "date",
   required: true,
-  dateFormat: "yyyy-mm-dd",
+  dateFormat: "YYYY-MM-DD",
   decimals: 2,
   enumOptions: INITIAL_OPTIONS,
 };
