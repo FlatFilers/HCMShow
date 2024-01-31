@@ -75,12 +75,6 @@ const Workspace = ({ fileName, flatfileSpaceId }: Props) => {
             </p>
           </div>
         </div>
-
-        <FeaturesList
-          type="project-onboarding"
-          githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/workflows/project/index.ts"
-          features={features}
-        />
       </div>
     </div>
   );

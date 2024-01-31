@@ -84,14 +84,6 @@ export const Events = ({ flatfileSpaceId, initialEvents }: Props) => {
             </GoToSpace>
           </div>
         </div>
-
-        <div className="hidden md:block">
-          <FeaturesList
-            type="file-feed"
-            githubUrl="https://github.com/FlatFilers/hcm-show-config/blob/main/workflows/filefeed/index.ts"
-            features={features}
-          />
-        </div>
       </div>
 
       <div className="md:max-w-lg">
