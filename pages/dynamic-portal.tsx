@@ -99,7 +99,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     type: customField.type,
     label: customField.name,
     description: "Custom field",
-    constraints: [{ type: "required" }],
+    ...(customField.required && { constraints: [{ type: "required" }] }),
     ...(customField.type === "enum" &&
       customField.enumOptions &&
       customOptionsConfig(customField.enumOptions)),

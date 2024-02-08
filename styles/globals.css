@@ -207,3 +207,9 @@ div[data-testid="space-contents"] {
 .ui-resource p {
   @apply text-xs text-[#FFFFFFCC];
 }
+
+/* The "yes, cancel" button you see in the close modal */
+.flatfile_primary {
+  border: 1px solid #3a7cb9 !important;
+  background-color: #3a7cb9 !important;
+}
