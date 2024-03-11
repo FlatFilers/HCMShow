@@ -186,6 +186,29 @@ export const updateSpaceLanguage = async ({
   }
 };
 
+export const updateSpaceWorkbookId = async ({
+  workflow,
+  flatfileSpaceId,
+  workbookId,
+}: {
+  workflow: WorkflowType;
+  flatfileSpaceId: string;
+  workbookId: string;
+}) => {
+  const flatfile = flatfileClient(workflow);
+
+  try {
+    const result = await flatfile.spaces.update(flatfileSpaceId, {
+      primaryWorkbookId: workbookId,
+    });
+
+    return result.data;
+  } catch (e) {
+    console.log("updateSpaceWorkbookId() error", JSON.stringify(e, null, 2));
+    return null;
+  }
+};
+
 export const listWorkbooks = async ({
   workflow,
   spaceId,
@@ -367,6 +390,54 @@ export const getRecordsByName = async ({
   return records;
 };
 
+export const getSpaceAccessToken = async ({
+  workflow,
+  flatfileSpaceId,
+}: {
+  workflow: WorkflowType;
+  flatfileSpaceId: string;
+}) => {
+  try {
+    const flatfile = flatfileClient(workflow);
+
+    const response = await flatfile.spaces.get(flatfileSpaceId);
+
+    if (response.data.accessToken) {
+      return response.data.accessToken;
+    }
+
+    throw new Error("No access token for space");
+  } catch (e) {
+    console.log("getSpaceAccessToken() error", JSON.stringify(e, null, 2));
+    return null;
+  }
+};
+
+export const createWorkbookForSpace = async ({
+  workflow,
+  flatfileSpaceId,
+  workbookConfig,
+}: {
+  workflow: WorkflowType;
+  flatfileSpaceId: string;
+  workbookConfig: any;
+}) => {
+  try {
+    const flatfile = flatfileClient(workflow);
+
+    const response = await flatfile.workbooks.create({
+      spaceId: flatfileSpaceId,
+      ...workbookConfig,
+    });
+
+    console.log("response", response);
+
+    return response.data;
+  } catch (e) {
+    console.log("createWorkbookForSpace() error", JSON.stringify(e, null, 2));
+    return null;
+  }
+};
 const getWorkbookIdAndSheetIds = async ({
   workflow,
   flatfileSpaceId,

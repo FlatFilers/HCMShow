@@ -95,12 +95,12 @@ export const listener = FlatfileListener.create((client: Client) => {
     })
   );
 
-  client.use(
-    dedupePlugin("dedupe-benefit-elections", {
-      on: "employeeId",
-      keep: "last",
-    })
-  );
+  // client.use(
+  //   dedupePlugin("dedupe-benefit-elections", {
+  //     on: "employeeId",
+  //     keep: "last",
+  //   })
+  // );
 
   // Add the XLSX extractor plugin to the listener
   // This allows the listener to parse XLSX files

@@ -23,6 +23,10 @@ import { listener } from "../lib/listeners/dynamic";
 import { sheets } from "../lib/listeners/sheets/benefits";
 import { theme } from "../lib/theme";
 import useLanguage from "../lib/hooks/use-language";
+import { SpaceType } from "../lib/space";
+import { WorkflowType, getSpaceAccessToken } from "../lib/flatfile";
+import StepList, { Step } from "../components/shared/step-list";
+import SetupSpace from "../components/dynamic-templates/setup-space";
 
 const DynamicEmbeddedSpace = dynamic(
   () => import("../components/shared/embedded-space"),
@@ -31,6 +35,8 @@ const DynamicEmbeddedSpace = dynamic(
     ssr: false,
   }
 );
+
+const SAMPLE_DATA_FILENAME = "/benefits-sample-data.csv";
 
 const customOptionsConfig = (options: Option[]) => {
   const mappedOptions = options.map((o) => {
@@ -80,14 +86,19 @@ const generateConfig = ({
 interface Props {
   environmentToken: string;
   userId: string;
+  existingSpaceId: string | null;
+  accessToken: string | null;
   dbCustomField: CustomField | null;
 }
 
 const DynamicTemplates: NextPageWithLayout<Props> = ({
   environmentToken,
   userId,
+  existingSpaceId,
+  accessToken,
   dbCustomField,
 }) => {
+  const [spaceId, setSpaceId] = useState<string | null>(existingSpaceId);
   const [showSpace, setShowSpace] = useState(false);
   const [customField, setCustomField] = useState<CustomField>(
     dbCustomField ?? DEFAULT_CUSTOM_FIELD
@@ -117,38 +128,57 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     actions: firstSheet.actions,
   };
 
-  const spaceProps: ISpace = {
-    publishableKey,
-    environmentId: environmentToken,
-    name: "Dynamic Portal",
-    themeConfig: theme("#71a3d2", "#3A7CB9"),
-    listener,
-    document,
-    workbook: generateConfig({
-      workbookConfig,
-      customFieldConfig,
-    }),
-    spaceInfo: {
-      userId,
-    },
-    sidebarConfig: {
-      showDataChecklist: false,
-      showSidebar: true,
-    },
-    spaceBody: {
-      languageOverride: language,
-      metadata: {
-        customFieldValidations: {
-          decimals: customField.decimals,
-          dateFormat: customField.dateFormat,
+  let spaceProps: ISpace;
+
+  const workbook = generateConfig({
+    workbookConfig,
+    customFieldConfig,
+  });
+
+  if (spaceId && accessToken) {
+    console.log(`Reusing space ID ${spaceId}`);
+
+    spaceProps = {
+      environmentId: environmentToken,
+      listener,
+      space: {
+        id: spaceId,
+        accessToken,
+      },
+    };
+  } else {
+    console.log("Creating new space");
+
+    spaceProps = {
+      publishableKey,
+      environmentId: environmentToken,
+      name: "Dynamic Portal",
+      themeConfig: theme("#71a3d2", "#3A7CB9"),
+      listener,
+      document,
+      workbook,
+      spaceInfo: {
+        userId,
+      },
+      sidebarConfig: {
+        showDataChecklist: false,
+        showSidebar: true,
+      },
+      spaceBody: {
+        languageOverride: language,
+        metadata: {
+          customFieldValidations: {
+            decimals: customField.decimals,
+            dateFormat: customField.dateFormat,
+          },
         },
       },
-    },
-    closeSpace: {
-      operation: "contacts:submit", // todo: what do we put here?
-      onClose: () => setShowSpace(false),
-    },
-  };
+      closeSpace: {
+        operation: "contacts:submit", // todo: what do we put here?
+        onClose: () => setShowSpace(false),
+      },
+    };
+  }
 
   const item = workflowItems().find((i) => i.slug === "dynamic-portal")!;
 
@@ -182,8 +212,61 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 
   useOnClickOutside(modalRef, () => setShowSpace(false));
 
+  const initialSteps: Step[] = [
+    {
+      name: "Create Space",
+      status: "current",
+    },
+    {
+      name: "Customize workspace",
+      status: "upcoming",
+    },
+  ];
+  const [steps] = useState<Step[]>(initialSteps);
+
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [buttonText, setButtonText] = useState<string>("Setup Flatfile");
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    setButtonText("Setting up Flatfile...");
+
+    try {
+      const response = await fetch("/api/flatfile/create-dynamic-space", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          language,
+          workbook,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error(`Error creating dynamic space: ${response.statusText}`);
+        return;
+      }
+
+      const json = await response.json();
+
+      console.log("json si", json);
+
+      setSpaceId(json.spaceId);
+    } catch (e) {
+      console.error(`Error creating dynamic space: ${e}`);
+      toast.error("Error setting up Flatfile");
+    } finally {
+      setIsSubmitting(false);
+      setButtonText("Setup Flatfile");
+    }
+  };
+
+  console.log("existing", existingSpaceId);
   return (
     <div className="text-white space-y-8 md:relative lg:max-w-3xl">
+      {!spaceId && <StepList steps={steps} />}
+
       <div className="flex flex-col space-y-4 md:flex-row md:justify-between md:items-center">
         <div className="space-y-4">
           <SVG src={item.imageUri} className={`icon-${item.slug} w-16 h-16`} />
@@ -194,92 +277,116 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
           </h1>
         </div>
 
-        <div className="card-bg card-sm space-y-2 md:max-w-sm">
-          <SVG src="/images/lightbulb.svg" />
-          <p className="text-sm font-bold">Customize your workspace</p>
-          <p className="text-xs font-light">
-            Adjust the field options below. Save each as you complete them and
-            then click Open Portal to add your data.
-          </p>
-        </div>
+        {spaceId && (
+          <div className="card-bg card-sm space-y-2 md:max-w-sm">
+            <SVG src="/images/lightbulb.svg" />
+            <p className="text-sm font-bold">Customize your workspace</p>
+            <p className="text-xs font-light">
+              Adjust the field options below. Save each as you complete them and
+              then click Open Portal to add your data.
+            </p>
+          </div>
+        )}
       </div>
 
-      <div className="space-y-2 md:max-w-md">
-        <p className="text-sm font-semibold">Create Custom Fields</p>
-        <p className="text-sm font-light leading-5">{item.description}</p>
-      </div>
-
-      <div className="">
-        <div className="grid grid-cols-3 text-xs border-b border-gray-500 pb-4 space-x-2">
-          <div>Field Name</div>
-          <div>Field Type</div>
-          <div>Required?</div>
-        </div>
-
-        <div className="space-y-2 py-4">
-          {workbookConfig.sheets &&
-            workbookConfig.sheets[0].fields.map((f) => {
-              return (
-                <div
-                  key={f.key}
-                  className="grid grid-cols-3 card-bg card-sm space-x-2 text-sm items-center"
-                  style={{
-                    boxShadow:
-                      "8.74046516418457px 9.711627960205078px 18.45209312438965px 0px rgba(61, 73, 100, 0.3) inset",
-                  }}
-                >
-                  <div>{f.label}</div>
-                  <div className="capitalize">{f.type}</div>
-                  <div className="flex flex-row items-center">
-                    <input
-                      type="checkbox"
-                      checked={
-                        f.constraints?.find((c) => c.type === "required") !==
-                        undefined
-                      }
-                      disabled
-                      className="text-dynamic-portal"
-                    />
-                  </div>
-                </div>
-              );
-            })}
-
-          <CustomFieldBuilder
-            customField={customField}
-            setCustomField={setCustomField}
-          />
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        <div className="space-y-1">
-          <p className="font-semibold">Generate your workspace</p>
-          <p className="text-gray-400 text-sm">
-            Click to generate the workspace with your custom config and input
-            your data.
-          </p>
-        </div>
-
-        <div className="flex flex-row items-center space-x-8">
-          <button
-            onClick={() => setShowSpace(!showSpace)}
-            className={`space-x-2 px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm button-bg`}
-          >
-            <SVG
-              src="/images/sparkles-icon.svg"
-              className="w-4 h-4 fill-white"
+      {!spaceId && (
+        <div>
+          {steps[0].status === "current" && (
+            <SetupSpace
+              fileName={SAMPLE_DATA_FILENAME}
+              handleSubmit={async (e: FormEvent<HTMLFormElement>) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+              isSubmitting={isSubmitting}
+              buttonText={buttonText}
+              language={language}
             />
-            <span>{showSpace ? "Close Portal" : "Open Portal"}</span>
-          </button>
-
-          <button onClick={handleResetSubmit} className="underline text-xs">
-            Reset Workspace
-          </button>
+          )}
         </div>
-      </div>
+      )}
 
-      {showSpace && <DynamicEmbeddedSpace spaceProps={spaceProps} />}
+      {spaceId && (
+        <div>
+          <div className="space-y-2 md:max-w-md">
+            <p className="text-sm font-semibold">Create Custom Fields</p>
+            <p className="text-sm font-light leading-5">{item.description}</p>
+          </div>
+
+          <div className="">
+            <div className="grid grid-cols-3 text-xs border-b border-gray-500 pb-4 space-x-2">
+              <div>Field Name</div>
+              <div>Field Type</div>
+              <div>Required?</div>
+            </div>
+
+            <div className="space-y-2 py-4">
+              {workbookConfig.sheets &&
+                workbookConfig.sheets[0].fields.map((f) => {
+                  return (
+                    <div
+                      key={f.key}
+                      className="grid grid-cols-3 card-bg card-sm space-x-2 text-sm items-center"
+                      style={{
+                        boxShadow:
+                          "8.74046516418457px 9.711627960205078px 18.45209312438965px 0px rgba(61, 73, 100, 0.3) inset",
+                      }}
+                    >
+                      <div>{f.label}</div>
+                      <div className="capitalize">{f.type}</div>
+                      <div className="flex flex-row items-center">
+                        <input
+                          type="checkbox"
+                          checked={
+                            f.constraints?.find(
+                              (c) => c.type === "required"
+                            ) !== undefined
+                          }
+                          disabled
+                          className="text-dynamic-portal"
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+
+              <CustomFieldBuilder
+                customField={customField}
+                setCustomField={setCustomField}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="space-y-1">
+              <p className="font-semibold">Generate your workspace</p>
+              <p className="text-gray-400 text-sm">
+                Click to generate the workspace with your custom config and
+                input your data.
+              </p>
+            </div>
+
+            <div className="flex flex-row items-center space-x-8">
+              <button
+                onClick={() => setShowSpace(!showSpace)}
+                className={`space-x-2 px-4 py-2 inline-flex items-center justify-center rounded-md border text-sm font-medium shadow-sm button-bg`}
+              >
+                <SVG
+                  src="/images/sparkles-icon.svg"
+                  className="w-4 h-4 fill-white"
+                />
+                <span>{showSpace ? "Close Portal" : "Open Portal"}</span>
+              </button>
+
+              <button onClick={handleResetSubmit} className="underline text-xs">
+                Reset Workspace
+              </button>
+            </div>
+          </div>
+
+          {showSpace && <DynamicEmbeddedSpace spaceProps={spaceProps} />}
+        </div>
+      )}
     </div>
   );
 };
@@ -300,6 +407,25 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     throw "Missing DYNAMIC_TEMPLATES_ENVIRONMENT_ID env var";
   }
 
+  let existingSpace = await prismaClient.space.findUnique({
+    where: {
+      userId_type: {
+        userId: token.sub,
+        type: SpaceType.Dynamic,
+      },
+    },
+  });
+
+  console.log("Existing space", existingSpace);
+
+  let accessToken: string | null = null;
+  if (existingSpace) {
+    accessToken = await getSpaceAccessToken({
+      workflow: WorkflowType.Dynamic,
+      flatfileSpaceId: existingSpace.flatfileSpaceId,
+    });
+  }
+
   const dbCustomField = await prismaClient.customField.findFirst({
     where: {
       userId: token.sub,
@@ -317,9 +443,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
+  console.log("spaceID", existingSpace?.flatfileSpaceId);
+
   const props: Props = {
     environmentToken,
     userId: token.sub,
+    existingSpaceId: existingSpace?.flatfileSpaceId || null,
+    accessToken,
     dbCustomField: dbCustomField
       ? ({
           name: dbCustomField.name,
