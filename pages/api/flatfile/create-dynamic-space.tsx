@@ -36,8 +36,6 @@ export default async function handler(
     throw new Error("No user found");
   }
 
-  console.log("here");
-
   const workflow = WorkflowType.Dynamic;
   const environmentId = process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID as string;
 
@@ -51,10 +49,6 @@ export default async function handler(
     throw new Error("Missing workbookConfig param");
   }
 
-  console.log("workbookConfig", workbookConfig);
-
-  console.log("user", user.id);
-
   const spaceResult = await createSpace({
     workflow,
     userId: user.id,
@@ -62,8 +56,6 @@ export default async function handler(
     spaceName: "Dynamic",
     language,
   });
-
-  console.log("spaceResult", spaceResult);
 
   if (!spaceResult) {
     console.log("bad");
@@ -99,6 +91,8 @@ export default async function handler(
     flatfileData: spaceResult,
   });
 
-  res.status(200).json({ spaceId: spaceResult.id });
+  res
+    .status(200)
+    .json({ spaceId: spaceResult.id, accessToken: spaceResult.accessToken });
   return;
 }

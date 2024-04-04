@@ -87,7 +87,7 @@ interface Props {
   environmentToken: string;
   userId: string;
   existingSpaceId: string | null;
-  accessToken: string | null;
+  existingAccessToken: string | null;
   dbCustomField: CustomField | null;
 }
 
@@ -95,10 +95,13 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
   environmentToken,
   userId,
   existingSpaceId,
-  accessToken,
+  existingAccessToken,
   dbCustomField,
 }) => {
   const [spaceId, setSpaceId] = useState<string | null>(existingSpaceId);
+  const [accessToken, setAccessToken] = useState<string | null>(
+    existingAccessToken
+  );
   const [showSpace, setShowSpace] = useState(false);
   const [customField, setCustomField] = useState<CustomField>(
     dbCustomField ?? DEFAULT_CUSTOM_FIELD
@@ -128,7 +131,7 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     actions: firstSheet.actions,
   };
 
-  let spaceProps: ISpace;
+  let spaceProps: ISpace = {} as ISpace;
 
   const workbook = generateConfig({
     workbookConfig,
@@ -146,39 +149,9 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
         accessToken,
       },
     };
-  } else {
-    console.log("Creating new space");
-
-    spaceProps = {
-      publishableKey,
-      environmentId: environmentToken,
-      name: "Dynamic Portal",
-      themeConfig: theme("#71a3d2", "#3A7CB9"),
-      listener,
-      document,
-      workbook,
-      spaceInfo: {
-        userId,
-      },
-      sidebarConfig: {
-        showDataChecklist: false,
-        showSidebar: true,
-      },
-      spaceBody: {
-        languageOverride: language,
-        metadata: {
-          customFieldValidations: {
-            decimals: customField.decimals,
-            dateFormat: customField.dateFormat,
-          },
-        },
-      },
-      closeSpace: {
-        operation: "contacts:submit", // todo: what do we put here?
-        onClose: () => setShowSpace(false),
-      },
-    };
   }
+
+  console.log("spaceId, access,", spaceId, accessToken);
 
   const item = workflowItems().find((i) => i.slug === "dynamic-portal")!;
 
@@ -250,9 +223,10 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
 
       const json = await response.json();
 
-      console.log("json si", json);
+      console.log("json", json);
 
       setSpaceId(json.spaceId);
+      setAccessToken(json.accessToken);
     } catch (e) {
       console.error(`Error creating dynamic space: ${e}`);
       toast.error("Error setting up Flatfile");
@@ -262,7 +236,6 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
     }
   };
 
-  console.log("existing", existingSpaceId);
   return (
     <div className="text-white space-y-8 md:relative lg:max-w-3xl">
       {!spaceId && <StepList steps={steps} />}
@@ -416,8 +389,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   });
 
-  console.log("Existing space", existingSpace);
-
   let accessToken: string | null = null;
   if (existingSpace) {
     accessToken = await getSpaceAccessToken({
@@ -449,7 +420,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     environmentToken,
     userId: token.sub,
     existingSpaceId: existingSpace?.flatfileSpaceId || null,
-    accessToken,
+    existingAccessToken: accessToken,
     dbCustomField: dbCustomField
       ? ({
           name: dbCustomField.name,

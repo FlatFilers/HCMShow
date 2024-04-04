@@ -199,6 +199,7 @@ export const updateSpaceWorkbookId = async ({
 
   try {
     const result = await flatfile.spaces.update(flatfileSpaceId, {
+      autoConfigure: true,
       primaryWorkbookId: workbookId,
     });
 
@@ -429,8 +430,6 @@ export const createWorkbookForSpace = async ({
       spaceId: flatfileSpaceId,
       ...workbookConfig,
     });
-
-    console.log("response", response);
 
     return response.data;
   } catch (e) {

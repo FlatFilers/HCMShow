@@ -16,7 +16,7 @@ import moment from "moment";
 export const listener = FlatfileListener.create((client: Client) => {
   // Log the event topic for all events
   client.on("**", (event) => {
-    console.log("> event.topic: ", event.topic, event);
+    console.log("> event: ", event);
   });
 
   // Attach a record hook to the 'benefit-elections-sheet' of the Flatfile importer
