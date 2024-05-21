@@ -114,18 +114,17 @@ export default async function handler(
       actionType: ActionType.SyncOnboardingRecords,
     });
   } else if (space.type === SpaceType.FileFeed) {
-    const { successfullySyncedFlatfileRecordIds } =
-      await syncBenefitPlanRecords({
-        workflow: WorkflowType.FileFeed,
-        userId: user.id,
-        organizationId: user.organizationId,
-        spaceType: space.type,
-        actionType: ActionType.SyncFilefeedRecords,
-      });
+    const { syncedFlatfileRecordIds } = await syncBenefitPlanRecords({
+      workflow: WorkflowType.FileFeed,
+      userId: user.id,
+      organizationId: user.organizationId,
+      spaceType: space.type,
+      actionType: ActionType.SyncFilefeedRecords,
+    });
 
     res.status(200).json({
       success: true,
-      successfullySyncedFlatfileRecordIds,
+      syncedFlatfileRecordIds,
     });
     return;
   } else if (space.type === SpaceType.Embed) {
