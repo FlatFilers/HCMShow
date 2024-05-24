@@ -41,23 +41,23 @@ export interface FlatfileSpaceData {
 }
 
 const flatfileClient = (workflow: WorkflowType) => {
-  let token = process.env.FLATFILE_API_KEY;
+  let token;
 
-  if (!token) {
-    switch (workflow) {
-      case WorkflowType.Onboarding:
-        token = process.env.ONBOARDING_FLATFILE_API_KEY;
-        break;
-      case WorkflowType.FileFeed:
-        token = process.env.FILEFEED_API_KEY;
-        break;
-      case WorkflowType.Embedded:
-        token = process.env.EMBEDDED_FLATFILE_API_KEY;
-        break;
-      case WorkflowType.Dynamic:
-        token = process.env.DYNAMIC_FLATFILE_API_KEY;
-        break;
-    }
+  switch (workflow) {
+    case WorkflowType.Onboarding:
+      token =
+        process.env.FLATFILE_API_KEY || process.env.ONBOARDING_FLATFILE_API_KEY;
+      break;
+    case WorkflowType.FileFeed:
+      token = process.env.FLATFILE_API_KEY || process.env.FILEFEED_API_KEY;
+      break;
+    case WorkflowType.Embedded:
+      token =
+        process.env.FLATFILE_API_KEY || process.env.EMBEDDED_FLATFILE_API_KEY;
+      break;
+    case WorkflowType.Dynamic:
+      token = process.env.DYNAMIC_FLATFILE_API_KEY;
+      break;
   }
 
   if (!token) {
