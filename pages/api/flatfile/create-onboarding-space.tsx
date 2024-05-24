@@ -39,7 +39,9 @@ export default async function handler(
     throw new Error("No user found");
   }
 
-  const environmentId = process.env.ONBOARDING_ENVIRONMENT_ID;
+  const environmentId =
+    process.env.FLATFILE_ENVIRONMENT_ID ||
+    process.env.ONBOARDING_ENVIRONMENT_ID;
 
   if (!environmentId) {
     throw new Error("Missing ONBOARDING_ENVIRONMENT_ID env var");
