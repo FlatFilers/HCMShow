@@ -247,7 +247,7 @@ export const syncBenefitPlanRecords = async ({
   const employeeBenefitRecords = await getRecordsByName({
     workflow,
     userId,
-    workbookName: "HCM Import",
+    workbookName: "Benefits Workbook",
     sheetName: "Benefit Elections",
     spaceType,
     spaceId,
