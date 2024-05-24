@@ -124,7 +124,7 @@ export default async function handler(
 
     res.status(200).json({
       success: true,
-      syncedFlatfileRecordIds,
+      successfullySyncedFlatfileRecordIds: syncedFlatfileRecordIds,
     });
     return;
   } else if (space.type === SpaceType.Embed) {
