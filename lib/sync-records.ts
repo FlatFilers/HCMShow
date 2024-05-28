@@ -163,8 +163,8 @@ export const syncWorkbookRecords = async ({
               : null,
             positionTitle: r.values.positionTitle.value as string,
             employeeTypeId,
-            defaultWeeklyHours: r.values.defaultWeeklyHours.value as number,
-            scheduledWeeklyHours: r.values.scheduledWeeklyHours.value as number,
+            defaultWeeklyHours: Number(r.values.defaultWeeklyHours.value),
+            scheduledWeeklyHours: Number(r.values.scheduledWeeklyHours.value),
             flatfileRecordId: r.id,
             jobId: job.id,
           };
