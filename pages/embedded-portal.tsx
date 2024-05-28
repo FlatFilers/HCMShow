@@ -262,8 +262,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const existingSpaceId = existingSpace.flatfileSpaceId;
 
-  const environmentId =
-    process.env.FLATFILE_ENVIRONMENT_ID || process.env.EMBEDDED_ENVIRONMENT_ID;
+  const environmentId = process.env.FLATFILE_ENVIRONMENT_ID;
 
   if (!environmentId) {
     throw new Error("Missing EMBEDDED_ENVIRONMENT_ID env var");
