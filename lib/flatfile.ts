@@ -13,6 +13,13 @@ export enum WorkflowType {
   Dynamic = "dynamic",
 }
 
+const NAMESPACE_FOR_WORKFLOW = {
+  [WorkflowType.Onboarding]: process.env.FLATFILE_PROJECT_NAMESPACE,
+  [WorkflowType.Embedded]: process.env.FLATFILE_EMBED_NAMESPACE,
+  [WorkflowType.FileFeed]: process.env.FLATFILE_FILEFEED_NAMESPACE,
+  [WorkflowType.Dynamic]: process.env.FLATFILE_DYNAMIC_NAMESPACE,
+};
+
 export interface FlatfileSpaceData {
   id: string;
   workbooksCount: number;
@@ -80,6 +87,7 @@ export const createSpace = async ({
       name: spaceName,
       environmentId,
       autoConfigure: true,
+      namespace: NAMESPACE_FOR_WORKFLOW[workflow],
       metadata: {
         userId,
       },
