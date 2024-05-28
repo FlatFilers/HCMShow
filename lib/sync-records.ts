@@ -24,14 +24,14 @@ export const syncWorkbookRecords = async ({
   const employeeRecords = await getRecordsByName({
     workflow,
     userId,
-    workbookName: process.env.ONBOARDING_WORKBOOK_NAME as string,
+    workbookName: process.env.WORKBOOK_NAME as string,
     sheetName: "Employees",
     spaceType,
   });
   const jobRecords = await getRecordsByName({
     workflow,
     userId,
-    workbookName: process.env.ONBOARDING_WORKBOOK_NAME as string,
+    workbookName: process.env.WORKBOOK_NAME as string,
     sheetName: "Jobs",
     spaceType,
   });
@@ -226,7 +226,7 @@ export const syncWorkbookRecords = async ({
 type SyncResult = {
   success: boolean;
   message: string;
-  successfullySyncedFlatfileRecordIds: string[];
+  syncedFlatfileRecordIds: string[];
 };
 
 export const syncBenefitPlanRecords = async ({
@@ -247,7 +247,7 @@ export const syncBenefitPlanRecords = async ({
   const employeeBenefitRecords = await getRecordsByName({
     workflow,
     userId,
-    workbookName: "Benefits Workbook",
+    workbookName: process.env.WORKBOOK_NAME as string,
     sheetName: "Benefit Elections",
     spaceType,
     spaceId,
@@ -270,7 +270,7 @@ export const syncBenefitPlanRecords = async ({
     return {
       success: false,
       message: "No Records Found. Did you upload the sample data in Flatfile?",
-      successfullySyncedFlatfileRecordIds: [],
+      syncedFlatfileRecordIds: [],
     };
   }
 
@@ -278,16 +278,18 @@ export const syncBenefitPlanRecords = async ({
     return {
       success: false,
       message: "There are no employee benefit records to sync.",
-      successfullySyncedFlatfileRecordIds: [],
+      syncedFlatfileRecordIds: [],
     };
   }
-  const successfullySyncedFlatfileRecordIds =
-    await upsertEmployeeBenefitPlanRecords(employeeBenefitRecords, {
+  const syncedFlatfileRecordIds = await upsertEmployeeBenefitPlanRecords(
+    employeeBenefitRecords,
+    {
       userId,
       organizationId,
-    });
+    }
+  );
 
-  const message = `Synced ${successfullySyncedFlatfileRecordIds.length} valid employee benefit plans.`;
+  const message = `Synced ${syncedFlatfileRecordIds.length} valid employee benefit plans.`;
 
   await createAction({
     userId,
@@ -303,6 +305,6 @@ export const syncBenefitPlanRecords = async ({
   return {
     success: true,
     message,
-    successfullySyncedFlatfileRecordIds,
+    syncedFlatfileRecordIds,
   };
 };

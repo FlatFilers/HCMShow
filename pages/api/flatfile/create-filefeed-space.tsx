@@ -42,7 +42,7 @@ export default async function handler(
   }
 
   const workflow = WorkflowType.FileFeed;
-  const environmentId = process.env.FILEFEED_ENVIRONMENT_ID as string;
+  const environmentId = process.env.FLATFILE_ENVIRONMENT_ID as string;
 
   const language = req.body.language as SupportedLanguage;
   if (!language) {

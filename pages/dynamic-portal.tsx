@@ -105,9 +105,9 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
       customOptionsConfig(customField.enumOptions)),
   };
 
-  const publishableKey = process.env.NEXT_PUBLIC_DYNAMIC_PUBLISHABLE_KEY;
+  const publishableKey = process.env.NEXT_PUBLIC_PUBLISHABLE_KEY;
   if (!publishableKey) {
-    throw "Missing NEXT_PUBLIC_DYNAMIC_PUBLISHABLE_KEY env var";
+    throw "Missing NEXT_PUBLIC_PUBLISHABLE_KEY env var";
   }
 
   const firstSheet = sheets[0];
@@ -295,9 +295,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  const environmentToken = process.env.DYNAMIC_TEMPLATES_ENVIRONMENT_ID;
+  const environmentToken = process.env.FLATFILE_ENVIRONMENT_ID;
   if (!environmentToken) {
-    throw "Missing DYNAMIC_TEMPLATES_ENVIRONMENT_ID env var";
+    throw "Missing FLATFILE_ENVIRONMENT_ID env var";
   }
 
   const dbCustomField = await prismaClient.customField.findFirst({

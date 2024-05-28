@@ -26,6 +26,7 @@ export default withAuth(
           req.nextUrl.pathname === "/api/seeds" ||
           req.nextUrl.pathname.includes("/images") ||
           req.nextUrl.pathname.includes("api/v1") ||
+          req.nextUrl.pathname.includes("api/webhook") ||
           req.nextUrl.pathname.includes("api/auth")
         ) {
           return true;
