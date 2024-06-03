@@ -60,12 +60,14 @@ export const upsertJobRecords = async (
 ) => {
   const upserts = validJobs.map(async (r) => {
     try {
+      let effectiveDate = r.values.effectiveDate.value as string;
+
       let data: Parameters<typeof upsertJob>[0] = {
         organizationId: organizationId,
         slug: r.values.jobCode.value as string,
         name: r.values.jobName.value as string,
         department: r.values.jobDept.value as string,
-        effectiveDate: new Date(r.values.effectiveDate.value as string),
+        effectiveDate: effectiveDate ? new Date(effectiveDate) : new Date(),
         isInactive: !!r.values.inactive.value,
       };
 
