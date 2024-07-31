@@ -42,7 +42,7 @@ export default async function handler(
   const environmentId = process.env.FLATFILE_ENVIRONMENT_ID;
 
   if (!environmentId) {
-    throw new Error("Missing ONBOARDING_ENVIRONMENT_ID env var");
+    throw new Error("Missing FLATFILE_ENVIRONMENT_ID env var");
   }
 
   const language = req.body.language as SupportedLanguage;

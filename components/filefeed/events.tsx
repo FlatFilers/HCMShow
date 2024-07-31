@@ -71,7 +71,7 @@ export const Events = ({ flatfileSpaceId, initialEvents }: Props) => {
               <a
                 className="underline text-gray-400"
                 target="_blank"
-                href="https://drive.google.com/file/d/1Y9-rnoDuqxrvV9JIpDYoXq-nt3cdAJQ3/view?usp=sharing"
+                href={`https://drive.google.com/file/d/${process.env.NEXT_PUBLIC_GOOGLE_DRIVE_FILE_ID}/view?usp=sharing`}
               >
                 here.
               </a>
