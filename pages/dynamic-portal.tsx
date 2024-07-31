@@ -105,9 +105,9 @@ const DynamicTemplates: NextPageWithLayout<Props> = ({
       customOptionsConfig(customField.enumOptions)),
   };
 
-  const publishableKey = process.env.NEXT_PUBLIC_PUBLISHABLE_KEY;
+  const publishableKey = process.env.NEXT_PUBLIC_FLATFILE_PUBLISHABLE_KEY;
   if (!publishableKey) {
-    throw "Missing NEXT_PUBLIC_PUBLISHABLE_KEY env var";
+    throw "Missing NEXT_PUBLIC_FLATFILE_PUBLISHABLE_KEY env var";
   }
 
   const firstSheet = sheets[0];
