@@ -24,7 +24,7 @@
     "@flatfile/plugin-json-extractor": "^0.8.2",
     "@flatfile/plugin-xlsx-extractor": "^3.1.4",
     "@flatfile/plugin-xml-extractor": "^0.6.2",
-    "@flatfile/plugin-zip-extractor": "^0.3.10",
+    "@flatfile/plugin-zip-extractor": "^0.5.3",
     "@flatfile/react": "^7.5.1",
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
