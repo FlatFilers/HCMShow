@@ -38,8 +38,10 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   useEffect(() => {
     const getStoredLanguage = () => {
       if (typeof window !== "undefined") {
-        const savedLanguage = localStorage.getItem("language");
-        return (savedLanguage as SupportedLanguage) || "en";
+        const storedLanguage = localStorage.getItem(
+          "language"
+        ) as SupportedLanguage;
+        return storedLanguage || "en";
       }
       return "en";
     };
